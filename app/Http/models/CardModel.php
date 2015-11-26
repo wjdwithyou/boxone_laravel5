@@ -3,14 +3,12 @@
 /*
  *  카드 관련 컨트롤러
  */
-$rootpath = "/var/www/laravel/app";
-//$rootpath = "C:/app/app";
-include $rootpath."/function/baseFunction.php";
+include_once dirname(__FILE__)."/../function/baseFunction.php";
 
     /*  	
      *	카드정보 등록 기능
      */
-	public function create($title, $contents, $status)
+	function create($title, $contents, $status)
 	{
 
 		if(	!(	inputErrorCheck($title, 'title')
@@ -33,7 +31,7 @@ include $rootpath."/function/baseFunction.php";
     /*  	
      *	카드 리스트로 종류별로 가져오는 기능
      */
-	public function getInfoList($status)
+	function getInfoList($status)
 	{
 		$result = DB::select('select * from card where status=? order by idx DESC', array($status));
 
@@ -44,7 +42,7 @@ include $rootpath."/function/baseFunction.php";
     /*  	
      *	카드 이름으로 검색하는 기능
      */
-	public function getInfoByName($title)
+	function getInfoByName($title)
 	{
 		$result = DB::select("select * from card where title like '%$title%'");
 
@@ -55,7 +53,7 @@ include $rootpath."/function/baseFunction.php";
  	/*  	
      *	카드 삭제 기능
      */
-	public function delete($card_idx)
+	function delete($card_idx)
 	{
 		if(	!(	inputErrorCheck($card_idx, 'card_idx')))
 			return ;		
@@ -73,7 +71,7 @@ include $rootpath."/function/baseFunction.php";
     /*  	
      *	카드 수정 기능
      */
-	public function update($idx, $title, $contents)
+	function update($idx, $title, $contents)
 	{
 	  	   
 		if(	!(	inputErrorCheck($idx, 'idx')

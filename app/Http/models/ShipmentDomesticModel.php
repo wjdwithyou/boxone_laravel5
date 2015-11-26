@@ -3,14 +3,12 @@
 /*
  *  국내배송 관련 컨트롤러
  */
-$rootpath = "/var/www/laravel/app";
-//$rootpath = "C:/app/app";
-include $rootpath."/function/baseFunction.php";
+include_once dirname(__FILE__)."/../function/baseFunction.php";
 
     /*  	
      *	국내배송정보 등록 기능
      */
-	public function create($product_name, $postal_num, $postal_agency, $memo, $member_idx, $icon, $status)
+	function create($product_name, $postal_num, $postal_agency, $memo, $member_idx, $icon, $status)
 	{
 
 		if(	!(	inputErrorCheck($product_name, 'product_name')
@@ -24,7 +22,7 @@ include $rootpath."/function/baseFunction.php";
 			return ;		
 				
 
-		$result = DB::table('domestic_shipment')->insertGetId(
+		$result = DB::table('shipment_domestic')->insertGetId(
 			array(
 				'product_name'=> $product_name, 
 				'postal_num'=> $postal_num, 
@@ -43,10 +41,10 @@ include $rootpath."/function/baseFunction.php";
     /*  	
      *	국내배송 리스트 가져오는 기능
      */
-	public function getInfoList($member_idx)
+	function getInfoList($member_idx)
 	{
 
-		$result = DB::select('select * from domestic_shipment where member_idx=? order by idx DESC', array($member_idx));
+		$result = DB::select('select * from shipment_domestic where member_idx=? order by idx DESC', array($member_idx));
 
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
@@ -54,13 +52,13 @@ include $rootpath."/function/baseFunction.php";
  	/*  	
      *	국내배송 삭제 기능
      */
-	public function delete($idx)
+	function delete($idx)
 	{
 		
 		if(	!(	inputErrorCheck($idx, 'idx')))
 			return ;		
 
- 		$result = DB::delete('delete from domestic_shipment where idx=?', array($idx));
+ 		$result = DB::delete('delete from shipment_domestic where idx=?', array($idx));
 
 		if($result == true){
          	return array('code' => 1, 'msg' => 'success');
@@ -73,7 +71,7 @@ include $rootpath."/function/baseFunction.php";
     /*  	
      *	국내배송 수정 기능
      */
-	public function update($idx, $product_name, $postal_num, $postal_agency, $memo, $icon, $status)
+	function update($idx, $product_name, $postal_num, $postal_agency, $memo, $icon, $status)
 	{
 
 		if(	!(	inputErrorCheck($idx, 'idx')
@@ -86,7 +84,7 @@ include $rootpath."/function/baseFunction.php";
 				))
 			return ;		
 				
-		$result = DB::update('update domestic_shipment set product_name=?, postal_num=?, postal_agency=?, memo=?, icon=?, status=?,	upload=now() where idx=?',
+		$result = DB::update('update shipment_domestic set product_name=?, postal_num=?, postal_agency=?, memo=?, icon=?, status=?,	upload=now() where idx=?',
 			array($product_name, $postal_num, $postal_agency, $memo, $icon, $status, $idx));
                     
  		if($result == true){

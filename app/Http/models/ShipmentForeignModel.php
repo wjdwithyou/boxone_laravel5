@@ -3,14 +3,12 @@
 /*
  *  해외통관 관련 컨트롤러
  */
-$rootpath = "/var/www/laravel/app";
-//$rootpath = "C:/app/app";
-include $rootpath."/function/baseFunction.php";
+include_once dirname(__FILE__)."/../function/baseFunction.php";
 
     /*  	
      *	해외통관 정보 등록 기능
      */
-	public function create($product_name, $year, $icon, $memo, $member_idx, $status)
+	function create($product_name, $year, $icon, $memo, $member_idx, $status)
 	{
 
 		if(	!(	inputErrorCheck($product_name, 'product_name')
@@ -23,7 +21,7 @@ include $rootpath."/function/baseFunction.php";
 			return ;		
 				
 
-		$result = DB::table('foreign_shipment')->insertGetId(
+		$result = DB::table('shipment_foreign')->insertGetId(
 			array(
 				'product_name'=> $product_name, 
 				'year'=> $year, 
@@ -41,9 +39,9 @@ include $rootpath."/function/baseFunction.php";
     /*  	
      *	해외통관 리스트 가져오는 기능
      */
-	public function getInfoList($member_idx)
+	function getInfoList($member_idx)
 	{
-		$result = DB::select('select * from foreign_shipment where member_idx=? order by idx DESC', array($membeR_idx));
+		$result = DB::select('select * from shipment_foreign where member_idx=? order by idx DESC', array($membeR_idx));
 
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
@@ -51,12 +49,12 @@ include $rootpath."/function/baseFunction.php";
  	/*  	
      *	해외통관 삭제 기능
      */
-	public function delete($idx)
+	function delete($idx)
 	{
 		if(	!(	inputErrorCheck($idx, 'idx')))
 			return ;		
 
- 		$result = DB::delete('delete from foreign_shipment where idx=?', array($idx));
+ 		$result = DB::delete('delete from shipment_foreign where idx=?', array($idx));
 
 		if($result == true){
          	return array('code' => 1, 'msg' => 'success');
@@ -69,7 +67,7 @@ include $rootpath."/function/baseFunction.php";
     /*  	
      *	해외통관 수정 기능
      */
-	public function update($idx, product_name, $year, $icon, $memo, $status)
+	function update($idx, product_name, $year, $icon, $memo, $status)
 	{
 
 
@@ -83,7 +81,7 @@ include $rootpath."/function/baseFunction.php";
 			return ;		
 				
 				
-		$result = DB::update('update foreign_shipment set product_name=?, year=?, icon=?, memo=?, status=?,	upload=now() where idx=?',
+		$result = DB::update('update shipment_foreign set product_name=?, year=?, icon=?, memo=?, status=?,	upload=now() where idx=?',
 			array($product_name, $year, $icon, $memo, $status, $idx));
                     
  		if($result == true){

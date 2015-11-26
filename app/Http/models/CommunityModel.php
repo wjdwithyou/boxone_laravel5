@@ -3,14 +3,12 @@
 /*
  *  커뮤니티 관련 컨트롤러
  */
-$rootpath = "/var/www/laravel/app";
-//$rootpath = "C:/app/app";
-include $rootpath."/function/baseFunction.php";
+include_once dirname(__FILE__)."/../function/baseFunction.php";
 
     /*  	
      *	게시물 등록 기능
      */
-	public function create($member_idx, $title, $contents, $category_small)
+	function create($member_idx, $title, $contents, $category_small)
 	{
 		if(	!(	inputErrorCheck($member_idx, 'member_idx')
 		 		&& inputErrorCheck($title, 'title')
@@ -34,7 +32,7 @@ include $rootpath."/function/baseFunction.php";
 	/*  	
      *	댓글 등록 기능
      */
-	public function createReply($member_idx, $community_idx, $contents)
+	function createReply($member_idx, $community_idx, $contents)
 	{
 		
 		if(	!(	inputErrorCheck($member_idx, 'member_idx')
@@ -58,7 +56,7 @@ include $rootpath."/function/baseFunction.php";
     /*  	
      *	게시물 수정 기능
      */
-	public function update($community_idx, $title, $contents)
+	function update($community_idx, $title, $contents)
 	{
 	  	   
 
@@ -80,7 +78,7 @@ include $rootpath."/function/baseFunction.php";
     /*  	
      *	댓글 수정 기능
      */
-	public function updateReply($reply_idx, $contents)
+	function updateReply($reply_idx, $contents)
 	{
 
 		if(	!(	inputErrorCheck($reply_idx, 'reply_idx')
@@ -101,7 +99,7 @@ include $rootpath."/function/baseFunction.php";
     /*  	
      *	게시물 삭제 기능
      */
-	public function delete($community_idx)
+	function delete($community_idx)
 	{
 	  	
 		if(	!(	inputErrorCheck($community_idx, 'community_idx')))
@@ -120,7 +118,7 @@ include $rootpath."/function/baseFunction.php";
     /*  	
      *	댓글 삭제 기능
      */
-	public function deleteReply($reply_idx)
+	function deleteReply($reply_idx)
 	{
 	  	
 		if(	!(	inputErrorCheck($reply_idx, 'reply_idx')))
@@ -139,7 +137,7 @@ include $rootpath."/function/baseFunction.php";
     /*  	
      *	게시물 목록 가져오는 기능
      */
-	public function getInfoList($last_idx)
+	function getInfoList($last_idx)
 	{
 		if ( isset($last) && ($last != '') ) { //사용자가 검색을 통해 인덱스 넘겼을 때 들어감
 			$result = DB::select('select * from community where idx <=? order by idx DESC limit 20 ',array($last_idx));
@@ -171,7 +169,7 @@ include $rootpath."/function/baseFunction.php";
     /*  	
      *	게시물 댓글 목록 가져오는 기능
      */
-	public function getReplyList($community_idx, $readmember_idx)		// 게시글인덱스, 현재 보고있는 사용자 인덱스
+	function getReplyList($community_idx, $readmember_idx)		// 게시글인덱스, 현재 보고있는 사용자 인덱스
 	{
 
 		if(	!(	inputErrorCheck($community_idx, 'community_idx')
@@ -205,7 +203,7 @@ include $rootpath."/function/baseFunction.php";
 	/*
 	 *  게시물의 제목+내용 필터로 검색
 	 */
-	public function retrieveByText($text)
+	function retrieveByText($text)
 	{
 
 		if( !( inputErrorCheck($text, 'text')))
@@ -220,7 +218,7 @@ include $rootpath."/function/baseFunction.php";
 	/*  	
      *	단일 게시글 가져오는 기능 + 조회수 1 증가
      */
-	public function getInfoSingle($community_idx, $readmember_idx)
+	function getInfoSingle($community_idx, $readmember_idx)
 	{
 
 		if(	!(	inputErrorCheck($community_idx, 'community_idx')
@@ -244,7 +242,7 @@ include $rootpath."/function/baseFunction.php";
 	/*  	
      *	커뮤니티 글 북마크 추가
      */
-	public function createBookmark($member_idx, $community_idx)
+	function createBookmark($member_idx, $community_idx)
 	{
 
 		if(	!(	inputErrorCheck($community_idx, 'community_idx')
@@ -269,7 +267,7 @@ include $rootpath."/function/baseFunction.php";
 	/*  	
      *	커뮤니티 글 북마크 삭제
      */
-	public function deleteBookmark($bookmar_idx, $community_idx)
+	function deleteBookmark($bookmar_idx, $community_idx)
 	{
 
 		if(	!(	inputErrorCheck($bookmark_idx, 'bookmark_idx')

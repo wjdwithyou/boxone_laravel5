@@ -1,53 +1,50 @@
 <?php
 
 /*
- *  배대지 관련 컨트롤러
+ *  쇼핑사이트 관련 컨트롤러
  */
-$rootpath = "/var/www/laravel/app";
-//$rootpath = "C:/app/app";
-include $rootpath."/function/baseFunction.php";
+include_once dirname(__FILE__)."/../function/baseFunction.php";
 
     /*  	
-     *	배대지정보 등록 기능
+     *	쇼핑사이트정보 등록 기능
      */
-	public function create($fare, $ranking, $country, $name)
+	function create($name, $website_link, $category_idx, $note)
 	{
 
-		if(	!(	inputErrorCheck($fare, 'fare')
-				&& inputErrorCheck($ranking, 'ranking')
-				&& inputErrorCheck($country, 'country')
-				&& inputErrorCheck($name, 'name')))
+		if(	!(	inputErrorCheck($name, 'name')
+				&& inputErrorCheck($website_link, 'website_link')
+				&& inputErrorCheck($category_idx, 'category_idx')
+				&& inputErrorCheck($note, 'note')))
 			return ;		
 				
 
-		$result = DB::table('shipping_agency')->insertGetId(
+		$result = DB::table('shoppingsite')->insertGetId(
 			array(
-				'fare'=> $fare, 
-				'ranking'=> $ranking, 
-				'country'=> $country, 
 				'name'=> $name, 
-				'upload'=>DB::raw('now()')
+				'website_link'=> $website_link, 
+				'category_idx'=> $category_idx, 
+				'note'=> $note
 				)
 			);	
 
 		return array('code' => 1,'msg' =>'success' ,'data' => $result);
 	}
 
+
     /*  	
-     *	배대지 리스트로 종류별로 가져오는 기능
+     *	쇼핑사이트 리스트 카테고리 분류별로 가져오는 기능
      */
-	public function getInfoList($status)
+	function getInfoList($category_idx)
 	{
-		$result = DB::select('select * from shipping_agency where status=? order by ranking asc', array($status));
+		$result = DB::select('select * from shoppingsite where category_idx=?', array($category_idx));
 
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
 
-
  	/*  	
-     *	배대지 삭제 기능
+     *	쇼핑사이트 삭제 기능
      */
-	public function delete($idx)
+	function delete($idx)
 	{
 
 		if(	!(	inputErrorCheck($idx, 'idx')))
@@ -58,15 +55,15 @@ include $rootpath."/function/baseFunction.php";
 		if($result == true){
          	return array('code' => 1, 'msg' => 'success');
         }else{
-         	return array('code' => , 'msg' => 'update failure: no matched data');
+         	return array('code' => 0, 'msg' => 'update failure: no matched data');
         }
 	}
 
 
     /*  	
-     *	배대지 수정 기능
+     *	쇼핑사이트 수정 기능
      */
-	public function update($idx, $title, $contents)
+	function update($idx, $title, $contents)
 	{
 	  	   
 		if(	!(	inputErrorCheck($idx, 'idx')

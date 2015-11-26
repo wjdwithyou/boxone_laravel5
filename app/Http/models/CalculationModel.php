@@ -42,6 +42,9 @@ include_once dirname(__FILE__)."/../function/baseFunction.php";
 		return $result;
 	}
 	
+	/*
+	 *	선택된 무게에 따른 세금 리턴
+	 */
 	function getWeightTax($status, $region, $weight){
 	
 		if( !(inputErrorCheck($status, 'status')

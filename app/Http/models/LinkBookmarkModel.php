@@ -3,14 +3,12 @@
 /*
  *  북마크 관련 컨트롤러
  */
-$rootpath = "/var/www/laravel/app";
-//$rootpath = "C:/app/app";
-include $rootpath."/function/baseFunction.php";
+include_once dirname(__FILE__)."/../function/baseFunction.php";
 
     /*  	
      *	북마크정보 등록 기능
      */
-	public function create($member_idx, $website_link)
+	function create($member_idx, $website_link)
 	{
 
 		if(	!(	inputErrorCheck($member_idx, 'member_idx')
@@ -31,7 +29,7 @@ include $rootpath."/function/baseFunction.php";
     /*  	
      *	북마크 리스트 가져오는 기능
      */
-	public function getInfoList()
+	function getInfoList()
 	{
 		$result = DB::select('select * from link_bookmark where order by idx DESC');
 
@@ -41,7 +39,7 @@ include $rootpath."/function/baseFunction.php";
  	/*  	
      *	북마크 삭제 기능
      */
-	public function delete($idx)
+	function delete($idx)
 	{
 		if(	!(	inputErrorCheck($idx, 'idx')))
 			return ;		
