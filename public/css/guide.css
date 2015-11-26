@@ -1,0 +1,144 @@
+#current_menu, #guide_nav_wrap {
+	max-width: 992px;
+	margin: 0 auto;
+}
+#guide_nav_wrap {
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+}
+.nav-tabs {
+	border-bottom: transparent;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+	border: transparent;
+	color: #f32791;
+	border-bottom: 3px solid #f32791;
+}
+.nav-tabs > li > a {
+	border: transparent;
+}
+#guide_header_wrap {
+	width: 100%;
+	height: 200px;
+	background-image: url('http://localhost:8000/img/guide_background.jpg');
+	background-size: contain;
+}
+#guide_title_wrap {
+	max-width: 400px;
+	height: 200px;
+	margin: 0 auto;
+	margin-top: -150px;
+	color: #fff;
+}
+#guide_title {
+	height: 150px;
+	background-color: #000;
+	opacity: 0.7;
+	margin: 0 10px;
+	padding: 10px 20px;
+}
+#each_title {
+	height: 50px;
+	background-color: #000;
+	opacity: 0.7;
+	margin: 0 10px;
+	padding: 0 20px;
+}
+#common_title {
+	font-size: 24px;
+	font-weight: bold;
+	opacity: 1 !important;
+	margin: 20px 0;
+}
+#common_content {
+	font-size: 12px;
+	font-weight: bold;
+	opacity: 1 !important;
+}
+#title {
+	font-size: 24px;
+	font-weight: bold;
+	opacity: 1 !important;
+	padding-top: 9px;
+	border-top: 1px solid #ccc;
+}
+.gm_top {
+	font-weight: bold;
+	margin: 15px 0;
+}
+.gm_menu {
+	margin: 5px 0;
+}
+#static_menu_wrap hr {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-top: 1px solid #000;
+}
+.gm_top:hover, .gm_menu:hover {
+	cursor: pointer;
+	color: #f43497;
+}
+@media (max-width: 991px) {
+	#guide_wrap {
+		width: 100%;
+		margin-top: 20px;
+	}
+	#static_menu_wrap {
+		display: none;
+	}
+	#guide_content {
+		width: 100%;
+	}
+}
+@media (min-width: 992px) {
+	#guide_wrap {
+		min-width: 1280px;
+		margin-top: 20px;
+	}
+	#guide_nav_wrap {
+		display: none;
+	}
+	#static_menu_wrap {
+		width: 180px;
+		margin-left: 20px;
+		position: absolute;
+	}
+	#guide_content {
+		width: 900px;
+		margin: 0 auto;
+	}
+}
+@media (max-width: 420px) {
+	#common_content {
+		font-size: 11px;
+	}
+	#title {
+		font-size: 19px;
+	}
+	.submenu_grid {
+		width: 50% !important;
+	}
+}
+#guide_content {
+	padding: 25px;10px;
+}
+#guide_content img {
+	width: 100%;
+}
+.submenu_grid {
+	width: 33.3%;
+	height: 30px;
+	float: left;
+	font-size: 11px;
+	text-align: center;
+    padding-top: 8px;
+    color: #8B8B8B;
+}
+.submenu_grid:hover {
+	cursor: pointer;
+    color: #000;
+    font-weight: bold;
+}
+.half {
+	width: 50% !important;
+}

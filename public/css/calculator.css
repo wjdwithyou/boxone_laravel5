@@ -1,0 +1,103 @@
+#cal_wrap {
+	width: 248px;
+	margin-left: 5px;
+}
+#input_wrap {
+	border: 1px solid #ccc;
+}
+.cal_txt {
+	width: 70px;
+	padding-top: 20px;
+	padding-bottom: 20px;;
+	text-align: center;
+	font-size: 13px;
+	font-weight: bold;
+}
+.cal_cate {
+	width: 178px;
+}
+.cal_cate_split {
+	width: 123px;
+	float: left;
+	background-color: #f8f7f7;
+}
+#monetary {
+	position: absolute;
+	margin-top: -27px;
+	margin-left: 130px;
+}
+#input_weight {
+	width: 100px;
+	float: left;
+}
+#select_weight {
+	width: 70px;
+	float: left;
+}
+#cal_btn_wrap {
+	text-align: center;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+#cal_btn {
+	width: 100px;
+	font-weight: bold;
+}
+#low_cate {
+	color: #8352fa;
+}
+#select_country {
+	width: 120px;
+}
+#exchange {
+	color: #13aeb5;
+	font-size: 12px;
+	padding-left: 10px;
+}
+#input_price {
+	width: 166px;
+}
+.cal_msg {
+	font-size: 10px;
+	text-align: center;
+}
+.result_txt {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 15px;
+	font-size: 13px;
+	font-weight: bold;
+	background-color: #f8f7f7;
+}
+.result_money {
+	text-align: right;
+	padding-right: 15px;
+	font-weight: bold;
+	background-color: #f8f7f7;
+}
+#cal_result_wrap {
+	border-top: 1px solid #ccc;
+	background-color: #f8f7f7;
+}
+#cal_result_wrap td {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+#price_money {
+	color: #8352fa;
+	font-weight: 16px;
+}
+#duty_money, #surtax_money {
+	color: red;
+	font-weight: 16px;
+}
+#weight_money_wrap td {
+	font-size: 10px;
+	text-align: right;
+}
+#weight_money_wrap td:first-child {
+	padding-right: 5px;
+}
+#weight_money_wrap td:nth-child(2) {
+	padding-right: 60px;
+}
