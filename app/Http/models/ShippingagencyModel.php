@@ -30,16 +30,16 @@ include_once dirname(__FILE__)."/../function/baseFunction.php";
 		return array('code' => 1,'msg' =>'success' ,'data' => $result);
 	}
 
-
     /*  	
-     *	쇼핑사이트 리스트 카테고리 분류별로 가져오는 기능
+     *	쇼핑사이트 리스트로 종류별로 가져오는 기능
      */
 	function getInfoList($category_idx)
 	{
-		$result = DB::select('select * from shoppingsite where category_idx=?', array($category_idx));
+		$result = DB::select('select * from shoppingsite where status=? order by ranking asc', array($status));
 
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
+
 
  	/*  	
      *	쇼핑사이트 삭제 기능
@@ -55,7 +55,7 @@ include_once dirname(__FILE__)."/../function/baseFunction.php";
 		if($result == true){
          	return array('code' => 1, 'msg' => 'success');
         }else{
-         	return array('code' => 0, 'msg' => 'update failure: no matched data');
+         	return array('code' => , 'msg' => 'update failure: no matched data');
         }
 	}
 
