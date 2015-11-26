@@ -1,45 +1,25 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Laravel</title>
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
-        <style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
-
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 96px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Laravel 5</div>
-            </div>
-        </div>
-    </body>
-</html>
+	<div style="width:798px; height:230px; margin:40px; margin-bottom:0; padding:20px; border:1px solid #dfdfff;">
+		<div style="width:100%; float:left;">
+			<img src="http://52.69.107.135/img/boxone.png" style="width:20px; height:22px; margin-right:10px; float:left;"/>
+			<div style="font-weight:bold;float:left;"> B O X O N E</div>
+		</div>
+		<div style="width:100%; height:auto; margin-top:20px; color:gray; font-size:14px; line-height:30px; float:left;">
+			{{$name}}님, 안녕하세요<br>
+			암호를 재설정하려면 아래 인증코드를 입력해주세요.<br>
+			<font color="#5977fc">인증코드 : {{$code}}<br><br></font>
+			감사합니다.<br>
+			- 박스원 팀
+		</div>
+	</div>
+	<div style="width:840px; height:60px; margin-left:40px;">
+		<a href="http://52.69.107.135/" style="width:260px; height:60px; padding:0 80px; background-color:gray; cursor:pointer; float:left;">
+			<img src="http://52.69.107.135/img/pc.png" style="width:40px; height:50px; margin-top:5px; float:left;"/>
+			<div style="margin:20px 0; color:white; font-size:14px; float:left;">
+				우리 홈페이지에 방문하세요!
+			</div>
+		</a>
+		<div style="width:240px; height:20px; padding:20px 90px; color:gray; font-size:14px; background-color:#dfdfff; float:left;">
+			help@boxone.com | 02-2220-1207
+		</div>
+	</div>
