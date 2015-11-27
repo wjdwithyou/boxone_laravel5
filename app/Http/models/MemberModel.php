@@ -2,6 +2,7 @@
 
 namespace App\Http\models;
 use DB;
+use Hash;
 /*
  *  회원 관련 컨트롤러
  */

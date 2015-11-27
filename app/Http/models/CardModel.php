@@ -40,6 +40,16 @@ class CardModel{
 
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
+	
+	/*
+	 *	카드 리스트로 종류별로 가져오는 기능
+	 */
+	function getInfoListAll()
+	{
+		$result = DB::select('select * from card order by idx DESC');
+	
+		return array('code' => 1, 'msg' => 'success', 'data' => $result);
+	}
 
 
     /*  	
@@ -111,7 +121,7 @@ class CardModel{
 	 */
 	function getInfoListByCardcompany($cardcompany)
 	{
-		if( !( inputErrorCheck(($cardcompany, 'cardcompany')))
+		if( !( inputErrorCheck($cardcompany, 'cardcompany')))
 			return ;
 
 		$result = DB::select("select * from card where support_card like '%$cardcompany%'");
@@ -125,7 +135,7 @@ class CardModel{
 	 */
 	function getCardCardcompany()
 	{
-		$result = DB::select("select distinct support_card from card");
+		$result = DB::select("select distinct support_card from card where status=1");
 
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 
@@ -137,7 +147,7 @@ class CardModel{
 	 */
 	function getCardShippingagency()
 	{
-		$result = DB::select("select distinct support_site from card");
+		$result = DB::select("select distinct support_site from card where status=0");
 
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 

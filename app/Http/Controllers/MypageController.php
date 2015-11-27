@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
+use App\Http\models\MemberModel;
 use Request;
 
-include dirname(__FILE__)."/../models/MemberModel.php";
 include_once dirname(__FILE__)."/../function/baseFunction.php";
 
 class MypageController extends Controller {
@@ -24,10 +24,12 @@ class MypageController extends Controller {
 
 	public function index()
 	{
+		$memberModel = new MemberModel();
+		
 		if (loginStateChk(true))
 		{
 			$nickname = $_SESSION['nickname'];
-			$result = getInfoByNickname($nickname)['data'][0];
+			$result = $memberModel->getInfoByNickname($nickname)['data'][0];
 			$page = 'mypage';
 		}
 		return view($page, array('page' => $page, 'result' => $result));
@@ -40,11 +42,13 @@ class MypageController extends Controller {
 	 */
 	public function checkPw()
 	{
+		$memberModel = new MemberModel();
+		
 		$type = 5;
 		$id = Request::input('id');
 		$pw = Request::input('pw');
 		
-		$result = login($type, $id, $pw);
+		$result = $memberModel->login($type, $id, $pw);
 		
 		header('Content-Type: application/json');
 		echo json_encode($result);
@@ -57,18 +61,20 @@ class MypageController extends Controller {
 	 */
 	public function update()
 	{
+		$memberModel = new MemberModel();
+		
 		$idx = Request::input('idx');
 		$col = Request::input('col');
 		$val = Request::input('val');
 		
-		$data = getInfoSingle($idx);
+		$data = $memberModel->getInfoSingle($idx);
 		
 		if ($col == "email")
 			$data['data'][0]->email = $val;
 		else if ($col == "nickname")
 			$data['data'][0]->nickname = $val;
 		
-		$result = update($idx, $data['data'][0]->nickname, $data['data'][0]->type, $data['data'][0]->email, $data['data'][0]->id);
+		$result = $memberModel->update($idx, $data['data'][0]->nickname, $data['data'][0]->type, $data['data'][0]->email, $data['data'][0]->id);
 		
 		if ($result['code'] == 1 && $col == 'nickname')
 			$_SESSION['nickname'] = $val;
@@ -85,10 +91,12 @@ class MypageController extends Controller {
 	 */
 	public function updatePw()
 	{
+		$memberModel = new MemberModel();
+		
 		$idx = Request::input('idx');
 		$pw = Request::input('pw');
 	
-		$result = updatePw($idx, $pw);
+		$result = $memberModel->updatePw($idx, $pw);
 	
 		header('Content-Type: application/json');
 		echo json_encode($result);

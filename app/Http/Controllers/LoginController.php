@@ -1,10 +1,11 @@
 <?php
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
+use App\Http\models\MemberModel;
 use Request;
 use Mail;
 
-include dirname(__FILE__)."/../models/MemberModel.php";
+
 include_once dirname(__FILE__)."/../function/baseFunction.php";
 
 class LoginController extends Controller {
@@ -101,12 +102,14 @@ class LoginController extends Controller {
 	 */
 	public function login()
 	{
+		$memberModel = new MemberModel();
+		
 		$type = Request::input('type');
 		$id = Request::input('id');
 		$pw = Request::input('pw');
 
 		// DB에 해당 정보 있는지 확인 후 return
-		$result = login($type, $id, $pw);
+		$result = $memberModel->login($type, $id, $pw);
 		
 		// 로그인 된 상태로 변환
 		if ($result['code'] == 1)
@@ -129,6 +132,8 @@ class LoginController extends Controller {
 	 */
 	public function signIn()
 	{
+		$memberModel = new MemberModel();
+		
 		$type = Request::input('type');
 		$id = Request::input('id');
 		$pw = Request::input('pw');
@@ -139,16 +144,16 @@ class LoginController extends Controller {
 		
 		//추천인 포인트 업
 		if (!empty($rec))
-			recommand($rec);
+			$memberModel->recommand($rec);
 		
 		//DB에 넣기
-		$result = create($type, $email, $nickname, $id, $pw);
+		$result = $memberModel->create($type, $email, $nickname, $id, $pw);
 		
 		//이미지 처리
 				
 		
 		//필요정보 받아오기
-		$result = login($type, $id, $pw);
+		$result = $memberModel->login($type, $id, $pw);
 		if ($result['code'] == 1)
 		{
 			if (session_id() == '')
@@ -169,8 +174,10 @@ class LoginController extends Controller {
 	 */
 	public function checkEmail()
 	{
+		$memberModel = new MemberModel();
+		
 		$email = Request::input('email');
-		$result = checkEmail($email);
+		$result = $memberModel->checkEmail($email);
 		
 		header('Content-Type: application/json');
 		echo json_encode($result);
@@ -183,8 +190,10 @@ class LoginController extends Controller {
 	 */
 	public function checkNickname()
 	{
+		$memberModel = new MemberModel();
+		
 		$nickname = Request::input('nickname');
-		$result = checknickname($nickname);
+		$result = $memberModel->checknickname($nickname);
 		
 		header('Content-Type: application/json');
 		echo json_encode($result);
@@ -214,10 +223,12 @@ class LoginController extends Controller {
 	 */
 	public function findPw()
 	{
+		$memberModel = new MemberModel();
+		
 		$email = Request::input('email');
 		
 		// 해당 이메일이 가입되어 있는지 확인하기
-		$check = checkEmail($email);
+		$check = $memberModel->checkEmail($email);
 		if ($check['code'] == 0)
 		{
 			switch($check['msg'])
@@ -304,10 +315,12 @@ class LoginController extends Controller {
 	 */
 	public function updatePw()
 	{
+		$memberModel = new MemberModel();
+		
 		$idx = Request::input('idx');
 		$pw = Request::input('pw');
 		
-		$result = updatePw($idx, $pw);
+		$result = $memberModel->updatePw($idx, $pw);
 		
 		header('Content-Type: application/json');
 		echo json_encode($result);

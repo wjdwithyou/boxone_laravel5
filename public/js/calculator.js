@@ -26,6 +26,7 @@ function get_cate_large()
 		},
 		error: function(request,status,error)
 		{
+			console.log(request.responseText);
 		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		}
 	});
@@ -57,6 +58,7 @@ function select_cate(){
 		},
 		error: function(request,status,error)
 		{
+			console.log(request.responseText);
 		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		}
 	});

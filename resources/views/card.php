@@ -39,10 +39,10 @@
 						카드검색
 					</div>
 					<div class="card_search_input">
-						<input type="text" id="" class="form-control" placeholder="카드명 입력">
-						<a onclick=""><img src="<?= $adr_img ?>search_img_white.png"></a>
+						<input type="text" id="card_name_search_input" class="form-control" placeholder="카드명 입력">
+						<a onclick="getCardList(1);"><img src="<?= $adr_img ?>search_img_white.png"></a>
 					</div>
-					<div class="card_search_all">
+					<div class="card_search_all" onclick="getCardListAll(1);">
 						전체보기
 					</div>
 				</div>
@@ -51,19 +51,14 @@
 						배대지 제휴 신용카드
 					</div>
 					<div class="card_search_input">
-						<select class="form-control">
+						<select id="card_proxy_search_input" class="form-control">
 							<option>배대지 선택</option>
-							<option>뉴욕걸즈</option>
-							<option>몰테일</option>
-							<option>세븐존</option>
-							<option>아이딜리버</option>
-							<option>아이포터</option>
-							<option>위메프박스</option>
-							<option>오마이짐</option>
-							<option>이하넥스</option>
+							<?php foreach ($siteList as $site): ?>
+								<option><?= $site->support_site?></option>
+							<?php endforeach;?>
 						</select>
 					</div>
-					<div class="card_search_all">
+					<div class="card_search_all" onclick="getCardListAll(2);">
 						전체보기
 					</div>
 				</div>
@@ -72,19 +67,14 @@
 						해외결제 혜택카드
 					</div>
 					<div class="card_search_input">
-						<select class="form-control">
+						<select id="card_benefit_search_input" class="form-control">
 							<option>카드사 선택</option>
-							<option>뉴욕걸즈</option>
-							<option>몰테일</option>
-							<option>세븐존</option>
-							<option>아이딜리버</option>
-							<option>아이포터</option>
-							<option>위메프박스</option>
-							<option>오마이짐</option>
-							<option>이하넥스</option>
+							<?php foreach ($compList as $comp): ?>
+								<option><?= $comp->support_card?></option>
+							<?php endforeach;?>
 						</select>
 					</div>
-					<div class="card_search_all">
+					<div class="card_search_all" onclick="getCardListAll(3);">
 						전체보기
 					</div>
 				</div>
@@ -93,93 +83,7 @@
 		</div>
 
 		<div id="card_result_wrap">
-			<div id="card_result">
-				<div id="result_title">
-					<span>해외결제 혜택 신용카드</span>
-					&nbsp;(<span>20</span>)
-				</div>
-				<div class="result_sub_title">
-					신한카드
-				</div>
-				<div class="result_content">
-					<div class="col-xs-4">
-						<img src="<?= $adr_img?>card_sample.jpg">
-					</div>
-					<div class="col-xs-8">
-						<div class="card_desc">
-							<div class="card_name">신한 SMART GLOBAL 카드</div>
-							<div class="card_title">아이포터 (해외직구 배송대행 서비스)</div>
-							<div class="card_content">
-								배송비 할인: 3% 쿠폰 제공, 묶음 배송비 할인 : $2 쿠폰 제공, 사진 촬영비 할인: $1 쿠폰제공 *이용 실적 조건 및 금액 한도, 이용 횟수 제한 없음 "아이포터 URL:www.iporter.com"
-							</div>
-						</div>
-					</div>
-					<div class="clear_both"></div>
-				</div>
-				<div class="result_content">
-					<div class="col-xs-4">
-						<img src="<?= $adr_img?>card_sample.jpg">
-					</div>
-					<div class="col-xs-8">
-						<div class="card_desc">
-							<div class="card_name">신한 SMART GLOBAL 카드</div>
-							<div class="card_title">아이포터 (해외직구 배송대행 서비스)</div>
-							<div class="card_content">
-								배송비 할인: 3% 쿠폰 제공, 묶음 배송비 할인 : $2 쿠폰 제공, 사진 촬영비 할인: $1 쿠폰제공 *이용 실적 조건 및 금액 한도, 이용 횟수 제한 없음 "아이포터 URL:www.iporter.com"
-								배송비 할인: 3% 쿠폰 제공, 묶음 배송비 할인 : $2 쿠폰 제공, 사진 촬영비 할인: $1 쿠폰제공 *이용 실적 조건 및 금액 한도, 이용 횟수 제한 없음 "아이포터 URL:www.iporter.com"
-								배송비 할인: 3% 쿠폰 제공, 묶음 배송비 할인 : $2 쿠폰 제공, 사진 촬영비 할인: $1 쿠폰제공 *이용 실적 조건 및 금액 한도, 이용 횟수 제한 없음 "아이포터 URL:www.iporter.com"
-								배송비 할인: 3% 쿠폰 제공, 묶음 배송비 할인 : $2 쿠폰 제공, 사진 촬영비 할인: $1 쿠폰제공 *이용 실적 조건 및 금액 한도, 이용 횟수 제한 없음 "아이포터 URL:www.iporter.com"
-							</div>
-						</div>
-					</div>
-					<div class="clear_both"></div>
-				</div>
-				<div class="result_content">
-					<div class="col-xs-4">
-						<img src="<?= $adr_img?>card_sample.jpg">
-					</div>
-					<div class="col-xs-8">
-						<div class="card_desc">
-							<div class="card_name">신한 SMART GLOBAL 카드</div>
-							<div class="card_title">아이포터 (해외직구 배송대행 서비스)</div>
-							<div class="card_content">
-								배송비 할인: 3% 쿠폰 제공, 묶음 배송비 할인 : $2 쿠폰 제공, 사진 촬영비 할인: $1 쿠폰제공 *이용 실적 조건 및 금액 한도, 이용 횟수 제한 없음 "아이포터 URL:www.iporter.com"
-							</div>
-						</div>
-					</div>
-					<div class="clear_both"></div>
-				</div>
-				<div class="result_content">
-					<div class="col-xs-4">
-						<img src="<?= $adr_img?>card_sample.jpg">
-					</div>
-					<div class="col-xs-8">
-						<div class="card_desc">
-							<div class="card_name">신한 SMART GLOBAL 카드</div>
-							<div class="card_title">아이포터 (해외직구 배송대행 서비스)</div>
-							<div class="card_content">
-								배송비 할인: 3% 쿠폰 제공, 묶음 배송비 할인 : $2 쿠폰 제공, 사진 촬영비 할인: $1 쿠폰제공 *이용 실적 조건 및 금액 한도, 이용 횟수 제한 없음 "아이포터 URL:www.iporter.com"
-							</div>
-						</div>
-					</div>
-					<div class="clear_both"></div>
-				</div>
-				<div class="result_content">
-					<div class="col-xs-4">
-						<img src="<?= $adr_img?>card_sample.jpg">
-					</div>
-					<div class="col-xs-8">
-						<div class="card_desc">
-							<div class="card_name">신한 SMART GLOBAL 카드</div>
-							<div class="card_title">아이포터 (해외직구 배송대행 서비스)</div>
-							<div class="card_content">
-								배송비 할인: 3% 쿠폰 제공, 묶음 배송비 할인 : $2 쿠폰 제공, 사진 촬영비 할인: $1 쿠폰제공 *이용 실적 조건 및 금액 한도, 이용 횟수 제한 없음 "아이포터 URL:www.iporter.com"
-							</div>
-						</div>
-					</div>
-					<div class="clear_both"></div>
-				</div>
-			</div>
+			<!-- 카드 내용 들어가는곳  -->
 		</div>
 
 		<style>

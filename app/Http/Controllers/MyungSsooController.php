@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Request;
 
 //include ("/var/www/laravel/app/models/MemberModel.php");
 
@@ -24,10 +24,10 @@ class MyungSsooController extends Controller {
 	 * 작성자 : 박용호
 	 * 통관번호, 년도 입력하여 현재 상태 받기 
 	 */
-	public function getInfo(Request $request)
+	public function getInfo()
 	{
-		$num = $request->input('num');
-		$year = $request->input('year');
+		$num = Request::input('num');
+		$year = Request::input('year');
 		
 		// 통관번호로 화물번호 가져오기
 		$postdata = http_build_query(

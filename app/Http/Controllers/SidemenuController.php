@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
+use App\Http\models\CalculationModel;
 use Request;
 
-include dirname(__FILE__)."/../models/CalculationModel.php";
 include_once dirname(__FILE__)."/../function/baseFunction.php";
 
 class SidemenuController extends Controller {
@@ -22,8 +22,8 @@ class SidemenuController extends Controller {
 	*/
 
 	public function index()
-	{		
-		if (Request::has('bef'))		
+	{
+		if (Request::has('bef'))
 			$bef = Request::input('bef');
 		else
 			$bef = "http://".$_SERVER['HTTP_HOST'];
@@ -33,7 +33,9 @@ class SidemenuController extends Controller {
 	
 	public function getCateLarge()
 	{
-		$result = getInfoLarge();
+		$calculationModel = new CalculationModel();
+		
+		$result = $calculationModel->getInfoLarge();
 		
 		header('Content-Type: application/json');
 		echo json_encode($result);
@@ -41,8 +43,10 @@ class SidemenuController extends Controller {
 	
 	public function getCateMedium()
 	{
+		$calculationModel = new CalculationModel();
+		
 		$cateLarge = Request::input('cate');
-		$result = getInfoMedium($cateLarge);
+		$result = $calculationModel->getInfoMedium($cateLarge);
 		
 		header('Content-Type: application/json');
 		echo json_encode($result);
@@ -50,8 +54,10 @@ class SidemenuController extends Controller {
 
 	public function getCateTax()
 	{
+		$calculationModel = new CalculationModel();
+		
 		$cate_idx = Request::input('cate');
-		$result = getInfoTax($cate_idx);
+		$result = $calculationModel->getInfoTax($cate_idx);
 		
 		header('Content-Type: application/json');
 		echo json_encode($result[0]);
@@ -59,6 +65,8 @@ class SidemenuController extends Controller {
 	
 	public function getWeightTax()
 	{
+		$calculationModel = new CalculationModel();
+		
 		$status = Request::input('status');
 		$region = Request::input('region');
 		$weight = Request::input('weight');
@@ -73,7 +81,7 @@ class SidemenuController extends Controller {
 			
 			$result = 0;
 			if ($weight != 0)
-				$result = getWeightTax($status, $region, $weight);
+				$result = $calculationModel->getWeightTax($status, $region, $weight);
 			
 			if ($region == 1)
 				$result += $num * 45500;
@@ -88,7 +96,7 @@ class SidemenuController extends Controller {
 				else
 					$result = 213000 + ($weight - 30)*6000;
 			else 
-				$result = getWeightTax($status, $region, $weight);
+				$result = $calculationModel->getWeightTax($status, $region, $weight);
 		}
 		
 		header('Content-Type: application/json');
