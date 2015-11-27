@@ -1,6 +1,11 @@
 $(document).ready(function(){	
 	getCardListAll(1);
 	
+	$("#card_name_search_input").keyup(function(e){
+		if (e.keyCode == 13)
+			getCardList(1);
+	});
+	
 	$("#card_proxy_search_input").on('change', function(){
 		getCardList(2);
 	});
