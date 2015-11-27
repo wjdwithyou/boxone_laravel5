@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\models;
+use DB;
 
 /*
  *  쇼핑사이트 관련 컨트롤러
@@ -37,7 +38,7 @@ class ShoppingsiteModel{
      */
 	function getInfoList($category_idx)
 	{
-		$result = DB::select('select * from shoppingsite where category_idx=?', array($status));
+		$result = DB::select('select * from shoppingsite where category_idx=?', array($category_idx));
 
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}

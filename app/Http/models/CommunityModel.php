@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\models;
+use DB;
 /*
  *  커뮤니티 관련 컨트롤러
  */

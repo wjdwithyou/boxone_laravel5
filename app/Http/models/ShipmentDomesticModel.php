@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\models;
+use DB;
 
 /*
  *  국내배송 관련 컨트롤러

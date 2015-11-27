@@ -1,6 +1,6 @@
 <?php
 namespace App\Http\models;
-
+use DB;
 /*
  *  카드 관련 컨트롤러
  */

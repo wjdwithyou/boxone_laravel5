@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\models;
+use DB;
 /*
  *  환율 관련 컨트롤러
  */

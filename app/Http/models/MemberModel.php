@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\models;
+use DB;
 /*
  *  회원 관련 컨트롤러
  */

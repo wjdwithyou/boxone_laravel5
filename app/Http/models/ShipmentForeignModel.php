@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\models;
+use DB;
 
 /*
  *  해외통관 관련 컨트롤러
