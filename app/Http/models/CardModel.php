@@ -135,7 +135,7 @@ class CardModel{
 	 */
 	function getCardCardcompany()
 	{
-		$result = DB::select("select distinct support_card from card where status=1");
+		$result = DB::select("select distinct support_card from card where status=1 order by support_card asc");
 
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 
@@ -147,7 +147,7 @@ class CardModel{
 	 */
 	function getCardShippingagency()
 	{
-		$result = DB::select("select distinct support_site from card where status=0");
+		$result = DB::select("select distinct support_site from card where status=0 order by support_site asc");
 
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 

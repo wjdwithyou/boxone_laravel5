@@ -32,14 +32,11 @@ class CardController extends Controller {
 		return view($page, array('page' => $page, 'siteList' => $site['data'], 'compList' => $comp['data']));
 	}
 	
-	public function test()
-	{
-		$cardModel = new CardModel();
-		print_r( $cardModel->getInfoList(0));
-	}
-	
 	/*
-	 *  type : 1-카드검색, 2-제휴신용카드, 3-해외결제혜택카드
+	 * 2015.11.27
+	 * 작성자 : 박용호
+	 * 카드 리스트 가져오기
+	 * type 1:이름으로 검색, 2:배송대행지로 검색, 3:카드사로 검색
 	 */
 	public function getCardList()
 	{
@@ -78,6 +75,13 @@ class CardController extends Controller {
 		return view($page, $ar);
 	}
 	
+	
+	/*
+	 * 2015.11.27
+	 * 작성자 : 박용호
+	 * 카드 리스트 전체 가져오기
+	 * type 1:모든 전체, 2:배송대행지 해당 카드 전체, 3:해외 직구 카드 전체
+	 */
 	public function getCardListAll()
 	{
 		$cardModel = new CardModel();
