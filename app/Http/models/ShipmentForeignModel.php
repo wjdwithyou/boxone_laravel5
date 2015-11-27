@@ -1,10 +1,13 @@
 <?php
+namespace App\Http\models;
 
 /*
  *  해외통관 관련 컨트롤러
  */
 include_once dirname(__FILE__)."/../function/baseFunction.php";
 
+
+class ShipmentForeignModel{
     /*  	
      *	해외통관 정보 등록 기능
      */
@@ -90,3 +93,4 @@ include_once dirname(__FILE__)."/../function/baseFunction.php";
           	return array('code' => 0, 'msg' => 'update false');
          } 
 	}
+}

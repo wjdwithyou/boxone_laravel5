@@ -1,10 +1,11 @@
 <?php
-
+namespace App\Http\models;
 /*
  *  환율 관련 컨트롤러
  */
 include_once dirname(__FILE__)."/../function/baseFunction.php";
 
+class CalculationModel{
 	/*
 	 *	계산기 카테고리 대분류 리스트 업
 	 */
@@ -56,5 +57,4 @@ include_once dirname(__FILE__)."/../function/baseFunction.php";
 	
 		return $result[0]->tax;
 	}
-	
-	
+}	

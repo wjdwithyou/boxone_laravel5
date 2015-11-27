@@ -1,10 +1,11 @@
 <?php
-
+namespace App\Http\models;
 /*
  *  커뮤니티 관련 컨트롤러
  */
 include_once dirname(__FILE__)."/../function/baseFunction.php";
 
+class CommunityModel{
     /*  	
      *	게시물 등록 기능
      */
@@ -282,3 +283,4 @@ include_once dirname(__FILE__)."/../function/baseFunction.php";
 
         return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
+}

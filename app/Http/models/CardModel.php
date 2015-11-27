@@ -1,10 +1,13 @@
 <?php
+namespace App\Http\models;
 
 /*
  *  카드 관련 컨트롤러
  */
 include_once dirname(__FILE__)."/../function/baseFunction.php";
 
+   
+class CardModel{
     /*  	
      *	카드정보 등록 기능
      */
@@ -88,3 +91,4 @@ include_once dirname(__FILE__)."/../function/baseFunction.php";
           	return array('code' => 0, 'msg' => 'update false');
          } 
 	}
+}

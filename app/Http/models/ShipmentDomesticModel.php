@@ -1,10 +1,13 @@
 <?php
+namespace App\Http\models;
 
 /*
  *  국내배송 관련 컨트롤러
  */
 include_once dirname(__FILE__)."/../function/baseFunction.php";
 
+
+class ShipmentDomesticModel{
     /*  	
      *	국내배송정보 등록 기능
      */
@@ -93,3 +96,4 @@ include_once dirname(__FILE__)."/../function/baseFunction.php";
           	return array('code' => 0, 'msg' => 'update false');
          } 
 	}
+}
