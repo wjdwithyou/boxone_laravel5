@@ -57,7 +57,7 @@ class ShoppingsiteModel{
 		if($result == true){
          	return array('code' => 1, 'msg' => 'success');
         }else{
-         	return array('code' => , 'msg' => 'update failure: no matched data');
+         	return array('code' => 0, 'msg' => 'update failure: no matched data');
         }
 	}
 
