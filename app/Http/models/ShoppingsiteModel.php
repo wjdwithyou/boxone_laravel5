@@ -50,11 +50,11 @@ class ShoppingsiteModel{
      */
 	function getInfoList($category_idx)
 	{
-		if ($category_idx == "0")
+		if ($category_idx == "0" || $category_idx == 0)
 			$cate = "";
 		else
-			$cate = "where category_idx=? ";
-		$result = DB::select('select * from shoppingsite '.$cate.'order by hit_count desc limit 10', array($category_idx));
+			$cate = "where category_idx='$category_idx' ";
+		$result = DB::select('select * from shoppingsite '.$cate.'order by hit_count desc limit 10');
 
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
@@ -67,7 +67,7 @@ class ShoppingsiteModel{
 		if ($category_idx == "0")
 			$cate = "";
 		else
-			$cate = "category_idx=? and ";
+			$cate = "category_idx='$category_idx' and ";
 		
 		$sort = "";
 		if ($char == "1")
@@ -87,7 +87,7 @@ class ShoppingsiteModel{
 				$sort .= " or name_eng like '".chr($i)."%'";
 		$sort = "(".substr($sort, 3).")";
 		
-		$result = DB::select('select * from shoppingsite where '.$cate.$sort.' order by name_eng asc', array($category_idx));
+		$result = DB::select('select * from shoppingsite where '.$cate.$sort.' order by name_eng asc');
 		
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}

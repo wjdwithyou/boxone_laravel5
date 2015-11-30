@@ -13,7 +13,7 @@
 
 		<div id="br_wrap">
 			<div id="static_menu_wrap">
-				<div class="br_menu" onclick='<?= $adr_ctr?>Bestranking/index?cate=0&char=1'>
+				<div class="br_menu" onclick='location.href="<?= $adr_ctr?>Bestranking/index?cate=0&char=1"'>
 					BEST 랭킹
 				</div>
 				<?php foreach($cate as $cateList):?>
