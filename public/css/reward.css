@@ -1,0 +1,144 @@
+#rw_top, #rw_wrap, #rw_result_wrap {
+	max-width: 992px;
+	margin: 0 auto;
+}
+#rw_content {
+	padding: 10px;
+}
+#rw_top {
+	width: 100%;
+	padding: 0 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+#rw_top_title {
+	font-size: 20px;
+	font-weight: bold;
+}
+#rw_img_wrap {
+	max-width: 600px;
+	margin: 0 auto;
+	text-align: center;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+#rw_img_wrap img {
+	width: 100%;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+#rw_search_wrap {
+	width: 300px;
+	margin: 0 auto;
+}
+#rw_search_wrap hr {
+	width: 150px;
+	margin: 30px auto;
+	border-color: #f15a63;
+}
+#rw_search_title {
+	text-align: center;
+	padding: 20px;
+	font-size: 18px;
+	font-weight: bold;
+	color: #f15a63;
+}
+#rw_search {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+#rw_search input {
+	border: 1px solid #f15a63;
+	border-radius: 20px !important;
+	padding-left: 35px;
+}
+#rw_search a img {
+	position: absolute;
+	z-index: 99;
+	margin-top: 8px;
+	margin-left: 12px;
+}
+#rw_hr {
+	margin-top: 60px;
+	margin-bottom: 40px;
+}
+#rw_result_wrap {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+#rw_result_title {
+	margin-left: 10px;
+	margin-bottom: 20px;
+	font-weight: bold;
+	font-size: 18px;
+	color: #aaa;
+}
+#rw_result_top_wrap {
+	padding: 0 5px;
+}
+#rw_result_top {
+	font-weight: bold;
+	padding: 15px 10px;
+	border: 1px solid #ddd;
+	background-color: #eee;
+	margin-bottom: 5px;
+}
+@media (max-width: 991px) {
+	.rw_result_div_wrap {
+		width: 33.3%;
+		float: left;
+	}
+}
+@media (min-width: 992px) {
+	.rw_result_div_wrap {
+		width: 20%;
+		float: left;
+	}
+}
+@media (max-width: 600px) {
+	.rw_result_div_wrap {
+		width: 50%;
+		float: left;
+	}
+}
+.rw_result_div_wrap {
+	padding: 5px;
+}
+.rw_result_div {
+	border: 1px solid #ccc;
+	-webkit-box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.1);
+	-moz-box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.1);
+	box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.1);
+}
+.rw_site_img {
+	height: 120px;
+	border-bottom: 1px solid #ccc;
+	text-align: center;
+}
+.rw_site_img img {
+	width: 100%;
+	max-width: 200px;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+.rw_site_desc {
+	padding: 5px;
+}
+.rw_site_name {
+	font-weight: bold;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.rw_site_reward {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.reward_percent {
+	font-size: 18px;
+	font-weight: bold;
+	color: #8352fa;
+}
+

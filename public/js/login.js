@@ -59,9 +59,6 @@ function move_join_success() {
 function close_popup(str){
 	$(str).modal('hide');
 }
-function myhref(e){
-	window.location.href = e;
-}
 
 var adr_ctr = $("#adr_ctr").val();
 
