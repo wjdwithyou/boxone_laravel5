@@ -78,6 +78,9 @@
 				<input type="text" class="form-control" placeholder="Search for..." onclick="">
 			</div>
 			
+			<div class="menu sidemenu_div sidemenu_hover" onclick='location.href="<?=$adr_ctr?>Bestranking/index"'>				
+				<span>베스트랭킹</span>
+			</div>
 			<div id="guide_menu" class="menu sidemenu_div sidemenu_hover" onclick="guide_collapse();">
 				<span>쇼핑가이드</span>
 			</div>
@@ -87,10 +90,10 @@
 				<div class="guide_submenu sidemenu_hover" onclick='location.href="<?=$adr_ctr?>Guide/index?no=3&det=3_1"'>배송대행 이용하기</div>
 				<div class="guide_submenu sidemenu_hover" onclick='location.href="<?=$adr_ctr?>Guide/index?no=4&det=4_1"'>직구 꿀팁</div>
 			</div>
-			<div class="menu sidemenu_div sidemenu_hover" onclick="">				
+			<div class="menu sidemenu_div sidemenu_hover" onclick='location.href="<?=$adr_ctr?>Reward/index"'>				
 				<span>리워드</span>
 			</div>
-			<div class="menu sidemenu_div sidemenu_hover" onclick="location.href="<?=$adr_ctr?>Card/index"">				
+			<div class="menu sidemenu_div sidemenu_hover" onclick='location.href="<?=$adr_ctr?>Card/index"'>				
 				<span>카드혜택</span>
 			</div>
 			<div class="menu sidemenu_div sidemenu_hover" onclick="">				

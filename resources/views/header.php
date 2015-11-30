@@ -78,7 +78,7 @@
 	<div id="mobile_searchbar_wrap" class="collapse">
 		<div id="mobile_searchbar_txt">검색창</div>
 		<div id="mobile_searchbar_input">
-			<a onclick=""><img src="<?= $adr_img?>search_img.png"></a>
+			<a onclick=""><img src="<?= $adr_img?>search_img_gray.png"></a>
 			<input type="text" class="form-control" placeholder="Search for...">
 		</div>
 	</div>
@@ -87,7 +87,7 @@
 <div id="main_menu_wrap">
 	<div id="main_menu">
 		<div id="shoppingbox_menu_wrap" class="menu_split">
-			<div id="shoppingbox" onclick="myhref('<?=$adr_ctr?>Product/index');">쇼핑박스</div>
+			<div id="shoppingbox" onclick='location.href="<?=$adr_ctr?>Product/index"'>쇼핑박스</div>
 		    <div id="shoppingbox_menu">
 		        <div class="col-xs-2">
 					<div class="sb_top">패션잡화</div>
@@ -177,7 +177,8 @@
 				<div class="clear_both"></div>
 		    </div>
 		</div>
-		<div class="menu_split">리워드</div>
+		<div class="menu_split" onclick='location.href="<?=$adr_ctr?>Bestranking/index"'>베스트랭킹</div>
+		<div class="menu_split" onclick='location.href="<?=$adr_ctr?>Reward/index"'>리워드</div>
 		<div class="menu_split" onclick='location.href="<?=$adr_ctr?>Card/index"'>카드혜택</div>
 		<div class="menu_split">핫딜</div>
 		<div class="menu_split">직거래박스</div>
