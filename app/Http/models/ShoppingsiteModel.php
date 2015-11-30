@@ -32,17 +32,65 @@ class ShoppingsiteModel{
 
 		return array('code' => 1,'msg' =>'success' ,'data' => $result);
 	}
+	
+	
+	/*
+	 *  쇼핑사이트 카테고리 가져오는 기능
+	 */
+	function getCate()
+	{
+		$result = DB::select('select * from shoppingsite_category');
+	
+		return array('code' => 1, 'msg' => 'success', 'data' => $result);
+	}
+	
 
     /*  	
-     *	쇼핑사이트 리스트로 종류별로 가져오는 기능
+     *	쇼핑사이트 리스트로 종류별로 가져오는 기능, 조회수로 정렬
      */
 	function getInfoList($category_idx)
 	{
-		$result = DB::select('select * from shoppingsite where category_idx=?', array($category_idx));
+		if ($category_idx == "0")
+			$cate = "";
+		else
+			$cate = "where category_idx=? ";
+		$result = DB::select('select * from shoppingsite '.$cate.'order by hit_count desc limit 10', array($category_idx));
 
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
-
+	
+	/*
+	 *  쇼핑사이트 리스트로 문자, 종류별로 가져오는 기능, 문자로 정렬 
+	 */
+	function getInfoListByChar($category_idx, $char)
+	{
+		if ($category_idx == "0")
+			$cate = "";
+		else
+			$cate = "category_idx=? and ";
+		
+		$sort = "";
+		if ($char == "1")
+			for ($i = 0 ; $i < 10 ; $i++)
+				$sort .= " or name_eng like '$i%'";
+		else if ($char == "2")
+			for ($i = 65 ; $i < 70 ; $i++)
+				$sort .= " or name_eng like '".chr($i)."%'";
+		else if ($char == "3")
+			for ($i = 70 ; $i < 77 ; $i++)
+				$sort .= " or name_eng like '".chr($i)."%'";
+		else if ($char == "4")
+			for ($i = 77 ; $i < 84 ; $i++)
+				$sort .= " or name_eng like '".chr($i)."%'";
+		else if ($char == "5")
+			for ($i = 84 ; $i < 91 ; $i++)
+				$sort .= " or name_eng like '".chr($i)."%'";
+		$sort = "(".substr($sort, 3).")";
+		
+		$result = DB::select('select * from shoppingsite where '.$cate.$sort.' order by name_eng asc', array($category_idx));
+		
+		return array('code' => 1, 'msg' => 'success', 'data' => $result);
+	}
 
  	/*  	
      *	쇼핑사이트 삭제 기능
