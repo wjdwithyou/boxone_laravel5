@@ -90,7 +90,7 @@
 			<div class="menu sidemenu_div sidemenu_hover" onclick="">				
 				<span>리워드</span>
 			</div>
-			<div class="menu sidemenu_div sidemenu_hover" onclick="">				
+			<div class="menu sidemenu_div sidemenu_hover" onclick="location.href="<?=$adr_ctr?>Card/index"">				
 				<span>카드혜택</span>
 			</div>
 			<div class="menu sidemenu_div sidemenu_hover" onclick="">				

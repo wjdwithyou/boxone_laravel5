@@ -68,6 +68,7 @@
 }
 .gm_menu {
 	margin: 5px 0;
+	font-size: 12px;
 }
 #static_menu_wrap hr {
 	margin-top: 10px;
@@ -77,6 +78,12 @@
 .gm_top:hover, .gm_menu:hover {
 	cursor: pointer;
 	color: #f43497;
+}
+#guide_content {
+	padding: 25px;
+}
+#guide_content img {
+	width: 100%;
 }
 @media (max-width: 991px) {
 	#guide_wrap {
@@ -99,13 +106,14 @@
 		display: none;
 	}
 	#static_menu_wrap {
-		width: 180px;
+		width: 150px;
 		margin-left: 20px;
 		position: absolute;
 	}
 	#guide_content {
-		width: 900px;
+		width: 992px;
 		margin: 0 auto;
+		padding-left: 35px;
 	}
 }
 @media (max-width: 420px) {
@@ -118,12 +126,6 @@
 	.submenu_grid {
 		width: 50% !important;
 	}
-}
-#guide_content {
-	padding: 25px;10px;
-}
-#guide_content img {
-	width: 100%;
 }
 .submenu_grid {
 	width: 33.3%;

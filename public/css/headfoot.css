@@ -1,3 +1,7 @@
+@font-face {
+    font-family: bkant;
+    src: url('http://localhost:8000/font/BKANT.TTF');
+}
 * {
 	border: 0;
 	outline: none;
