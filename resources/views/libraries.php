@@ -1,15 +1,15 @@
-﻿ 	<meta charset="utf-8">
+﻿    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-	<meta name="csrf-token" content="<?php echo csrf_token();?>"/>
-	
-	<?php $adr_js = "http://localhost:8000/js/"?>
-  	<?php $adr_css = "http://localhost:8000/css/"?>
-  	<?php $adr_img = "http://localhost:8000/img/"?>
-  	<?php $adr_btstrp = "http://localhost:8000/bootstrap/"?>
-  	<?php $adr_ctr = "http://localhost:8000/"?>
+    <meta name="csrf-token" content="<?php echo csrf_token();?>"/>
+
+	<?php $adr_js = "http://52.69.26.243//js/"?>
+  	<?php $adr_css = "http://52.69.26.243//css/"?>
+  	<?php $adr_img = "http://52.69.26.243//img/"?>
+  	<?php $adr_btstrp = "http://52.69.26.243//bootstrap/"?>
+  	<?php $adr_ctr = "http://52.69.26.243//"?>
   	
   	<input type="hidden" id="adr_js" value="<?=$adr_js?>"/>
   	<input type="hidden" id="adr_css" value="<?=$adr_css?>"/>
@@ -26,19 +26,21 @@
 			$img = $_SESSION['img'];
 		}
 	?>
-	    
+	
     <link rel="stylesheet" href="<?=$adr_btstrp?>css/bootstrap.css">
     <link rel="stylesheet" href="<?=$adr_btstrp?>css/bootstrap-theme.css">
     <link rel="stylesheet" href="<?=$adr_css?>carousel.css">
     
     <script type="text/javascript" src="<?=$adr_btstrp?>js/jquery-1.11.3.min.js"></script>
-	<script type="text/javascript">
+    
+    <script type="text/javascript">
    		$.ajaxSetup({
 	        headers: {
 	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 	        }
 		});
 	</script>
+    
     <script type="text/javascript" src="<?=$adr_btstrp?>js/bootstrap.min.js"></script>
     <script type="text/javascript" src="<?=$adr_btstrp?>js/ie-emulation-modes-warning.js"></script>
     <script type="text/javascript" src="<?=$adr_btstrp?>js/ie10-viewport-bug-workaround.js"></script>
@@ -61,7 +63,6 @@
   	<script type="text/javascript" src="<?=$adr_js?>headfoot.js"></script>
   	<script type="text/javascript" src="<?=$adr_js?>login.js"></script>
   	<script type="text/javascript" src="<?=$adr_js?>calculator.js"></script>
-  	
 
     <link rel="icon" href="<?=$adr_img?>brower_logo.ico">
     <title>BOXONE</title>
