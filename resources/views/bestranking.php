@@ -52,7 +52,13 @@
 							<div class="rank_border">
 								<div class="rank">
 									<div class="rank_bookmark">
-										<a onclick=""><img src="<?= $adr_img ?>bookmark.png"></a>
+										<a onclick="clickBookmark($(this).children(), <?= $best1->idx?>);">
+											<?php if ($best1->bookmark == 1) :?>
+												<img src="<?= $adr_img ?>bookmark_on.png">
+											<?php else :?>
+												<img src="<?= $adr_img ?>bookmark.png">
+											<?php endif;?>
+										</a>
 									</div>
 									<div class="rank_no">
 										BEST 1
@@ -79,7 +85,13 @@
 							<div class="rank_border">
 								<div class="rank">
 									<div class="rank_bookmark">
-										<a onclick=""><img src="<?= $adr_img ?>bookmark.png"></a>
+										<a onclick="clickBookmark($(this).children(), <?= $upper[$i]->idx?>);">
+											<?php if ($upper[$i]->bookmark == 1) :?>
+												<img src="<?= $adr_img ?>bookmark_on.png">
+											<?php else :?>
+												<img src="<?= $adr_img ?>bookmark.png">
+											<?php endif;?>
+										</a>
 									</div>
 									<div class="rank_no">
 										BEST <?= ($i+1)?>
@@ -123,7 +135,13 @@
 							</div>
 							<div class="site_name_set">
 								<div class="site_bookmark">
-									<a onclick=""><img src="<?= $adr_img ?>bookmark.png"></a>
+									<a onclick="clickBookmark($(this).children(), <?= $charList->idx?>);">
+										<?php if ($charList->bookmark == 1) :?>
+											<img src="<?= $adr_img ?>bookmark_on.png">
+										<?php else :?>
+											<img src="<?= $adr_img ?>bookmark.png">
+										<?php endif;?>
+									</a>
 								</div>
 								<div class="site_name_en">
 									<?= $charList->name_eng?>

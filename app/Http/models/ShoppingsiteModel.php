@@ -54,7 +54,7 @@ class ShoppingsiteModel{
 			$cate = "";
 		else
 			$cate = "where category_idx='$category_idx' ";
-		$result = DB::select('select * from shoppingsite '.$cate.'order by hit_count desc limit 10');
+		$result = DB::select('select *, 0 as bookmark from shoppingsite '.$cate.'order by hit_count desc limit 10');
 
 		for()
 
@@ -91,7 +91,7 @@ class ShoppingsiteModel{
 				$sort .= " or name_eng like '".chr($i)."%'";
 		$sort = "(".substr($sort, 3).")";
 		
-		$result = DB::select('select * from shoppingsite where '.$cate.$sort.' order by name_eng asc');
+		$result = DB::select('select *, 0 as bookmark from shoppingsite where '.$cate.$sort.' order by name_eng asc');
 		
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
@@ -142,22 +142,41 @@ class ShoppingsiteModel{
     /*  	
      *	북마크정보 등록 기능
      */
-	function createBookmark($member_idx, $website_link)
+	function createBookmark($member_idx, $shoppingsite_idx)
 	{
 
 		if(	!(	inputErrorCheck($member_idx, 'member_idx')
-				&& inputErrorCheck($website_link, 'website_link')))
+				&& inputErrorCheck($shoppingsite_idx, 'shoppingsite_idx')))
 			return ;		
 				
 		$result = DB::table('link_bookmark')->insertGetId(
 			array(
 				'member_idx'=> $member_idx, 
-				'website_link'=> $website_link, 
+				'shoppingsite_idx'=> $shoppingsite_idx, 
 				'upload'=>DB::raw('now()')
 				)
 			);	
 
-		return array('code' => 1,'msg' =>'success' ,'data' => $result);
+		return array('code' => 1,'msg' =>'success' ,'data' => 'create');
+	}
+	
+	
+	/*
+	 *	북마크정보 확인 기능
+	 */
+	function checkBookmark($member_idx, $shoppingsite_idx)
+	{
+	
+		if(	!(	inputErrorCheck($member_idx, 'member_idx')
+				&& inputErrorCheck($shoppingsite_idx, 'shoppingsite_idx')))
+				return ;
+	
+		$result = DB::select('select * from link_bookmark where member_idx=? and shoppingsite_idx=?', array($member_idx, $shoppingsite_idx));
+		
+		if (count($result) > 0)
+			return array('code' => 1,'msg' =>'success' ,'data' => $result);
+		else
+			return array('code' => 0,'msg' =>'failure' ,'data' => $result);
 	}
 
     /*  	
@@ -177,15 +196,16 @@ class ShoppingsiteModel{
  	/*  	
      *	북마크 삭제 기능
      */
-	function deleteBookmark($idx)
+	function deleteBookmark($member_idx, $shoppingsite_idx)
 	{
-		if(	!(	inputErrorCheck($idx, 'idx')))
-			return ;		
+		if(	!(	inputErrorCheck($member_idx, 'member_idx')
+				&& inputErrorCheck($shoppingsite_idx, 'shoppingsite_idx')))
+				return ;	
 
- 		$result = DB::delete('delete from link_bookmark where idx=?', array($idx));
+ 		$result = DB::delete('delete from link_bookmark where member_idx=? and shoppingsite_idx=?', array($member_idx, $shoppingsite_idx));
 
 		if($result == true){
-         	return array('code' => 1, 'msg' => 'data delete success');
+         	return array('code' => 1, 'msg' => 'data delete success', 'data' => 'delete');
         }else{
          	return array('code' => 0, 'msg' => 'delete false: no matched data');
         }
