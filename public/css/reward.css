@@ -68,13 +68,13 @@
 }
 #rw_result_title {
 	margin-left: 10px;
-	margin-bottom: 20px;
 	font-weight: bold;
 	font-size: 18px;
 	color: #aaa;
 }
 #rw_result_top_wrap {
 	padding: 0 5px;
+	margin-top: 20px;
 }
 #rw_result_top {
 	font-weight: bold;

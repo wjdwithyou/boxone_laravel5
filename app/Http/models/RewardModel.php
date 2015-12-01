@@ -43,10 +43,8 @@ class RewardModel
 			return ;
 
 
-		$result = DB::select("(select * from reward where target_site like '%$target_site%' order by target_site DESC)
-								LEFT JOIN shoppingsite ON reward.rewardsite_idx=shoppingsite.idx");
-
-		$
+		$result = DB::select("select * from reward LEFT JOIN shoppingsite ON reward.rewardsite_idx=shoppingsite.idx
+							 where target_site like '%$target_site%' order by target_site ASC");
 
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
