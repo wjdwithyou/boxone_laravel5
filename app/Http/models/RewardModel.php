@@ -96,7 +96,7 @@ class RewardModel
 	 */
 	function getInfoListByCardcompany($cardcompany)
 	{
-		if( !( inputErrorCheck(($cardcompany, 'cardcompany')))
+		if( !( inputErrorCheck($cardcompany, 'cardcompany')))
 			return ;
 
 		$result = DB::select("select * from card where support_card like '%$cardcompany%'");
