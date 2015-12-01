@@ -7,6 +7,7 @@ use DB;
 include_once dirname(__FILE__)."/../function/baseFunction.php";
 
 class CommunityModel{
+
     /*  	
      *	게시물 등록 기능
      */
@@ -281,6 +282,20 @@ class CommunityModel{
 
 		//북마크 삭제
 		$result = DB::delete('delete from community_bookmark where idx=?', array($bookmark_idx));
+
+        return array('code' => 1, 'msg' => 'success', 'data' => $result);
+	}
+
+	/*  	
+     *	내가 쓴 글 목록 가져오기
+     */
+	function getInfoMyCommunity($member_idx)
+	{
+
+		if(	!(	inputErrorCheck($member_idx, 'member_idx')))
+			return ;
+
+		$result = DB::select('select * from community where member_idx=? order by idx DESC', array($member_idx));
 
         return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}

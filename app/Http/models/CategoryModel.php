@@ -12,19 +12,43 @@ class CategoryModel{
 	/*
 	 *	소분류 -> 대분류 
 	 */
-	function upToDown()
+	function downToUp($small_idx)
 	{
-		
 
+		$result = DB::join('select * from
+							(
+								(
+								 category_small as cs 
+								 JOIN category_medium as cm
+								 ON cs.medium_idx=cm.idx
+								) as cms
+							 LEFT JOIN category_large as cl 
+							 ON cms.large_idx=cl.idx
+							) where cs.idx=?', array($small_idx));
 
+      	return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
 
 	/*
 	 *	대분류 -> 소분류 
 	 */
-	function downToUp()
+	function upToDown($large_idx)
 	{
+		if( !( inputErrorCheck($large_idx, 'large_idx')))
+			return ;
 
+		$result = DB::join('select * from
+					(
+						(
+						 (select * from category_large where idx=?) as cl 
+						 LEFT JOIN category_medium as cm
+						 ON cl.idx=cm.large_idx
+						) as clm
+					 LEFT JOIN category_small as cs 
+					 ON clm.idx=cs.medium_idx
+					)',array($large_idx));
+
+      	return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
 
 	/*
