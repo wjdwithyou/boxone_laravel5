@@ -1,3 +1,10 @@
+$(document).ready(function(){	
+	$("#rw_search_text").keyup(function(e){
+		if (e.keyCode == 13)
+			searchReward();
+	});
+});
+
 function searchReward()
 {	
 	var text = $("#rw_search_text").val();
