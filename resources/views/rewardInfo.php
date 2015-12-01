@@ -9,7 +9,7 @@
 		<div class="rw_result_div_wrap">
 			<div class="rw_result_div">
 				<div class="rw_site_img">
-					<a onclick="window.open('<?= $rewardList->target_link?>');"><img src="<?= $adr_img ?><?= $rewardList->idx?>.png"></a>
+					<a onclick="window.open('<?= $rewardList->target_link?>');"><img src="<?= $adr_img ?>site/<?= $rewardList->idx?>.png"></a>
 				</div>
 				<div class="rw_site_desc">
 					<div class="rw_site_name">
