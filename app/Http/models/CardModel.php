@@ -91,6 +91,27 @@ class CardModel{
           	return array('code' => 0, 'msg' => 'update false');
          } 
 	}
+	
+	/*
+	 *  카드 서포트 사이트 목록 가져오기
+	 */
+	function getCardSupportSite()
+	{
+		$result = DB::select("select distinct support_site from card where support_site != ''");
+				
+		return array('code' => 1, 'msg' => 'success', 'data' => $result);				
+	}
+	
+	/*
+	 *  카드사 목록 가져오기
+	 */
+	function getCardCompany()
+	{
+		$result = DB::select("select distinct support_card from card");
+	
+		return array('code' => 1, 'msg' => 'success', 'data' => $result);
+	}
+				
 
 	/*
 	 *	입력받은 배대지에 해당하는 카드 리스트 출력
