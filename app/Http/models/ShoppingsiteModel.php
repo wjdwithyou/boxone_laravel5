@@ -48,13 +48,17 @@ class ShoppingsiteModel{
     /*  	
      *	쇼핑사이트 리스트로 종류별로 가져오는 기능, 조회수로 정렬
      */
-	function getInfoList($category_idx)
+	function getInfoList($category_idx, $member_idx)
 	{
 		if ($category_idx == "0" || $category_idx == 0)
 			$cate = "";
 		else
 			$cate = "where category_idx='$category_idx' ";
 		$result = DB::select('select * from shoppingsite '.$cate.'order by hit_count desc limit 10');
+
+		for()
+
+
 
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
