@@ -38,13 +38,33 @@ class BestrankingController extends Controller {
 		$allCate = $ssModel->getCate();
 		
 		// 카테고리 별 사이트 베스트 랭킹
-		$upper = $ssModel->getInfoList($cate);
-		if (count($upper['data']) > 0)
-			$best1 = $upper['data'][0];
-		else 
-			$best1 = null;
+		$upper = $ssModel->getInfoList($cate);		
 		$lower = $ssModel->getInfoListByChar($cate, $char);
 		
+		// 로그인 되어있을 시 북마크 체크
+		if (session_id() == '')	session_start();
+		if (!empty($_SESSION['idx']))
+		{
+			$idx = $_SESSION['idx'];
+			$bookmarks = $ssModel->getInfoListBookmark($idx);
+			
+			for ($i = 0 ; $i < count($upper['data']) ; ++$i)
+				for ($j = 0 ; $j < count($bookmarks['data']) ; ++$j)
+					if ($upper['data'][$i]->idx == $bookmarks['data'][$j]->shoppingsite_idx)
+						$upper['data'][$i]->bookmark = 1;
+					
+			for ($i = 0 ; $i < count($lower['data']) ; ++$i)
+				for ($j = 0 ; $j < count($bookmarks['data']) ; ++$j)
+					if ($lower['data'][$i]->idx == $bookmarks['data'][$j]->shoppingsite_idx)
+						$lower['data'][$i]->bookmark = 1;
+		}
+		
+		// 랭킹 1위 떼어내기
+		if (count($upper['data']) > 0)
+			$best1 = $upper['data'][0];
+		else
+			$best1 = null;
+					
 		$page = 'bestranking';
 		return view($page, array('page' => $page, 'nowCate' => $cate, 'cate' => $allCate['data'], 'best1' => $best1, 'upper' => $upper['data'], 'lower' => $lower['data']));
 	}
@@ -59,7 +79,46 @@ class BestrankingController extends Controller {
 		
 		$lower = $ssModel->getInfoListByChar($cate, $char);
 		
+		// 로그인 되어있을 시 북마크 체크
+		if (session_id() == '')	session_start();
+		if (!empty($_SESSION['idx']))
+		{
+			$idx = $_SESSION['idx'];
+			$bookmarks = $ssModel->getInfoListBookmark($idx);
+			
+			for ($i = 0 ; $i < count($lower['data']) ; ++$i)
+				for ($j = 0 ; $j < count($bookmarks['data']) ; ++$j)
+					if ($lower['data'][$i]->idx."" == $bookmarks['data'][$j]->shoppingsite_idx)
+						$lower['data'][$i]->bookmark = 1;
+		}
+		
 		$page = 'bestrankingInfo';
 		return view($page, array('page' => $page, 'nowCate' => $cate, 'lower' => $lower['data'], 'adr_img' => $adr_img));
 	}
+	
+	public function checkBookmark()
+	{
+		$ssModel = new ShoppingsiteModel();
+		
+		$member_idx = Request::input('member');
+		$shoppingsite_idx = Request::input('site');
+		
+		$chk = $ssModel->checkBookmark($member_idx, $shoppingsite_idx);
+		if ($chk['code'] == 0)
+			$result = $ssModel->createBookmark($member_idx, $shoppingsite_idx);
+		else
+			$result = $ssModel->deleteBookmark($member_idx, $shoppingsite_idx);
+		
+		header('Content-Type: application/json');
+		echo json_encode($result);
+	}
 }
+
+
+
+
+
+
+
+
+
