@@ -18,7 +18,7 @@ class CommunityModel{
 		 		&& inputErrorCheck($category_small, 'category_small')))
 			return ;
 		
-		$result = DB::table('board')->insertGetId(
+		$result = DB::table('community')->insertGetId(
 			array(
 				'member_idx'=> $member_idx, 
 				'title'=> $title, 
@@ -62,13 +62,13 @@ class CommunityModel{
 	{
 	  	   
 
-		if(	!(	inputErrorCheck($board_idx, 'board_idx')
+		if(	!(	inputErrorCheck($community_idx, 'community_idx')
 		 		&& inputErrorCheck($title, 'title')
 		 		&& inputErrorCheck($contents, 'contents')))
 			return ;
 
-		$result = DB::update('update board set title=?, contents=?, upload=now() where board_idx = ?' ,
-			array($title, $contents, $board_idx));
+		$result = DB::update('update community set title=?, contents=?, upload=now() where idx = ?' ,
+			array($title, $contents, $community_idx));
                     
  		if($result == true){
           	return array('code' => 1, 'msg' => 'update success');

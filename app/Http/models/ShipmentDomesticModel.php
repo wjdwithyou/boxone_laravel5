@@ -47,7 +47,9 @@ class ShipmentDomesticModel{
      */
 	function getInfoList($member_idx)
 	{
-
+		if(	!(	inputErrorCheck($member_idx, 'member_idx')))
+			return ;	
+		
 		$result = DB::select('select * from shipment_domestic where member_idx=? order by idx DESC', array($member_idx));
 
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);

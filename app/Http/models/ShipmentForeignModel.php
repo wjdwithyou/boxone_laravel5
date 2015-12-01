@@ -45,6 +45,9 @@ class ShipmentForeignModel{
      */
 	function getInfoList($member_idx)
 	{
+		if(	!(	inputErrorCheck($member_idx, 'member_idx')))
+			return ;	
+		
 		$result = DB::select('select * from shipment_foreign where member_idx=? order by idx DESC', array($membeR_idx));
 
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
