@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
+use App\Http\models\CommunityModel;
 use Request;
 
 //include ("/var/www/laravel/app/models/MemberModel.php");
@@ -15,8 +16,12 @@ class MyungSsooController extends Controller {
 
 	public function index()
 	{
-		$page = 'test';
-		return view($page, array('page' => $page));
+		$model = new CommunityModel();
+
+		$result = $model->getInfoList(1, array(16, 17), 3, 4);
+//		$result = $model->getResultSize(1, array(16));
+
+		print_r($result);
 	}
 	
 	/*
