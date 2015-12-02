@@ -15,7 +15,7 @@ class MyungSsooController extends Controller {
 
 	public function index()
 	{
-		$page = 'test';
+		$page = 'deliver';
 		return view($page, array('page' => $page));
 	}
 	
@@ -87,6 +87,14 @@ class MyungSsooController extends Controller {
 		
 		
 		echo ("화물번호:".$hwaNum.", M B/L:".$mbl.", H B/L:".$hbl);
+	}
+	
+	function getInfoBaesong()
+	{
+		$url = Request::input('url');	
+		$result = file_get_contents($url);
+		
+		echo ($result);
 	}
 
 }
