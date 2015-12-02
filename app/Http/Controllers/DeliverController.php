@@ -95,11 +95,12 @@ class DeliverController extends Controller {
 		$num = Request::input('num');
 		$url = Request::input('url');
 		
-		$html = file_get_contents($url);
 		$result = array();
 		
 		if ($company == "우체국택배")
 		{
+			$html = file_get_contents($url);
+			
 			$html = substr($html, strpos($html, "배달결과"));
 			$html = substr($html, strpos($html, "<td>") + 1);
 		
@@ -152,19 +153,38 @@ class DeliverController extends Controller {
 			}
 			
 			array_push($result, $info);
-			
-				
-			
-			
-			
+
 		}
 		else if ($company == "대한통운")
 		{
+			$postdata = http_build_query(
+				array(
+					'fsp_action' => 'PARC_ACT_002',
+					'fsp_cmd' => 'retrieveInvNoACT',
+					'invc_no' => $num,
+					'nextpage' => 'parcel/pa_004_r.jsp'
+				)
+			);
+			
+			$opts = array('http' =>
+				array(
+					'method' => 'POST',
+					'header' => 'Content-type: application/x-www-form-urlencoded; Host: http://www.doortodoor.co.kr/;',
+					'content' => $postdata
+				), 
+				'ssl' =>
+				array(
+					'crypto_method' => STREAM_CRYPTO_METHOD_SSLv3_CLIENT
+				)
+			);
+			
+			$context = stream_context_create($opts);
+			$result = file_get_contents('https://www.doortodoor.co.kr/main/doortodoor.do', false, $context);
 			
 		}
 		else if ($company == "한진택배")
 		{
-				
+			var_dump(openssl_get_cert_locations());
 		}
 		else if ($company == "로젠택배")
 		{
@@ -241,12 +261,7 @@ class DeliverController extends Controller {
 		else if ($company == "HB한방택배")
 		{
 		
-		}
-		else if ($company == "GTX")
-		{
-		
-		}
-		
+		}		
 		
 			
 		print_r ($result);

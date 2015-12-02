@@ -5,9 +5,9 @@ var dtd_companys = new Array();
 dtd_companys["우체국택배"] = new Array(13,
 		"https://service.epost.go.kr/trace.RetrieveDomRigiTraceList.comm?displayHeader=N&sid1=",
 		"1234567890123 (13자리)", "1588-1300", "http://parcel.epost.go.kr");
-dtd_companys["대한통운"] = new Array(10,
+dtd_companys["대한통운"] = new Array(12,
 		"http://www.doortodoor.co.kr/servlets/cmnChnnel?tc=dtd.cmn.command.c03condiCrg01Cmd&invc_no=",
-		"1234567890 (10자리)", "1588-1255", "http://www.doortodoor.co.kr");
+		"123456789012 (12자리)", "1588-1255", "http://www.doortodoor.co.kr");
 dtd_companys["한진택배"] = new Array(12,
 		"http://www.hanjin.co.kr/Delivery_html/inquiry/result_waybill.jsp?wbl_num=",
 		"1234567890 (10,12자리)", "1588-0011", "http://hanex.hanjin.co.kr");
@@ -70,9 +70,6 @@ dtd_companys["TNT Express"] = new Array(13,
 dtd_companys["HB한방택배"] = new Array(12,
 		"http://www.hbtb.co.kr/search/s_search.asp?f_slipno=",
 		"123456789012 (12자리)", "1588-1059", "http://www.hbtb.co.kr/");
-dtd_companys["GTX"] = new Array(12,
-		"http://www.gtx2010.co.kr/del_inquiry_result.html?s_gbn=1&awblno=",
-		"123456789012 (12자리)", "1588-1756", "http://www.gtx2010.co.kr");
 
 function baesongSearch() 
 {
