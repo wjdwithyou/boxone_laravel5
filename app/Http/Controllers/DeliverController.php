@@ -170,7 +170,7 @@ class DeliverController extends Controller {
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_URL, "https://www.doortodoor.co.kr/main/doortodoor.do");
 			curl_setopt($ch, CURLOPT_POST, 1);
-			curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
 			echo(curl_exec($ch));
 			
 			/*
