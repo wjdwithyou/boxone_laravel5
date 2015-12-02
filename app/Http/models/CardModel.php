@@ -17,13 +17,13 @@ class CardModel{
 		if(	!(	inputErrorCheck($title, 'title')
 				&& inputErrorCheck($contents, 'contents')
 				&& inputErrorCheck($status, 'status')))
-			return ;		
-				
+			return ;
+
 		$result = DB::table('card')->insertGetId(
 			array(
-				'title'=> $title, 
-				'contents'=> $contents, 
-				'status'=> $status, 
+				'title'=> $title,
+				'contents'=> $contents,
+				'status'=> $status,
 				'upload'=>DB::raw('now()')
 				)
 			);	
