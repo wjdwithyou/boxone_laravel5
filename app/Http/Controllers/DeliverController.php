@@ -157,6 +157,7 @@ class DeliverController extends Controller {
 		}
 		else if ($company == "대한통운")
 		{
+			
 			$postdata = http_build_query(
 				array(
 					'fsp_action' => 'PARC_ACT_002',
@@ -166,20 +167,32 @@ class DeliverController extends Controller {
 				)
 			);
 			
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL, "https://www.doortodoor.co.kr/main/doortodoor.do");
+			curl_setopt($ch, CURLOPT_POST, 1);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+			echo(curl_exec($ch));
+			
+			/*
 			$opts = array('http' =>
 				array(
 					'method' => 'POST',
-					'header' => 'Content-type: application/x-www-form-urlencoded; Host: http://www.doortodoor.co.kr/;',
+					'header' => 'User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36; Content-type: application/x-www-form-urlencoded;',
 					'content' => $postdata
 				), 
 				'ssl' =>
 				array(
-					'crypto_method' => STREAM_CRYPTO_METHOD_SSLv3_CLIENT
+					'verify_peer' => true,
+					'cafile' => 'http://localhost:8000/img/ca.pem',
+					'CN_match' => 'www.doortodoor.co.kr',
+					'ciphers' => 'HIGH:!SSLv2:!SSLv3' 
 				)
 			);
 			
 			$context = stream_context_create($opts);
-			$result = file_get_contents('https://www.doortodoor.co.kr/main/doortodoor.do', false, $context);
+			$result = file_get_contents('https://www.doortodoor.co.kr/main/doortodoor.do', false, $context);*/
+			
+			
 			
 		}
 		else if ($company == "한진택배")
