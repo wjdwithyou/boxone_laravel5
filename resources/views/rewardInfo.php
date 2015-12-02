@@ -13,7 +13,7 @@
 				</div>
 				<div class="rw_site_desc">
 					<div class="rw_site_name">
-						<span class="site_name_kr"><?= $rewardList->name?></span>&nbsp;( <span class="site_name_en"><?= $rewardList->name_eng?></span>)
+						<span class="site_name_kr"><?= $rewardList->name?></span>&nbsp;(<span class="site_name_en"><?= $rewardList->name_eng?></span>)
 					</div>
 					<div class="rw_site_reward">
 						<span class="reward_percent"><?= $rewardList->reward_rate?></span> 리워드
