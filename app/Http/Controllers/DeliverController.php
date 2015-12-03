@@ -365,26 +365,21 @@ class DeliverController extends Controller {
 			define("COOKIE_FILE", "cookie.txt");
 			
 			// Login the user
-			$ch = curl_init('http://www.hlc.co.kr/open/tracking?invno='.$num);
-			curl_setopt ($ch, CURLOPT_COOKIEJAR, COOKIE_FILE);
+			$ch = curl_init();
+			curl_setopt ($ch, CURLOPT_URL, 'http://www.hlc.co.kr/open/tracking?invno='.$num);
+			curl_setopt ($ch, CURLOPT_USERAGENT,'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/32.0.1700.107 Chrome/32.0.1700.107 Safari/537.36');
+			curl_setopt ($ch, CURLOPT_COOKIESESSION, true);
+			curl_setopt ($ch, CURLOPT_COOKIEJAR, 'cookie-name');
+			curl_setopt ($ch, CURLOPT_COOKIEFILE, COOKIE_FILE);
 			curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
-			curl_setopt($ch, CURLOPT_HEADER, true);
-			echo curl_exec ($ch);
-			
-			// Read the session saved in the cookie file
-			echo "<br/><br/>";
-			$file = fopen("cookie.txt", 'r');
-			echo fread($file, 100000000);
-			echo "<br/><br/>";
+			curl_setopt ($ch, CURLOPT_HEADER, true);
+			$result = curl_exec ($ch);
 			
 			// Get the users details
-			$ch = curl_init('http://www.hlc.co.kr/open/tracking');
-			curl_setopt ($ch, CURLOPT_COOKIEJAR, COOKIE_FILE);
-			curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
-			curl_setopt($ch, CURLOPT_HEADER, true);
+			curl_setopt ($ch, CURLOPT_URL, 'http://www.hlc.co.kr/open/tracking');
 			curl_setopt($ch, CURLOPT_POST, true);
 			curl_setopt($ch, CURLOPT_POSTFIELDS, "action=processSubmit");
-			echo curl_exec ($ch);
+			$result = curl_exec ($ch);
 				
 		}
 		else if ($company == "KG옐로우캡택배")
