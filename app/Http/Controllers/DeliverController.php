@@ -178,9 +178,9 @@ class DeliverController extends Controller {
 			curl_setopt($ch, CURLOPT_POST, true);
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
 			curl_setopt($ch, CURLOPT_TIMEOUT, 20);
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-			curl_setopt($ch, CURLOPT_AUTOREFERER, true);
+			//curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			//curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+			//curl_setopt($ch, CURLOPT_AUTOREFERER, true);
 			curl_setopt($ch, CURLOPT_CAINFO, dirname(__FILE__)."/cacert.pem");
 			ob_start();
 			$res = curl_exec($ch);
