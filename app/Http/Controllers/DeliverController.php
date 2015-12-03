@@ -163,12 +163,9 @@ class DeliverController extends Controller {
 					'fsp_action' => 'PARC_ACT_002',
 					'fsp_cmd' => 'retrieveInvNoACT',
 					'invc_no' => $num,
-					'nextpage' => 'parcel'
+					'nextpage' => 'parcel/pa_004_r.jsp'
 				)
 			);
-			
-			$postdata .= '/pa_004_r.jsp';
-			//echo ($postdata);
 			
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_URL, "https://www.doortodoor.co.kr/main/doortodoor.do");
