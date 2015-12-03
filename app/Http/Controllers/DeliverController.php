@@ -180,7 +180,71 @@ class DeliverController extends Controller {
 		}
 		else if ($company == "KGB택배")
 		{
+		$company = Request::input('company');
+		$num = Request::input('num');
+		$url = Request::input('url');
+		
+		$html = file_get_contents($url);
+		$result = array();
+		
+		if ($company == "우체국택배")
+		{
+			
+			$html = substr($html, strpos($html, "배달결과"));
+			$html = substr($html, strpos($html, "<td>") + 1);
+		
+			// 보내는분
+			$html = substr($html, strpos($html, "<td>") + 4);
+			$result['sender'] = substr($html, 0, strpos($html, "<"));
+			// 발송날짜
+			$html = substr($html, strpos($html, ">") + 1);
+			$result['sendDate'] = substr($html, 0, strpos($html, "</"));
+			
+			// 받는분
+			$html = substr($html, strpos($html, "<td>") + 4);
+			$result['receiver'] = substr($html, 0, strpos($html, "<"));
+			// 수신날짜
+			$html = substr($html, strpos($html, ">") + 1);
+			$result['receiveDate'] = substr($html, 0, strpos($html, "</"));
+			
+			$html = substr($html, strpos($html, "<td>") + 4);
+			
+			// 배달결과
+			$html = substr($html, strpos($html, "<td>") + 4);
+			$result['state'] = substr($html, 0, strpos($html, "<"));
+			
+			// 배송 상황 (날짜, 시간, 현재위치, 처리현황)
+			$info = array();
+			while ($pos = strpos($html, "return goPost"))
+			{
+				$temp = array();
 				
+				$html = substr($html, strrpos(substr($html, 0, $pos), "<tr>"));
+				
+				// 날짜
+				$html = substr($html, strpos($html, "<td>") + 4);
+				$temp['date'] = substr($html, 0, strpos($html, "<"));
+				
+				// 시간
+				$html = substr($html, strpos($html, "<td>") + 4);
+				$temp['time'] = substr($html, 0, strpos($html, "<"));
+				
+				// 현재위치
+				$html = substr($html, strpos($html, "onclick"));
+				$html = substr($html, strpos($html, ">") + 1);
+				$temp['location'] = substr($html, 0, strpos($html, "<"));
+				
+				// state
+				$html = substr($html, strpos($html, "<td>") + 4);
+				$temp['state'] = trim(substr($html, 0, strpos($html, "<")), " &nbsp; ( )");
+				
+				array_push($info, $temp);
+			}
+			
+			array_push($result, $info);
+			
+				
+							
 		}
 		else if ($company == "EMS")
 		{

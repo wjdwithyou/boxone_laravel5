@@ -5,11 +5,11 @@
     <meta name="author" content="">
     <meta name="csrf-token" content="<?php echo csrf_token();?>"/>
 
-	<?php $adr_js = "http://52.69.26.243/js/"?>
-  	<?php $adr_css = "http://52.69.26.243/css/"?>
-  	<?php $adr_img = "http://52.69.26.243/img/"?>
-  	<?php $adr_btstrp = "http://52.69.26.243/bootstrap/"?>
-  	<?php $adr_ctr = "http://52.69.26.243/"?>
+	<?php $adr_js = "http://localhost:8000/js/"?>
+  	<?php $adr_css = "http://localhost:8000/css/"?>
+  	<?php $adr_img = "http://localhost:8000/img/"?>
+  	<?php $adr_btstrp = "http://localhost:8000/bootstrap/"?>
+  	<?php $adr_ctr = "http://localhost:8000/"?>
   	
   	<input type="hidden" id="adr_js" value="<?=$adr_js?>"/>
   	<input type="hidden" id="adr_css" value="<?=$adr_css?>"/>
