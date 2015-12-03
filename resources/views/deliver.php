@@ -30,7 +30,6 @@
 				<option>CVSnet 편의점택배</option>
 				<option>TNT Express</option>
 				<option>HB한방택배</option>
-				<option>GTX</option>
 			</select>
 			<input type="text" id="baesong_num"/>
 			<button onclick="baesongSearch();">버튼</button>
