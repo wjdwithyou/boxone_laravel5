@@ -19,8 +19,12 @@ class AlarmModel()
 	 */
 	function getInfoAlarm($member_idx)
 	{
-		//5개
+		if( !( inputErrorCheck($member_idx, 'member_idx')))
+			return ;
 
+		$result = DB::select('select * from alarm_mypage where member_idx=? limit 5', array($member_idx));
+
+      	return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
 
 
@@ -31,7 +35,7 @@ class AlarmModel()
 	/*
 	 * 	키워드 알람 등록 기능
 	 */
-	function createKeywordAlarm($keyword, $member_idx)
+	function createKeywordAlarm($keyword, $member_idx, $target_table)
 	{
 
 

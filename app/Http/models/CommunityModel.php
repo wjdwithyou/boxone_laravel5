@@ -136,14 +136,23 @@ class CommunityModel{
         }
 	}
 
+	/*
+	 *	대분류 리스트 중복제거하고 출력
+	 */
+	function getLargeCategory()
+	{
+		$result = DB::select('select distinct large_name from community_category');
+
+        return array('code' => 1 , 'msg' => 'success', 'data' => $result);
+	}
 
 	/*
 	 *	각각 대분류에 해당하는 중분류 리스트 출력
 	 */
-	function getSmallCategory($largecategory_idx)
+	function getSmallCategory($large_name)
 	{
-		$result = DB::select('select idx, name from community_category where idx=?',
-			array($largecategory_idx));
+		$result = DB::select('select idx, name from community_category where large_name=?',
+			array($large_name));
 
         return array('code' => 1 , 'msg' => 'success', 'data' => $result);
 	}
@@ -356,10 +365,4 @@ class CommunityModel{
         return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}	
 
-
-	function getCategoryMedium()
-	{
-
-		
-	}
 }

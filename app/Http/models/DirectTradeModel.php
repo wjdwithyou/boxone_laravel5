@@ -33,7 +33,7 @@ class DirectTradeModel()
 				'addr_1'		=> $addr_1, 
 				'addr_2'		=> $addr_2, 
 				'account_bank'	=> $account_bank, 
-				'account_bank'	=> $account_bank, 
+				'account_number'	=> $account_number, 
 				'upload'=>DB::raw('now()')
 				)
 			);	
