@@ -2,12 +2,38 @@
 namespace App\Http\models;
 use DB;
 /*
- *  카드 관련 컨트롤러
+ *  상품 관련 컨트롤러
  */
 include_once dirname(__FILE__)."/../function/baseFunction.php";
 
    
-class CardModel{
+class ProductModel{
+
+	function createBookmark($product_idx, $member_idx)
+	{
+		if( !( inputErrorCheck($product_idx, 'product_idx')
+			   && inputErrorCheck($member_idx, 'member_idx')))
+			return ;
+
+
+		$result = DB::table('product_bookmark')->insertGetId(
+			array(
+				'product_idx'=> $product_idx, 
+				'member_idx'=> $member_idx, 
+				'upload'=>DB::raw('now()')
+				)
+			);	
+
+		return array('code' => 1,'msg' =>'success' ,'data' => $result);
+	}
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////
     /*  	
      *	카드정보 등록 기능
      */
@@ -17,13 +43,13 @@ class CardModel{
 		if(	!(	inputErrorCheck($title, 'title')
 				&& inputErrorCheck($contents, 'contents')
 				&& inputErrorCheck($status, 'status')))
-			return ;
-
+			return ;		
+				
 		$result = DB::table('card')->insertGetId(
 			array(
-				'title'=> $title,
-				'contents'=> $contents,
-				'status'=> $status,
+				'title'=> $title, 
+				'contents'=> $contents, 
+				'status'=> $status, 
 				'upload'=>DB::raw('now()')
 				)
 			);	
@@ -91,27 +117,6 @@ class CardModel{
           	return array('code' => 0, 'msg' => 'update false');
          } 
 	}
-	
-	/*
-	 *  카드 서포트 사이트 목록 가져오기
-	 */
-	function getCardSupportSite()
-	{
-		$result = DB::select("select distinct support_site from card where support_site != ''");
-				
-		return array('code' => 1, 'msg' => 'success', 'data' => $result);				
-	}
-	
-	/*
-	 *  카드사 목록 가져오기
-	 */
-	function getCardCompany()
-	{
-		$result = DB::select("select distinct support_card from card");
-	
-		return array('code' => 1, 'msg' => 'success', 'data' => $result);
-	}
-				
 
 	/*
 	 *	입력받은 배대지에 해당하는 카드 리스트 출력
@@ -132,7 +137,7 @@ class CardModel{
 	 */
 	function getInfoListByCardcompany($cardcompany)
 	{
-		if( !( inputErrorCheck($cardcompany, 'cardcompany')))
+		if( !( inputErrorCheck(($cardcompany, 'cardcompany')))
 			return ;
 
 		$result = DB::select("select * from card where support_card like '%$cardcompany%'");

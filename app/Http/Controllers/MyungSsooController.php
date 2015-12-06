@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
+use App\Http\models\CommunityModel;
 use Request;
 
 //include ("/var/www/laravel/app/models/MemberModel.php");
@@ -15,8 +16,11 @@ class MyungSsooController extends Controller {
 
 	public function index()
 	{
-		$page = 'test';
-		return view($page, array('page' => $page));
+		$model = new CommunityModel();
+
+		$result = $model->getInfoList(array(16, 17), 3, 4);
+		
+		print_r($result);
 	}
 	
 	/*
@@ -87,6 +91,14 @@ class MyungSsooController extends Controller {
 		
 		
 		echo ("화물번호:".$hwaNum.", M B/L:".$mbl.", H B/L:".$hbl);
+	}
+	
+	function getInfoBaesong()
+	{
+		$url = Request::input('url');	
+		$result = file_get_contents($url);
+		
+		echo ($result);
 	}
 
 }

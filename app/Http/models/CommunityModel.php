@@ -7,23 +7,24 @@ use DB;
 include_once dirname(__FILE__)."/../function/baseFunction.php";
 
 class CommunityModel{
+
     /*  	
      *	게시물 등록 기능
      */
-	function create($member_idx, $title, $contents, $category_small)
+	function create($member_idx, $title, $contents, $commucategory_idx)
 	{
 		if(	!(	inputErrorCheck($member_idx, 'member_idx')
 		 		&& inputErrorCheck($title, 'title')
 		 		&& inputErrorCheck($contents, 'contents')
-		 		&& inputErrorCheck($category_small, 'category_small')))
+		 		&& inputErrorCheck($commucategory_idx, 'commucategory_idx')))
 			return ;
 		
-		$result = DB::table('board')->insertGetId(
+		$result = DB::table('community')->insertGetId(
 			array(
 				'member_idx'=> $member_idx, 
 				'title'=> $title, 
 				'contents'=> $contents, 
-				'category_small'=> $category_small,
+				'commucategory_idx'=> $commucategory_idx,
 				'upload'=>DB::raw('now()')
 				)
 			);		
@@ -58,17 +59,17 @@ class CommunityModel{
     /*  	
      *	게시물 수정 기능
      */
-	function update($community_idx, $title, $contents)
+	function update($community_idx, $title, $contents, $commucategory_idx)
 	{
-	  	   
 
-		if(	!(	inputErrorCheck($board_idx, 'board_idx')
+		if(	!(	inputErrorCheck($community_idx, 'community_idx')
 		 		&& inputErrorCheck($title, 'title')
-		 		&& inputErrorCheck($contents, 'contents')))
+		 		&& inputErrorCheck($contents, 'contents')
+		 		&& inputErrorCheck($commucategory_idx, 'commucategory_idx')))
 			return ;
 
-		$result = DB::update('update board set title=?, contents=?, upload=now() where board_idx = ?' ,
-			array($title, $contents, $board_idx));
+		$result = DB::update('update community set title=?, contents=?, commucategory_idx=?, upload=now() where idx = ?',
+			array($title, $contents, $community_idx, $commucategory_idx));
                     
  		if($result == true){
           	return array('code' => 1, 'msg' => 'update success');
@@ -135,28 +136,79 @@ class CommunityModel{
         }
 	}
 
+	/*
+	 *	대분류 리스트 중복제거하고 출력
+	 */
+	function getLargeCategory()
+	{
+		$result = DB::select('select distinct large_name from community_category');
+
+        return array('code' => 1 , 'msg' => 'success', 'data' => $result);
+	}
+
+	/*
+	 *	각각 대분류에 해당하는 중분류 리스트 출력
+	 */
+	function getSmallCategory($large_name)
+	{
+		$result = DB::select('select idx, name from community_category where large_name=?',
+			array($large_name));
+
+        return array('code' => 1 , 'msg' => 'success', 'data' => $result);
+	}
+
+
+	/*
+	 *	해당 자료 갯수 가져옴
+	 */
+	function getResultSize($commucategory_idx_array)
+	{
+		$commucategory_query = "";
+		for( $i=0; $i<count($commucategory_idx_array); $i++)
+		{
+			$commucategory_query .= "commucategory_idx like '%" .$commucategory_idx_array[$i]. "%'";
+			if( $i != count($commucategory_idx_array)-1)
+				$commucategory_query .= " OR ";
+		}
+		$result = DB::select('select * from community where ' .$commucategory_query. ' order by idx DESC');
+
+		return count($result);
+	}
 
     /*  	
      *	게시물 목록 가져오는 기능
      */
-	function getInfoList($last_idx)
+	function getInfoList($commucategory_idx_array, $page_num, $maximum_page)
 	{
-		if ( isset($last) && ($last != '') ) { //사용자가 검색을 통해 인덱스 넘겼을 때 들어감
-			$result = DB::select('select * from community where idx <=? order by idx DESC limit 20 ',array($last_idx));
-		}else if ($last == ''){				   //최초 게시판 들어갔을때 최근 리스트 보여줌
-			$result = DB::select('select * from community order by idx DESC limit 20 ',array());
-		}else{								   //잘못된 인풋값
-			return array('code' => 0, 'msg' => 'invalid input at idx'));
-			return;
+
+		$commucategory_query = "";
+		for( $i=0; $i<count($commucategory_idx_array); $i++)
+		{
+			$commucategory_query .= "commucategory_idx like '%" .$commucategory_idx_array[$i]. "%'";
+			if( $i != count($commucategory_idx_array)-1)
+				$commucategory_query .= " OR ";
 		}
 		
-		//끝에 도달하였을 경우
-		if((count($result)==1 && $last==1) ||count($result)==0){
-		 	return array('code' => '406', 'msg' => '더 이상 게시물이 존재하지 않습니다.'));
-			return;
+		// 마지막 데이터까지 전부 출력
+		if( $maximum_page == $page_num)
+		{
+			$result = DB::select('select * from community where ' .$commucategory_query. ' order by idx DESC');
+		}
+		// 맥시멈 데이터까지만 출력
+		else
+		{
+			$maximum_val = ($page_num)*5;
+			$result = DB::select('select * from community where ' .$commucategory_query. ' order by idx DESC limit ?',
+				array($maximum_val));
 		}
 
-		for($i=0; $i<count($result); $i++) 
+		$finish = count($result);
+		//해당하는 내용이 없을 경우
+		if( $finish==0 )
+		 	return array('code' => '406', 'msg' => 'no matched result');
+		
+		$start = ($page_num-1)*5;
+		for($i=$start; $i<$finish; $i++) 
 		{
 			$member_idx = $result[$i]->member_idx;
 			
@@ -164,7 +216,7 @@ class CommunityModel{
 			$result[$i]->nickname  = $temp[0]->nickname;		
 		}
 
-       return array('code' => 1, 'msg' => 'success', 'data' => $result);
+       return array('code' => 1, 'msg' => 'success', 'data' => array_slice($result, $start, $finish));
 	}
 
 
@@ -205,7 +257,7 @@ class CommunityModel{
 	/*
 	 *  게시물의 제목+내용 필터로 검색
 	 */
-	function retrieveByText($text)
+	function getInfoByText($text)
 	{
 
 		if( !( inputErrorCheck($text, 'text')))
@@ -284,4 +336,33 @@ class CommunityModel{
 
         return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
+
+	/*  	
+     *	내가 쓴 글 목록 가져오기
+     */
+	function getInfoMyCommunity($member_idx)
+	{
+
+		if(	!(	inputErrorCheck($member_idx, 'member_idx')))
+			return ;
+
+		$result = DB::select('select * from community where member_idx=? order by idx DESC', array($member_idx));
+
+        return array('code' => 1, 'msg' => 'success', 'data' => $result);
+	}
+
+	/*  	
+     *	내가 쓴 글 목록 가져오기
+     */
+	function getInfoMyReply($member_idx)
+	{
+
+		if(	!(	inputErrorCheck($member_idx, 'member_idx')))
+			return ;
+
+		$result = DB::select('select * from community_reply where member_idx=? order by idx DESC', array($member_idx));
+
+        return array('code' => 1, 'msg' => 'success', 'data' => $result);
+	}	
+
 }

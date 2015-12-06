@@ -24,9 +24,9 @@ class CardController extends Controller {
 		$cardModel = new CardModel();
 		
 		// 배대지 목록 가지고 오기
-		$site = $cardModel->getCardShippingagency();
+		$site = $cardModel->getCardSupportSite();
 		// 카드사 목록 가지고 오기
-		$comp = $cardModel->getCardCardcompany();
+		$comp = $cardModel->getCardCompany();
 		
 		$page = 'card';
 		return view($page, array('page' => $page, 'siteList' => $site['data'], 'compList' => $comp['data']));
@@ -102,7 +102,7 @@ class CardController extends Controller {
 		else
 		{
 			$title = "카드 검색 결과";
-			$result = $cardModel->getInfoListAll();
+			$result = $cardModel->getInfoByName("");
 		}
 		
 		$page = "cardInfo";

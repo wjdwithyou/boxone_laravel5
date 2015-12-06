@@ -199,4 +199,24 @@ class MemberModel{
       }
       return array('code' => 1, 'msg' => 'update success');
      }
+
+    /*    
+     *  게시물 삭제 기능
+     */
+    function delete($member_idx)
+    {
+        
+      if( !(  inputErrorCheck($member_idx, 'member_idx')))
+        return ;    
+  
+      $result = DB::delete('delete from member where idx=?', array($member_idx));
+  
+      if($result == true){
+            return array('code' => 1, 'msg' => 'success');
+          }else{
+            return array('code' => 0, 'msg' => 'delete failure: no matched data');
+          }
+    }
+    
+
 }

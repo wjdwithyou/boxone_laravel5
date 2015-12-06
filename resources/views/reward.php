@@ -30,8 +30,8 @@
 					리워드 검색하기
 				</div>
 				<div id="rw_search">
-					<a onclick=""><img src="<?= $adr_img ?>search_img.png"></a>
-					<input type="text" class="form-control">
+					<a onclick="searchReward();"><img src="<?= $adr_img ?>search_img.png"></a>
+					<input type="text" id="rw_search_text" class="form-control">
 				</div>
 			</div>
 		</div>
@@ -43,31 +43,7 @@
 				검색결과
 			</div>
 			<div id="rw_result">
-				<div id="rw_result_top_wrap">
-					<div id="rw_result_top">
-						아마존 (amazon)
-					</div>
-				</div>
-				
-				<!-- 리워드 사이트 -->
-				<div class="rw_result_div_wrap">
-					<div class="rw_result_div">
-						<div class="rw_site_img">
-							<a onclick=""><img src="<?= $adr_img ?>br_sample.png"></a>
-						</div>
-						<div class="rw_site_desc">
-							<div class="rw_site_name">
-								<span class="site_name_kr">이베이츠</span>&nbsp;( <span class="site_name_en">ebates</span>)
-							</div>
-							<div class="rw_site_reward">
-								<span class="reward_percent">5.5%</span> 리워드
-							</div>
-						</div>
-					</div>
-				</div>
-				<!--  -->
-				
-				<div class="clear_both"></div>
+				<!-- 리워드 검색 결과 -->
 			</div>
 		</div>
 

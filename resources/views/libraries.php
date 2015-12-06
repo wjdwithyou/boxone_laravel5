@@ -10,13 +10,13 @@
   	<?php $adr_img = "http://localhost:8000/img/"?>
   	<?php $adr_btstrp = "http://localhost:8000/bootstrap/"?>
   	<?php $adr_ctr = "http://localhost:8000/"?>
-
+  	
   	<input type="hidden" id="adr_js" value="<?=$adr_js?>"/>
   	<input type="hidden" id="adr_css" value="<?=$adr_css?>"/>
   	<input type="hidden" id="adr_img" value="<?=$adr_img?>"/>
   	<input type="hidden" id="adr_ctr" value="<?=$adr_ctr?>"/>
   	
-  	<!-- 로그인 관련 세션  -->     
+  	<!-- 로그인 관련 세션  -->
   	<?php
 		if (session_id() == '')	session_start();
 		$logined = !empty($_SESSION['nickname']);
@@ -26,6 +26,12 @@
 			$img = $_SESSION['img'];
 		}
 	?>
+	
+	<?php if ($logined) :?>
+		<input type="hidden" id="logined_idx" value="<?= $idx?>"/>
+	<?php else :?>
+		<input type="hidden" id="logined_idx" value="0"/>
+	<?php endif;?>
 	
     <link rel="stylesheet" href="<?=$adr_btstrp?>css/bootstrap.css">
     <link rel="stylesheet" href="<?=$adr_btstrp?>css/bootstrap-theme.css">
