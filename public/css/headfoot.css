@@ -1,6 +1,6 @@
 @font-face {
-    font-family: bkant;
-    src: url('http://localhost:8000/font/BKANT.TTF');
+	font-family: bkant;
+	src: url('http://localhost:8000/font/BKANT.TTF');
 }
 * {
 	border: 0;
@@ -44,6 +44,11 @@ button.close {
 }
 .font_weight_bold {
 	font-weight: bold;
+}
+.text_overflow {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
 .transparent_btn {
 	background-image: none;
@@ -123,7 +128,7 @@ button.close {
 	margin-top: 8px;
 	margin-left: 12px;
 }
-@media (max-width: 767px) {
+@media (max-width: 768px) {
 	#header {
 		height: 100%;
 	}
@@ -166,7 +171,7 @@ button.close {
 	}
 }
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
 	#header {
 		height: 90px;
 	}
@@ -279,9 +284,9 @@ button.close {
 }
 #mobile_searchbar_txt {
 	width: 100px;
-    margin: 0 auto;
-    padding: 10px;
-    font-weight: bold;
+	margin: 0 auto;
+	padding: 10px;
+	font-weight: bold;
 }
 #mobile_searchbar_input {
 	padding: 0 10px 10px 10px;
@@ -297,10 +302,10 @@ button.close {
 	z-index: 100;
 	background-color: #fff;
 	position: absolute;
-    top: 80px;
-   	padding-left: 8px;
-   	border: 3px solid #ccc;
-   	margin-left: -110px;
+	top: 80px;
+	padding-left: 8px;
+	border: 3px solid #ccc;
+	margin-left: -110px;
 }
 
 /* 공통 */

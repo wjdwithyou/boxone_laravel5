@@ -64,5 +64,5 @@
   	<script type="text/javascript" src="<?=$adr_js?>login.js"></script>
   	<script type="text/javascript" src="<?=$adr_js?>calculator.js"></script>
 
-    <link rel="icon" href="<?=$adr_img?>brower_logo.ico">
+    <link rel="icon" href="<?=$adr_img?>brower_logo.png">
     <title>BOXONE</title>

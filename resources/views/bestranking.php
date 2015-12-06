@@ -54,6 +54,7 @@
 									<div class="rank_bookmark">
 										<a onclick=""><img src="<?= $adr_img ?>bookmark.png"></a>
 									</div>
+									<div class="clear_both"></div>
 									<div class="rank_no">
 										BEST 1
 									</div>
@@ -81,6 +82,7 @@
 									<div class="rank_bookmark">
 										<a onclick=""><img src="<?= $adr_img ?>bookmark.png"></a>
 									</div>
+									<div class="clear_both"></div>
 									<div class="rank_no">
 										BEST <?= ($i+1)?>
 										<span><!-- 랭크 no --></span>

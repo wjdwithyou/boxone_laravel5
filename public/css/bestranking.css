@@ -127,7 +127,8 @@
 }
 .rank_bookmark {
 	width: 17px;
-	margin-left: 5px;
+	float: right;
+	margin-right: 15px;
 	margin-top: 5px;
 }
 .rank_bookmark a img {
