@@ -25,7 +25,7 @@ function move_div() {
 }
 
 function move_div2() {
-	if (window.innerWidth <= 769) {
+	if (window.innerWidth <= 767) {
 		$(".code_img:odd").each(function() {
 			$(this).insertAfter($(this).siblings(".code_desc"));
 		});

@@ -87,17 +87,13 @@
 	background-color: #ef676f;
 	opacity: 0.9;
 }
-@media (max-width: 992px) {
+@media (max-width: 991px) {
 	.product_div2_inner, .product_div2_inner2 {
 		width: 420px !important;
 		height: 100px !important;
 	}
-	/* .code_div3 {
-	 float: right !important;
-	 clear: both !important;
-	 } */
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
 	#top_ad_wrap {
 		margin-top: 32px;
 		padding-left: 0;

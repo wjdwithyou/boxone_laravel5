@@ -180,7 +180,7 @@
 		<div class="menu_split" onclick='location.href="<?=$adr_ctr?>Bestranking/index"'>베스트랭킹</div>
 		<div class="menu_split" onclick='location.href="<?=$adr_ctr?>Reward/index"'>리워드</div>
 		<div class="menu_split" onclick='location.href="<?=$adr_ctr?>Card/index"'>카드혜택</div>
-		<div class="menu_split" onclick='location.href="<?=$adr_ctr?>Hotdeal/index"'>핫딜</div>
+		<div class="menu_split" onclick='location.href="<?=$adr_ctr?>Hotdeal/main"'>핫딜</div>
 		<div class="menu_split">직거래박스</div>
 		<div class="menu_split">커뮤니티</div>
 		<div class="menu_split" onclick='location.href="<?=$adr_ctr?>Guide/index?no=1&det=1_1"'>해외쇼핑가이드</div>
