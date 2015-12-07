@@ -17,7 +17,7 @@
 					핫딜
 				</div>
 				<div id="top_content">
-					핫딜 상품과 코드를 모아놨어용
+					핫딜 상품과 코드를 모아놨어용:)
 				</div>
 			</div>
 
@@ -38,7 +38,9 @@
 					<div id="top_ad_inner">
 
 					</div>
-					<div id="slopy_div" hidden></div>
+					<div id="slopy_img" hidden>
+						<img src="<?= $adr_img ?>slopy_background.png">
+					</div>
 				</div>
 			</div>
 
@@ -315,7 +317,10 @@
 						</div>
 					</div>
 					<div id="move_target2" class="code_div2 col-xs-12 col-md-8">
-						
+						<img src="<?= $adr_img ?>guide_background.jpg">
+						<div id="code_ad_inner">
+	
+						</div>
 					</div>
 					<div id="move_div" class="code_div3 col-xs-12 col-sm-6 col-md-4">
 						<div class="code_img center_box">
