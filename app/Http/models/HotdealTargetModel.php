@@ -133,7 +133,7 @@ class HotdealTargetModel
 			$option_query = ', deadline DESC';
 			break ;
 
-			default 
+			default :
 			break;
 		}
 
