@@ -153,7 +153,7 @@
 						<a onclick="hotdealHref('','',<?php echo ($paging['now'] + 1);?>);"><?php echo ($paging['now'] + 1);?></a>
 						<!-- <a onclick="hotdealHref('','',<?php echo ($paging['now'] + 2);?>);"><?php echo ($paging['now'] + 2);?></a> -->
 						<span>···</span>
-						<a onclick=""><?=$paging['max']?></a>
+						<a onclick="hotdealHref('','',<?=$paging['max']?>);"><?=$paging['max']?></a>
 					<?php else :?>
 						<?php for($i = $paging['now'] + 1 ; $i < $paging['max'] + 1 ; $i++) :?>
 							<a onclick="hotdealHref('','',<?=$i?>);"><?=$i?></a>
