@@ -124,15 +124,15 @@ class HotdealTargetModel
 		switch($sort_option)
 		{
 			case 1:
-			$option_query = ', hit_count DESC';
+			$option_query = ' hit_count DESC,';
 			break ;
 
 			case 2:
-			$option_query = ', site_name ASC';
+			$option_query = ' site_name ASC,';
 			break ;
 
 			case 3:
-			$option_query = ', deadline DESC';
+			$option_query = ' deadline DESC,';
 			break ;
 
 			default :
@@ -141,7 +141,7 @@ class HotdealTargetModel
 
 		$start = ($page_num-1)*30;
 		$finish = ($page_num)*30;
-		$result = DB::select('select * from '.$target_query.') as A order by idx DESC'.$option_query.' limit ?', array($finish));
+		$result = DB::select('select * from '.$target_query.') as A order by'.$option_query.' idx DESC limit ?', array($finish));
 
 		$finish = count($result);
 		//해당하는 내용이 없을 경우
