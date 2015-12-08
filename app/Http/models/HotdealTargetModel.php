@@ -107,7 +107,7 @@ class HotdealTargetModel
 	/*
 	 *	카테고리별 핫딜 30개씩 출력하는 출력 기능 
 	 */
-	function getInfoHotdeal($category_idx, $last_idx, $sort_option)
+	function getInfoHotdeal($category_idx, $sort_option, $maximum_page, $page_num)
 	{
 		if( !( inputErrorCheck($category_idx, 'category_idx')
 				&& inputErrorCheck($last_idx, 'last_idx')))		
@@ -137,23 +137,42 @@ class HotdealTargetModel
 			break;
 		}
 
-		if ( isset($last_idx) && ($last_idx != '') ) { //사용자가 검색을 통해 인덱스 넘겼을 때 들어감
-			$result = DB::select('select * from'.$target_query.' where idx<=? order by idx DESC'.$option_query.' limit 30 ',array($last_idx));
+		// 마지막 데이터까지 전부 출력
+		if( $maximum_page == $page_num)
+		{
+			$result = DB::select('select * from'.$target_query.' where category_idx=? order by idx DESC'.$option_query.' limit 30', array($category_idx));
 		}
-		else if ($last_idx == ''){	//최초 게시판 들어갔을때 최근 리스트 보여줌
-			$result = DB::select('select * from'.$target_query.' order by idx DESC'.$option_query.' limit 30');
+		// 맥시멈 데이터까지만 출력
+		else
+		{
+			$maximum_val = ($page_num)*30;
+			$result = DB::select('select * from'.$target_query.' where category_idx=? order by idx DESC'.$option_query.' limit ?', array($maximum_val));
 		}
-		else{
-			return (array('code' => '400', 'msg' => 'invalid input at last_idx'));
-		}		
 
-		if((count($result)==1 && $last_idx==1) || count($result)==0)
-		 	return array('code' => '406', 'msg' => '더 이상 게시물이 존재하지 않습니다.'));
-		
-		return array('code' => 1, 'msg' => 'success', 'data' => $result);
+		$finish = count($result);
+		//해당하는 내용이 없을 경우
+		if( $finish==0 )
+		 	return array('code' => '406', 'msg' => 'no matched result');
+
+		$start = ($page_num-1)*$product_num;
+
+       return array('code' => 1, 'msg' => 'success', 'data' => array_slice($result, $start, $finish));		
 	}
 
 		
+	/*
+	 *	해당 핫딜 갯수 가져옴
+	 */
+	function getResultSize($category_idx)
+	{
+
+		if( $category_idx == 0)
+			$result = DB::select('select * from hotdeal_promo');
+		else
+			$result = DB::select('select * from hotdeal_promo where category_idx=?', array($category_idx));
+
+		return count($result);
+	}
 
 
 
