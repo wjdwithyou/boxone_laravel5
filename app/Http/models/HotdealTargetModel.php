@@ -105,23 +105,57 @@ class HotdealTargetModel
 	}
 
 	/*
-	 *	카테고리별 핫딜 출력 기능 
+	 *	카테고리별 핫딜 30개씩 출력하는 출력 기능 
 	 */
-	function getInfoHotdeal($category_idx)
+	function getInfoHotdeal($category_idx, $last_idx, $sort_option)
 	{
-		if( !( inputErrorCheck($category_idx, 'category_idx')))		
+		if( !( inputErrorCheck($category_idx, 'category_idx')
+				&& inputErrorCheck($last_idx, 'last_idx')))		
 			return ;
 
-		if( $category_idx == 0 ){
-			$result = DB::select('select * from hotdeal_promo', array($category_idx));
-			return array('code' => 1, 'msg' => 'success', 'data' => $result);
-		}
-		else{
-			$result = DB::select('select * from hotdeal_promo where category_idx=?', array($category_idx));
-			return array('code' => 1, 'msg' => 'success', 'data' => $result);
-
+		$target_query = "select * from hotdeal_promo"; 
+		if( $category_idx != 0 ){
+			$target_query .= " where category_idx=".$category_idx;
 		}	
 
+		$option_query;
+		switch($sort_option)
+		{
+			case 1:
+			$option_query = ', hit_count DESC';
+			break ;
+
+			case 2:
+			$option_query = ', site_name ASC';
+			break ;
+
+			case 3:
+			$option_query = ', deadline DESC';
+			break ;
+
+			default 
+			break;
+		}
+
+		if ( isset($last_idx) && ($last_idx != '') ) { //사용자가 검색을 통해 인덱스 넘겼을 때 들어감
+			$result = DB::select('select * from'.$target_query.' where idx<=? order by idx DESC'.$option_query.' limit 30 ',array($last_idx));
+		}
+		else if ($last_idx == ''){	//최초 게시판 들어갔을때 최근 리스트 보여줌
+			$result = DB::select('select * from'.$target_query.' order by idx DESC'.$option_query.' limit 30');
+		}
+		else{
+			return (array('code' => '400', 'msg' => 'invalid input at last_idx'));
+		}		
+
+		if((count($result)==1 && $last_idx==1) || count($result)==0)
+		 	return array('code' => '406', 'msg' => '더 이상 게시물이 존재하지 않습니다.'));
+		
+		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
+
+		
+
+
+
 
 }
