@@ -60,6 +60,7 @@
 											<?php endif;?>
 										</a>
 									</div>
+									<div class="clear_both"></div>
 									<div class="rank_no">
 										BEST 1
 									</div>
@@ -93,6 +94,7 @@
 											<?php endif;?>
 										</a>
 									</div>
+									<div class="clear_both"></div>
 									<div class="rank_no">
 										BEST <?= ($i+1)?>
 										<span><!-- 랭크 no --></span>

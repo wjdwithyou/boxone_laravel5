@@ -96,7 +96,7 @@
 			<div class="menu sidemenu_div sidemenu_hover" onclick='location.href="<?=$adr_ctr?>Card/index"'>				
 				<span>카드혜택</span>
 			</div>
-			<div class="menu sidemenu_div sidemenu_hover" onclick="">				
+			<div class="menu sidemenu_div sidemenu_hover" onclick='location.href="<?=$adr_ctr?>Hotdeal/main"'>				
 				<span>핫딜</span>
 			</div>
 			<div class="menu sidemenu_div sidemenu_hover" onclick="">				
