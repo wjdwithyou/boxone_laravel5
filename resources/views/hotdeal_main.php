@@ -236,7 +236,7 @@
 			<div id="hd_code_wrap">
 				<div id="hd_code_all">
 					더 많은 핫딜 코드는 여기에!&nbsp;
-					<a onclick='location.href="<?=$adr_ctr?>Hotdeal/index"'>모두보기</a>
+					<a href="<?=$adr_ctr?>Hotdeal/indexCode">모두보기</a>
 				</div>
 				<div id="hd_code_top">
 					베스트 핫딜 코드

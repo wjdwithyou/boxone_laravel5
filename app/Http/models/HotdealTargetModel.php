@@ -110,15 +110,17 @@ class HotdealTargetModel
 	function getInfoHotdeal($category_idx, $sort_option, $maximum_page, $page_num)
 	{
 		if( !( inputErrorCheck($category_idx, 'category_idx')
-				&& inputErrorCheck($last_idx, 'last_idx')))		
+				&& inputErrorCheck($sort_option, 'sort_option')
+				&& inputErrorCheck($maximum_page, 'maximum_page')
+				&& inputErrorCheck($page_num, 'page_num')))		
 			return ;
 
-		$target_query = "select * from hotdeal_promo"; 
+		$target_query = "(select * from hotdeal_promo"; 
 		if( $category_idx != 0 ){
 			$target_query .= " where category_idx=".$category_idx;
 		}	
 
-		$option_query;
+		$option_query = '';
 		switch($sort_option)
 		{
 			case 1:
@@ -137,26 +139,16 @@ class HotdealTargetModel
 			break;
 		}
 
-		// 마지막 데이터까지 전부 출력
-		if( $maximum_page == $page_num)
-		{
-			$result = DB::select('select * from'.$target_query.' where category_idx=? order by idx DESC'.$option_query.' limit 30', array($category_idx));
-		}
-		// 맥시멈 데이터까지만 출력
-		else
-		{
-			$maximum_val = ($page_num)*30;
-			$result = DB::select('select * from'.$target_query.' where category_idx=? order by idx DESC'.$option_query.' limit ?', array($maximum_val));
-		}
+		$start = ($page_num-1)*30;
+		$finish = ($page_num)*30;
+		$result = DB::select('select * from '.$target_query.') as A order by idx DESC'.$option_query.' limit ?', array($finish));
 
 		$finish = count($result);
 		//해당하는 내용이 없을 경우
 		if( $finish==0 )
 		 	return array('code' => '406', 'msg' => 'no matched result');
 
-		$start = ($page_num-1)*$product_num;
-
-       return array('code' => 1, 'msg' => 'success', 'data' => array_slice($result, $start, $finish));		
+		return array('code' => 1, 'msg' => 'success', 'data' => array_slice($result, $start, $finish));		
 	}
 
 		
@@ -172,6 +164,17 @@ class HotdealTargetModel
 			$result = DB::select('select * from hotdeal_promo where category_idx=?', array($category_idx));
 
 		return count($result);
+	}
+	
+	
+	/*
+	 *	핫딜 힛 카운트 추가
+	 */
+	function updateHitCount($idx)
+	{
+		DB::table('hotdeal_promo')->where('idx', $idx)->increment('hit_count', 1);
+		
+		return array('code' => 1, 'msg' => 'success');
 	}
 
 

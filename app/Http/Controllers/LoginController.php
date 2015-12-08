@@ -297,7 +297,7 @@ class LoginController extends Controller {
 			);
 			Mail::send('pwFindMail', $data, function($m) use ($user)
 			{
-				$m->from('dydzlwwkd@gmail.com', 'Boxone');
+				$m->from('boxone2015@gmail.com', 'Boxone');
 				$m->to($user['email'], $user['name'])->subject('Find Pw');
 			});
 			
