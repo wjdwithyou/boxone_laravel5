@@ -112,10 +112,15 @@ class HotdealTargetModel()
 		if( !( inputErrorCheck($category_idx)))		
 			return ;
 
-		$result = DB::select('select * from hotdeal_promo where category_idx=?',
-			array($category_idx));
+		if( $category_idx == 0 ){
+			$result = DB::select('select * from hotdeal_promo', array($category_idx))
+			return array('code' => 1, 'msg' => 'success', 'data' => $result);
+		}
+		else{
+			$result = DB::select('select * from hotdeal_promo where category_idx=?', array($category_idx));
+			return array('code' => 1, 'msg' => 'success', 'data' => $result);
 
-		return array('code' => 1, 'msg' => 'success', 'data' => $result);
+		}	
 
 	}
 
