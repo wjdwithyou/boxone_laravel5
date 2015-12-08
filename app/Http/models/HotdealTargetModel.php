@@ -27,7 +27,7 @@ class HotdealTargetModel()
 
 
 
-		$result = DB::table('hotdeal_target')->insertGetId(
+		$result = DB::table('hotdeal_promo')->insertGetId(
 			array(
 				'site_name'		=> $site_name, 
 				'title'			=> $title, 
@@ -56,7 +56,7 @@ class HotdealTargetModel()
 			return ;
 
 		//북마크 +1
-		DB::update('update hotdeal_target set bookmark_count=bookmark_count+1 where idx=?',array($hotdeal_idx));
+		DB::update('update hotdeal_promo set bookmark_count=bookmark_count+1 where idx=?',array($hotdeal_idx));
 
 		//북마크 생성
 		$result = DB::table('hotdeal_bookmark')->insertGetId(
@@ -82,7 +82,7 @@ class HotdealTargetModel()
 			return ;
 
 		//북마크 -1
-		DB::update('update hotdeal_target set bookmark_count=bookmark_count-1 where idx=?',array($hotdeal_idx));
+		DB::update('update hotdeal_promo set bookmark_count=bookmark_count-1 where idx=?',array($hotdeal_idx));
 
 		//북마크 삭제
 		$result = DB::delete('delete from hotdeal_bookmark where idx=?', array($bookmar_idx));
@@ -107,10 +107,16 @@ class HotdealTargetModel()
 	/*
 	 *	카테고리별 핫딜 출력 기능 
 	 */
-	function getInfoHotdeal($hotdeal_idx)
+	function getInfoHotdeal($category_idx)
 	{
-		if( !( inputErrorCheck($hotdeal_idx)))		
+		if( !( inputErrorCheck($category_idx)))		
 			return ;
+
+		$result = DB::select('select * from hotdeal_promo where category_idx=?',
+			array($category_idx));
+
+		return array('code' => 1, 'msg' => 'success', 'data' => $result);
+
 	}
 
 }
