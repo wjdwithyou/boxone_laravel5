@@ -109,11 +109,11 @@ class HotdealTargetModel
 	 */
 	function getInfoHotdeal($category_idx)
 	{
-		if( !( inputErrorCheck($category_idx)))		
+		if( !( inputErrorCheck($category_idx, 'category_idx')))		
 			return ;
 
 		if( $category_idx == 0 ){
-			$result = DB::select('select * from hotdeal_promo', array($category_idx))
+			$result = DB::select('select * from hotdeal_promo', array($category_idx));
 			return array('code' => 1, 'msg' => 'success', 'data' => $result);
 		}
 		else{

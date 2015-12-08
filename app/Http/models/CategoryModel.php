@@ -56,7 +56,7 @@ class CategoryModel{
 	 */
 	function getInfoListLarge()
 	{
-		$result = DB::select('select * from category_large')
+		$result = DB::select('select * from category_large');
 
       	return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}

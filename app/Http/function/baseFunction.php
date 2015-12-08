@@ -147,10 +147,10 @@
 //			File::delete("/tmp/test_164.jpg");
 
 
-			return array('code' => '200', 'data' => 'image uplaod success'));
+			return array('code' => '200', 'data' => 'image uplaod success');
 		}
 		else{
-			return array('code' => '400', 'data' => 'image file has error'));
+			return array('code' => '400', 'data' => 'image file has error');
 		}		
 	}
 	
