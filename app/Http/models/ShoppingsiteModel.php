@@ -206,4 +206,22 @@ class ShoppingsiteModel{
          	return array('code' => 0, 'msg' => 'delete false: no matched data');
         }
 	}
+
+	/*
+	 *	사용자 log를 바탕으로 사이트 조회수 1씩 증가
+	 */
+	function increaseHitCount($shoppingsite_idx)
+	{
+		if( !( inputErrorCheck($shoppingsite_idx, 'shoppingsite_idx')))
+			return ;
+
+		$result = DB::update('update shoppingsite set hit_count=hit_count+1 where idx=?',
+			array($shoppingsite_idx));
+
+ 		if($result == true){
+          	return array('code' => 1, 'msg' => 'success');
+        }else{
+         	return array('code' => 0, 'msg' => 'update failure: no matched data');
+        } 
+	}
 }

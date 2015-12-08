@@ -107,10 +107,10 @@ class HotdealTargetModel()
 	/*
 	 *	카테고리별 핫딜 출력 기능 
 	 */
-	function getInfoHotdeal()
+	function getInfoHotdeal($hotdeal_idx)
 	{
-
-		
+		if( !( inputErrorCheck($hotdeal_idx)))		
+			return ;
 	}
 
 }

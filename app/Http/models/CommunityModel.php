@@ -11,12 +11,13 @@ class CommunityModel{
     /*  	
      *	게시물 등록 기능
      */
-	function create($member_idx, $title, $contents, $commucategory_idx)
+	function create($member_idx, $title, $contents, $commucategory_idx, $commcommunnity_idx)
 	{
 		if(	!(	inputErrorCheck($member_idx, 'member_idx')
 		 		&& inputErrorCheck($title, 'title')
 		 		&& inputErrorCheck($contents, 'contents')
-		 		&& inputErrorCheck($commucategory_idx, 'commucategory_idx')))
+		 		&& inputErrorCheck($commucategory_idx, 'commucategory_idx')
+		 		&& inputErrorCheck($commcommunnity_idx, 'commcommunnity_idx')))
 			return ;
 		
 		$result = DB::table('community')->insertGetId(
@@ -25,6 +26,7 @@ class CommunityModel{
 				'title'=> $title, 
 				'contents'=> $contents, 
 				'commucategory_idx'=> $commucategory_idx,
+				'commcommunnity_idx' => $commcommunnity_idx,
 				'upload'=>DB::raw('now()')
 				)
 			);		
@@ -35,12 +37,13 @@ class CommunityModel{
 	/*  	
      *	댓글 등록 기능
      */
-	function createReply($member_idx, $community_idx, $contents)
+	function createReply($member_idx, $community_idx, $contents, $rereply_idx)
 	{
 		
 		if(	!(	inputErrorCheck($member_idx, 'member_idx')
 		 		&& inputErrorCheck($community_idx, 'community_idx')
-		 		&& inputErrorCheck($contents, 'contents')))
+		 		&& inputErrorCheck($contents, 'contents')
+		 		&& inputErrorCheck($rereply_idx, 'rereply_idx')))
 			return ;
 		
 
@@ -49,6 +52,7 @@ class CommunityModel{
 				'member_idx'=> $member_idx,
 				'community_idx'	=> $community_idx, 	
 				'contents'	=> $contents,
+				'rereply_idx' => $rereply_idx,
 				'upload'	=> DB::raw('now()')
 				)
 			);
@@ -178,7 +182,7 @@ class CommunityModel{
     /*  	
      *	게시물 목록 가져오는 기능
      */
-	function getInfoList($commucategory_idx_array, $page_num, $maximum_page)
+	function getInfoList($commucategory_idx_array, $page_num, $maximum_page, $product_num)	// product_num은 한 페이지에 몇개씩 보여줄지
 	{
 
 		$commucategory_query = "";
@@ -197,7 +201,7 @@ class CommunityModel{
 		// 맥시멈 데이터까지만 출력
 		else
 		{
-			$maximum_val = ($page_num)*5;
+			$maximum_val = ($page_num)*$product_num;
 			$result = DB::select('select * from community where ' .$commucategory_query. ' order by idx DESC limit ?',
 				array($maximum_val));
 		}
@@ -207,7 +211,7 @@ class CommunityModel{
 		if( $finish==0 )
 		 	return array('code' => '406', 'msg' => 'no matched result');
 		
-		$start = ($page_num-1)*5;
+		$start = ($page_num-1)*$product_num;
 		for($i=$start; $i<$finish; $i++) 
 		{
 			$member_idx = $result[$i]->member_idx;
@@ -217,55 +221,6 @@ class CommunityModel{
 		}
 
        return array('code' => 1, 'msg' => 'success', 'data' => array_slice($result, $start, $finish));
-	}
-
-
-    /*  	
-     *	게시물 댓글 목록 가져오는 기능
-     */
-	function getReplyList($community_idx, $readmember_idx)		// 게시글인덱스, 현재 보고있는 사용자 인덱스
-	{
-
-		if(	!(	inputErrorCheck($community_idx, 'community_idx')
-		 		&& inputErrorCheck($readmember_idx, 'readmember_idx')))
-			return ;
-
-		$result = DB::select('select * from community_reply where community_idx=? order by idx DESC ', 
-			array($community_idx));
-
-		
-		for($i=0; $i<count($result); $i++) 
-		{
-			$writermember_idx = $result[$i]->member_idx;
-
-			// 둘이 동일인일 경우 own권한 부여
-			if($readmember_idx == $writermember_idx)
-				$result[$i]->own = 'Y';
-			else
-				$result[$i]->own = 'N';
-			
-			$temp = DB::select('select image, nickname from member where idx=?', array($writermember_idx));
-
-			$result[$i]->image 		= $temp[0]->image;
-			$result[$i]->nickname 	= $temp[0]->nickname;			
-		}
-
-       return array('code' => 1, 'msg' => 'success', 'data' => $result);
-	}
-
-
-	/*
-	 *  게시물의 제목+내용 필터로 검색
-	 */
-	function getInfoByText($text)
-	{
-
-		if( !( inputErrorCheck($text, 'text')))
-			return ;
-
-		$result = DB::select("select distinct * from community where title like '%$text%' or contents like '%$text%'");
-		
-		return array('code' => 1, 'data' => $result);
 	}
 
 
@@ -279,18 +234,68 @@ class CommunityModel{
 		 		&& inputErrorCheck($readmember_idx, 'readmember_idx')))
 			return ;
 
-		// 해당 게시물의 작성자 정보
-		$result = DB::select('select * from community where idx =?',array($community_idx));
-		$writer_mem = $result[0]->member_idx;
-
 		DB::update('update community set hit_count=hit_count+1 where idx=?',array($community_idx));
 
-		if($writer_mem == $readmember_idx)
+		$result = DB::select('select * from 
+							(
+								community as cm
+								JOIN member as mm
+								ON cm.member_idx=mm.idx
+							) where cm.idx=?', array($community_idx));
+
+
+		if($result[0]->member_idx == $readmember_idx)
 			$result[0]->own = 'Y';
 		else
 			$result[0]->own = 'N';
 
         return array('code' => 1, 'msg' => 'success', 'data' => $result);
+	}
+
+
+    /*  	
+     *	게시물 댓글 목록 가져오는 기능
+     */
+	function getReplyList($community_idx, $readmember_idx)		// 게시글인덱스, 현재 보고있는 사용자 인덱스
+	{
+
+		if(	!(	inputErrorCheck($community_idx, 'community_idx')
+		 		&& inputErrorCheck($readmember_idx, 'readmember_idx')))
+			return ;
+
+ 		$result = DB::select('select * from 
+							(
+								community_reply as cr
+								JOIN member as mm
+								ON cr.member_idx=mm.idx
+							) where cr.community_idx=?
+ 							order by idx DESC', array($community_idx));
+		
+		for($i=0; $i<count($result); $i++) 
+		{
+			// 둘이 동일인일 경우 own권한 부여
+			if($readmember_idx == $result[$i]->member_idx)
+				$result[$i]->own = 'Y';
+			else
+				$result[$i]->own = 'N';			
+		}
+
+       return array('code' => 1, 'msg' => 'success', 'data' => $result);
+	}
+
+
+	/*
+	 *  게시물의 제목+내용 필터로 검색
+	 */
+	function getInfoListByText($text)
+	{
+
+		if( !( inputErrorCheck($text, 'text')))
+			return ;
+
+		$result = DB::select("select distinct * from community where title like '%$text%' or contents like '%$text%'");
+		
+		return array('code' => 1, 'data' => $result);
 	}
 
 	/*  	
@@ -340,7 +345,7 @@ class CommunityModel{
 	/*  	
      *	내가 쓴 글 목록 가져오기
      */
-	function getInfoMyCommunity($member_idx)
+	function getInfoListMyCommunity($member_idx)
 	{
 
 		if(	!(	inputErrorCheck($member_idx, 'member_idx')))
@@ -354,7 +359,7 @@ class CommunityModel{
 	/*  	
      *	내가 쓴 글 목록 가져오기
      */
-	function getInfoMyReply($member_idx)
+	function getInfoListMyReply($member_idx)
 	{
 
 		if(	!(	inputErrorCheck($member_idx, 'member_idx')))
