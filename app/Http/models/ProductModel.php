@@ -16,9 +16,24 @@ class ProductModel()
 	 */
 	function recommandProduct($small_idx)
 	{
+		if( !( InputErrorCheck($small_idx, 'small_idx')))
+			return ;
+		
 
 
+	}
 
+	/*
+	 *	찜한 상품 가져오는 기능
+	 */
+	function getInfoBookmark($member_idx)
+	{
+		if( !( InputErrorCheck($member_idx, 'member_idx')))
+			return ;
+
+		$result = DB::select('select * from product_bookmark where member_idx=?', array($member_idx));
+
+		return array('code'=>1, 'msg'=> 'success', 'data'=> $result);
 	}
 
 }

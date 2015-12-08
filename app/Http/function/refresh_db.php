@@ -6,16 +6,24 @@
 $cur_time = strtotime(date("Y-m-d H:i:s"));
 
 // 핫딜 refresh
-$result = @mysql_query("SELECT idx, deadline FROM hotdeal_promo WHERE stat='N'");
+$hotdeal = @mysql_query("SELECT idx, deadline FROM hotdeal_promo WHERE stat='N'");
 
-while($row = mysql_fetch_array($result)) {
-    $cur_idx = $row["idx"];
-    if( strtotime($row["date"]) < $cur_time){
-        @mysql_query("UPDATE battle set stat='E' WHERE idx=$cur_idx");
+while($row1 = mysql_fetch_array($hotdeal)) {
+    $cur_idx = $row1["idx"];
+    if( strtotime($row1["deadline"]) < $cur_time){
+        @mysql_query("DELETE FROM hotdeal_promo WHERE idx=$cur_idx");
     }
 }
 
 
-
 // 배송+통관 refresh
+/*
+$shipment = @mysql_query("SELECT * FROM shipment_domestic")
 
+while($row2 = mysql_fetch_array($shipment)) {
+    $cur_idx = $row2["idx"];
+	   if( strtotime($row2["date"]) < $cur_time){
+	     @mysql_query("UPDATE battle set stat='E' WHERE idx=$cur_idx");
+    }
+}
+*/
