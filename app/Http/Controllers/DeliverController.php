@@ -308,9 +308,10 @@ class DeliverController extends Controller {
 				$html = substr($html, strpos($html, "<td>") + 4);
 				$temp['location'] = substr($html, 0, strpos($html, "<"));
 			
-				// state
+				// 상태
 				$html = substr($html, strpos($html, "left") + 6);
-				$temp['state'] = trim(substr($html, 0, strpos($html, "</div")), " &nbsp; ( ) <strong> </strong>");
+				$tempStr = substr($html, 0, strpos($html, "</div"));
+				$temp['state'] = substr($html, strrpos($tempStr, "<strong>") + 8, strrpos($tempStr, "</strong>") - strrpos($tempStr, "<strong>") - 8);
 				
 				array_push($info, $temp);
 				
