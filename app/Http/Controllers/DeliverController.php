@@ -142,7 +142,7 @@ class DeliverController extends Controller {
 			$buffer = ob_get_contents();
 			ob_end_clean();
 			if (!$buffer)
-				$result = "Curl Fetch Error : ".curl_error($ch);
+				$html = "Curl Fetch Error : ".curl_error($ch);
 			else
 				$html = $buffer;
 			curl_close($ch);
