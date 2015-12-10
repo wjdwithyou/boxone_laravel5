@@ -10,6 +10,7 @@ include_once dirname(__FILE__)."/../function/baseFunction.php";
 
 
 class MemberModel{
+
     /*    
      *  회원 등록 기능
      */
@@ -218,5 +219,64 @@ class MemberModel{
           }
     }
     
+
+    /*
+     *  세션 생성
+     */
+    function createSession($member_idx, $session)
+    {
+        if( !(  inputErrorCheck($member_idx, 'member_idx')
+            && inputErrorCheck($session, 'session')))
+          return ;
+        
+        $hashedSession = Hash::make($session);
+
+        if(Hash::check($session, $hashedSession)){
+          //비밀번호 일치
+        }
+        else{
+          //비밀번호 불일치
+          if(Hash::needsRehash($hashedSession))
+            $hashedSession = Hash::make($session);
+        }
+
+        $result = DB::update('update member set session=?, upload=now() where idx=?', array($hashedSession, $member_idx));
+
+      if($result > 0)
+        return array('code' => 1, 'data' => $result);
+      else
+        return array('code' => 0, 'data' => 'internel server error');      
+    }
+
+    /*
+     *  세션 체크
+     */
+    function createSession($member_idx, $session)
+    {
+      $target_member = DB::select('select * from member where idx=?', array($member_idx));
+
+      if(count($target_member)>0 && Hash::check($session, $target_member[0]->session)){
+          //로그인 성공
+          return array('code' => 1, 'data' => $target_member);
+      } 
+      else{
+          //로그인 실패
+          return array('code' => 0, 'data'=> "session failure" );
+      }
+    }
+
+    /*
+     *  세션 삭제
+     */
+    function deleteSession($member_idx)
+    {
+      $target_member = DB::update('update member set session=NULL, upload=now() where idx=?', array($member_idx));
+
+
+      if($result == true){
+            return array('code' => 1, 'msg' => 'success');
+      }else{
+            return array('code' => 0, 'msg' => 'update false');
+    }
 
 }

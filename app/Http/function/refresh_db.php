@@ -12,6 +12,7 @@ while($row1 = mysql_fetch_array($hotdeal)) {
     $cur_idx = $row1["idx"];
     if( strtotime($row1["deadline"]) < $cur_time){
         @mysql_query("DELETE FROM hotdeal_promo WHERE idx=$cur_idx");
+        // cascade로 hotdeal_bookmark는 자동으로 삭제됨
     }
 }
 
