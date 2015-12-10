@@ -25,9 +25,9 @@ function sortByChar(cate, char)
 
 function clickBookmark(img, site)
 {
-	var member_idx = $("#logined_idx").val();
+	var logined = $("#logined").val();
 	
-	if (member_idx == "0")
+	if (logined == "0")
 		login_popup();
 	else
 	{
@@ -36,8 +36,7 @@ function clickBookmark(img, site)
 			url: adr_ctr+'Bestranking/checkBookmark',
 			type: 'post',
 			data: {
-				site: site,
-				member: member_idx			
+				site: site
 			},		 
 			success: function(result)
 			{

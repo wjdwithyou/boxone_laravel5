@@ -18,7 +18,7 @@ class DeliverController extends Controller {
 	 * 작성자 : 박용호
 	 * 통관번호, 년도 입력하여 현재 상태 받기 
 	 */
-	public function getInfo()
+	public function getInfoEntry()
 	{
 		$num = Request::input('num');
 		$year = Request::input('year');
@@ -74,7 +74,11 @@ class DeliverController extends Controller {
 		
 		$html = substr($html, strpos($html, "B/L<"));
 		$result['mbl'] = substr($html, strpos($html, '<td>')+4, 11);
-		$result['hbl'] = substr($html, strpos($html, '-')+1, 13);		
+		$result['hbl'] = substr($html, strpos($html, '-')+1, 13);
+		
+		$html = substr($html, strpos($html, "<tr"));
+		$html = substr($html, strpos($html, "<td>") + 4);
+		$result['state'] = substr($html, 0, strpos($html, "</td>"));
 		
 		$html = substr($html, strpos($html, "</thead>"));
 		$info = array();
@@ -104,19 +108,24 @@ class DeliverController extends Controller {
 			array_push($info, $temp);
 		}
 		
-		$result['state'] = $info;
+		$result[0] = $info;
 		
-		print_r ($result);
+		$page = 'deliver_entryInfo';
+		return view($page, array('page' => $page, 'result' => $result));
 		
 		//echo ("화물번호:".$hwaNum.", M B/L:".$mbl.", H B/L:".$hbl);
 	}
 	
-	function getInfoBaesong()
+	function getInfoDelivery()
 	{
 		$company = Request::input('company');
 		$num = Request::input('num');
+		$adr_ctr = Request::input('adr_ctr');
 		
 		$result = array();
+		
+		$result['office'] = $company;
+		$result['num'] = $num;
 		
 		if ($company == "CJ대한통운")
 		{
@@ -178,7 +187,7 @@ class DeliverController extends Controller {
 		
 				// 현재위치
 				$html = substr($html, strpos($html, "href"));
-				$html = substr($html, strpos($html, ">"));
+				$html = substr($html, strpos($html, ">") + 1);
 				$temp['location'] = substr($html, 0, strpos($html, "<"));
 		
 				array_push($info, $temp);
@@ -444,6 +453,8 @@ class DeliverController extends Controller {
 				if (strpos($temp['state'], "&nbsp;") !== false)
 					break;
 			
+				$temp['date'] = "";
+				$temp['time'] = "";
 				array_push($info, $temp);
 			}
 			array_push($result, $info);
@@ -451,7 +462,13 @@ class DeliverController extends Controller {
 			// 받는 시간
 			$html = substr($html, strpos($html, "tbScanDt"));
 			$html = substr($html, strpos($html, "value") + 7);
-			$result['sendDate'] = substr($html, 0, strpos($html, "\""));
+			$result['receiveDate'] = substr($html, 0, strpos($html, "\""));
+			
+			if (count($result[0]) > 0)
+			{
+				$result[0][0]['date'] = $result['sendDate'];
+				$result[0][count($result[0])-1]['date'] = $result['receiveDate'];
+			}
 		}
 		else if ($company == "KG로지스")
 		{
@@ -877,6 +894,7 @@ class DeliverController extends Controller {
 				$html = substr($html, strpos($html, ">") + 1);
 				$temp['state'] = substr($html, 0, strpos($html, "<"));
 					
+				$temp['time'] = "";
 				array_push($info, $temp);
 			}
 			array_push($result, $info);
@@ -1087,7 +1105,16 @@ class DeliverController extends Controller {
 			array_push($result, $info);			
 		}
 			
-		print_r ($result);
+		if (!isset($result['state']))
+			$result['state'] = $result[0][count($result[0])-1]['state'];
+		if (!isset($result['prdt']))
+			if (isset($result['sender']))
+				$result['prdt'] = $result['receiver']."님의 상품";
+			else 
+				$result['prdt'] = "상품명 알 수 없음";
+		
+		$page = 'deliver_deliveryInfo';
+		return view($page, array('page' => $page, 'result' => $result, 'adr_ctr' => $adr_ctr));
 	}
 
 

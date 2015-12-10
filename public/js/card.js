@@ -78,7 +78,7 @@ function getCardListAll(type)
 		data: {
 			type: type,
 			adr_img: adr_img
-		},		 
+		},
 		success: function(result)
 		{
 			$("#card_result_wrap").html(result);

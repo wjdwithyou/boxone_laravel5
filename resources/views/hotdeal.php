@@ -23,7 +23,7 @@
 					&nbsp;>&nbsp;
 				</div>
 				<div id="top_select">
-					<select id="hotdeal_cate" class="form-control" onchange="hotdeal_cate();">
+					<select id="hotdeal_cate" class="form-control">
 						<option value="0">전체</option> 
 						<?php foreach($cateList as $list) :?>
 							<?php if ($list->idx == $nowCate['idx']) :?>
@@ -35,7 +35,7 @@
 					</select>
 				</div>
 				<div id="order_select">
-					<select id="order_list" class="form-control" onchange="order_list();">
+					<select id="order_list" class="form-control">
 						<?php if ($type == '상품') :?>
 							<option value="1">인기 순</option>
 							<option value="2">기한 순</option>
@@ -103,7 +103,7 @@
 						<div class="hd_result_div">
 							<div class="hd_code_img center_box">
 								<div class="hd_bookmark">
-									<a onclick="add_heart($(this).children());"><img src="<?= $adr_img ?>heart.png"></a>
+									<a onclick="hotdealBookmark($(this).children(),<?=$prdtList->idx?>);"><img src="<?= $adr_img ?>heart.png"></a>
 								</div>
 								<div class="center_content">
 									<a onclick="hotdealConnect('<?=$prdtList->idx?>', '<?=$prdtList->website_link?>');"><img src="<?=$prdtList->image?>"></a>

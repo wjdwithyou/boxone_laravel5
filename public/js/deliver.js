@@ -26,22 +26,39 @@ dtd_companys.push(new Array("UPS", 13, "http://www.ups.com/content/kr/ko/index.j
 dtd_companys.push(new Array("TNTExpress", 9, "http://www.tnt.com/express/ko_kr/site/home.html"));
 
 $(document).ready(function(){
-	$("#baesong_select").html("");
+	$("#delivery_office").html("");
 	var i = 0;
 	for (i = 0 ; i < dtd_companys.length ; i++)
-		$("#baesong_select").append("<option value='"+i+"'>"+dtd_companys[i][0]+"</option>");
+		$("#delivery_office").append("<option value='"+i+"'>"+dtd_companys[i][0]+"</option>");
 	
-	$("#tongkwan_select").html("");
+	$("#entry_year").html("");
 	var i = 0;
 	for (i = 2015 ; i > 1995 ; i--)
-		$("#tongkwan_select").append("<option value='"+i+"-01-01"+"'>"+i+"</option>");
+		$("#entry_year").append("<option value='"+i+"-01-01"+"'>"+i+"년</option>");
+	
+	$(".deliver_header_").on('click', function(){
+		$(".deliver_header_").removeClass("deliver_header_selected");
+		$(this).addClass('deliver_header_selected');
+	});
 });
 
-function baesongSearch() 
+function delivery_popup()
 {
-	var company_info = dtd_companys[$("#baesong_select").val()];
+	$("#deliver_body").html($("#delivery1").html());
+	$('#deliver_modal').modal('show');
+}
+
+function entry_popup()
+{
+	$("#deliver_body").html($("#entry1").html());
+	$('#deliver_modal').modal('show');
+}
+
+function deliverySearch() 
+{
+	var company_info = dtd_companys[$("#delivery_office").val()];
 	var company = company_info[0];
-	var num = $("#baesong_num").val();
+	var num = $("#delivery_num").val();
 
 	/* 운송장 번호 값 확인 */
 	if (company == "UPS") 
@@ -52,7 +69,7 @@ function baesongSearch()
 		if (pattern1.test(num) && pattern2.test(num) && pattern3.test(num)) 
 		{
 			alert(company + "의 운송장 번호 패턴에 맞지 않습니다.");
-			$("#baesong_num").focus();
+			$("#delivery_num").focus();
 			return false;
 		}
 	} 
@@ -61,13 +78,13 @@ function baesongSearch()
 		if (!isNumeric(num)) 
 		{
 			alert("운송장 번호는 숫자만 입력해 주세요.");
-			$("#baesong_num").focus();
+			$("#delivery_num").focus();
 			return false;
 		} 
 		else if (company_info[1] > 0 && company_info[1] < num.length) 
 		{
 			alert(company + "의 운송장 번호는 " + company_info[1] + "자리의 숫자로 입력해 주세요.");
-			$("#baesong_num").focus();
+			$("#delivery_num").focus();
 			return false;
 		}
 	}
@@ -77,33 +94,9 @@ function baesongSearch()
 		if (!pattern.test(num)) 
 		{
 			alert(company + "의 운송장 번호 패턴에 맞지 않습니다.");
-			$("#baesong_num").focus();
+			$("#delivery_num").focus();
 			return false;
 		}
-	} 
-	else if (company == "현대택배") 
-	{
-		/*$.ajax
-		({
-			url: adr_ctr+"Deliver/hyundaePre",
-			type: 'post',
-			async: false,
-			data:{
-				num: num
-			},
-			success: function(result)
-			{
-				console.log(result);
-				$("#baesong_test").html(result);
-				//alert (JSON.stringify(result));
-				//result = JSON.parse(result);
-			},
-			error: function(request,status,error)
-			{
-				console.log(request.responseText);
-			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			}
-		});*/
 	} 
 	else if (company == "TNT Express") 
 	{
@@ -112,7 +105,7 @@ function baesongSearch()
 		if (num.search(pattern1) == -1 && num.search(pattern2) == -1) 
 		{
 			alert(company + "의 운송장 번호 패턴에 맞지 않습니다.");
-			$("#baesong_num").focus();
+			$("#delivery_num").focus();
 			return false;
 		}
 	} 
@@ -121,13 +114,13 @@ function baesongSearch()
 		if (!isNumeric(num)) 
 		{
 			alert("운송장 번호는 숫자만 입력해 주세요.");
-			$("#baesong_num").focus();
+			$("#delivery_num").focus();
 			return false;
 		} 
 		else if (company_info[1] > 0 && company_info[1] != num.length) 
 		{
 			alert(company + "의 운송장 번호는 " + company_info[1] + "자리의 숫자로 입력해 주세요.");
-			$("#baesong_num").focus();
+			$("#delivery_num").focus();
 			return false;
 		}
 	}
@@ -135,17 +128,19 @@ function baesongSearch()
 	var adr_ctr = $("#adr_ctr").val();
 	$.ajax
 	({
-		url: adr_ctr+"Deliver/getInfoBaesong",
+		url: adr_ctr+"Deliver/getInfoDelivery",
 		type: 'post',
 		async: false,
 		data:{
+			adr_ctr: adr_ctr,
 			company: company,
 			num: num
 		},
 		success: function(result)
 		{
 			console.log(result);
-			$("#baesong_test").html(result);
+			$("#deliver_body").html(result).trigger("create");
+			$('#deliver_modal').modal('show');
 			//alert (JSON.stringify(result));
 			//result = JSON.parse(result);
 		},
@@ -158,15 +153,15 @@ function baesongSearch()
 	//window.open(url, "_blank");
 }
 
-function tongkwanSearch()
+function entrySearch()
 {
 	var adr_ctr = $("#adr_ctr").val();
-	var num = $("#tongkwan_num").val();
-	var year = $("#tongkwan_select").val();
+	var num = $("#entry_num").val();
+	var year = $("#entry_year").val();
 	
 	$.ajax
 	({
-		url: adr_ctr+"Deliver/getInfo",
+		url: adr_ctr+"Deliver/getInfoEntry",
 		type: 'post',
 		async: false,
 		data:{
@@ -176,7 +171,8 @@ function tongkwanSearch()
 		success: function(result)
 		{
 			console.log(result);
-			$("#tongkwan_test").html(result);
+			$("#deliver_body").html(result).trigger("create");
+			$('#deliver_modal').modal('show');
 			//alert (JSON.stringify(result));
 			//result = JSON.parse(result);
 		},

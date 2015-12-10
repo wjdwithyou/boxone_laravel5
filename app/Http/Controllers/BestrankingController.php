@@ -100,7 +100,8 @@ class BestrankingController extends Controller {
 	{
 		$ssModel = new ShoppingsiteModel();
 		
-		$member_idx = Request::input('member');
+		if (session_id() == '')	session_start();
+		$member_idx = $_SESSION['idx'];
 		$shoppingsite_idx = Request::input('site');
 		
 		$chk = $ssModel->checkBookmark($member_idx, $shoppingsite_idx);

@@ -69,15 +69,35 @@ class HotdealTargetModel
 
         return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
+	
+	
+	/*
+	 *	핫딜 북마크 검사
+	 */
+	function checkBookmark($member_idx, $hotdeal_idx)
+	{
+	
+		if(	!(	inputErrorCheck($hotdeal_idx, 'hotdeal_idx')
+				&& inputErrorCheck($member_idx, 'member_idx')))
+					return ;
+
+		//북마크 검사
+		$result = DB::select('select idx from hotdeal_bookmark where member_idx = ? AND hotdeal_idx = ?',
+			array($member_idx, $hotdeal_idx));
+		if (count($result) > 0)
+			return array('code' => 0, 'msg' => 'exist!');
+		else
+			return array('code' => 1, 'msg' => 'no!');
+	}
 
 	
 	/*  	
      *	핫딜 북마크 삭제
      */
-	function deleteBookmark($bookmar_idx, $hotdeal_idx)
+	function deleteBookmark($member_idx, $hotdeal_idx)
 	{
 
-		if(	!(	inputErrorCheck($bookmark_idx, 'bookmark_idx')
+		if(	!(	inputErrorCheck($member_idx, 'member_idx')
 			 && inputErrorCheck($hotdeal_idx, 'hotdeal_idx')))
 			return ;
 
@@ -85,7 +105,7 @@ class HotdealTargetModel
 		DB::update('update hotdeal_promo set bookmark_count=bookmark_count-1 where idx=?',array($hotdeal_idx));
 
 		//북마크 삭제
-		$result = DB::delete('delete from hotdeal_bookmark where idx=?', array($bookmar_idx));
+		$result = DB::delete('delete from hotdeal_bookmark where member_idx=? AND hotdeal_idx = ?', array($member_idx, $hotdeal_idx));
 
         return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
@@ -128,11 +148,11 @@ class HotdealTargetModel
 			break ;
 
 			case 2:
-			$option_query = ' site_name ASC,';
+			$option_query = ' deadline ASC,';
 			break ;
 
 			case 3:
-			$option_query = ' deadline DESC,';
+			$option_query = ' site_name ASC,';
 			break ;
 
 			default :

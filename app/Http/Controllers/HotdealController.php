@@ -81,11 +81,34 @@ class HotdealController extends Controller {
 	{
 		$hotdealModel = new HotdealTargetModel();
 		
+		if (isset($_COOKIE['click']))
+			return array('code' => 0, 'msg' => 'already clicked!');
+		else
+			setcookie('click', 1, time()+5);	
+		
 		$idx = Request::input('idx');
 		$result = $hotdealModel->updateHitCount($idx);
 		
 		return $result;
 	}
 	
+	public function hotdealBookmark()
+	{
+		$hotdealModel = new HotdealTargetModel();
+		
+		if (session_id() == '')	session_start();
+		$member_idx = $_SESSION['idx'];
+		$hotdeal_idx = Request::input('idx');
+		
+		$result = $hotdealModel->checkBookmark($member_idx, $hotdeal_idx); 
+		
+		if ($result['code'])
+			$hotdealModel->createBookmark($member_idx, $hotdeal_idx);
+		else
+			$hotdealModel->deleteBookmark($member_idx, $hotdeal_idx);
+		
+		header('Content-Type: application/json');
+		return json_encode($result);
+	}
 	
 }
