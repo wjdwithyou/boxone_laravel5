@@ -1,10 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
-use SoapClient;
 use Request;
 
-require_once dirname(__FILE__)."/../lib/fedex-common.php5";
 class DeliverController extends Controller {
 
 	public function index()
