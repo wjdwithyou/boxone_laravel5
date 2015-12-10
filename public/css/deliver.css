@@ -63,6 +63,8 @@
 				float:left;
 			}
 			.deliver_info_state{
+				width:100%;
+				height:auto;
 				font-size:18px;
 				color:#f45a63;
 				float:left;

@@ -7,7 +7,7 @@
   			<div class="deliver_info_title">
 	  			화물관리번호 :<br><?=$result['hwaNum']?>
 	  		</div>
-	  		<div class="deliver_info_state">
+	  		<div class="deliver_info_state" style="width:auto;">
 	  			<?=$result['state']?>
 	  		</div>
 	  		<button type="button" class="deliver_info_button">
