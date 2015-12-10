@@ -1,3 +1,4 @@
+		
 		<div>
 			<span style="font-size:13px; color:#f45a63;">
 				<?=$result['office']?> / <?=$result['num']?><br>

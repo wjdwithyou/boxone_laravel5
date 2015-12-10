@@ -167,6 +167,48 @@
 		<?php
 		include ("footer.php");
 		?>
+		
+		<style>
+			#hotdeal_cate {
+				width: 188px;
+				height: 45px;
+				border: 0 !important;
+				color: #FFF;
+				background: #F15A63 url('<?=$adr_img?>select_arrow.png') no-repeat 90% center;
+				text-indent: 0.01px;
+				text-overflow: "";
+				padding-left: 6px;
+				-webkit-appearance: none;
+				-moz-appearance: none;
+				appearance: none;
+			}
+			
+			#order_list {
+				width: 188px;
+				height: 45px;
+				border: 1px solid #F15A63 !important;
+				color: #F15A63;
+				background: #fff url('<?=$adr_img?>select_arrow_pink.png') no-repeat 90% center;
+				text-indent: 0.01px;
+				text-overflow: "";
+				padding-left: 6px;
+				-webkit-appearance: none;
+				-moz-appearance: none;
+				appearance: none;
+			}
+			
+			@media (max-width: 450px) {
+				#hotdeal_cate, #order_list {
+					width: 100%;
+					background: #F15A63 url('<?=$adr_img?>select_arrow.png') no-repeat 95% center;
+				}
+				#order_list {
+					width: 100%;
+					margin-top: 5px;
+					background: #fff url('<?=$adr_img?>select_arrow_pink.png') no-repeat 95% center;
+				}
+			}
+		</style>
 	</body>
 </html>
 

@@ -106,7 +106,7 @@ class DeliverController extends Controller {
 			array_push($info, $temp);
 		}
 		
-		$result[0] = $info;
+		$result[0] = rsort($info);
 		
 		$page = 'deliver_entryInfo';
 		return view($page, array('page' => $page, 'result' => $result));
