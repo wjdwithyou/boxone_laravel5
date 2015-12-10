@@ -27,7 +27,9 @@
 	<!-- 배송조회 팝업 1 -->
 	<div id="delivery1" hidden>
 		<div>
-	  		BOXONE에서 간편하게 배송조회하세요!
+			<span style="font-size:13px; color:#f45a63;">
+	  			BOXONE에서 간편하게 배송조회하세요!
+	  		</span>
 	  	</div>
 	  	<select id="delivery_office" class="form_margin form-control">
 	  	</select>
@@ -38,7 +40,9 @@
 	<!-- 통관조회 팝업 1 -->
 	<div id="entry1" hidden>
 		<div>
-	  		BOXONE에서 간편하게 통관조회하세요!
+			<span style="font-size:13px; color:#f45a63;">
+	  			BOXONE에서 간편하게 통관조회하세요!
+	  		</span>
 	  	</div>
 	  	<select id="entry_year" class="form_margin form-control">
 	  	</select>

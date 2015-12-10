@@ -21,6 +21,8 @@ class DeliverController extends Controller {
 		$num = Request::input('num');
 		$year = Request::input('year');
 		
+		$page = 'deliverInfo';
+		
 		// 통관번호로 화물번호 가져오기
 		$postdata = http_build_query(
 			array(
@@ -42,6 +44,9 @@ class DeliverController extends Controller {
 		
 		$context = stream_context_create($opts);
 		$html = file_get_contents('http://m.customs.go.kr/kcshome/mobile/program/program07List.do', false, $context);
+		
+		if (strpos($html, "자료가 없습니다"))
+			return view($page, array('page' => $page, 'code' => 0));
 		
 		// 화물번호로 배송 상태 가져오기
 		$pos = strpos($html, "program07Detail");
@@ -106,10 +111,9 @@ class DeliverController extends Controller {
 			array_push($info, $temp);
 		}
 		
-		$result[0] = rsort($info);
+		$result[0] = array_reverse($info);
 		
-		$page = 'deliver_entryInfo';
-		return view($page, array('page' => $page, 'result' => $result));
+		return view($page, array('page' => $page, 'code' => 2, 'result' => $result));
 		
 		//echo ("화물번호:".$hwaNum.", M B/L:".$mbl.", H B/L:".$hbl);
 	}
@@ -119,6 +123,8 @@ class DeliverController extends Controller {
 		$company = Request::input('company');
 		$num = Request::input('num');
 		$adr_ctr = Request::input('adr_ctr');
+		
+		$page = 'deliverInfo';
 		
 		$result = array();
 		
@@ -142,7 +148,10 @@ class DeliverController extends Controller {
 			$buffer = ob_get_contents();
 			ob_end_clean();
 			if (!$buffer)
+			{
 				$html = "Curl Fetch Error : ".curl_error($ch);
+				return view($page, array('page' => $page, 'code' => 0));
+			}
 			else
 				$html = $buffer;
 			curl_close($ch);
@@ -199,6 +208,9 @@ class DeliverController extends Controller {
 		{
 			$html = file_get_contents('https://service.epost.go.kr/trace.RetrieveDomRigiTraceList.comm?displayHeader=N&sid1='.$num);
 			
+			if (strpos($html, "배달정보를 찾지 못했습니다"))
+				return view($page, array('page' => $page, 'code' => 0));
+				
 			$html = substr($html, strpos($html, "배달결과"));
 			$html = substr($html, strpos($html, "<td>") + 1);
 		
@@ -268,6 +280,9 @@ class DeliverController extends Controller {
 			$html = file_get_contents('http://www.hanjin.co.kr/Delivery_html/inquiry/result_waybill.jsp?wbl_num='.$num, false, $context);
 			$html = mb_convert_encoding($html, 'UTF-8', 'EUC-KR');
 			
+			if (strpos($html, "result_error.jsp"))
+				return view($page, array('page' => $page, 'code' => 0));
+			
 			$html = substr($html, strpos($html, "<tbody>"));
 			$html = substr($html, strpos($html, "bb") + 4);
 			
@@ -324,67 +339,22 @@ class DeliverController extends Controller {
 		}
 		else if ($company == "현대택배")		// 실패!!!! 망함 ㅠㅠ
 		{						
-			/*$result = file_get_contents('http://www.hlc.co.kr/open/tracking?invno='.$num);
-			$str = $http_response_header[8];
-			$cookie = substr($str, strpos($str, ":"));
-			$cookie = substr($str, strpos($str, "=")+1, strpos($str, ";"));
-			
-			echo $cookie;
-			
-			setcookie("JSESSIONID_hlchome", $cookie, time()+60*60);
-			
-			$postdata = http_build_query(
-				array(
-					'action' => 'processSubmit'
-				)
-			);
-			 	
-			$header =
-			 	'Content-Type: application/x-www-form-urlencoded\r\n'.
-			 	'Host: www.hlc.co.kr\r\n'.
-			 	'Origin: http://www.hlc.co.kr\r\n'.
-			 	'Cookie: JSESSIONID_hlchome='.$cookie.'\r\n'.
-			 	'Referer: http://www.hlc.co.kr/open/tracking?invno=304361081183\r\n'.
-			 	'Upgrade-Insecure-Requests: 1\r\n'.
-			 	'User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36';
-			 	
-			$opts = array(
-			 	'http' => array(
-			 		'method' => 'POST',
-			 		'header' => $header,
-			 		'content' => $postdata,
-			 		'timeout' => 10
-			 	)
-			);
-			
-			$context = stream_context_create($opts);
-			$result = file_get_contents('http://www.hlc.co.kr/open/tracking', false, $context);*/
-			
-			//$cookie_file = "cookie.txt";
-				
 			// Login the user
 			$ch = curl_init();
 			curl_setopt ($ch, CURLOPT_URL, 'http://www.hlc.co.kr/open/tracking?invno='.$num);
-			//curl_setopt ($ch, CURLOPT_USERAGENT,'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/32.0.1700.107 Chrome/32.0.1700.107 Safari/537.36');
-			//curl_setopt ($ch, CURLOPT_COOKIEJAR, $cookie_file);
 			curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
 			curl_setopt ($ch, CURLOPT_HEADER, true);
-			//curl_setopt ($ch, CURLOPT_CONNECT_ONLY, true);
-			//curl_setopt ($ch, CURLOPT_HTTPHEADER, array('Upgrade_Insecure_Requests: 1', 'Host: www.hlc.co.kr', 'Origin: http://www.hlc.co.kr', 'Cookie: JSESSIONID_hlchome=6vnKWkKKyh2gDmF0q2QGCS7Gl7QvX0cYWDrSynhLvm1QC2nT8Fjs!855130315!-1404783096', 'User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36'));
-			//curl_setopt ($ch, CURLOPT_COOKIESESSION, true);
-			//curl_setopt ($ch, CURLOPT_FOLLOWLOCATION, true);
-			//curl_setopt ($ch, CURLOPT_AUTOREFERER, true);
 			
-			$result = curl_exec ($ch);
+			$cookie = curl_exec ($ch);
 			curl_close($ch);
 			
-			$pos = strpos($result, "<!");
-			$str = substr($result, 0, $pos);
+			$pos = strpos($cookie, "<!");
+			$str = substr($cookie, 0, $pos);
 			$str = substr($str, strpos($str, "JSESSIONID"));
 			$cookie = substr($str, 0, strpos($str, ";"));
 			
-			$result = substr($result, $pos);
-			echo $cookie."\n";
+			//$html = substr($cookie, $pos);
+			//echo $cookie."\n";
 			
 			sleep(3);
 			
@@ -395,20 +365,69 @@ class DeliverController extends Controller {
 			curl_setopt ($ch, CURLOPT_POST, true);
 			curl_setopt ($ch, CURLOPT_POSTFIELDS, "action=processSubmit");
 			curl_setopt ($ch, CURLOPT_COOKIE, $cookie);
-			//curl_setopt ($ch, CURLOPT_COOKIE, "JSESSIONID_hlchome=gj8lWmnh9y26RFX31NSfhQSpnG6BQ4tP1pRLWHQMGrp6tj3GDlQD!248303518!-256124272");
-			//curl_setopt ($ch, CURLOPT_COOKIEFILE, $cookie_file);
-			//curl_setopt ($ch, CURLOPT_HEADER, true);
-			//curl_setopt ($ch, CURLOPT_COOKIEJAR, $cookie_file);
-			$result = curl_exec ($ch);
-			$result = str_replace ("/js", "http://www.hlc.co.kr/js", $result);
+			$html = curl_exec ($ch);
 			
 			curl_close($ch);
-		
+			
+			if (strpos($html, "해당 번호에 대한 배송정보가 없습니다"))
+				return view($page, array('page' => $page, 'code' => 0));
+			
+			// 보낸날짜
+			$html = substr($html, strpos($html, "<table") + 1);
+			$html = substr($html, strpos($html, "<table") + 1);
+			
+			$info = array();
+			
+			while (strpos($html, "<tr") < strpos($html, "</table"))
+			{
+				$temp = array();
+				
+				$html = substr($html, strpos($html, "<tr") + 1);
+				
+				// 날짜
+				$html = substr($html, strpos($html, "<td"));
+				$html = substr($html, strpos($html, ">") + 1);
+				$temp['date'] = substr($html, 0, strpos($html, "</td"));
+				
+				// 시간
+				$html = substr($html, strpos($html, "<td"));
+				$html = substr($html, strpos($html, ">") + 1);
+				$temp['time'] = substr($html, 0, strpos($html, "</td"));
+				
+				// 위치
+				$html = substr($html, strpos($html, "<a"));
+				$html = substr($html, strpos($html, ">") + 1);
+				$temp['location'] = substr($html, 0, strpos($html, "</a"));
+				if ($temp['location'] == "")
+					$temp['location'] = "&nbsp;";
+				
+				// 상태
+				$html = substr($html, strpos($html, "<td"));
+				$html = substr($html, strpos($html, ">") + 1);
+				$temp['state'] = substr($html, 0, strpos($html, "<"));
+				if (strpos($temp['state'], "하였습니다"))
+					$temp['state'] = substr($temp['state'], 0, strpos($temp['state'], "하였습니다"));
+				if (strpos($temp['state'], "보내셨습니다"))
+					$temp['state'] = substr($temp['state'], 0, strpos($temp['state'], "보내셨습니다"))."보냄";
+				if (strpos($temp['state'], " 입니다"))
+					$temp['state'] = substr($temp['state'], 0, strpos($temp['state'], " 입니다"));
+				
+				array_push($info, $temp);
+				
+				$html = substr($html, strpos($html, "<tr") + 1);
+			}
+			if ($info[count($info)-1]['state'] == "고객")
+				$info = array_slice($info, 0, count($info)-1);
+			array_push($result, $info);
+			
 		}
 		else if ($company == "로젠택배")
 		{
 			$html = file_get_contents('http://www.ilogen.com/iLOGEN.Web.New/TRACE/TraceView.aspx?gubun=slipno&slipno='.$num);
 			$html = mb_convert_encoding($html, 'UTF-8', 'EUC-KR');
+			
+			if (strpos($html, "배송자료를 조회할 수 없습니다"))
+				return view($page, array('page' => $page, 'code' => 0));
 				
 			// 보낸날짜
 			$html = substr($html, strpos($html, "tbTakeDt"));
@@ -441,16 +460,23 @@ class DeliverController extends Controller {
 					
 				// 현재위치
 				$html = substr($html, strpos($html, "<td"));
-				$html = substr($html, strpos($html, ">"));
+				$html = substr($html, strpos($html, ">") + 1);
 				$temp['location'] = substr($html, 0, strpos($html, "<"));
 					
 				// state
 				$html = substr($html, strpos($html, "<td"));
-				$html = substr($html, strpos($html, ">"));
+				$html = substr($html, strpos($html, ">") + 1);
 				$temp['state'] = substr($html, 0, strpos($html, "<"));
 				
 				if (strpos($temp['state'], "&nbsp;") !== false)
 					break;
+				
+				if (strpos($temp['state'], "하였습니다"))
+					$temp['state'] = substr($temp['state'], 0, strpos($temp['state'], "하였습니다"));
+				if (strpos($temp['state'], "했습니다"))
+					$temp['state'] = substr($temp['state'], 0, strpos($temp['state'], "했습니다"));
+				if (strpos($temp['state'], "입니다"))
+					$temp['state'] = substr($temp['state'], 0, strpos($temp['state'], "입니다"));
 			
 				$temp['date'] = "";
 				$temp['time'] = "";
@@ -482,7 +508,7 @@ class DeliverController extends Controller {
 				
 			$context = stream_context_create($opts);
 			$html = file_get_contents('http://www.kglogis.co.kr/delivery/delivery_result.jsp', false, $context);
-				
+			
 			$html = substr($html, strpos($html, "<tbody>"));
 				
 			// 보낸 분
@@ -497,6 +523,9 @@ class DeliverController extends Controller {
 			// 받는 분
 			$html = substr($html, strpos($html, "<td>") + 4);
 			$result['receiver'] = substr($html, 0, strpos($html, " "));
+			
+			if ($result['sender'] == "" && $result['prdt'] == "")
+				return view($page, array('page' => $page, 'code' => 0));
 				
 			// 배송 상황 (현재위치, 처리현황)
 			$html = substr($html, strpos($html, "<tbody>"));
@@ -516,6 +545,17 @@ class DeliverController extends Controller {
 				// state
 				$html = substr($html, strpos($html, "<span>") + 6);
 				$temp['state'] = substr($html, 0, strpos($html, "<"));
+				
+				if (strpos($temp['state'], "운송장을 발행"))
+					$temp['state'] = "운송장 발행";
+				if (strpos($temp['state'], "이동중"))
+					$temp['state'] = "이동중";
+				if (strpos($temp['state'], "달지에"))
+					$temp['state'] = "배달지 도착";
+				if (strpos($temp['state'], "예정"))
+					$temp['state'] = "배달준비";
+				if (strpos($temp['state'], "배달완료"))
+					$temp['state'] = "배달완료";
 					
 				// 위치
 				$html = substr($html, strpos($html, "<span>") + 6);
@@ -532,6 +572,9 @@ class DeliverController extends Controller {
 		else if ($company == "CVSnet 편의점택배")
 		{
 			$html = file_get_contents('http://www.doortodoor.co.kr/jsp/cmn/TrackingCVS.jsp?pTdNo='.$num);
+			
+			if (strpos($html, "검색된 결과가 없습니다"))
+				return view($page, array('page' => $page, 'code' => 0));
 				
 			$html = substr($html, strpos($html, "<tbody"));
 				
@@ -612,6 +655,9 @@ class DeliverController extends Controller {
 				$html = substr($html, strpos($html, "<td"));
 				$html = substr($html, strpos($html, ">") + 1);
 				$temp['location'] = substr($html, 0, strpos($html, "<"));
+				
+				if ($temp['location'] == "")
+					$temp['location'] = "&nbsp;";
 					
 				// 날짜
 				$html = substr($html, strpos($html, "<td"));
@@ -626,10 +672,22 @@ class DeliverController extends Controller {
 				$html = substr($html, strpos($html, "<td"));
 				$html = substr($html, strpos($html, ">") + 1);
 				$temp['state'] = substr($html, 0, strpos($html, "<"));
+				
+				if (strpos($temp['state'], "에서"))
+					$temp['state'] = substr($temp['state'], strpos($temp['state'], "에서") + 7);
+				if (strpos($temp['state'], "했습니다"))
+					$temp['state'] = substr($temp['state'], 0, strpos($temp['state'], "했습니다"));
+				if (strpos($temp['state'], "배송을 시작"))
+					$temp['state'] = "배송을 시작";
+				if (strpos($temp['state'], ". "))
+					$temp['state'] = substr($temp['state'], 0, strpos($temp['state'], ". "));
 					
 				array_push($info, $temp);
 			}
 			array_push($result, $info);
+			
+			if (count($info) == 0)
+				return view($page, array('page' => $page, 'code' => 0));
 				
 		}
 		else if ($company == "경동택배")
@@ -658,6 +716,9 @@ class DeliverController extends Controller {
 			$context = stream_context_create($opts);
 			$html = file_get_contents('http://www.hdexp.co.kr/parcel/order_result_t.asp', false, $context);
 			$html = mb_convert_encoding($html, 'UTF-8', 'EUC-KR');
+			
+			if (strpos($html, "운송장번호가 일치하지 않습니다."))
+				return view($page, array('page' => $page, 'code' => 0));
 			
 			$html = substr($html, strpos($html, "<tbody"));
 			$html = substr($html, strpos($html, "<tr") + 2);
@@ -695,6 +756,10 @@ class DeliverController extends Controller {
 			$html = substr($html, strpos($html, "<table"));
 			$html = substr($html, strpos($html, "<tr") + 2);
 			
+			if ($result['sender'] == "" && $result['prdt'] == "")
+				return view($page, array('page' => $page, 'code' => 0));
+				
+			
 			// 배송 상황 (현재위치, 처리현황)
 			$info = array();
 			while (strpos($html, "<tr") < strpos($html, "</tbody"))
@@ -731,6 +796,10 @@ class DeliverController extends Controller {
 		{
 			$html = file_get_contents('http://www.gtxlogis.co.kr/tracking/default.asp?awblno='.$num);
 			$html = mb_convert_encoding($html, 'UTF-8', 'EUC-KR');
+			
+			if (strpos($html, "운송장 번호에 대한 자료가 없습니다"))
+				return view($page, array('page' => $page, 'code' => 0));
+				
 			
 			// 보내는 분
 			$html = substr($html, strpos($html, "jeon_07") + 9);
@@ -779,6 +848,9 @@ class DeliverController extends Controller {
 		{
 			$html = file_get_contents('http://www.kunyoung.com/goods/goods_01.php?mulno='.$num);
 			$html = mb_convert_encoding($html, 'UTF-8', 'EUC-KR');
+			
+			if (strpos($html, "조회된 데이터가 없습니다"))
+				return view($page, array('page' => $page, 'code' => 0));
 			
 			// 다음 페이지 가져오기
 			$html = substr($html, strpos($html, $num) + 2);
@@ -850,6 +922,9 @@ class DeliverController extends Controller {
 		{
 			$html = file_get_contents('http://www.chunil.co.kr/HTrace/HTrace.jsp?transNo='.$num);
 			$html = mb_convert_encoding($html, 'UTF-8', 'EUC-KR');
+			
+			if (strpos($html, "결과가 없습니다"))
+				return view($page, array('page' => $page, 'code' => 0));
 			
 			// 보내는 분
 			$html = substr($html, strpos($html, "명 :"));
@@ -1026,6 +1101,7 @@ class DeliverController extends Controller {
 			
 			// 배달결과
 			$html = substr($html, strpos($html, "<td>") + 4);
+			$html = substr($html, strpos($html, "<td>") + 4);
 			$result['state'] = substr($html, 0, strpos($html, "<"));
 				
 			// 배송 상황 (날짜, 시간, 현재위치, 처리현황)
@@ -1038,11 +1114,11 @@ class DeliverController extends Controller {
 			
 				// 날짜
 				$html = substr($html, strpos($html, "<td>") + 4);
-				$temp['date'] = substr($html, 0, strpos($html, " "));
+				$temp['date'] = trim(substr($html, 0, strpos($html, " ")));
 			
 				// 시간
 				$html = substr($html, strpos($html, " ") + 1);
-				$temp['time'] = substr($html, 0, strpos($html, "<"));
+				$temp['time'] = trim(substr($html, 0, strpos($html, "<")));
 			
 				// state
 				$html = substr($html, strpos($html, "<td>") + 4);
@@ -1050,8 +1126,9 @@ class DeliverController extends Controller {
 				
 				// 현재위치
 				$html = substr($html, strpos($html, "txtL") + 6);
-				$temp['location'] = trim(substr($html, 0, strpos($html, "<")), " &nbsp; ( )");
-			
+				$temp['location'] = "&nbsp";
+				if ($temp['location'] == "")
+					$temp['location'] = "&nbsp;";
 				
 			
 				array_push($info, $temp);
@@ -1071,6 +1148,9 @@ class DeliverController extends Controller {
 		{
 			//echo ("???");
 			$html = file_get_contents('http://www.tnt.com/webtracker/tracking.do?navigation=0&page=1&plazakey=&refs=&requesttype=GEN&respCountry=kr&respLang=ko&searchType=CON&sourceCountry=ww&sourceID=1&trackType=CON&cons='.$num);
+			
+			if (strpos($html, "일치되는 송장번호가 없습니다"))
+				return view($page, array('page' => $page, 'code' => 0));
 			
 			$html = substr($html, strpos($html, "sectionheading"));
 			$html = substr($html, strpos($html, "<tr"));
@@ -1098,10 +1178,21 @@ class DeliverController extends Controller {
 				$html = substr($html, strpos($html, "<td") + 4);
 				$temp['state'] = substr($html, 0, strpos($html, "<"));
 				
+				if (strpos($temp['state'], "화물이 도착"))
+					$temp['state'] = "배송사무소 도착";
+				if (strpos($temp['state'], "경유센터"))
+					$temp['state'] = "경유센터에서 분류";
+				if (strpos($temp['state'], "물건을 픽업"))
+					$temp['state'] = "물건 픽업";
+				if (strpos($temp['state'], "센터에 화물"))
+					$temp['state'] = "TNT센터 도착";
+				if (strpos($temp['state'], "습니다"))
+					$temp['state'] = substr($temp['state'], 0, strpos($temp['state'], "습니다") - 6);
+				
 				array_push($info, $temp);
 			}
 			
-			array_push($result, $info);			
+			array_push($result, array_reverse($info));			
 		}
 			
 		if (!isset($result['state']))
@@ -1112,8 +1203,7 @@ class DeliverController extends Controller {
 			else 
 				$result['prdt'] = "상품명 알 수 없음";
 		
-		$page = 'deliver_deliveryInfo';
-		return view($page, array('page' => $page, 'result' => $result, 'adr_ctr' => $adr_ctr));
+		return view($page, array('page' => $page, 'code' => 1, 'result' => $result, 'adr_ctr' => $adr_ctr));
 	}
 
 
