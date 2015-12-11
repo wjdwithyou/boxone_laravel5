@@ -5,10 +5,10 @@
 		include ("libraries.php");
 		?>
 
-		<link href="<?=$adr_ctr ?>summernote-master/dist/summernote.css" rel="stylesheet">
+		<link href="<?=$adr_ctr ?>summernote/summernote.css" rel="stylesheet">
 		<link href="<?=$adr_ctr ?>font-awesome/css/font-awesome.min.css" rel="stylesheet">
-		<script src="<?=$adr_ctr ?>summernote-master/dist/summernote.min.js"></script>
-		<script src="<?=$adr_ctr ?>summernote-master/lang/summernote-ko-KR.js"></script>
+		<script src="<?=$adr_ctr ?>summernote/summernote.min.js"></script>
+		<script src="<?=$adr_ctr ?>summernote/summernote-ko-KR.js"></script>
 	</head>
 
 	<body>

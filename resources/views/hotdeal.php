@@ -134,11 +134,13 @@
 								<div class="hd_brand text_overflow">
 									<?=$prdtList->site_name?>
 								</div>
-								<div class="hd_code_name">
+								<div class="hd_product_name">
 									<div>
-										<?=$prdtList->title?><br>
-										기한 : <?=$prdtList->deadline?> 까지
+										<?=$prdtList->title?>
 									</div>
+								</div>
+								<div class="hd_code_duration">
+									기한 : <?=$prdtList->deadline?> 까지
 								</div>
 								<div class="hd_code text_overflow">
 									<?php if (trim($prdtList->promo_code) != "") :?>

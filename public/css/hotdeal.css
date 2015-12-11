@@ -209,41 +209,17 @@
 	color: #f15a63;
 }
 .hd_product_name {
-	height: 32px;
+	height: 24px;
 	font-size: 12px;
 	overflow: hidden;
 	color: #8b8b8b;
-}
-.hd_product_name:before {
-	content: "";
-	float: left;
-	width: 5px;
-	height: 32px;
-}
-.hd_product_name > *:first-child {
-	float: right;
-	width: 100%;
-	margin-left: -5px;
-}
-.hd_product_name:after {
-	content: "\02026";
-	box-sizing: content-box;
-	-webkit-box-sizing: content-box;
-	-moz-box-sizing: content-box;
-	float: right;
-	position: relative;
-	top: -15px;
-	left: 100%;
-	width: 3em;
-	margin-left: -3em;
-	padding-right: 5px;
-	text-align: right;
-	background: -webkit-gradient(linear, left top, right top,
-	from(rgba(255, 255, 255, 0)), to(white), color-stop(50%, white));
-	background: -moz-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
-	background: -o-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
-	background: -ms-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
-	background: linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+	 overflow: hidden;
+	 text-overflow: ellipsis;
+	 display: -webkit-box;
+	 -webkit-line-clamp: 2; /* 라인수 */
+	 -webkit-box-orient: vertical;
+	 word-wrap:break-word; 
+	 line-height: 12px;
 }
 .hd_code_duration {
 	font-size: 12px;
