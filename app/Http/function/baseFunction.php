@@ -99,15 +99,12 @@
 	/*
 	 *	이미지 사진 등록 함수
 	 */
-	function insertImg()
+	function insertImg($target_idx, $document_idx, $image, $image_num)
 	{
-		$target_idx 		= Input::get('target_idx');
-		$document_idx		= Input::get('document_idx');
-		$image_val 			= Input::file('image');
-		
 		if( ! (inputErrorCheck($target_idx, 'target_idx')
-			  &&inputErrorCheck($document_idx, 'document_idx')
-			  &&inputErrorCheck($image, 'image')))
+			  && inputErrorCheck($document_idx, 'document_idx')
+			  && inputErrorCheck($image, 'image')
+			  && inputErrorCheck($image_num, 'image_num')))
 				return;
 		
 
@@ -119,37 +116,49 @@
 //			$image = Image::make('/tmp/test.jpg')->fit(317,374)->save('/tmp/test_317.jpg');
 //			$image = Image::make('/tmp/test.jpg')->fit(164,167)->save('/tmp/test_164.jpg');
 
+			$image_name = $document_idx.'_image'.$image_num.'.jpg', $document_idx;
+
 			switch (target_idx) {
-				// card
+				// community
 				case '1':
 				$s3->putObject(array(
-					'Bucket'	=> 'boxone_image/card',
-					'Key'		=> $document_idx.'_image.jpg',
-					'SourceFile'	=> '/tmp/test.jpg',
-					));
-				$result = DB::update('update card set image=? where idx=?', array($document_idx.'_image.jpg', $document_idx));
-				break;
-
-				// community
-				case '2':
-				$s3->putObject(array(
 					'Bucket'	=> 'boxone_image/community',
-					'Key'		=> $document_idx.'_image.jpg',
+					'Key'		=> $document_idx.'_image'.$image_num.'.jpg',
 					'SourceFile'	=> '/tmp/test.jpg',
 					));
-				$result = DB::update('update community set image=? where idx=?', array($document_idx.'_image.jpg', $document_idx));
+				$result = DB::update('update community set image= CONCAT(image, "?") where idx=?', array($image_name, $document_idx));
 				break;
 
 				// member
-				case '3':
+				case '2':
 				$s3->putObject(array(
 					'Bucket'	=> 'boxone_image/member',
-					'Key'		=> $document_idx.'_image.jpg',
+					'Key'		=> $document_idx.'_image'.$image_num.'.jpg',
 					'SourceFile'	=> '/tmp/test.jpg',
 					));				
-				$result = DB::update('update member set image=? where idx=?', array($document_idx.'_image.jpg', $document_idx));
+				$result = DB::update('update member set image=? where idx=?', array($image_name, $document_idx));
 				break;
-				
+
+				// community complain
+				case '3':
+				$s3->putObject(array(
+					'Bucket'	=> 'boxone_image/community_complain',
+					'Key'		=> $document_idx.'_image'.$image_num.'.jpg',
+					'SourceFile'	=> '/tmp/test.jpg',
+					));				
+				$result = DB::update('update community_complain set image= CONCAT(image, "?") where idx=?', array($image_name, $document_idx));
+				break;
+
+				// direct product
+				case '4':
+				$s3->putObject(array(
+					'Bucket'	=> 'boxone_image/direct_product',
+					'Key'		=> $document_idx.'_image'.$image_num.'.jpg',
+					'SourceFile'	=> '/tmp/test.jpg',
+					));				
+				$result = DB::update('update direct_product set image= CONCAT(image, "?") where idx=?', array($image_name, $document_idx));
+				break;
+
 				default:
 				break;
 			}
@@ -160,10 +169,10 @@
 //			File::delete("/tmp/test_164.jpg");
 
 
-			echo json_encode(array('code' => '200', 'data' => 'image uplaod success'));
+			return array('code' => '200', 'data' => 'image uplaod success');
 		}
 		else{
-			echo json_encode(array('code' => '400', 'data' => 'image file has error'));
+			return array('code' => '400', 'data' => 'image file has error');
 		}		
 	}
 	

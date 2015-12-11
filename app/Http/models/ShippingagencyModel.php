@@ -23,7 +23,7 @@ class ShippingagencyModel{
 		if( !( inputErrorCheck($country, 'country')))
 			return ;
 
-		$result = DB::join('SELECT * FROM shipping_agency_fare1 AS saf 
+		$result = DB::select('SELECT * FROM shipping_agency_fare1 AS saf 
 									JOIN shioppingsite AS ss 
 									ON saf.agency_idx = shoppingsite.idx
 									WHERE country=? AND region_code=? AND howtoship=?',

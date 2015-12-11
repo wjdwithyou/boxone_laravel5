@@ -5,11 +5,20 @@
     <meta name="author" content="">
     <meta name="csrf-token" content="<?php echo csrf_token();?>"/>
 
-	<?php $adr_js = "http://localhost:8000/js/"?>
-  	<?php $adr_css = "http://localhost:8000/css/"?>
-  	<?php $adr_img = "http://localhost:8000/img/"?>
-  	<?php $adr_btstrp = "http://localhost:8000/bootstrap/"?>
-  	<?php $adr_ctr = "http://localhost:8000/"?>
+	<?php 
+		$adr_js = "http://52.69.26.243/js/";
+  		$adr_css = "http://52.69.26.243/css/";
+  		$adr_img = "http://52.69.26.243/img/";
+  		$adr_btstrp = "http://52.69.26.243/bootstrap/";
+  		$adr_ctr = "http://52.69.26.243/";
+  	
+  		/*$adr_js = "http://localhost:8000/js/";
+  		$adr_css = "http://localhost:8000/css/";
+  		$adr_img = "http://localhost:8000/img/";
+  		$adr_btstrp = "http://localhost:8000/bootstrap/";
+  		$adr_ctr = "http://localhost:8000/";*/
+  	?>
+
   	
   	<input type="hidden" id="adr_js" value="<?=$adr_js?>"/>
   	<input type="hidden" id="adr_css" value="<?=$adr_css?>"/>
@@ -21,16 +30,15 @@
 		if (session_id() == '')	session_start();
 		$logined = !empty($_SESSION['nickname']);
 		if ($logined) {
-			$idx = $_SESSION['idx'];
 			$nickname = $_SESSION['nickname'];
 			$img = $_SESSION['img'];
 		}
 	?>
 	
 	<?php if ($logined) :?>
-		<input type="hidden" id="logined_idx" value="<?= $idx?>"/>
+		<input type="hidden" id="logined" value="1"/>
 	<?php else :?>
-		<input type="hidden" id="logined_idx" value="0"/>
+		<input type="hidden" id="logined" value="0"/>
 	<?php endif;?>
 	
     <link rel="stylesheet" href="<?=$adr_btstrp?>css/bootstrap.css">
@@ -66,9 +74,11 @@
   	<link rel="stylesheet" href="<?=$adr_css?>headfoot.css">
   	<link rel="stylesheet" href="<?=$adr_css?>login.css">
   	<link rel="stylesheet" href="<?=$adr_css?>calculator.css">
+  	<link rel="stylesheet" href="<?=$adr_css?>deliver.css">
   	<script type="text/javascript" src="<?=$adr_js?>headfoot.js"></script>
   	<script type="text/javascript" src="<?=$adr_js?>login.js"></script>
   	<script type="text/javascript" src="<?=$adr_js?>calculator.js"></script>
+  	<script type="text/javascript" src="<?=$adr_js?>deliver.js"></script>
 
     <link rel="icon" href="<?=$adr_img?>brower_logo.png">
     <title>BOXONE</title>

@@ -1,0 +1,35 @@
+#container {
+	max-width: 992px;
+	margin: 0 auto;
+}
+#container:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+#top {
+	margin: 32px 8px 16px 8px;
+	text-align: center;
+}
+#top:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+#top_title {
+	font-size: 23px;
+    font-weight: bold;
+}
+#top_content {
+	font-size: 11px;
+	color: #9e9d9d;
+}
+#top hr {
+	width: 100px;
+	margin: 20px auto;
+	border-top: 1px solid #ef676f;
+}
+#current_cate {
+	font-size: 16px;
+	font-weight: bold;
+}

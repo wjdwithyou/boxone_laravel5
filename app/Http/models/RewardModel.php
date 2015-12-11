@@ -90,42 +90,4 @@ class RewardModel
          } 
 	}
 
-/////////////////////////////////////////////////////////////
-
-	/*
-	 *	입력받은 카드사에 따른 카드 리스트 출력
-	 */
-	function getInfoListByCardcompany($cardcompany)
-	{
-		if( !( inputErrorCheck($cardcompany, 'cardcompany')))
-			return ;
-
-		$result = DB::select("select * from card where support_card like '%$cardcompany%'");
-
-		return array('code' => 1, 'msg' => 'success', 'data' => $result);
-	}
-
-
-	/*
-	 * 	카드사 목록 출력하는 기능
-	 */
-	function getCardCardcompany()
-	{
-		$result = DB::select("select distinct support_card from card");
-
-		return array('code' => 1, 'msg' => 'success', 'data' => $result);
-
-	}
-
-
-	/*
-	 * 	배대지 목록 출력하는 기능
-	 */
-	function getCardShippingagency()
-	{
-		$result = DB::select("select distinct support_site from card");
-
-		return array('code' => 1, 'msg' => 'success', 'data' => $result);
-
-	}
 }

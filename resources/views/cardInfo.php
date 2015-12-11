@@ -1,5 +1,4 @@
 
-<input type="hidden" id="token_renew" value="<?php echo csrf_token();?>"/>
 <div id="card_result">
 	<div id="result_title">
 		<span><?= $title?></span>

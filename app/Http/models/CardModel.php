@@ -140,4 +140,22 @@ class CardModel{
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
 
+
+	/*
+	 *	배대지 연계 카드사와 쇼핑사이트 링크 연결
+	 */
+	function getShoppingsiteLink($site_name)
+	{
+		if( !( inputErrorCheck($site_name, 'site_name')))
+			return ;
+
+		$result = DB::select('select website_link from shoppingsite where name=?', array($site_name));
+
+ 		if(count($result) != 0){
+          	return array('code' => 1, 'msg' => 'success', 'data' => $result);
+         }else{
+          	return array('code' => 0, 'msg' => 'no matched data');
+         } 
+	}
+
 }

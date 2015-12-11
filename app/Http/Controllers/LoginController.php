@@ -293,11 +293,11 @@ class LoginController extends Controller {
 			);
 			$data = array(
 					'code' => $str,
-					'name' => $email
+					'email' => $email
 			);
 			Mail::send('pwFindMail', $data, function($m) use ($user)
 			{
-				$m->from('dydzlwwkd@gmail.com', 'Boxone');
+				$m->from('boxone2015@gmail.com', 'Boxone');
 				$m->to($user['email'], $user['name'])->subject('Find Pw');
 			});
 			

@@ -1,51 +1,65 @@
-<!DOCTYPE html>
-<html lang="ko">
-	<head>
-		<?php include ("libraries.php");?>
-	</head>
-
-	<body>
-		<div>
-			배송조회
-			<select id="baesong_select">
-				<option selected="selected">우체국택배</option>
-				<option>대한통운</option>
-				<option>한진택배</option>
-				<option>로젠택배</option>
-				<option>현대택배</option>
-				<option>KG옐로우캡택배</option>
-				<option>KGB택배</option>
-				<option>EMS</option>
-				<option>DHL</option>
-				<option>한덱스</option>
-				<option>FedEx</option>
-				<option>동부익스프레스</option>
-				<option>CJ GLS</option>
-				<option>UPS</option>
-				<option>하나로택배</option>
-				<option>대신택배</option>
-				<option>경동택배</option>
-				<option>이노지스택배</option>
-				<option>일양로지스택배</option>
-				<option>CVSnet 편의점택배</option>
-				<option>TNT Express</option>
-				<option>HB한방택배</option>
-			</select>
-			<input type="text" id="baesong_num"/>
-			<button onclick="baesongSearch();">버튼</button>
-			<div id="test">
+<!-- 로그인 통괄 팝업 -->
+<div class="modal fade" id="deliver_modal" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div id="deliver_modal_header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<div id="deliver_header">
+					<div class="deliver_header_ deliver_header_selected" onclick="delivery_popup();">
+						배송조회
+					</div>
+					<div class="deliver_header_" onclick="entry_popup();">
+						통관조회
+					</div>
+				</div>
+			</div>
+			<div class="modal-body">
+				<!-- 팝업 -->
+				<div id="deliver_body">
+				</div>
 			</div>
 		</div>
-		
+	</div>
+</div>
+
+	<!-- 배송조회 팝업 1 -->
+	<div id="delivery1" hidden>
 		<div>
-			통관조회
-			<input type="text" id="tongkwan_text"/>
-		</div>
-		
-		
-		
-		
-		 
-	</body>
-</html>
+			<span style="font-size:13px; color:#f45a63;">
+	  			BOXONE에서 간편하게 배송조회하세요!
+	  		</span>
+	  	</div>
+	  	<select id="delivery_office" class="form_margin form-control">
+	  	</select>
+	  	<input type="text" id="delivery_num" class="form_margin form-control" placeholder="운송장번호">
+		<button type="button" class="btn btn-default deliver_btn" onclick="deliverySearch();">조회</button>
+	</div>
+	
+	<!-- 통관조회 팝업 1 -->
+	<div id="entry1" hidden>
+		<div>
+			<span style="font-size:13px; color:#f45a63;">
+	  			BOXONE에서 간편하게 통관조회하세요!
+	  		</span>
+	  	</div>
+	  	<select id="entry_year" class="form_margin form-control">
+	  	</select>
+	  	<input type="text" id="entry_num" class="form_margin form-control" placeholder="화물통관번호">
+		<button type="button" class="btn btn-default deliver_btn" onclick="entrySearch();">조회</button>
+	</div>
+	
+	<style>
+		#delivery_office, #entry_year {
+			border: 1px solid #DDDDDD !important;
+			background: #fff url('<?=$adr_img?>select_arrow_pink.png') no-repeat 95% center;
+			text-indent: 0.01px;
+			text-overflow: "";
+			padding-left: 6px;
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
+		}
+	</style>
 

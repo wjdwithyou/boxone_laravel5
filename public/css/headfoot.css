@@ -204,12 +204,6 @@ button.close {
 		float: left;
 	}
 }
-#current_menu {
-	text-align: center;
-	padding: 10px;
-	border-top: 1px solid #ccc;
-	border-bottom: 1px solid #ccc;
-}
 #alarm_wrap {
 	height: 90px;
 	float: right;
@@ -328,4 +322,7 @@ button.close {
 	float: right;
 	margin-right: 10px;
 }
-/*  */
+#compare_same_wrap {
+	height: 150px;
+	overflow-y: scroll;
+}

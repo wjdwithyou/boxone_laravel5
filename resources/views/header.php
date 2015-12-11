@@ -25,7 +25,7 @@
 				<div id="before_login">
 					<ol class="breadcrumb">
 						<li><a onclick="login_popup();">로그인</a></li>
-						<li><a onclick="join_popup();">회원가입</a></li>
+						<li><a onclick="delivery_popup();">배송통관조회</a></li>
 					</ol>
 				</div>
 				<?php else : ?>
@@ -238,3 +238,4 @@
 </style>
 
 <?php include ("login.php"); ?>
+<?php include ("deliver.php"); ?>

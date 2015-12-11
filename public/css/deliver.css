@@ -1,0 +1,122 @@
+#deliver_modal_header {
+	height: 70px;
+	padding: 15px 0;
+	margin-bottom:25px;
+}
+
+#deliver_header{
+	height:auto;
+	width:auto;
+	margin:0 20px;
+	margin-top:25px;
+}
+
+	.deliver_header_{
+		height:60px;
+		width:128px;
+		padding:19px 0;
+		background-color:#f45a63;
+		border:1px solid #f45a63;
+		font-size:17px;
+		color:white;
+		letter-spacing:2px;
+		float:left;
+		cursor:pointer;
+	}
+		.deliver_header_selected{
+			background-color:white;
+			color:#f45a63;
+		}
+	.deliver_btn{
+		width: 100px;
+		height:30px;
+		padding:3px 0;
+		margin:10px 0;
+		color: #fff;
+		text-shadow: none;
+		background-image: none;
+		background-color: #f45a63;
+		border-radius:20px !important;
+	}
+	
+	.deliver_margin {
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+	
+	.deliver_info{
+			height:115px;
+			margin-top:10px;
+			padding:10px;
+			border:1px solid #dddddd;
+			font-weight:bold;
+			text-align:left;
+		}
+			.deliver_info_title{
+				width:100%;
+				height:auto;
+				margin-bottom:20px;
+				font-size:15px;
+				overflow:hidden;
+				white-space:nowrap;
+				text-overflow:ellipsis;
+				float:left;
+			}
+			.deliver_info_state{
+				width:100%;
+				height:auto;
+				font-size:18px;
+				color:#f45a63;
+				float:left;
+			}
+			.deliver_info_office{
+				margin-top:5px;
+				float:left;
+			}
+			.deliver_info_button{
+				width:100px;
+				height:28px;
+				padding:6px 0;
+				border:1px solid #f45a63;
+				border-radius:20px !important;
+				background-color:white;
+				font-size:13px;
+				color:#f45a63;
+				float:right;
+			}
+			
+		.deliver_detail{
+			margin-top:20px;
+		}
+			.deliver_detail_title{
+				font-size:15px;
+				font-weight:bold;
+			}
+			.deliver_detail_content{
+				height:auto;
+				margin-top:5px;
+				margin-bottom:30px;
+				border:1px solid #dddddd;
+				border-bottom:none;
+				text-align:left;
+				font-size:13px;
+			}
+				.deliver_detail_content_{
+					border-bottom:1px solid #dddddd;
+					padding:5px 10px;
+					line-height:20px;
+				}
+				.align_right{
+					height:auto;
+					float:right;
+				}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		

@@ -53,19 +53,6 @@
 #order_select {
 	float: right;
 }
-#hotdeal_cate, #brand_cate, #site_cate, #order_list {
-	width: 188px;
-	height: 40px;
-	border: 1px solid #F15A63 !important;
-	color: #F15A63;
-	background: #fff url('http://localhost:8000/img/select_arrow_pink.png') no-repeat 90% center;
-	text-indent: 0.01px;
-	text-overflow: "";
-	padding-left: 6px;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-}
 @media (max-width: 991px) {
 	.hd_result_div_wrap {
 		width: 33.3%;
@@ -106,11 +93,7 @@
 		width: 100%;
 		margin-left: 0;
 	}
-	#hotdeal_cate, #brand_cate, #site_cate, #order_list {
-		width: 100%;
-		margin-top: 5px;
-		background: #fff url('http://localhost:8000/img/select_arrow_pink.png') no-repeat 95% center;
-	}
+	
 }
 .hd_result_div_wrap {
 	padding: 16px 8px;
@@ -162,7 +145,7 @@
 }
 #pagination a {
 	color: #aaa;
-	margin: 0 10px;
+	margin: 0 5px;
 }
 #pagination a:hover {
 	color: #000;

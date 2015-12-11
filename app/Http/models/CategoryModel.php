@@ -15,7 +15,7 @@ class CategoryModel{
 	function downToUp($small_idx)
 	{
 
-		$result = DB::join('select * from
+		$result = DB::select('select * from
 							(
 								(
 								 category_small as cs 
@@ -37,16 +37,16 @@ class CategoryModel{
 		if( !( inputErrorCheck($large_idx, 'large_idx')))
 			return ;
 
-		$result = DB::join('select * from
-					(
+		$result = DB::select('select * from
 						(
-						 (select * from category_large where idx=?) as cl 
-						 LEFT JOIN category_medium as cm
-						 ON cl.idx=cm.large_idx
-						) as clm
-					 LEFT JOIN category_small as cs 
-					 ON clm.idx=cs.medium_idx
-					)',array($large_idx));
+							(
+							 (select * from category_large where idx=?) as cl 
+							 LEFT JOIN category_medium as cm
+							 ON cl.idx=cm.large_idx
+							) as clm
+						 LEFT JOIN category_small as cs 
+						 ON clm.idx=cs.medium_idx
+						)',array($large_idx));
 
       	return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
@@ -56,7 +56,7 @@ class CategoryModel{
 	 */
 	function getInfoListLarge()
 	{
-		$result = DB::select('select * from category_large')
+		$result = DB::select('select * from category_large');
 
       	return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}

@@ -18,8 +18,9 @@ class MyungSsooController extends Controller {
 	{
 		$model = new CommunityModel();
 
-		$result = $model->getInfoList(array(16, 17), 3, 4);
-		
+		$result = $model->getInfoSingle(3, 62);
+
+
 		print_r($result);
 	}
 	

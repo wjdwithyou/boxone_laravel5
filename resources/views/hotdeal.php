@@ -14,31 +14,32 @@
 		<div id="container">
 			<div id="top">
 				<div id="top_title">
-					핫딜상품 <!-- or 핫딜코드 -->
+					핫딜<?=$type?><!-- or 핫딜코드 -->
 				</div>
 				<div id="top_content">
 					핫딜 상품과 코드를 모아놨어용:)
 				</div>
 				<hr>
 				<div id="current_cate">
-					니트/스웨터
+					<?=$nowCate['name']?>
 				</div>
 				<div id="top_index">
-					<a onclick=''>핫딜상품 <!-- or 핫딜코드 --></a>
+					<a href='<?=$adr_ctr?>Hotdeal/indexCode'>핫딜<?=$type?><!-- or 핫딜코드 --></a>
 					&nbsp;>&nbsp;
-					<a onclick=''>여성의류</a>
-					&nbsp;>&nbsp;
-					<a onclick=''>상의</a>
+					<a href='<?=$adr_ctr?>Hotdeal/indexCode?cate=<?=$nowCate['idx']?>'><?=$nowCate['name']?></a>
 					&nbsp;>&nbsp;
 					<a onclick=''>니트/스웨터</a>
 				</div>
 				<div id="top_select">
-					<select id="hotdeal_cate" class="form-control" onchange="hotdeal_cate();">
-						<option value="">전체</option>
-						<option value="">니트/스웨터</option>
-						<option value="">셔츠</option>
-						<option value="">티셔츠</option>
-						<option value="">가디건/베스트</option>
+					<select id="hotdeal_cate" class="form-control">
+						<option value="0">전체</option> 
+						<?php foreach($cateList as $list) :?>
+							<?php if ($list->idx == $nowCate['idx']) :?>
+								<option value="<?=$list->idx?>" selected="selected"><?=$list->name?></option>
+							<?php else :?>
+								<option value="<?=$list->idx?>"><?=$list->name?></option>
+							<?php endif;?>
+						<?php endforeach;?>
 					</select>
 				</div>
 				<!-- 핫딜상품 -->
@@ -62,95 +63,180 @@
 					</select>
 				</div>
 				<div id="order_select">
-					<select id="order_list" class="form-control" onchange="order_list();">
-						<option value="">모두보기</option>
-						<option value="">인기 순</option>
-						<option value="">할인율: 높은 순</option>
-						<option value="">할인율: 낮은 순</option>
-						<option value="">나의 ♥</option>
+					<select id="order_list" class="form-control">
+						<?php if ($type == '상품') :?>
+							<option value="1">인기 순</option>
+							<option value="2">기한 순</option>
+							<option value="3">할인율: 높은 순</option>
+							<option value="4">할인율: 낮은 순</option>
+						<?php else :?>
+							<?php if ($sort == 1 || $sort == '1') :?>
+								<option value="1" selected="selected">인기 순</option>
+								<option value="2">기한 순</option>
+								<option value="3">사이트 순</option>
+							<?php endif;?>
+							<?php if ($sort == 2 || $sort == '2') :?>
+								<option value="1">인기 순</option>
+								<option value="2" selected="selected">기한 순</option>
+								<option value="3">사이트 순</option>
+							<?php endif;?>
+							<?php if ($sort == 3 || $sort == '3') :?>
+								<option value="1">인기 순</option>
+								<option value="2">기한 순</option>
+								<option value="3" selected="selected">사이트 순</option>
+							<?php endif;?>
+							
+						<?php endif;?>
+						<?php if ($logined) :?> 
+							<option value="5">나의 ♥</option> 
+						<?php endif;?>
 					</select>
 				</div>
 			</div>
 
 			<div id="hd_result_wrap">
-
 				<!-- 핫딜상품 -->
-				<div class="hd_result_div_wrap">
-					<div class="hd_result_div">
-						<div class="hd_product_img center_box">
-							<div class="center_content">
-								<a onclick=""><img src="<?= $adr_img ?>calculator.jpg"></a>
-							</div>
-						</div>
-						<div class="hd_site_desc">
-							<div class="hd_brand text_overflow">
-								토리버치
-							</div>
-							<div class="hd_product_name">
-								<div>
-									상품명
-									토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일
+				<?php if ($type == '상품') :?>
+					<div class="hd_result_div_wrap">
+						<div class="hd_result_div">
+							<div class="hd_product_img center_box">
+								<div class="hd_bookmark">
+									<a onclick="add_heart($(this).children());"><img src="<?= $adr_img ?>heart.png"></a>
+								</div>
+								<div class="center_content">
+									<a onclick=""><img src="<?= $adr_img ?>calculator.jpg"></a>
 								</div>
 							</div>
-							<div class="hd_price text_overflow">
-								[30%] 34,900 원
+							<div class="hd_site_desc">
+								<div class="hd_brand text_overflow">
+									토리버치
+								</div>
+								<div class="hd_product_name">
+									<div>
+										상품명
+										토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일
+									</div>
+								</div>
+								<div class="hd_price text_overflow">
+									[30%] 34,900 원
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<!--  -->
+				<?php endif;?>
 
 				<!-- 핫딜코드 -->
-				<div class="hd_result_div_wrap">
-					<div class="hd_result_div">
-						<div class="hd_code_img center_box">
-							<div class="hd_bookmark">
-								<a onclick="add_heart($(this).children());"><img src="<?= $adr_img ?>heart.png"></a>
-							</div>
-							<div class="center_content">
-								<a onclick=""><img src="<?= $adr_img ?>br_sample.png"></a>
-							</div>
-						</div>
-						<div class="hd_site_desc">
-							<div class="hd_brand text_overflow">
-								토리버치
-							</div>
-							<div class="hd_product_name">
-								<div>
-									상품명
-									토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일
+				<?php if ($type == '코드') : foreach($prdt as $prdtList) :?>
+					<div class="hd_result_div_wrap">
+						<div class="hd_result_div">
+							<div class="hd_code_img center_box">
+								<div class="hd_bookmark">
+									<a onclick="hotdealBookmark($(this).children(),<?=$prdtList->idx?>);"><img src="<?= $adr_img ?>heart.png"></a>
+								</div>
+								<div class="center_content">
+									<a onclick="hotdealConnect('<?=$prdtList->idx?>', '<?=$prdtList->website_link?>');"><img src="<?=$prdtList->image?>"></a>
 								</div>
 							</div>
-							<div class="hd_code_duration text_overflow">
-								2015.12.12 ~ 2015.12.21
-							</div>
-							<div class="hd_code text_overflow">
-								CODE: REDHOT231
+							<div class="hd_site_desc">
+								<div class="hd_brand text_overflow">
+									<?=$prdtList->site_name?>
+								</div>
+								<div class="hd_code_name">
+									<div>
+										<?=$prdtList->title?><br>
+										기한 : <?=$prdtList->deadline?> 까지
+									</div>
+								</div>
+								<div class="hd_code text_overflow">
+									<?php if (trim($prdtList->promo_code) != "") :?>
+										CODE: <?=$prdtList->promo_code?>
+									<?php else :?>
+										쿠폰이 필요하지 않아요!
+									<?php endif;?>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<!--  -->
-
+				<?php endforeach; endif;?>
+				
 				<div class="clear_both"></div>
 			</div>
 
+			<input type="hidden" id="nowPage" value="<?=$paging['now']?>"/>
 			<div id="pagination_wrap">
-				<a onclick=""><img src="<?= $adr_img ?>left_arrow.png"></a>
+				<a onclick="hotdealHref('','',<?php echo ($paging['now'] - 1);?>);"><img src="<?= $adr_img ?>left_arrow.png"></a>
 				<div id="pagination">
-					<a class="current_page" onclick="">1</a>
-					<a onclick="">2</a>
-					<a onclick="">3</a>
-					<span>···</span>
-					<a onclick="">7</a>
+					<?php if ($paging['now'] > 3) :?>
+						<a onclick="hotdealHref('','',1);">1</a>
+						<span>···</span>
+						<!-- <a onclick="hotdealHref('','',<?php echo ($paging['now'] - 2);?>);"><?php echo ($paging['now'] - 2);?></a> -->
+						<a onclick="hotdealHref('','',<?php echo ($paging['now'] - 1);?>);"><?php echo ($paging['now'] - 1);?></a>
+					<?php else :?>
+						<?php for($i = 1 ; $i < $paging['now'] ; $i++) :?>
+							<a onclick="hotdealHref('','',<?=$i?>);"><?=$i?></a>
+						<?php endfor;?>
+					<?php endif;?>
+					<a class="current_page"><?=$paging['now']?></a>
+					<?php if ($paging['max'] - $paging['now'] > 3) :?>
+						<a onclick="hotdealHref('','',<?php echo ($paging['now'] + 1);?>);"><?php echo ($paging['now'] + 1);?></a>
+						<!-- <a onclick="hotdealHref('','',<?php echo ($paging['now'] + 2);?>);"><?php echo ($paging['now'] + 2);?></a> -->
+						<span>···</span>
+						<a onclick="hotdealHref('','',<?=$paging['max']?>);"><?=$paging['max']?></a>
+					<?php else :?>
+						<?php for($i = $paging['now'] + 1 ; $i < $paging['max'] + 1 ; $i++) :?>
+							<a onclick="hotdealHref('','',<?=$i?>);"><?=$i?></a>
+						<?php endfor;?>
+					<?php endif;?>
 				</div>
-				<a onclick=""><img src="<?= $adr_img ?>right_arrow.png"></a>
+				<a onclick="hotdealHref('','',<?php echo ($paging['now'] + 1);?>);"><img src="<?= $adr_img ?>right_arrow.png"></a>
 			</div>
 		</div>
 		
 		<?php
 		include ("footer.php");
 		?>
+		
+		<style>
+			#hotdeal_cate {
+				width: 188px;
+				height: 45px;
+				border: 0 !important;
+				color: #FFF;
+				background: #F15A63 url('<?=$adr_img?>select_arrow.png') no-repeat 90% center;
+				text-indent: 0.01px;
+				text-overflow: "";
+				padding-left: 6px;
+				-webkit-appearance: none;
+				-moz-appearance: none;
+				appearance: none;
+			}
+			
+			#order_list {
+				width: 188px;
+				height: 45px;
+				border: 1px solid #F15A63 !important;
+				color: #F15A63;
+				background: #fff url('<?=$adr_img?>select_arrow_pink.png') no-repeat 90% center;
+				text-indent: 0.01px;
+				text-overflow: "";
+				padding-left: 6px;
+				-webkit-appearance: none;
+				-moz-appearance: none;
+				appearance: none;
+			}
+			
+			@media (max-width: 450px) {
+				#hotdeal_cate, #order_list {
+					width: 100%;
+					background: #F15A63 url('<?=$adr_img?>select_arrow.png') no-repeat 95% center;
+				}
+				#order_list {
+					width: 100%;
+					margin-top: 5px;
+					background: #fff url('<?=$adr_img?>select_arrow_pink.png') no-repeat 95% center;
+				}
+			}
+		</style>
 	</body>
 </html>
 
