@@ -27,8 +27,6 @@
 					<a href='<?=$adr_ctr?>Hotdeal/indexCode'>핫딜<?=$type?><!-- or 핫딜코드 --></a>
 					&nbsp;>&nbsp;
 					<a href='<?=$adr_ctr?>Hotdeal/indexCode?cate=<?=$nowCate['idx']?>'><?=$nowCate['name']?></a>
-					&nbsp;>&nbsp;
-					<a onclick=''>니트/스웨터</a>
 				</div>
 				<div id="top_select">
 					<select id="hotdeal_cate" class="form-control">
@@ -42,26 +40,30 @@
 						<?php endforeach;?>
 					</select>
 				</div>
-				<!-- 핫딜상품 -->
-				<!-- <div id="brand_select">
-					<select id="brand_cate" class="form-control" onchange="">
-						<option value="">브랜드</option>
-						<option value="">Polo</option>
-						<option value="">Nike</option>
-						<option value="">Adidas</option>
-						<option value="">Reebok</option>
-					</select>
-				</div> -->
-				<!-- 핫딜코드 -->
-				<div id="site_select">
-					<select id="site_cate" class="form-control" onchange="">
-						<option value="">사이트</option>
-						<option value="">Amazon</option>
-						<option value="">Polo</option>
-						<option value="">ebay</option>
-						<option value="">auction</option>
-					</select>
-				</div>
+				<?php if ($type == '상품') :?>
+					<div id="brand_select">
+						<select id="brand_cate" class="form-control" onchange="">
+							<option value="">브랜드</option>
+							<option value="">Polo</option>
+							<option value="">Nike</option>
+							<option value="">Adidas</option>
+							<option value="">Reebok</option>
+						</select>
+					</div>
+				<?php else :?>
+					<div id="site_select">
+						<select id="site_cate" class="form-control" onchange="">
+							<option value="0">사이트 전체</option>
+							<?php foreach($company as $cList) :?>
+								<?php if ($cList->site_name == $site) :?>
+									<option selected="selected"><?=$cList->site_name?></option>
+								<?php else :?>
+									<option><?=$cList->site_name?></option>
+								<?php endif;?>
+							<?php endforeach;?>
+						</select>
+					</div>
+				<?php endif;?>
 				<div id="order_select">
 					<select id="order_list" class="form-control">
 						<?php if ($type == '상품') :?>
@@ -135,12 +137,10 @@
 									<?=$prdtList->site_name?>
 								</div>
 								<div class="hd_product_name">
-									<div>
-										<?=$prdtList->title?>
-									</div>
+										<?=$prdtList->title?>						
 								</div>
 								<div class="hd_code_duration">
-									기한 : <?=$prdtList->deadline?> 까지
+									기한 : <?=$prdtList->deadline?> 까지	
 								</div>
 								<div class="hd_code text_overflow">
 									<?php if (trim($prdtList->promo_code) != "") :?>
@@ -159,31 +159,31 @@
 
 			<input type="hidden" id="nowPage" value="<?=$paging['now']?>"/>
 			<div id="pagination_wrap">
-				<a onclick="hotdealHref('','',<?php echo ($paging['now'] - 1);?>);"><img src="<?= $adr_img ?>left_arrow.png"></a>
+				<a onclick="hotdealHref('','','',<?php echo ($paging['now'] - 1);?>);"><img src="<?= $adr_img ?>left_arrow.png"></a>
 				<div id="pagination">
 					<?php if ($paging['now'] > 3) :?>
-						<a onclick="hotdealHref('','',1);">1</a>
+						<a onclick="hotdealHref('','','',1);">1</a>
 						<span>···</span>
-						<!-- <a onclick="hotdealHref('','',<?php echo ($paging['now'] - 2);?>);"><?php echo ($paging['now'] - 2);?></a> -->
-						<a onclick="hotdealHref('','',<?php echo ($paging['now'] - 1);?>);"><?php echo ($paging['now'] - 1);?></a>
+						<!-- <a onclick="hotdealHref('','','',<?php echo ($paging['now'] - 2);?>);"><?php echo ($paging['now'] - 2);?></a> -->
+						<a onclick="hotdealHref('','','',<?php echo ($paging['now'] - 1);?>);"><?php echo ($paging['now'] - 1);?></a>
 					<?php else :?>
 						<?php for($i = 1 ; $i < $paging['now'] ; $i++) :?>
-							<a onclick="hotdealHref('','',<?=$i?>);"><?=$i?></a>
+							<a onclick="hotdealHref('','','',<?=$i?>);"><?=$i?></a>
 						<?php endfor;?>
 					<?php endif;?>
 					<a class="current_page"><?=$paging['now']?></a>
 					<?php if ($paging['max'] - $paging['now'] > 3) :?>
-						<a onclick="hotdealHref('','',<?php echo ($paging['now'] + 1);?>);"><?php echo ($paging['now'] + 1);?></a>
-						<!-- <a onclick="hotdealHref('','',<?php echo ($paging['now'] + 2);?>);"><?php echo ($paging['now'] + 2);?></a> -->
+						<a onclick="hotdealHref('','','',<?php echo ($paging['now'] + 1);?>);"><?php echo ($paging['now'] + 1);?></a>
+						<!-- <a onclick="hotdealHref('','','',<?php echo ($paging['now'] + 2);?>);"><?php echo ($paging['now'] + 2);?></a> -->
 						<span>···</span>
-						<a onclick="hotdealHref('','',<?=$paging['max']?>);"><?=$paging['max']?></a>
+						<a onclick="hotdealHref('','','',<?=$paging['max']?>);"><?=$paging['max']?></a>
 					<?php else :?>
 						<?php for($i = $paging['now'] + 1 ; $i < $paging['max'] + 1 ; $i++) :?>
-							<a onclick="hotdealHref('','',<?=$i?>);"><?=$i?></a>
+							<a onclick="hotdealHref('','','',<?=$i?>);"><?=$i?></a>
 						<?php endfor;?>
 					<?php endif;?>
 				</div>
-				<a onclick="hotdealHref('','',<?php echo ($paging['now'] + 1);?>);"><img src="<?= $adr_img ?>right_arrow.png"></a>
+				<a onclick="hotdealHref('','','',<?php echo ($paging['now'] + 1);?>);"><img src="<?= $adr_img ?>right_arrow.png"></a>
 			</div>
 		</div>
 		

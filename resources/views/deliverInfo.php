@@ -8,6 +8,9 @@
 		</div>
 	<?php else : if ($code == 1) :?>
 		<div>
+			<input type="hidden" id="delivery_office_value" value="<?=$result['office']?>"/>
+			<input type="hidden" id="delivery_num_value" value="<?=$result['num']?>"/>
+			<input type="hidden" id="delivery_prdt_value" value="<?=$result['prdt']?>"/>
 			<span style="font-size:13px; color:#f45a63;">
 				<?=$result['office']?> / <?=$result['num']?><br>
 				 로 조회한 결과입니다.
@@ -23,7 +26,7 @@
 	  		<div class="deliver_info_office">
 	  			<?=$result['office']?>
 	  		</div>
-	  		<button type="button" class="deliver_info_button">
+	  		<button type="button" class="deliver_info_button" onclick="createDelivery();">
 	  			배송통관등록
 	  		</button>
 	  	</div>
@@ -45,6 +48,8 @@
 	  	</div>
 	<?php else : ?>
 		<div>
+			<input type="hidden" id="entry_num_value" value="<?=$result['hbl']?>"/>
+			<input type="hidden" id="entry_year_value" value="<?=$result['year']?>"/>
 			<span style="font-size:13px; color:#f45a63;">
 				<?=$result['hbl']?> 로 조회한 결과입니다.
 			</span>
@@ -56,7 +61,7 @@
 	  		<div class="deliver_info_state" style="width:auto;">
 	  			<?=$result['state']?>
 	  		</div>
-	  		<button type="button" class="deliver_info_button">
+	  		<button type="button" class="deliver_info_button" onclick="createEntry();">
 	  			배송통관등록
 	  		</button>
 	  	</div>

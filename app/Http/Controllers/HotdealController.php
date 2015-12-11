@@ -37,7 +37,7 @@ class HotdealController extends Controller {
 		$hotdealModel = new HotdealTargetModel();
 		$categoryModel = new CategoryModel();
 		
-		// 정렬 방식 가져오기
+		// 정렬 방식 가져오기, 검사	(1, 2, 3, 5)
 		$sort = '1';
 		if (Request::has('sort'))
 			$sort = Request::input('sort');
@@ -45,14 +45,23 @@ class HotdealController extends Controller {
 		if ($sort == '5' && empty($_SESSION['idx']))
 			$sort = 1;
 		
-		// 카테고리 검사
-		$cateList = $categoryModel->getInfoListLarge();
-		
+		// 카테고리 가져오기, 검사	(0은 전체)		
 		$cate = '0';
 		if (Request::has('cate'))
 			$cate = Request::input('cate');
-		if ($cate > count($cateList))
+		$cateList = $categoryModel->getInfoListLarge();
+		if ($cate > count($cateList['data']))
 			$cate = '0';
+		
+		// 사이트 가져오기, 검사 (전체는 0)
+		$site = "0";
+		if (Request::has('site'))
+			$site = Request::input('site');
+		
+		// 페이지 검사
+		$nowPage = '1';
+		if (Request::has('page'))
+			$nowPage = Request::input('page');
 		
 		// 현재 카테고리 이름 가져오기
 		$name = "전체";
@@ -60,28 +69,16 @@ class HotdealController extends Controller {
 			if ($cateList['data'][$i]->idx == $cate)
 				$name = $cateList['data'][$i]->name;
 				
-		// 5번이면 내 상품 가져오기
+			
+		// 내 북마크 핫딜, 전체 핫딜 분기
 		if ($sort == '5' || $sort == 5)
 		{
-			// 페이지 검사
-			$maxPage = 1;
-			$nowPage = 1;
-
-			$result = $hotdealModel->getMyHotdeal($_SESSION['idx'], 0);
+			$result = $hotdealModel->getMyHotdeal($_SESSION['idx'], $cate, $site, '1', $nowPage, 0);
 		}
 		else	// 5번 아니면 정렬, 페이지 기준에 따라 
-		{
-			// 페이지 검사
-			$maxPage = floor(($hotdealModel->getResultSize($cate)-1) / 30) + 1;
-			
-			$nowPage = '1';
-			if (Request::has('page'))
-				$nowPage = Request::input('page');
-			if ($maxPage < $nowPage)
-				$nowPage = $maxPage;
-			
+		{			
 			// 핫딜 데이터 가져오기
-			$result = $hotdealModel->getInfoHotdeal($cate, $sort, $maxPage, $nowPage);
+			$result = $hotdealModel->getInfoHotdeal($cate, $site, $sort, $nowPage);
 			
 			// 로그인 되어있을 시 북마크 체크
 			if (!empty($_SESSION['idx']))
@@ -96,12 +93,30 @@ class HotdealController extends Controller {
 			}
 			
 		}
-			
+		
+		if ($result['code'] == '0')
+		{
+			$result['maxPage'] = 1;
+			$result['company'] = array();
+			$result['data'] = array();
+		}
+		
 		$nowCate = array('idx' => $cate, 'name' => $name);
-		$paging = array('now' => $nowPage, 'max' => $maxPage);
+		$paging = array('now' => $nowPage, 'max' => $result['maxPage']);
 		
 		$page = 'hotdeal';
-		return view($page, array('page' => $page, 'type' => '코드', 'cateList' => $cateList['data'], 'nowCate' => $nowCate, 'sort' => $sort, 'prdt' => $result['data'], 'paging' => $paging));
+		$data = array(
+				'page' => $page, 
+				'type' => '코드', 
+				'cateList' => $cateList['data'],
+				'company' => $result['company'],
+				'nowCate' => $nowCate,
+				'site' => $site,
+				'sort' => $sort,
+				'paging' => $paging,
+				'prdt' => $result['data'] 
+		);
+		return view($page, $data);
 	}
 	
 	public function hitCountPlus()
