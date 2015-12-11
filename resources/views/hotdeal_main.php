@@ -51,7 +51,7 @@
 				<hr id="hd_product_hr">
 				<div id="hd_product_all">
 					더 많은 핫딜 상품은 여기에!&nbsp;
-					<a onclick="">모두보기</a>
+					<a onclick='location.href="<?=$adr_ctr?>Hotdeal/index"'>모두보기</a>
 				</div>
 				<hr id="hd_product_hr2" hidden>
 				<div id="product_wrap">

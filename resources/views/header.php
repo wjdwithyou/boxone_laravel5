@@ -87,7 +87,7 @@
 <div id="main_menu_wrap">
 	<div id="main_menu">
 		<div id="shoppingbox_menu_wrap" class="menu_split">
-			<div id="shoppingbox" onclick='location.href="<?=$adr_ctr?>Product/index"'>쇼핑박스</div>
+			<div id="shoppingbox" onclick='location.href="<?=$adr_ctr?>Shoppingbox/index"'>쇼핑박스</div>
 		    <div id="shoppingbox_menu">
 		        <div class="col-xs-2">
 					<div class="sb_top">패션잡화</div>
