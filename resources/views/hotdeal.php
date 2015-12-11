@@ -14,13 +14,21 @@
 		<div id="container">
 			<div id="top">
 				<div id="top_title">
-					핫딜상품 <?=$type?><!-- or 핫딜코드 -->
+					핫딜<?=$type?><!-- or 핫딜코드 -->
+				</div>
+				<div id="top_content">
+					핫딜 상품과 코드를 모아놨어용:)
+				</div>
+				<hr>
+				<div id="current_cate">
+					<?=$nowCate['name']?>
 				</div>
 				<div id="top_index">
 					<a href='<?=$adr_ctr?>Hotdeal/indexCode'>핫딜<?=$type?><!-- or 핫딜코드 --></a>
 					&nbsp;>&nbsp;
 					<a href='<?=$adr_ctr?>Hotdeal/indexCode?cate=<?=$nowCate['idx']?>'><?=$nowCate['name']?></a>
 					&nbsp;>&nbsp;
+					<a onclick=''>니트/스웨터</a>
 				</div>
 				<div id="top_select">
 					<select id="hotdeal_cate" class="form-control">
@@ -32,6 +40,26 @@
 								<option value="<?=$list->idx?>"><?=$list->name?></option>
 							<?php endif;?>
 						<?php endforeach;?>
+					</select>
+				</div>
+				<!-- 핫딜상품 -->
+				<!-- <div id="brand_select">
+					<select id="brand_cate" class="form-control" onchange="">
+						<option value="">브랜드</option>
+						<option value="">Polo</option>
+						<option value="">Nike</option>
+						<option value="">Adidas</option>
+						<option value="">Reebok</option>
+					</select>
+				</div> -->
+				<!-- 핫딜코드 -->
+				<div id="site_select">
+					<select id="site_cate" class="form-control" onchange="">
+						<option value="">사이트</option>
+						<option value="">Amazon</option>
+						<option value="">Polo</option>
+						<option value="">ebay</option>
+						<option value="">auction</option>
 					</select>
 				</div>
 				<div id="order_select">
@@ -162,23 +190,9 @@
 		?>
 		
 		<style>
-			#hotdeal_cate {
+			#hotdeal_cate, #brand_cate, #site_cate, #order_list {
 				width: 188px;
-				height: 45px;
-				border: 0 !important;
-				color: #FFF;
-				background: #F15A63 url('<?=$adr_img?>select_arrow.png') no-repeat 90% center;
-				text-indent: 0.01px;
-				text-overflow: "";
-				padding-left: 6px;
-				-webkit-appearance: none;
-				-moz-appearance: none;
-				appearance: none;
-			}
-			
-			#order_list {
-				width: 188px;
-				height: 45px;
+				height: 40px;
 				border: 1px solid #F15A63 !important;
 				color: #F15A63;
 				background: #fff url('<?=$adr_img?>select_arrow_pink.png') no-repeat 90% center;
@@ -191,11 +205,7 @@
 			}
 			
 			@media (max-width: 450px) {
-				#hotdeal_cate, #order_list {
-					width: 100%;
-					background: #F15A63 url('<?=$adr_img?>select_arrow.png') no-repeat 95% center;
-				}
-				#order_list {
+				#hotdeal_cate, #brand_cate, #site_cate, #order_list {
 					width: 100%;
 					margin-top: 5px;
 					background: #fff url('<?=$adr_img?>select_arrow_pink.png') no-repeat 95% center;
