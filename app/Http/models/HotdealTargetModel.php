@@ -48,11 +48,12 @@ class HotdealTargetModel
 	/*  	
      *	핫딜 북마크 추가
      */
-	function createBookmark($member_idx, $hotdeal_idx)
+	function createBookmark($member_idx, $hotdeal_idx, $target)
 	{
 
 		if(	!(	inputErrorCheck($hotdeal_idx, 'hotdeal_idx')
-		 		&& inputErrorCheck($member_idx, 'member_idx')))
+		 		&& inputErrorCheck($member_idx, 'member_idx')
+		 		&& inputErrorCheck($target, 'target')))
 			return ;
 
 		//북마크 +1
@@ -63,7 +64,8 @@ class HotdealTargetModel
 			array(
 				'member_idx'	=> $member_idx,
 				'hotdeal_idx'	=> $hotdeal_idx, 	
-				'upload'	=> DB::raw('now()')
+				'target'		=> $target,
+				'upload'		=> DB::raw('now()')
 				)
 			);
 
