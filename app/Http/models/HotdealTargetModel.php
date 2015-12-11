@@ -52,8 +52,7 @@ class HotdealTargetModel
 	{
 
 		if(	!(	inputErrorCheck($hotdeal_idx, 'hotdeal_idx')
-		 		&& inputErrorCheck($member_idx, 'member_idx')
-		 		&& inputErrorCheck($target, 'target')))
+		 		&& inputErrorCheck($member_idx, 'member_idx')))
 			return ;
 
 		//북마크 +1
@@ -114,9 +113,9 @@ class HotdealTargetModel
 
 
 	/*
-	 *	핫딜 리스트 가져오는 기능
+	 *	북마크 리스트 가져오는 기능
 	 */
-	function getMyHotdeal($member_idx)
+	function getInfoListBookmark($member_idx)
 	{
 		if( !( inputErrorCheck($member_idx, 'member_idx')))
 			return ;
@@ -124,6 +123,20 @@ class HotdealTargetModel
 		$result = DB::select('select * from hotdeal_bookmark where member_idx=?', array($member_idx));
 
         return array('code' => 1, 'msg' => 'success', 'data' => $result);
+	}
+	
+	
+	/*
+	 *	북마크 지정된 상품 가져오는 기능
+	 */
+	function getMyHotdeal($member_idx, $target)
+	{
+		if( !( inputErrorCheck($member_idx, 'member_idx')))
+			return ;
+	
+		$result = DB::select('select *, 1 as bookmark from hotdeal_promo as p, hotdeal_bookmark as b where b.target=? and b.member_idx=? and p.idx=b.idx', array($target, $member_idx));
+	
+		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
 
 	/*
@@ -163,7 +176,7 @@ class HotdealTargetModel
 
 		$start = ($page_num-1)*30;
 		$finish = ($page_num)*30;
-		$result = DB::select('select * from '.$target_query.') as A order by'.$option_query.' idx DESC limit ?', array($finish));
+		$result = DB::select('select *, 0 as bookmark from '.$target_query.') as A order by'.$option_query.' idx DESC limit ?', array($finish));
 
 		$finish = count($result);
 		//해당하는 내용이 없을 경우

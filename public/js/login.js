@@ -323,6 +323,7 @@ function justLogin()
 		},
 		error: function(request,status,error)
 		{
+			console.log(request.responseText);
 		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		}
 	});

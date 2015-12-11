@@ -37,6 +37,14 @@ class HotdealController extends Controller {
 		$hotdealModel = new HotdealTargetModel();
 		$categoryModel = new CategoryModel();
 		
+		// 정렬 방식 가져오기
+		$sort = '1';
+		if (Request::has('sort'))
+			$sort = Request::input('sort');
+		if (session_id() == '')	session_start();
+		if ($sort == '5' && empty($_SESSION['idx']))
+			$sort = 1;
+		
 		// 카테고리 검사
 		$cateList = $categoryModel->getInfoListLarge();
 		
@@ -45,31 +53,50 @@ class HotdealController extends Controller {
 			$cate = Request::input('cate');
 		if ($cate > count($cateList))
 			$cate = '0';
-				
-		
-		// 페이지 검사
-		$maxPage = floor(($hotdealModel->getResultSize($cate)-1) / 30) + 1;
-		
-		$nowPage = '1';
-		if (Request::has('page'))
-			$nowPage = Request::input('page');
-		if ($maxPage < $nowPage)
-			$nowPage = $maxPage;
-		
-		// 정렬 방식 가져오기
-		$sort = '1';
-		if (Request::has('sort'))
-			$sort = Request::input('sort');
-		
-		// 핫딜 데이터 가져오기
-		$result = $hotdealModel->getInfoHotdeal($cate, $sort, $maxPage, $nowPage);
 		
 		// 현재 카테고리 이름 가져오기
 		$name = "전체";
 		for ($i = 0 ; $i < count($cateList['data']) ; $i++)
 			if ($cateList['data'][$i]->idx == $cate)
 				$name = $cateList['data'][$i]->name;
-		
+				
+		// 5번이면 내 상품 가져오기
+		if ($sort == '5' || $sort == 5)
+		{
+			// 페이지 검사
+			$maxPage = 1;
+			$nowPage = 1;
+
+			$result = $hotdealModel->getMyHotdeal($_SESSION['idx'], 0);
+		}
+		else	// 5번 아니면 정렬, 페이지 기준에 따라 
+		{
+			// 페이지 검사
+			$maxPage = floor(($hotdealModel->getResultSize($cate)-1) / 30) + 1;
+			
+			$nowPage = '1';
+			if (Request::has('page'))
+				$nowPage = Request::input('page');
+			if ($maxPage < $nowPage)
+				$nowPage = $maxPage;
+			
+			// 핫딜 데이터 가져오기
+			$result = $hotdealModel->getInfoHotdeal($cate, $sort, $maxPage, $nowPage);
+			
+			// 로그인 되어있을 시 북마크 체크
+			if (!empty($_SESSION['idx']))
+			{
+				$idx = $_SESSION['idx'];
+				$bookmarks = $hotdealModel->getInfoListBookmark($idx);
+			
+				for ($i = 0 ; $i < count($result['data']) ; ++$i)
+					for ($j = 0 ; $j < count($bookmarks['data']) ; ++$j)
+						if ($result['data'][$i]->idx == $bookmarks['data'][$j]->hotdeal_idx)
+							$result['data'][$i]->bookmark = 1;
+			}
+			
+		}
+			
 		$nowCate = array('idx' => $cate, 'name' => $name);
 		$paging = array('now' => $nowPage, 'max' => $maxPage);
 		
@@ -103,7 +130,7 @@ class HotdealController extends Controller {
 		$result = $hotdealModel->checkBookmark($member_idx, $hotdeal_idx); 
 		
 		if ($result['code'])
-			$hotdealModel->createBookmark($member_idx, $hotdeal_idx);
+			$hotdealModel->createBookmark($member_idx, $hotdeal_idx, 0);
 		else
 			$hotdealModel->deleteBookmark($member_idx, $hotdeal_idx);
 		
