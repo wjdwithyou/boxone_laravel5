@@ -37,30 +37,17 @@
 				<div id="order_select">
 					<select id="order_list" class="form-control">
 						<?php if ($type == '상품') :?>
-							<option value="1">인기 순</option>
-							<option value="2">기한 순</option>
-							<option value="3">할인율: 높은 순</option>
-							<option value="4">할인율: 낮은 순</option>
+							<option value="1"<?php if ($sort == 1) echo (" selected=\"selected\"");?>>인기 순</option>
+							<option value="2"<?php if ($sort == 2) echo (" selected=\"selected\"");?>>기한 순</option>
+							<option value="3"<?php if ($sort == 3) echo (" selected=\"selected\"");?>>할인율: 높은 순</option>
+							<option value="4"<?php if ($sort == 4) echo (" selected=\"selected\"");?>>할인율: 낮은 순</option>
 						<?php else :?>
-							<?php if ($sort == 1 || $sort == '1') :?>
-								<option value="1" selected="selected">인기 순</option>
-								<option value="2">기한 순</option>
-								<option value="3">사이트 순</option>
-							<?php endif;?>
-							<?php if ($sort == 2 || $sort == '2') :?>
-								<option value="1">인기 순</option>
-								<option value="2" selected="selected">기한 순</option>
-								<option value="3">사이트 순</option>
-							<?php endif;?>
-							<?php if ($sort == 3 || $sort == '3') :?>
-								<option value="1">인기 순</option>
-								<option value="2">기한 순</option>
-								<option value="3" selected="selected">사이트 순</option>
-							<?php endif;?>
-							
+							<option value="1"<?php if ($sort == 1) echo (" selected=\"selected\"");?>>인기 순</option>
+							<option value="2"<?php if ($sort == 2) echo (" selected=\"selected\"");?>>기한 순</option>
+							<option value="3"<?php if ($sort == 3) echo (" selected=\"selected\"");?>>사이트 순</option>
 						<?php endif;?>
 						<?php if ($logined) :?> 
-							<option value="5">나의 ♥</option> 
+							<option value="5"<?php if ($sort == 5) echo (" selected=\"selected\"");?>>나의 ♥</option> 
 						<?php endif;?>
 					</select>
 				</div>
@@ -103,7 +90,13 @@
 						<div class="hd_result_div">
 							<div class="hd_code_img center_box">
 								<div class="hd_bookmark">
-									<a onclick="hotdealBookmark($(this).children(),<?=$prdtList->idx?>);"><img src="<?= $adr_img ?>heart.png"></a>
+									<a onclick="hotdealBookmark($(this).children(),<?=$prdtList->idx?>);">
+										<?php if ($prdtList->bookmark == 0) :?>
+											<img src="<?= $adr_img ?>heart.png">
+										<?php else :?>
+											<img src="<?= $adr_img ?>heart_on.png">
+										<?php endif;?>
+									</a>
 								</div>
 								<div class="center_content">
 									<a onclick="hotdealConnect('<?=$prdtList->idx?>', '<?=$prdtList->website_link?>');"><img src="<?=$prdtList->image?>"></a>
