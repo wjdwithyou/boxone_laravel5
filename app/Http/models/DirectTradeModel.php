@@ -43,7 +43,7 @@ class DirectTradeModel()
 
 
 	/*
-	 *	직거래 상품 등록
+	 *	직거래 상품 등록 + direct_salelist테이블에 해당 회원 판매리스트 추가 
 	 */
 	function createProduct()
 	{
@@ -51,26 +51,165 @@ class DirectTradeModel()
 
 	}
 
+	/*
+	 *	오늘의랭킹 부분 - 현 시점에서 할인율 가장 높은 상품 9개 출력  
+	 */
+	function getInfoTodayRanking()
+	{
+		$result = DB::select('select * from direct_product where status=1 order by price_sale/price_original DESC limit 9');
+
+		for($i=0; $i<count($result); $i++)
+		{
+			$result[$i]->sale_rate = (double)$result[$i]->price_sale/$result[$i]->price_original;
+		}
+
+		return array('code' => 1,'msg' =>'success' ,'data' => $result);
+	}
 
 	/*
-	 *	카테고리별 베스트 랭킹 상품 출력
+	 *	직거래박스 메인페이지에서 대분류 카테고리별 베스트 랭킹 상품 출력
 	 */
-	function getInfoBestranking($category_idx)
+	function getInfoBestranking($category_L)
 	{
-		//대분류 카테고리에서 베스트 순서로 출력
+		if( !( inputErrorCheck($category_L, 'category_L')))
+			return ;
 
+		$result = DB::select('select * from direct_product where category_L=? AND status=1 order by hit_count+bookmark_count DESC limit 12', array($category_L));
+
+		return array('code' => 1,'msg' =>'success' ,'data' => $result);				
+	}	
+
+	/*
+	 *	직거래박스 세부페이지에서 대/중/소분류 카테고리별 직거래박스 상품 출력
+	 */
+	function getInfoDirectProduct($category_idx, $type, $sort_option)
+	{
+
+		$option_query = '';
+		switch($sort_option)
+		{
+			case 1:
+			$option_query = ' hit_count+bookmark_count DESC,';
+			break ;
+
+			case 2:
+			$option_query = ' price_sale ASC,';
+			break ;
+
+			case 3:
+			$option_query = ' price_sale DESC,';
+			break ;
+
+			default :
+			break;
+		}
+
+		$where_query = '';
+		switch(type)
+		{
+			case 1:
+			$where_query = "category_L='$category_idx'";
+			break;
+			
+			case 2:
+			$where_query = "category_M='$category_idx'";
+			break;
+	
+			case 3:
+			$where_query = "category_S='$category_idx'";
+			break;
+		
+			default :
+			break;	
+		}
+		
+		$result = DB::select('select * from direct_product where '.$where_query.' AND status=1 order by'.$option_query.' idx DESC');
+
+		return array('code' => 1, 'msg' => 'success', 'data' => $result);		
 	}
 
 
+/////BRAND_LIST
 	/*
-	 *	오늘의랭킹 부분 - 전체 직거래박스 물품중 랭킹 TOP 출력 
+	 *	상품 등록시 브랜드 직접입력때 사용 
 	 */
-	function getInfoTotalBestranking()
-	{
-		direct_product
+	function createBrand($name)
+	{	
+		if( !( inputErrorCheck($name, 'name')))
+			return ;
 
+		$result = DB::table('brand')->insertGetId(
+			array(
+				'name'			=> $name, 
+				)
+			);
+		return array('code' => 1,'msg' =>'success' ,'data' => $result);
 	}
 
+	/*
+	 *	브랜드 리스트 출력
+	 */
+	function getInfoBrandList($char)
+	{
+		if( !( inputErrorCheck($char, 'char')))
+			return ;
+
+		$sort = "";
+		if($char >= 65 && $char <= 90)		// 알파벳 일 경우
+			$sort .= "name like '".chr($i)."%'";
+		else if( $char == 123)				// 숫자 일 경우
+			for ($i = 0 ; $i < 10 ; $i++)
+				$sort .= " or name like '$i%'";		
+		else 								// 특수문자 일 경우
+		{ 								
+			for ($i = 33 ; $i < 48 ; $i++)
+				$sort .= "name like '".chr($i)."%'";
+			for ($j = 58 ; $j < 65 ; $j++)
+				$sort .= "name like '".chr($i)."%'";
+		}
+		$sort = "(".substr($sort, 3).")";
+		
+		$result = DB::select('select * from brand_list where '.$sort.' order by name asc');
+		
+		return array('code' => 1, 'msg' => 'success', 'data' => $result);
+	}
+
+	
+	/*
+	 *	브랜드 종류별 상품 출력 
+	 */
+	function getInfoByBrand($brand_idx, $sort_option)
+	{
+
+		if( !( inputErrorCheck($brand_idx, 'brand_idx')
+				&& inputErrorCheck($sort_option, 'sort_option')))
+			return ;
+
+		$option_query = '';
+		switch($sort_option)
+		{
+			case 1:
+			$option_query = ' hit_count+bookmark_count DESC,';
+			break ;
+
+			case 2:
+			$option_query = ' price_sale ASC,';
+			break ;
+
+			case 3:
+			$option_query = ' price_sale DESC,';
+			break ;
+
+			default :
+			break;
+		}
+
+		$result = DB::select('select * from direct_product where brand=? AND status=1 order by'.$option_query.' idx DESC', array($brand_idx));
+
+		return array('code' => 1, 'msg' => 'success', 'data' => $result);		
+	}	
+
+/////BESTSELLER
 	/*
 	 *	셀러 단골등록하기 기능
 	 */
@@ -80,8 +219,15 @@ class DirectTradeModel()
 			   && inputErrorCheck($seller_idx, 'seller_idx')))
 			return ;
 
+		$result = DB::table('direct_bestseller')->insertGetId(
+			array(
+				'member_idx'			=> $member_idx,
+				'seller_idx'			=> $seller_idx, 
+				'upload'				=> DB::raw('now()')
+				)
+			);
 
-
+		return array('code' => 1,'msg' =>'success' ,'data' => $result);
 	}
 
 	/* 
@@ -89,10 +235,32 @@ class DirectTradeModel()
 	 */
 	function deleteBestSeller($bestseller_idx)
 	{
+		if( !( inputErrorCheck($bestseller_idx, 'bestseller_idx')))
+			return ;
 
-
+		$result = DB::delete('delete from direct_bestseller where idx=?', array($bestseller_idx));
+                        
+		if($result == true){
+         	return array('code' => 1, 'msg' => 'success');
+        }else{
+         	return array('code' => 0, 'msg' => 'delete failure: no matched data');
+        }
 	}
 
+	/*
+	 *	해당 회원의 단골 셀러 가져오는 기능
+	 */
+	function getBestSeller($member_idx)
+	{
+		if( !( inputErrorCheck($member_idx, 'member_idx')))
+			return ;
+
+		$result = DB::select('select * from direct_bestseller where member_idx=?', array($member_idx));
+
+        return array('code' => 1, 'msg' => 'success', 'data' => $result);
+	}
+
+/////CART
 	/*
 	 *	해당 product를 장바구니에 저장
 	 */
@@ -103,6 +271,7 @@ class DirectTradeModel()
 	}
 
 
+/////COMPLAIN
  	/*
  	 *	판매자에게 컴플레인 등록
  	 */
@@ -134,9 +303,32 @@ class DirectTradeModel()
  	
 	}
 
+	/*
+	 *	판매자에 대한 구매평 작성 기능
+	 */
+	function createDirectReview($member_idx, $seller_idx, $product_idx)
+	{
+		if( !(inputErrorCheck($member_idx, 'member_idx')
+			&& inputErrorCheck($seller_idx, 'seller_idx')
+			&& inputErrorCheck($product_idx, 'product_idx')))
+			return ;
+
+
+
+	}	
 
 	/*
 	 *	주문  + direct_buylist 테이블에 해당 회원 구매내역 추가
+	 */
+	function ~~~()
+	{
+
+
+	}
+
+
+	/*
+	 *	d
 	 */
 
 }
