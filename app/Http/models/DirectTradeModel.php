@@ -122,7 +122,7 @@ class DirectTradeModel()
 			default :
 			break;	
 		}
-		
+
 		$result = DB::select('select * from direct_product where '.$where_query.' AND status=1 order by'.$option_query.' idx DESC');
 
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);		
@@ -267,7 +267,19 @@ class DirectTradeModel()
 	function createDirectCart($member_idx, $product_idx)
 	{
 
+		if( !( inputErrorCheck($member_idx, 'member_idx')
+				&& inputErrorCheck($product_idx, 'product_idx')))
+			return ;
 
+		$result = DB::table('direct_cart')->insertGetId(
+			array(
+				'member_idx'		=> $member_idx, 
+				'product_idx'		=> $product_idx, 
+				'upload'			=> DB::raw('now()')
+				)
+			);	
+
+		return array('code' => 1,'msg' =>'success' ,'data' => $result);
 	}
 
 
@@ -275,28 +287,80 @@ class DirectTradeModel()
  	/*
  	 *	판매자에게 컴플레인 등록
  	 */
- 	function createDirectComplain($member_idx, $seller_idx)
+ 	function createSellerComplain($member_idx, $seller_idx, &title, &contents, $complain_category)
  	{
 
+		if( !( inputErrorCheck($member_idx, 'member_idx')
+				&& inputErrorCheck($seller_idx, 'seller_idx')
+				&& inputErrorCheck($title, 'title')
+				&& inputErrorCheck($contents, 'contents')
+				&& inputErrorCheck($complain_category, 'complain_category')))
+			return ;
 
+		$result = DB::table('direct_cart')->insertGetId(
+			array(
+				'member_idx'		=> $member_idx, 
+				'seller_idx'		=> $seller_idx, 
+				'title'				=> $title, 
+				'contents'			=> $contents, 
+				'complain_category'	=> $complain_category, 
+				'upload'			=> DB::raw('now()')
+				)
+			);	
+
+		return array('code' => 1,'msg' =>'success' ,'data' => $result);
  	}
-
 
  	/*
 	 * 판매자가 컴플레인에 대한 답글 등록
 	 */
- 	function createDirectComplainReply($member_idx,)
+ 	function createDirectComplainAnswer($seller_idx, $title, $contents, $complain_idx)
  	{
+		if( !( inputErrorCheck($seller_idx, 'seller_idx')
+				&& inputErrorCheck($title, 'title')
+				&& inputErrorCheck($contents, 'contents')
+				&& inputErrorCheck($complain_idx, 'complain_idx')))
+			return ;
+
+		$result = DB::table('direct_cart')->insertGetId(
+			array(
+				'seller_idx'		=> $seller_idx, 
+				'title'				=> $title, 
+				'contents'			=> $contents, 
+				'complain_idx'		=> $complain_idx, 
+				'upload'			=> DB::raw('now()')
+				)
+			);	
+
+		DB::update('update direct_complain set status=1 where idx=?',array($complain_idx));
+
+		return array('code' => 1,'msg' =>'success' ,'data' => $result);
+ 	}
 
 
- 		status update 필요
+ 	/*
+ 	 *	해당 판매자의 컴플레인 + 답변까지 같이 넘겨줌
+ 	 */
+ 	function getInfoSellerComplain($seller_idx)
+ 	{
+		if( !( inputErrorCheck($seller_idx, 'seller_idx')))
+			return ;
+
+		$result = DB::select('select * from 
+							(
+								direct_complain as dc
+								JOIN direct_complain_answer as dca
+								ON dc.idx=dca.complain_idx
+							) where dc.seller_idx=?', array($seller_idx));
+
+		return array('code' => 1, 'msg' => 'success', 'data' => $result);
  	}
 
 
  	/*
  	 *	현재 보고있는 판매자 상품의 다른 상품 추천
  	 */
- 	function other()
+ 	function recommandOtherProduct($seller_idx)
  	{
 
 
@@ -320,7 +384,7 @@ class DirectTradeModel()
 	/*
 	 *	주문  + direct_buylist 테이블에 해당 회원 구매내역 추가
 	 */
-	function ~~~()
+	function cartOrder($member_idx)
 	{
 
 
@@ -328,7 +392,7 @@ class DirectTradeModel()
 
 
 	/*
-	 *	d
+	 *	
 	 */
 
 }
