@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
-use App\Http\models\CommunityModel;
+use App\Http\models\DirectTradeModel;
 use Request;
 
 //include ("/var/www/laravel/app/models/MemberModel.php");
@@ -11,19 +11,18 @@ class MyungSsooController extends Controller {
 	/*
 	 *  명수꺼, 테스트용
 	 */
-	
-
-
 	public function index()
 	{
-		$model = new CommunityModel();
+		$model = new DirectTradeModel();
 
-		$result = $model->getInfoSingle(3, 62);
+		$result = $model->createMember(62, "정명수", "01037500413", "수원시장안구정자동", "SK한화아파트 626-2403", "신한은행", "110311026526");
 
 
 		print_r($result);
 	}
 	
+
+
 	/*
 	 * 2015.11.23
 	 * 작성자 : 박용호

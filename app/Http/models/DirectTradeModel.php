@@ -8,7 +8,7 @@ use DB;
 include_once dirname(__FILE__)."/../function/baseFunction.php";
 
 
-class DirectTradeModel()
+class DirectTradeModel
 {
 
 	/*
@@ -287,7 +287,7 @@ class DirectTradeModel()
  	/*
  	 *	판매자에게 컴플레인 등록
  	 */
- 	function createSellerComplain($member_idx, $seller_idx, &title, &contents, $complain_category)
+ 	function createSellerComplain($member_idx, $seller_idx, $title, $contents, $complain_category)
  	{
 
 		if( !( inputErrorCheck($member_idx, 'member_idx')
@@ -362,24 +362,48 @@ class DirectTradeModel()
  	 */
  	function recommandOtherProduct($seller_idx)
  	{
+ 		if( !( inputErrorCheck($seller_idx)))
+ 			return ;
 
-
+ 		$result = DB::select('select * from direct_product where ');
  	
 	}
 
 	/*
 	 *	판매자에 대한 구매평 작성 기능
 	 */
-	function createDirectReview($member_idx, $seller_idx, $product_idx)
+	function createSellerReview($member_idx, $direct_seller_idx, $direct_product_idx)
 	{
 		if( !(inputErrorCheck($member_idx, 'member_idx')
-			&& inputErrorCheck($seller_idx, 'seller_idx')
-			&& inputErrorCheck($product_idx, 'product_idx')))
+			&& inputErrorCheck($direct_seller_idx, 'direct_seller_idx')
+			&& inputErrorCheck($direct_product_idx, 'direct_product_idx')))
 			return ;
 
+		$result = DB::table('direct_review')->insertGetId(
+			array(
+				'member_idx'		=> $member_idx, 
+				'direct_seller_idx'	=> $direct_seller_idx, 
+				'direct_product_idx'=> $direct_product_idx, 
+				'upload'			=> DB::raw('now()')
+				)
+			);	
 
-
+		return array('code' => 1,'msg' =>'success' ,'data' => $result);
 	}	
+
+	/*
+	 *	판매자에 대한 구매평 리스트 가져오는 기능
+	 */
+	function getInfoSellerReview($seller_idx)
+	{
+		if( !(inputErrorCheck($seller_idx, 'seller_idx')))
+			return ;
+
+		$result = DB::select('select * from direct_review where seller_idx=? order by idx DESC',array($seller_idx));
+
+		return array('code' => 1,'msg' =>'success' ,'data' => $result);
+	}
+
 
 	/*
 	 *	주문  + direct_buylist 테이블에 해당 회원 구매내역 추가
@@ -389,10 +413,4 @@ class DirectTradeModel()
 
 
 	}
-
-
-	/*
-	 *	
-	 */
-
 }
