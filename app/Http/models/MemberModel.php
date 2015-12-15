@@ -251,7 +251,7 @@ class MemberModel{
     /*
      *  세션 체크
      */
-    function createSession($member_idx, $session)
+    function checkSession($member_idx, $session)
     {
       $target_member = DB::select('select * from member where idx=?', array($member_idx));
 
@@ -277,6 +277,7 @@ class MemberModel{
             return array('code' => 1, 'msg' => 'success');
       }else{
             return array('code' => 0, 'msg' => 'update false');
+    	}
     }
 
 }

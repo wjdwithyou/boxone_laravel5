@@ -197,57 +197,93 @@ function isNumeric(s) {
 		return 1;
 }
 
-/*
-function SetDeleveryContents(idx) {
-	company = dtd_select_obj.options[idx].value;
-	document.getElementById("Dcs01").innerHTML = dtd_companys[company][2];
-	document.getElementById("Dcs02").innerHTML = company;
-	document.getElementById("Dcs03").innerHTML = dtd_companys[company][3];
-	document.getElementById("Dcs04").href = dtd_companys[company][4];
-	document.getElementById("Dcs04").target = "_blank";
-
-}
-*/
-/*
-function checkValidDoor(num) {
-	// 운송장 번호 값 확인 
-	if (company == "UPS") {
-		var pattern1 = /^1z[0-9]{16}$/i;
-		var pattern2 = /^M[0-9]{10}$/;
-		if (num.search(pattern1) == -1 && num.search(pattern2) == -1) {
-			lert(company + "의 운송장 번호 패턴에 맞지 않습니다.");
-			document.door_to_door_frm.dtd_number_num.focus();
-			return false;
-		}
-	} else if (company == "EMS") {
-		var pattern = /^[a-zA-z]{2}[0-9]{9}[a-zA-z]{2}$/;
-		if (num.search(pattern) == -1) {
-			alert(company + "의 운송장 번호 패턴에 맞지 않습니다.");
-			document.door_to_door_frm.dtd_number_num.focus();
-			return false;
-		}
-	} else if (company == "SC 로지스" || company == "한진택배" || company == "현대택배") {
-		if (!isNumeric(num)) {
-			alert("운송장 번호는 숫자만 입력해주세요.");
-			document.door_to_door_frm.dtd_number_num.focus();
-			return false;
-		} else if (num.length != 10 && num.length != 12) {
-			alert(company + "의 운송장 번호는 10자리 또는 12자리의 숫자로 입력해주세요.");
-			document.door_to_door_frm.dtd_number_num.focus();
-			return false;
-		}
-	} else {
-		if (!isNumeric(num)) {
-			alert("운송장 번호는 숫자만 입력해 주세요.");
-			document.door_to_door_frm.dtd_number_num.focus();
-			return false;
-		} else if (dtd_companys[company][0] > 0
-				&& dtd_companys[company][0] != num.length) {
-			alert(company + "의 운송장 번호는 " + dtd_companys[company][0]
-					+ "자리의 숫자로 입력해 주세요.");
-			document.door_to_door_frm.dtd_number_num.focus();
-			return false;
-		}
+function createDelivery()
+{
+	var logined = $("#logined").val();
+	if (logined == "0")
+	{
+		$('#deliver_modal').modal('hide');
+		login_popup();
 	}
+	else
+	{	
+		var num = $("#entry_num_value").val();
+		var year = $("#entry_num_value").val();
+		
+		//alert (office+" "+num+" "+prdt);
+		
+		$.ajax
+		({
+			url: adr_ctr+"Deliver/createEntry",
+			type: 'post',
+			async: false,
+			data:{
+				num: num,
+				year: year
+			},
+			success: function(result)
+			{
+				console.log(result);
+				result = JSON.parse(result);
+				if (result.code == "1")
+					alert ("정상적으로 추가되었습니다.");
+				//alert (JSON.stringify(result));
+				//result = JSON.parse(result);
+			},
+			error: function(request,status,error)
+			{
+				console.log(request.responseText);
+			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	}
+}
 
-}*/
+
+function createEntry()
+{
+	var logined = $("#logined").val();
+	if (logined == "0")
+	{
+		$('#deliver_modal').modal('hide');
+		login_popup();
+	}
+	else
+	{	
+		var num = $("#delivery_office_value").val();
+		var num = $("#delivery_num_value").val();
+		var prdt = $("#delivery_prdt_value").html();
+		
+		//alert (office+" "+num+" "+prdt);
+		
+		$.ajax
+		({
+			url: adr_ctr+"Deliver/createDelivery",
+			type: 'post',
+			async: false,
+			data:{
+				office: office,
+				num: num,
+				prdt: prdt
+			},
+			success: function(result)
+			{
+				console.log(result);
+				result = JSON.parse(result);
+				if (result.code == "1")
+					alert ("정상적으로 추가되었습니다.");
+				//alert (JSON.stringify(result));
+				//result = JSON.parse(result);
+			},
+			error: function(request,status,error)
+			{
+				console.log(request.responseText);
+			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	}
+}
+
+
+
+

@@ -16,8 +16,8 @@ class ShipmentDomesticModel{
 	{
 
 		if(	!(	inputErrorCheck($product_name, 'product_name')
-				&& inputErrorCheck($postal_num, 'postal_num')
 				&& inputErrorCheck($postal_agency, 'postal_agency')
+				&& inputErrorCheck($postal_num, 'postal_num')
 				&& inputErrorCheck($member_idx, 'member_idx')
 				&& inputErrorCheck($memo, 'memo')
 				&& inputErrorCheck($icon, 'icon')
@@ -28,8 +28,8 @@ class ShipmentDomesticModel{
 
 		$result = DB::table('shipment_domestic')->insertGetId(
 			array(
-				'product_name'=> $product_name, 
-				'postal_num'=> $postal_num, 
+				'product_name'=> $product_name,
+				'postal_num'=> $postal_num,
 				'postal_agency'=> $postal_agency, 
 				'member_idx'=> $member_idx, 
 				'memo'=> $memo, 

@@ -1,28 +1,33 @@
 $(document).ready(function(){
-	
 	$("#hotdeal_cate").on('change', function(){
-		hotdealHref("","","1");
+		hotdealHref('','','0',"1");
+	});
+	
+	$("#site_cate").on('change', function(){
+		hotdealHref('','','',"1");
 	});
 	
 	$("#order_list").on('change', function(){
-		hotdealHref("","","1");
+		var sort = $("#order_list").val() + "";
+		if (sort != "5")
+			hotdealHref('','','',"1");
+		else
+			hotdealHref('0','','0','1');
 	});
 });
 
-function hotdealHref(cate, sort, page)
+function hotdealHref(cate, sort, site, page)
 {
 	var adr_ctr = $("#adr_ctr").val();
 	
-	if (cate == "")
+	if (cate == '')
 		cate = $("#hotdeal_cate").val();
-	
-	if (sort == "")
+	if (sort == '')
 		sort = $("#order_list").val();
+	if (site == '')
+		site = $("#site_cate").val();
 	
-	if (page == "")
-		page = $("#nowPage").val();
-	
-	location.href = (adr_ctr + "Hotdeal/indexCode?cate="+cate+"&page="+page+"&sort="+sort);
+	location.href = (adr_ctr + "Hotdeal/indexCode?cate="+cate+"&page="+page+"&sort="+sort+"&site="+site);
 }
 
 function hotdealConnect(idx, url)
@@ -68,9 +73,15 @@ function hotdealBookmark(adr, idx)
 				result = JSON.parse(result);
 				var adr_img = $("#adr_img").val();
 				if (result.code == 1 || result.code == "1")
+				{
 					adr.attr("src", adr_img+"heart_on.png");
+					alert ("핫딜 북마크에 추가되었습니다.");
+				}
 				else
+				{
 					adr.attr("src", adr_img+"heart.png");
+					alert ("핫딜 북마크에서 삭제되었습니다.");
+				}
 					
 				window.open(url);
 				//alert (JSON.stringify(result));

@@ -12,10 +12,10 @@ class ShipmentCustomModel{
     /*  	
      *	해외통관 정보 등록 기능
      */
-	function create($product_name, $year, $icon, $memo, $member_idx, $status)
+	function create($entry_num, $year, $icon, $memo, $member_idx, $status)
 	{
 
-		if(	!(	inputErrorCheck($product_name, 'product_name')
+		if(	!(	inputErrorCheck($entry_num, 'entry_num')
 				&& inputErrorCheck($year, 'year')
 				&& inputErrorCheck($icon, 'icon')
 				&& inputErrorCheck($member_idx, 'member_idx')
@@ -27,7 +27,7 @@ class ShipmentCustomModel{
 
 		$result = DB::table('shipment_foreign')->insertGetId(
 			array(
-				'product_name'=> $product_name, 
+				'entry_num'=> $entry_num, 
 				'year'=> $year, 
 				'icon'=> $icon, 
 				'member_idx'=> $member_idx, 

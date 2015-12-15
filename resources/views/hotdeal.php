@@ -14,13 +14,19 @@
 		<div id="container">
 			<div id="top">
 				<div id="top_title">
-					핫딜상품 <?=$type?><!-- or 핫딜코드 -->
+					핫딜<?=$type?><!-- or 핫딜코드 -->
+				</div>
+				<div id="top_content">
+					핫딜 상품과 코드를 모아놨어용:)
+				</div>
+				<hr>
+				<div id="current_cate">
+					<?=$nowCate['name']?>
 				</div>
 				<div id="top_index">
 					<a href='<?=$adr_ctr?>Hotdeal/indexCode'>핫딜<?=$type?><!-- or 핫딜코드 --></a>
 					&nbsp;>&nbsp;
 					<a href='<?=$adr_ctr?>Hotdeal/indexCode?cate=<?=$nowCate['idx']?>'><?=$nowCate['name']?></a>
-					&nbsp;>&nbsp;
 				</div>
 				<div id="top_select">
 					<select id="hotdeal_cate" class="form-control">
@@ -34,33 +40,44 @@
 						<?php endforeach;?>
 					</select>
 				</div>
+				<?php if ($type == '상품') :?>
+					<div id="brand_select">
+						<select id="brand_cate" class="form-control" onchange="">
+							<option value="">브랜드</option>
+							<option value="">Polo</option>
+							<option value="">Nike</option>
+							<option value="">Adidas</option>
+							<option value="">Reebok</option>
+						</select>
+					</div>
+				<?php else :?>
+					<div id="site_select">
+						<select id="site_cate" class="form-control" onchange="">
+							<option value="0">사이트 전체</option>
+							<?php foreach($company as $cList) :?>
+								<?php if ($cList->site_name == $site) :?>
+									<option selected="selected"><?=$cList->site_name?></option>
+								<?php else :?>
+									<option><?=$cList->site_name?></option>
+								<?php endif;?>
+							<?php endforeach;?>
+						</select>
+					</div>
+				<?php endif;?>
 				<div id="order_select">
 					<select id="order_list" class="form-control">
 						<?php if ($type == '상품') :?>
-							<option value="1">인기 순</option>
-							<option value="2">기한 순</option>
-							<option value="3">할인율: 높은 순</option>
-							<option value="4">할인율: 낮은 순</option>
+							<option value="1"<?php if ($sort == 1) echo (" selected=\"selected\"");?>>인기 순</option>
+							<option value="2"<?php if ($sort == 2) echo (" selected=\"selected\"");?>>기한 순</option>
+							<option value="3"<?php if ($sort == 3) echo (" selected=\"selected\"");?>>할인율: 높은 순</option>
+							<option value="4"<?php if ($sort == 4) echo (" selected=\"selected\"");?>>할인율: 낮은 순</option>
 						<?php else :?>
-							<?php if ($sort == 1 || $sort == '1') :?>
-								<option value="1" selected="selected">인기 순</option>
-								<option value="2">기한 순</option>
-								<option value="3">사이트 순</option>
-							<?php endif;?>
-							<?php if ($sort == 2 || $sort == '2') :?>
-								<option value="1">인기 순</option>
-								<option value="2" selected="selected">기한 순</option>
-								<option value="3">사이트 순</option>
-							<?php endif;?>
-							<?php if ($sort == 3 || $sort == '3') :?>
-								<option value="1">인기 순</option>
-								<option value="2">기한 순</option>
-								<option value="3" selected="selected">사이트 순</option>
-							<?php endif;?>
-							
+							<option value="1"<?php if ($sort == 1) echo (" selected=\"selected\"");?>>인기 순</option>
+							<option value="2"<?php if ($sort == 2) echo (" selected=\"selected\"");?>>기한 순</option>
+							<option value="3"<?php if ($sort == 3) echo (" selected=\"selected\"");?>>사이트 순</option>
 						<?php endif;?>
 						<?php if ($logined) :?> 
-							<option value="5">나의 ♥</option> 
+							<option value="5"<?php if ($sort == 5) echo (" selected=\"selected\"");?>>나의 ♥</option> 
 						<?php endif;?>
 					</select>
 				</div>
@@ -103,7 +120,13 @@
 						<div class="hd_result_div">
 							<div class="hd_code_img center_box">
 								<div class="hd_bookmark">
-									<a onclick="hotdealBookmark($(this).children(),<?=$prdtList->idx?>);"><img src="<?= $adr_img ?>heart.png"></a>
+									<a onclick="hotdealBookmark($(this).children(),<?=$prdtList->idx?>);">
+										<?php if ($prdtList->bookmark == 0) :?>
+											<img src="<?= $adr_img ?>heart.png">
+										<?php else :?>
+											<img src="<?= $adr_img ?>heart_on.png">
+										<?php endif;?>
+									</a>
 								</div>
 								<div class="center_content">
 									<a onclick="hotdealConnect('<?=$prdtList->idx?>', '<?=$prdtList->website_link?>');"><img src="<?=$prdtList->image?>"></a>
@@ -113,11 +136,11 @@
 								<div class="hd_brand text_overflow">
 									<?=$prdtList->site_name?>
 								</div>
-								<div class="hd_code_name">
-									<div>
-										<?=$prdtList->title?><br>
-										기한 : <?=$prdtList->deadline?> 까지
-									</div>
+								<div class="hd_product_name">
+										<?=$prdtList->title?>						
+								</div>
+								<div class="hd_code_duration">
+									기한 : <?=$prdtList->deadline?> 까지	
 								</div>
 								<div class="hd_code text_overflow">
 									<?php if (trim($prdtList->promo_code) != "") :?>
@@ -136,31 +159,31 @@
 
 			<input type="hidden" id="nowPage" value="<?=$paging['now']?>"/>
 			<div id="pagination_wrap">
-				<a onclick="hotdealHref('','',<?php echo ($paging['now'] - 1);?>);"><img src="<?= $adr_img ?>left_arrow.png"></a>
+				<a onclick="hotdealHref('','','',<?php echo ($paging['now'] - 1);?>);"><img src="<?= $adr_img ?>left_arrow.png"></a>
 				<div id="pagination">
 					<?php if ($paging['now'] > 3) :?>
-						<a onclick="hotdealHref('','',1);">1</a>
+						<a onclick="hotdealHref('','','',1);">1</a>
 						<span>···</span>
-						<!-- <a onclick="hotdealHref('','',<?php echo ($paging['now'] - 2);?>);"><?php echo ($paging['now'] - 2);?></a> -->
-						<a onclick="hotdealHref('','',<?php echo ($paging['now'] - 1);?>);"><?php echo ($paging['now'] - 1);?></a>
+						<!-- <a onclick="hotdealHref('','','',<?php echo ($paging['now'] - 2);?>);"><?php echo ($paging['now'] - 2);?></a> -->
+						<a onclick="hotdealHref('','','',<?php echo ($paging['now'] - 1);?>);"><?php echo ($paging['now'] - 1);?></a>
 					<?php else :?>
 						<?php for($i = 1 ; $i < $paging['now'] ; $i++) :?>
-							<a onclick="hotdealHref('','',<?=$i?>);"><?=$i?></a>
+							<a onclick="hotdealHref('','','',<?=$i?>);"><?=$i?></a>
 						<?php endfor;?>
 					<?php endif;?>
 					<a class="current_page"><?=$paging['now']?></a>
 					<?php if ($paging['max'] - $paging['now'] > 3) :?>
-						<a onclick="hotdealHref('','',<?php echo ($paging['now'] + 1);?>);"><?php echo ($paging['now'] + 1);?></a>
-						<!-- <a onclick="hotdealHref('','',<?php echo ($paging['now'] + 2);?>);"><?php echo ($paging['now'] + 2);?></a> -->
+						<a onclick="hotdealHref('','','',<?php echo ($paging['now'] + 1);?>);"><?php echo ($paging['now'] + 1);?></a>
+						<!-- <a onclick="hotdealHref('','','',<?php echo ($paging['now'] + 2);?>);"><?php echo ($paging['now'] + 2);?></a> -->
 						<span>···</span>
-						<a onclick="hotdealHref('','',<?=$paging['max']?>);"><?=$paging['max']?></a>
+						<a onclick="hotdealHref('','','',<?=$paging['max']?>);"><?=$paging['max']?></a>
 					<?php else :?>
 						<?php for($i = $paging['now'] + 1 ; $i < $paging['max'] + 1 ; $i++) :?>
-							<a onclick="hotdealHref('','',<?=$i?>);"><?=$i?></a>
+							<a onclick="hotdealHref('','','',<?=$i?>);"><?=$i?></a>
 						<?php endfor;?>
 					<?php endif;?>
 				</div>
-				<a onclick="hotdealHref('','',<?php echo ($paging['now'] + 1);?>);"><img src="<?= $adr_img ?>right_arrow.png"></a>
+				<a onclick="hotdealHref('','','',<?php echo ($paging['now'] + 1);?>);"><img src="<?= $adr_img ?>right_arrow.png"></a>
 			</div>
 		</div>
 		
@@ -169,23 +192,9 @@
 		?>
 		
 		<style>
-			#hotdeal_cate {
+			#hotdeal_cate, #brand_cate, #site_cate, #order_list {
 				width: 188px;
-				height: 45px;
-				border: 0 !important;
-				color: #FFF;
-				background: #F15A63 url('<?=$adr_img?>select_arrow.png') no-repeat 90% center;
-				text-indent: 0.01px;
-				text-overflow: "";
-				padding-left: 6px;
-				-webkit-appearance: none;
-				-moz-appearance: none;
-				appearance: none;
-			}
-			
-			#order_list {
-				width: 188px;
-				height: 45px;
+				height: 40px;
 				border: 1px solid #F15A63 !important;
 				color: #F15A63;
 				background: #fff url('<?=$adr_img?>select_arrow_pink.png') no-repeat 90% center;
@@ -198,11 +207,7 @@
 			}
 			
 			@media (max-width: 450px) {
-				#hotdeal_cate, #order_list {
-					width: 100%;
-					background: #F15A63 url('<?=$adr_img?>select_arrow.png') no-repeat 95% center;
-				}
-				#order_list {
+				#hotdeal_cate, #brand_cate, #site_cate, #order_list {
 					width: 100%;
 					margin-top: 5px;
 					background: #fff url('<?=$adr_img?>select_arrow_pink.png') no-repeat 95% center;

@@ -116,7 +116,7 @@
 //			$image = Image::make('/tmp/test.jpg')->fit(317,374)->save('/tmp/test_317.jpg');
 //			$image = Image::make('/tmp/test.jpg')->fit(164,167)->save('/tmp/test_164.jpg');
 
-			$image_name = $document_idx.'_image'.$image_num.'.jpg', $document_idx;
+			$image_name = $document_idx.'_image'.$image_num.'.jpg';
 
 			switch (target_idx) {
 				// community
