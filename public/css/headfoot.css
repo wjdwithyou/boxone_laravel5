@@ -16,6 +16,7 @@ a {
 input[type=file] {
 	padding: 5px;
 }
+dl,ul,ol,menu,li {list-style:none}
 .badge {
 	border-radius: 10px !important;
 }
@@ -190,6 +191,7 @@ button.close {
 		margin: 0 auto;
 		margin-top: 5px;
 		margin-bottom: 5px;
+		border-bottom: 1px solid #ddd;
 	}
 	#mobile_menu_btn {
 		display: none;
