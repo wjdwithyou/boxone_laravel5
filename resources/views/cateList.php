@@ -11,6 +11,7 @@
 <?php foreach($result1 as $list1):?>
 <Category>
 	<Cust ID>boxone</Cust ID>
+	<Cinc>l<?= $list1->idx?>m0s0</Cinc>
 	<Ccode1><?= $list1->idx?></Ccode1>
 	<Ccode2>0</Ccode2>
 	<Ccode3>0</Ccode3>
@@ -22,6 +23,7 @@
 <?php foreach($result2 as $list2):?>
 <Category>
 	<Cust ID>boxone</Cust ID>
+	<Cinc>l<?= $list2->large_idx?>m<?= $list2->idx?>s0</Cinc>
 	<Ccode1><?= $list2->large_idx?></Ccode1>
 	<Ccode2><?= $list2->idx?></Ccode2>
 	<Ccode3>0</Ccode3>
@@ -33,6 +35,7 @@
 <?php foreach($result3 as $list3):?>
 <Category>
 	<Cust ID>boxone</Cust ID>
+	<Cinc>l<?= $list3->lidx?>m<?= $list3->midx?>s<?= $list3->sidx?></Cinc>
 	<Ccode1><?= $list3->lidx?></Ccode1>
 	<Ccode2><?= $list3->midx?></Ccode2>
 	<Ccode3><?= $list3->sidx?></Ccode3>
