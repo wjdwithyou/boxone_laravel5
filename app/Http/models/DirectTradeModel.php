@@ -61,7 +61,8 @@ class DirectTradeModel
 				)
 			);	
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////상품입력받고
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		// direct_salelist에 주문상품 추가
 		DB::table('direct_salelist')->insertGetId(
@@ -305,6 +306,26 @@ class DirectTradeModel
 		return array('code' => 1,'msg' =>'success' ,'data' => $result);
 	}
 
+	/*
+	 *	주문  + direct_buylist 테이블에 해당 회원 구매내역 추가
+	 */
+	function cartOrder($member_idx)
+	{
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		// direct_salelist에 주문상품 추가
+		DB::table('direct_buylist')->insertGetId(
+			array(
+				'product_idx'	=> $result, 
+				'upload'=>DB::raw('now()')
+				)
+			);	
+
+		return array('code' => 1,'msg' =>'success' ,'data' => $result);
+
+	}
+
 
 /////COMPLAIN
  	/*
@@ -488,20 +509,17 @@ class DirectTradeModel
 		return array('code' => 1,'msg' =>'success' ,'data' => $result);
 	}	
 
+
+
 	/*
-	 *	판매자에 대한 구매평 리스트 가져오는 기능
+	 *	구매평 전체 개수 가져옴
 	 */
-	function getInfoSellerReview($seller_idx)
+	function getResultSize($seller_idx)
 	{
-		if( !(inputErrorCheck($seller_idx, 'seller_idx')))
+		if( !( inputErrorCheck($seller_idx, 'seller_idx')))
 			return ;
 
-		$result = DB::select("SELECT 
-									dr.title as dr_title,
-									dr.rating as dr_rating
-									dr.upload as dr_upload
-									dp.name as dp_name
-									dm.nickname as dm_nickname
+		$result = DB::select("SELECT idx
 								FROM direct_review AS dr
 								INNER JOIN direct_product AS dp
 									ON dr.direct_product_idx = dp.idx
@@ -509,8 +527,64 @@ class DirectTradeModel
 									ON dr.member_Idx = dm.idx
 								WHERE seller_idx='$seller_idx'
 								ORDER BY idx DESC");
+		return count($result);
+	}
 
-		return array('code' => 1,'msg' =>'success' ,'data' => $result);
+	/*
+	 *	판매자에 대한 구매평 리스트 가져오는 기능 
+	 *  paging 포함
+	 */
+	function getInfoSellerReview($seller_idx, $page_num, $maximum_page)
+	{
+		if( !(inputErrorCheck($seller_idx, 'seller_idx')))
+			return ;
+
+		// 마지막 데이터까지 전부 출력
+		if( $maximum_page == $page_num)
+		{
+			$result = DB::select("SELECT 
+										dr.title as dr_title,
+										dr.rating as dr_rating
+										dr.upload as dr_upload
+										dp.name as dp_name
+										dm.nickname as dm_nickname
+									FROM direct_review AS dr
+									INNER JOIN direct_product AS dp
+										ON dr.direct_product_idx = dp.idx
+									INNER JOIN direct_member AS dm
+										ON dr.member_Idx = dm.idx
+									WHERE seller_idx='$seller_idx'
+									ORDER BY idx DESC");		
+		}
+		// 맥시멈 데이터까지만 출력
+		else
+		{
+			$maximum_val = ($page_num)*5;
+			$result = DB::select("SELECT 
+							dr.title as dr_title,
+							dr.rating as dr_rating
+							dr.upload as dr_upload
+							dp.name as dp_name
+							dm.nickname as dm_nickname
+						FROM direct_review AS dr
+						INNER JOIN direct_product AS dp
+							ON dr.direct_product_idx = dp.idx
+						INNER JOIN direct_member AS dm
+							ON dr.member_Idx = dm.idx
+						WHERE seller_idx='$seller_idx'
+						ORDER BY idx DESC
+						LIMIT '$maximum_val'");
+		}
+
+		$start = ($page_num-1)*5;
+		$finish = count($result);
+		//해당하는 내용이 없을 경우
+		if( $finish==0 )
+		 	return array('code' => '406', 'msg' => 'no matched result');
+	
+
+ 	    return array('code' => 1, 'msg' => 'success', 'data' => array_slice($result, $start, $finish));
+
 	}
 
 
@@ -530,12 +604,4 @@ class DirectTradeModel
 	}
 
 
-	/*
-	 *	주문  + direct_buylist 테이블에 해당 회원 구매내역 추가
-	 */
-	function cartOrder($member_idx)
-	{
-
-
-	}
 }
