@@ -25,7 +25,7 @@ class ShipmentCustomModel{
 			return ;		
 				
 
-		$result = DB::table('shipment_foreign')->insertGetId(
+		$result = DB::table('shipment_custom')->insertGetId(
 			array(
 				'entry_num'=> $entry_num, 
 				'year'=> $year, 
@@ -48,7 +48,7 @@ class ShipmentCustomModel{
 		if(	!(	inputErrorCheck($member_idx, 'member_idx')))
 			return ;	
 		
-		$result = DB::select('select * from shipment_foreign where member_idx=? order by idx DESC', array($membeR_idx));
+		$result = DB::select('select * from shipment_custom where member_idx=? order by idx DESC', array($membeR_idx));
 
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
@@ -61,7 +61,7 @@ class ShipmentCustomModel{
 		if(	!(	inputErrorCheck($idx, 'idx')))
 			return ;		
 
- 		$result = DB::delete('delete from shipment_foreign where idx=?', array($idx));
+ 		$result = DB::delete('delete from shipment_custom where idx=?', array($idx));
 
 		if($result == true){
          	return array('code' => 1, 'msg' => 'success');
@@ -88,7 +88,7 @@ class ShipmentCustomModel{
 			return ;		
 				
 				
-		$result = DB::update('update shipment_foreign set product_name=?, year=?, icon=?, memo=?, status=?,	upload=now() where idx=?',
+		$result = DB::update('update shipment_custom set product_name=?, year=?, icon=?, memo=?, status=?,	upload=now() where idx=?',
 			array($product_name, $year, $icon, $memo, $status, $idx));
                     
  		if($result == true){
