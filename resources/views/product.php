@@ -33,6 +33,14 @@
 					<a href="<?=$adr_img ?>product_2.jpg"><img src="<?=$adr_img ?>product_2.jpg"></a>
 					<a href="<?=$adr_img ?>product_3.jpg"><img src="<?=$adr_img ?>product_3.jpg"></a>
 					<a href="<?=$adr_img ?>product_4.jpg"><img src="<?=$adr_img ?>product_4.jpg"></a>
+					<a href="<?=$adr_img ?>product_1.jpg"><img src="<?=$adr_img ?>product_1.jpg"></a>
+					<a href="<?=$adr_img ?>product_2.jpg"><img src="<?=$adr_img ?>product_2.jpg"></a>
+					<a href="<?=$adr_img ?>product_3.jpg"><img src="<?=$adr_img ?>product_3.jpg"></a>
+					<a href="<?=$adr_img ?>product_4.jpg"><img src="<?=$adr_img ?>product_4.jpg"></a>
+					<a href="<?=$adr_img ?>product_1.jpg"><img src="<?=$adr_img ?>product_1.jpg"></a>
+					<a href="<?=$adr_img ?>product_2.jpg"><img src="<?=$adr_img ?>product_2.jpg"></a>
+					<a href="<?=$adr_img ?>product_3.jpg"><img src="<?=$adr_img ?>product_3.jpg"></a>
+					<a href="<?=$adr_img ?>product_4.jpg"><img src="<?=$adr_img ?>product_4.jpg"></a>
 				</div>
 			</div>
 			<ul id="product_desc_wrap" class="col-xs-12 col-sm-6">
@@ -78,14 +86,8 @@
 						</button>
 					</div>
 				</li>
-				<li>
-					<select class="form-control">
-						<option>size</option>
-						<option>S</option>
-						<option>M</option>
-						<option>L</option>
-						<option>XL</option>
-					</select>
+				<li class="pd_li3 bo_color">
+					S/M/L/XL/XXL
 				</li>
 				<li class="pd_li4 li_underline">
 					<button type="button" class="bo_btn f_b">
@@ -107,7 +109,7 @@
 							</div>
 							<div class="f_r">
 								<button type="button" class="bo_btn3">
-									사러가기
+									구매하기
 								</button>
 							</div>
 						</li>
@@ -123,7 +125,7 @@
 							</div>
 							<div class="f_r">
 								<button type="button" class="bo_btn3">
-									사러가기
+									구매하기
 								</button>
 							</div>
 						</li>
@@ -138,7 +140,7 @@
 							</div>
 							<div class="f_r">
 								<button type="button" class="bo_btn3">
-									사러가기
+									구매하기
 								</button>
 							</div>
 						</li>
@@ -204,7 +206,7 @@
 									<td class="bo_color">무료배송</td>
 									<td class="review_btn">
 									<button type="button" class="bo_btn3">
-										사러가기
+										구매하기
 									</button></td>
 								</tr>
 							</table>
@@ -227,7 +229,7 @@
 									<td class="bo_color">무료배송</td>
 									<td class="review_btn">
 									<button type="button" class="bo_btn3">
-										사러가기
+										구매하기
 									</button></td>
 								</tr>
 							</table>
@@ -249,7 +251,7 @@
 									<td class="bo_color">무료배송</td>
 									<td class="review_btn">
 									<button type="button" class="bo_btn3">
-										사러가기
+										구매하기
 									</button></td>
 								</tr>
 							</table>
@@ -271,7 +273,7 @@
 									<td class="bo_color">무료배송</td>
 									<td class="review_btn">
 									<button type="button" class="bo_btn3">
-										사러가기
+										구매하기
 									</button></td>
 								</tr>
 							</table>
@@ -293,7 +295,7 @@
 									<td class="bo_color">무료배송</td>
 									<td class="review_btn">
 									<button type="button" class="bo_btn3">
-										사러가기
+										구매하기
 									</button></td>
 								</tr>
 							</table>
@@ -315,7 +317,7 @@
 									<td class="bo_color">무료배송</td>
 									<td class="review_btn">
 									<button type="button" class="bo_btn3">
-										사러가기
+										구매하기
 									</button></td>
 								</tr>
 							</table>
@@ -337,7 +339,7 @@
 									<td class="bo_color">무료배송</td>
 									<td class="review_btn">
 									<button type="button" class="bo_btn3">
-										사러가기
+										구매하기
 									</button></td>
 								</tr>
 							</table>
