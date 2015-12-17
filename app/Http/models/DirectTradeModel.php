@@ -48,7 +48,30 @@ class DirectTradeModel
 	function createProduct()
 	{
 
+		$result = DB::table('direct_product')->insertGetId(
+			array(
+				'member_idx'=> $member_idx, 
+				'name'			=> $name, 
+				'phone'			=> $phone, 
+				'addr_1'		=> $addr_1, 
+				'addr_2'		=> $addr_2, 
+				'account_bank'	=> $account_bank, 
+				'account_number'	=> $account_number, 
+				'upload'=>DB::raw('now()')
+				)
+			);	
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////상품입력받고
+
+		// direct_salelist에 주문상품 추가
+		DB::table('direct_salelist')->insertGetId(
+			array(
+				'product_idx'	=> $result, 
+				'upload'=>DB::raw('now()')
+				)
+			);	
+
+		return array('code' => 1,'msg' =>'success' ,'data' => $result);
 	}
 
 	/*
@@ -313,8 +336,9 @@ class DirectTradeModel
 
  	/*
 	 * 판매자가 컴플레인에 대한 답글 등록
+	 * 구매자도 답답글로 등록 가능: seller table에 등록
 	 */
- 	function createDirectComplainAnswer($seller_idx, $title, $contents, $complain_idx)
+ 	function createSellerComplainAnswer($seller_idx, $title, $contents, $complain_idx)
  	{
 		if( !( inputErrorCheck($seller_idx, 'seller_idx')
 				&& inputErrorCheck($title, 'title')
@@ -337,38 +361,111 @@ class DirectTradeModel
 		return array('code' => 1,'msg' =>'success' ,'data' => $result);
  	}
 
-
  	/*
- 	 *	해당 판매자의 컴플레인 + 답변까지 같이 넘겨줌
+ 	 *	판매자 컴플레인 리스트 출력
  	 */
- 	function getInfoSellerComplain($seller_idx)
- 	{
+ 	function getInfoListSellerComplain($seller_idx)
+ 	{	
 		if( !( inputErrorCheck($seller_idx, 'seller_idx')))
 			return ;
 
-		$result = DB::select('select * from 
-							(
-								direct_complain as dc
-								JOIN direct_complain_answer as dca
-								ON dc.idx=dca.complain_idx
-							) where dc.seller_idx=?', array($seller_idx));
+		$result = DB::select("SELECT 
+									dc.idx as dc_idx
+									dc.contents as d_contents,
+									dc.complain_category as dc_complain_category,
+									dc.upload as dc_upload,
+									dc.status as dc_status,
+									mm.nickname as mm_nickname
+								FROM direct_complain AS dc
+								INNER JOIN direct_member AS dm
+								 	ON dc.member_idx = dm.idx
+								INNER JOIN member AS mm 
+									ON dm.member_idx = mm.idx
+								WHERE dc.seller_idx='$seller_idx'
+								ORDER BY dc.idx DESC");
 
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
  	}
 
 
  	/*
- 	 *	현재 보고있는 판매자 상품의 다른 상품 추천
+ 	 *	해당 판매자의 컴플레인 내용 + 답변까지 같이 넘겨줌
  	 */
- 	function recommandOtherProduct($seller_idx)
+ 	function getSingleInfoSellerComplain($complain_idx)
  	{
- 		if( !( inputErrorCheck($seller_idx)))
+		if( !( inputErrorCheck($complain_idx, 'complain_idx')))
+			return ;
+
+		$result = DB::select("SELECT 
+									dc.contents as dc_contents, 
+									dc.image as dc_image,
+									dca.contents as dca_contents, 
+									dca.upload as dca_upload,
+									dca.image as dca_image,
+									mm.nickname as mm_nickname
+								FROM direct_complain AS dc
+								INNER JOIN direct_complain_answer AS dca
+									ON dc.idx = dca.complain_idx
+								INNER JOIN direct_member AS dm
+								 	ON dca.member_idx = dm.idx
+								INNER JOIN member AS mm 
+									ON dm.member_idx = mm.idx
+								WHERE dc.complain_idx='$complain_idx'
+								ORDER BY dca.idx ASC");
+
+		return array('code' => 1, 'msg' => 'success', 'data' => $result);
+ 	}
+
+ 	/*
+ 	 *	complain 검색 기능
+ 	 */
+ 	function getInfoComplainByKeyword($keyword, $type)
+ 	{
+ 		if( !( inputErrorCheck($keyword, 'keyword')
+ 				&& inputErrorCheck($type, 'type')))
  			return ;
 
- 		$result = DB::select('select * from direct_product where ');
- 	
-	}
+ 		if($type == 0)	// 문의종류로 검색
+ 		{
+			$result = DB::select("SELECT 
+										dc.idx as dc_idx
+										dc.contents as d_contents,
+										dc.complain_category as dc_complain_category,
+										dc.upload as dc_upload,
+										dc.status as dc_status,
+										mm.nickname as mm_nickname
+									FROM direct_complain AS dc
+									INNER JOIN direct_member AS dm
+									 	ON dc.member_idx = dm.idx
+									INNER JOIN member AS mm 
+										ON dm.member_idx = mm.idx
+									WHERE dc_status='$keyword'
+									ORDER BY dc.idx DESC");
+ 		}
+ 		else if($type == 1)	// 문의자로 검색
+ 		{
+			$result = DB::select("SELECT 
+										dc.idx as dc_idx
+										dc.contents as d_contents,
+										dc.complain_category as dc_complain_category,
+										dc.upload as dc_upload,
+										dc.status as dc_status,
+										mm.nickname as mm_nickname
+									FROM direct_complain AS dc
+									INNER JOIN direct_member AS dm
+									 	ON dc.member_idx = dm.idx
+									INNER JOIN member AS mm 
+										ON dm.member_idx = mm.idx
+									WHERE mm_nickname='$keyword'
+									ORDER BY dc.idx DESC");
+ 		}	
+		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 
+ 	}
+
+
+
+/////REVIEW
 	/*
 	 *	판매자에 대한 구매평 작성 기능
 	 */
@@ -399,9 +496,37 @@ class DirectTradeModel
 		if( !(inputErrorCheck($seller_idx, 'seller_idx')))
 			return ;
 
-		$result = DB::select('select * from direct_review where seller_idx=? order by idx DESC',array($seller_idx));
+		$result = DB::select("SELECT 
+									dr.title as dr_title,
+									dr.rating as dr_rating
+									dr.upload as dr_upload
+									dp.name as dp_name
+									dm.nickname as dm_nickname
+								FROM direct_review AS dr
+								INNER JOIN direct_product AS dp
+									ON dr.direct_product_idx = dp.idx
+								INNER JOIN direct_member AS dm
+									ON dr.member_Idx = dm.idx
+								WHERE seller_idx='$seller_idx'
+								ORDER BY idx DESC");
 
 		return array('code' => 1,'msg' =>'success' ,'data' => $result);
+	}
+
+
+
+
+ 	/*
+ 	 *	현재 보고있는 판매자 상품의 다른 상품 추천
+ 	 */
+ 	function recommandOtherProduct($seller_idx)
+ 	{
+ 		if( !( inputErrorCheck($seller_idx, 'seller_idx')))
+ 			return ;
+
+ 		$result = DB::select('select * from direct_product where seller_idx=? limit 4',array($seller_idx));
+ 	
+		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
 
 
