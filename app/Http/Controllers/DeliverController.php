@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
+use App\Http\models\ShipmentDomesticModel;
+use App\Http\models\ShipmentCustomModel;
 use Request;
 
 class DeliverController extends Controller {
@@ -71,6 +73,7 @@ class DeliverController extends Controller {
 		
 		// 화물번호 정리해서 보내기
 		$result = array();
+		$result['year'] = substr($year, 0, 4);
 		
 		$html = substr($html, strpos($html, "화물관리번호<"));
 		$result['hwaNum'] = substr($html, strpos($html, '40%">')+5, 20);
@@ -1207,5 +1210,42 @@ class DeliverController extends Controller {
 		return view($page, array('page' => $page, 'code' => 1, 'result' => $result, 'adr_ctr' => $adr_ctr));
 	}
 
+	public function createDelivery()
+	{
+		$sdModel = new ShipmentDomesticModel(); 
+		
+		$office = Request::input('office');
+		$num = Request::input('num');
+		$prdt = Request::input('prdt');
+		
+		if (session_id() == '') 	session_start();
+		$member_idx = $_SESSION['idx'];
+		
+		$result = $sdModel->create(trim($prdt), $num, $office, " ", $member_idx, " ", " ", "배송중");
+		
+		header('Content-Type: application/json');
+		echo json_encode($result);
+	}
+	
+	
+	public function createEntry()
+	{
+		$scModel = new ShipmentCustomModel();
+	
+		$num = Request::input('num');
+		$year = Request::input('yaer');
+	
+		if (session_id() == '') 	session_start();
+		$member_idx = $_SESSION['idx'];
+	
+		$result = $scModel->create($num, $year, " ", " ", $member_idx, "배송중");
+	
+		header('Content-Type: application/json');
+		echo json_encode($result);
+	}
 
 }
+
+
+
+

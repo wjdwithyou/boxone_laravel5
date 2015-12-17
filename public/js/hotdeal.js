@@ -1,32 +1,33 @@
 $(document).ready(function(){
-	
-	
 	$("#hotdeal_cate").on('change', function(){
-		hotdealHref("","","1");
+		hotdealHref('','','0',"1");
+	});
+	
+	$("#site_cate").on('change', function(){
+		hotdealHref('','','',"1");
 	});
 	
 	$("#order_list").on('change', function(){
-		hotdealHref("","","1");
+		var sort = $("#order_list").val() + "";
+		if (sort != "5")
+			hotdealHref('','','',"1");
+		else
+			hotdealHref('0','','0','1');
 	});
 });
 
-function hotdealHref(cate, sort, page)
+function hotdealHref(cate, sort, site, page)
 {
 	var adr_ctr = $("#adr_ctr").val();
 	
-	if (cate == "")
+	if (cate == '')
 		cate = $("#hotdeal_cate").val();
-	
-	if (sort == "")
+	if (sort == '')
 		sort = $("#order_list").val();
+	if (site == '')
+		site = $("#site_cate").val();
 	
-	if (page == "")
-		page = $("#nowPage").val();
-	
-	if (sort != "5")
-		location.href = (adr_ctr + "Hotdeal/indexCode?cate="+cate+"&page="+page+"&sort="+sort);
-	else
-		location.href = (adr_ctr + "Hotdeal/indexCode?sort="+sort);
+	location.href = (adr_ctr + "Hotdeal/indexCode?cate="+cate+"&page="+page+"&sort="+sort+"&site="+site);
 }
 
 function hotdealConnect(idx, url)

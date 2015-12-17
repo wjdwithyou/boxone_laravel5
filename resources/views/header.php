@@ -38,7 +38,7 @@
 					    </div>
 					    <div id="member_menu">
 					        <div><a href="<?=$adr_ctr?>Mypage/index">마이페이지</a></div>
-					        <div><a>배송/통관 조회</a></div>
+					        <div><a onclick="delivery_popup();">배송/통관 조회</a></div>
 					        <div><a rel="external" onclick="logout();">로그아웃</a></div>
 					    </div>
 					</div>
