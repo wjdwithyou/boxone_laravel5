@@ -93,8 +93,9 @@ input[type="checkbox"]:checked + label span {
 	padding-left: 8px;
 	padding-right: 8px;
 }
-#cm_board {
+.cm_board {
 	width: 100%;
+	border-bottom: 1px solid #ddd;
 }
 .cm_pc {
 	width: 80px;
@@ -179,12 +180,14 @@ input[type="checkbox"]:checked + label span {
 		float: left;
 	}
 }
+@media (min-width: 769px) {
+	.cm_mobile {
+		display: none;
+	}
+}
 @media (max-width: 768px) {
 	.cm_pc {
 		display: none;
-	}
-	.cm_mobile {
-		display: block;
 	}
 	#community_cate {
 		width: 130px;

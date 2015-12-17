@@ -7,16 +7,16 @@
 					<table id="cm_board">
 						<!-- 커뮤니티 글 -->
 						<tr>
-							<td class="cm_pc b_bottom"><?= $list->idx?></td>
-							<td class="cm_board_title b_bottom"><a><?= $list->title?></a></td>
-							<td class="cm_pc b_bottom"><?= $list->nickname?></td>
-							<td class="cm_pc b_bottom"><?= $list->date?></td>
-							<td class="cm_pc b_bottom"><?= $list->hit_count?></td>
-							<td class="cm_board_reply cm_mobile b_bottom" rowspan="2" hidden>
+							<td class="cm_pc"><?= $list->idx?></td>
+							<td class="cm_board_title"><a><?= $list->title?></a></td>
+							<td class="cm_pc"><?= $list->nickname?></td>
+							<td class="cm_pc"><?= $list->date?></td>
+							<td class="cm_pc"><?= $list->hit_count?></td>
+							<td class="cm_board_reply cm_mobile" rowspan="2" hidden>
 								<div class="numberCircle"><?= $list->bookmark_count?></div>
 							</td>
 						</tr>
-						<tr class="b_bottom cm_mobile" hidden>
+						<tr class="cm_mobile" hidden>
 							<td class="cm_board_writer bo_color"><?= $list->nickname?>&nbsp;|&nbsp;<?= $list->date?>&nbsp;|&nbsp;조회수&nbsp;<?= $list->hit_count?></td>
 						</tr>
 						<!-- /커뮤니티 글 -->
