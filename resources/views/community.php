@@ -40,7 +40,7 @@
 					<button type="button" class="bo_btn">
 						앨범형
 					</button>
-					<button type="button" class="bo_btn" onclick='location.href="<?=$adr_ctr?>Community/write"'>
+					<button type="button" class="bo_btn" onclick='location.href="<?=$adr_ctr ?>Community/write"'>
 						글쓰기
 					</button>
 				</div>
@@ -76,101 +76,235 @@
 					<label for="c7"><span></span>Check Box 1</label>
 				</div>
 			</div>
-			
-			<div id="cm_board_wrap">
-				<table id="cm_board">
-					<!-- 커뮤니티 글 -->
+
+			<div id="cm_board_wrap" class="cl_b">
+				<!-- 게시판형 -->
+				<table class="cm_board">
 					<tr>
-						<td class="cm_board_no">127257</td>
-						<td class="cm_board_title"><a>신규 통장 발급 얼마나 까다롭기에, 통장고시라는 말까지</a></td>
-						<td class="cm_board_reply b_bottom" rowspan="2">
+						<td class="cm_pc ">127257</td>
+						<td class="cm_board_title "><a>신규 통장 발급 얼마나 까다롭기에, 통장고시라는 말까지</a></td>
+						<td class="cm_pc ">서장원</td>
+						<td class="cm_pc ">2015-07-14</td>
+						<td class="cm_pc ">223</td>
+						<td class="cm_board_reply cm_mobile" rowspan="2">
 							<div class="numberCircle">12</div>
 						</td>
 					</tr>
-					<tr class="b_bottom">
-						<td class="cm_board_no"></td>
-						<td class="cm_board_writer bo_color">서장원 | 2015-07-14 | 223</td>
-					</tr>
-					<!-- /커뮤니티 글 -->
-					<tr>
-						<td class="cm_board_no">127257</td>
-						<td class="cm_board_title"><a>신규 통장 발급 얼마나 까다롭기에, 통장고시라는 말까지</a></td>
-						<td class="cm_board_reply b_bottom" rowspan="2">
-							<div class="numberCircle">12</div>
-						</td>
-					</tr>
-					<tr class="b_bottom">
-						<td class="cm_board_no"></td>
-						<td class="cm_board_writer bo_color">서장원 | 2015-07-14 | 223</td>
-					</tr>
-					<tr>
-						<td class="cm_board_no">127257</td>
-						<td class="cm_board_title"><a>신규 통장 발급 얼마나 까다롭기에, 통장고시라는 말까지</a></td>
-						<td class="cm_board_reply b_bottom" rowspan="2">
-							<div class="numberCircle">12</div>
-						</td>
-					</tr>
-					<tr class="b_bottom">
-						<td class="cm_board_no"></td>
-						<td class="cm_board_writer bo_color">서장원 | 2015-07-14 | 223</td>
-					</tr>
-					<tr>
-						<td class="cm_board_no">127257</td>
-						<td class="cm_board_title"><a>신규 통장 발급 얼마나 까다롭기에, 통장고시라는 말까지</a></td>
-						<td class="cm_board_reply b_bottom" rowspan="2">
-							<div class="numberCircle">12</div>
-						</td>
-					</tr>
-					<tr class="b_bottom">
-						<td class="cm_board_no"></td>
-						<td class="cm_board_writer bo_color">서장원 | 2015-07-14 | 223</td>
-					</tr>
-					<tr>
-						<td class="cm_board_no">127257</td>
-						<td class="cm_board_title"><a>신규 통장 발급 얼마나 까다롭기에, 통장고시라는 말까지</a></td>
-						<td class="cm_board_reply b_bottom" rowspan="2">
-							<div class="numberCircle">12</div>
-						</td>
-					</tr>
-					<tr class="b_bottom">
-						<td class="cm_board_no"></td>
-						<td class="cm_board_writer bo_color">서장원 | 2015-07-14 | 223</td>
-					</tr>
-					<tr>
-						<td class="cm_board_no">127257</td>
-						<td class="cm_board_title"><a>신규 통장 발급 얼마나 까다롭기에, 통장고시라는 말까지</a></td>
-						<td class="cm_board_reply b_bottom" rowspan="2">
-							<div class="numberCircle">12</div>
-						</td>
-					</tr>
-					<tr class="b_bottom">
-						<td class="cm_board_no"></td>
-						<td class="cm_board_writer bo_color">서장원 | 2015-07-14 | 223</td>
-					</tr>
-					<tr>
-						<td class="cm_board_no">127257</td>
-						<td class="cm_board_title"><a>신규 통장 발급 얼마나 까다롭기에, 통장고시라는 말까지</a></td>
-						<td class="cm_board_reply b_bottom" rowspan="2">
-							<div class="numberCircle">12</div>
-						</td>
-					</tr>
-					<tr class="b_bottom">
-						<td class="cm_board_no"></td>
-						<td class="cm_board_writer bo_color">서장원 | 2015-07-14 | 223</td>
-					</tr>
-					<tr>
-						<td class="cm_board_no">127257</td>
-						<td class="cm_board_title"><a>신규 통장 발급 얼마나 까다롭기에, 통장고시라는 말까지</a></td>
-						<td class="cm_board_reply b_bottom" rowspan="2">
-							<div class="numberCircle">12</div>
-						</td>
-					</tr>
-					<tr class="b_bottom">
-						<td class="cm_board_no"></td>
-						<td class="cm_board_writer bo_color">서장원 | 2015-07-14 | 223</td>
+					<tr class="cm_mobile">
+						<td class="cm_board_writer bo_color">서장원&nbsp;|&nbsp;2015-07-14&nbsp;|&nbsp;조회수&nbsp;223</td>
 					</tr>
 				</table>
+				<!-- /게시판형 -->
+				<table class="cm_board">
+					<tr>
+						<td class="cm_pc ">127257</td>
+						<td class="cm_board_title "><a>신규 통장 발급 얼마나 까다롭기에, 통장고시라는 말까지</a></td>
+						<td class="cm_pc ">서장원</td>
+						<td class="cm_pc ">2015-07-14</td>
+						<td class="cm_pc ">223</td>
+						<td class="cm_board_reply cm_mobile" rowspan="2">
+							<div class="numberCircle">12</div>
+						</td>
+					</tr>
+					<tr class="cm_mobile">
+						<td class="cm_board_writer bo_color">서장원&nbsp;|&nbsp;2015-07-14&nbsp;|&nbsp;조회수&nbsp;223</td>
+					</tr>
+				</table>
+				<table class="cm_board">
+					<tr>
+						<td class="cm_pc ">127257</td>
+						<td class="cm_board_title "><a>신규 통장 발급 얼마나 까다롭기에, 통장고시라는 말까지</a></td>
+						<td class="cm_pc ">서장원</td>
+						<td class="cm_pc ">2015-07-14</td>
+						<td class="cm_pc ">223</td>
+						<td class="cm_board_reply cm_mobile" rowspan="2">
+							<div class="numberCircle">12</div>
+						</td>
+					</tr>
+					<tr class="cm_mobile">
+						<td class="cm_board_writer bo_color">서장원&nbsp;|&nbsp;2015-07-14&nbsp;|&nbsp;조회수&nbsp;223</td>
+					</tr>
+				</table>
+				<table class="cm_board">
+					<tr>
+						<td class="cm_pc ">127257</td>
+						<td class="cm_board_title "><a>신규 통장 발급 얼마나 까다롭기에, 통장고시라는 말까지</a></td>
+						<td class="cm_pc ">서장원</td>
+						<td class="cm_pc ">2015-07-14</td>
+						<td class="cm_pc ">223</td>
+						<td class="cm_board_reply cm_mobile" rowspan="2">
+							<div class="numberCircle">12</div>
+						</td>
+					</tr>
+					<tr class="cm_mobile">
+						<td class="cm_board_writer bo_color">서장원&nbsp;|&nbsp;2015-07-14&nbsp;|&nbsp;조회수&nbsp;223</td>
+					</tr>
+				</table>
+				<table class="cm_board">
+					<tr>
+						<td class="cm_pc ">127257</td>
+						<td class="cm_board_title "><a>신규 통장 발급 얼마나 까다롭기에, 통장고시라는 말까지</a></td>
+						<td class="cm_pc ">서장원</td>
+						<td class="cm_pc ">2015-07-14</td>
+						<td class="cm_pc ">223</td>
+						<td class="cm_board_reply cm_mobile" rowspan="2">
+							<div class="numberCircle">12</div>
+						</td>
+					</tr>
+					<tr class="cm_mobile">
+						<td class="cm_board_writer bo_color">서장원&nbsp;|&nbsp;2015-07-14&nbsp;|&nbsp;조회수&nbsp;223</td>
+					</tr>
+				</table>
+				
+				<!-- 앨범형 -->
+				<div class="hd_result_div_wrap">
+					<div class="hd_result_div">
+						<div class="hd_product_img center_box">
+							<div class="center_content">
+								<a onclick=""><img src="<?= $adr_img ?>calculator.jpg"></a>
+							</div>
+						</div>
+						<div class="hd_site_desc">
+							<div class="hd_brand text_overflow">
+								토리버치 드디어 왔어요! 개봉샷 올립니다! 평가점
+							</div>
+							<div class="album_writer bo_color">
+									서장원 | 2015-07-14 | 223
+							</div>
+							<div class="album_btnset text_overflow">
+								<img src="<?= $adr_img ?>suki.png">
+								<span class="album_count">16</span>
+								&nbsp;
+								<img src="<?= $adr_img ?>reply.png">
+								<span class="album_count">5</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /앨범형 -->
+				<div class="hd_result_div_wrap">
+					<div class="hd_result_div">
+						<div class="hd_product_img center_box">
+							<div class="center_content">
+								<a onclick=""><img src="<?= $adr_img ?>calculator.jpg"></a>
+							</div>
+						</div>
+						<div class="hd_site_desc">
+							<div class="hd_brand text_overflow">
+								토리버치 드디어 왔어요! 개봉샷 올립니다! 평가점
+							</div>
+							<div class="album_writer bo_color">
+									서장원 | 2015-07-14 | 223
+							</div>
+							<div class="album_btnset text_overflow">
+								<img src="<?= $adr_img ?>suki.png">
+								<span class="album_count">16</span>
+								&nbsp;
+								<img src="<?= $adr_img ?>reply.png">
+								<span class="album_count">5</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="hd_result_div_wrap">
+					<div class="hd_result_div">
+						<div class="hd_product_img center_box">
+							<div class="center_content">
+								<a onclick=""><img src="<?= $adr_img ?>calculator.jpg"></a>
+							</div>
+						</div>
+						<div class="hd_site_desc">
+							<div class="hd_brand text_overflow">
+								토리버치 드디어 왔어요! 개봉샷 올립니다! 평가점
+							</div>
+							<div class="album_writer bo_color">
+									서장원 | 2015-07-14 | 223
+							</div>
+							<div class="album_btnset text_overflow">
+								<img src="<?= $adr_img ?>suki.png">
+								<span class="album_count">16</span>
+								&nbsp;
+								<img src="<?= $adr_img ?>reply.png">
+								<span class="album_count">5</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="hd_result_div_wrap">
+					<div class="hd_result_div">
+						<div class="hd_product_img center_box">
+							<div class="center_content">
+								<a onclick=""><img src="<?= $adr_img ?>calculator.jpg"></a>
+							</div>
+						</div>
+						<div class="hd_site_desc">
+							<div class="hd_brand text_overflow">
+								토리버치 드디어 왔어요! 개봉샷 올립니다! 평가점
+							</div>
+							<div class="album_writer bo_color">
+									서장원 | 2015-07-14 | 223
+							</div>
+							<div class="album_btnset text_overflow">
+								<img src="<?= $adr_img ?>suki.png">
+								<span class="album_count">16</span>
+								&nbsp;
+								<img src="<?= $adr_img ?>reply.png">
+								<span class="album_count">5</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="hd_result_div_wrap">
+					<div class="hd_result_div">
+						<div class="hd_product_img center_box">
+							<div class="center_content">
+								<a onclick=""><img src="<?= $adr_img ?>calculator.jpg"></a>
+							</div>
+						</div>
+						<div class="hd_site_desc">
+							<div class="hd_brand text_overflow">
+								토리버치 드디어 왔어요! 개봉샷 올립니다! 평가점
+							</div>
+							<div class="album_writer bo_color">
+									서장원 | 2015-07-14 | 223
+							</div>
+							<div class="album_btnset text_overflow">
+								<img src="<?= $adr_img ?>suki.png">
+								<span class="album_count">16</span>
+								&nbsp;
+								<img src="<?= $adr_img ?>reply.png">
+								<span class="album_count">5</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="hd_result_div_wrap">
+					<div class="hd_result_div">
+						<div class="hd_product_img center_box">
+							<div class="center_content">
+								<a onclick=""><img src="<?= $adr_img ?>calculator.jpg"></a>
+							</div>
+						</div>
+						<div class="hd_site_desc">
+							<div class="hd_brand text_overflow">
+								토리버치 드디어 왔어요! 개봉샷 올립니다! 평가점
+							</div>
+							<div class="album_writer bo_color">
+									서장원 | 2015-07-14 | 223
+							</div>
+							<div class="album_btnset">
+								<img src="<?= $adr_img ?>suki.png">
+								<span class="album_count">16</span>
+								&nbsp;
+								<img src="<?= $adr_img ?>reply.png">
+								<span class="album_count">5</span>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
+			
+			
 			
 			<div class="pagination_wrap cl_b">
 				<a onclick=""><img src="<?= $adr_img ?>left_arrow.png"></a>

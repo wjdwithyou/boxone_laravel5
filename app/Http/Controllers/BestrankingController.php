@@ -36,6 +36,7 @@ class BestrankingController extends Controller {
 				
 		// 사이트 카테고리 가져오기
 		$allCate = $ssModel->getCate();
+		$allCate['data'] = array_slice($allCate['data'], 0, count($allCate['data'])-1);
 		
 		// 카테고리 별 사이트 베스트 랭킹
 		$upper = $ssModel->getInfoList($cate);		
