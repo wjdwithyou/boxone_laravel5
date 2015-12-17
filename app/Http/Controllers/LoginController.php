@@ -301,7 +301,7 @@ class LoginController extends Controller {
 				$m->to($user['email'], $user['name'])->subject('Find Pw');
 			});
 			
-			$result['msg'] = $str;
+			$memberModel->createSession($email, $str);
 			
 			header('Content-Type: application/json');
 			echo json_encode($result);
@@ -313,14 +313,32 @@ class LoginController extends Controller {
 	 * 작성자 : 박용호
 	 * 비밀번호 변경 -> 인증코드 정상 입력 시 호출, 새로운 비밀번호로 변경.
 	 */
+	public function checkSession()
+	{
+		$memberModel = new MemberModel();
+	
+		$email = Request::input('email');
+		$num = Request::input('num');
+	
+		$result = $memberModel->checkSession($email, $num);
+	
+		header('Content-Type: application/json');
+		echo json_encode($result);
+	}
+	
+	/*
+	 * 2015.11.17
+	 * 작성자 : 박용호
+	 * 비밀번호 변경 -> 인증코드 정상 입력 시 호출, 새로운 비밀번호로 변경.
+	 */
 	public function updatePw()
 	{
 		$memberModel = new MemberModel();
 		
-		$idx = Request::input('idx');
+		$email = Request::input('email');
 		$pw = Request::input('pw');
 		
-		$result = $memberModel->updatePw($idx, $pw);
+		$result = $memberModel->updatePw($email, $pw);
 		
 		header('Content-Type: application/json');
 		echo json_encode($result);

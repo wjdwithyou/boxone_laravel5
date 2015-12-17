@@ -415,6 +415,8 @@ class DeliverController extends Controller {
 					$temp['state'] = substr($temp['state'], 0, strpos($temp['state'], "보내셨습니다"))."보냄";
 				if (strpos($temp['state'], " 입니다"))
 					$temp['state'] = substr($temp['state'], 0, strpos($temp['state'], " 입니다"));
+				if ($temp['state'] == "배달 완료")
+					$temp['state'] = "배달완료";
 				
 				array_push($info, $temp);
 				
@@ -481,6 +483,8 @@ class DeliverController extends Controller {
 					$temp['state'] = substr($temp['state'], 0, strpos($temp['state'], "했습니다"));
 				if (strpos($temp['state'], "입니다"))
 					$temp['state'] = substr($temp['state'], 0, strpos($temp['state'], "입니다"));
+				if (strpos($temp['state'], "물품을 전달"))
+					$temp['state'] = "배달완료";
 			
 				$temp['date'] = "";
 				$temp['time'] = "";
@@ -615,10 +619,20 @@ class DeliverController extends Controller {
 				$html = substr($html, strpos($html, " ") + 1);
 				$temp['time'] = substr($html, 0, strpos($html, "<"));
 		
-				// state
+				// 상태
 				$html = substr($html, strpos($html, "<td"));
 				$html = substr($html, strpos($html, ">") + 1);
 				$temp['state'] = trim(substr($html, 0, strpos($html, "<")));
+				
+				if (strpos($temp['state'], "배송지에 도착"))
+					$temp['state'] = "배송지에 도착";
+				if (strpos($temp['state'], "상품이 이동중"))
+					$temp['state'] = "배송지역 이동중";
+				if (strpos($temp['state'], "배송할 예정"))
+					$temp['state'] = "배송 예정";
+				if (strpos($temp['state'], "배송완료"))
+					$temp['state'] = "배송완료";
+					
 					
 				// 위치
 				$html = substr($html, strpos($html, "href"));
@@ -914,6 +928,8 @@ class DeliverController extends Controller {
 				// state
 				$html = substr($html, strpos($html, "<") - 6);
 				$temp['state'] = substr($html, 0, strpos($html, "<"));
+				if ($temp['state'] == "완료")
+					$temp['state'] = "배송완료";
 					
 				array_push($info, $temp);
 				
@@ -925,7 +941,7 @@ class DeliverController extends Controller {
 		else if ($company == "천일택배")
 		{
 			$html = file_get_contents('http://www.chunil.co.kr/HTrace/HTrace.jsp?transNo='.$num);
-			$html = mb_convert_encoding($html, 'UTF-8', 'EUC-KR');
+			//$html = mb_convert_encoding($html, 'UTF-8', 'EUC-KR');
 			
 			if (strpos($html, "결과가 없습니다"))
 				return view($page, array('page' => $page, 'code' => 0));
@@ -971,6 +987,8 @@ class DeliverController extends Controller {
 				$html = substr($html, strpos($html, "<td"));
 				$html = substr($html, strpos($html, ">") + 1);
 				$temp['state'] = substr($html, 0, strpos($html, "<"));
+				if ($temp['state'] == "도착")
+					$temp['state'] = "배송완료";
 					
 				$temp['time'] = "";
 				array_push($info, $temp);
@@ -1192,6 +1210,8 @@ class DeliverController extends Controller {
 					$temp['state'] = "TNT센터 도착";
 				if (strpos($temp['state'], "습니다"))
 					$temp['state'] = substr($temp['state'], 0, strpos($temp['state'], "습니다") - 6);
+				if (strpos($temp['state'], "인도가 완료"))
+					$temp['state'] = "배송완료";
 				
 				array_push($info, $temp);
 			}
