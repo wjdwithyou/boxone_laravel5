@@ -155,9 +155,9 @@ class MemberModel{
       /*
        *   비밀번호 찾기 에서 사용
        */
-      function updatePw($member_idx, $pw)
+      function updatePw($member_email, $pw)
       {
-      	if( !(inputErrorCheck($member_idx, 'member_idx') 
+      	if( !(inputErrorCheck($member_email, 'member_email') 
             && inputErrorCheck($pw, 'pw')))
         	return ;
       
@@ -172,8 +172,8 @@ class MemberModel{
             $hashedPassword = Hash::make($pw);
         }
 
-      	$result = DB::update('update member set pw=? where idx=?', 
-      		array($hashedPassword, $member_idx));
+      	$result = DB::update('update member set pw=? where email=?', 
+      		array($hashedPassword, $member_email));
       	
       	if ($result == 1)
       		return array('code' => 1, 'msg' => 'success');
@@ -223,9 +223,9 @@ class MemberModel{
     /*
      *  세션 생성
      */
-    function createSession($member_idx, $session)
+    function createSession($member_email, $session)
     {
-        if( !(  inputErrorCheck($member_idx, 'member_idx')
+        if( !(  inputErrorCheck($member_email, 'member_email')
             && inputErrorCheck($session, 'session')))
           return ;
         
@@ -240,7 +240,7 @@ class MemberModel{
             $hashedSession = Hash::make($session);
         }
 
-        $result = DB::update('update member set session=?, upload=now() where idx=?', array($hashedSession, $member_idx));
+        $result = DB::update('update member set session=?, upload=now() where email=?', array($hashedSession, $member_email));
 
       if($result > 0)
         return array('code' => 1, 'data' => $result);
@@ -251,11 +251,11 @@ class MemberModel{
     /*
      *  세션 체크
      */
-    function checkSession($member_idx, $session)
+    function checkSession($member_email, $session)
     {
-      $target_member = DB::select('select * from member where idx=?', array($member_idx));
+      $target_member = DB::select('select session from member where email=?', array($member_email));
 
-      if(count($target_member)>0 && Hash::check($session, $target_member[0]->session)){
+      if(Hash::check($session, $target_member[0]->session)){
           //로그인 성공
           return array('code' => 1, 'data' => $target_member);
       } 
@@ -268,9 +268,9 @@ class MemberModel{
     /*
      *  세션 삭제
      */
-    function deleteSession($member_idx)
+    function deleteSession($member_email)
     {
-      $target_member = DB::update('update member set session=NULL, upload=now() where idx=?', array($member_idx));
+      $target_member = DB::update('update member set session=NULL, upload=now() where email=?', array($member_email));
 
 
       if($result == true){

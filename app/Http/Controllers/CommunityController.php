@@ -16,7 +16,13 @@ class CommunityController extends Controller {
 	|	Route::get('/', 'HomeController@showWelcome');
 	|
 	*/
-
+	
+	public function index()
+	{
+		$page = 'community';
+		return view($page, array('page' => $page));
+	}
+	
 	public function write()
 	{
 		$page = 'community_write';

@@ -15,6 +15,10 @@
     return view('welcome');
 });*/
 
+Route::get('/cateList', function(){
+	return view('cateList');
+});
+
 Route::get('/', 'MainController@index');
 
 Route::any('{ctr}/{fnc}', Request::segment(1)."Controller@".Request::segment(2));

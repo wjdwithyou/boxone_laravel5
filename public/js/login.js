@@ -544,8 +544,7 @@ function checkPwc(adr)
  * 작성자 : 박용호
  * 비밀번호 찾기 단계 1 -> 이메일로 인증번호 발송
  */
-var certifyNum;
-var idx = "";
+var email;
 function findPw()
 {
 	email = $("#find_pw_email").val();
@@ -568,8 +567,6 @@ function findPw()
 				result = JSON.parse(result);
 				if (result.code == 1)
 				{
-					certifyNum = result.msg;
-					idx = result.idx;
 					move_find_pw_certify(email);
 				}
 				else
@@ -599,23 +596,42 @@ function findPwCertify()
 	
 	if (cnt != 0)
 	{
-		if (num == certifyNum)
-		{
-			alert ("인증 완료되었습니다. 새로운 비밀번호를 설정해주세요.");
-			move_find_pw_new();
-		}
-		else
-		{
-			--cnt;
-			alert ("잘못된 인증번호를 입력하셨습니다.");
-			$("#find_pw_certify_head").text("인증번호를 입력하세요 (남은횟수 : "+cnt+")");
-			if (cnt == 0)
+		$.ajax
+		({
+			url: adr_ctr+'Login/checkSession',
+			type: 'post',
+			async: false,
+			data: {
+				email: email,
+				num: num
+			},		 
+			success: function(result)
 			{
-				cnt = 5;
-				alert ("인증번호를 새로 받아주세요.");
-				close_popup();
+				result = JSON.parse(result);
+				if (result.code == 1)
+				{
+					alert ("인증 완료되었습니다. 새로운 비밀번호를 설정해주세요.");
+					move_find_pw_new();
+				}
+				else
+				{
+					--cnt;
+					alert ("잘못된 인증번호를 입력하셨습니다.");
+					$("#find_pw_certify_head").text("인증번호를 입력하세요 (남은횟수 : "+cnt+")");
+					if (cnt == 0)
+					{
+						cnt = 5;
+						alert ("인증번호를 새로 받아주세요.");
+						close_popup("#boxone_basis_modal");
+					}
+				}
+			},	
+			error:function(request,status,error)
+			{
+				console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
-		}
+		});
 	}
 }
 
@@ -630,8 +646,6 @@ function changePw(str)
 	var pw = $(str + "pw").val();
 	var pw_msg = $(str + "pw_msg").text();
 	var pwc = $(str + "pw_confirm").val();
-	if (idx == "")
-		idx = $("#member_idx").val();
 	
 	if (pw.length == 0)
 	{
@@ -653,7 +667,7 @@ function changePw(str)
 			type: 'post',
 			async: false,
 			data: {
-				idx: idx,
+				email: email,
 				pw: pw
 			},		 
 			success: function(result)
