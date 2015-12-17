@@ -77,30 +77,86 @@
 				</div>
 			</div>
 
-			<!-- 게시판형 -->
 			<div id="cm_board_wrap" class="cl_b">
-				<table id="cm_board">
-					<!-- 커뮤니티 글 -->
+				<!-- 게시판형 -->
+				<table class="cm_board">
 					<tr>
-						<td class="cm_pc b_bottom">127257</td>
-						<td class="cm_board_title b_bottom"><a>신규 통장 발급 얼마나 까다롭기에, 통장고시라는 말까지</a></td>
-						<td class="cm_pc b_bottom">서장원</td>
-						<td class="cm_pc b_bottom">2015-07-14</td>
-						<td class="cm_pc b_bottom">223</td>
-						<td class="cm_board_reply cm_mobile b_bottom" rowspan="2" hidden>
+						<td class="cm_pc ">127257</td>
+						<td class="cm_board_title "><a>신규 통장 발급 얼마나 까다롭기에, 통장고시라는 말까지</a></td>
+						<td class="cm_pc ">서장원</td>
+						<td class="cm_pc ">2015-07-14</td>
+						<td class="cm_pc ">223</td>
+						<td class="cm_board_reply cm_mobile" rowspan="2">
 							<div class="numberCircle">12</div>
 						</td>
 					</tr>
-					<tr class="b_bottom cm_mobile" hidden>
+					<tr class="cm_mobile">
 						<td class="cm_board_writer bo_color">서장원&nbsp;|&nbsp;2015-07-14&nbsp;|&nbsp;조회수&nbsp;223</td>
 					</tr>
-					<!-- /커뮤니티 글 -->
 				</table>
-			</div>
-			<!-- /게시판형 -->
-			
-			<!-- 앨범형 -->
-			<div id="cm_album_wrap" class="cl_b">
+				<!-- /게시판형 -->
+				<table class="cm_board">
+					<tr>
+						<td class="cm_pc ">127257</td>
+						<td class="cm_board_title "><a>신규 통장 발급 얼마나 까다롭기에, 통장고시라는 말까지</a></td>
+						<td class="cm_pc ">서장원</td>
+						<td class="cm_pc ">2015-07-14</td>
+						<td class="cm_pc ">223</td>
+						<td class="cm_board_reply cm_mobile" rowspan="2">
+							<div class="numberCircle">12</div>
+						</td>
+					</tr>
+					<tr class="cm_mobile">
+						<td class="cm_board_writer bo_color">서장원&nbsp;|&nbsp;2015-07-14&nbsp;|&nbsp;조회수&nbsp;223</td>
+					</tr>
+				</table>
+				<table class="cm_board">
+					<tr>
+						<td class="cm_pc ">127257</td>
+						<td class="cm_board_title "><a>신규 통장 발급 얼마나 까다롭기에, 통장고시라는 말까지</a></td>
+						<td class="cm_pc ">서장원</td>
+						<td class="cm_pc ">2015-07-14</td>
+						<td class="cm_pc ">223</td>
+						<td class="cm_board_reply cm_mobile" rowspan="2">
+							<div class="numberCircle">12</div>
+						</td>
+					</tr>
+					<tr class="cm_mobile">
+						<td class="cm_board_writer bo_color">서장원&nbsp;|&nbsp;2015-07-14&nbsp;|&nbsp;조회수&nbsp;223</td>
+					</tr>
+				</table>
+				<table class="cm_board">
+					<tr>
+						<td class="cm_pc ">127257</td>
+						<td class="cm_board_title "><a>신규 통장 발급 얼마나 까다롭기에, 통장고시라는 말까지</a></td>
+						<td class="cm_pc ">서장원</td>
+						<td class="cm_pc ">2015-07-14</td>
+						<td class="cm_pc ">223</td>
+						<td class="cm_board_reply cm_mobile" rowspan="2">
+							<div class="numberCircle">12</div>
+						</td>
+					</tr>
+					<tr class="cm_mobile">
+						<td class="cm_board_writer bo_color">서장원&nbsp;|&nbsp;2015-07-14&nbsp;|&nbsp;조회수&nbsp;223</td>
+					</tr>
+				</table>
+				<table class="cm_board">
+					<tr>
+						<td class="cm_pc ">127257</td>
+						<td class="cm_board_title "><a>신규 통장 발급 얼마나 까다롭기에, 통장고시라는 말까지</a></td>
+						<td class="cm_pc ">서장원</td>
+						<td class="cm_pc ">2015-07-14</td>
+						<td class="cm_pc ">223</td>
+						<td class="cm_board_reply cm_mobile" rowspan="2">
+							<div class="numberCircle">12</div>
+						</td>
+					</tr>
+					<tr class="cm_mobile">
+						<td class="cm_board_writer bo_color">서장원&nbsp;|&nbsp;2015-07-14&nbsp;|&nbsp;조회수&nbsp;223</td>
+					</tr>
+				</table>
+				
+				<!-- 앨범형 -->
 				<div class="hd_result_div_wrap">
 					<div class="hd_result_div">
 						<div class="hd_product_img center_box">
@@ -125,6 +181,7 @@
 						</div>
 					</div>
 				</div>
+				<!-- /앨범형 -->
 				<div class="hd_result_div_wrap">
 					<div class="hd_result_div">
 						<div class="hd_product_img center_box">
@@ -246,7 +303,8 @@
 					</div>
 				</div>
 			</div>
-			<!-- /앨범형 -->
+			
+			
 			
 			<div class="pagination_wrap cl_b">
 				<a onclick=""><img src="<?= $adr_img ?>left_arrow.png"></a>
