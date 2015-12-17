@@ -102,7 +102,7 @@
 			<div class="menu sidemenu_div sidemenu_hover" onclick="">				
 				<span>직거래박스</span>
 			</div>
-			<div class="menu sidemenu_div sidemenu_hover" onclick="">				
+			<div class="menu sidemenu_div sidemenu_hover" onclick='location.href="<?=$adr_ctr?>Community/index"'>				
 				<span>커뮤니티</span>
 			</div>
 			<div id="sb_menu" class="menu sidemenu_div sidemenu_hover" onclick="sb_collapse();">				
