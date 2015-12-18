@@ -1,5 +1,5 @@
 <?php
-	header("Content-type: text/xml;charset=euc-kr");
+	header("Content-Type: text/xml; charset=euc-kr");
 	$result1 = DB::select('SELECT * from category_large');
 	$result2 = DB::select('SELECT * from category_medium');
 	$result3 = DB::select('SELECT m.large_idx AS lidx, m.idx AS midx, s.idx AS sidx, s.name FROM category_medium AS m LEFT JOIN category_small AS s ON s.medium_idx = m.idx');
