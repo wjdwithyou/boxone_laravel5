@@ -93,6 +93,8 @@ input[type="checkbox"] {
 	padding-top: 16px;
 	padding-bottom: 8px;
 	font-size: 12px;
+	width: 80px;
+	text-align: center
 }
 .cm_board_title {
 	padding-top: 16px;

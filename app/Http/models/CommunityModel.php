@@ -145,7 +145,7 @@ class CommunityModel{
 	 */
 	function getLargeCategory()
 	{
-		$result = DB::select('select distinct large_name from community_category');
+		$result = DB::select('select distinct large_name as name, large_name as idx from community_category');
 
         return array('code' => 1 , 'msg' => 'success', 'data' => $result);
 	}
@@ -155,72 +155,56 @@ class CommunityModel{
 	 */
 	function getSmallCategory($large_name)
 	{
-		$result = DB::select('select idx, name from community_category where large_name=?',
+		$result = DB::select('select idx, title as name from community_category where large_name=?',
 			array($large_name));
 
         return array('code' => 1 , 'msg' => 'success', 'data' => $result);
 	}
 
 
-	/*
-	 *	해당 자료 갯수 가져옴
-	 */
-	function getResultSize($commucategory_idx_array)
-	{
-		$commucategory_query = "";
-		for( $i=0; $i<count($commucategory_idx_array); $i++)
-		{
-			$commucategory_query .= "commucategory_idx like '%" .$commucategory_idx_array[$i]. "%'";
-			if( $i != count($commucategory_idx_array)-1)
-				$commucategory_query .= " OR ";
-		}
-		$result = DB::select('select * from community where ' .$commucategory_query. ' order by idx DESC');
-
-		return count($result);
-	}
-
     /*  	
      *	게시물 목록 가져오는 기능
      */
-	function getInfoList($commucategory_idx_array, $page_num, $maximum_page, $product_num)	// product_num은 한 페이지에 몇개씩 보여줄지
+	function getInfoList($commucategory_idx_array, $page_num)	// product_num은 한 페이지에 몇개씩 보여줄지
 	{
 
-		$commucategory_query = "";
-		for( $i=0; $i<count($commucategory_idx_array); $i++)
+		$commucategory_query = "where ";
+		
+		if (count($commucategory_idx_array))
 		{
-			$commucategory_query .= "commucategory_idx like '%" .$commucategory_idx_array[$i]. "%'";
-			if( $i != count($commucategory_idx_array)-1)
-				$commucategory_query .= " OR ";
+			for( $i=0; $i<count($commucategory_idx_array); $i++)
+			{
+				$commucategory_query .= "commucategory_idx = '$commucategory_idx_array[$i]' ";
+				if( $i != count($commucategory_idx_array)-1)
+					$commucategory_query .= "OR ";
+			}
 		}
+		else
+			$commucategory_query = "";
 		
 		// 마지막 데이터까지 전부 출력
-		if( $maximum_page == $page_num)
-		{
-			$result = DB::select('select * from community where ' .$commucategory_query. ' order by idx DESC');
-		}
-		// 맥시멈 데이터까지만 출력
-		else
-		{
-			$maximum_val = ($page_num)*$product_num;
-			$result = DB::select('select * from community where ' .$commucategory_query. ' order by idx DESC limit ?',
-				array($maximum_val));
-		}
+		$result = DB::select('select * from community ' .$commucategory_query. 'order by idx DESC');
 
-		$finish = count($result);
 		//해당하는 내용이 없을 경우
-		if( $finish==0 )
+		if( count($result)==0 )
 		 	return array('code' => '406', 'msg' => 'no matched result');
 		
-		$start = ($page_num-1)*$product_num;
-		for($i=$start; $i<$finish; $i++) 
+		$page_max = floor((count($result)-1) / 20) + 1;
+		if ($page_num > $page_max)
+			$page_num = $page_max;
+		$page_start = ($page_num-1)*20;
+		
+		$result = array_slice($result, $page_start, 20);
+		
+		for($i = 0 ; $i < count($result) ; $i++) 
 		{
 			$member_idx = $result[$i]->member_idx;
 			
 			$temp = DB::select('select nickname from member where idx=?', array($member_idx));
-			$result[$i]->nickname  = $temp[0]->nickname;		
+			$result[$i]->nickname  = $temp[0]->nickname;
 		}
 
-       return array('code' => 1, 'msg' => 'success', 'data' => array_slice($result, $start, $finish));
+       return array('code' => 1, 'msg' => 'success', 'data' => $result, 'paging' => array('now' => $page_num, 'max' => $page_max));
 	}
 
 

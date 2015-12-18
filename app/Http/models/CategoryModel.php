@@ -15,16 +15,20 @@ class CategoryModel{
 	function downToUp($small_idx)
 	{
 
-		$result = DB::select('select * from
-							(
-								(
-								 category_small as cs 
-								 JOIN category_medium as cm
-								 ON cs.medium_idx=cm.idx
-								) as cms
-							 LEFT JOIN category_large as cl 
-							 ON cms.large_idx=cl.idx
-							) where cs.idx=?', array($small_idx));
+
+		$result = DB::select("SELECT 
+									cs.idx as sidx, 
+									cs.name as sname, 
+									cm.idx as midx, 
+									cm.name as mname, 
+									cl.idx as lidx, 
+									cl.name as lname 
+								FROM category_small AS cs
+								INNER JOIN category_medium AS cm
+									ON cs.medium_idx = cm.idx
+								INNER JOIN category_large AS cl
+								 	ON cm.large_idx = cl.idx
+								WHERE cs.idx='$small_idx'");
 
       	return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
@@ -37,16 +41,20 @@ class CategoryModel{
 		if( !( inputErrorCheck($large_idx, 'large_idx')))
 			return ;
 
-		$result = DB::select('select * from
-						(
-							(
-							 (select * from category_large where idx=?) as cl 
-							 LEFT JOIN category_medium as cm
-							 ON cl.idx=cm.large_idx
-							) as clm
-						 LEFT JOIN category_small as cs 
-						 ON clm.idx=cs.medium_idx
-						)',array($large_idx));
+		$result = DB::select("SELECT 
+									cs.idx as sidx, 
+									cs.name as sname, 
+									cm.idx as midx, 
+									cm.name as mname, 
+									cl.idx as lidx, 
+									cl.name as lname
+								FROM category_large AS cl
+								INNER JOIN category_medium AS cm
+									ON cm.large_idx = cl.idx
+								INNER JOIN category_small AS cs
+								 	ON cs.medium_idx = cm.idx
+								WHERE cl.idx='$large_idx'");
+
 
       	return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
