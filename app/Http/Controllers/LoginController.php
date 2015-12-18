@@ -92,7 +92,7 @@ class LoginController extends Controller {
 				//print_r($data);
 			}
 		}
-		return View::make('naverGetData', $data);
+		return view('naverGetData', $data);
 	}
 	
 	/*
