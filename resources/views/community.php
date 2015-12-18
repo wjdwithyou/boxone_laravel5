@@ -25,7 +25,6 @@
 				</div>
 				<div id="top_select">
 					<select id="community_cate" class="form-control" onchange="">
-						<option value="">전체</option>
 						<option value="">패션잡화</option>
 						<option value="">디지털/가전</option>
 						<option value="">리빙/뷰티/헬스/기타</option>
@@ -49,31 +48,31 @@
 			<div id="cm_cate_wrap" class="cl_b">
 				<div class="cm_cate col-xs-4 col-sm-2">
 					<input type="checkbox" id="c1" name="cc">
-					<label for="c1"><span></span>Check Box 1</label>
+					<label for="c1"><span></span>안경 및 선글라스</label>
 				</div>
 				<div class="cm_cate col-xs-4 col-sm-2">
 					<input type="checkbox" id="c2" name="cc">
-					<label for="c2"><span></span>Check Box 1</label>
+					<label for="c2"><span></span>안경 및 선글라스</label>
 				</div>
 				<div class="cm_cate col-xs-4 col-sm-2">
 					<input type="checkbox" id="c3" name="cc">
-					<label for="c3"><span></span>Check Box 1</label>
+					<label for="c3"><span></span>안경 및 선글라스</label>
 				</div>
 				<div class="cm_cate col-xs-4 col-sm-2">
 					<input type="checkbox" id="c4" name="cc">
-					<label for="c4"><span></span>Check Box 1</label>
+					<label for="c4"><span></span>안경 및 선글라스</label>
 				</div>
 				<div class="cm_cate col-xs-4 col-sm-2">
 					<input type="checkbox" id="c5" name="cc">
-					<label for="c5"><span></span>Check Box 1</label>
+					<label for="c5"><span></span>안경 및 선글라스</label>
 				</div>
 				<div class="cm_cate col-xs-4 col-sm-2">
 					<input type="checkbox" id="c6" name="cc">
-					<label for="c6"><span></span>Check Box 1</label>
+					<label for="c6"><span></span>안경 및 선글라스</label>
 				</div>
 				<div class="cm_cate col-xs-4 col-sm-2">
 					<input type="checkbox" id="c7" name="cc">
-					<label for="c7"><span></span>Check Box 1</label>
+					<label for="c7"><span></span>안경 및 선글라스</label>
 				</div>
 			</div>
 
@@ -87,11 +86,12 @@
 						<td class="cm_pc ">2015-07-14</td>
 						<td class="cm_pc ">223</td>
 						<td class="cm_board_reply cm_mobile" rowspan="2">
-							<div class="numberCircle">12</div>
-						</td>
+						<div class="numberCircle">
+							12
+						</div></td>
 					</tr>
 					<tr class="cm_mobile">
-						<td class="cm_board_writer bo_color">서장원&nbsp;|&nbsp;2015-07-14&nbsp;|&nbsp;조회수&nbsp;223</td>
+						<td class="cm_board_writer bo_color">서장원 | 2015-07-14 | 조회수 223</td>
 					</tr>
 				</table>
 				<!-- /게시판형 -->
@@ -103,11 +103,12 @@
 						<td class="cm_pc ">2015-07-14</td>
 						<td class="cm_pc ">223</td>
 						<td class="cm_board_reply cm_mobile" rowspan="2">
-							<div class="numberCircle">12</div>
-						</td>
+						<div class="numberCircle">
+							12
+						</div></td>
 					</tr>
 					<tr class="cm_mobile">
-						<td class="cm_board_writer bo_color">서장원&nbsp;|&nbsp;2015-07-14&nbsp;|&nbsp;조회수&nbsp;223</td>
+						<td class="cm_board_writer bo_color">서장원 | 2015-07-14 | 조회수 223</td>
 					</tr>
 				</table>
 				<table class="cm_board">
@@ -118,11 +119,12 @@
 						<td class="cm_pc ">2015-07-14</td>
 						<td class="cm_pc ">223</td>
 						<td class="cm_board_reply cm_mobile" rowspan="2">
-							<div class="numberCircle">12</div>
-						</td>
+						<div class="numberCircle">
+							12
+						</div></td>
 					</tr>
 					<tr class="cm_mobile">
-						<td class="cm_board_writer bo_color">서장원&nbsp;|&nbsp;2015-07-14&nbsp;|&nbsp;조회수&nbsp;223</td>
+						<td class="cm_board_writer bo_color">서장원 | 2015-07-14 | 조회수 223</td>
 					</tr>
 				</table>
 				<table class="cm_board">
@@ -133,11 +135,12 @@
 						<td class="cm_pc ">2015-07-14</td>
 						<td class="cm_pc ">223</td>
 						<td class="cm_board_reply cm_mobile" rowspan="2">
-							<div class="numberCircle">12</div>
-						</td>
+						<div class="numberCircle">
+							12
+						</div></td>
 					</tr>
 					<tr class="cm_mobile">
-						<td class="cm_board_writer bo_color">서장원&nbsp;|&nbsp;2015-07-14&nbsp;|&nbsp;조회수&nbsp;223</td>
+						<td class="cm_board_writer bo_color">서장원 | 2015-07-14 | 조회수 223</td>
 					</tr>
 				</table>
 				<table class="cm_board">
@@ -148,16 +151,17 @@
 						<td class="cm_pc ">2015-07-14</td>
 						<td class="cm_pc ">223</td>
 						<td class="cm_board_reply cm_mobile" rowspan="2">
-							<div class="numberCircle">12</div>
-						</td>
+						<div class="numberCircle">
+							12
+						</div></td>
 					</tr>
 					<tr class="cm_mobile">
-						<td class="cm_board_writer bo_color">서장원&nbsp;|&nbsp;2015-07-14&nbsp;|&nbsp;조회수&nbsp;223</td>
+						<td class="cm_board_writer bo_color">서장원 | 2015-07-14 | 조회수 223</td>
 					</tr>
 				</table>
-				
+
 				<!-- 앨범형 -->
-				<div class="hd_result_div_wrap">
+				<div class="hd_result_div_wrap cl_b">
 					<div class="hd_result_div">
 						<div class="hd_product_img center_box">
 							<div class="center_content">
@@ -169,20 +173,23 @@
 								토리버치 드디어 왔어요! 개봉샷 올립니다! 평가점
 							</div>
 							<div class="album_writer bo_color">
-									서장원 | 2015-07-14 | 223
+								서장원 | 2015-07-14 | 223
 							</div>
-							<div class="album_btnset text_overflow">
-								<img src="<?= $adr_img ?>suki.png">
-								<span class="album_count">16</span>
-								&nbsp;
-								<img src="<?= $adr_img ?>reply.png">
-								<span class="album_count">5</span>
+							<div class="album_btnset cl_b">
+								<div class="f_l">
+									<img src="<?= $adr_img ?>suki.png">
+									<span class="album_count">16</span>
+								</div>
+								<div class="f_r">
+									<img src="<?= $adr_img ?>reply.png">
+									<span class="album_count">5</span>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 				<!-- /앨범형 -->
-				<div class="hd_result_div_wrap">
+				<div class="hd_result_div_wrap cl_b">
 					<div class="hd_result_div">
 						<div class="hd_product_img center_box">
 							<div class="center_content">
@@ -194,14 +201,98 @@
 								토리버치 드디어 왔어요! 개봉샷 올립니다! 평가점
 							</div>
 							<div class="album_writer bo_color">
-									서장원 | 2015-07-14 | 223
+								서장원 | 2015-07-14 | 223
 							</div>
-							<div class="album_btnset text_overflow">
-								<img src="<?= $adr_img ?>suki.png">
-								<span class="album_count">16</span>
-								&nbsp;
-								<img src="<?= $adr_img ?>reply.png">
-								<span class="album_count">5</span>
+							<div class="album_btnset cl_b">
+								<div class="f_l">
+									<img src="<?= $adr_img ?>suki.png">
+									<span class="album_count">16</span>
+								</div>
+								<div class="f_r">
+									<img src="<?= $adr_img ?>reply.png">
+									<span class="album_count">5</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="hd_result_div_wrap cl_b">
+					<div class="hd_result_div">
+						<div class="hd_product_img center_box">
+							<div class="center_content">
+								<a onclick=""><img src="<?= $adr_img ?>calculator.jpg"></a>
+							</div>
+						</div>
+						<div class="hd_site_desc">
+							<div class="hd_brand text_overflow">
+								토리버치 드디어 왔어요! 개봉샷 올립니다! 평가점
+							</div>
+							<div class="album_writer bo_color">
+								서장원 | 2015-07-14 | 223
+							</div>
+							<div class="album_btnset cl_b">
+								<div class="f_l">
+									<img src="<?= $adr_img ?>suki.png">
+									<span class="album_count">16</span>
+								</div>
+								<div class="f_r">
+									<img src="<?= $adr_img ?>reply.png">
+									<span class="album_count">5</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="hd_result_div_wrap cl_b">
+					<div class="hd_result_div">
+						<div class="hd_product_img center_box">
+							<div class="center_content">
+								<a onclick=""><img src="<?= $adr_img ?>calculator.jpg"></a>
+							</div>
+						</div>
+						<div class="hd_site_desc">
+							<div class="hd_brand text_overflow">
+								토리버치 드디어 왔어요! 개봉샷 올립니다! 평가점
+							</div>
+							<div class="album_writer bo_color">
+								서장원 | 2015-07-14 | 223
+							</div>
+							<div class="album_btnset cl_b">
+								<div class="f_l">
+									<img src="<?= $adr_img ?>suki.png">
+									<span class="album_count">16</span>
+								</div>
+								<div class="f_r">
+									<img src="<?= $adr_img ?>reply.png">
+									<span class="album_count">5</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="hd_result_div_wrap cl_b">
+					<div class="hd_result_div">
+						<div class="hd_product_img center_box">
+							<div class="center_content">
+								<a onclick=""><img src="<?= $adr_img ?>calculator.jpg"></a>
+							</div>
+						</div>
+						<div class="hd_site_desc">
+							<div class="hd_brand text_overflow">
+								토리버치 드디어 왔어요! 개봉샷 올립니다! 평가점
+							</div>
+							<div class="album_writer bo_color">
+								서장원 | 2015-07-14 | 223
+							</div>
+							<div class="album_btnset cl_b">
+								<div class="f_l">
+									<img src="<?= $adr_img ?>suki.png">
+									<span class="album_count">16</span>
+								</div>
+								<div class="f_r">
+									<img src="<?= $adr_img ?>reply.png">
+									<span class="album_count">5</span>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -218,94 +309,23 @@
 								토리버치 드디어 왔어요! 개봉샷 올립니다! 평가점
 							</div>
 							<div class="album_writer bo_color">
-									서장원 | 2015-07-14 | 223
+								서장원 | 2015-07-14 | 223
 							</div>
-							<div class="album_btnset text_overflow">
-								<img src="<?= $adr_img ?>suki.png">
-								<span class="album_count">16</span>
-								&nbsp;
-								<img src="<?= $adr_img ?>reply.png">
-								<span class="album_count">5</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="hd_result_div_wrap">
-					<div class="hd_result_div">
-						<div class="hd_product_img center_box">
-							<div class="center_content">
-								<a onclick=""><img src="<?= $adr_img ?>calculator.jpg"></a>
-							</div>
-						</div>
-						<div class="hd_site_desc">
-							<div class="hd_brand text_overflow">
-								토리버치 드디어 왔어요! 개봉샷 올립니다! 평가점
-							</div>
-							<div class="album_writer bo_color">
-									서장원 | 2015-07-14 | 223
-							</div>
-							<div class="album_btnset text_overflow">
-								<img src="<?= $adr_img ?>suki.png">
-								<span class="album_count">16</span>
-								&nbsp;
-								<img src="<?= $adr_img ?>reply.png">
-								<span class="album_count">5</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="hd_result_div_wrap">
-					<div class="hd_result_div">
-						<div class="hd_product_img center_box">
-							<div class="center_content">
-								<a onclick=""><img src="<?= $adr_img ?>calculator.jpg"></a>
-							</div>
-						</div>
-						<div class="hd_site_desc">
-							<div class="hd_brand text_overflow">
-								토리버치 드디어 왔어요! 개봉샷 올립니다! 평가점
-							</div>
-							<div class="album_writer bo_color">
-									서장원 | 2015-07-14 | 223
-							</div>
-							<div class="album_btnset text_overflow">
-								<img src="<?= $adr_img ?>suki.png">
-								<span class="album_count">16</span>
-								&nbsp;
-								<img src="<?= $adr_img ?>reply.png">
-								<span class="album_count">5</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="hd_result_div_wrap">
-					<div class="hd_result_div">
-						<div class="hd_product_img center_box">
-							<div class="center_content">
-								<a onclick=""><img src="<?= $adr_img ?>calculator.jpg"></a>
-							</div>
-						</div>
-						<div class="hd_site_desc">
-							<div class="hd_brand text_overflow">
-								토리버치 드디어 왔어요! 개봉샷 올립니다! 평가점
-							</div>
-							<div class="album_writer bo_color">
-									서장원 | 2015-07-14 | 223
-							</div>
-							<div class="album_btnset">
-								<img src="<?= $adr_img ?>suki.png">
-								<span class="album_count">16</span>
-								&nbsp;
-								<img src="<?= $adr_img ?>reply.png">
-								<span class="album_count">5</span>
+							<div class="album_btnset cl_b">
+								<div class="f_l">
+									<img src="<?= $adr_img ?>suki.png">
+									<span class="album_count">16</span>
+								</div>
+								<div class="f_r">
+									<img src="<?= $adr_img ?>reply.png">
+									<span class="album_count">5</span>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			
-			
-			
+
 			<div class="pagination_wrap cl_b">
 				<a onclick=""><img src="<?= $adr_img ?>left_arrow.png"></a>
 				<div class="pagination">
@@ -322,6 +342,44 @@
 		<?php
 		include ("footer.php");
 		?>
+
+		<style>
+			#community_cate {
+				width: 188px;
+				height: 40px;
+				border: 1px solid #F15A63 !important;
+				color: #F15A63;
+				background: #fff url('<?=$adr_img?>select_arrow_pink.png') no-repeat 90% center;
+				text-indent: 0.01px;
+				text-overflow: "";
+				padding-left: 6px;
+				-webkit-appearance: none;
+				-moz-appearance: none;
+				appearance: none;
+			}
+			input[type="checkbox"] + label span {
+				display: inline-block;
+				width: 19px;
+				height: 19px;
+				margin: -4px 4px 0 0;
+				vertical-align: middle;
+				background: url(<?=$adr_img?>bo_checkbox.png);
+				background-size: contain;
+				cursor: pointer;
+			}
+			input[type="checkbox"]:checked + label span {
+				background: url(<?=$adr_img?>bo_checkbox_on.png);
+				background-size: contain;
+			}
+			@media (max-width: 768px) {
+				#community_cate {
+					width: 130px;
+					height: 30px;
+					background: #fff url('<?=$adr_img?>select_arrow_pink.png') no-repeat 90% center;
+					font-size: 10px;
+				}
+			}
+		</style>
 	</body>
 </html>
 
