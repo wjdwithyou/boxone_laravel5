@@ -186,7 +186,8 @@ function loginCallback(result)
             'userId': 'me'
         });
         request.execute(function (resp)
-        {			
+        {	
+        	alert (JSON.stringify(resp));
             var email = '';
             if(resp['emails'])
             {

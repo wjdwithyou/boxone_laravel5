@@ -15,6 +15,8 @@ function changePageType()
 		$("#cm_page_type_button").attr("value", "0");
 	else
 		$("#cm_page_type_button").attr("value", "1");
+	
+	checkCate('');
 }
 
 function checkCate(page)
