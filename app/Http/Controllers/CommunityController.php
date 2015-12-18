@@ -78,4 +78,10 @@ class CommunityController extends Controller {
 		$page = 'community_write';
 		return view($page, array('page' => $page));
 	}
+	
+	public function content()
+	{
+		$page = 'community_content';
+		return view($page, array('page' => $page));
+	}
 }

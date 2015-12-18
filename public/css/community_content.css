@@ -1,0 +1,150 @@
+#container {
+	max-width: 992px;
+	margin: 0 auto;
+}
+.cl_b:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+.f_l {
+	float: left;
+}
+.f_r {
+	float: right;
+}
+#cm_top_title {
+	margin: 32px 8px;
+	font-weight: bold;
+	font-size: 16px;
+}
+#cm_top_content {
+	border-bottom: 1px solid #F15A63;
+	padding-bottom: 8px;
+}
+#cm_top_table img {
+	width: 45px;
+	height: 45px;
+}
+#cm_top_table td {
+	padding-left: 8px;
+}
+.bo_color {
+	color: #8c8b8b;
+}
+.cm_writer {
+	font-size: 12px;
+}
+.cm_content_info {
+	font-size: 11px;
+}
+#cm_content {
+	margin: 32px 8px;
+}
+#cm_content img {
+	max-width: 100%;
+}
+#cm_content_btnset {
+	padding: 32px 8px;
+}
+.bo_btn {
+	width: 50px;
+	color: #8c8b8b;
+	background-color: #fff;
+	border: 1px solid #8c8b8b;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	border-radius: 25px !important;
+	font-size: 12px;
+}
+#suggest_btn {
+	width: 80px;
+}
+.bo_btn:hover, .boxone_btn:active {
+	color: #fff;
+	background-color: #8c8b8b;
+	border-color: #8c8b8b;
+}
+#content_btnset button:first-child {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border-right: 0;
+}
+#content_btnset button:nth-child(2) {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    margin-left: -4px;
+}
+.reply_table {
+	font-size: 12px;
+}
+#reply_wrap {
+	background-color: #f8f7f7;
+	padding: 16px 8px;
+}
+.reply_title img {
+	width: 14px;
+	height: 14px;
+}
+.reply_table {
+	width: 100%;
+	margin-top: 16px;
+	margin-bottom: 16px;
+	border-bottom: 1px solid #ddd;
+}
+.reply_profile {
+	width: 80px;
+	vertical-align: top;
+	padding-right: 16px;
+}
+.reply_profile img {
+	width: 100%;
+}
+.reply_writer {
+	font-weight: bold;
+}
+.reply_date {
+	font-size: 10px;
+}
+.reply_content {
+	padding-top: 8px;
+	padding-bottom: 16px;
+}
+.reply_a {
+	font-size: 10px;
+	text-decoration: underline;
+	margin-bottom: 16px;
+}
+.reply_cancel {
+	color: #F15A63;
+}
+.reply_rm a {
+	margin-left: 8px;
+}
+.reply_modify_show textarea {
+	margin-bottom: 16px;
+	float: left;
+	resize: none;
+}
+.input_textarea {
+	padding-right: 60px;
+}
+.input_textarea button {
+	position: absolute;
+}
+.add_reply {
+	width: 60px;
+	height: 74px;
+	border-radius: 0 !important;
+	border: 1px solid #ccc;
+	border-left: transparent;
+	background-color: #fff;
+}
+.add_reply:hover {
+	background-color: #ccc;
+}
+@media (max-width: 768px) {
+	.reply_profile {
+		width: 48px;
+	}
+}
