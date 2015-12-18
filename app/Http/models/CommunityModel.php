@@ -187,7 +187,7 @@ class CommunityModel{
 
 		//해당하는 내용이 없을 경우
 		if( count($result)==0 )
-		 	return array('code' => '406', 'msg' => 'no matched result');
+		 	return array('code' => '406', 'msg' => 'no matched result', 'data' => array(), 'paging' => array('now' => 1, 'max' => 1));
 		
 		$page_max = floor((count($result)-1) / 20) + 1;
 		if ($page_num > $page_max)
