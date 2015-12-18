@@ -16,7 +16,7 @@
 	<Ccode2>0</Ccode2>
 	<Ccode3>0</Ccode3>
 	<Depth>1</Depth>
-	<CateName><?= $list1->name?></CateName>
+	<CateName><![CDATA[<?=$list1->name?>]]></CateName>
 </Category>
 <?php endforeach;?>
 
@@ -28,7 +28,7 @@
 	<Ccode2><?= $list2->idx?></Ccode2>
 	<Ccode3>0</Ccode3>
 	<Depth>2</Depth>
-	<CateName><?= $list2->name?></CateName>
+	<CateName><![CDATA[<?=$list2->name?>]]></CateName>
 </Category>
 <?php endforeach;?>
 	
@@ -40,7 +40,7 @@
 	<Ccode2><?= $list3->midx?></Ccode2>
 	<Ccode3><?= $list3->sidx?></Ccode3>
 	<Depth>3</Depth>
-	<CateName><?= $list3->name?></CateName>
+	<CateName><![CDATA[<?=$list3->name?>]]></CateName>
 </Category>
 <?php endforeach;?>
 </CateCust>
