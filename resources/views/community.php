@@ -65,6 +65,44 @@
 		<?php
 		include ("footer.php");
 		?>
+
+		<style>
+			#community_cate {
+				width: 188px;
+				height: 40px;
+				border: 1px solid #F15A63 !important;
+				color: #F15A63;
+				background: #fff url('<?=$adr_img?>select_arrow_pink.png') no-repeat 90% center;
+				text-indent: 0.01px;
+				text-overflow: "";
+				padding-left: 6px;
+				-webkit-appearance: none;
+				-moz-appearance: none;
+				appearance: none;
+			}
+			input[type="checkbox"] + label span {
+				display: inline-block;
+				width: 19px;
+				height: 19px;
+				margin: -4px 4px 0 0;
+				vertical-align: middle;
+				background: url(<?=$adr_img?>bo_checkbox.png);
+				background-size: contain;
+				cursor: pointer;
+			}
+			input[type="checkbox"]:checked + label span {
+				background: url(<?=$adr_img?>bo_checkbox_on.png);
+				background-size: contain;
+			}
+			@media (max-width: 768px) {
+				#community_cate {
+					width: 130px;
+					height: 30px;
+					background: #fff url('<?=$adr_img?>select_arrow_pink.png') no-repeat 90% center;
+					font-size: 10px;
+				}
+			}
+		</style>
 	</body>
 </html>
 

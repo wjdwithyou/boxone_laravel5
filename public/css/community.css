@@ -32,21 +32,8 @@
 	float: left;
 	margin-top: 32px;
 }
-#community_cate {
-	width: 188px;
-	height: 40px;
-	border: 1px solid #F15A63 !important;
-	color: #F15A63;
-	background: #fff url('http://localhost:8000/img/select_arrow_pink.png') no-repeat 90% center;
-	text-indent: 0.01px;
-	text-overflow: "";
-	padding-left: 6px;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-}
 .bo_btn {
-	width: 100px;
+	width: 80px;
 	color: #f15a63;
 	background-color: #fff;
 	border: 1px solid #f15a63;
@@ -59,33 +46,38 @@
 	background-color: #f15a63;
 	border-color: #f15a63;
 }
+.f_l {
+	float: left;
+}
 .f_r {
 	float: right;
 }
 #top_btnset {
 	margin-top: 32px;
 }
+#top_btnset button:first-child {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border-right: 0;
+}
+#top_btnset button:nth-child(2) {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    margin-left: -4px;
+}
 input[type="checkbox"] {
     display:none;
 }
-input[type="checkbox"] + label span {
-    display:inline-block;
-    width:19px;
-    height:19px;
-    margin:-1px 4px 0 0;
-    vertical-align:middle;
-    background:url(http://localhost:8000/img/check_radio_sheet.png) left top no-repeat;
-    cursor:pointer;
-}
-input[type="checkbox"]:checked + label span {
-    background:url(http://localhost:8000/img/check_radio_sheet.png) -20px top no-repeat;
+.cm_cate {
+	padding-left: 8px;
+	padding-right: 8px;
 }
 .cm_cate label {
 	font-weight: normal;
 	cursor: pointer;
+	font-size: 11px;
 }
 #cm_cate_wrap {
-	padding-top: 16px;
 	padding-bottom: 16px;
 	border-bottom: 1px solid #f15a63;
 }
@@ -98,10 +90,11 @@ input[type="checkbox"]:checked + label span {
 	border-bottom: 1px solid #ddd;
 }
 .cm_pc {
-	width: 80px;
 	padding-top: 16px;
 	padding-bottom: 8px;
 	font-size: 12px;
+	width: 80px;
+	text-align: center
 }
 .cm_board_title {
 	padding-top: 16px;
@@ -123,7 +116,7 @@ input[type="checkbox"]:checked + label span {
 	border-bottom: 1px solid #ddd;
 }
 .numberCircle {
-    border-radius: 50% !important;
+    border-radius: 5px !important;
     behavior: url(PIE.htc);
     width: 28px;
     height: 28px;
@@ -135,7 +128,7 @@ input[type="checkbox"]:checked + label span {
     cursor: pointer;
 }
 .numberCircle:hover {
-    border: 2px solid #f15a63;
+    border: 1px solid #f15a63;
 	font-weight: bold;
 }
 .pagination_wrap {
@@ -184,17 +177,13 @@ input[type="checkbox"]:checked + label span {
 	.cm_mobile {
 		display: none;
 	}
+	.cm_board_title {
+		padding-bottom: 16px;
+	}
 }
 @media (max-width: 768px) {
 	.cm_pc {
 		display: none;
-	}
-	#community_cate {
-		width: 130px;
-		height: 30px;
-		border: 1px solid #F15A63 !important;
-		background: #fff url('http://localhost:8000/img/select_arrow_pink.png') no-repeat 90% center;
-		font-size: 10px;
 	}
 	#top_btnset button {
 		font-size: 10px;
@@ -205,6 +194,11 @@ input[type="checkbox"]:checked + label span {
 	.hd_result_div_wrap {
 		width: 50%;
 		float: left;
+	}
+}
+@media (max-width: 450px) {
+	.cm_cate {
+		width: 50%;
 	}
 }
 .hd_result_div_wrap {
@@ -280,6 +274,10 @@ input[type="checkbox"]:checked + label span {
 }
 .album_btnset {
 	text-align: right;
+}
+.album_btnset img {
+	width: 16px;
+	height: 14px;
 }
 .album_count {
 	font-size: 11px;
