@@ -1,10 +1,10 @@
 <?php
-	header("Content-Type: text/xml; charset=euc-kr");
+	header("Content-Type: text/xml; charset=utf-8");
 	$result1 = DB::select('SELECT * from category_large');
 	$result2 = DB::select('SELECT * from category_medium');
 	$result3 = DB::select('SELECT m.large_idx AS lidx, m.idx AS midx, s.idx AS sidx, s.name FROM category_medium AS m LEFT JOIN category_small AS s ON s.medium_idx = m.idx');
 	
-	echo "<?xml version='1.0' encoding='euc-kr'?>\n";
+	echo "<?xml version='1.0' encoding='utf-8'?>\n";
 ?>
 
 <CateCust>
