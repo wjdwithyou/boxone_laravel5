@@ -5,9 +5,9 @@
 	$result3 = DB::select('SELECT m.large_idx AS lidx, m.idx AS midx, s.idx AS sidx, s.name FROM category_medium AS m LEFT JOIN category_small AS s ON s.medium_idx = m.idx');
 	
 	echo "<?xml version='1.0' encoding='euc-kr'?>\n";
-	echo "<CateCust>";
 ?>
 
+<CateCust>
 <?php foreach($result1 as $list1):?>
 <Category>
 	<CustID>boxone</CustID>
@@ -43,7 +43,7 @@
 	<CateName><?= $list3->name?></CateName>
 </Category>
 <?php endforeach;?>
-	
+</CateCust>
 	
 	
 	
