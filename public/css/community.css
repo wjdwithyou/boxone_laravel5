@@ -256,6 +256,7 @@ input[type="checkbox"] {
 	text-align: center;
 	padding: 10px;
 	white-space: nowrap;
+	cursor: pointer;
 }
 .center_content:before {
 	content: '';

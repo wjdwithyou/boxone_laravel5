@@ -11,5 +11,12 @@ function cal_toggle(){
 	else {
 		$("#header_cal").attr("src", adr_img + "header_cal_on.png");
 	}
+	
+	if ($("#select_cate").html() == "")
+	{
+		get_cate_large();
+		select_cate();
+	}
+	
 	$("#cal_popup").toggle();
 }

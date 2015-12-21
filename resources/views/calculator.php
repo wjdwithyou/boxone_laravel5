@@ -4,10 +4,8 @@
 			<tbody>
 				<tr>
 					<td colspan="2">
-						<select id="select_cate" class="cal_cate_split form-control" onchange="select_cate();">
-						</select>
-						<select id="low_cate" class="cal_cate_split form-control" onchange="select_lowcate();">
-						</select>
+						<select id="select_cate" class="cal_cate_split form-control" onchange="select_cate();"></select>
+						<select id="low_cate" class="cal_cate_split form-control" onchange="select_lowcate();"></select>
 					</td>
 				</tr>
 				<tr>
