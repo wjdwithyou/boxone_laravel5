@@ -352,7 +352,7 @@ function justSignIn()
 		var pw = $("#join_pw").val();
 		var email = $("#join_email").val();
 		var nickname = $("#join_nickname").val();
-		var img = ""; // 임시
+		var img = "default"; // 임시
 		var rec = $("#join_suggest").val(); // 임시
 		
 		signIn(type, id, pw, email, nickname, img, rec);

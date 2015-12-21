@@ -106,13 +106,13 @@ class CommunityModel{
     /*  	
      *	게시물 삭제 기능
      */
-	function delete($community_idx)
+	function delete($community_idx, $member_idx)
 	{
 	  	
 		if(	!(	inputErrorCheck($community_idx, 'community_idx')))
 			return ;		
 
- 		$result = DB::delete('delete from community where idx=?', array($community_idx));
+ 		$result = DB::delete('delete from community where idx=? and member_idx=?', array($community_idx, $member_idx));
 
 		if($result == true){
          	return array('code' => 1, 'msg' => 'success');
@@ -220,20 +220,24 @@ class CommunityModel{
 
 		DB::update('update community set hit_count=hit_count+1 where idx=?',array($community_idx));
 
-		$result = DB::select('select * from 
+		$result = DB::select('select cm.*, mm.nickname, mm.image from 
 							(
 								community as cm
 								JOIN member as mm
 								ON cm.member_idx=mm.idx
 							) where cm.idx=?', array($community_idx));
 
-
-		if($result[0]->member_idx == $readmember_idx)
-			$result[0]->own = 'Y';
+		if (count($result))
+		{
+			if($result[0]->member_idx == $readmember_idx)
+				$result[0]->own = 1;
+			else
+				$result[0]->own = 0;
+	
+	        return array('code' => 1, 'msg' => 'success', 'data' => $result[0]);
+		}
 		else
-			$result[0]->own = 'N';
-
-        return array('code' => 1, 'msg' => 'success', 'data' => $result);
+			return array('code' => 0, 'msg' => 'fucking no data');
 	}
 
 
@@ -247,7 +251,7 @@ class CommunityModel{
 		 		&& inputErrorCheck($readmember_idx, 'readmember_idx')))
 			return ;
 
- 		$result = DB::select('select * from 
+ 		$result = DB::select('select cr.*, mm.nickname, mm.image from 
 							(
 								community_reply as cr
 								JOIN member as mm
@@ -255,16 +259,37 @@ class CommunityModel{
 							) where cr.community_idx=?
  							order by idx DESC', array($community_idx));
 		
+ 		
+ 		$reply = array();
+ 		$rereply = array();
+ 		
 		for($i=0; $i<count($result); $i++) 
-		{
+		{			
 			// 둘이 동일인일 경우 own권한 부여
 			if($readmember_idx == $result[$i]->member_idx)
-				$result[$i]->own = 'Y';
+				$result[$i]->own = 1;
 			else
-				$result[$i]->own = 'N';			
+				$result[$i]->own = 0;
+			
+			// 댓글, 댓댓글 분류
+			if ($result[$i]->rereply_idx)
+				array_push($rereply, $result[$i]);
+			else
+			{
+				$result[$i]->rereply = array();
+				array_push($reply, $result[$i]);
+			}
 		}
+		
+		for ($i=0; $i<count($rereply); $i++)
+			for ($j=0; $j<count($reply); $j++)
+				if ($rereply[$i]->rereply_idx == $reply[$j]->idx)
+				{
+					array_push($reply[$j]->rereply, $rereply[$i]);
+					break;	
+				}
 
-       return array('code' => 1, 'msg' => 'success', 'data' => $result);
+       return array('code' => 1, 'msg' => 'success', 'data' => $reply);
 	}
 
 
@@ -304,16 +329,31 @@ class CommunityModel{
 				)
 			);
 
-        return array('code' => 1, 'msg' => 'success', 'data' => $result);
+        return array('code' => 1, 'msg' => 'created', 'data' => $result);
+	}
+	
+	/*
+	 *	커뮤니티 글 북마크 체크
+	 */
+	function checkBookmark($member_idx, $community_idx)
+	{
+	
+		if(	!(	inputErrorCheck($community_idx, 'community_idx')
+				&& inputErrorCheck($member_idx, 'member_idx')))
+					return ;
+	
+		//북마크 체크
+		$result = DB::select("SELECT count(*) as count FROM community_bookmark WHERE member_idx=? AND community_idx=? LIMIT 1", array($member_idx,$community_idx));
+		return $result[0]->count;
 	}
 
 	/*  	
      *	커뮤니티 글 북마크 삭제
      */
-	function deleteBookmark($bookmar_idx, $community_idx)
+	function deleteBookmark($member_idx, $community_idx)
 	{
 
-		if(	!(	inputErrorCheck($bookmark_idx, 'bookmark_idx')
+		if(	!(	inputErrorCheck($member_idx, 'member_idx')
 			 && inputErrorCheck($community_idx, 'community_idx')))
 			return ;
 
@@ -321,9 +361,9 @@ class CommunityModel{
 		DB::update('update community set bookmark_count=bookmark_count-1 where idx=?',array($community_idx));
 
 		//북마크 삭제
-		$result = DB::delete('delete from community_bookmark where idx=?', array($bookmark_idx));
+		$result = DB::delete('delete from community_bookmark where member_idx=? and community_idx=?', array($member_idx, $community_idx));
 
-        return array('code' => 1, 'msg' => 'success', 'data' => $result);
+        return array('code' => 1, 'msg' => 'deleted', 'data' => $result);
 	}
 
 	/*  	

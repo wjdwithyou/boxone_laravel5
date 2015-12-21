@@ -51,6 +51,7 @@ function getCardList(type)
 		success: function(result)
 		{
 			$("#card_result_wrap").html(result);
+			location.href = "#card_result_wrap";
 		},	
 		error:function(request,status,error)
 		{
@@ -82,6 +83,7 @@ function getCardListAll(type)
 		success: function(result)
 		{
 			$("#card_result_wrap").html(result);
+			location.href = "#card_result_wrap";
 		},	
 		error:function(request,status,error)
 		{

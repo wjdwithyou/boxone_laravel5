@@ -8,7 +8,7 @@
 						<!-- 커뮤니티 글 -->
 						<tr>
 							<td class="cm_pc"><?= $list->idx?></td>
-							<td class="cm_board_title"><a><?= $list->title?></a></td>
+							<td class="cm_board_title"><a href="<?= $adr_ctr?>Community/content?idx=<?= $list->idx?>"><?= $list->title?></a></td>
 							<td class="cm_pc"><?= $list->nickname?></td>
 							<td class="cm_pc"><?= $list->date?></td>
 							<td class="cm_pc"><?= $list->hit_count?></td>
@@ -30,8 +30,8 @@
 				<div class="hd_result_div_wrap cl_b">
 					<div class="hd_result_div">
 						<div class="hd_product_img center_box">
-							<div class="center_content">
-								<a onclick=""><img src="<?=$list->image?>"></a>
+							<div class="center_content" onclick="location.href='<?= $adr_ctr?>Community/content?idx=<?= $list->idx?>'">
+								<img src="<?=$list->image?>">
 							</div>
 						</div>
 						<div class="hd_site_desc">
@@ -42,10 +42,10 @@
 									<?=$list->nickname?> | <?=$list->date?> | <?=$list->hit_count?>
 							</div>
 							<div class="album_btnset cl_b">
-								<img src="<?= $adr_img ?>suki.png">
+								<img src="<?= $adr_ctr ?>img/suki.png">
 								<span class="album_count"><?=$list->bookmark_count?></span>
 								&nbsp;
-								<img src="<?= $adr_img ?>reply.png">
+								<img src="<?= $adr_ctr ?>img/reply.png">
 								<span class="album_count"><?=$list->reply_number?></span>
 							</div>
 						</div>
@@ -58,7 +58,7 @@
 			
 			<input type="hidden" id="cm_nowPage" value="<?=$paging['now']?>"/>
 			<div class="pagination_wrap cl_b">
-				<a onclick="checkCate(<?php echo ($paging['now'] - 1);?>);"><img src="<?= $adr_img ?>left_arrow.png"></a>
+				<a onclick="checkCate(<?php echo ($paging['now'] - 1);?>);"><img src="<?= $adr_ctr ?>img/left_arrow.png"></a>
 				<div class="pagination">
 					<?php if ($paging['now'] > 3) :?>
 						<a onclick="checkCate(1);">1</a>
@@ -82,7 +82,7 @@
 						<?php endfor;?>
 					<?php endif;?>
 				</div>
-				<a onclick="checkCate(<?php echo ($paging['now'] + 1);?>);"><img src="<?= $adr_img ?>right_arrow.png"></a>
+				<a onclick="checkCate(<?php echo ($paging['now'] + 1);?>);"><img src="<?= $adr_ctr ?>img/right_arrow.png"></a>
 			</div>
 			
 			
