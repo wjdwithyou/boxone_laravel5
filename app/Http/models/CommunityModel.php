@@ -131,7 +131,13 @@ class CommunityModel{
 		if(	!(	inputErrorCheck($reply_idx, 'reply_idx')))
 			return ;		
 
- 		$result = DB::delete('delete from community_reply where idx=?', array($reply_idx));
+		// 댓글의 댓글이 없을 시에만 삭제 가능
+		$chk = DB::select('SELECT count(*) AS cnt FROM community_reply WHERE rereply_idx=? LIMIT 1', array($reply_idx));
+		
+		if ($chk[0]->cnt)
+			return array('code' => 0, 'msg' => 'delete failure: fucking replies are fucking exist');
+		else 
+ 			$result = DB::delete('delete from community_reply where idx=?', array($reply_idx));
                         
 		if($result == true){
          	return array('code' => 1, 'msg' => 'success');
@@ -220,11 +226,13 @@ class CommunityModel{
 
 		DB::update('update community set hit_count=hit_count+1 where idx=?',array($community_idx));
 
-		$result = DB::select('select cm.*, mm.nickname, mm.image from 
+		$result = DB::select('select cm.*, mm.nickname, mm.image, cc.title from 
 							(
 								community as cm
 								JOIN member as mm
 								ON cm.member_idx=mm.idx
+								JOIN community_category as cc
+								ON cm.commucategory_idx=cc.idx
 							) where cm.idx=?', array($community_idx));
 
 		if (count($result))
@@ -289,7 +297,7 @@ class CommunityModel{
 					break;	
 				}
 
-       return array('code' => 1, 'msg' => 'success', 'data' => $reply);
+       return array('code' => 1, 'msg' => 'success', 'data' => array_reverse($reply));
 	}
 
 

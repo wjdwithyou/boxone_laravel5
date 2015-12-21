@@ -150,6 +150,7 @@ class CommunityController extends Controller {
 	{
 		$cmModel = new CommunityModel();
 		$comm_idx = Request::input('comm_idx');
+		$reply_idx = Request::input('reply_idx');
 		$content = Request::input('text');
 		
 		if (session_id() == '')
@@ -162,7 +163,29 @@ class CommunityController extends Controller {
 		else 
 		{
 			$mem_idx = $_SESSION['idx'];
-			$result = $cmModel->createReply($mem_idx, $comm_idx, $content, '0');	
+			$result = $cmModel->createReply($mem_idx, $comm_idx, $content, $reply_idx);	
+			
+			header('Content-Type: application/json');
+			echo json_encode($result);
+		}
+	}
+	
+	public function deleteReply()
+	{
+		$cmModel = new CommunityModel();
+		$reply_idx = Request::input('idx');
+		
+		if (session_id() == '')
+			session_start();
+		if (!isset($_SESSION['idx']))
+		{
+			header('Content-Type: application/json');
+			echo json_encode(array('code' => 0, 'msg' => 'not logined'));
+		}
+		else
+		{
+			$mem_idx = $_SESSION['idx'];
+			$result = $cmModel->deleteReply($reply_idx);
 			
 			header('Content-Type: application/json');
 			echo json_encode($result);

@@ -73,10 +73,10 @@ function commDelete(comm_idx)
 	});
 }
 
-function replyCreate(comm_idx)
+function replyCreate(e, comm_idx, reply_idx)
 {
 	var logined = $("#logined").val();
-	var text = $("#reply_write_content").val();
+	var text = e.parent().find("textarea").val();
 	
 	if (logined != "1")
 		login_popup();
@@ -93,6 +93,7 @@ function replyCreate(comm_idx)
 			async: false,
 			data:{
 				comm_idx: comm_idx,
+				reply_idx: reply_idx,
 				text: text
 			},
 			success: function(result)
@@ -100,8 +101,6 @@ function replyCreate(comm_idx)
 				result = JSON.parse(result);
 				if (result.code == 1)
 				{
-					alert ("댓글이 등록되었습니다.");
-					var adr_ctr = $("#adr_ctr").val();
 					location.reload();
 				}
 				else
@@ -114,7 +113,40 @@ function replyCreate(comm_idx)
 			}
 		});
 	}
-		
+}
+
+function replyDelete(idx)
+{
+	var chk = $("#reply_delete_chk_"+idx).val();
+	if (chk == "0")
+		alert ("해당 댓글에 댓글이 달려 있어 삭제할 수 없습니다.");
+	else if (confirm("댓글을 삭제하시겠습니까?"))
+	{
+		$.ajax
+		({
+			url: adr_ctr+"Community/deleteReply",
+			type: 'post',
+			async: false,
+			data:{
+				idx: idx
+			},
+			success: function(result)
+			{
+				result = JSON.parse(result);
+				if (result.code == 1)
+				{
+					location.reload();
+				}
+				else
+					alert ("잘못된 접근입니다." + result.msg);
+			},
+			error: function(request,status,error)
+			{
+				console.log(request.responseText);
+			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	}
 }
 
 

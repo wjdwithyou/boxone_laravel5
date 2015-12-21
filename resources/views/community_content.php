@@ -63,6 +63,11 @@
 				
 				<!-- 댓글 -->
 				<?php foreach($reply as $list) :?>
+				<?php if (count($list->rereply) > 0) :?>
+					<input type="hidden" id="reply_delete_chk_<?=$list->idx?>" value="0"/>
+				<?php else :?>
+					<input type="hidden" id="reply_delete_chk_<?=$list->idx?>" value="1"/>
+				<?php endif;?>
 				<table class="reply_table">
 					<tr class="reply_show">
 						<td class="reply_profile" rowspan="3">
@@ -75,9 +80,7 @@
 						</td>
 					</tr>
 					<tr class="reply_show">
-						<td class="reply_content">
-							<?=$list->contents?>
-						</td>
+						<td class="reply_content"><?=$list->contents?></td>
 					</tr>
 					<tr class="reply_modify_show" hidden>
 						<td class="input_textarea">
@@ -89,14 +92,13 @@
 					</tr>
 					<tr>
 						<td>
-							<?php if ($list->own) :?>
 							<div class="f_l bo_color reply_a">
-								<a class="reply_show reply_input" onclick="reply_textarea($(this));">답글쓰기</a>
+								<a class="reply_show reply_input" onclick="reply_textarea($(this), <?=$result->idx?>, <?=$list->idx?>);">답글쓰기</a>
 							</div>
-							<?php else :?>
+							<?php if ($list->own) :?>
 							<div class="f_r bo_color reply_a reply_rm">
 								<a class="reply_show" onclick="reply_modify($(this));">수정</a>
-								<a class="reply_show" onclick="">삭제</a>
+								<a class="reply_show" onclick="replyDelete(<?=$list->idx?>);">삭제</a>
 								<a class="reply_modify_show" onclick="reply_modify_cancel($(this));" hidden>취소</a>
 							</div>
 							<?php endif;?>
@@ -107,6 +109,7 @@
 				
 					<!-- 댓댓글 -->
 					<?php foreach($list->rereply as $reList) :?>
+					<input type="hidden" id="reply_delete_chk_<?=$list->idx?>" value="1"/>
 					<table class="reply_table">
 						<tr>
 							<td class="reply_profile" rowspan="3">
@@ -122,8 +125,7 @@
 							</td>
 						</tr>
 						<tr class="reply_show">
-							<td class="reply_content"><?=$reList->contents?>
-							</td>
+							<td class="reply_content"><?=$reList->contents?></td>
 						</tr>
 						<tr class="reply_modify_show" hidden>
 							<td class="input_textarea">
@@ -135,11 +137,13 @@
 						</tr>
 						<tr>
 							<td>
+								<?php if ($reList->own) :?>
 								<div class="f_r bo_color reply_a reply_rm">
 									<a class="reply_show" onclick="reply_modify($(this));">수정</a>
-									<a class="reply_show" onclick="">삭제</a>
+									<a class="reply_show" onclick="replyDelete(<?=$reList->idx?>);">삭제</a>
 									<a class="reply_modify_show" onclick="reply_modify_cancel($(this));" hidden>취소</a>
 								</div>
+								<?php endif;?>
 							</td>
 						</tr>
 					</table>
@@ -157,7 +161,7 @@
 					<tr class="reply_modify_show">
 						<td class="input_textarea">
 							<textarea id="reply_write_content" class="form-control" placeholder="최대 200자까지 등록할 수 있습니다." rows="3"></textarea>
-							<button type="button" class="add_reply" onclick="replyCreate(<?=$result->idx?>);">
+							<button type="button" class="add_reply" onclick="replyCreate($(this), <?=$result->idx?>, 0);">
 								등록
 							</button>
 						</td>
@@ -201,7 +205,8 @@
 		?>
 		
 		<script>
-			function reply_textarea(e) {
+			function reply_textarea(e, comm_idx, reply_idx) {
+				$("#reply_textarea").find("button").attr("onclick", "replyCreate($(this), "+comm_idx+", "+reply_idx+");");
 				$("#reply_textarea").children().clone().insertAfter(e.closest("table"));
 				e.closest("table").find(".reply_input").hide();
 			}
