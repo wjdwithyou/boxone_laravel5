@@ -26,74 +26,56 @@
 				</div>
 				<hr>
 				<div id="current_cate">
-					글 쓰기
+					패션 잡화
 				</div>
 			</div>
-
-			<div id="cmw_wrap">
-				<label class="checkbox-inline">
-					<input type="checkbox" id="inlineCheckbox1" value="option1">
-					아우터</label>
-				<label class="checkbox-inline">
-					<input type="checkbox" id="inlineCheckbox2" value="option2">
-					상의</label>
-				<label class="checkbox-inline">
-					<input type="checkbox" id="inlineCheckbox3" value="option3">
-					하의</label>
-				<label class="checkbox-inline">
-					<input type="checkbox" id="inlineCheckbox1" value="option1">
-					원피스</label>
-				<label class="checkbox-inline">
-					<input type="checkbox" id="inlineCheckbox2" value="option2">
-					언더웨어</label>
-				<label class="checkbox-inline">
-					<input type="checkbox" id="inlineCheckbox3" value="option3">
-					남성신발</label>
-				<label class="checkbox-inline">
-					<input type="checkbox" id="inlineCheckbox1" value="option1">
-					여성신발</label>
-				<label class="checkbox-inline">
-					<input type="checkbox" id="inlineCheckbox2" value="option2">
-					가방</label>
-				<label class="checkbox-inline">
-					<input type="checkbox" id="inlineCheckbox3" value="option3">
-					지갑</label>
-				<label class="checkbox-inline">
-					<input type="checkbox" id="inlineCheckbox1" value="option1">
-					시계</label>
-				<label class="checkbox-inline">
-					<input type="checkbox" id="inlineCheckbox2" value="option2">
-					안경 및 선글라스</label>
-				<label class="checkbox-inline">
-					<input type="checkbox" id="inlineCheckbox3" value="option3">
-					쥬얼리</label>
-				<label class="checkbox-inline">
-					<input type="checkbox" id="inlineCheckbox2" value="option2">
-					유아동</label>
-				<label class="checkbox-inline">
-					<input type="checkbox" id="inlineCheckbox3" value="option3">
-					기타</label>
+			
+			<div id="cmw_title_wrap">
+				 <input type="text" class="form-control" id="cmw_title" placeholder="제목을 입력하세요">
 			</div>
-			<div id="summernote">
-				Hello Summernote
+
+			<div id="cm_cate_wrap" class="cl_b">
+				<?php for($i = 0 ; $i < count($cateS) ; $i++) :?>
+					<div class="cm_cate col-xs-4 col-sm-2">
+						<input type="checkbox" id="<?=$cateS[$i]->idx?>" name="cc" onclick="checkCate(1);">
+						<label for="<?=$cateS[$i]->idx?>"><span></span><?=$cateS[$i]->name?></label>
+					</div>
+				<?php endfor;?>
+			</div>
+			
+			<div id="cmw_content">
+				<textarea id="summernote" name="content"></textarea>
+			</div>
+			
+			<div id="cmw_btnset">
+				<button type="button" class="bo_btn" onclick="">
+					미리보기
+				</button>
+				<button type="button" class="bo_btn" onclick="">
+					등록
+				</button>
+				<button type="button" class="bo_btn" onclick=''>
+					취소
+				</button>
 			</div>
 		</div>
-		<script>
-		$(document).ready(function() {
-			$('#summernote').summernote({
-				height : 300,
-				lang: 'ko-KR',
-				toolbar: [
-					['style', ['fontsize', 'bold', 'underline', 'strikethrough']],
-					['color', ['color']],
-					['para', ['paragraph']],
-					['insert', ['picture', 'video', 'link']],
-					['misc', ['codeview']],
-				]
-			});
-		});
-		</script>
-
+		
+		<style>
+			input[type="checkbox"] + label span {
+				display: inline-block;
+				width: 19px;
+				height: 19px;
+				margin: -4px 4px 0 0;
+				vertical-align: middle;
+				background: url(<?=$adr_img?>bo_checkbox.png);
+				background-size: contain;
+				cursor: pointer;
+			}
+			input[type="checkbox"]:checked + label span {
+				background: url(<?=$adr_img?>bo_checkbox_on.png);
+				background-size: contain;
+			}
+		</style>
 		<?php
 		include ("footer.php");
 		?>

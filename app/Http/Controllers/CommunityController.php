@@ -75,8 +75,22 @@ class CommunityController extends Controller {
 	
 	public function write()
 	{
+		$cmModel = new CommunityModel();
+		
+		if (Request::has('cate'))
+			$cate = Request::input('cate');
+		else
+			$cate = "전체";
+		
+		$cateL = $cmModel->getLargeCategory();
+		
+		if ($cate == "전체")
+			$cateS = $cmModel->getLargeCategory();
+		else
+			$cateS = $cmModel->getSmallCategory($cate);
+		
 		$page = 'community_write';
-		return view($page, array('page' => $page));
+		return view($page, array('page' => $page, 'cate' => $cate, 'cateL' => $cateL['data'], 'cateS' => $cateS['data']));
 	}
 	
 	public function content()

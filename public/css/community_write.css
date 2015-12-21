@@ -11,7 +11,7 @@
 	margin: 32px 8px 16px 8px;
 	text-align: center;
 }
-#top:after {
+.cl_b:after {
 	content: "";
 	display: block;
 	clear: both;
@@ -32,4 +32,79 @@
 #current_cate {
 	font-size: 16px;
 	font-weight: bold;
+}
+input[type="checkbox"] {
+    display:none;
+}
+.cm_cate {
+	padding-left: 8px;
+	padding-right: 8px;
+}
+.cm_cate label {
+	font-weight: normal;
+	cursor: pointer;
+	font-size: 11px;
+}
+#cm_cate_wrap {
+	padding-bottom: 16px;
+	border-bottom: 1px solid #f15a63;
+}
+#cmw_title_wrap {
+	padding: 16px 8px;
+}
+.panel-default > .panel-heading, .btn-default {
+	background-image: -webkit-linear-gradient(#fff 0%, #fff 100%) !important;
+	background-image: -moz-linear-gradient(#fff 0%, #fff 100%) !important;
+	background-image: -o-linear-gradient(#fff 0%, #fff 100%) !important;
+	background-image: -webkit-gradient(linear, 0 100%, 0 0, from(#fff), to(#fff)) !important;
+	background-image: linear-gradient(#fff 0%, #fff 100%) !important;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff', endColorstr='#fff', GradientType=0) !important;
+	background-repeat: repeat-x;
+}
+.panel-default > .panel-heading {
+    background-color: #fff !important;
+}
+.note-editor {
+	margin: 16px 8px;
+}
+.note-editor.note-frame {
+    border: 1px solid #ddd !important;
+}
+.bo_btn {
+	width: 80px;
+	color: #f15a63;
+	background-color: #fff;
+	border: 1px solid #f15a63;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	border-radius: 25px !important;
+}
+.bo_btn:hover, .boxone_btn:active {
+	color: #fff;
+	background-color: #f15a63;
+	border-color: #f15a63;
+}
+#cmw_btnset {
+	width: 240px;
+	margin: 32px auto;
+}
+#cmw_btnset button:first-child {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border-right: 0;
+}
+#cmw_btnset button:nth-child(2) {
+    border-radius: 0 !important;
+    border-right: 0;
+    margin-left: -4px;
+}
+#cmw_btnset button:nth-child(3) {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    margin-left: -4px;
+}
+@media (max-width: 450px) {
+	.cm_cate {
+		width: 50%;
+	}
 }

@@ -282,3 +282,29 @@ input[type="checkbox"] {
 .album_count {
 	font-size: 11px;
 }
+#cm_search_wrap {
+    width: 300px;
+    margin: 0 auto;
+}
+.cm_search {
+    height: 30px;
+    color: #8C8B8B;
+}
+#cm_cate_select {
+	width: 80px;
+    font-size: 11px;
+    padding: 0;
+    border-right: transparent;
+}
+#cm_search_input {
+	width: 150px;
+}
+#cm_search_btn {
+	width: 60px;
+	background-color: #fff;
+    border: 1px solid #ccc;
+    font-size: 12px;
+    border-top-right-radius: 15px !important;
+    border-bottom-right-radius: 15px !important;
+    border-left: transparent;
+}

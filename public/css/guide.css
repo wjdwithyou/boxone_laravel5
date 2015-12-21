@@ -17,12 +17,6 @@
 .nav-tabs > li > a {
 	border: transparent;
 }
-#guide_header_wrap {
-	width: 100%;
-	height: 200px;
-	background-image: url('http://localhost:8000/img/guide_background.jpg');
-	background-size: contain;
-}
 #guide_title_wrap {
 	max-width: 400px;
 	height: 200px;

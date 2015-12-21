@@ -14,6 +14,9 @@
 
 		<div id="container">
 			<div id="cm_top">
+				<div id="cm_top_cate" class="bo_color">
+					#여성 #잡화 #가방
+				</div>
 				<div id="cm_top_title">
 					스타워즈 몰라도 빠져드는 에릭남의 역대급 인터뷰
 				</div>
@@ -329,8 +332,11 @@
 				</div>
 				
 				<!-- 댓글 달기 -->
-				<table class="reply_table">
+				<table id="reply_input_table" class="reply_table">
 					<tr class="reply_modify_show">
+						<td class="reply_profile reply_show">
+							<img src="<?=$adr_img?>profile_image.png">
+						</td>
 						<td class="input_textarea">
 							<textarea class="form-control" rows="3"></textarea>
 							<button type="button" class="add_reply" onclick="">
@@ -370,6 +376,17 @@
 			</div>
 			<!-- /댓댓글 달기 클론 -->
 			
+			<div id="pagination_wrap">
+				<a onclick=""><img src="<?= $adr_img ?>left_arrow.png"></a>
+				<div id="pagination">
+					<a onclick="">이전</a>
+					&nbsp;|&nbsp;
+					<a onclick="">목록보기</a>
+					&nbsp;|&nbsp;
+					<a onclick="">다음</a>
+				</div>
+				<a onclick=""><img src="<?= $adr_img ?>right_arrow.png"></a>
+			</div>
 		</div>
 		
 		<?php

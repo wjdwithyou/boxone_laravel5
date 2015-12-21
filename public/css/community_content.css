@@ -13,8 +13,13 @@
 .f_r {
 	float: right;
 }
+#cm_top_cate {
+	font-size: 11px;
+	margin-top: 16px;
+	margin-left: 8px;
+}
 #cm_top_title {
-	margin: 32px 8px;
+	margin: 8px 8px 32px 8px;
 	font-weight: bold;
 	font-size: 16px;
 }
@@ -93,9 +98,9 @@
 	border-bottom: 1px solid #ddd;
 }
 .reply_profile {
-	width: 80px;
+	width: 64px;
 	vertical-align: top;
-	padding-right: 16px;
+	padding-right: 8px;
 }
 .reply_profile img {
 	width: 100%;
@@ -147,4 +152,30 @@
 	.reply_profile {
 		width: 48px;
 	}
+}
+#reply_input_table {
+	border-bottom: transparent;
+	margin-bottom: 0;
+}
+#pagination_wrap {
+	width: 300px;
+	margin: 32px auto;
+	text-align: center;
+}
+#pagination_wrap a {
+	display: inline-block;
+}
+#pagination_wrap img {
+	margin: 0 16px;
+}
+#pagination {
+	display: inline-block;
+}
+#pagination a {
+	color: #aaa;
+	margin: 0 8px;
+}
+#pagination a:hover {
+	color: #000;
+	font-weight: bold;
 }
