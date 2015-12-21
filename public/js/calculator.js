@@ -1,7 +1,4 @@
 $(document).ready(function(){
-	get_cate_large();
-	select_cate();
-
 });
 
 /*

@@ -233,7 +233,13 @@ class CommunityModel{
 								ON cm.member_idx=mm.idx
 								JOIN community_category as cc
 								ON cm.commucategory_idx=cc.idx
-							) where cm.idx=?', array($community_idx));
+							) where cm.idx=? LIMIT 1', array($community_idx));
+		
+		// 이전, 다음 구하기 (속도 왕창 느려짐..)
+		$prev = DB::select('SELECT idx FROM community WHERE idx<? ORDER BY idx DESC LIMIT 1', array($community_idx));
+		$next = DB::select('SELECT idx FROM community WHERE idx>? LIMIT 1', array($community_idx));
+		$result[0]->prev = $prev[0]->idx;
+		$result[0]->next = $next[0]->idx;
 
 		if (count($result))
 		{
