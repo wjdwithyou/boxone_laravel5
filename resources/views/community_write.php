@@ -16,8 +16,8 @@
 		include ("header.php");
 		?>
 
-		<div id="container">
-			<div id="top">
+		<div id="container" class="cl_b">
+			<div id="top" class="cl_b">
 				<div id="top_title">
 					커뮤니티
 				</div>
@@ -28,12 +28,24 @@
 				<div id="current_cate">
 					패션 잡화
 				</div>
+				<div id="top_select">
+					<select id="community_cate" class="form-control">
+						<?php if ($cate == '전체') :?>
+							<option selected="selected">전체</option>
+						<?php else :?>
+							<option>전체</option>
+						<?php endif;?>
+						<?php foreach($cateL as $list){
+								if ($cate == $list->name) :?>
+									<option selected="selected"><?=$list->name?></option>
+								<?php else :?>
+									<option><?=$list->name?></option>
+								<?php endif; 
+						};?>
+					</select>
+				</div>
 			</div>
 			
-			<div id="cmw_title_wrap">
-				 <input type="text" class="form-control" id="cmw_title" placeholder="제목을 입력하세요">
-			</div>
-
 			<div id="cm_cate_wrap" class="cl_b">
 				<?php for($i = 0 ; $i < count($cateS) ; $i++) :?>
 					<div class="cm_cate col-xs-4 col-sm-2">
@@ -41,6 +53,10 @@
 						<label for="<?=$cateS[$i]->idx?>"><span></span><?=$cateS[$i]->name?></label>
 					</div>
 				<?php endfor;?>
+			</div>
+			
+			<div id="cmw_title_wrap">
+				 <input type="text" class="form-control" id="cmw_title" placeholder="제목을 입력하세요">
 			</div>
 			
 			<div id="cmw_content">
@@ -61,6 +77,19 @@
 		</div>
 		
 		<style>
+			#community_cate {
+				width: 188px;
+				height: 40px;
+				border: 1px solid #F15A63 !important;
+				color: #F15A63;
+				background: #fff url('<?=$adr_img?>select_arrow_pink.png') no-repeat 90% center;
+				text-indent: 0.01px;
+				text-overflow: "";
+				padding-left: 6px;
+				-webkit-appearance: none;
+				-moz-appearance: none;
+				appearance: none;
+			}
 			input[type="checkbox"] + label span {
 				display: inline-block;
 				width: 19px;
@@ -75,7 +104,16 @@
 				background: url(<?=$adr_img?>bo_checkbox_on.png);
 				background-size: contain;
 			}
+			@media (max-width: 768px) {
+				#community_cate {
+					width: 130px;
+					height: 30px;
+					background: #fff url('<?=$adr_img?>select_arrow_pink.png') no-repeat 90% center;
+					font-size: 10px;
+				}
+			}
 		</style>
+		
 		<?php
 		include ("footer.php");
 		?>

@@ -1,4 +1,4 @@
-#container, #reply_inner {
+#container, #reply_inner, #reply_input_wrap {
 	max-width: 992px;
 	margin: 0 auto;
 }
@@ -92,14 +92,10 @@
 	font-size: 12px;
 	color: #686666;
 	font-weight: bold;
-	padding-left: 8px;
 }
 .reply_title img {
 	width: 14px;
 	height: 14px;
-}
-.reply_title2 {
-	padding-left: 0;
 }
 .reply_table {
 	width: 100%;
@@ -230,4 +226,8 @@
 	padding: 16px 8px;
 	margin-top: 16px;
 	background-color: #fff;
+}
+#reply_inner {
+	padding-left: 8px;
+	padding-right: 8px;
 }
