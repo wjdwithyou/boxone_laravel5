@@ -18,7 +18,7 @@
 
 		<div id="container" class="cl_b">
 			<div id="top" class="cl_b">
-				<div id="top_title">
+				<!-- <div id="top_title">
 					커뮤니티
 				</div>
 				<div id="top_content">
@@ -27,7 +27,7 @@
 				<hr>
 				<div id="current_cate">
 					패션 잡화
-				</div>
+				</div> -->
 				<div id="top_select">
 					<select id="community_cate" class="form-control">
 						<?php if ($cate == '전체') :?>
@@ -49,10 +49,12 @@
 			<div id="cm_cate_wrap" class="cl_b">
 				<?php for($i = 0 ; $i < count($cateS) ; $i++) :?>
 					<div class="cm_cate col-xs-4 col-sm-2">
-						<input type="checkbox" id="<?=$cateS[$i]->idx?>" name="cc" onclick="checkCate(1);">
-						<label for="<?=$cateS[$i]->idx?>"><span></span><?=$cateS[$i]->name?></label>
+						<a id="<?=$cateS[$i]->idx?>" class="push_cate" onclick="stackCate($(this));"><?=$cateS[$i]->name?></a>
 					</div>
 				<?php endfor;?>
+			</div>
+			
+			<div id="stack_cate_wrap">
 			</div>
 			
 			<div id="cmw_title_wrap">
@@ -114,6 +116,33 @@
 			}
 		</style>
 		
+		<script>
+			function stackCate(e){
+				var cateIdx = e.attr("id");
+				var cateName = e.text();
+				var cnt = 0;
+				
+				$(".stack_cate").each(function(){
+					if($(this).val() == cateIdx){
+						cnt++;
+						return false;
+					}
+				})
+				
+				if(cnt == 0){
+					var appendStr = "<button type='button' class='stack_cate'"
+					 +"onclick='remove_stack_cate($(this));' value='"+cateIdx+"'>"+cateName+"&nbsp;&nbsp;X</button>";
+					$("#stack_cate_wrap").append(appendStr);
+				}
+				else{
+					alert("이미 선택하신 카테고리입니다.");
+				}
+			}
+			
+			function remove_stack_cate(e){
+				e.remove();
+			}
+		</script>
 		<?php
 		include ("footer.php");
 		?>
