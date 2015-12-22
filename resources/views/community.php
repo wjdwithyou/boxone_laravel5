@@ -13,6 +13,9 @@
 
 		<div id="container" class="cl_b">
 			<div id="top" class="cl_b">
+				<div id="option_btn_wrap">
+					<button type="button" id="mycommunity_btn" onclick="location.href='<?=$adr_ctr?>Community/my'">MY커뮤니티</button>
+				</div>
 				<div id="top_title">
 					커뮤니티
 				</div>

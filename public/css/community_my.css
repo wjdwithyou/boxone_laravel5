@@ -1,0 +1,22 @@
+#container {
+	max-width: 992px;
+	margin: 0 auto;
+}
+.cl_b:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+#mytop {
+	margin: 32px 8px 16px 8px;
+	text-align: center;
+	position: relative;
+}
+#mytop_title {
+	font-size: 23px;
+	font-weight: bold;
+}
+#mytop_content {
+	font-size: 11px;
+	color: #9e9d9d;
+}

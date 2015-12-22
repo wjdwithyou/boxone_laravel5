@@ -10,6 +10,7 @@
 #top {
 	margin: 32px 8px 16px 8px;
 	text-align: center;
+	position: relative;
 }
 #top_title {
 	font-size: 23px;
@@ -189,6 +190,11 @@ input[type="checkbox"] {
 		font-size: 10px;
 		width: 65px;
 	}
+	#mycommunity_btn {
+		font-size: 10px;
+		padding-left: 8px !important;
+		padding-right: 8px !important;
+	}
 }
 @media (max-width: 600px) {
 	.hd_result_div_wrap {
@@ -308,4 +314,20 @@ input[type="checkbox"] {
     border-top-right-radius: 15px !important;
     border-bottom-right-radius: 15px !important;
     border-left: transparent;
+}
+#mycommunity_btn {
+	padding: 7px 16px;
+	background-color: #F15A63;
+	border: 1px solid #F15A63;
+	color: #fff;
+	border-radius: 25px !important;
+}
+#mycommunity_btn:hover {
+	background-color: #fff;
+	border: 1px solid #F15A63;
+	color: #F15A63;
+}
+#option_btn_wrap {
+	position: absolute;
+	right: 0;
 }

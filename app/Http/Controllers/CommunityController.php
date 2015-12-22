@@ -267,6 +267,60 @@ class CommunityController extends Controller {
 			echo json_encode($result);
 		}
 	}
+	
+	public function my()
+	{
+		$cmModel = new CommunityModel();
+		
+		// 큰 카테고리
+		if (Request::has('cate'))
+			$cate = Request::input('cate');
+		else
+			$cate = "전체";
+		
+		// 특수경우용 상세카테고리
+		if (Request::has('cateS'))
+			$cateSList = Request::input('cateS');
+		else 
+			$cateSList = "";
+		
+		// 특수경우용 (보통 게시글 상세보기에서 목록 클릭 시) 타겟 페이징
+		if (Request::has('targetPage'))
+			$targetPage = Request::input('targetPage');
+		else
+			$targetPage = 1;
+		
+		if (Request::has('pageType'))
+			$pageType = Request::input('pageType');
+		else 
+			$pageType = 1;
+		
+		$cateL = $cmModel->getLargeCategory();
+		
+		if ($cate == "전체")
+			$cateS = $cmModel->getLargeCategory();
+		else
+		{
+			$cateS = $cmModel->getSmallCategory($cate);
+			
+			while($cateSList != "")
+			{
+				$temp = substr($cateSList, 0, 2);
+				$cateSList = substr($cateSList, 3);
+				for ($i = 0 ; $i < count($cateS['data']) ; $i++)
+				{
+					if ($temp == $cateS['data'][$i]->idx)
+					{
+						$cateS['data'][$i]->chk = 1;
+						break;
+					}
+				}
+			}
+		}
+		
+		$page = 'community_my';
+		return view($page, array('page' => $page, 'cate' => $cate, 'cateL' => $cateL['data'], 'cateS' => $cateS['data'], 'targetPage' => $targetPage, 'pageType' => $pageType));
+	}
 }
 
 
