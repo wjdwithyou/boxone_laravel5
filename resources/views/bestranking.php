@@ -65,7 +65,7 @@
 										BEST 1
 									</div>
 									<div class="rank_img">
-										<a onclick="location.href = '<?= $best1->website_link?>'"><img src="<?= $adr_img ?>site/<?= $best1->idx?>.png"></a>
+										<a onclick="clickLink(<?= $best1->idx?>, '<?= $best1->website_link?>');"><img src="<?= $adr_img ?>site/<?= $best1->idx?>.png"></a>
 									</div>
 								</div>
 								<div class="rank_desc">
@@ -100,7 +100,7 @@
 										<span><!-- 랭크 no --></span>
 									</div>
 									<div class="rank_img">
-										<a onclick="location.href = '<?= $upper[$i]->website_link?>'"><img src="<?= $adr_img ?>site/<?= $upper[$i]->idx?>.png"></a>
+										<a onclick="clickLink(<?= $upper[$i]->idx?>, '<?= $upper[$i]->website_link?>');"><img src="<?= $adr_img ?>site/<?= $upper[$i]->idx?>.png"></a>
 									</div>
 								</div>
 								<div class="rank_desc">
@@ -133,7 +133,7 @@
 					<?php foreach ($lower as $charList) :?>
 						<div class="site_set col-xs-6 col-sm-4">
 							<div class="site_img">
-								<a onclick="location.href = '<?= $charList->website_link?>'"><img src="<?= $adr_img ?>site/<?= $charList->idx?>.png"></a>
+								<a onclick="clickLink(<?= $charList->idx?>, '<?= $charList->website_link?>');"><img src="<?= $adr_img ?>site/<?= $charList->idx?>.png"></a>
 							</div>
 							<div class="site_name_set">
 								<div class="site_bookmark">
