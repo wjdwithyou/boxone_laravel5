@@ -57,10 +57,11 @@
 				</div>
 				<?php endif;?>
 			</div>
-			
-			<div id="reply_wrap">
+		</div>
+		<div id="reply_wrap">
+			<div id="reply_inner">
 				<div class="reply_title">
-					<img src="<?=$adr_img ?>reply.png">
+					<img src="<?=$adr_img ?>reply2.png">
 					&nbsp;댓글
 				</div>
 				
@@ -154,68 +155,69 @@
 					<!-- /댓댓글 -->
 				<?php endforeach;?>
 				
-				<div class="reply_title">
-					<img src="<?=$adr_img ?>reply.png">
-					&nbsp;댓글 쓰기
+				<div id="reply_input_wrap">
+					<div class="reply_title reply_title2">
+						<img src="<?=$adr_img ?>reply2.png">
+						&nbsp;댓글 쓰기
+					</div>
+					
+					<!-- 댓글 달기 -->
+					<table id="reply_input_table" class="reply_table">
+						<tr class="reply_modify_show">
+							<td class="reply_profile reply_show reply_mobile">
+								<img src="<?=$adr_img?>profile_image.png">
+							</td>
+							<td class="input_textarea2">
+								<textarea id="reply_write_content" class="form-control" placeholder="최대 200자까지 등록할 수 있습니다." rows="4"></textarea>
+								<button type="button" class="add_reply2" onclick="replyCreate($(this), <?=$result->idx?>, 0);">
+									등록
+								</button>
+							</td>
+						</tr>
+					</table>
+					<!-- /댓글 달기 -->
 				</div>
 				
-				<!-- 댓글 달기 -->
-				<table id="reply_input_table" class="reply_table">
-					<tr class="reply_modify_show">
-						<td class="reply_profile reply_show">
-							<img src="<?=$adr_img?>profile_image.png">
-						</td>
-						<td class="input_textarea">
-							<textarea id="reply_write_content" class="form-control" placeholder="최대 200자까지 등록할 수 있습니다." rows="3"></textarea>
-							<button type="button" class="add_reply" onclick="replyCreate($(this), <?=$result->idx?>, 0);">
-								등록
-							</button>
-						</td>
-					</tr>
-				</table>
-				<!-- /댓글 달기 -->
-				
-			</div>
-			
-			<!-- 댓댓글 달기 클론 -->
-			<div id="reply_textarea" hidden>
-				<table class="reply_table">
-					<tr class="reply_show">
-						<td class="reply_profile" rowspan="3">
-							<img src="<?=$adr_img?>reply_inner.png">
-						</td>
-					</tr>
-					<tr class="reply_modify_show">
-						<td class="input_textarea">
-							<textarea class="form-control" rows="3"></textarea>
-							<button type="button" class="add_reply" onclick="">
-								등록
-							</button>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<div class="f_r bo_color reply_a reply_rm">
-								<a class="reply_modify_show" onclick="remove_reply_textarea($(this));">취소</a>
-							</div>
-						</td>
-					</tr>
-				</table>
-			</div>
-			<!-- /댓댓글 달기 클론 -->
-			
-			<div id="pagination_wrap">
-				<a onclick=""><img src="<?= $adr_img ?>left_arrow.png"></a>
-				<div id="pagination">
-					<a onclick="">이전</a>
-					&nbsp;|&nbsp;
-					<a onclick="">목록보기</a>
-					&nbsp;|&nbsp;
-					<a onclick="">다음</a>
+				<div id="pagination_wrap">
+					<a onclick=""><img src="<?= $adr_img ?>left_arrow.png"></a>
+					<div id="pagination">
+						<a onclick="">이전</a>
+						&nbsp;|&nbsp;
+						<a onclick="">목록보기</a>
+						&nbsp;|&nbsp;
+						<a onclick="">다음</a>
+					</div>
+					<a onclick=""><img src="<?= $adr_img ?>right_arrow.png"></a>
 				</div>
-				<a onclick=""><img src="<?= $adr_img ?>right_arrow.png"></a>
 			</div>
 		</div>
+			
+		<!-- 댓댓글 달기 클론 -->
+		<div id="reply_textarea" hidden>
+			<table class="reply_table">
+				<tr class="reply_show">
+					<td class="reply_profile" rowspan="3">
+						<img src="<?=$adr_img?>reply_inner.png">
+					</td>
+				</tr>
+				<tr class="reply_modify_show">
+					<td class="input_textarea">
+						<textarea class="form-control" rows="3"></textarea>
+						<button type="button" class="add_reply" onclick="">
+							등록
+						</button>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="f_r bo_color reply_a reply_rm">
+							<a class="reply_modify_show" onclick="remove_reply_textarea($(this));">취소</a>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<!-- /댓댓글 달기 클론 -->
 		
 		<?php
 		include ("footer.php");
