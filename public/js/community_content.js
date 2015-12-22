@@ -149,7 +149,7 @@ function replyDelete(idx)
 	}
 }
 
-function replyUpdate(e, comm_idx, reply_idx)
+function replyUpdate(e, idx)
 {
 	var logined = $("#logined").val();
 	var text = e.parent().find("textarea").val();
@@ -164,12 +164,11 @@ function replyUpdate(e, comm_idx, reply_idx)
 	{
 		$.ajax
 		({
-			url: adr_ctr+"Community/createReply",
+			url: adr_ctr+"Community/updateReply",
 			type: 'post',
 			async: false,
 			data:{
-				comm_idx: comm_idx,
-				reply_idx: reply_idx,
+				idx: idx,
 				text: text
 			},
 			success: function(result)
