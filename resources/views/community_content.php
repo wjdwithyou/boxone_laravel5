@@ -15,7 +15,7 @@
 		<div id="container">
 			<div id="cm_top">
 				<div id="cm_top_cate" class="bo_color">
-					<?php foreach($result->category as $cateList) :?>#<?=$cateList ?><?php endforeach; ?>
+					<?php foreach($result->category as $cateList) :?>#<?=$cateList?>&nbsp;<?php endforeach;?>
 				</div>
 				<div id="cm_top_title">
 					<?=$result -> title ?>
@@ -89,8 +89,8 @@
 					</tr>
 					<tr class="reply_modify_show" hidden>
 						<td class="input_textarea">
-							<textarea class="form-control" rows="3"></textarea>
-							<button type="button" class="add_reply" onclick="">
+							<textarea class="form-control" placeholder="최대 300자까지 등록할 수 있습니다." maxlength="300" rows="3"></textarea>
+							<button type="button" class="add_reply" onclick="replyUpdate($this, <?=$result->idx?>, 0);">
 								등록
 							</button>
 						</td>
@@ -111,31 +111,65 @@
 					</tr>
 				</table>
 				<!-- /댓글 -->
+
+				<!-- 댓댓글 -->
+				<?php foreach($list->rereply as $reList) :?>
+				<table class="reply_table">
+					<tr>
+						<td class="reply_profile" rowspan="3">
+							<img src="<?=$adr_img?>reply_inner.png">
+						</td>
+						<td class="reply_profile reply_show" rowspan="3">
+							<img src="<?=$adr_img?>profile/<?=$reList->image?>.png">
+						</td>
+						<td>
+							<span class="reply_writer reply_show"><?=$reList->nickname?></span>
+							&nbsp;
+							<span class="reply_date bo_color reply_show"><?=$reList->upload?></span>
+						</td>
+					</tr>
+					<tr class="reply_show">
+						<td class="reply_content"><?=$reList->contents?></td>
+					</tr>
+					<tr class="reply_modify_show" hidden>
+						<td class="input_textarea">
+							<textarea class="form-control" placeholder="최대 300자까지 등록할 수 있습니다." maxlength="300" rows="3"></textarea>
+							<button type="button" class="add_reply" onclick="replyUpdate($this, <?=$result->idx?>, <?=$reList->idx?>);">
+								등록
+							</button>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<?php if ($reList->own) :?>
+							<div class="f_r bo_color reply_a reply_rm">
+								<a class="reply_show" onclick="reply_modify($(this));">수정</a>
+								<a class="reply_show" onclick="replyDelete(<?=$reList->idx?>);">삭제</a>
+								<a class="reply_modify_show" onclick="reply_modify_cancel($(this));" hidden>취소</a>
+							</div>
+							<?php endif;?>
+						</td>
+					</tr>
+				</table>
+				<?php endforeach;?>
+				<!-- /댓댓글 -->
+				<?php endforeach;?>
 				
-					<!-- 댓댓글 -->
-					<?php foreach($list->rereply as $reList) :?>
-					<input type="hidden" id="reply_delete_chk_<?=$list -> idx ?>" value="1"/>
-					<table class="reply_table">
-						<tr>
-							<td class="reply_profile" rowspan="3">
-								<img src="<?=$adr_img ?>reply_inner.png">
+				<div id="reply_input_wrap">
+					<div class="reply_title reply_title2">
+						<img src="<?=$adr_img ?>reply2.png">
+						&nbsp;댓글 쓰기
+					</div>
+					
+					<!-- 댓글 달기 -->
+					<table id="reply_input_table" class="reply_table">
+						<tr class="reply_modify_show">
+							<td class="reply_profile reply_show reply_mobile">
+								<img src="<?=$adr_img?>profile_image.png">
 							</td>
-							<td class="reply_profile reply_show" rowspan="3">
-								<img src="<?=$adr_img ?>profile/<?=$reList -> image ?>.png">
-							</td>
-							<td>
-								<span class="reply_writer reply_show"><?=$reList -> nickname ?></span>
-								&nbsp;
-								<span class="reply_date bo_color reply_show"><?=$reList -> upload ?></span>
-							</td>
-						</tr>
-						<tr class="reply_show">
-							<td class="reply_content"><?=$reList -> contents ?></td>
-						</tr>
-						<tr class="reply_modify_show" hidden>
-							<td class="input_textarea">
-								<textarea class="form-control" rows="3"></textarea>
-								<button type="button" class="add_reply" onclick="">
+							<td class="input_textarea2">
+								<textarea id="reply_write_content" class="form-control" placeholder="최대 300자까지 등록할 수 있습니다." maxlength="300" rows="4"></textarea>
+								<button type="button" class="add_reply2" onclick="replyCreate($(this), <?=$result->idx?>, 0);">
 									등록
 								</button>
 							</td>
@@ -152,33 +186,37 @@
 							</td>
 						</tr>
 					</table>
-					<?php endforeach; ?>
-					<!-- /댓댓글 -->
-				<?php endforeach; ?>
+				</div>
+				<!-- /댓글 달기 -->
 			</div>
-			
-			<div id="reply_input_wrap">
-				<div class="reply_title">
-					<img src="<?=$adr_img ?>reply2.png">
-					&nbsp;댓글 쓰기
-				</div>				
-				<!-- 댓글 달기 -->
-				<table id="reply_input_table" class="reply_table">
-					<tr class="reply_modify_show">
-						<td class="reply_profile reply_show reply_mobile">
-							<img src="<?=$adr_img ?>profile_image.png">
+				
+			<!-- 댓댓글 달기 클론 -->
+			<div id="reply_textarea" hidden>
+				<table class="reply_table">
+					<tr class="reply_show">
+						<td class="reply_profile" rowspan="3">
+							<img src="<?=$adr_img?>reply_inner.png">
 						</td>
-						<td class="input_textarea2">
-							<textarea id="reply_write_content" class="form-control" placeholder="최대 200자까지 등록할 수 있습니다." rows="4"></textarea>
-							<button type="button" class="add_reply2" onclick="replyCreate($(this), <?=$result -> idx ?>, 0);">
+					</tr>
+					<tr class="reply_modify_show">
+						<td class="input_textarea">
+							<textarea class="form-control" placeholder="최대 300자까지 등록할 수 있습니다." maxlength="300" rows="3"></textarea>
+							<button type="button" class="add_reply" onclick="">
 								등록
 							</button>
 						</td>
 					</tr>
+					<tr>
+						<td>
+							<div class="f_r bo_color reply_a reply_rm">
+								<a class="reply_modify_show" onclick="remove_reply_textarea($(this));">취소</a>
+							</div>
+						</td>
+					</tr>
 				</table>
-				<!-- /댓글 달기 -->
 			</div>
-			
+			<!-- /댓댓글 달기 클론 -->
+
 			<div id="pagination_wrap">
 				<div id="pagination">
 					<?php if($result->next) :?>
@@ -198,34 +236,7 @@
 				</div>
 			</div>
 		</div>
-			
-		<!-- 댓댓글 달기 클론 -->
-		<div id="reply_textarea" hidden>
-			<table class="reply_table">
-				<tr class="reply_show">
-					<td class="reply_profile" rowspan="3">
-						<img src="<?=$adr_img ?>reply_inner.png">
-					</td>
-				</tr>
-				<tr class="reply_modify_show">
-					<td class="input_textarea">
-						<textarea class="form-control" maxlength="200" rows="3"></textarea>
-						<button type="button" class="add_reply" onclick="">
-							등록
-						</button>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="f_r bo_color reply_a reply_rm">
-							<a class="reply_modify_show" onclick="remove_reply_textarea($(this));">취소</a>
-						</div>
-					</td>
-				</tr>
-			</table>
-		</div>
-		<!-- /댓댓글 달기 클론 -->
-		
+
 		<?php
 		include ("footer.php");
 		?>

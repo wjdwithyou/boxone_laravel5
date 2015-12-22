@@ -240,7 +240,7 @@ class CommunityModel{
 		while ($cateNums != "")
 		{
 			$cateNum = substr($cateNums, 0, 2);
-			$cateStr = DB::select("SELECT title FROM community_category WHERE idx = $cateNums");
+			$cateStr = DB::select("SELECT title FROM community_category WHERE idx = $cateNum");
 			array_push($cateList, $cateStr[0]->title);
 			$cateNums = substr($cateNums, 3);
 		}
@@ -313,6 +313,8 @@ class CommunityModel{
 				array_push($reply, $result[$i]);
 			}
 		}
+		
+		$rereply = array_reverse($rereply);
 		
 		for ($i=0; $i<count($rereply); $i++)
 			for ($j=0; $j<count($reply); $j++)
