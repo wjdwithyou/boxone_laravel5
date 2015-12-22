@@ -69,6 +69,29 @@ function clickBookmark(img, site)
 	}
 }
 
+function clickLink(idx, url)
+{
+	$.ajax
+	({
+		url: adr_ctr+"Bestranking/hitCountPlus",
+		type: 'post',
+		async: false,
+		data:{
+			idx: idx
+		},
+		success: function(result)
+		{
+			window.open(url);
+			//alert (JSON.stringify(result));
+			//result = JSON.parse(result);
+		},
+		error: function(request,status,error)
+		{
+			console.log(request.responseText);
+		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+	});
+}
 
 
 

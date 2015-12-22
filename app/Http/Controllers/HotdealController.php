@@ -123,10 +123,10 @@ class HotdealController extends Controller {
 	{
 		$hotdealModel = new HotdealTargetModel();
 		
-		if (isset($_COOKIE['click']))
+		if (isset($_COOKIE['hotdeal_click']))
 			return array('code' => 0, 'msg' => 'already clicked!');
 		else
-			setcookie('click', 1, time()+5);	
+			setcookie('hotdeal_click', 1, time()+5);	
 		
 		$idx = Request::input('idx');
 		$result = $hotdealModel->updateHitCount($idx);

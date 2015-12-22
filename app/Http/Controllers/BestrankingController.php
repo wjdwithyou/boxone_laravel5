@@ -114,6 +114,21 @@ class BestrankingController extends Controller {
 		header('Content-Type: application/json');
 		echo json_encode($result);
 	}
+	
+	public function hitCountPlus()
+	{
+		$ssModel = new ShoppingsiteModel();
+		
+		if (isset($_COOKIE['bestrank_click']))
+			return array('code' => 0, 'msg' => 'already clicked!');
+		else
+			setcookie('bestrank_click', 1, time()+5);	
+		
+		$idx = Request::input('idx');
+		$result = $ssModel->increaseHitCount($idx);
+		
+		return $result;
+	}
 }
 
 
