@@ -15,7 +15,7 @@
 		<div id="container">
 			<div id="cm_top">
 				<div id="cm_top_cate" class="bo_color">
-					<?php foreach($result->category as $cateList) :?>#<?=$cateList?><?php endforeach;?>
+					<?php foreach($result->category as $cateList) :?>#<?=$cateList?>&nbsp;<?php endforeach;?>
 				</div>
 				<div id="cm_top_title">
 					<?=$result->title?>
@@ -87,7 +87,7 @@
 					</tr>
 					<tr class="reply_modify_show" hidden>
 						<td class="input_textarea">
-							<textarea class="form-control" rows="3"></textarea>
+							<textarea class="form-control" placeholder="최대 300자까지 등록할 수 있습니다." maxlength="300" rows="3"></textarea>
 							<button type="button" class="add_reply" onclick="">
 								등록
 							</button>
@@ -132,7 +132,7 @@
 						</tr>
 						<tr class="reply_modify_show" hidden>
 							<td class="input_textarea">
-								<textarea class="form-control" rows="3"></textarea>
+								<textarea class="form-control" placeholder="최대 300자까지 등록할 수 있습니다." maxlength="300" rows="3"></textarea>
 								<button type="button" class="add_reply" onclick="">
 									등록
 								</button>
@@ -166,7 +166,7 @@
 							<img src="<?=$adr_img?>profile_image.png">
 						</td>
 						<td class="input_textarea">
-							<textarea id="reply_write_content" class="form-control" placeholder="최대 200자까지 등록할 수 있습니다." rows="3"></textarea>
+							<textarea id="reply_write_content" class="form-control" placeholder="최대 300자까지 등록할 수 있습니다." maxlength="300" rows="3"></textarea>
 							<button type="button" class="add_reply" onclick="replyCreate($(this), <?=$result->idx?>, 0);">
 								등록
 							</button>
@@ -187,7 +187,7 @@
 					</tr>
 					<tr class="reply_modify_show">
 						<td class="input_textarea">
-							<textarea class="form-control" rows="3"></textarea>
+							<textarea class="form-control" placeholder="최대 300자까지 등록할 수 있습니다." maxlength="300" rows="3"></textarea>
 							<button type="button" class="add_reply" onclick="">
 								등록
 							</button>

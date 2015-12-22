@@ -82,8 +82,8 @@ function replyCreate(e, comm_idx, reply_idx)
 		login_popup();
 	else if (text.length == 0)
 		alert ("댓글을 입력해주세요.");
-	else if (text.length > 200)
-		alert ("최대 200자까지 등록할 수 있습니다.");
+	else if (text.length > 300)
+		alert ("최대 300자까지 등록할 수 있습니다.");
 	else
 	{
 		$.ajax
