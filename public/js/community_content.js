@@ -149,6 +149,13 @@ function replyDelete(idx)
 	}
 }
 
+function commContent(idx)
+{
+	var adr_ctr = $("#adr_ctr").val();
+	var url = encodeURIComponent($("#cm_redirect").val());
+	location.href = adr_ctr + "Community/content?idx=" + idx + "&url=" + url;
+}
+
 
 
 

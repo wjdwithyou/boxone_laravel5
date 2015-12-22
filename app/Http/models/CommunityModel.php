@@ -161,7 +161,7 @@ class CommunityModel{
 	 */
 	function getSmallCategory($large_name)
 	{
-		$result = DB::select('select idx, title as name from community_category where large_name=?',
+		$result = DB::select('select idx, title as name, 0 as chk from community_category where large_name=?',
 			array($large_name));
 
         return array('code' => 1 , 'msg' => 'success', 'data' => $result);
@@ -226,21 +226,40 @@ class CommunityModel{
 
 		DB::update('update community set hit_count=hit_count+1 where idx=?',array($community_idx));
 
-		$result = DB::select('select cm.*, mm.nickname, mm.image, cc.title from 
+		// 상품 가져오기
+		$result = DB::select('select cm.*, mm.nickname, mm.image from 
 							(
 								community as cm
 								JOIN member as mm
 								ON cm.member_idx=mm.idx
-								JOIN community_category as cc
-								ON cm.commucategory_idx=cc.idx
 							) where cm.idx=? LIMIT 1', array($community_idx));
+		
+		// 카테고리 정리하기
+		$cateNums = $result[0]->commucategory_idx;
+		$cateList = array();
+		while ($cateNums != "")
+		{
+			$cateNum = substr($cateNums, 0, 2);
+			$cateStr = DB::select("SELECT title FROM community_category WHERE idx = $cateNums");
+			array_push($cateList, $cateStr[0]->title);
+			$cateNums = substr($cateNums, 3);
+		}
+		$result[0]->category = $cateList;
 		
 		// 이전, 다음 구하기 (속도 왕창 느려짐..)
 		$prev = DB::select('SELECT idx FROM community WHERE idx<? ORDER BY idx DESC LIMIT 1', array($community_idx));
 		$next = DB::select('SELECT idx FROM community WHERE idx>? LIMIT 1', array($community_idx));
-		$result[0]->prev = $prev[0]->idx;
-		$result[0]->next = $next[0]->idx;
-
+		
+		if (count($prev) > 0)
+			$result[0]->prev = $prev[0]->idx;
+		else 
+			$result[0]->prev = 0;
+		
+		if (count($next) > 0)
+			$result[0]->next = $next[0]->idx;
+		else 
+			$result[0]->next = 0;
+		
 		if (count($result))
 		{
 			if($result[0]->member_idx == $readmember_idx)

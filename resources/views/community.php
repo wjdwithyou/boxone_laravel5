@@ -32,33 +32,52 @@
 						<?php endif;?>
 						<?php foreach($cateL as $list){
 								if ($cate == $list->name) :?>
-									<option selected="selected"><?=$list->name?>
+									<option selected="selected"><?=$list->name?></option>
 								<?php else :?>
-									<option><?=$list->name?>
+									<option><?=$list->name?></option>
 								<?php endif; 
 						};?>
 					</select>
 				</div>
 				<div id="top_btnset" class="f_r">
+					<?php if ($pageType == 1) :?>
 					<button type="button" id="cm_page_type_button" class="bo_btn" onclick="changePageType();" value="1">
 						앨범형
 					</button>
-					<button type="button" class="bo_btn" onclick='location.href="<?=$adr_ctr ?>Community/write"'>
+					<?php else :?>
+					<button type="button" id="cm_page_type_button" class="bo_btn" onclick="changePageType();" value="0">
+						게시판형
+					</button>
+					<?php endif;?>
+					<button type="button" class="bo_btn" onclick='commWrite();'>
 						글쓰기
 					</button>
 				</div>
 			</div>
 
 			<div id="cm_cate_wrap" class="cl_b">
-				<?php for($i = 0 ; $i < count($cateS) ; $i++) :?>
-					<div class="cm_cate col-xs-4 col-sm-2">
-						<input type="checkbox" id="<?=$cateS[$i]->idx?>" name="cc" onclick="checkCate(1);">
-						<label for="<?=$cateS[$i]->idx?>"><span></span><?=$cateS[$i]->name?></label>
-					</div>
-				<?php endfor;?>
-				
+				<?php if ($cate == '전체') :?>
+					<?php foreach($cateS as $list) :?>
+						<div class="cm_cate col-xs-4 col-sm-2">
+							<input type="checkbox" id="cm_cate_<?=$list->idx?>" name="cc" onclick="location.href = '<?=$adr_ctr?>Community/index?cate=<?=$list->name?>'">
+							<label for="cm_cate_<?=$list->idx?>"><span></span><?=$list->name?></label>
+						</div>
+					<?php endforeach;?>
+				<?php else :?>
+					<?php foreach($cateS as $list) :?>
+						<div class="cm_cate col-xs-4 col-sm-2">
+							<?php if ($list->chk) :?>
+								<input type="checkbox" id="cm_cate_<?=$list->idx?>" name="cc" value="<?=$list->idx?>" checked="checked" onclick="checkCate(1);">
+							<?php else :?>
+								<input type="checkbox" id="cm_cate_<?=$list->idx?>" name="cc" value="<?=$list->idx?>" onclick="checkCate(1);">
+							<?php endif;?>
+							<label for="cm_cate_<?=$list->idx?>"><span></span><?=$list->name?></label>
+						</div>
+					<?php endforeach;?>
+				<?php endif;?>
 			</div>
 			<div id="cm_contents">
+				<input type="hidden" id="cm_target_page" value="<?=$targetPage?>"/>
 			</div>
 			
 			<div id="cm_search_wrap" class="cl_b">

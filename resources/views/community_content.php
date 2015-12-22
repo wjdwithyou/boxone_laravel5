@@ -15,7 +15,7 @@
 		<div id="container">
 			<div id="cm_top">
 				<div id="cm_top_cate" class="bo_color">
-					#여성 #잡화 #가방
+					<?php foreach($result->category as $cateList) :?>#<?=$cateList?><?php endforeach;?>
 				</div>
 				<div id="cm_top_title">
 					<?=$result->title?>
@@ -177,17 +177,24 @@
 					</table>
 					<!-- /댓글 달기 -->
 				</div>
-				
-				<div id="pagination_wrap">
-					<a onclick=""><img src="<?= $adr_img ?>left_arrow.png"></a>
-					<div id="pagination">
-						<a onclick="">이전</a>
-						&nbsp;|&nbsp;
-						<a onclick="">목록보기</a>
-						&nbsp;|&nbsp;
-						<a onclick="">다음</a>
-					</div>
-					<a onclick=""><img src="<?= $adr_img ?>right_arrow.png"></a>
+			</div>
+			
+			<div id="pagination_wrap">
+				<div id="pagination">
+					<?php if($result->next) :?>
+						<a onclick="commContent(<?=$result->next?>);">이전</a>
+					<?php else :?>
+						<a onclick="alert('이전 게시글이 없습니다.');">이전</a>
+					<?php endif;?>
+					&nbsp;|&nbsp;
+					<a href="<?=$adr_ctr?>Community/index?<?=$redirect?>">목록보기</a>
+					<input type="hidden" id="cm_redirect" value="<?=$redirect?>"/>
+					&nbsp;|&nbsp;
+					<?php if($result->prev) :?>
+						<a onclick="commContent(<?=$result->prev?>);">다음</a>
+					<?php else :?>
+						<a onclick="alert('다음 게시글이 없습니다.');">다음</a>
+					<?php endif;?>
 				</div>
 			</div>
 		</div>
