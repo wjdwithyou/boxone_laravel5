@@ -8,7 +8,7 @@
 						<!-- 커뮤니티 글 -->
 						<tr>
 							<td class="cm_pc"><?= $list->idx?></td>
-							<td class="cm_board_title"><a href="<?= $adr_ctr?>Community/content?idx=<?= $list->idx?>"><?= $list->title?></a></td>
+							<td class="cm_board_title"><a onclick="commContent(<?= $list->idx?>);"><?= $list->title?></a></td>
 							<td class="cm_pc"><?= $list->nickname?></td>
 							<td class="cm_pc"><?= $list->date?></td>
 							<td class="cm_pc"><?= $list->hit_count?></td>
@@ -30,7 +30,7 @@
 				<div class="hd_result_div_wrap cl_b">
 					<div class="hd_result_div">
 						<div class="hd_product_img center_box">
-							<div class="center_content" onclick="location.href='<?= $adr_ctr?>Community/content?idx=<?= $list->idx?>'">
+							<div class="center_content" onclick="commContent(<?= $list->idx?>);">
 								<img src="<?=$list->image?>">
 							</div>
 						</div>

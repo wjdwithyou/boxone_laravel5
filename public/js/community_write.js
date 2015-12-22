@@ -22,3 +22,9 @@ $(document).ready(function() {
 		});
 	}
 });
+
+function commCreate()
+{
+	var title = $("cmw_title").val();
+	var content = $("summernote").val();
+}
