@@ -180,7 +180,7 @@
 				<div class="product_div2 col-xs-12 col-sm-8 col-md-4">
 					<div class="large_product_img center_box">
 						<div class="center_content">
-							<a onclick='location.href="<?=$adr_ctr ?>Product/index"'><img src="<?= $adr_img ?>product_ex.jpg"></a>
+							<a onclick='location.href="<?=$adr_ctr ?>Product/index"'><img src="<?= $adr_img ?>product_1.jpg"></a>
 						</div>
 					</div>
 					<div class="product_div2_inner"></div>
@@ -188,7 +188,7 @@
 				<div class="product_div2 col-xs-12 col-sm-8 col-md-4">
 					<div class="large_product_img center_box">
 						<div class="center_content">
-							<a onclick='location.href="<?=$adr_ctr ?>Product/index"'><img src="<?= $adr_img ?>product_ex.jpg"></a>
+							<a onclick='location.href="<?=$adr_ctr ?>Product/index"'><img src="<?= $adr_img ?>product_2.jpg"></a>
 						</div>
 					</div>
 					<div class="product_div2_inner2"></div>
@@ -364,7 +364,7 @@
 				<div class="product_div2 col-xs-12 col-sm-8 col-md-4">
 					<div class="large_product_img center_box">
 						<div class="center_content">
-							<a onclick='location.href="<?=$adr_ctr ?>Product/index"'><img src="<?= $adr_img ?>product_ex.jpg"></a>
+							<a onclick='location.href="<?=$adr_ctr ?>Product/index"'><img src="<?= $adr_img ?>product_3.jpg"></a>
 						</div>
 					</div>
 					<div class="product_div2_inner"></div>
@@ -372,7 +372,7 @@
 				<div class="product_div2 col-xs-12 col-sm-8 col-md-4">
 					<div class="large_product_img center_box">
 						<div class="center_content">
-							<a onclick='location.href="<?=$adr_ctr ?>Product/index"'><img src="<?= $adr_img ?>product_ex.jpg"></a>
+							<a onclick='location.href="<?=$adr_ctr ?>Product/index"'><img src="<?= $adr_img ?>product_4.jpg"></a>
 						</div>
 					</div>
 					<div class="product_div2_inner2"></div>
@@ -380,7 +380,7 @@
 				<div class="product_div col-xs-6 col-sm-4 col-md-2">
 					<div class="hd_product_img center_box">
 						<div class="center_content">
-							<a onclick='location.href="<?=$adr_ctr ?>Product/index"'><img src="<?= $adr_img ?>product_ex.jpg"></a>
+							<a onclick='location.href="<?=$adr_ctr ?>Product/index"'><img src="<?= $adr_img ?>product_4.jpg"></a>
 						</div>
 					</div>
 					<div class="hd_site_desc">

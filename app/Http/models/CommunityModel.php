@@ -314,6 +314,8 @@ class CommunityModel{
 			}
 		}
 		
+		$rereply = array_reverse($rereply);
+		
 		for ($i=0; $i<count($rereply); $i++)
 			for ($j=0; $j<count($reply); $j++)
 				if ($rereply[$i]->rereply_idx == $reply[$j]->idx)
