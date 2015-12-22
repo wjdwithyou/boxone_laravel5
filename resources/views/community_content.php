@@ -90,7 +90,7 @@
 					<tr class="reply_modify_show" hidden>
 						<td class="input_textarea">
 							<textarea class="form-control" placeholder="최대 300자까지 등록할 수 있습니다." maxlength="300" rows="3"></textarea>
-							<button type="button" class="add_reply" onclick="replyUpdate($this, <?=$result->idx?>, 0);">
+							<button type="button" class="add_reply" onclick="replyUpdate($(this), <?=$list->idx?>);">
 								등록
 							</button>
 						</td>
@@ -134,7 +134,7 @@
 					<tr class="reply_modify_show" hidden>
 						<td class="input_textarea">
 							<textarea class="form-control" placeholder="최대 300자까지 등록할 수 있습니다." maxlength="300" rows="3"></textarea>
-							<button type="button" class="add_reply" onclick="replyUpdate($this, <?=$result->idx?>, <?=$reList->idx?>);">
+							<button type="button" class="add_reply" onclick="replyUpdate($(this), <?=$reList->idx?>);">
 								등록
 							</button>
 						</td>

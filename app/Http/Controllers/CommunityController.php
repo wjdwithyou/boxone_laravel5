@@ -223,6 +223,29 @@ class CommunityController extends Controller {
 		}
 	}
 	
+	public function updateReply()
+	{
+		$cmModel = new CommunityModel();
+		$my_idx = Request::input('idx');
+		$content = Request::input('text');
+	
+		if (session_id() == '')
+			session_start();
+		if (!isset($_SESSION['idx']))
+		{
+			header('Content-Type: application/json');
+			echo json_encode(array('code' => 0, 'msg' => 'not logined'));
+		}
+		else
+		{
+			$mem_idx = $_SESSION['idx'];
+			$result = $cmModel->updateReply($mem_idx, $my_idx, $content);
+				
+			header('Content-Type: application/json');
+			echo json_encode($result);
+		}
+	}
+	
 	public function deleteReply()
 	{
 		$cmModel = new CommunityModel();

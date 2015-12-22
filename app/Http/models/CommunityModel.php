@@ -85,15 +85,16 @@ class CommunityModel{
     /*  	
      *	댓글 수정 기능
      */
-	function updateReply($reply_idx, $contents)
+	function updateReply($member_idx, $reply_idx, $contents)
 	{
 
 		if(	!(	inputErrorCheck($reply_idx, 'reply_idx')
-		 		&& inputErrorCheck($contents, 'contents')))
+		 		&& inputErrorCheck($contents, 'contents')
+				&& inputErrorCheck($member_idx, 'member_idx')))
 			return ;
 
-		$result = DB::update('update community_repy set contents=? where idx=?',
-			array($contents, $reply_idx));
+		$result = DB::update('update community_reply set contents=? where idx=? and member_idx=?',
+			array($contents, $reply_idx, $member_idx));
                     
  		if($result == true){
           	return array('code' => 1, 'msg' => 'update success');
