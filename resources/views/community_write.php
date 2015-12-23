@@ -30,28 +30,19 @@
 				</div> -->
 				<div id="top_select">
 					<select id="community_cate" class="form-control">
-						<?php if ($cate == '전체') :?>
-							<option selected="selected">전체</option>
-						<?php else :?>
-							<option>전체</option>
-						<?php endif;?>
-						<?php foreach($cateL as $list){
-								if ($cate == $list->name) :?>
-									<option selected="selected"><?=$list->name?></option>
-								<?php else :?>
-									<option><?=$list->name?></option>
-								<?php endif; 
-						};?>
+						<?php foreach($cateL as $list) :?>
+						<option><?=$list->name?></option>
+						<?php endforeach;?>
 					</select>
 				</div>
 			</div>
 			
 			<div id="cm_cate_wrap" class="cl_b">
-				<?php for($i = 0 ; $i < count($cateS) ; $i++) :?>
+				<?php foreach($cateS as $list) :?>
 					<div class="cm_cate col-xs-4 col-sm-2">
-						<a id="<?=$cateS[$i]->idx?>" class="push_cate" onclick="stackCate($(this));"><?=$cateS[$i]->name?></a>
+						<a class="push_cate" onclick="stackCate(<?=$list->idx?>, '<?=$list->name?>');"><?=$list->name?></a>
 					</div>
-				<?php endfor;?>
+				<?php endforeach;?>
 			</div>
 			
 			<div id="stack_cate_wrap">
@@ -69,7 +60,7 @@
 				<button type="button" class="bo_btn" onclick="">
 					미리보기
 				</button>
-				<button type="button" class="bo_btn" onclick="">
+				<button type="button" class="bo_btn" onclick="commWrite();">
 					등록
 				</button>
 				<button type="button" class="bo_btn" onclick=''>
@@ -115,34 +106,7 @@
 				}
 			}
 		</style>
-		
-		<script>
-			function stackCate(e){
-				var cateIdx = e.attr("id");
-				var cateName = e.text();
-				var cnt = 0;
-				
-				$(".stack_cate").each(function(){
-					if($(this).val() == cateIdx){
-						cnt++;
-						return false;
-					}
-				})
-				
-				if(cnt == 0){
-					var appendStr = "<button type='button' class='stack_cate'"
-					 +"onclick='remove_stack_cate($(this));' value='"+cateIdx+"'>"+cateName+"&nbsp;&nbsp;X</button>";
-					$("#stack_cate_wrap").append(appendStr);
-				}
-				else{
-					alert("이미 선택하신 카테고리입니다.");
-				}
-			}
-			
-			function remove_stack_cate(e){
-				e.remove();
-			}
-		</script>
+
 		<?php
 		include ("footer.php");
 		?>

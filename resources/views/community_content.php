@@ -29,7 +29,7 @@
 							<td class="cm_writer bo_color"><?=$result -> nickname ?></td>
 						</tr>
 						<tr>
-							<td class="cm_content_info bo_color"><?=$result -> date ?> | 조휘수 <?=$result -> hit_count ?> | 추천 <?=$result -> bookmark_count ?></td>
+							<td class="cm_content_info bo_color"><?=$result -> upload ?> | 조휘수 <?=$result -> hit_count ?> | 추천 <?=$result -> bookmark_count ?></td>
 						</tr>
 					</table>
 				</div>
@@ -172,17 +172,6 @@
 								<button type="button" class="add_reply2" onclick="replyCreate($(this), <?=$result->idx?>, 0);">
 									등록
 								</button>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<?php if ($reList->own) :?>
-								<div class="f_r bo_color reply_a reply_rm">
-									<a class="reply_show" onclick="reply_modify($(this));">수정</a>
-									<a class="reply_show" onclick="replyDelete(<?=$reList -> idx ?>);">삭제</a>
-									<a class="reply_modify_show" onclick="reply_modify_cancel($(this));" hidden>취소</a>
-								</div>
-								<?php endif; ?>
 							</td>
 						</tr>
 					</table>

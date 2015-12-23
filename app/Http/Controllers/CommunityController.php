@@ -111,20 +111,11 @@ class CommunityController extends Controller {
 	{
 		$cmModel = new CommunityModel();
 		
-		if (Request::has('cate'))
-			$cate = Request::input('cate');
-		else
-			$cate = "전체";
-		
-		$cateL = $cmModel->getLargeCategory();
-		
-		if ($cate == "전체")
-			$cateS = $cmModel->getLargeCategory();
-		else
-			$cateS = $cmModel->getSmallCategory($cate);
+		$cateL = $cmModel->getLargeCategory();		
+		$cateS = $cmModel->getSmallCategory("패션잡화");
 		
 		$page = 'community_write';
-		return view($page, array('page' => $page, 'cate' => $cate, 'cateL' => $cateL['data'], 'cateS' => $cateS['data']));
+		return view($page, array('page' => $page, 'cateL' => $cateL['data'], 'cateS' => $cateS['data']));
 	}
 	
 	public function content()
@@ -320,6 +311,48 @@ class CommunityController extends Controller {
 		
 		$page = 'community_my';
 		return view($page, array('page' => $page, 'cate' => $cate, 'cateL' => $cateL['data'], 'cateS' => $cateS['data'], 'targetPage' => $targetPage, 'pageType' => $pageType));
+	}
+	
+	public function getSmallCate()
+	{
+		$cmModel = new CommunityModel();
+		
+		$cate = Request::input('cate');
+		
+		$result = $cmModel->getSmallCategory($cate);
+		
+		header('Content-Type: application/json');
+		echo json_encode($result['data']);
+	}
+	
+	public function create()
+	{
+		$cmModel = new CommunityModel();
+		
+		$cate = Request::input('cate');
+		$title = Request::input('title');
+		$content = Request::input('content');
+		
+		if (session_id() == '')
+			session_start();
+		if (!isset($_SESSION['idx']))
+		{
+			header('Content-Type: application/json');
+			echo json_encode(array('code' => 0, 'msg' => 'not logined'));
+		}
+		else
+		{
+			// 이미지 뽑아내서 정리해야함!!
+			
+			
+			$mem_idx = $_SESSION['idx'];
+			$result = $cmModel->create($mem_idx, $title, $content, $cate, '0');
+			$result['content'] = mb_detect_encoding($content); 
+		
+			header('Content-Type: application/json');
+			echo json_encode($result);
+		}
+		
 	}
 }
 

@@ -11,13 +11,13 @@ class CommunityModel{
     /*  	
      *	게시물 등록 기능
      */
-	function create($member_idx, $title, $contents, $commucategory_idx, $commcommunnity_idx)
+	function create($member_idx, $title, $contents, $commucategory_idx, $commcommunity_idx)
 	{
 		if(	!(	inputErrorCheck($member_idx, 'member_idx')
 		 		&& inputErrorCheck($title, 'title')
 		 		&& inputErrorCheck($contents, 'contents')
 		 		&& inputErrorCheck($commucategory_idx, 'commucategory_idx')
-		 		&& inputErrorCheck($commcommunnity_idx, 'commcommunnity_idx')))
+		 		&& inputErrorCheck($commcommunity_idx, 'commcommunity_idx')))
 			return ;
 		
 		$result = DB::table('community')->insertGetId(
@@ -26,7 +26,7 @@ class CommunityModel{
 				'title'=> $title, 
 				'contents'=> $contents, 
 				'commucategory_idx'=> $commucategory_idx,
-				'commcommunnity_idx' => $commcommunnity_idx,
+				'commcommunity_idx' => $commcommunity_idx,
 				'upload'=>DB::raw('now()')
 				)
 			);		
