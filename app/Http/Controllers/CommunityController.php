@@ -344,10 +344,9 @@ class CommunityController extends Controller {
 		{
 			// 이미지 뽑아내서 정리해야함!!
 			
-			
 			$mem_idx = $_SESSION['idx'];
 			$result = $cmModel->create($mem_idx, $title, $content, $cate, '0');
-			$result['content'] = $content; 
+			$result['content'] = $content;
 		
 			header('Content-Type: application/json');
 			echo json_encode($result);
