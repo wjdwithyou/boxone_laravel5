@@ -3,6 +3,11 @@ $(document).ready(function() {
 		$('#summernote').summernote({
 			height : 400,
 			lang: 'ko-KR',
+			callbacks: {
+				onImageUpload: function(files){
+					sendFile(files[0]);
+				}
+			},
 			toolbar: [
 				['style', ['fontsize', 'bold']],
 				['insert', ['picture']],
@@ -13,6 +18,11 @@ $(document).ready(function() {
 		$('#summernote').summernote({
 			height : 600,
 			lang: 'ko-KR',
+			callbacks: {
+				onImageUpload: function(files, editor, welEditable){
+					sendFile(files[0], editor, welEditable);
+				}
+			},
 			toolbar: [
 				['style', ['fontsize', 'bold', 'underline', 'strikethrough']],
 				['color', ['color']],
@@ -52,6 +62,43 @@ $(document).ready(function() {
 			}
 		});
 	});
+	
+	// 글 작성 중 페이지이동 또는 종료 시 물어보기
+	$(window).on("beforeunload", function(){
+		var length = $("#summernote").val().length + $("#cmw_title").val().length;
+		if (length > 0 && chkWrite) 
+			return "작성중인 글은 지워집니다.";
+	});
+	
+	// 임시 저장 이미지 날리기
+	$(window).on("unload", function(){
+		if (chkWrite)
+		{
+			var adr_ctr = $("#adr_ctr").val();
+			$.ajax({
+		        type: "POST",
+		        async: false,
+		        url: adr_ctr + "Community/deleteTempImg",
+		        success: function(result)
+				{
+					//alert (JSON.stringify(result));
+					result = JSON.parse(result);
+					if (result.code == 1)
+					{
+						alert ("ㅇㅋ지워짐");
+					}
+					else
+						alert ("로그인안됨");
+				},
+		        error: function(request,status,error)
+				{
+					console.log(request.responseText);
+				    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				}
+		    });
+		}
+	});
+	
 });
 
 function stackCate(idx, name)
@@ -79,6 +126,7 @@ function remove_stack_cate(e){
 	e.remove();
 }
 
+var chkWrite = true;
 function commWrite()
 {
 	var cate = "";
@@ -101,6 +149,7 @@ function commWrite()
 			url: adr_ctr+"Community/create",
 			type: 'post',
 			async: false,
+			timeout: 10000,
 			data:{
 				cate: cate,
 				title: title,
@@ -110,11 +159,11 @@ function commWrite()
 			{
 				//alert (JSON.stringify(result));
 				result = JSON.parse(result);
-				alert (result.content);
 				if (result.code == 1)
 				{
 					var adr_ctr = $("#adr_ctr").val();
 					alert ("게시글이 작성되었습니다.");
+					chkWrite = false;
 					location.href = adr_ctr + "Community/content?idx=" + result.data;  
 				}
 				else
@@ -130,5 +179,38 @@ function commWrite()
 }
 
 
+// 파일 임시저장
+var tempImgNum = 0;
+function sendFile(file) 
+{
+	var adr_ctr = $("#adr_ctr").val();
+	var adr_img = $("#adr_img").val();
+		
+    data = new FormData();
+    data.append("file", file);
+    data.append("num", tempImgNum++);
+    $.ajax({
+        data: data,
+        type: "POST",
+        url: adr_ctr + "Community/imageUpload",
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(result) {
+        	//alert (JSON.stringify(result));
+        	result = JSON.parse(result);
+        	
+        	if (result.code == 1)
+        		$("#summernote").summernote('insertImage', adr_img + "community/" + result.name);
+        	else
+        		alert ("로그인해야 쓸 수 있어요!");
+        },
+        error: function(request,status,error)
+		{
+			console.log(request.responseText);
+		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+    });
+}
 
 

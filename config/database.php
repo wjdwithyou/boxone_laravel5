@@ -64,7 +64,7 @@ return [
     			'username'  => 'boxone',
     			'password'  => '1q2w3e!!',
     			'charset'   => 'utf8',
-    			'collation' => 'utf8_unicode_ci',
+    			'collation' => 'utf8_general_ci',
     			'prefix'    => '',
     	],
 

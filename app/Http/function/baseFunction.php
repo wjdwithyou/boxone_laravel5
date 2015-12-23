@@ -118,7 +118,7 @@
 
 			$image_name = $document_idx.'_image'.$image_num.'.jpg';
 
-			switch (target_idx) {
+			switch ($target_idx) {
 				// community
 				case '1':
 				$s3->putObject(array(

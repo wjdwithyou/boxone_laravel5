@@ -341,17 +341,69 @@ class CommunityController extends Controller {
 			echo json_encode(array('code' => 0, 'msg' => 'not logined'));
 		}
 		else
-		{
-			// 이미지 뽑아내서 정리해야함!!
-			
+		{	
 			$mem_idx = $_SESSION['idx'];
 			$result = $cmModel->create($mem_idx, $title, $content, $cate, '0');
-			$result['content'] = $content;
 		
 			header('Content-Type: application/json');
 			echo json_encode($result);
 		}
 		
+	}
+	
+	// 이미지 파일 임시저장
+	public function imageUpload()
+	{
+		$file = Request::file('file');
+		$num = Request::input('num');
+		
+		if (session_id() == '')
+			session_start();
+		if (!isset($_SESSION['idx']))
+		{
+			header('Content-Type: application/json');
+			echo json_encode(array('code' => 0, 'msg' => 'not logined'));
+		}
+		else
+		{
+			$mem_idx = $_SESSION['idx'];
+			$ext = $file->getClientOriginalExtension();
+			$date = date("YmdHis", time());
+			$name = "$mem_idx"."dd$num$date.$ext";
+			
+			//$path = str_replace("/","\\",$adr_img)."community\\";
+			$path = "img/community/";
+			$file->move($path, $name);
+			
+			header('Content-Type: application/json');
+			echo json_encode(array('code' => 1, 'msg' => 'success', 'name' => $name));
+		}
+	}
+	
+	// 임시저장 후 등록하지 않고 다른 페이지 이동 시 임시저장 파일 제거
+	public function deleteTempImg()
+	{
+		if (session_id() == '')
+			session_start();
+		if (!isset($_SESSION['idx']))
+		{
+			header('Content-Type: application/json');
+			echo json_encode(array('code' => 0, 'msg' => 'not logined'));
+		}
+		else
+		{
+			$mem_idx = $_SESSION['idx'];
+			
+			$glob = glob('img/community/'.$mem_idx.'dd*');
+			foreach($glob as $file)
+			{
+				if (is_file($file))
+					unlink($file);
+			}
+			
+			header('Content-Type: application/json');
+			echo json_encode(array('code' => 1, 'msg' => 'success', 'data' => $glob));
+		}
 	}
 
 }
