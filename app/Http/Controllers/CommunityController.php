@@ -347,13 +347,14 @@ class CommunityController extends Controller {
 			
 			$mem_idx = $_SESSION['idx'];
 			$result = $cmModel->create($mem_idx, $title, $content, $cate, '0');
-			$result['content'] = mb_detect_encoding($content); 
+			$result['content'] = $content; 
 		
 			header('Content-Type: application/json');
 			echo json_encode($result);
 		}
 		
 	}
+
 }
 
 

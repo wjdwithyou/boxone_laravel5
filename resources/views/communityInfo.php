@@ -10,14 +10,14 @@
 							<td class="cm_pc"><?= $list->idx?></td>
 							<td class="cm_board_title"><a onclick="commContent(<?= $list->idx?>);"><?= $list->title?></a></td>
 							<td class="cm_pc"><?= $list->nickname?></td>
-							<td class="cm_pc"><?= $list->date?></td>
+							<td class="cm_pc"><?= $list->upload?></td>
 							<td class="cm_pc"><?= $list->hit_count?></td>
 							<td class="cm_board_reply cm_mobile" rowspan="2">
 								<div class="numberCircle"><?= $list->bookmark_count?></div>
 							</td>
 						</tr>
 						<tr class="cm_mobile">
-							<td class="cm_board_writer bo_color"><?= $list->nickname?>&nbsp;|&nbsp;<?= $list->date?>&nbsp;|&nbsp;조회수&nbsp;<?= $list->hit_count?></td>
+							<td class="cm_board_writer bo_color"><?= $list->nickname?>&nbsp;|&nbsp;<?= $list->upload?>&nbsp;|&nbsp;조회수&nbsp;<?= $list->hit_count?></td>
 						</tr>
 						<!-- /커뮤니티 글 -->
 					</table>
@@ -39,7 +39,7 @@
 								<?=$list->contents?>
 							</div>
 							<div class="album_writer bo_color">
-									<?=$list->nickname?> | <?=$list->date?> | <?=$list->hit_count?>
+									<?=$list->nickname?> | <?=$list->upload?> | <?=$list->hit_count?>
 							</div>
 							<div class="album_btnset cl_b">
 								<img src="<?= $adr_ctr ?>img/suki.png">

@@ -172,7 +172,7 @@ class CommunityModel{
     /*  	
      *	게시물 목록 가져오는 기능
      */
-	function getInfoList($commucategory_idx_array, $page_num)	// product_num은 한 페이지에 몇개씩 보여줄지
+	function getInfoList($commucategory_idx_array, $page_num)
 	{
 
 		$commucategory_query = "where ";
@@ -181,7 +181,7 @@ class CommunityModel{
 		{
 			for( $i=0; $i<count($commucategory_idx_array); $i++)
 			{
-				$commucategory_query .= "commucategory_idx = '$commucategory_idx_array[$i]' ";
+				$commucategory_query .= "commucategory_idx like '%$commucategory_idx_array[$i],%' ";
 				if( $i != count($commucategory_idx_array)-1)
 					$commucategory_query .= "OR ";
 			}
