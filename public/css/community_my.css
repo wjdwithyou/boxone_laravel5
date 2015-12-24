@@ -204,3 +204,9 @@ input[type="checkbox"] {
 	width: 100px;
     margin-top: -8px;
 }
+#selected_remove:hover {
+	color: #fff;
+	border: 1px solid #8B8B8B;
+	background-color: #8B8B8B;
+	font-size: 12px;
+}
