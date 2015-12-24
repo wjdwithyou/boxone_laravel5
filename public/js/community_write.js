@@ -198,7 +198,7 @@ function sendFile(file)
         	result = JSON.parse(result);
         	
         	if (result.code == 1)
-        		$("#summernote").summernote('insertImage', adr_img + "community/" + result.name);
+        		$("#summernote").summernote('insertImage', adr_ctr + "img/community/" + result.name);
         	else
         		alert ("로그인해야 쓸 수 있어요!");
         },
