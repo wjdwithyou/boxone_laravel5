@@ -42,10 +42,10 @@
 									<?=$list->nickname?> | <?=$list->upload?> | <?=$list->hit_count?>
 							</div>
 							<div class="album_btnset cl_b">
-								<img src="<?= $adr_ctr ?>img/suki.png">
+								<img src="<?=$adr_img?>suki.png">
 								<span class="album_count"><?=$list->bookmark_count?></span>
 								&nbsp;
-								<img src="<?= $adr_ctr ?>img/reply.png">
+								<img src="<?=$adr_img?>reply.png">
 								<span class="album_count"><?=$list->reply_number?></span>
 							</div>
 						</div>

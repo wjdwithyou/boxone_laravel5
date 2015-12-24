@@ -36,7 +36,7 @@ function checkCate(page)
 		});
 	}
 	
-	var adr_ctr = $("#adr_ctr").val();
+	var adr_img = $("#adr_img").val();
 	
 	var page_type = $('#cm_page_type_button').attr("value");
 	
@@ -50,7 +50,7 @@ function checkCate(page)
 		async: false,
 		data:{
 			cate: JSON.stringify(cate),
-			adr_ctr: adr_ctr,
+			adr_img: adr_img,
 			page_type: page_type,
 			paging: page
 		},

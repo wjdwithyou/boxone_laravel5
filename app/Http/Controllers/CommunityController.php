@@ -78,7 +78,7 @@ class CommunityController extends Controller {
 		$cmModel = new CommunityModel();
 		
 		$cate = json_decode(Request::input('cate'));
-		$adr_ctr = Request::input('adr_ctr');
+		$adr_img = Request::input('adr_img');
 		$page_type = Request::input('page_type');
 		$paging = Request::input('paging');
 		
@@ -104,7 +104,7 @@ class CommunityController extends Controller {
 		//print_r ($result);
 		
 		$page = 'communityInfo';
-		return view($page, array('page' => $page, 'result' => $result['data'], 'adr_ctr' => $adr_ctr, 'page_type' => $page_type, 'paging' => $result['paging']));
+		return view($page, array('page' => $page, 'result' => $result['data'], 'adr_img' => $adr_img, 'page_type' => $page_type, 'paging' => $result['paging']));
 	}
 	
 	public function write()

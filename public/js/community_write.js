@@ -181,7 +181,6 @@ var tempImgNum = 0;
 function sendFile(file) 
 {
 	var adr_ctr = $("#adr_ctr").val();
-	var adr_img = $("#adr_img").val();
 		
     data = new FormData();
     data.append("file", file);
