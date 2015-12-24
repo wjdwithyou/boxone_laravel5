@@ -58,7 +58,7 @@
 			
 			<input type="hidden" id="cm_nowPage" value="<?=$paging['now']?>"/>
 			<div class="pagination_wrap cl_b">
-				<a onclick="checkCate(<?php echo ($paging['now'] - 1);?>);"><img src="<?= $adr_ctr ?>img/left_arrow.png"></a>
+				<a onclick="checkCate(<?php echo ($paging['now'] - 1);?>);"><img src="<?=$adr_img?>left_arrow.png"></a>
 				<div class="pagination">
 					<?php if ($paging['now'] > 3) :?>
 						<a onclick="checkCate(1);">1</a>
@@ -82,7 +82,7 @@
 						<?php endfor;?>
 					<?php endif;?>
 				</div>
-				<a onclick="checkCate(<?php echo ($paging['now'] + 1);?>);"><img src="<?= $adr_ctr ?>img/right_arrow.png"></a>
+				<a onclick="checkCate(<?php echo ($paging['now'] + 1);?>);"><img src="<?=$adr_img?>right_arrow.png"></a>
 			</div>
 			
 			
