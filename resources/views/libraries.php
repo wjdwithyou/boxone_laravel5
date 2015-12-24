@@ -1,4 +1,4 @@
-﻿    <meta charset="utf-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -8,7 +8,7 @@
 	<?php 
 		$adr_js = "http://52.69.26.243/js/";
   		$adr_css = "http://52.69.26.243/css/";
-  		$adr_img = "http://52.69.26.243/img/";
+  		$adr_img = "https://s3-ap-northeast-1.amazonaws.com/boxone-image/";
   		$adr_btstrp = "http://52.69.26.243/bootstrap/";
   		$adr_ctr = "http://52.69.26.243/";
   	

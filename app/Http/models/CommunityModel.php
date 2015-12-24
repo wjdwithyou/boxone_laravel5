@@ -20,18 +20,55 @@ class CommunityModel{
 		 		&& inputErrorCheck($commcommunity_idx, 'commcommunity_idx')))
 			return ;
 		
-		$result = DB::table('community')->insertGetId(
+		$community_idx = DB::table('community')->insertGetId(
 			array(
 				'member_idx'=> $member_idx, 
 				'title'=> $title, 
-				'contents'=> $contents, 
+				//'contents'=> $contents, 
 				'commucategory_idx'=> $commucategory_idx,
 				'commcommunity_idx' => $commcommunity_idx,
 				'upload'=>DB::raw('now()')
 				)
-			);		
+			);
+		
+		// 이미지 처리 (임시 이미지를 S3에 저장, 게시글에 이미지 src 변경, 임시 이미지 지우기)
+		$imgList = array();
+		
+		$s3Adr = "https://s3-ap-northeast-1.amazonaws.com/boxone-image/community/";
+		$dbImg = "";
+		
+		$str = $contents;
+		$num = 0;
+		
+		while (strpos($str, "<img"))
+		{
+			$str = substr($str, strpos($str, "<img"));
+			$str = substr($str, strpos($str, "src=\"") + 5);		
+			$imgStr = substr($str, 0, strpos($str, "\""));
+			
+			$ext = substr($imgStr, strrpos($imgStr, "."));
+			
+			if (!$num)
+				$dbImg = $community_idx.'_image0'.$ext;
+			$imgName = $s3Adr.$community_idx.'_image'.($num++).$ext;
+			
+			array_push($imgList, $imgStr);
+			$contents = str_replace($imgStr, $imgName, $contents);
+		}
+		
+		if (count($imgList) > 0)
+		{
+			for ($i = 0 ; $i < count($imgList) ; $i++)
+			{
+				$imgStr = "img/community/".substr($imgList[$i], strrpos($imgList[$i], "/") + 1);
+				if (is_file($imgStr))
+					insertImg('1', $community_idx, $imgStr, "$i");
+			}
+		
+			$result = DB::update('update community set image=?, contents=? where idx=?', array($dbImg, $contents, $community_idx));
+		}
 		                      
-		return array('code' => 1,'msg' =>'success' ,'data' => $result);
+		return array('code' => 1,'msg' =>'success' ,'data' => $community_idx);
 	}
 
 	/*  	

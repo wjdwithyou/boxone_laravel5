@@ -19,8 +19,8 @@ $(document).ready(function() {
 			height : 600,
 			lang: 'ko-KR',
 			callbacks: {
-				onImageUpload: function(files, editor, welEditable){
-					sendFile(files[0], editor, welEditable);
+				onImageUpload: function(files){
+					sendFile(files[0]);
 				}
 			},
 			toolbar: [
@@ -72,31 +72,28 @@ $(document).ready(function() {
 	
 	// 임시 저장 이미지 날리기
 	$(window).on("unload", function(){
-		if (chkWrite)
-		{
-			var adr_ctr = $("#adr_ctr").val();
-			$.ajax({
-		        type: "POST",
-		        async: false,
-		        url: adr_ctr + "Community/deleteTempImg",
-		        success: function(result)
+		var adr_ctr = $("#adr_ctr").val();
+		$.ajax({
+	        type: "POST",
+	        async: false,
+	        url: adr_ctr + "Community/deleteTempImg",
+	        success: function(result)
+			{
+				//alert (JSON.stringify(result));
+				result = JSON.parse(result);
+				if (result.code == 1)
 				{
-					//alert (JSON.stringify(result));
-					result = JSON.parse(result);
-					if (result.code == 1)
-					{
-						alert ("ㅇㅋ지워짐");
-					}
-					else
-						alert ("로그인안됨");
-				},
-		        error: function(request,status,error)
-				{
-					console.log(request.responseText);
-				    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					alert ("ㅇㅋ지워짐");
 				}
-		    });
-		}
+				else
+					alert ("로그인안됨");
+			},
+	        error: function(request,status,error)
+			{
+				console.log(request.responseText);
+			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+	    });
 	});
 	
 });

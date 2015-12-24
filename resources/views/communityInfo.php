@@ -31,12 +31,12 @@
 					<div class="hd_result_div">
 						<div class="hd_product_img center_box">
 							<div class="center_content" onclick="commContent(<?= $list->idx?>);">
-								<img src="<?=$list->image?>">
+								<img src="<?=$adr_img?>community/<?=$list->image?>">
 							</div>
 						</div>
 						<div class="hd_site_desc">
 							<div class="hd_brand text_overflow">
-								<?=$list->contents?>
+								<?=$list->title?>
 							</div>
 							<div class="album_writer bo_color">
 									<?=$list->nickname?> | <?=$list->upload?> | <?=$list->hit_count?>

@@ -144,7 +144,11 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-		
+    		
+    	/*
+    	 * Aws S3 use
+    	 */
+		Aws\Laravel\AwsServiceProvider::class,
     ],
 
     /*
@@ -195,6 +199,8 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
 
 		'SoapClient' => SoapClient::class,
+    		
+    	'AWS' => Aws\Laravel\AwsFacade::class,
     ],
 
 ];

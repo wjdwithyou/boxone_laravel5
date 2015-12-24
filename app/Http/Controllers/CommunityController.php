@@ -342,7 +342,7 @@ class CommunityController extends Controller {
 		}
 		else
 		{	
-			$mem_idx = $_SESSION['idx'];
+			$mem_idx = $_SESSION['idx'];			
 			$result = $cmModel->create($mem_idx, $title, $content, $cate, '0');
 		
 			header('Content-Type: application/json');
