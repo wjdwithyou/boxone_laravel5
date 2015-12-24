@@ -183,7 +183,7 @@ input[type="checkbox"] {
 	}
 }
 @media (max-width: 768px) {
-	.cm_pc {
+	.cm_pc, .pc_reply {
 		display: none;
 	}
 	#top_btnset button {
@@ -330,4 +330,7 @@ input[type="checkbox"] {
 #option_btn_wrap {
 	position: absolute;
 	right: 0;
+}
+.pc_reply {
+	font-weight: normal;
 }
