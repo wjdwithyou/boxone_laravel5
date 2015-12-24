@@ -154,7 +154,7 @@ function commWrite()
 			},
 			success: function(result)
 			{
-				//alert (JSON.stringify(result));
+				alert (JSON.stringify(result));
 				result = JSON.parse(result);
 				if (result.code == 1)
 				{
