@@ -8,7 +8,7 @@
 						<!-- 커뮤니티 글 -->
 						<tr>
 							<td class="cm_pc"><?= $list->idx?></td>
-							<td class="cm_board_title"><a onclick="commContent(<?= $list->idx?>);"><?= $list->title?></a></td>
+							<td class="cm_board_title"><a onclick="commContent(<?= $list->idx?>);"><?= $list->title?><span class="pc_reply">&nbsp;[12]</span></a></td>
 							<td class="cm_pc"><?= $list->nickname?></td>
 							<td class="cm_pc"><?= $list->upload?></td>
 							<td class="cm_pc"><?= $list->hit_count?></td>
