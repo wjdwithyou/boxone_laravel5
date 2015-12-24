@@ -48,7 +48,7 @@
 				</div>
 				<?php else : ?>
 				<div id="content_btnset" class="f_r">
-					<button type="button" class="bo_btn" onclick='location.href="<?=$adr_ctr ?>Community/write"'>
+					<button type="button" class="bo_btn" onclick='commModify(<?=$result->idx?>);'>
 						수정
 					</button>
 					<button type="button" class="bo_btn" onclick="commDelete(<?=$result -> idx ?>)">

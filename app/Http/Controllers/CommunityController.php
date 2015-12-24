@@ -81,7 +81,10 @@ class CommunityController extends Controller {
 		$adr_img = Request::input('adr_img');
 		$page_type = Request::input('page_type');
 		$paging = Request::input('paging');
+		$searchText = trim(Request::input('searchText'));
+		$searchType = Request::input('searchType');
 		
+		// 카테고리 정리
 		if (!is_numeric($cate[0]))
 		{
 			$temp = array();
@@ -96,9 +99,9 @@ class CommunityController extends Controller {
 				}
 			}
 			$cate = $temp;
-		}
+		}		
 
-		$result = $cmModel->getInfoList($cate, $paging);
+		$result = $cmModel->getInfoList($cate, $paging, $searchText, $searchType);
 		
 		
 		//print_r ($result);
@@ -107,7 +110,7 @@ class CommunityController extends Controller {
 		return view($page, array('page' => $page, 'result' => $result['data'], 'adr_img' => $adr_img, 'page_type' => $page_type, 'paging' => $result['paging']));
 	}
 	
-	public function write()
+	public function indexWrite()
 	{
 		$cmModel = new CommunityModel();
 		
@@ -118,7 +121,7 @@ class CommunityController extends Controller {
 		return view($page, array('page' => $page, 'cateL' => $cateL['data'], 'cateS' => $cateS['data']));
 	}
 	
-	public function content()
+	public function indexContent()
 	{
 		$cmModel = new CommunityModel();
 		$comm_idx = Request::input('idx');
@@ -259,7 +262,7 @@ class CommunityController extends Controller {
 		}
 	}
 	
-	public function my()
+	public function indexMy()
 	{
 		$cmModel = new CommunityModel();
 		

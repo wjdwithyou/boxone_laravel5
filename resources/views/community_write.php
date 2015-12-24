@@ -57,13 +57,13 @@
 			</div>
 			
 			<div id="cmw_btnset">
-				<button type="button" class="bo_btn" onclick="">
+				<button type="button" class="bo_btn" onclick="lookAhead();">
 					미리보기
 				</button>
 				<button type="button" class="bo_btn" onclick="commWrite();">
 					등록
 				</button>
-				<button type="button" class="bo_btn" onclick=''>
+				<button type="button" class="bo_btn" onclick='history.go(-1);'>
 					취소
 				</button>
 			</div>

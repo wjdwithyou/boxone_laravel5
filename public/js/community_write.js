@@ -161,7 +161,7 @@ function commWrite()
 					var adr_ctr = $("#adr_ctr").val();
 					alert ("게시글이 작성되었습니다.");
 					chkWrite = false;
-					location.href = adr_ctr + "Community/content?idx=" + result.data;  
+					location.href = adr_ctr + "Community/indexContent?idx=" + result.data;  
 				}
 				else
 					alert ("잘못된 접근입니다.");
@@ -207,6 +207,11 @@ function sendFile(file)
 		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		}
     });
+}
+
+function lookAhead()
+{
+	
 }
 
 

@@ -209,25 +209,50 @@ class CommunityModel{
     /*  	
      *	게시물 목록 가져오는 기능
      */
-	function getInfoList($commucategory_idx_array, $page_num)
+	function getInfoList($commucategory_idx_array, $page_num, $text, $searchType)
 	{
 
-		$commucategory_query = "where ";
+		$commucategory_query = "";
 		
 		if (count($commucategory_idx_array))
-		{
 			for( $i=0; $i<count($commucategory_idx_array); $i++)
+				$commucategory_query .= "commucategory_idx like '%$commucategory_idx_array[$i],%' OR ";
+		if ($commucategory_query != "")
+			$commucategory_query = substr($commucategory_query, 0, count($commucategory_query) - 5);
+		
+		if ($text == "")		// 검색어 없을 시
+		{
+			if ($commucategory_query != "")
+				$commucategory_query = "where ".$commucategory_query;
+			$result = DB::select('select * from community '.$commucategory_query.' order by idx DESC');
+		}
+		else 		// 검색어 있을 시
+		{
+			if ($commucategory_query != "")
+				$commucategory_query = "(".$commucategory_query.") and ";
+			switch($searchType)
 			{
-				$commucategory_query .= "commucategory_idx like '%$commucategory_idx_array[$i],%' ";
-				if( $i != count($commucategory_idx_array)-1)
-					$commucategory_query .= "OR ";
+				// 전체(제목, 내용, 글쓴이)
+				case 1:
+					$result = DB::select("select cm.* from community as cm left join member as mm on cm.member_idx=mm.idx where $commucategory_query cm.title like '%$text%' or cm.contents like '%$text%' or mm.nickname like '%$text%' order by idx DESC");
+					break;
+			
+				// 제목
+				case 2:
+					$result = DB::select("select * from community where $commucategory_query title like '%$text%' order by idx DESC");
+					break;
+					
+				// 제목+내용
+				case 3:
+					$result = DB::select("select * from community where $commucategory_query title like '%$text%' or contents like '%$text%' order by idx DESC");
+					break;
+				
+				// 글쓴이
+				case 4:
+					$result = DB::select("select cm.* from community as cm left join member as mm on cm.member_idx=mm.idx where $commucategory_query mm.nickname like '%$text%' order by idx DESC");
+					break;
 			}
 		}
-		else
-			$commucategory_query = "";
-		
-		// 마지막 데이터까지 전부 출력
-		$result = DB::select('select * from community ' .$commucategory_query. 'order by idx DESC');
 
 		//해당하는 내용이 없을 경우
 		if( count($result)==0 )
@@ -243,9 +268,12 @@ class CommunityModel{
 		for($i = 0 ; $i < count($result) ; $i++) 
 		{
 			$member_idx = $result[$i]->member_idx;
-			
 			$temp = DB::select('select nickname from member where idx=?', array($member_idx));
-			$result[$i]->nickname  = $temp[0]->nickname;
+			$result[$i]->nickname = $temp[0]->nickname;
+			
+			$comm_idx = $result[$i]->idx;
+			$temp = DB::select('select count(*) as cnt from community_reply where community_idx=?', array($comm_idx));
+			$result[$i]->replyCnt = $temp[0]->cnt;
 		}
 
        return array('code' => 1, 'msg' => 'success', 'data' => $result, 'paging' => array('now' => $page_num, 'max' => $page_max));
@@ -369,13 +397,34 @@ class CommunityModel{
 	/*
 	 *  게시물의 제목+내용 필터로 검색
 	 */
-	function getInfoListByText($text)
+	function getInfoListByText($case, $text)
 	{
 
 		if( !( inputErrorCheck($text, 'text')))
 			return ;
 
-		$result = DB::select("select distinct * from community where title like '%$text%' or contents like '%$text%'");
+		switch($case)
+		{
+			// 전체(제목, 내용, 글쓴이)
+			case 1:
+				$result = DB::select("select cm.* from community as cm left join member as mm on cm.member_idx=mm.idx; where cm.title like '%$text%' or cm.contents like '%$text%' or mm.nickname like '%$text%'");
+				break;
+		
+			// 제목
+			case 2:
+				$result = DB::select("select * from community where title like '%$text%'");
+				break;
+				
+			// 제목+내용
+			case 3:
+				$result = DB::select("select * from community where title like '%$text%' or contents like '%$text%'");
+				break;
+			
+			// 글쓴이
+			case 4:
+				$result = DB::select("select cm.* from community as cm left join member as mm on cm.member_idx=mm.idx; where mm.nickname like '%$text%'");
+				break;
+		}
 		
 		return array('code' => 1, 'data' => $result);
 	}
