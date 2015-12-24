@@ -216,7 +216,7 @@ class CommunityModel{
 		
 		if (count($commucategory_idx_array))
 			for( $i=0; $i<count($commucategory_idx_array); $i++)
-				$commucategory_query .= "commucategory_idx like '%$commucategory_idx_array[$i],%' OR ";
+				$commucategory_query .= "cm.commucategory_idx like '%$commucategory_idx_array[$i],%' OR ";
 		if ($commucategory_query != "")
 			$commucategory_query = substr($commucategory_query, 0, count($commucategory_query) - 5);
 		
@@ -224,7 +224,7 @@ class CommunityModel{
 		{
 			if ($commucategory_query != "")
 				$commucategory_query = "where ".$commucategory_query;
-			$result = DB::select('select * from community '.$commucategory_query.' order by idx DESC');
+			$result = DB::select('select * from community as cm '.$commucategory_query.' order by idx DESC');
 		}
 		else 		// 검색어 있을 시
 		{
@@ -234,17 +234,17 @@ class CommunityModel{
 			{
 				// 전체(제목, 내용, 글쓴이)
 				case 1:
-					$result = DB::select("select cm.* from community as cm left join member as mm on cm.member_idx=mm.idx where $commucategory_query cm.title like '%$text%' or cm.contents like '%$text%' or mm.nickname like '%$text%' order by idx DESC");
+					$result = DB::select("select cm.* from community as cm left join member as mm on cm.member_idx=mm.idx where $commucategory_query (cm.title like '%$text%' or cm.contents like '%$text%' or mm.nickname like '%$text%') order by idx DESC");
 					break;
 			
 				// 제목
 				case 2:
-					$result = DB::select("select * from community where $commucategory_query title like '%$text%' order by idx DESC");
+					$result = DB::select("select * from community as cm where $commucategory_query cm.title like '%$text%' order by idx DESC");
 					break;
 					
 				// 제목+내용
 				case 3:
-					$result = DB::select("select * from community where $commucategory_query title like '%$text%' or contents like '%$text%' order by idx DESC");
+					$result = DB::select("select * from community as cm where $commucategory_query (cm.title like '%$text%' or cm.contents like '%$text%') order by idx DESC");
 					break;
 				
 				// 글쓴이
