@@ -103,11 +103,12 @@ class CommunityController extends Controller {
 
 		$result = $cmModel->getInfoList($cate, $paging, $searchText, $searchType);
 		
+		$searchSelect = array('제목', '제목+내용', '댓글', '작성자');
 		
 		//print_r ($result);
 		
 		$page = 'communityInfo';
-		return view($page, array('page' => $page, 'result' => $result['data'], 'adr_img' => $adr_img, 'page_type' => $page_type, 'paging' => $result['paging']));
+		return view($page, array('page' => $page, 'result' => $result['data'], 'adr_img' => $adr_img, 'page_type' => $page_type, 'paging' => $result['paging'], 'searchText' => $searchText, 'searchType' => $searchType, 'searchSelect' => $searchSelect));
 	}
 	
 	public function indexWrite()

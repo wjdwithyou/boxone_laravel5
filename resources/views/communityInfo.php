@@ -85,6 +85,19 @@
 				<a onclick="checkCate(<?php echo ($paging['now'] + 1);?>);"><img src="<?=$adr_img?>right_arrow.png"></a>
 			</div>
 			
+			<div id="cm_search_wrap" class="cl_b">
+				<select id="cm_cate_select" class="form-control f_l cm_search">
+					<?php for($i = 1 ; $i < 5 ; $i++) :?>
+						<?php if ($i == $searchType) :?>
+							<option value="<?=$i?>" selected="selected"><?=$searchSelect[$i-1]?></option>
+						<?php else :?>
+							<option value="<?=$i?>"><?=$searchSelect[$i-1]?></option>
+						<?php endif;?>
+					<?php endfor;?>
+				</select>
+				<input type="text" id="cm_search_input" class="form-control f_l cm_search" value="<?=$searchText?>"/>
+				<button type="button" id="cm_search_btn" class="f_l cm_search" onclick="checkCate(1);">검색</button>
+			</div>
 			
 			
 			

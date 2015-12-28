@@ -232,22 +232,26 @@ class CommunityModel{
 				$commucategory_query = "(".$commucategory_query.") and ";
 			switch($searchType)
 			{
-				// 전체(제목, 내용, 글쓴이)
+				// 제목
 				case 1:
-					$result = DB::select("select cm.* from community as cm left join member as mm on cm.member_idx=mm.idx where $commucategory_query (cm.title like '%$text%' or cm.contents like '%$text%' or mm.nickname like '%$text%') order by idx DESC");
+					$result = DB::select("select cm.* from community as cm where $commucategory_query cm.title like '%$text%' order by idx DESC");
 					break;
 			
-				// 제목
+				// 제목+내용
 				case 2:
-					$result = DB::select("select * from community as cm where $commucategory_query cm.title like '%$text%' order by idx DESC");
+					$data = DB::select("select cm.* from community as cm where $commucategory_query (cm.title like '%$text%' or cm.contents like '%$text%') order by idx DESC");
+					$result = array();
+					foreach($data as $list)
+						if (strpos($list->title, $text) || strpos(preg_replace('/\<*\>/', ' ', $list->contents), $text))
+							array_push($result, $list);
 					break;
 					
-				// 제목+내용
+				// 댓글
 				case 3:
-					$result = DB::select("select * from community as cm where $commucategory_query (cm.title like '%$text%' or cm.contents like '%$text%') order by idx DESC");
+					$result = DB::select("select cm.* from community_reply as cr left join community as cm on cr.community_idx=cm.idx where $commucategory_query (cr.contents like '%$text%') order by idx DESC");
 					break;
 				
-				// 글쓴이
+				// 작성자
 				case 4:
 					$result = DB::select("select cm.* from community as cm left join member as mm on cm.member_idx=mm.idx where $commucategory_query mm.nickname like '%$text%' order by idx DESC");
 					break;
