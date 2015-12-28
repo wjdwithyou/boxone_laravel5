@@ -294,6 +294,8 @@ function socialSignIn()
 		var img = profile[2];
 		var rec = $("#social_add_suggest").val();
 		
+		alert (img);
+		
 		signIn(type, id, pw, email, nickname, img, rec);
 	}
 }
