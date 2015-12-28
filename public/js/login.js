@@ -59,6 +59,21 @@ function move_join_success() {
 function close_popup(str){
 	$(str).modal('hide');
 }
+function profileUpload(file)
+{
+	//var file = $("#join_profile_input");
+	var img = $("#join_profile a img");
+	
+	if (window.FileReader && file[0].files && file[0].files[0])
+	{
+		var reader = new FileReader();
+		reader.onload = function(e){
+			img.attr("src", e.target.result);
+		}
+		reader.readAsDataURL(file[0].files[0]);
+	}
+	//img.attr("src", file.val());
+}
 
 var adr_ctr = $("#adr_ctr").val();
 
@@ -352,8 +367,12 @@ function justSignIn()
 		var pw = $("#join_pw").val();
 		var email = $("#join_email").val();
 		var nickname = $("#join_nickname").val();
-		var img = "default"; // 임시
-		var rec = $("#join_suggest").val(); // 임시
+		var rec = $("#join_suggest").val();
+		
+		var imgFile = $("#join_profile_input");
+		var img = "";
+		if (imgFile[0].files && imgFile[0].files[0])
+			var img = imgFile[0].files[0]; // 임시
 		
 		signIn(type, id, pw, email, nickname, img, rec);
 	}
@@ -368,20 +387,23 @@ function justSignIn()
  */
 function signIn(type, id, pw, email, nickname, img, rec)
 {
+	var data = new FormData();
+	data.append("type", type);
+	data.append("id", id);
+	data.append("pw", pw);
+	data.append("email", email);
+	data.append("nickname", nickname);
+	data.append("img", img);
+	data.append("rec", rec);
+
 	$.ajax
 	({
 		url: adr_ctr+'Login/signIn',
 		type: 'post',
-		async: false,
-		data: {
-			type: type,
-			id: id,
-			pw: pw,
-			email: email,
-			nickname: nickname,
-			img: img,
-			rec: rec
-		},		 
+		cache: false,
+		processData: false,
+		contentType: false,
+		data: data,		 
 		success: function(result)
 		{
 			//alert (JSON.stringify(result));
@@ -399,6 +421,7 @@ function signIn(type, id, pw, email, nickname, img, rec)
 		error:function(request,status,error)
 		{
 		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		    console.log(request.responseText);
 		}
 	});
 }

@@ -61,8 +61,9 @@ class CommunityModel{
 			for ($i = 0 ; $i < count($imgList) ; $i++)
 			{
 				$imgStr = "img/community/".substr($imgList[$i], strrpos($imgList[$i], "/") + 1);
+				$ext = substr($imgStr, strrpos($imgStr, ".")+1);
 				if (is_file($imgStr))
-					insertImg('1', $community_idx, $imgStr, "$i");
+					insertImg('1', $community_idx, $imgStr, $ext, "$i");
 			}
 		}
 		$result = DB::update('update community set image=?, contents=? where idx=?', array($dbImg, $contents, $community_idx));

@@ -138,19 +138,19 @@ class LoginController extends Controller {
 		$id = Request::input('id');
 		$pw = Request::input('pw');
 		$email = Request::input('email');
-		$nickname = Request::input('nickname');
-		$img = Request::input('img');
+		$nickname = Request::input('nickname');		
 		$rec = Request::input('rec');
+		
+		$img = "";
+		if (Request::hasFile('img'))
+			$img = Request::file('img');
 		
 		//추천인 포인트 업
 		if (!empty($rec))
 			$memberModel->recommand($rec);
 		
 		//DB에 넣기
-		$result = $memberModel->create($type, $email, $nickname, $id, $pw);
-		
-		//이미지 처리
-				
+		$result = $memberModel->create($type, $email, $nickname, $id, $pw, $img);
 		
 		//필요정보 받아오기
 		$result = $memberModel->login($type, $id, $pw);

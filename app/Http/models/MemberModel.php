@@ -14,7 +14,7 @@ class MemberModel{
     /*    
      *  회원 등록 기능
      */
-    function create($type, $email, $nickname, $id, $pw)
+    function create($type, $email, $nickname, $id, $pw, $img)
     {
 
         if( !(  inputErrorCheck($type, 'type')
@@ -37,7 +37,7 @@ class MemberModel{
         }
 
 
-        $result = DB::table('member')->insertGetId(
+        $member_idx = DB::table('member')->insertGetId(
           array(
             'type'=> $type, 
             'email'=> $email, 
@@ -47,9 +47,18 @@ class MemberModel{
             'upload'=>DB::raw('now()')
             )
           );  
+        
+        // 이미지 처리
+        $ext = $img->getClientOriginalExtension();
+        $fileName = $img->getRealPath();        
+        insertImg('2', $member_idx, $fileName, $ext, '0');
+        
+        $dbImg = $member_idx."_image.".$ext;
+        $result = DB::update('update member set image=? where idx=?', array($dbImg, $member_idx));
+        
 
-      if($result > 0)
-        return array('code' => 1, 'data' => $result);
+      if($member_idx > 0)
+        return array('code' => 1, 'data' => $member_idx);
       else
         return array('code' => 0, 'data' => 'internel server error');
     }

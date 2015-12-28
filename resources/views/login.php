@@ -27,7 +27,7 @@
 <!-- 로그인 팝업 -->
 <div id="login" hidden>
   <input type="text" id="login_id" class="form_margin form-control" placeholder="아이디">
-	<input type="password" id="login_pw" class="form_margin form-control" placeholder="비밀번호">
+	<input type="password" id="login_pw" class="form_margin form-control" placeholder="비밀번호" onkeypress="if(event.keyCode==13) {justLogin();}">
 	<button type="button" rel="external" onclick="justLogin();" class="login_btn_set form_margin boxone_btn_1 btn btn-default">로그인</button>
 	<div id="login_body_text">
 		<span>소셜계정으로 로그인</span>
@@ -145,7 +145,7 @@
 	</div>
 	<span>프로필 사진</span>
 	<br>
-	<input type="file" id="">
+	<input type="file" id="join_profile_input" accept="image/*" onchange="profileUpload($(this));"/>
 	<div class="btn_padding_right col-xs-6">
 		<button type="button" class="boxone_btn_2 btn btn-default" onclick="close_popup('#login_modal');">취소</button>
 	</div>
