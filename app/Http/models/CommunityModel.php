@@ -64,9 +64,8 @@ class CommunityModel{
 				if (is_file($imgStr))
 					insertImg('1', $community_idx, $imgStr, "$i");
 			}
-		
-			$result = DB::update('update community set image=?, contents=? where idx=?', array($dbImg, $contents, $community_idx));
 		}
+		$result = DB::update('update community set image=?, contents=? where idx=?', array($dbImg, $contents, $community_idx));
 		                      
 		return array('code' => 1,'msg' =>'success' ,'data' => $community_idx);
 	}
@@ -209,7 +208,7 @@ class CommunityModel{
     /*  	
      *	게시물 목록 가져오는 기능
      */
-	function getInfoList($commucategory_idx_array, $page_num, $text, $searchType)
+	function getInfoList($commucategory_idx_array, $page_num, $text, $searchType, $page_type)
 	{
 
 		$commucategory_query = "";
@@ -256,6 +255,15 @@ class CommunityModel{
 					$result = DB::select("select cm.* from community as cm left join member as mm on cm.member_idx=mm.idx where $commucategory_query mm.nickname like '%$text%' order by idx DESC");
 					break;
 			}
+		}
+		
+		if ($page_type == "0")
+		{
+			$data = array();
+			foreach ($result as $list)
+				if ($list->image != "")
+					array_push($data, $list);
+			$result = $data;
 		}
 
 		//해당하는 내용이 없을 경우
