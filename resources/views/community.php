@@ -82,17 +82,6 @@
 			<div id="cm_contents">
 				<input type="hidden" id="cm_target_page" value="<?=$targetPage?>"/>
 			</div>
-			
-			<div id="cm_search_wrap" class="cl_b">
-				<select id="cm_cate_select" class="form-control f_l cm_search">
-					<option value="1">전체</option>
-					<option value="2">제목</option>
-					<option value="3">제목+내용</option>
-					<option value="4">글쓴이</option>
-				</select>
-				<input type="text" id="cm_search_input" class="form-control f_l cm_search">
-				<button type="button" id="cm_search_btn" class="f_l cm_search" onclick="checkCate('');">검색</button>
-			</div>
 		</div>
 
 		<?php

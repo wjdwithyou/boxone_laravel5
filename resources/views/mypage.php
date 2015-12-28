@@ -140,7 +140,7 @@
 						<table class="table">
 							<tbody>
 								<tr>
-									<td class="text_align_center" rowspan="2"><a href="#" onclick=""><img id="profile_img" src="<?=$adr_img ?>profile_image.png"></a></td>
+									<td class="text_align_center" rowspan="2"><a href="#" onclick=""><img id="profile_img" src="<?=$adr_img ?>profile/<?=$result->image?>"></a></td>
 									<td class="font_weight_bold">닉네임</td>
 								</tr>
 								<tr>
@@ -164,7 +164,7 @@
 							</div>
 							<div class="modal-body">
 								<div id="mod_profile_img">
-									<a onclick=""><img src="<?=$adr_img?>profile_image.png"></a>
+									<a onclick=""><img src="<?=$adr_img?>profile/<?=$result->image?>"></a>
 								</div>
 								<span id="profile_modal_nickname_msg" class="input_msg">미입력</span> <!-- 이메일 형식체크, 중복체크 메시지 -->								
 								<input type="text" id="profile_modal_nickname" class="form_margin form-control" placeholder="닉네임">

@@ -61,12 +61,12 @@ class CommunityModel{
 			for ($i = 0 ; $i < count($imgList) ; $i++)
 			{
 				$imgStr = "img/community/".substr($imgList[$i], strrpos($imgList[$i], "/") + 1);
+				$ext = substr($imgStr, strrpos($imgStr, ".")+1);
 				if (is_file($imgStr))
-					insertImg('1', $community_idx, $imgStr, "$i");
+					insertImg('1', $community_idx, $imgStr, $ext, "$i");
 			}
-		
-			$result = DB::update('update community set image=?, contents=? where idx=?', array($dbImg, $contents, $community_idx));
 		}
+		$result = DB::update('update community set image=?, contents=? where idx=?', array($dbImg, $contents, $community_idx));
 		                      
 		return array('code' => 1,'msg' =>'success' ,'data' => $community_idx);
 	}
@@ -209,7 +209,7 @@ class CommunityModel{
     /*  	
      *	게시물 목록 가져오는 기능
      */
-	function getInfoList($commucategory_idx_array, $page_num, $text, $searchType)
+	function getInfoList($commucategory_idx_array, $page_num, $text, $searchType, $page_type)
 	{
 
 		$commucategory_query = "";
@@ -232,26 +232,39 @@ class CommunityModel{
 				$commucategory_query = "(".$commucategory_query.") and ";
 			switch($searchType)
 			{
-				// 전체(제목, 내용, 글쓴이)
+				// 제목
 				case 1:
-					$result = DB::select("select cm.* from community as cm left join member as mm on cm.member_idx=mm.idx where $commucategory_query (cm.title like '%$text%' or cm.contents like '%$text%' or mm.nickname like '%$text%') order by idx DESC");
+					$result = DB::select("select cm.* from community as cm where $commucategory_query cm.title like '%$text%' order by idx DESC");
 					break;
 			
-				// 제목
+				// 제목+내용
 				case 2:
-					$result = DB::select("select * from community as cm where $commucategory_query cm.title like '%$text%' order by idx DESC");
+					$data = DB::select("select cm.* from community as cm where $commucategory_query (cm.title like '%$text%' or cm.contents like '%$text%') order by idx DESC");
+					$result = array();
+					foreach($data as $list)
+						if (strpos($list->title, $text) || strpos(strip_tags($list->contents), $text))
+							array_push($result, $list);
 					break;
 					
-				// 제목+내용
+				// 댓글
 				case 3:
-					$result = DB::select("select * from community as cm where $commucategory_query (cm.title like '%$text%' or cm.contents like '%$text%') order by idx DESC");
+					$result = DB::select("select cm.* from community_reply as cr left join community as cm on cr.community_idx=cm.idx where $commucategory_query (cr.contents like '%$text%') order by idx DESC");
 					break;
 				
-				// 글쓴이
+				// 작성자
 				case 4:
 					$result = DB::select("select cm.* from community as cm left join member as mm on cm.member_idx=mm.idx where $commucategory_query mm.nickname like '%$text%' order by idx DESC");
 					break;
 			}
+		}
+		
+		if ($page_type == "0")
+		{
+			$data = array();
+			foreach ($result as $list)
+				if ($list->image != "")
+					array_push($data, $list);
+			$result = $data;
 		}
 
 		//해당하는 내용이 없을 경우

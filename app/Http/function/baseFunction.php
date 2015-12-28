@@ -99,7 +99,7 @@
 	/*
 	 *	이미지 사진 등록 함수
 	 */
-	function insertImg($target_idx, $document_idx, $image, $image_num)
+	function insertImg($target_idx, $document_idx, $image, $ext, $image_num)
 	{
 		if( ! (inputErrorCheck($target_idx, 'target_idx')
 			  && inputErrorCheck($document_idx, 'document_idx')
@@ -113,12 +113,10 @@
 //		$image = Image::make('/tmp/test.jpg')->fit(317,374)->save('/tmp/test_317.jpg');
 //		$image = Image::make('/tmp/test.jpg')->fit(164,167)->save('/tmp/test_164.jpg');
 
-		$ext = substr($image, strrpos($image, "."));
-		$image_name = $document_idx.'_image'.$image_num.$ext;
-
 		switch ($target_idx) {
 			// community
 			case '1':
+			$image_name = $document_idx.'_image'.$image_num.'.'.$ext;
 			$s3->putObject(array(
 				'Bucket'	=> 'boxone-image',
 				'Key'		=> 'community/'.$image_name,
@@ -128,12 +126,12 @@
 			
 			// member
 			case '2':
+			$image_name = $document_idx.'_image.'.$ext;
 			$s3->putObject(array(
-				'Bucket'	=> 'boxone_image/member',
-				'Key'		=> $document_idx.'_image'.$image_num.'.jpg',
-				'SourceFile'	=> '/tmp/test.jpg',
+				'Bucket'	=> 'boxone-image',
+				'Key'		=> 'profile/'.$image_name,
+				'SourceFile'	=> $image,
 				));				
-			$result = DB::update('update member set image=? where idx=?', array($image_name, $document_idx));
 			break;
 
 			// community complain

@@ -33,7 +33,7 @@
 				<div id="after_login">
 					<div id="member_menu_wrap">
 					    <div>
-							<img src="<?= $adr_img?>profile_image.png">	
+							<img src="<?= $adr_img?>profile/<?=$img?>">	
 					        <a><?=$nickname?>님</a>
 					    </div>
 					    <div id="member_menu">
