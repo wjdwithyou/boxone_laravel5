@@ -140,7 +140,7 @@
 						<table class="table">
 							<tbody>
 								<tr>
-									<td class="text_align_center" rowspan="2"><a href="#" onclick=""><img id="profile_img" src="<?=$adr_img ?>profile_image.png"></a></td>
+									<td class="text_align_center" rowspan="2"><a href="#" onclick=""><img id="profile_img" src="<?=$adr_img ?>profile/<?=$result->image?>"></a></td>
 									<td class="font_weight_bold">닉네임</td>
 								</tr>
 								<tr>
