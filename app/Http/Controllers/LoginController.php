@@ -141,9 +141,10 @@ class LoginController extends Controller {
 		$nickname = Request::input('nickname');		
 		$rec = Request::input('rec');
 		
-		$img = "";
 		if (Request::hasFile('img'))
 			$img = Request::file('img');
+		else if (Request::has('img'))
+			$img = Request::input('img');
 		
 		//추천인 포인트 업
 		if (!empty($rec))
