@@ -35,7 +35,7 @@
 				</div>
 			</div>
 
-			<div id="cm_content">
+			<div id="cm_content" class="cl_b">
 				<?=$result -> contents ?>
 			</div>
 			
