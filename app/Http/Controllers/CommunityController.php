@@ -409,6 +409,12 @@ class CommunityController extends Controller {
 			echo json_encode(array('code' => 1, 'msg' => 'success', 'data' => $glob));
 		}
 	}
+	
+	public function tester()
+	{
+		$str = "<p>어쩌고저쩌고<img src='dddaaa'>fghsd</p>";
+		echo strip_tags($str);
+	}
 
 }
 

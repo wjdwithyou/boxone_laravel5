@@ -242,7 +242,7 @@ class CommunityModel{
 					$data = DB::select("select cm.* from community as cm where $commucategory_query (cm.title like '%$text%' or cm.contents like '%$text%') order by idx DESC");
 					$result = array();
 					foreach($data as $list)
-						if (strpos($list->title, $text) || strpos(preg_replace('/\<*\>/', ' ', $list->contents), $text))
+						if (strpos($list->title, $text) || strpos(strip_tags($list->contents), $text))
 							array_push($result, $list);
 					break;
 					
