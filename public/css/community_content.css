@@ -30,6 +30,7 @@
 #cm_top_table img {
 	width: 45px;
 	height: 45px;
+	border-radius: 50% !important;
 }
 #cm_top_table td {
 	padding-left: 8px;
@@ -81,7 +82,12 @@
     margin-left: -4px;
 }
 .reply_table {
+	width: 100%;
+	margin-top: 16px;
+	padding-bottom: 16px;
+	border-bottom: 1px solid #ddd;
 	font-size: 12px;
+	min-height: 72px;
 }
 #reply_wrap {
 	background-color: #f8f7f7;
@@ -97,12 +103,6 @@
 	width: 14px;
 	height: 14px;
 }
-.reply_table {
-	width: 100%;
-	margin-top: 16px;
-	margin-bottom: 16px;
-	border-bottom: 1px solid #ddd;
-}
 .reply_profile {
 	width: 64px;
 	vertical-align: top;
@@ -110,6 +110,8 @@
 }
 .reply_profile img {
 	width: 100%;
+    height: 56px;
+    border-radius: 50% !important;
 }
 .reply_writer {
 	font-weight: bold;
@@ -174,6 +176,12 @@
 @media (max-width: 768px) {
 	.reply_profile {
 		width: 48px;
+	}
+	.reply_profile img {
+	    height: 40px;
+	}
+	.reply_table {
+		min-height: 56px;
 	}
 }
 @media (max-width: 450px) {

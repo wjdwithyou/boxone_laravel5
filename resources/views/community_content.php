@@ -24,7 +24,7 @@
 					<table id="cm_top_table">
 						<tr>
 							<td rowspan="2">
-								<img src="<?=$adr_img ?>profile/<?=$result -> image ?>.png">
+								<img src="<?=$adr_img ?>profile/<?=$result -> image ?>">
 							</td>
 							<td class="cm_writer bo_color"><?=$result -> nickname ?></td>
 						</tr>
@@ -35,7 +35,7 @@
 				</div>
 			</div>
 
-			<div id="cm_content">
+			<div id="cm_content" class="cl_b">
 				<?=$result -> contents ?>
 			</div>
 			
@@ -76,7 +76,7 @@
 				<table class="reply_table">
 					<tr class="reply_show">
 						<td class="reply_profile" rowspan="3">
-							<img src="<?=$adr_img ?>profile/<?=$list -> image ?>.png">
+							<img src="<?=$adr_img ?>profile/<?=$list -> image ?>">
 						</td>
 						<td>
 							<span class="reply_writer"><?=$list -> nickname ?></span>
@@ -120,7 +120,7 @@
 							<img src="<?=$adr_img?>reply_inner.png">
 						</td>
 						<td class="reply_profile reply_show" rowspan="3">
-							<img src="<?=$adr_img?>profile/<?=$reList->image?>.png">
+							<img src="<?=$adr_img?>profile/<?=$reList->image?>">
 						</td>
 						<td>
 							<span class="reply_writer reply_show"><?=$reList->nickname?></span>

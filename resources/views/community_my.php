@@ -29,7 +29,7 @@
 							&nbsp;게시물&nbsp;23
 						</div>
 						<div class="mytop_info_ico col-xs-4">
-							<img src="<?= $adr_img ?>suki_on2.png">
+							<img src="<?= $adr_img ?>board.png">
 							&nbsp;댓글&nbsp;12
 						</div>
 						<div class="mytop_info_ico col-xs-4">
@@ -184,7 +184,7 @@
 				cursor: pointer;
 			}
 			input[type="checkbox"]:checked + label span {
-				background: url(<?=$adr_img?>bo_checkbox_on.png);
+				background: url(<?=$adr_img?>bo_checkbox_on2.png);
 				background-size: contain;
 			}
 		</style>
