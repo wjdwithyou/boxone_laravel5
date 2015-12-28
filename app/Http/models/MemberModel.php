@@ -49,8 +49,16 @@ class MemberModel{
           );  
         
         // 이미지 처리
-        $ext = $img->getClientOriginalExtension();
-        $fileName = $img->getRealPath();        
+        if ($type == 5)
+        {
+        	$ext = $img->getClientOriginalExtension();
+        	$fileName = $img->getRealPath();
+        }
+        else
+        {
+        	$fileName = $img;
+        	$ext = substr($img, 0, strrpos($img, ".") + 1);
+        }
         insertImg('2', $member_idx, $fileName, $ext, '0');
         
         $dbImg = $member_idx."_image.".$ext;
