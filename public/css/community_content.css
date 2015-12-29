@@ -63,6 +63,16 @@
 	border-radius: 25px !important;
 	font-size: 12px;
 }
+.bo_btn2 {
+	width: 50px;
+	color: #fff;
+	background-color: #8c8b8b;
+	border: 1px solid #8c8b8b;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	border-radius: 25px !important;
+	font-size: 12px;
+}
 #suggest_btn {
 	width: 80px;
 }

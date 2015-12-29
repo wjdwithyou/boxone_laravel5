@@ -409,6 +409,7 @@ class CommunityController extends Controller {
 			echo json_encode(array('code' => 1, 'msg' => 'success', 'data' => $glob));
 		}
 	}
+
 }
 
 

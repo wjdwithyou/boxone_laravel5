@@ -236,6 +236,14 @@
 		}
 	}
 	
+	function cutDateAsToday($date)
+	{		
+		if (date('Y-m-d') == substr($date, 0, 10))
+			return substr($date, 11, 5);
+		else
+			return substr($date, 0, 10);
+	}
+	
 	
 
 	

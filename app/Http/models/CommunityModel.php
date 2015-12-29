@@ -285,6 +285,9 @@ class CommunityModel{
 			$member_idx = $result[$i]->member_idx;
 			$temp = DB::select('select nickname from member where idx=?', array($member_idx));
 			$result[$i]->nickname = $temp[0]->nickname;
+			
+			$date = $result[$i]->upload;
+			$result[$i]->upload = cutDateAsToday($date);
 		}
 
        return array('code' => 1, 'msg' => 'success', 'data' => $result, 'paging' => array('now' => $page_num, 'max' => $page_max));
@@ -342,7 +345,13 @@ class CommunityModel{
 			if($result[0]->member_idx == $readmember_idx)
 				$result[0]->own = 1;
 			else
+			{
 				$result[0]->own = 0;
+				if (count(DB::select('SELECT count(*) FROM community_bookmark WHERE member_idx=? AND community_idx=?', array($community_idx, $readmember_idx))))
+					$result[0]->bookmark = 1;
+				else
+					$result[0]->bookmark = 0;
+			}
 	
 	        return array('code' => 1, 'msg' => 'success', 'data' => $result[0]);
 		}
