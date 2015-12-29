@@ -93,6 +93,8 @@ class CommunityModel{
 				'upload'	=> DB::raw('now()')
 				)
 			);
+		
+		DB::update('UPDATE community SET reply_number=reply_number+1 WHERE idx=?', array($community_idx));
 		                  
 		return array('code' => 1,'msg' =>'success' ,'data' => $result);
 	}
@@ -283,10 +285,6 @@ class CommunityModel{
 			$member_idx = $result[$i]->member_idx;
 			$temp = DB::select('select nickname from member where idx=?', array($member_idx));
 			$result[$i]->nickname = $temp[0]->nickname;
-			
-			$comm_idx = $result[$i]->idx;
-			$temp = DB::select('select count(*) as cnt from community_reply where community_idx=?', array($comm_idx));
-			$result[$i]->replyCnt = $temp[0]->cnt;
 		}
 
        return array('code' => 1, 'msg' => 'success', 'data' => $result, 'paging' => array('now' => $page_num, 'max' => $page_max));

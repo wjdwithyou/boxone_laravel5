@@ -21,12 +21,10 @@ function commBookmark(comm_idx)
 				{
 					if (result.msg == "created")
 					{
-						alert ("북마크에 추가되었습니다.");
 						// 버튼 변경
 					}
 					else
 					{
-						alert ("북마크에서 제거되었습니다.");
 						// 버튼 변경
 					}
 				}

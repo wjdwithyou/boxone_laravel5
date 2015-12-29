@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\models\CardModel;
+use App\Http\models\ShoppingsiteModel;
 use Request;
 
 class CardController extends Controller {
@@ -22,9 +23,10 @@ class CardController extends Controller {
 	public function index()
 	{
 		$cardModel = new CardModel();
+		$ssModel = new ShoppingsiteModel();
 		
 		// 배대지 목록 가지고 오기
-		$site = $cardModel->getCardSupportSite();
+		$site = $ssModel->getInfoList(9);
 		// 카드사 목록 가지고 오기
 		$comp = $cardModel->getCardCompany();
 		

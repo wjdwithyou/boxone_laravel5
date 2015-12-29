@@ -93,16 +93,6 @@ class CardModel{
 	}
 	
 	/*
-	 *  카드 서포트 사이트 목록 가져오기
-	 */
-	function getCardSupportSite()
-	{
-		$result = DB::select("select distinct support_site from card where support_site != ''");
-				
-		return array('code' => 1, 'msg' => 'success', 'data' => $result);				
-	}
-	
-	/*
 	 *  카드사 목록 가져오기
 	 */
 	function getCardCompany()
