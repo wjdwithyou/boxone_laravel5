@@ -54,7 +54,7 @@
 						<select id="card_proxy_search_input" class="form-control">
 							<option>배대지 선택</option>
 							<?php foreach ($siteList as $site): ?>
-								<option><?= $site->support_site?></option>
+								<option><?= $site->name?></option>
 							<?php endforeach;?>
 						</select>
 					</div>

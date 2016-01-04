@@ -51,10 +51,10 @@ class ShoppingsiteModel{
    function getInfoList($category_idx)
    {
       if ($category_idx == "0" || $category_idx == 0)
-         $cate = "";
+         $cate = "where category_idx!=10 ";
       else
          $cate = "where category_idx='$category_idx' ";
-      $result = DB::select('select *, 0 as bookmark from shoppingsite '.$cate.'order by hit_count desc limit 10');
+      $result = DB::select('select *, 0 as bookmark from shoppingsite '.$cate.'group by name order by hit_count desc limit 10');
 
       return array('code' => 1, 'msg' => 'success', 'data' => $result);
    }
@@ -65,7 +65,7 @@ class ShoppingsiteModel{
 	function getInfoListByChar($category_idx, $char)
 	{
 		if ($category_idx == "0")
-			$cate = "";
+			$cate = "category_idx!=10 and ";
 		else
 			$cate = "category_idx='$category_idx' and ";
 		
@@ -87,7 +87,7 @@ class ShoppingsiteModel{
 				$sort .= " or name_eng like '".chr($i)."%'";
 		$sort = "(".substr($sort, 3).")";
 		
-		$result = DB::select('select *, 0 as bookmark from shoppingsite where '.$cate.$sort.' order by name_eng asc');
+		$result = DB::select('select *, 0 as bookmark from shoppingsite where '.$cate.$sort.' group by name order by name_eng asc');
 		
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}

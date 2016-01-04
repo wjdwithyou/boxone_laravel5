@@ -42,7 +42,11 @@
 			<div id="cm_content_btnset" class="cl_b">
 				<?php if (!($result->own)) :?>
 				<div class="f_l">
-					<button type="button" id="suggest_btn" class="bo_btn" onclick='commBookmark(<?=$result -> idx ?>)'>
+					<?php if ($result->bookmark) :?>
+						<button type="button" id="suggest_btn" class="bo_btn2" onclick='commBookmark(<?=$result -> idx ?>)'>
+					<?php else :?>
+						<button type="button" id="suggest_btn" class="bo_btn" onclick='commBookmark(<?=$result -> idx ?>)'>
+					<?php endif;?>
 						★ 추천
 					</button>
 				</div>

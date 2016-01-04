@@ -14,7 +14,7 @@
 		<div id="br_wrap">
 			<div id="static_menu_wrap">
 				<div class="br_menu" onclick='location.href="<?= $adr_ctr?>Bestranking/index?cate=0&char=1"'>
-					BEST 랭킹
+					탑브랜드
 				</div>
 				<?php foreach($cate as $cateList):?>
 					<div class="br_menu" onclick='location.href = "<?= $adr_ctr?>Bestranking/index?cate=<?= $cateList->idx?>"'>
@@ -35,7 +35,7 @@
 
 				<div id="br_nav_wrap">
 					<div class="nav_menu col-xs-6 col-sm-4" onclick='location.href = "<?= $adr_ctr?>Bestranking/index?cate=0&char=1"'>
-						BEST 랭킹
+						탑브랜드
 					</div>
 					<?php foreach($cate as $cateList):?>
 						<div class="nav_menu col-xs-6 col-sm-4" onclick='location.href = "<?= $adr_ctr?>Bestranking/index?cate=<?= $cateList->idx?>"'>

@@ -8,7 +8,7 @@
 						<!-- 커뮤니티 글 -->
 						<tr>
 							<td class="cm_pc"><?= $list->idx?></td>
-							<td class="cm_board_title"><a onclick="commContent(<?= $list->idx?>);"><?= $list->title?><span class="pc_reply">&nbsp;[<?=$list->replyCnt?>]</span></a></td>
+							<td class="cm_board_title"><a onclick="commContent(<?= $list->idx?>);"><?= $list->title?><span class="pc_reply">&nbsp;[<?=$list->reply_number?>]</span></a></td>
 							<td class="cm_pc"><?= $list->nickname?></td>
 							<td class="cm_pc"><?= $list->upload?></td>
 							<td class="cm_pc"><?= $list->hit_count?></td>
@@ -36,7 +36,7 @@
 						</div>
 						<div class="hd_site_desc">
 							<div class="hd_brand text_overflow">
-								<?=$list->title?><span class="pc_reply">&nbsp;[<?=$list->replyCnt?>]</span>
+								<?=$list->title?><span class="pc_reply"></span>
 							</div>
 							<div class="album_writer bo_color">
 									<?=$list->nickname?> | <?=$list->upload?> | <?=$list->hit_count?>

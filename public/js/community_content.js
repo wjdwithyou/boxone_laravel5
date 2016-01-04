@@ -21,13 +21,13 @@ function commBookmark(comm_idx)
 				{
 					if (result.msg == "created")
 					{
-						alert ("북마크에 추가되었습니다.");
 						// 버튼 변경
+						$("#suggest_btn").removeClass("bo_btn").addClass("bo_btn2");
 					}
 					else
 					{
-						alert ("북마크에서 제거되었습니다.");
 						// 버튼 변경
+						$("#suggest_btn").removeClass("bo_btn2").addClass("bo_btn");
 					}
 				}
 				else
