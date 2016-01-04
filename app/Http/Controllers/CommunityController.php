@@ -105,7 +105,7 @@ class CommunityController extends Controller {
 		
 		$searchSelect = array('제목', '제목+내용', '댓글', '작성자');
 		
-		//print_r ($result);
+		print_r ($result);
 		
 		$page = 'communityInfo';
 		return view($page, array('page' => $page, 'result' => $result['data'], 'adr_img' => $adr_img, 'page_type' => $page_type, 'paging' => $result['paging'], 'searchText' => $searchText, 'searchType' => $searchType, 'searchSelect' => $searchSelect));
@@ -408,6 +408,12 @@ class CommunityController extends Controller {
 			header('Content-Type: application/json');
 			echo json_encode(array('code' => 1, 'msg' => 'success', 'data' => $glob));
 		}
+	}
+	
+	public function tester()
+	{
+		$cmModel = new CommunityModel();
+		print_r($cmModel->getInfoList(array(23), $paging, $searchText, $searchType, $page_type));
 	}
 
 }
