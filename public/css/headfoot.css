@@ -222,6 +222,8 @@ button.close {
 }
 #login_sign img {
 	width: 30px;
+	height: 30px;
+	border-radius: 50% !important;
 	margin-right: 5px;
 }
 #main_menu {
