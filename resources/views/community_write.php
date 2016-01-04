@@ -31,8 +31,8 @@
 				<div id="top_select">
 					<select id="community_cate" class="form-control">
 						<?php foreach($cateL as $list) :?>
-						<option><?=$list->name?></option>
-						<?php endforeach;?>
+						<option><?=$list -> name ?></option>
+						<?php endforeach; ?>
 					</select>
 				</div>
 			</div>
@@ -40,9 +40,9 @@
 			<div id="cm_cate_wrap" class="cl_b">
 				<?php foreach($cateS as $list) :?>
 					<div class="cm_cate col-xs-4 col-sm-2">
-						<a class="push_cate" onclick="stackCate(<?=$list->idx?>, '<?=$list->name?>');"><?=$list->name?></a>
+						<a class="push_cate" onclick="stackCate(<?=$list -> idx ?>, '<?=$list -> name ?>');"><?=$list -> name ?></a>
 					</div>
-				<?php endforeach;?>
+				<?php endforeach; ?>
 			</div>
 			
 			<div id="stack_cate_wrap">
@@ -69,13 +69,32 @@
 			</div>
 		</div>
 		
+		<!-- 미리보기 팝업 -->
+		<div class="modal fade" id="preview_modal" tabindex="-1" role="dialog">
+			<div id="preview_dialog" class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div id="preview_title" class="modal-header">
+					</div>
+					<div id="preview_content" class="modal-body">
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- //미리보기 팝업 -->
+		
 		<style>
+			#preview_modal {
+				padding-right: 0 !important;
+			}
+			#preview_dialog {
+				text-align: left;
+			}
 			#community_cate {
 				width: 188px;
 				height: 40px;
 				border: 1px solid #F15A63 !important;
 				color: #F15A63;
-				background: #fff url('<?=$adr_img?>select_arrow_pink.png') no-repeat 90% center;
+				background: #fff url('<?=$adr_img ?>select_arrow_pink.png') no-repeat 90% center;
 				text-indent: 0.01px;
 				text-overflow: "";
 				padding-left: 6px;
@@ -89,22 +108,23 @@
 				height: 19px;
 				margin: -4px 4px 0 0;
 				vertical-align: middle;
-				background: url(<?=$adr_img?>bo_checkbox.png);
+				background: url(<?=$adr_img ?>bo_checkbox.png);
 				background-size: contain;
 				cursor: pointer;
 			}
 			input[type="checkbox"]:checked + label span {
-				background: url(<?=$adr_img?>bo_checkbox_on.png);
+				background: url(<?=$adr_img ?>bo_checkbox_on.png);
 				background-size: contain;
 			}
 			@media (max-width: 768px) {
 				#community_cate {
 					width: 130px;
 					height: 30px;
-					background: #fff url('<?=$adr_img?>select_arrow_pink.png') no-repeat 90% center;
-					font-size: 10px;
-				}
-			}
+					background: #fff url('<?=$adr_img ?>
+						select_arrow_pink.png') no-repeat 90% center;
+						font-size: 10px;
+						}
+						}
 		</style>
 
 		<?php

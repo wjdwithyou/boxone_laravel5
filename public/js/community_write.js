@@ -96,6 +96,9 @@ $(document).ready(function() {
 	    });
 	});
 	
+	$(window).resize(function() {
+		$('#preview_dialog').width($('#cmw_content').width());	
+	});
 });
 
 function stackCate(idx, name)
@@ -211,7 +214,10 @@ function sendFile(file)
 
 function lookAhead()
 {
-	
+	$('#preview_modal').modal('show');
+	$('#preview_title').html($('#cmw_title').val());
+	$('#preview_content').html($('#summernote').val());
+	$('#preview_dialog').width($('#cmw_content').width());
 }
 
 

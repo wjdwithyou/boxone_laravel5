@@ -35,6 +35,19 @@ class MypageController extends Controller {
 		return view($page, array('page' => $page, 'result' => $result));
 	}
 	
+	public function info()
+	{
+		$memberModel = new MemberModel();
+		
+		if (loginStateChk(true))
+		{
+			$nickname = $_SESSION['nickname'];
+			$result = $memberModel->getInfoByNickname($nickname)['data'][0];
+			$page = 'mypage_info';
+		}
+		return view($page, array('page' => $page, 'result' => $result));
+	}
+
 	/*
 	 * 2015.11.19
 	 * 작성자 : 박용호
