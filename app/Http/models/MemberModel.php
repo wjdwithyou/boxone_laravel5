@@ -52,7 +52,7 @@ class MemberModel{
         if ($type == 5)
         {
         	$ext = $img->getClientOriginalExtension();
-        	$fileName = $img->getRealPath(); 
+        	$fileName = $img->getRealPath();
         }
         else
         {

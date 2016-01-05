@@ -107,7 +107,7 @@
 			  && inputErrorCheck($image_num, 'image_num')))
 				return;
 		
-		$image->move("/tmp", "test.jpg");
+		//$image->move("/tmp", "test.jpg");
 			
 		$s3 = App::make('aws')->createClient('s3');
 //		$image = Image::make('/tmp/test.jpg')->fit(317,374)->save('/tmp/test_317.jpg');
@@ -130,7 +130,7 @@
 			$s3->putObject(array(
 				'Bucket'	=> 'boxone-image',
 				'Key'		=> 'profile/'.$image_name,
-				'SourceFile'=> $image,
+				'SourceFile'	=> $image,
 				));				
 			break;
 
