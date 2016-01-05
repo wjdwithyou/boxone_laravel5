@@ -120,7 +120,7 @@
 			$s3->putObject(array(
 				'Bucket'	=> 'boxone-image',
 				'Key'		=> 'community/'.$image_name,
-				'SourceFile'	=> '/tmp/test.jpg',
+				'SourceFile'	=> $image,
 				));
 			break;
 			
@@ -130,7 +130,7 @@
 			$s3->putObject(array(
 				'Bucket'	=> 'boxone-image',
 				'Key'		=> 'profile/'.$image_name,
-				'SourceFile'=> '/tmp/test.jpg',
+				'SourceFile'=> $image,
 				));				
 			break;
 
