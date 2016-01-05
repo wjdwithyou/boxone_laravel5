@@ -107,10 +107,10 @@
 			  && inputErrorCheck($image_num, 'image_num')))
 				return;
 		
-		//$image->move("/tmp", "test.jpg");
+		$image->move("/tmp", "test.jpg");
 			
 		$s3 = App::make('aws')->createClient('s3');
-		$image = Image::make('/tmp/test.jpg')->fit(317,374)->save('/tmp/test_317.jpg');
+//		$image = Image::make('/tmp/test.jpg')->fit(317,374)->save('/tmp/test_317.jpg');
 //		$image = Image::make('/tmp/test.jpg')->fit(164,167)->save('/tmp/test_164.jpg');
 
 		switch ($target_idx) {
@@ -120,7 +120,7 @@
 			$s3->putObject(array(
 				'Bucket'	=> 'boxone-image',
 				'Key'		=> 'community/'.$image_name,
-				'SourceFile'	=> $image,
+				'SourceFile'	=> '/tmp/test.jpg',
 				));
 			break;
 			
@@ -130,7 +130,7 @@
 			$s3->putObject(array(
 				'Bucket'	=> 'boxone-image',
 				'Key'		=> 'profile/'.$image_name,
-				'SourceFile'=> $image,
+				'SourceFile'=> '/tmp/test.jpg',
 				));				
 			break;
 
