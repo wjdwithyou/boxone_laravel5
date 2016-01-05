@@ -126,29 +126,38 @@
 			
 			// member
 			case '2':
-			$ch = curl_init();
-			curl_setopt($ch, CURLOPT_URL, $url);
-			curl_setopt($ch, CURLOPT_SSL_CIPHER_LIST, 'SSLv3');
-			curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-			ob_start();
-			$res = curl_exec($ch);
-			$buffer = ob_get_contents();
-			ob_end_clean();
-			file_put_contents("img/community/".$image_name, $buffer);
-			
 			$image_name = $document_idx.'_image.'.$ext;
 			$s3->putObject(array(
 				'Bucket'	=> 'boxone-image',
 				'Key'		=> 'profile/'.$image_name,
-//				'SourceFile'	=> $image,
-				'SourceFile' => "img/community/".$image_name,
-				));				
-			unlink($image_name);
+				'SourceFile'	=> $image,
+				));							
+			break;
 			
+			
+			// social member
+			case '3':
+				$ch = curl_init();
+				curl_setopt($ch, CURLOPT_URL, $image);
+				curl_setopt($ch, CURLOPT_SSL_CIPHER_LIST, 'SSLv3');
+				curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+				ob_start();
+				$res = curl_exec($ch);
+				$buffer = ob_get_contents();
+				ob_end_clean();
+				file_put_contents("img/community/".$image_name, $buffer);
+					
+				$image_name = $document_idx.'_image.'.$ext;
+				$s3->putObject(array(
+						'Bucket'	=> 'boxone-image',
+						'Key'		=> 'profile/'.$image_name,
+						'SourceFile' => "img/community/".$image_name,
+				));
+				unlink($image_name);
 			break;
 
 			// community complain
-			case '3':
+			case '4':
 			$s3->putObject(array(
 				'Bucket'	=> 'boxone_image/community_complain',
 				'Key'		=> $document_idx.'_image'.$image_num.'.jpg',
@@ -158,7 +167,7 @@
 			break;
 
 			// direct product
-			case '4':
+			case '5':
 			$s3->putObject(array(
 				'Bucket'	=> 'boxone_image/direct_product',
 				'Key'		=> $document_idx.'_image'.$image_num.'.jpg',
