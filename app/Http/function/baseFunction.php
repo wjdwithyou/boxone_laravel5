@@ -126,12 +126,22 @@
 			
 			// member
 			case '2':
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL, $url);
+			curl_setopt($ch, CURLOPT_SSL_CIPHER_LIST, 'SSLv3');
+			curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+			ob_start();
+			$res = curl_exec($ch);
+			$buffer = ob_get_contents();
+			ob_end_clean();
+			file_put_contents("img/community/".$document_idx."_profile.$ext", $buffer);
+			
 			$image_name = $document_idx.'_image.'.$ext;
 			$s3->putObject(array(
 				'Bucket'	=> 'boxone-image',
 				'Key'		=> 'profile/'.$image_name,
 //				'SourceFile'	=> $image,
-				'SourceFile' => $image,
+				'SourceFile' => "img/community/".$document_idx."_profile.$ext",
 
 				));				
 			break;
