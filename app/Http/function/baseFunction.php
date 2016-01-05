@@ -131,7 +131,7 @@
 				'Bucket'	=> 'boxone-image',
 				'Key'		=> 'profile/'.$image_name,
 //				'SourceFile'	=> $image,
-				'SourceFile' => file_get_contents('$image'),
+				'SourceFile' => file_get_contents($image),
 
 				));				
 			break;
