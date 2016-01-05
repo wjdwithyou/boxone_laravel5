@@ -53,18 +53,24 @@ class MemberModel{
         {
         	$ext = $img->getClientOriginalExtension();
         	$fileName = $img->getRealPath();
+        	
+        	insertImg('2', $member_idx, $fileName, $ext, '0');
         }
         else if ($type == 3)
         {
         	$ext = substr($img, strpos($img, '?oh=')-3, 3);
         	$fileName = $img;
+        	
+        	insertImg('3', $member_idx, $fileName, $ext, '0');
         }
         else
         {
         	$ext = substr($img, strrpos($img, ".") + 1);
         	$fileName = $img;
+        	
+        	insertImg('3', $member_idx, $fileName, $ext, '0');
         }
-        insertImg('2', $member_idx, $fileName, $ext, '0');
+        //insertImg('2', $member_idx, $fileName, $ext, '0');
         
         $dbImg = $member_idx."_image.".$ext;
         $result = DB::update('update member set image=? where idx=?', array($dbImg, $member_idx));
