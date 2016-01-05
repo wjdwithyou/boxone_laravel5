@@ -58,6 +58,7 @@ class MemberModel{
         {
         	$ext = substr($img, strrpos($img, ".") + 1);
         	$fileName = $img;
+          return $fileName;
         }
         insertImg('2', $member_idx, $fileName, $ext, '0');
         
