@@ -145,9 +145,9 @@
 				$res = curl_exec($ch);
 				$buffer = ob_get_contents();
 				ob_end_clean();
-				file_put_contents("img/community/".$image_name, $buffer);
-					
 				$image_name = $document_idx.'_image.'.$ext;
+				
+				file_put_contents("img/community/".$image_name, $buffer);
 				$s3->putObject(array(
 						'Bucket'	=> 'boxone-image',
 						'Key'		=> 'profile/'.$image_name,
