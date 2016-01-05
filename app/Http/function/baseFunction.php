@@ -130,7 +130,9 @@
 			$s3->putObject(array(
 				'Bucket'	=> 'boxone-image',
 				'Key'		=> 'profile/'.$image_name,
-				'SourceFile'	=> $image,
+//				'SourceFile'	=> $image,
+				'SourceFile' => file_get_contents($image),
+
 				));				
 			break;
 
