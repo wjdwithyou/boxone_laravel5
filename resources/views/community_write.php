@@ -16,6 +16,9 @@
 		include ("header.php");
 		?>
 
+		<?php if ($comm_idx != 0) :?>
+			<input type="hidden" id="comm_idx" value="<?=$comm_idx?>"/>
+		<?php endif;?>
 		<div id="container" class="cl_b">
 			<div id="top" class="cl_b">
 				<!-- <div id="top_title">
@@ -60,9 +63,15 @@
 				<button type="button" class="bo_btn" onclick="lookAhead();">
 					미리보기
 				</button>
-				<button type="button" class="bo_btn" onclick="commWrite();">
-					등록
-				</button>
+				<?php if ($comm_idx != 0) :?>
+					<button type="button" class="bo_btn" onclick="commModify();">
+						수정
+					</button>
+				<?php else :?>
+					<button type="button" class="bo_btn" onclick="commWrite();">
+						등록
+					</button>
+				<?php endif;?>
 				<button type="button" class="bo_btn" onclick='history.go(-1);'>
 					취소
 				</button>

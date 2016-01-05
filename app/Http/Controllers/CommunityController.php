@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\models\CommunityModel;
+use AWS;
 use Request;
 
 class CommunityController extends Controller {
@@ -118,8 +119,72 @@ class CommunityController extends Controller {
 		$cateL = $cmModel->getLargeCategory();		
 		$cateS = $cmModel->getSmallCategory("패션잡화");
 		
+		if (Request::has('idx'))
+			$idx = Request::input('idx');
+		else
+			$idx = 0;
+		
 		$page = 'community_write';
-		return view($page, array('page' => $page, 'cateL' => $cateL['data'], 'cateS' => $cateS['data']));
+		return view($page, array('page' => $page, 'cateL' => $cateL['data'], 'cateS' => $cateS['data'], 'comm_idx' => $idx));
+	}
+	
+	public function getModifyContent()
+	{
+		$cmModel = new CommunityModel();
+		$comm_idx = Request::input('idx');
+		$adr_ctr = Request::input('adr_ctr');
+		
+		if (session_id() == '')
+			session_start();
+		if (isset($_SESSION['idx']))
+		{
+			$mem_idx = $_SESSION['idx'];
+			$result = $cmModel->getInfoSingleWithCateName($comm_idx);
+			
+			if ($result->member_idx == $mem_idx)
+			{
+				// 저장소에 있떤 이미지를 temp에 옮기고 내용 바꾸기
+				$imgList = array();
+				
+				$s3Adr = "https://s3-ap-northeast-1.amazonaws.com/boxone-image/community/";
+				$dbImg = "";
+				
+				$contents = $result->contents;
+				$str = $contents;
+				$num = 0;
+				
+				while (strpos($str, "<img"))
+				{
+					$str = substr($str, strpos($str, "<img"));
+					$str = substr($str, strpos($str, "src=\"") + 5);
+					$imgStr = substr($str, 0, strpos($str, "\""));
+					$imgName = substr($imgStr, strrpos($imgStr, "/") + 1);
+					$ext = substr($imgStr, strrpos($imgStr, ".")+1);
+					
+					$date = date("YmdHis", time());
+					$tempName = "$mem_idx"."dd".($num++)."$date.$ext";	
+					
+					$s3 = AWS::createClient('s3');
+					if ($s3->doesObjectExist('boxone-image', 'community/'.$imgName))
+					{
+						$imgUrl = $s3->getObject(array(
+							'Bucket' 	=> 'boxone-image',
+							'Key' 		=> 'community/'.$imgName,
+							'SaveAs' 	=> 'img/community/'.$tempName
+						));
+						$contents = str_replace($imgStr, $adr_ctr.'img/community/'.$tempName, $contents);
+					}
+				}
+				
+				// 정보 가져오기
+				$result->contents = $contents;
+				$data = $result;
+				echo json_encode(array('code' => 1, 'data' => $data, 'num' => $num));
+				return;
+			}
+		}
+		
+		echo json_encode(array('code' => 0, 'msg' => 'not logined'));
 	}
 	
 	public function indexContent()
@@ -355,6 +420,49 @@ class CommunityController extends Controller {
 		
 	}
 	
+	public function update()
+	{
+		$cmModel = new CommunityModel();
+		
+		$comm_idx = Request::input('idx');
+		$cate = Request::input('cate');
+		$title = Request::input('title');
+		$content = Request::input('content');
+		
+		if (session_id() == '')
+			session_start();
+		if (isset($_SESSION['idx']))
+		{
+			$mem_idx = $_SESSION['idx'];
+			$result = $cmModel->getInfoSingleWithCateName($comm_idx);
+				
+			if ($result->member_idx == $mem_idx)
+			{
+				// 기존 해당 글 이미지 지우기
+				$s3 = AWS::createClient('s3');
+				$imgList = $s3->getIterator('ListObjects', array(
+					'Bucket'	=> 'boxone-image',
+					'Prefix'	=> 'community/'.$comm_idx.'_image'
+				));
+				foreach ($imgList as $list)
+				{
+					$s3->deleteObject(array(
+						'Bucket'	=> 'boxone-image',
+						'Key'		=> $list['Key']
+					));
+				}
+				
+				$result = $cmModel->update($comm_idx, $title, $content, $cate);
+				
+				header('Content-Type: application/json');
+				echo json_encode($result);
+				return;
+			}
+		}
+		header('Content-Type: application/json');
+		echo json_encode(array('code' => 0, 'msg' => 'not logined'));
+	}
+	
 	// 이미지 파일 임시저장
 	public function imageUpload()
 	{
@@ -408,12 +516,6 @@ class CommunityController extends Controller {
 			header('Content-Type: application/json');
 			echo json_encode(array('code' => 1, 'msg' => 'success', 'data' => $glob));
 		}
-	}
-	
-	public function tester()
-	{
-		$cmModel = new CommunityModel();
-		print_r($cmModel->getInfoList(array(23), $paging, $searchText, $searchType, $page_type));
 	}
 
 }

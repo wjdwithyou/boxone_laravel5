@@ -73,36 +73,6 @@ function commDelete(comm_idx)
 	});
 }
 
-function commModify(comm_idx)
-{
-	$.ajax
-	({
-		url: adr_ctr+"Community/modifyChk",
-		type: 'post',
-		async: false,
-		data:{
-			comm_idx: comm_idx
-		},
-		success: function(result)
-		{
-			result = JSON.parse(result);
-			if (result.code == 1)
-			{
-				alert ("글이 삭제되었습니다.");
-				var adr_ctr = $("#adr_ctr").val();
-				location.href = adr_ctr + "Community/index";
-			}
-			else
-				alert ("잘못된 접근입니다.");
-		},
-		error: function(request,status,error)
-		{
-			console.log(request.responseText);
-		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		}
-	});
-}
-
 function replyCreate(e, comm_idx, reply_idx)
 {
 	var logined = $("#logined").val();

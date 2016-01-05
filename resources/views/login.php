@@ -141,7 +141,7 @@
 	<span id="join_suggest_msg" class="input_msg">&nbsp</span> <!-- 추천인 메시지 -->
 	<input type="text" id="join_suggest" class="form_margin form-control" placeholder="추천인">
 	<div id="join_profile">
-		<a onclick=""><img src="<?=$adr_img?>profile_image.png"></a>
+		<a onclick=""><img src="<?=$adr_img?>profile_img.png"></a>
 	</div>
 	<span>프로필 사진</span>
 	<br>

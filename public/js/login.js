@@ -233,7 +233,7 @@ function loginCallback(result)
 var profile;
 function socialLogin(type, id, email, nickname, img)
 {
-	//console.log(img);
+	console.log(img);
 	alert ("type:"+type+", id:"+id+", email:"+email+", nickname:"+nickname+", img:"+img);
 	
 	// 로그인으로 회원가입 여부 체크
