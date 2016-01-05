@@ -357,9 +357,12 @@ function justSignIn()
 	var pw_msg = $("#join_pw_msg").text();
 	var pwc_msg = $("#join_pw_confirm_msg").text();
 	var nickname_msg = $("#join_nickname_msg").text();
+	var imgFile = $("#join_profile_input");
 	
 	if (email_msg != "사용가능" || pw_msg != "사용가능" || pwc_msg != "일치" || nickname_msg != "사용가능")
 		alert ("입력한 정보들을 다시 확인해주세요.");
+	else if (!(imgFile[0].files) || !(imgFile[0].files[0]))
+		alert ("이미지를 추가해주세요.");
 	else
 	{
 		var type = 5;
@@ -369,7 +372,6 @@ function justSignIn()
 		var nickname = $("#join_nickname").val();
 		var rec = $("#join_suggest").val();
 		
-		var imgFile = $("#join_profile_input");
 		var img = "";
 		if (imgFile[0].files && imgFile[0].files[0])
 			var img = imgFile[0].files[0]; // 임시

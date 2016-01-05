@@ -56,9 +56,9 @@ class MemberModel{
         	
         	insertImg('2', $member_idx, $fileName, $ext, '0');
         }
-        else if ($type == 3)
+        else if ($type == 3 || $type == 4)
         {
-        	$ext = substr($img, strpos($img, '?oh=')-3, 3);
+        	$ext = substr($img, strpos($img, '?')-3, 3);
         	$fileName = $img;
         	
         	insertImg('3', $member_idx, $fileName, $ext, '0');
