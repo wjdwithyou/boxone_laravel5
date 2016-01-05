@@ -56,21 +56,16 @@ class MemberModel{
         	
         	insertImg('2', $member_idx, $fileName, $ext, '0');
         }
-        else if ($type == 3 || $type == 4)
-        {
-        	$ext = substr($img, strpos($img, '?')-3, 3);
-        	$fileName = $img;
-        	
-        	insertImg('3', $member_idx, $fileName, $ext, '0');
-        }
         else
         {
-        	$ext = substr($img, strrpos($img, ".") + 1);
-        	$fileName = $img;
+        	if (strpos($img, '?'))
+        		$ext = substr($img, strpos($img, '?')-3, 3);
+        	else
+        		$ext = substr($img, strrpos($img, ".") + 1);
         	
+        	$fileName = $img;
         	insertImg('3', $member_idx, $fileName, $ext, '0');
         }
-        //insertImg('2', $member_idx, $fileName, $ext, '0');
         
         $dbImg = $member_idx."_image.".$ext;
         $result = DB::update('update member set image=? where idx=?', array($dbImg, $member_idx));
