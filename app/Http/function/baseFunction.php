@@ -127,6 +127,7 @@
 			// member
 			case '2':
 			$image_name = $document_idx.'_image.'.$ext;
+			return $image_name;
 			$s3->putObject(array(
 				'Bucket'	=> 'boxone-image',
 				'Key'		=> 'profile/'.$image_name,
