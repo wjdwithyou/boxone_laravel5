@@ -134,16 +134,17 @@
 			$res = curl_exec($ch);
 			$buffer = ob_get_contents();
 			ob_end_clean();
-			file_put_contents("img/community/".$document_idx."_profile.$ext", $buffer);
+			file_put_contents("img/community/".$image_name, $buffer);
 			
 			$image_name = $document_idx.'_image.'.$ext;
 			$s3->putObject(array(
 				'Bucket'	=> 'boxone-image',
 				'Key'		=> 'profile/'.$image_name,
 //				'SourceFile'	=> $image,
-				'SourceFile' => "img/community/".$document_idx."_profile.$ext",
-
+				'SourceFile' => "img/community/".$image_name,
 				));				
+			unlink($image_name);
+			
 			break;
 
 			// community complain
