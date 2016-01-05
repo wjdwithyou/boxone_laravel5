@@ -153,7 +153,7 @@
 						'Key'		=> 'profile/'.$image_name,
 						'SourceFile' => "img/community/".$image_name,
 				));
-				unlink($image_name);
+				unlink("img/community/".$image_name);
 			break;
 
 			// community complain
