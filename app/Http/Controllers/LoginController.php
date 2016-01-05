@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\models\MemberModel;
 use Request;
+use AWS;
 use Mail;
 
 
@@ -347,6 +348,30 @@ class LoginController extends Controller {
 	
 	public function tester()
 	{
+		$url = "http://mud-kage.kakao.co.kr/14/dn/btqcnDsoqDk/EF2PbvmH9i1ldtXgjWv0TK/o.jpg";
+		//file_put_contents("img/community/test.gif", file_get_contents($url));
+		
+		
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		//curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+		//curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		//curl_setopt($ch, CURLOPT_SSLVERSION, 3);
+		curl_setopt($ch, CURLOPT_SSL_CIPHER_LIST, 'SSLv3');
+		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+		ob_start();
+		$res = curl_exec($ch);
+		$buffer = ob_get_contents();
+		ob_end_clean();
+		
+		file_put_contents("img/community/test.jpg", $buffer);
+		
+		$s3 = AWS::createClient('s3');
+		$s3->putObject(array(
+			'Bucket'	=> 'boxone-image',
+			'Key'		=> 'community/tester.jpg',
+			'SourceFile'	=> 'img/community/test.jpg'
+		));
 		
 	}
 }

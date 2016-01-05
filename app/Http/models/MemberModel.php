@@ -54,6 +54,11 @@ class MemberModel{
         	$ext = $img->getClientOriginalExtension();
         	$fileName = $img->getRealPath();
         }
+        else if ($type == 3)
+        {
+        	$ext = substr($img, strpos($img, '?oh=')-3, 3);
+        	$fileName = $img;
+        }
         else
         {
         	$ext = substr($img, strrpos($img, ".") + 1);
