@@ -202,7 +202,7 @@ function loginCallback(result)
         });
         request.execute(function (resp)
         {	
-        	alert (JSON.stringify(resp));
+        	//alert (JSON.stringify(resp));
             var email = '';
             if(resp['emails'])
             {
@@ -444,6 +444,8 @@ function checkEmail(adr)
 		$(adr+"email_msg").text("미입력");
 	else if (!pattern.test(email))
 		$(adr+"email_msg").text("이메일 양식 불일치");
+	else if (email.length > 40)
+		$(adr+"email_msg").text("최대 40자까지 가능");
 	else
 		$.ajax
 		({
@@ -481,12 +483,14 @@ function checkEmail(adr)
 function checkNickname(adr)
 {
 	var nickname = $(adr+"nickname").val();
-	var pattern = /[^0-9a-zA-Z-_ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+	var pattern = /[^0-9a-zA-Zㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
 	
 	if (nickname.length == 0)
 		$(adr+"nickname_msg").text("미입력");
+	else if (nickname.length < 2 || nickname.length > 10)
+		$(adr+"nickname_msg").text("2~10자");
 	else if (pattern.test(nickname))
-		$(adr+"nickname_msg").text("숫자, 영문, 한글, -_외 사용불가");
+		$(adr+"nickname_msg").text("숫자, 영문, 한글 외 사용불가");
 	else
 		$.ajax
 		({
@@ -533,6 +537,8 @@ function checkPw(adr)
 	
 	if (pw.length == 0)
 		$(adr+"pw_msg").text("미입력");
+	else if (pw.length < 8 || pw.length > 15)
+		$(adr+"pw_msg").text("8~15자");
 	else if (!patternNum.test(pw) || !patternEng.test(pw))
 		$(adr+"pw_msg").text("영문, 숫자 반드시 포함");
 	else if (patternX.test(pw))
