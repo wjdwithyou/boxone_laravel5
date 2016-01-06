@@ -83,6 +83,8 @@ class CommunityModel{
 		 		&& inputErrorCheck($rereply_idx, 'rereply_idx')))
 			return ;
 		
+		// 개행을 <br>로 변경
+		$contents = str_replace("\n", "<br>", $contents);
 
 		$result = DB::table('community_reply')->insertGetId(
 			array(
@@ -366,14 +368,14 @@ class CommunityModel{
 		$next = DB::select('SELECT idx FROM community WHERE idx>? LIMIT 1', array($community_idx));
 		
 		if (count($prev) > 0)
-			$result[0]->prev = $prev[0]->idx;
-		else 
-			$result[0]->prev = 0;
-		
-		if (count($next) > 0)
-			$result[0]->next = $next[0]->idx;
+			$result[0]->next = $prev[0]->idx;
 		else 
 			$result[0]->next = 0;
+		
+		if (count($next) > 0)
+			$result[0]->prev = $next[0]->idx;
+		else 
+			$result[0]->prev = 0;
 		
 		if (count($result))
 		{
@@ -382,7 +384,8 @@ class CommunityModel{
 			else
 			{
 				$result[0]->own = 0;
-				if (count(DB::select('SELECT count(*) FROM community_bookmark WHERE member_idx=? AND community_idx=?', array($community_idx, $readmember_idx))))
+				$cnt = DB::select('SELECT count(*) as cnt FROM community_bookmark WHERE member_idx=? AND community_idx=?', array($readmember_idx, $community_idx)); 
+				if ($cnt[0]->cnt)
 					$result[0]->bookmark = 1;
 				else
 					$result[0]->bookmark = 0;

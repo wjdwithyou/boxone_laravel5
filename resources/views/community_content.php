@@ -236,9 +236,15 @@
 		
 		<script>
 			function reply_textarea(e, comm_idx, reply_idx) {
-				$("#reply_textarea").find("button").attr("onclick", "replyCreate($(this), " + comm_idx + ", " + reply_idx + ");");
-				$("#reply_textarea").children().clone().insertAfter(e.closest("table"));
-				e.closest("table").find(".reply_input").hide();
+				var logined = $("#logined").val();
+				if (logined == 0)
+					login_popup();
+				else
+				{
+					$("#reply_textarea").find("button").attr("onclick", "replyCreate($(this), " + comm_idx + ", " + reply_idx + ");");
+					$("#reply_textarea").children().clone().insertAfter(e.closest("table"));
+					e.closest("table").find(".reply_input").hide();
+				}
 			}
 
 			function remove_reply_textarea(e) {
@@ -247,9 +253,15 @@
 			}
 
 			function reply_modify(e) {
-				e.closest("table").find(".input_textarea").children("textarea").text(e.closest("table").find(".reply_content").text());
-				e.closest("table").find(".reply_show").hide();
-				e.closest("table").find(".reply_modify_show").show();
+				var logined = $("#logined").val();
+				if (logined == 0)
+					login_popup();
+				else
+				{
+					e.closest("table").find(".input_textarea").children("textarea").text(e.closest("table").find(".reply_content").text());
+					e.closest("table").find(".reply_show").hide();
+					e.closest("table").find(".reply_modify_show").show();
+				}
 			}
 
 			function reply_modify_cancel(e) {

@@ -1,3 +1,11 @@
+$(document).ready(function(){
+	$("#reply_write_content").on('click', function(){
+		var logined = $("#logined").val();
+		if (logined == 0)
+			login_popup();
+	});
+});
+
 function commBookmark(comm_idx)
 {
 	var logined = $("#logined").val();

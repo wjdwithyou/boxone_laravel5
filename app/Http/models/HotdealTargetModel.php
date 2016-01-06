@@ -139,7 +139,7 @@ class HotdealTargetModel
 					return ;
 		
 		// where 조건문 -> 카테고리, 회사 구분
-		$query_where = "where b.target=$target and b.member_idx=$member_idx and p.idx=b.hotdeal_idx and";
+		$query_where = "where STR_TO_DATE(deadline, '%Y-%m-%d') > now() and b.target=$target and b.member_idx=$member_idx and p.idx=b.hotdeal_idx and";
 
 		// 카테고리 구분
 		if( $category_idx != 0 )
@@ -206,13 +206,13 @@ class HotdealTargetModel
 			return ;
 
 		// where 조건문 -> 카테고리, 회사 구분
-		$query_where = "where";
+		$query_where = "";
 		
 		// 카테고리 구분
 		if( $category_idx != 0 )
 		{
-			$query_where .= " category_idx=".$category_idx." and";
-			$query_where2 = "where category_idx=".$category_idx;
+			$query_where .= "and category_idx=".$category_idx;
+			$query_where2 = "and category_idx=".$category_idx;
 		}
 		else
 		{
@@ -222,16 +222,9 @@ class HotdealTargetModel
 		
 		// 회사 구분
 		if( $site_name != "0")
-			$query_where .= " site_name='".$site_name."' and";
+			$query_where .= "and site_name='".$site_name."'";
 		else
 			$query_where .= "";
-		
-		// where문 정리
-		if ($query_where == "where")
-			$query_where = "";
-		else
-			$query_where = substr($query_where, 0, strlen($query_where) - 3);
-		
 		
 		// 정렬 구분
 		$query_orderBy = "order by";
@@ -242,13 +235,16 @@ class HotdealTargetModel
 			case 3:		$query_orderBy .= ' site_name ASC'; 	break ;
 			default : 	$query_orderBy .= ' hit_count DESC';	break;
 		}
-
 		
 		// 자료 가져오기
-		$data = DB::select("select *, 0 as bookmark from hotdeal_promo $query_where $query_orderBy, idx DESC");
+		$data = DB::select("select *, 0 as bookmark from hotdeal_promo where STR_TO_DATE(deadline, '%Y-%m-%d') > now() $query_where $query_orderBy, idx DESC");
+		$result = array();
+		foreach ($data as $list)
+			if (strtotime($list->deadline) > time())
+				array_push($result, $list);
 		
 		// 사이트명 리스트 출력 -> 선택 기준이 됨
-		$company = DB::select("select distinct site_name from hotdeal_promo $query_where2");
+		$company = DB::select("select distinct site_name from hotdeal_promo where STR_TO_DATE(deadline, '%Y-%m-%d') > now() $query_where2");
 
 		// 갯수 확인 후 페이지 자르기
 		if (count($data) == 0)
