@@ -31,7 +31,7 @@
 				</div>
 				<div id="rw_search">
 					<a onclick="searchReward();"><img src="<?= $adr_img ?>search_img.png"></a>
-					<input type="text" id="rw_search_text" class="form-control">
+					<input type="text" id="rw_search_text" class="form-control" placeholder="영어로 검색해주세요">
 				</div>
 			</div>
 		</div>
