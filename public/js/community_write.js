@@ -92,6 +92,7 @@ $(document).ready(function() {
 	// 카테고리 select 변경 시 아래 내용 출력
 	$("#community_cate").on('change', function(){
 		var cate = $("#community_cate").val();
+		var adr_ctr = $("#adr_ctr").val();
 		$.ajax
 		({
 			url: adr_ctr+"Community/getSmallCate",
