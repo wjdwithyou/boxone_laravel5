@@ -13,7 +13,7 @@
 							<td class="cm_pc"><?= $list->upload?></td>
 							<td class="cm_pc"><?= $list->hit_count?></td>
 							<td class="cm_board_reply cm_mobile" rowspan="2">
-								<div class="numberCircle"><?= $list->bookmark_count?></div>
+								<div class="numberCircle"><?= $list->reply_number?></div>
 							</td>
 						</tr>
 						<tr class="cm_mobile">

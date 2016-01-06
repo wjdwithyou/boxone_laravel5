@@ -361,8 +361,6 @@ function justSignIn()
 	
 	if (email_msg != "사용가능" || pw_msg != "사용가능" || pwc_msg != "일치" || nickname_msg != "사용가능")
 		alert ("입력한 정보들을 다시 확인해주세요.");
-	else if (!(imgFile[0].files) || !(imgFile[0].files[0]))
-		alert ("이미지를 추가해주세요.");
 	else
 	{
 		var type = 5;
@@ -374,8 +372,8 @@ function justSignIn()
 		
 		var img = "";
 		if (imgFile[0].files && imgFile[0].files[0])
-			var img = imgFile[0].files[0]; // 임시
-		
+			img = imgFile[0].files[0]; // 임시
+
 		signIn(type, id, pw, email, nickname, img, rec);
 	}
 	
@@ -389,6 +387,9 @@ function justSignIn()
  */
 function signIn(type, id, pw, email, nickname, img, rec)
 {
+	if (img == "" || img == "null" || img == null || img.length == 0)
+		img = "default.png";
+	
 	var data = new FormData();
 	data.append("type", type);
 	data.append("id", id);

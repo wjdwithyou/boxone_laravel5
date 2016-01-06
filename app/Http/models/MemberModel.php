@@ -14,7 +14,7 @@ class MemberModel{
     /*    
      *  회원 등록 기능
      */
-    function create($type, $email, $nickname, $id, $pw, $img)
+    function create($type, $email, $nickname, $id, $pw, $img, $imgType)
     {
 
         if( !(  inputErrorCheck($type, 'type')
@@ -49,14 +49,15 @@ class MemberModel{
           );  
         
         // 이미지 처리
-        if ($type == 5)
+        if ($imgType == 1)
         {
         	$ext = $img->getClientOriginalExtension();
         	$fileName = $img->getRealPath();
+        	$dbImg = $member_idx."_image.".$ext;
         	
         	insertImg('2', $member_idx, $fileName, $ext, '0');
         }
-        else
+        else if ($imgType == 2)
         {
         	if (strpos($img, '?'))
         		$ext = substr($img, strpos($img, '?')-3, 3);
@@ -64,10 +65,15 @@ class MemberModel{
         		$ext = substr($img, strrpos($img, ".") + 1);
         	
         	$fileName = $img;
+        	$dbImg = $member_idx."_image.".$ext;
+        	
         	insertImg('3', $member_idx, $fileName, $ext, '0');
         }
+        else 
+        {
+        	$dbImg = "default.png";
+        }
         
-        $dbImg = $member_idx."_image.".$ext;
         $result = DB::update('update member set image=? where idx=?', array($dbImg, $member_idx));
         
 

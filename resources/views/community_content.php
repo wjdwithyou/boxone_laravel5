@@ -172,7 +172,11 @@
 								<img src="<?=$adr_img?>profile_image.png">
 							</td>
 							<td class="input_textarea2">
-								<textarea id="reply_write_content" class="form-control" placeholder="최대 300자까지 등록할 수 있습니다." maxlength="300" rows="4"></textarea>
+								<?php if ($logined) :?>
+									<textarea id="reply_write_content" class="form-control" placeholder="최대 300자까지 등록할 수 있습니다." maxlength="300" rows="4"></textarea>
+								<?php else :?>
+									<textarea id="reply_write_content" class="form-control" placeholder="로그인 후에 이용해 주세요." maxlength="300" rows="4"></textarea>
+								<?php endif;?>
 								<button type="button" class="add_reply2" onclick="replyCreate($(this), <?=$result->idx?>, 0);">
 									등록
 								</button>
@@ -193,7 +197,11 @@
 					</tr>
 					<tr class="reply_modify_show">
 						<td class="input_textarea">
-							<textarea class="form-control" placeholder="최대 300자까지 등록할 수 있습니다." maxlength="300" rows="3"></textarea>
+							<?php if ($logined) :?>
+								<textarea class="form-control" placeholder="최대 300자까지 등록할 수 있습니다." maxlength="300" rows="3"></textarea>
+							<?php else :?>
+								<textarea class="form-control" placeholder="로그인 후에 이용해 주세요." maxlength="300" rows="3"></textarea>
+							<?php endif;?>
 							<button type="button" class="add_reply" onclick="">
 								등록
 							</button>

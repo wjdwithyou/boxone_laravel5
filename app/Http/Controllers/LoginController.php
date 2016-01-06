@@ -143,16 +143,33 @@ class LoginController extends Controller {
 		$rec = Request::input('rec');
 		
 		if (Request::hasFile('img'))
+		{
 			$img = Request::file('img');
+			$imgType = 1;
+		}
 		else if (Request::has('img'))
+		{
 			$img = Request::input('img');
+			if (strpos(" ".$img, "default") || strpos(" ".$img, "nodata"))
+			{
+				$img = "default.png";
+				$imgType = 3;
+			}
+			else
+				$imgType = 2;
+		}
+		else
+		{
+			$img = "default.png";
+			$imgType = 3;
+		}
 		
 		//추천인 포인트 업
 		if (!empty($rec))
 			$memberModel->recommand($rec);
 		
 		//DB에 넣기
-		$result = $memberModel->create($type, $email, $nickname, $id, $pw, $img);
+		$result = $memberModel->create($type, $email, $nickname, $id, $pw, $img, $imgType);
 		
 		//필요정보 받아오기
 		$result = $memberModel->login($type, $id, $pw);

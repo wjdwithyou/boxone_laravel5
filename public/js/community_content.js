@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	
 	$("#reply_write_content").on('click', function(){
 		var logined = $("#logined").val();
 		if (logined == 0)
