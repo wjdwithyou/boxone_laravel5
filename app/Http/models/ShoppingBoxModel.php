@@ -8,7 +8,7 @@ use DB;
 include_once dirname(__FILE__)."/../function/baseFunction.php";
 
 
-class ProductModel
+class ShoppingBoxModel
 {
 
 	/*
