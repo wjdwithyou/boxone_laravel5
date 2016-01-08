@@ -38,7 +38,7 @@
 							<div class="hd_brand text_overflow">
 								<?=$list->title?><span class="pc_reply"></span>
 							</div>
-							<div class="album_writer bo_color">
+							<div class="album_writer bo_color text_overflow">
 									<?=$list->nickname?> | <?=$list->upload?> | <?=$list->hit_count?>
 							</div>
 							<div class="album_btnset cl_b">

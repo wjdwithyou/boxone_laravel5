@@ -46,7 +46,7 @@ class HotdealTargetModel
 
 
 	/*  	
-     *	핫딜 북마크 추가
+     *	 핫딜 북마크 추가
      */
 	function createBookmark($member_idx, $hotdeal_idx, $target)
 	{
