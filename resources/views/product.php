@@ -29,7 +29,7 @@
 			</div>
 			<div id="product_img_wrap" class="col-xs-12 col-sm-6">
 				<div class="fotorama" data-width="100%" data-height="500px" data-nav="thumbs" data-allowfullscreen="true">
-					<a href="<?=$adr_img ?>product_1.jpg"><img src="<?=$adr_img ?>product_1.jpg"></a>
+					<a href="<?=$result['img']?>"><img src="<?=$result['img']?>"></a>
 					<a href="<?=$adr_img ?>product_2.jpg"><img src="<?=$adr_img ?>product_2.jpg"></a>
 					<a href="<?=$adr_img ?>product_3.jpg"><img src="<?=$adr_img ?>product_3.jpg"></a>
 					<a href="<?=$adr_img ?>product_4.jpg"><img src="<?=$adr_img ?>product_4.jpg"></a>

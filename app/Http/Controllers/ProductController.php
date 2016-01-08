@@ -106,7 +106,7 @@ class ProductController extends Controller {
 		return view($page, $data);
 	}
 	
-	public function getPrdtDetail()
+	public function detail()
 	{
 		$prdtModel = new ProductModel();
 		
