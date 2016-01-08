@@ -110,6 +110,7 @@ class ProductController extends Controller {
 	public function detail()
 	{
 		$prdtModel = new ProductModel();
+		$cateModel = new CategoryModel();
 		
 		$idx = Request::input('idx');
 		$result = $prdtModel->getInfoSingle($idx);
