@@ -111,10 +111,10 @@ class ProductController extends Controller {
 		$prdtModel = new ProductModel();
 		
 		$idx = Request::input('idx');
-		$result = $prdtModel->getSingleInfo($idx);
+		$result = $prdtModel->getInfoSingle($idx);
 		
 		$page = 'product';
-		return view($page, array('page' => $page));
+		return view($page, array('page' => $page, 'result' => $result['data']));
 	}
 }
 

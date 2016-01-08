@@ -39,9 +39,55 @@ class ProductModel{
 		if(	!(	inputErrorCheck($prod_idx, 'prod_idx')))
 			return ;
 
-		$result = DB::select('select * from product where idx =?',array($prod_idx));
-
-		DB::update('update product set hit_count=hit_count+1 where idx=?',array($prod_idx));
+		if (connectToMssql())
+		{
+			$my_data = DB::select('select * from product where idx =?',array($prod_idx));			
+			
+			$table = $my_data[0]->mall_id.'_'.$my_data[0]->mall_kind;
+			$prodInc = $my_data[0]->prdt_id;
+			
+			$query = mssql_query("SELECT * FROM cgProdMain_$table WHERE ProdInc = $prodInc");
+			$ms_data_prod = mssql_fetch_array($query);
+			
+			$query = mssql_query("SELECT * FROM cgColorMain_$table WHERE ProdInc = $prodInc");
+			$ms_data_color = "";
+			while ($temp = mssql_fetch_array($query))
+				$ms_data_color .= $temp['ColorTxt']."/";
+			$ms_data_color = substr($ms_data_color, 0, count($ms_data_color)-1);
+			
+			$query = mssql_query("SELECT Distinct SizeTxt, * FROM cgSizeMain_$table WHERE ProdInc = $prodInc");
+			$ms_data_size = "";
+			while ($temp = mssql_fetch_array($query))
+				$ms_data_size .= $temp['SizeTxt']."/";
+			$ms_data_size = substr($ms_data_size, 0, count($ms_data_size)-1);
+			
+			$query = mssql_query("SELECT Story FROM cgStoryMain_$table WHERE ProdInc = $prodInc");
+			$temp = mssql_fetch_array($query);
+			$ms_data_story = $temp['Story'];
+			
+			$result = array(
+				'idx' => $my_data[0]->idx,
+				'cate' => $my_data[0]->cate_small,
+				'url' => $ms_data_prod['PurlD'],
+				'img' => $ms_data_prod['PimgD'],
+				'name' => $ms_data_prod['PnameD'],
+				'explain' => '',
+				'mall' => $ms_data_prod['MallID'],
+				'brand' => $ms_data_prod['BrandID'],
+				'price' => makeMoney($ms_data_prod['Lprice']),
+				'deliverFee' => '',
+				'color' => $ms_data_color,
+				'size' => $ms_data_size,
+				'story' => $ms_data_story
+			);
+			
+			DB::update('update product set hit_count=hit_count+1 where idx=?',array($prod_idx));
+		}
+		else 
+		{
+			echo "mssql Connection failed.\n";
+			return;
+		}
 
         return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}

@@ -45,21 +45,21 @@
 			</div>
 			<ul id="product_desc_wrap" class="col-xs-12 col-sm-6">
 				<li class="f_b">
-					토리버치
+					<?=$result['name']?>
 				</li>
 				<li class="pd_li li_underline bo_color">
 					Smathers & Branson for J.Crew card case for j.Crew card case
 				</li>
 				<li class="pd_li2">
-					amazon
+					<?=$result['mall']?>
 				</li>
 				<li class="pd_li cl_b">
 					<div class="f_l f_b">
 						가격
 					</div>
 					<div class="f_r">
-						<span class="before_price bo_color">￦134,000</span>
-						<span class="after_price f_b">￦34,000</span>
+						<!-- <span class="before_price bo_color">￦134,000</span> -->
+						<span class="after_price f_b">￦<?=$result['price']?></span>
 					</div>
 				</li>
 				<li class="pd_li li_underline cl_b">
@@ -74,7 +74,7 @@
 					컬러
 				</li>
 				<li class="pd_li3 bo_color">
-					Wht/Bright gold
+					<?=$result['color']?>
 				</li>
 				<li class="pd_li cl_b">
 					<div class="f_l f_b">
@@ -87,7 +87,7 @@
 					</div>
 				</li>
 				<li class="pd_li3 bo_color">
-					S/M/L/XL/XXL
+					<?=$result['size']?>
 				</li>
 				<li class="pd_li4 li_underline">
 					<button type="button" class="bo_btn f_b">
@@ -160,7 +160,8 @@
 					상품정보
 				</div>
 				<div class="info_content">
-					Our Embroidered Poplin Relaxed Tunic is stitched around the collar, placket and sleeve-ends for a graphic, cleanly tailored
+					<?=$result['story']?>
+					<!-- Our Embroidered Poplin Relaxed Tunic is stitched around the collar, placket and sleeve-ends for a graphic, cleanly tailored
 					look. This runway style is made of breathable, bright-white cotton, with a slit crewneck and an easy, tomboyish fit. Finished
 					with a banded hem, it’s crisp and casual — great for laid-back days and getaways.
 					<br>
@@ -180,7 +181,7 @@
 					<br>
 					•Short sleeves; sleeve length: 19.5" (49 cm)
 					<br>
-					•27.5" (69 cm) in length.
+					•27.5" (69 cm) in length. -->
 				</div>
 			</div>
 

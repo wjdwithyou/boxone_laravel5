@@ -266,6 +266,26 @@
 			return substr($date, 0, 10);
 	}
 	
+	function makeMoney($num)
+	{
+		$num = $num."";
+		$str = "";
+		while (strlen($num) >= 3)
+		{
+			$str = substr($num, strlen($num)-3, 3).",".$str;
+			$num = substr($num, 0, strlen($num)-3);
+		}
+		$str = $num.",".substr($str,0,strlen($str)-1);
+			
+		return $str;
+	}
+	
+	function connectToMssql()
+	{
+		$conn = mssql_connect('cafe24', 'cstourplatform', 'q1w2e3r4!@cosmos99');
+		return $conn;
+	}
+	
 	
 
 	
