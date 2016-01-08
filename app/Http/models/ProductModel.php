@@ -9,20 +9,22 @@ include_once dirname(__FILE__)."/../function/baseFunction.php";
    
 class ProductModel{
 
-	function createBookmark($product_idx, $member_idx)
+	function createBookmark($prod_idx, $member_idx)
 	{
-		if( !( inputErrorCheck($product_idx, 'product_idx')
+		if( !( inputErrorCheck($prod_idx, 'prod_idx')
 			   && inputErrorCheck($member_idx, 'member_idx')))
 			return ;
 
 
 		$result = DB::table('product_bookmark')->insertGetId(
 			array(
-				'product_idx'=> $product_idx, 
+				'prod_idx'=> $prod_idx, 
 				'member_idx'=> $member_idx, 
 				'upload'=>DB::raw('now()')
 				)
 			);	
+
+		DB::update('update product set bookmark_count=bookmark_count+1 where idx=?',array($prod_idx));
 
 		return array('code' => 1,'msg' =>'success' ,'data' => $result);
 	}
@@ -38,6 +40,8 @@ class ProductModel{
 			return ;
 
 		$result = DB::select('select * from product where idx =?',array($prod_idx));
+
+		DB::update('update product set hit_count=hit_count+1 where idx=?',array($prod_idx));
 
         return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
@@ -78,4 +82,6 @@ class ProductModel{
 			return array('code' => 1, 'msg' => 'success', 'data' => $result, 'maxPage' => $page_max);
 		}
 	}
+
+
 }
