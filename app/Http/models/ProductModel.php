@@ -55,18 +55,16 @@ class ProductModel
 			$ms_data_prod = mssql_fetch_array($query);
 				
 			$query = mssql_query("SELECT * FROM cgColorMain_$table WHERE ProdInc = $prodInc");
-			echo "SELECT * FROM cgColorMain_$table WHERE ProdInc = $prodInc";
 			$ms_data_color = "";
 			while ($temp = mssql_fetch_array($query))
 				$ms_data_color .= $temp['ColorTxt']."/";
-				
-			$ms_data_color = substr($ms_data_color, 0, count($ms_data_color)-1);
+			$ms_data_color = substr($ms_data_color, 0, strlen($ms_data_color)-1);
 				
 			$query = mssql_query("SELECT Distinct SizeTxt, * FROM cgSizeMain_$table WHERE ProdInc = $prodInc");
 			$ms_data_size = "";
 			while ($temp = mssql_fetch_array($query))
 				$ms_data_size .= $temp['SizeTxt']."/";
-			$ms_data_size = substr($ms_data_size, 0, count($ms_data_size)-1);
+			$ms_data_size = substr($ms_data_size, 0, strlen($ms_data_size)-1);
 				
 			$query = mssql_query("SELECT Story FROM cgStoryMain_$table WHERE ProdInc = $prodInc");
 			$temp = mssql_fetch_array($query);
