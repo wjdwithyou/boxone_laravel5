@@ -55,7 +55,7 @@ class ProductModel
 			$ms_data_prod = mssql_fetch_array($query);
 				
 			$query = mssql_query("SELECT * FROM cgColorMain_$table WHERE ProdInc = $prodInc");
-			echo $query;
+			echo "SELECT * FROM cgColorMain_$table WHERE ProdInc = $prodInc";
 			$ms_data_color = "";
 			while ($temp = mssql_fetch_array($query))
 				$ms_data_color .= $temp['ColorTxt']."/";
