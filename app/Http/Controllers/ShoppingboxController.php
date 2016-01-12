@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\models\ProductModel;
 use App\Http\models\CategoryModel;
+use Request;
 
 class ShoppingboxController extends Controller {
 
