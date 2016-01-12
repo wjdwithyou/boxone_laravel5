@@ -37,6 +37,7 @@ class ShoppingboxController extends Controller {
 		$cateL = '0';
 		$cateM = '0';
 		$cateS = '0';
+		$cateDepth = 0;
 		if (Request::has('cateL'))
 		{
 			$cateL = Request::input('cateL');
