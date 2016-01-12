@@ -35,14 +35,15 @@
 				</div>
 			</div>
 			<ul id="product_desc_wrap" class="col-xs-12 col-sm-6">
-				<li class="f_b">
+				<li class="bo_color">
+					<?=$result['brand']?>
+				</li>
+				<li class="pd_li li_underline f_b">
+					
 					<?=$result['name']?>
 				</li>
-				<li class="pd_li li_underline bo_color">
-					<?=$result['mall']?>
-				</li>
 				<li class="pd_li2">
-					<?=$result['brand']?>
+					<?=$result['mall']?>
 				</li>
 				<li class="pd_li cl_b">
 					<div class="f_l f_b">

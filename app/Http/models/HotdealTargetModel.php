@@ -211,8 +211,8 @@ class HotdealTargetModel
 		// 카테고리 구분
 		if( $category_idx != 0 )
 		{
-			$query_where .= "and category_idx=".$category_idx;
-			$query_where2 = "and category_idx=".$category_idx;
+			$query_where .= " and category_idx=".$category_idx;
+			$query_where2 = " and category_idx=".$category_idx;
 		}
 		else
 		{
@@ -222,7 +222,7 @@ class HotdealTargetModel
 		
 		// 회사 구분
 		if( $site_name != "0")
-			$query_where .= "and site_name='".$site_name."'";
+			$query_where .= " and site_name='".$site_name."'";
 		else
 			$query_where .= "";
 		

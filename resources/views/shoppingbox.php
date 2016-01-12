@@ -65,20 +65,22 @@
 				</div>
 				<div id="top_index">
 					<a onclick=''>쇼핑박스</a>
-					&nbsp;>&nbsp;
-					<a onclick=''>여성의류</a>
-					&nbsp;>&nbsp;
-					<a onclick=''>상의</a>
-					&nbsp;>&nbsp;
-					<a onclick=''>니트/스웨터</a>
+					<?php if (!count($nowCate)) :?>
+						&nbsp;>&nbsp;
+						<a onclick=''>전체</a>
+					<?php else :?>
+						<?php foreach ($nowCate as $cate) :?>
+							&nbsp;>&nbsp;
+							<a onclick=''><?$cate[1]?></a>
+						<?php endforeach;?>
+					<?php endif;?>
 				</div>
 				<div id="top_select">
 					<select id="hotdeal_cate" class="form-control" onchange="hotdeal_cate();">
 						<option value="">전체</option>
-						<option value="">니트/스웨터</option>
-						<option value="">셔츠</option>
-						<option value="">티셔츠</option>
-						<option value="">가디건/베스트</option>
+						<?php foreach ($cateList as $list) :?>
+							<option value=""><?$list->name?></option>
+						<?php endforeach;?>
 					</select>
 				</div>
 				<div id="order_select">
@@ -93,28 +95,30 @@
 			</div>
 
 			<div id="product_wrap">
-				<div class="product_div col-xs-6 col-sm-4 col-md-2">
-					<div class="hd_product_img center_box">
-						<div class="center_content">
-							<a onclick='location.href="<?=$adr_ctr ?>Product/index"'><img src="<?= $adr_img ?>product_ex.jpg"></a>
-						</div>
-					</div>
-					<div class="hd_site_desc">
-						<div class="hd_brand text_overflow">
-							토리버치
-						</div>
-						<div class="hd_product_name">
-							<div>
-								상품명
-								토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일
+				<?php foreach ($prdt as $list) :?>
+					<div class="product_div col-xs-6 col-sm-4 col-md-2">
+						<div class="hd_product_img center_box">
+							<div class="center_content">
+								<a onclick='location.href="<?=$adr_ctr ?>Product/index"'><img src="<?= $adr_img ?>product_ex.jpg"></a>
 							</div>
 						</div>
-						<div class="hd_price text_overflow">
-							￦34,900
+						<div class="hd_site_desc">
+							<div class="hd_brand text_overflow">
+								<?$list->brand?>
+							</div>
+							<div class="hd_product_name">
+								<div>
+									상품명
+									<?$list->name?>
+								</div>
+							</div>
+							<div class="hd_price text_overflow">
+								￦<?$list->price?>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="product_div col-xs-6 col-sm-4 col-md-2">
+				<?php endforeach;?>
+				<!-- <div class="product_div col-xs-6 col-sm-4 col-md-2">
 					<div class="hd_product_img center_box">
 						<div class="center_content">
 							<a onclick='location.href="<?=$adr_ctr ?>Product/index"'><img src="<?= $adr_img ?>product_ex.jpg"></a>
@@ -460,7 +464,7 @@
 							￦34,900
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 
 			<div id="pagination_wrap">

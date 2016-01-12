@@ -94,5 +94,17 @@ class CategoryModel{
 
 	    return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
+	
+	function getCateName($depth, $idx)
+	{
+		if ($depth == 1)
+			$result = DB::select("SELECT * FROM category_large WHERE idx=$idx");
+		else if ($depth == 2)
+			$result = DB::select("SELECT * FROM category_medium WHERE idx=$idx");
+		else
+			$result = DB::select("SELECT * FROM category_small WHERE idx=$idx");
+		
+		return array('code' => 1, 'msg' => 'success', 'data' => $result);
+	}
 
 }

@@ -117,24 +117,30 @@ class ProductModel
 	/*
 	 *	정보 리스트 가져오는 기능
 	 */
-	function getInfoList($cate_small)
+	function getInfoList($sort, $getCateList, $nowPage)
 	{
-		if( !( inputErrorCheck($cate_small, 'cate_small')))
+		if( !( inputErrorCheck($sort, 'sort') && 
+				inputErrorCheck($cate, 'cate') &&
+				inputErrorCheck($nowPage, 'nowPage')))
 			return ;
 
 		// 정렬 구분
-		$query_orderBy = "order by";
+		$query_orderBy = "order by ";
 		switch($sort_option)
 		{
-			case 1: 	$query_orderBy .= ' hit_count DESC'; 	break ;
-			case 2:		$query_orderBy .= ' deadline ASC'; 		break ;
-			case 3:		$query_orderBy .= ' site_name ASC'; 	break ;
+			case 1: 	$query_orderBy .= 'hit_count DESC, '; 	break;
+			case 2:		$query_orderBy .= 'deadline ASC, '; 		break;
+			case 3:		$query_orderBy .= 'site_name ASC, '; 	break;
 			default : 	$query_orderBy .= ""; 					break;
 		}
-
-
+		
+		// 카테고리 정리
+		$query_cate = "where true ";
+		foreach($getCateList as $list)
+			$query_cate .= "and cate_small=$list ";
+		
 		// 자료 가져오기
-		$data = DB::select("select * from product where cate_small=$cate_small $query_orderBy, idx DESC");
+		$data = DB::select("select * from product $query_cate $query_orderBy idx DESC");
 
 		// 갯수 확인 후 페이지 자르기
 		if (count($data) == 0)
