@@ -70,13 +70,11 @@ class ProductModel
 						break;
 				}
 			}
-			$ms_data_color = substr($ms_data_color, 0, strlen($ms_data_color)-3);
 				
 			$query = mssql_query("SELECT Distinct SizeTxt, * FROM cgSizeMain_$table WHERE ProdInc = $prodInc");
 			$ms_data_size = array();
 			while ($temp = mssql_fetch_array($query))
 				array_push($ms_data_size, $temp['SizeTxt']);
-			$ms_data_size = substr($ms_data_size, 0, strlen($ms_data_size)-3);
 				
 			$query = mssql_query("SELECT Story FROM cgStoryMain_$table WHERE ProdInc = $prodInc");
 			$temp = mssql_fetch_array($query);
