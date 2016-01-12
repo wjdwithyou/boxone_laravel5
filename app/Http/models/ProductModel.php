@@ -126,7 +126,7 @@ class ProductModel
 
 		// 정렬 구분
 		$query_orderBy = "order by ";
-		switch($sort_option)
+		switch($sort)
 		{
 			case 1: 	$query_orderBy .= 'hit_count DESC, '; 	break;
 			case 2:		$query_orderBy .= 'deadline ASC, '; 		break;
