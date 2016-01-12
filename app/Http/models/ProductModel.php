@@ -138,7 +138,10 @@ class ProductModel
 		$query_cate = "";
 		foreach($getCateList as $list)
 			$query_cate .= "cate_small=$list or ";
-		$query_cate = "where name != '' and (".substr($query_cate, 0, strlen($query_cate) - 3).")";
+		if ($query_cate == "")
+			$query_cate = "where name != ''";
+		else 
+			$query_cate = "where name != '' and (".substr($query_cate, 0, strlen($query_cate) - 3).")";
 		
 		// 자료 가져오기
 		$data = DB::select("select * from product $query_cate $query_orderBy idx DESC");
