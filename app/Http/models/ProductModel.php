@@ -120,7 +120,7 @@ class ProductModel
 	function getInfoList($sort, $getCateList, $nowPage)
 	{
 		if( !( inputErrorCheck($sort, 'sort') && 
-				inputErrorCheck($cate, 'cate') &&
+				inputErrorCheck($getCateList, 'getCateList') &&
 				inputErrorCheck($nowPage, 'nowPage')))
 			return ;
 
