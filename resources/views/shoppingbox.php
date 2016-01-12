@@ -61,8 +61,11 @@
 				</div>
 				<hr>
 				<div id="current_cate">
-					<?php echo ($nowCate[count($nowCate)-1][1]);?>
-					니트/스웨터
+					<?php if (count($nowCate)) :?>
+						<?php echo ($nowCate[count($nowCate)-1][1]);?>
+					<?php else :?>
+						전체
+					<?php endif;?>
 				</div>
 				<div id="top_index">
 					<a onclick=''>쇼핑박스</a>
@@ -86,7 +89,6 @@
 				</div>
 				<div id="order_select">
 					<select id="order_list" class="form-control" onchange="order_list();">
-						<option value="">모두보기</option>
 						<option value="">인기 순</option>
 						<option value="">할인율: 높은 순</option>
 						<option value="">할인율: 낮은 순</option>
