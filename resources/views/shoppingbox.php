@@ -61,6 +61,7 @@
 				</div>
 				<hr>
 				<div id="current_cate">
+					<?php echo ($nowCate[count($nowCate)-1][1]);?>
 					니트/스웨터
 				</div>
 				<div id="top_index">
@@ -71,7 +72,7 @@
 					<?php else :?>
 						<?php foreach ($nowCate as $cate) :?>
 							&nbsp;>&nbsp;
-							<a onclick=''><?$cate[1]?></a>
+							<a onclick=''><?=$cate[1]?></a>
 						<?php endforeach;?>
 					<?php endif;?>
 				</div>
@@ -79,7 +80,7 @@
 					<select id="hotdeal_cate" class="form-control" onchange="hotdeal_cate();">
 						<option value="">전체</option>
 						<?php foreach ($cateList as $list) :?>
-							<option value=""><?$list->name?></option>
+							<option value=""><?=$list->name?></option>
 						<?php endforeach;?>
 					</select>
 				</div>
@@ -99,21 +100,21 @@
 					<div class="product_div col-xs-6 col-sm-4 col-md-2">
 						<div class="hd_product_img center_box">
 							<div class="center_content">
-								<a onclick='location.href="<?=$adr_ctr ?>Product/index"'><img src="<?= $adr_img ?>product_ex.jpg"></a>
+								<a onclick='location.href="<?=$adr_ctr ?>Product/index"'><img src="<?=$list->img?>"></a>
 							</div>
 						</div>
 						<div class="hd_site_desc">
 							<div class="hd_brand text_overflow">
-								<?$list->brand?>
+								<?=$list->brand?>
 							</div>
 							<div class="hd_product_name">
 								<div>
 									상품명
-									<?$list->name?>
+									<?=$list->name?>
 								</div>
 							</div>
 							<div class="hd_price text_overflow">
-								￦<?$list->price?>
+								￦<?=$list->price?>
 							</div>
 						</div>
 					</div>
