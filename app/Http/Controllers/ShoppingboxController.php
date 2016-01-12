@@ -130,7 +130,6 @@ class ShoppingboxController extends Controller {
 		
 		$result = $prdtModel->getInfoList($sort, $getCateList, $nowPage);
 		
-		$nowCate = array('idx' => $cate, 'name' => $name);
 		$paging = array('now' => $nowPage, 'max' => $result['maxPage']);
 		
 		$page = 'shoppingbox';
