@@ -57,7 +57,10 @@ class ProductModel
 			$query = mssql_query("SELECT * FROM cgColorMain_$table WHERE ProdInc = $prodInc");
 			$ms_data_color = "";
 			while ($temp = mssql_fetch_array($query))
+			{
 				$ms_data_color .= $temp['ColorTxt']."/";
+				print_r ($temp);
+			}
 			$ms_data_color = substr($ms_data_color, 0, count($ms_data_color)-1);
 				
 			$query = mssql_query("SELECT Distinct SizeTxt, * FROM cgSizeMain_$table WHERE ProdInc = $prodInc");

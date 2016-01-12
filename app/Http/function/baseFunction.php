@@ -273,7 +273,7 @@
 	{
 		$num = ($num*1204.40)."";
 		$str = "";
-		while (strlen($num) >= 3)
+		while (strlen($num) > 3)
 		{
 			$str = substr($num, strlen($num)-3, 3).",".$str;
 			$num = substr($num, 0, strlen($num)-3);
