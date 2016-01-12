@@ -39,10 +39,10 @@
 					<?=$result['name']?>
 				</li>
 				<li class="pd_li li_underline bo_color">
-					Smathers & Branson for J.Crew card case for j.Crew card case
+					<?=$result['mall']?>
 				</li>
 				<li class="pd_li2">
-					<?=$result['mall']?>
+					<?=$result['brand']?>
 				</li>
 				<li class="pd_li cl_b">
 					<div class="f_l f_b">
@@ -65,7 +65,9 @@
 					컬러
 				</li>
 				<li class="pd_li3 bo_color">
-					<?=$result['color']?>
+					<?php foreach($result['color'] as $colorList) :?>
+						<span class="pd_color"><?=$colorList?></span>&nbsp;/&nbsp; 
+					<?php endforeach;?>
 				</li>
 				<li class="pd_li cl_b">
 					<div class="f_l f_b">

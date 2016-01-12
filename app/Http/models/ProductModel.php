@@ -56,10 +56,10 @@ class ProductModel
 			$ms_data_img = array($ms_data_prod['PimgD']);
 				
 			$query = mssql_query("SELECT * FROM cgColorMain_$table WHERE ProdInc = $prodInc");
-			$ms_data_color = "";
+			$ms_data_color = array();
 			while ($temp = mssql_fetch_array($query))
 			{
-				$ms_data_color .= $temp['ColorTxt']." / ";
+				array_push($temp['ColorTxt']);
 				array_push($ms_data_img, $temp['Bimg']);
 				for ($i = 1 ; $i <= 12 ; $i++)
 				{
@@ -73,9 +73,9 @@ class ProductModel
 			$ms_data_color = substr($ms_data_color, 0, strlen($ms_data_color)-3);
 				
 			$query = mssql_query("SELECT Distinct SizeTxt, * FROM cgSizeMain_$table WHERE ProdInc = $prodInc");
-			$ms_data_size = "";
+			$ms_data_size = array();
 			while ($temp = mssql_fetch_array($query))
-				$ms_data_size .= $temp['SizeTxt']." / ";
+				array_push($temp['SizeTxt']);
 			$ms_data_size = substr($ms_data_size, 0, strlen($ms_data_size)-3);
 				
 			$query = mssql_query("SELECT Story FROM cgStoryMain_$table WHERE ProdInc = $prodInc");
