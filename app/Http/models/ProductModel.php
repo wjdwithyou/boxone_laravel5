@@ -53,28 +53,45 @@ class ProductModel
 				
 			$query = mssql_query("SELECT * FROM cgProdMain_$table WHERE ProdInc = $prodInc");
 			$ms_data_prod = mssql_fetch_array($query);
+			$ms_data_img = array($ms_data_prod['PimgD']);
 				
 			$query = mssql_query("SELECT * FROM cgColorMain_$table WHERE ProdInc = $prodInc");
 			$ms_data_color = "";
 			while ($temp = mssql_fetch_array($query))
-				$ms_data_color .= $temp['ColorTxt']."/";
-			$ms_data_color = substr($ms_data_color, 0, strlen($ms_data_color)-1);
+			{
+				$ms_data_color .= $temp['ColorTxt']." / ";
+				array_push($ms_data_img, $temp['Bimg']);
+				for ($i = 1 ; $i <= 12 ; $i++)
+				{
+					$tempImg = $temp['Zimg'.$i];
+					if ($tempImg != "")
+						array_push($ms_data_img, $tempImg);
+					else 
+						break;
+				}
+			}
+			$ms_data_color = substr($ms_data_color, 0, strlen($ms_data_color)-3);
 				
 			$query = mssql_query("SELECT Distinct SizeTxt, * FROM cgSizeMain_$table WHERE ProdInc = $prodInc");
 			$ms_data_size = "";
 			while ($temp = mssql_fetch_array($query))
-				$ms_data_size .= $temp['SizeTxt']."/";
-			$ms_data_size = substr($ms_data_size, 0, strlen($ms_data_size)-1);
+				$ms_data_size .= $temp['SizeTxt']." / ";
+			$ms_data_size = substr($ms_data_size, 0, strlen($ms_data_size)-3);
 				
 			$query = mssql_query("SELECT Story FROM cgStoryMain_$table WHERE ProdInc = $prodInc");
 			$temp = mssql_fetch_array($query);
 			$ms_data_story = $temp['Story'];
+			
+			$query = mssql_query("SELECT Still FROM cgStillMain_$table WHERE ProdInc = $prodInc");
+			$temp = mssql_fetch_array($query);
+			while ($temp = mssql_fetch_array($query))
+				array_push($ms_data_img, $temp['Still']);						
 				
 			$result = array(
 					'idx' => $my_data[0]->idx,
 					'cate' => $my_data[0]->cate_small,
 					'url' => $ms_data_prod['PurlD'],
-					'img' => $ms_data_prod['PimgD'],
+					'img' => $ms_data_img,
 					'name' => $ms_data_prod['PnameD'],
 					'explain' => '',
 					'mall' => $ms_data_prod['MallID'],
