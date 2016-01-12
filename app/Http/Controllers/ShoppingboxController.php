@@ -61,7 +61,7 @@ class ShoppingboxController extends Controller {
 		if ($cateDepth == 1)
 		{
 			$tempList = $cateModel->getInfoListMedium($cateL);
-			$cateList = array(array("l$cateL", "전체"));
+			$cateList = array(array("l$cateL", "전체", 0));
 			foreach($tempList['data'] as $list)
 				array_push($cateList, array("m".$list->idx, $list->name, 0));
 			
@@ -79,7 +79,7 @@ class ShoppingboxController extends Controller {
 		else if ($cateDepth == 2)
 		{
 			$tempList = $cateModel->getInfoListSmall($cateM);
-			$cateList = array(array("m$cateM", "전체"));
+			$cateList = array(array("m$cateM", "전체", 0));
 			foreach($tempList['data'] as $list)
 				array_push($cateList, array("s".$list->idx, $list->name, 0));
 			
@@ -99,7 +99,7 @@ class ShoppingboxController extends Controller {
 		else if ($cateDepth == 3)
 		{
 			$tempList = $cateModel->getInfoListSmall($cateM);
-			$cateList = array(array("m$cateM", "전체"));
+			$cateList = array(array("m$cateM", "전체", 0));
 			foreach($tempList['data'] as $list)
 				if ($list->idx == $cateS)
 					array_push($cateList, array("s".$list->idx, $list->name, 1));
@@ -122,7 +122,7 @@ class ShoppingboxController extends Controller {
 		if ($cateDepth == 0)
 		{
 			$tempList = $cateModel->getInfoListLarge();
-			$cateList = array(array("l0", "전체"));
+			$cateList = array(array("l0", "전체", 0));
 			foreach($tempList['data'] as $list)
 				array_push($cateList, array("l".$list->idx, $list->name, 0));
 			
