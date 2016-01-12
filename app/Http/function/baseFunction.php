@@ -271,7 +271,7 @@
 	 */
 	function makeMoney($num)
 	{
-		$num = ($num*1204.40)."";
+		$num = floor($num*1204.40)."";
 		$str = "";
 		while (strlen($num) > 3)
 		{
