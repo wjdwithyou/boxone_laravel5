@@ -83,7 +83,7 @@ class ShoppingboxController extends Controller {
 			foreach($tempList['data'] as $list)
 				array_push($cateList, array("s".$list->idx, $list->name, 0));
 			
-			foreach($cateList['data'] as $list)
+			foreach($tempList['data'] as $list)
 				array_push($getCateList, $list->idx);
 			
 			$temp2 = $cateModel->getCateName(2, $cateM);
@@ -98,6 +98,8 @@ class ShoppingboxController extends Controller {
 		}
 		else if ($cateDepth == 3)
 		{
+			$temp = $cateModel->getCateName(3, $cateS);
+			$cateM = $temp['data'][0]->medium_idx;
 			$tempList = $cateModel->getInfoListSmall($cateM);
 			$cateList = array(array("m$cateM", "전체", 0));
 			foreach($tempList['data'] as $list)
@@ -126,7 +128,7 @@ class ShoppingboxController extends Controller {
 			foreach($tempList['data'] as $list)
 				array_push($cateList, array("l".$list->idx, $list->name, 0));
 			
-			$cate = array("l0", "전체");
+			$cate = array(array("l0", "전체"));
 		}
 		
 		// 페이지 검사
@@ -135,6 +137,13 @@ class ShoppingboxController extends Controller {
 			$nowPage = Request::input('page');
 		
 		$result = $prdtModel->getInfoList($sort, $getCateList, $nowPage);
+		
+		if (!($result['code']))
+		{
+			$result['maxPage'] = $nowPage = 1;
+			$result['data'] = array();
+		}
+			
 		
 		$paging = array('now' => $nowPage, 'max' => $result['maxPage']);
 		

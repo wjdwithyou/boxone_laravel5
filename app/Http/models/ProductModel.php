@@ -129,15 +129,16 @@ class ProductModel
 		switch($sort)
 		{
 			case 1: 	$query_orderBy .= 'hit_count DESC, '; 	break;
-			case 2:		$query_orderBy .= 'deadline ASC, '; 		break;
-			case 3:		$query_orderBy .= 'site_name ASC, '; 	break;
+			case 2:		$query_orderBy .= 'brand ASC, '; 		break;
+			case 3:		$query_orderBy .= 'price ASC, '; 	break;
 			default : 	$query_orderBy .= ""; 					break;
 		}
 		
 		// 카테고리 정리
-		$query_cate = "where name != '' ";
+		$query_cate = "";
 		foreach($getCateList as $list)
-			$query_cate .= "and cate_small=$list ";
+			$query_cate .= "cate_small=$list or ";
+		$query_cate = "where name != '' and (".substr($query_cate, 0, strlen($query_cate) - 3).")";
 		
 		// 자료 가져오기
 		$data = DB::select("select * from product $query_cate $query_orderBy idx DESC");

@@ -153,10 +153,9 @@
 	margin-top: 16px;
 }
 .hd_brand {
-	font-weight: bold;
 	margin-bottom: 4px;
 	font-size: 12px;
-	color: #686666;
+	color: #8b8b8b;
 }
 .hd_price {
 	font-size: 12px;
@@ -164,10 +163,11 @@
 	margin-top: 4px;
 }
 .hd_product_name {
+	font-weight: bold;
 	height: 24px;
 	font-size: 12px;
 	overflow: hidden;
-	color: #8b8b8b;
+	color: #686666;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;

@@ -69,9 +69,9 @@
 				</div>
 				<div id="top_index">
 					<a href='<?=$adr_ctr?>Shoppingbox/index'>쇼핑박스</a>
-					<?php foreach ($nowCate as $cate) :?>
+					<?php foreach ($nowCate as $list) :?>
 						&nbsp;>&nbsp;
-						<a onclick="getPrdt('<?=$cate[0]?>','',1);"><?=$cate[1]?></a>
+						<a onclick="getPrdt('<?=$list[0]?>','',1);"><?=$list[1]?></a>
 					<?php endforeach;?>
 				</div>
 				<div id="top_select">
@@ -86,7 +86,7 @@
 					</select>
 				</div>
 				<div id="order_select">
-					<select id="order_list" class="form-control" onchange="order_list();">
+					<select id="order_list" class="form-control">
 						<option value="1">인기 순</option>
 						<option value="2">할인율: 높은 순</option>
 						<option value="3">할인율: 낮은 순</option>
@@ -109,7 +109,6 @@
 							</div>
 							<div class="hd_product_name">
 								<div>
-									상품명
 									<?=$list->name?>
 								</div>
 							</div>
