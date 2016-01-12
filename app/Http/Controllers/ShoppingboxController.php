@@ -34,46 +34,36 @@ class ShoppingboxController extends Controller {
 			$sort = 1;
 		
 		// 카테고리 가져오기, 검사 (0은 전체)
-		$cateL = '0';
-		$cateM = '0';
-		$cateS = '0';
-		$cateDepth = 0;
-		if (Request::has('cateL'))
+		$cate = 'l0';
+		if (Request::has('cate'))
+			$cate = Request::input('cate');
+		
+		if ($cate == 'l0')
+			$cateDepth = 0;
+		else if (strpos(" ".$cate, 'l'))
 		{
-			$cateL = Request::input('cateL');
-			if (is_numeric($cateL) && Request::has('cateM'))
-			{
-				$cateM = Request::input('cateM');
-				if (is_numeric($cateM) && Request::has('cateS'))
-				{
-					$cateS = Request::input('cateS');
-					if (is_numeric($cateS))
-					{
-						$cateDepth = 3;
-					}
-					else 
-					{
-						$cateS = '0';
-						$cateDepth = 2;
-					}
-				}
-				else
-				{
-					$cateM = '0';
-					$cateDepth = 1;
-				}
-			}
-			else
-			{
-				$cateL = '0';
-				$cateDepth = 0;
-			}
+			$cateL = substr($cate, 1);
+			$cateDepth = 1;
+		}
+		else if (strpos(" ".$cate, 'm'))
+		{
+			$cateM = substr($cate, 1);
+			$cateDepth = 2;
+		}
+		else if (strpos(" ".$cate, 's'))
+		{
+			$cateS = substr($cate, 1);
+			$cateDepth = 3;
 		}
 		
 		$getCateList = array();
+
 		if ($cateDepth == 1)
 		{
-			$cateList = $cateModel->getInfoListMedium($cateL);
+			$tempList = $cateModel->getInfoListMedium($cateL);
+			$cateList = array(array("l$cateL", "전체"));
+			foreach($tempList['data'] as $list)
+				array_push($cateList, array("m".$list->idx, $list->name, 0));
 			
 			$temp = $cateModel->upToDown($cateL);
 			if (count($temp['data']))
@@ -81,46 +71,62 @@ class ShoppingboxController extends Controller {
 				foreach($temp['data'] as $list)
 					array_push($getCateList, $list->sidx);
 				
-				$cate = array(array($cateL, $temp['data'][0]->lname));
+				$cate = array(array("l".$cateL, $temp['data'][0]->lname));
 			}
 			else 
 				$cateDepth = 0;
 		}
 		else if ($cateDepth == 2)
 		{
-			$cateList = $cateModel->getInfoListSmall($cateM);
+			$tempList = $cateModel->getInfoListSmall($cateM);
+			$cateList = array(array("m$cateM", "전체"));
+			foreach($tempList['data'] as $list)
+				array_push($cateList, array("s".$list->idx, $list->name, 0));
 			
 			foreach($cateList['data'] as $list)
 				array_push($getCateList, $list->idx);
 			
-			$temp1 = $cateModel->getCateName(1, $cateL);
 			$temp2 = $cateModel->getCateName(2, $cateM);
+			$temp1 = $cateModel->getCateName(1, $temp2['data'][0]->large_idx);
+
 			if (count($temp1['data']) > 0 && count($temp2['data']) > 0)
-				$cate = array(array($cateL, $temp1['data'][0]->name), array($cateM, $temp2['data'][0]->name));
+				$cate = array(array("l".$temp1['data'][0]->idx, $temp1['data'][0]->name), 
+							  array("m".$cateM, $temp2['data'][0]->name));
 			else 
 				$cateDepth = 0;
 			
 		}
 		else if ($cateDepth == 3)
 		{
-			$cateList = $cateModel->getInfoListSmall($cateM);
+			$tempList = $cateModel->getInfoListSmall($cateM);
+			$cateList = array(array("m$cateM", "전체"));
+			foreach($tempList['data'] as $list)
+				if ($list->idx == $cateS)
+					array_push($cateList, array("s".$list->idx, $list->name, 1));
+				else
+					array_push($cateList, array("s".$list->idx, $list->name, 0));
+				
 			array_push($getCateList, $cateS);
 			
 			$temp = $cateModel->downToUp($cateS);
 			if (count($temp['data']))
 			{
 				$tempData = $temp['data'][0];
-				$cate = array(array($cateL, $tempData->lname), 
-							  array($cateM, $tempData->mname), 
-							  array($cateS, $tempData->sname));
+				$cate = array(array("l".$tempData->lidx, $tempData->lname), 
+							  array("m".$tempData->midx, $tempData->mname), 
+							  array("s".$tempData->sidx, $tempData->sname));
 			}
 			else
 				$cateDepth = 0;
 		}
 		if ($cateDepth == 0)
 		{
-			$cateList = $cateModel->getInfoListLarge();
-			$cate = array();
+			$tempList = $cateModel->getInfoListLarge();
+			$cateList = array(array("l0", "전체"));
+			foreach($tempList['data'] as $list)
+				array_push($cateList, array("l".$list->idx, $list->name));
+			
+			$cate = array("l0", "전체");
 		}
 		
 		// 페이지 검사

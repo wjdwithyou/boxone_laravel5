@@ -68,31 +68,29 @@
 					<?php endif;?>
 				</div>
 				<div id="top_index">
-					<a onclick=''>쇼핑박스</a>
-					<?php if (!count($nowCate)) :?>
+					<a href='<?=$adr_ctr?>Shoppingbox/index'>쇼핑박스</a>
+					<?php foreach ($nowCate as $cate) :?>
 						&nbsp;>&nbsp;
-						<a onclick=''>전체</a>
-					<?php else :?>
-						<?php foreach ($nowCate as $cate) :?>
-							&nbsp;>&nbsp;
-							<a onclick=''><?=$cate[1]?></a>
-						<?php endforeach;?>
-					<?php endif;?>
+						<a onclick="getPrdt('<?=$cate[0]?>','',1);"><?=$cate[1]?></a>
+					<?php endforeach;?>
 				</div>
 				<div id="top_select">
-					<select id="hotdeal_cate" class="form-control" onchange="hotdeal_cate();">
-						<option value="">전체</option>
+					<select id="product_cate" class="form-control">
 						<?php foreach ($cateList as $list) :?>
-							<option value=""><?=$list->name?></option>
+							<?php if ($list[2]) :?>
+								<option value="<?=$list[0]?>" selected="selected"><?=$list[1]?></option>
+							<?php else :?>
+								<option value="<?=$list[0]?>"><?=$list[1]?></option>
+							<?php endif;?>
 						<?php endforeach;?>
 					</select>
 				</div>
 				<div id="order_select">
 					<select id="order_list" class="form-control" onchange="order_list();">
-						<option value="">인기 순</option>
-						<option value="">할인율: 높은 순</option>
-						<option value="">할인율: 낮은 순</option>
-						<option value="">나의 ♥</option>
+						<option value="1">인기 순</option>
+						<option value="2">할인율: 높은 순</option>
+						<option value="3">할인율: 낮은 순</option>
+						<option value="5">나의 ♥</option>
 					</select>
 				</div>
 			</div>
@@ -102,7 +100,7 @@
 					<div class="product_div col-xs-6 col-sm-4 col-md-2">
 						<div class="hd_product_img center_box">
 							<div class="center_content">
-								<a onclick='location.href="<?=$adr_ctr ?>Product/index"'><img src="<?=$list->img?>"></a>
+								<a onclick='location.href="<?=$adr_ctr ?>Product/detail?idx=<?=$list->idx?>"'><img src="<?=$list->img?>"></a>
 							</div>
 						</div>
 						<div class="hd_site_desc">
