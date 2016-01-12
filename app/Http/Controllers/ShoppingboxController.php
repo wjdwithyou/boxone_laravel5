@@ -124,7 +124,7 @@ class ShoppingboxController extends Controller {
 			$tempList = $cateModel->getInfoListLarge();
 			$cateList = array(array("l0", "전체"));
 			foreach($tempList['data'] as $list)
-				array_push($cateList, array("l".$list->idx, $list->name));
+				array_push($cateList, array("l".$list->idx, $list->name, 0));
 			
 			$cate = array("l0", "전체");
 		}
