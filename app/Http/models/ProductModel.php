@@ -117,11 +117,11 @@ class ProductModel
 	/*
 	 *	정보 리스트 가져오는 기능
 	 */
-	function getInfoList($sort, $getCateList, $nowPage)
+	function getInfoList($sort, $getCateList, $page_num)
 	{
 		if( !( inputErrorCheck($sort, 'sort') && 
 				inputErrorCheck($getCateList, 'getCateList') &&
-				inputErrorCheck($nowPage, 'nowPage')))
+				inputErrorCheck($page_num, 'page_num')))
 			return ;
 
 		// 정렬 구분
