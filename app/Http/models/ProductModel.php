@@ -49,7 +49,7 @@ class ProductModel
 			$my_data = DB::select('select * from product where idx =?',array($prod_idx));
 				
 			$table = $my_data[0]->mall_id.'_'.$my_data[0]->mall_kind;
-			$prodInc = $my_data[0]->prdt_id;
+			$prodInc = $my_data[0]->prod_id;
 				
 			$query = mssql_query("SELECT * FROM cgProdMain_$table WHERE ProdInc = $prodInc");
 			$ms_data_prod = mssql_fetch_array($query);
