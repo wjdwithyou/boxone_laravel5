@@ -266,9 +266,12 @@
 			return substr($date, 0, 10);
 	}
 	
+	/*
+	 *  달러로 받은 가격을 한국돈으로 변환, 콤마 찍기
+	 */
 	function makeMoney($num)
 	{
-		$num = $num."";
+		$num = ($num*1204.40)."";
 		$str = "";
 		while (strlen($num) >= 3)
 		{
