@@ -135,7 +135,7 @@ class ProductModel
 		}
 		
 		// 카테고리 정리
-		$query_cate = "where true ";
+		$query_cate = "where name != '' ";
 		foreach($getCateList as $list)
 			$query_cate .= "and cate_small=$list ";
 		
