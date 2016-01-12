@@ -141,7 +141,7 @@ class ShoppingboxController extends Controller {
 		$page = 'shoppingbox';
 		$data = array(
 				'page' => $page,
-				'cateList' => $cateList['data'],
+				'cateList' => $cateList,
 				'nowCate' => $cate,
 				'sort' => $sort,
 				'paging' => $paging,
