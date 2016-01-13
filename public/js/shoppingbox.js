@@ -14,7 +14,7 @@ $(document).ready(function() {
 		if (sort != "5")
 			getPrdt('','',"1");
 		else
-			getPrdt('1','5','1');
+			getPrdt('','5','1');
 	});
 });
 

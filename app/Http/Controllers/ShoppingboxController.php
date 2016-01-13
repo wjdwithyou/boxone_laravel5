@@ -138,7 +138,10 @@ class ShoppingboxController extends Controller {
 		if (Request::has('page'))
 			$nowPage = Request::input('page');
 		
-		$result = $prdtModel->getInfoList($sort, $getCateList, $nowPage);
+		if ($sort != '5')
+			$result = $prdtModel->getInfoList($sort, $getCateList, $nowPage);
+		else
+			$result = $prdtModel->d();
 		
 		if (!($result['code']))
 		{
