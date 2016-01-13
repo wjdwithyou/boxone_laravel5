@@ -6,7 +6,7 @@
 		?>
 
 		<style>
-			#hotdeal_cate {
+			#product_cate {
 				width: 188px;
 				height: 40px;
 				border: 0 !important;
