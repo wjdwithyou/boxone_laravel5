@@ -78,7 +78,6 @@
 					</div>
 				</li>
 				<li class="pd_li3 bo_color">
-					<?php print_r($result['size']);?>
 					<?php foreach($result['size'] as $sizeList) :?>
 						<span class="pd_size"><?=$sizeList?></span>&nbsp;/&nbsp; 
 					<?php endforeach;?>
