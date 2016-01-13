@@ -34,9 +34,12 @@ class ProductController extends Controller {
 				
 		$idx = Request::input('idx');
 		$result = $prdtModel->getInfoSingle($idx);
+
+		$cateS = $result['data'][0]->cate_small;
+		$data = $cateModel->downToUp($cateS);
 		
 		$page = 'product';
-		return view($page, array('page' => $page, 'result' => $result['data']));
+		return view($page, array('page' => $page, 'result' => $result['data'], 'cate' => $data['data'][0]));
 	}
 
 }

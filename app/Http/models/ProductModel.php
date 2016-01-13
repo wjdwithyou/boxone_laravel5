@@ -20,18 +20,17 @@ class ProductModel
 				&& inputErrorCheck($member_idx, 'member_idx')))
 					return ;
 
+		$result = DB::table('product_bookmark')->insertGetId(
+				array(
+						'prod_idx'=> $prod_idx,
+						'member_idx'=> $member_idx,
+						'upload'=>DB::raw('now()')
+				)
+		);
 
-				$result = DB::table('product_bookmark')->insertGetId(
-						array(
-								'prod_idx'=> $prod_idx,
-								'member_idx'=> $member_idx,
-								'upload'=>DB::raw('now()')
-						)
-				);
+		DB::update('update product set bookmark_count=bookmark_count+1 where idx=?',array($prod_idx));
 
-				DB::update('update product set bookmark_count=bookmark_count+1 where idx=?',array($prod_idx));
-
-				return array('code' => 1,'msg' =>'success' ,'data' => $result);
+		return array('code' => 1,'msg' =>'success' ,'data' => $result);
 	}
 
 
@@ -71,7 +70,7 @@ class ProductModel
 				}
 			}
 				
-			$query = mssql_query("SELECT Distinct SizeTxt, * FROM cgSizeMain_$table WHERE ProdInc = $prodInc");
+			$query = mssql_query("SELECT Distinct SizeTxt FROM cgSizeMain_$table WHERE ProdInc = $prodInc");
 			$ms_data_size = array();
 			while ($temp = mssql_fetch_array($query))
 				array_push($ms_data_size, $temp['SizeTxt']);
