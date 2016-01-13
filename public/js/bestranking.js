@@ -28,7 +28,7 @@ function clickBookmark(img, site)
 	var logined = $("#logined").val();
 	
 	if (logined == "0")
-		login_popup();
+		moveLogin();
 	else
 	{
 		$.ajax

@@ -203,7 +203,7 @@ function createDelivery()
 	if (logined == "0")
 	{
 		$('#deliver_modal').modal('hide');
-		login_popup();
+		moveLogin();
 	}
 	else
 	{	
@@ -246,7 +246,7 @@ function createEntry()
 	if (logined == "0")
 	{
 		$('#deliver_modal').modal('hide');
-		login_popup();
+		moveLogin();
 	}
 	else
 	{	

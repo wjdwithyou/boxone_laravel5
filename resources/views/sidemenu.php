@@ -15,7 +15,7 @@
 	        		<?php else :?>
 	        			<!-- 로그인 전 -->
 	        			<img src="<?= $adr_img?>profile_image.png" id="profile_img">
-	        			<a onclick="login_popup();">로그인 해주세요</a>
+	        			<a onclick="moveLogin();">로그인 해주세요</a>
 	        		<?php endif;?>
 				</div>			
 	        	<a id="close_sidemenu" onclick='location.href = "<?=$bef?>"'>
@@ -48,7 +48,7 @@
 				<?php if ($logined) :?>
 					<div id="mypage" class="sidemenu_hover col-xs-6" onclick="mypage_collapse();">
 				<?php else:?>
-					<div id="mypage" class="sidemenu_hover col-xs-6" onclick="login_popup();">
+					<div id="mypage" class="sidemenu_hover col-xs-6" onclick="moveLogin();">
 				<?php endif;?>
 					<span>마이페이지</span>
 				</div>

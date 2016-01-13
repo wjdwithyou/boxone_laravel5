@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	if ($("#need_login").val() == "1")
-		login_popup();
+		moveLogin();
 });
 
 function cal_toggle(){

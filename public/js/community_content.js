@@ -12,7 +12,7 @@ function commBookmark(comm_idx)
 	var logined = $("#logined").val();
 	
 	if (logined != "1")
-		login_popup();
+		moveLogin();
 	else
 	{
 		$.ajax
@@ -88,7 +88,7 @@ function replyCreate(e, comm_idx, reply_idx)
 	var text = e.parent().find("textarea").val();
 	
 	if (logined != "1")
-		login_popup();
+		moveLogin();
 	else if (text.length == 0)
 		alert ("댓글을 입력해주세요.");
 	else if (text.length > 300)
@@ -164,7 +164,7 @@ function replyUpdate(e, idx)
 	var text = e.parent().find("textarea").val();
 	
 	if (logined != "1")
-		login_popup();
+		moveLogin();
 	else if (text.length == 0)
 		alert ("댓글을 입력해주세요.");
 	else if (text.length > 300)
