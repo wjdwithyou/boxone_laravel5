@@ -344,5 +344,36 @@ class LoginController extends Controller {
 		header('Content-Type: application/json');
 		echo json_encode($result);
 	}
+	
+	public function index()
+	{
+		$page = 'login';
+		return view($page, array('page' => $page));
+	}
+	public function join()
+	{
+		$page = 'join';
+		return view($page, array('page' => $page));
+	}
+	public function login_findpw()
+	{
+		$page = 'login_findpw';
+		return view($page, array('page' => $page));
+	}
+	
+	public function login_changepw()
+	{
+		$eid = Request::input('eid');
+		$page = 'login_changepw';
+		return view($page, array('page' => $page, 'eid' => $eid));
+	}
+	public function login_addinfo()
+	{
+		$type = Request::input('type');
+		$eid = Request::input('eid');
+		$img = Request::input('img');
+		$page = 'login_addinfo';
+		return view($page, array('page' => $page, 'type' => $type, 'eid' => $eid, 'img' => $img));
+	}
 }
 

@@ -1,6 +1,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="csrf-token" content="<?php echo csrf_token();?>"/>
@@ -12,11 +12,11 @@
   		$adr_btstrp = "http://52.69.26.243/bootstrap/";
   		$adr_ctr = "http://52.69.26.243/";
   	
-  		/*$adr_js = "http://localhost:8000/js/";
-  		$adr_css = "http://localhost:8000/css/";
-  		$adr_img = "http://localhost:8000/img/";
-  		$adr_btstrp = "http://localhost:8000/bootstrap/";
-  		$adr_ctr = "http://localhost:8000/";*/
+  		/*$adr_js = "http://166.104.125.187:8000/js/";
+  		$adr_css = "http://166.104.125.187:8000/css/";
+  		$adr_img = "https://s3-ap-northeast-1.amazonaws.com/boxone-image/";
+  		$adr_btstrp = "http://166.104.125.187:8000/bootstrap/";
+  		$adr_ctr = "http://166.104.125.187:8000/";*/
   	?>
 
   	
@@ -71,14 +71,11 @@
   	<script type="text/javascript" src="<?=$adr_js?><?=$page?>.js"></script>
   	
   	<!-- header,footer 관련 css, js -->
-  	<link rel="stylesheet" href="<?=$adr_css?>headfoot.css">
+  	<link rel="stylesheet" href="<?=$adr_css?>common.css">
   	<link rel="stylesheet" href="<?=$adr_css?>login.css">
   	<link rel="stylesheet" href="<?=$adr_css?>calculator.css">
   	<link rel="stylesheet" href="<?=$adr_css?>deliver.css">
-  	<script type="text/javascript" src="<?=$adr_js?>headfoot.js"></script>
-  	<script type="text/javascript" src="<?=$adr_js?>login.js"></script>
-  	<script type="text/javascript" src="<?=$adr_js?>calculator.js"></script>
-  	<script type="text/javascript" src="<?=$adr_js?>deliver.js"></script>
+  	<script type="text/javascript" src="<?=$adr_js?>common.js"></script>
 
     <link rel="icon" href="<?=$adr_img?>brower_logo.png">
     <title>BOXONE</title>

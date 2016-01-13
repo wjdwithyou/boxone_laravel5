@@ -1,0 +1,115 @@
+@charset "utf-8";
+
+/* Common */
+body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select,hr,label{margin:0;padding:0}
+body,input,textarea,select,button,table{font-family:'맑은 고딕',Malgun Gothic,Helvetica,sans-serif;font-size:12px}
+img,fieldset{border:0}
+ul,ol{list-style:none}
+a,a:hover,a:active,a:focus{color:#000;text-decoration:none;cursor:pointer}
+input:focus, textarea:focus{outline:none}
+input{-webkit-appearance:none;-moz-appearance:none;appearance:none;}
+label{font-weight:normal}
+.f_l{float:left}
+.f_r{float:right}
+.f_c{*zoom:1}
+.f_c:after{display:block;visibility:hidden;height:0;font-size:0;clear:both;content:''}
+.br_50{border-radius:50%}
+.br_25{border-radius:25px}
+.br_20{border-radius:20px}
+.limit_line{display:-webkit-box;overflow:hidden;text-overflow:ellipsis;line-height:1.2em;-webkit-box-orient:vertical;word-wrap:break-word}
+.limit_line_2{height:2.4em;-webkit-line-clamp:2}
+.limit_line_3{height:3.6em;-webkit-line-clamp:3}
+.t_o{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.img_14{width:14px;height:14px}
+.img_24{width:24px;height:24px}
+.grid{float:left;position:relative;min-height:1px}
+.grid_h{width:50%}
+.li_set{position:relative}
+.li_set li{display:inline-block}
+.li_bar{display:inline-block;width:1px;height:9px;margin:-2px 0 0 -15px;background-color:#ccc}
+.li_bar2{display:inline-block;width:1px;height:9px;margin:0 8px;background-color:#ccc}
+.btn_set2 div:first-of-type{padding-right:4px}
+.btn_set2 div:nth-of-type(2){padding-left:4px}
+
+/* Layout */
+#wrap{}
+#header{}
+#container{}
+#top{margin:32px 8px;text-align:center;position:relative;}
+#content{}
+#footer{}
+.inner{max-width:1024px;margin:0 auto;padding-left:8px;padding-right:8px}
+.input_div{margin-top:8px}
+.input_div input,.input_div button{width:100%}
+.input_div input:not([type='file']),.input_div button{padding:12px;font-size:16px}
+.input_wrap{width:300px;margin:0 auto;padding:0 8px}
+
+/* Header */
+#header_top_wrap{position:relative;margin-top:8px}
+#header_main_wrap{margin-top:8px}
+#main_menu_wrap{margin-top:16px}
+#header_profile{position:absolute;top:-4px;left:-28px}
+#integrated_search{width:100%;margin-top:2px;padding-top:8px;padding-bottom:8px;font-size:13px}
+#integrated_search + a img{top:12px;left:12px}
+#main_menu{font-size:12px;font-weight:bold}
+#main_menu li{float:left;margin-right:107px;padding-bottom:8px}
+#main_menu li:last-of-type{margin-right:0}
+.top_li_set{font-size:11px}
+.top_li_set li{margin-right:16px}
+.header_top_ico{margin-top:-2px}
+#bo_dialog{position:absolute;z-index:100;width:300px;height:400px;border:1px solid #e1e1e1;background-color:#fff;box-shadow:0px 5px 8px 0px rgba(225, 225, 225, 0.25);top:23px}
+.bo_dialog_arrow{position:absolute;width:0;height:0;border-style:solid;border-width:0 10px 10px 10px}
+.bo_dialog_arrow_1{z-index:102;border-color:transparent transparent #fff transparent;top:-9px}
+.bo_dialog_arrow_2{z-index:101;border-color:transparent transparent #ccc transparent;top:-10px}
+.hover_menu{position:absolute;z-index:10000;width:100%;height:300px;background-color:#f8f7f7;border-top:1px solid #cdcdcd;border-bottom:1px solid #cdcdcd;top:129px;}
+.header_hr{border-top:3px solid #F15A63}
+.header_hr2{margin-top:8px;margin-bottom:16px;border-top:1px solid #ddd}
+
+/* Boxone theme */
+.bo_color1{color:#f15a63}
+.bo_color2{color:#8c8b8b}
+.bo_btn1{border:1px solid #f15a63;background-color:#fff;color:#f15a63}
+.bo_btn1:hover{background-color:#f15a63;color:#fff}
+.bo_btn2{border:1px solid #f15a63;background-color:#f15a63;color:#fff}
+.bo_btn2:hover{background-color:#fff;color:#f15a63}
+.bo_btn3{border:1px solid #8352fa;background-color:#fff;color:#8352fa}
+.bo_btn3:hover{background-color:#8352fa;color:#fff}
+.bo_btn4{border:1px solid #8352fa;background-color:#8352fa;color:#fff}
+.bo_btn4:hover{background-color:#fff;color:#8352fa}
+.bo_btn5{border:1px solid #8c8b8b;background-color:#fff;color:#8c8b8b}
+.bo_btn5:hover{background-color:#8c8b8b;color:#fff}
+.bo_btn6{border:1px solid #8c8b8b;background-color:#8c8b8b;color:#fff}
+.bo_btn6:hover{background-color:#fff;color:#8c8b8b}
+.bo_input1{border:1px solid #ccc;border-radius:0}
+.bo_search1{border:1px solid #f15a63;padding-left:30px}
+.bo_search2{border:1px solid #ccc;padding-left:30px}
+.bo_search1 + a img, .bo_search2 + a img{position:absolute;z-index:10;}
+.bo_checkbox{display:none}
+.bo_checkbox + label span{display:inline-block;vertical-align:middle;width:19px;height:19px;margin:-4px 4px 0 0;background:url(https://s3-ap-northeast-1.amazonaws.com/boxone-image/bo_checkbox.png);background-size:contain;cursor:pointer}
+.bo_checkbox_1:checked + label span{background:url(https://s3-ap-northeast-1.amazonaws.com/boxone-image/bo_checkbox_on.png);background-size:contain;}
+.bo_checkbox_2:checked + label span{background:url(https://s3-ap-northeast-1.amazonaws.com/boxone-image/bo_checkbox_on2.png);background-size:contain;}
+.bo_selectbox{width:188px;height:40px;padding-left:6px;border:1px solid #F15A63;background:#fff url(https://s3-ap-northeast-1.amazonaws.com/boxone-image/select_arrow_pink.png) no-repeat 90% center;text-indent:0.01px;text-overflow:"";color:#F15A63;-webkit-appearance:none;-moz-appearance:none;appearance:none;}
+.bo_badge{padding-left:5px;padding-right:5px;border-radius:25px;background-color:#F15A63;color:#fff}
+.top_h1{font-size:23px;font-weight:bold}
+.top_h3{margin-top:8px;font-size:11px}
+.top_hr{width:200px;margin:16px auto;border-top:1px solid #F15A63}
+
+/* Media tag (break point:1024~768~420) */
+@media(min-width:1024px){
+	.grid_310{width:33.33333333%}
+	.mob_header{display:none}
+	#bo_logo img{width:150px}
+}
+@media(max-width:1023px){
+	.grid_310{width:100%}
+	.pc_header{display:none}
+	#bo_logo img{width:120px}
+	#header_search{margin-top:8px}
+	#header_main{text-align:center}
+	.mob_side_btn{margin-top:8px}
+	.header_hr{margin-top:8px}
+	.bo_selectbox{width:130px;height:30px;font-size: 10px;background:#fff url(https://s3-ap-northeast-1.amazonaws.com/boxone-image/select_arrow_pink.png) no-repeat 90% center;}
+}
+@media(max-width:420px){
+	.input_wrap{width:100%}
+}

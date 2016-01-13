@@ -98,7 +98,7 @@ function commWrite()
 	var adr_ctr = $("#adr_ctr").val();
 	
 	if (logined == "0")
-		login_popup();
+		moveLogin();
 	else
 		location.href = adr_ctr + "Community/indexWrite";
 }
