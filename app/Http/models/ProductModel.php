@@ -83,13 +83,36 @@ class ProductModel
 			$query = mssql_query("SELECT Still FROM cgStillMain_$table WHERE ProdInc = $prodInc");
 			$temp = mssql_fetch_array($query);
 			while ($temp = mssql_fetch_array($query))
-				array_push($ms_data_img, $temp['Still']);						
+				array_push($ms_data_img, $temp['Still']);	
+			
+			$imgList = array();
+			// 동일한 이미지 정리
+			for ($i = 0 ; $i < count($ms_data_img) ; $i++)
+			{
+				for ($j = $i+1 ; $j < count($ms_data_img) ; $j++)
+				{
+					if (strpos($ms_data_img[$i], "?"))
+						$img1 = substr($ms_data_img[$i], 0, strpos($ms_data_img[$i], "?"));
+					else 
+						$img1 = $ms_data_img[$i];
+					
+					if (strpos($ms_data_img[$j], "?"))
+						$img2 = substr($ms_data_img[$j], 0, strpos($ms_data_img[$j], "?"));
+					else
+						$img2 = $ms_data_img[$j];
+					
+					if ($img1 == $img2)
+						break;
+				}
+				if ($j == count($ms_data_img))
+					array_push($imgList, $ms_data_img[$i]);
+			}
 				
 			$result = array(
 					'idx' => $my_data[0]->idx,
 					'cate' => $my_data[0]->cate_small,
 					'url' => $ms_data_prod['PurlD'],
-					'img' => $ms_data_img,
+					'img' => $imgList,
 					'name' => $ms_data_prod['PnameD'],
 					'explain' => '',
 					'mall' => $ms_data_prod['MallID'],
