@@ -50,13 +50,12 @@ class DirectTradeModel
 
 		$result = DB::table('direct_product')->insertGetId(
 			array(
-				'member_idx'=> $member_idx, 
+				'member_idx'	=> $member_idx, 
 				'name'			=> $name, 
-				'phone'			=> $phone, 
 				'addr_1'		=> $addr_1, 
 				'addr_2'		=> $addr_2, 
 				'account_bank'	=> $account_bank, 
-				'account_number'	=> $account_number, 
+				'account_number'=> $account_number, 
 				'upload'=>DB::raw('now()')
 				)
 			);	
@@ -313,7 +312,7 @@ class DirectTradeModel
 	{
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
+
 		// direct_salelist에 주문상품 추가
 		DB::table('direct_buylist')->insertGetId(
 			array(

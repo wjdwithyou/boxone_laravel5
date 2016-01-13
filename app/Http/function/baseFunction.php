@@ -131,11 +131,33 @@
 				'Bucket'	=> 'boxone-image',
 				'Key'		=> 'profile/'.$image_name,
 				'SourceFile'	=> $image,
-				));				
+				));							
+			break;
+			
+			
+			// social member
+			case '3':
+				$ch = curl_init();
+				curl_setopt($ch, CURLOPT_URL, $image);
+				curl_setopt($ch, CURLOPT_SSL_CIPHER_LIST, 'SSLv3');
+				curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+				ob_start();
+				$res = curl_exec($ch);
+				$buffer = ob_get_contents();
+				ob_end_clean();
+				$image_name = $document_idx.'_image.'.$ext;
+				
+				file_put_contents("img/community/".$image_name, $buffer);
+				$s3->putObject(array(
+						'Bucket'	=> 'boxone-image',
+						'Key'		=> 'profile/'.$image_name,
+						'SourceFile' => "img/community/".$image_name,
+				));
+				unlink("img/community/".$image_name);
 			break;
 
 			// community complain
-			case '3':
+			case '4':
 			$s3->putObject(array(
 				'Bucket'	=> 'boxone_image/community_complain',
 				'Key'		=> $document_idx.'_image'.$image_num.'.jpg',
@@ -145,7 +167,7 @@
 			break;
 
 			// direct product
-			case '4':
+			case '5':
 			$s3->putObject(array(
 				'Bucket'	=> 'boxone_image/direct_product',
 				'Key'		=> $document_idx.'_image'.$image_num.'.jpg',
@@ -242,6 +264,29 @@
 			return substr($date, 11, 5);
 		else
 			return substr($date, 0, 10);
+	}
+	
+	/*
+	 *  달러로 받은 가격을 한국돈으로 변환, 콤마 찍기
+	 */
+	function makeMoney($num)
+	{
+		$num = floor($num*1204.40)."";
+		$str = "";
+		while (strlen($num) > 3)
+		{
+			$str = substr($num, strlen($num)-3, 3).",".$str;
+			$num = substr($num, 0, strlen($num)-3);
+		}
+		$str = $num.",".substr($str,0,strlen($str)-1);
+			
+		return $str;
+	}
+	
+	function connectToMssql()
+	{
+		$conn = mssql_connect('cafe24', 'cstourplatform', 'q1w2e3r4!@cosmos99');
+		return $conn;
 	}
 	
 	

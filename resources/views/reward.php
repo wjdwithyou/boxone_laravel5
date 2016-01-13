@@ -31,7 +31,7 @@
 				</div>
 				<div id="rw_search">
 					<a onclick="searchReward();"><img src="<?= $adr_img ?>search_img.png"></a>
-					<input type="text" id="rw_search_text" class="form-control">
+					<input type="text" id="rw_search_text" class="form-control" placeholder="영어로 검색해주세요">
 				</div>
 			</div>
 		</div>
@@ -44,6 +44,11 @@
 			</div>
 			<div id="rw_result">
 				<!-- 리워드 검색 결과 -->
+				<div id="rw_result_top_wrap">
+					<div id="rw_result_top" style="text-align:center; background-color:#DDDDDD;">
+						위 검색창에서 검색해주세요.
+					</div>
+				</div>
 			</div>
 		</div>
 

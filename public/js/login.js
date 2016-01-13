@@ -139,7 +139,7 @@ function loginCallback(result)
         });
         request.execute(function (resp)
         {	
-        	alert (JSON.stringify(resp));
+        	//alert (JSON.stringify(resp));
             var email = '';
             if(resp['emails'])
             {
@@ -169,7 +169,7 @@ function loginCallback(result)
  */
 function socialLogin(type, id, email, nickname, img)
 {
-	//console.log(img);
+	console.log(img);
 	alert ("type:"+type+", id:"+id+", email:"+email+", nickname:"+nickname+", img:"+img);
 	
 	// 로그인으로 회원가입 여부 체크
@@ -246,5 +246,4 @@ function justLogin()
 		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		}
 	});
-	
 }

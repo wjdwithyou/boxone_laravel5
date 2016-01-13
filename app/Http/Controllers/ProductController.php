@@ -1,6 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
+use App\Http\models\ProductModel;
+use App\Http\models\CategoryModel;
+use Request;
+
 
 class ProductController extends Controller {
 
@@ -22,4 +26,26 @@ class ProductController extends Controller {
 		$page = 'product';
 		return view($page, array('page' => $page));
 	}
+
+	public function detail()
+	{
+		$cateModel = new CategoryModel();
+		$prdtModel = new ProductModel();
+				
+		$idx = Request::input('idx');
+		$result = $prdtModel->getInfoSingle($idx);
+
+		$cateS = $result['data']['cate'];
+		$data = $cateModel->downToUp($cateS);
+		
+		$page = 'product';
+		return view($page, array('page' => $page, 'result' => $result['data'], 'cate' => $data['data'][0]));
+	}
+
 }
+
+
+
+
+
+

@@ -13,7 +13,7 @@
 							<td class="cm_pc"><?= $list->upload?></td>
 							<td class="cm_pc"><?= $list->hit_count?></td>
 							<td class="cm_board_reply cm_mobile" rowspan="2">
-								<div class="numberCircle"><?= $list->bookmark_count?></div>
+								<div class="numberCircle"><?= $list->reply_number?></div>
 							</td>
 						</tr>
 						<tr class="cm_mobile">
@@ -38,7 +38,7 @@
 							<div class="hd_brand text_overflow">
 								<?=$list->title?><span class="pc_reply"></span>
 							</div>
-							<div class="album_writer bo_color">
+							<div class="album_writer bo_color text_overflow">
 									<?=$list->nickname?> | <?=$list->upload?> | <?=$list->hit_count?>
 							</div>
 							<div class="album_btnset cl_b">

@@ -12,11 +12,11 @@
   		$adr_btstrp = "http://52.69.26.243/bootstrap/";
   		$adr_ctr = "http://52.69.26.243/";
   	
-  		/*$adr_js = "http://166.104.125.187:8000/js/";
-  		$adr_css = "http://166.104.125.187:8000/css/";
+  		/*$adr_js = "http://localhost:8000/js/";
+  		$adr_css = "http://localhost:8000/css/";
   		$adr_img = "https://s3-ap-northeast-1.amazonaws.com/boxone-image/";
-  		$adr_btstrp = "http://166.104.125.187:8000/bootstrap/";
-  		$adr_ctr = "http://166.104.125.187:8000/";*/
+  		$adr_btstrp = "http://localhost:8000/bootstrap/";
+  		$adr_ctr = "http://localhost:8000/";*/
   	?>
 
   	

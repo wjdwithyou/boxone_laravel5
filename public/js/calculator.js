@@ -111,6 +111,7 @@ function select_country(){
  * 안심구매금액 처리
  */
 var tax;
+var ansim;
 function change_ansim()
 {
 	var cur = $("#select_country").val();
@@ -126,6 +127,25 @@ function change_ansim()
 		success: function(result)
 		{
 			tax = JSON.parse(result);
+			if (cur == "USD")
+			{
+				//alert (tax.status);
+				if (Number(tax.status) == 1)
+				{
+					ansim = 200;
+					$("#ansim").html("200&nbsp;USD");
+				}
+				else
+				{
+					ansim = 150;
+					$("#ansim").html("150&nbsp;USD");
+				}
+			}
+			else
+			{
+				ansim = parseFloat("200") * parseFloat(exchange_rate["USD"]) / parseFloat(exchange_rate[cur]);
+				$("#ansim").html(ansim.toFixed(2)+"&nbsp;"+cur);
+			}			
 		},
 		error: function(request,status,error)
 		{
@@ -133,21 +153,7 @@ function change_ansim()
 		}
 	});
 
-	if (cur == "USD")
-	{
-		if (Number(tax.status) == 1)
-			$("#ansim").html("200&nbsp;USD");
-		else
-		{
-			var ansim = parseFloat("150000") / parseFloat(exchange_rate["USD"]);
-			$("#ansim").html(ansim.toFixed(2)+"&nbsp;USD");
-		}
-	}
-	else
-	{
-		var ansim = parseFloat("150000") / parseFloat(exchange_rate[cur]);
-		$("#ansim").html(ansim.toFixed(2)+"&nbsp;"+cur);
-	}
+	
 }
 
 
@@ -222,7 +228,19 @@ function calculate_all()
 			success: function(result)
 			{
 				weight_tax = Number(result);
-				$("#weight_money").text(comma(result));				 
+				$("#weight_money").text(comma(result));		
+				
+				// 관세, 부가세 출력
+				var ks = 0;
+				var bgs = 0;
+				if ((Number(price)+weight_tax) > ansim * parseFloat(exchange_rate[cur]))
+				{
+					ks = Number((price + weight_tax) * parseFloat(tax.duty));
+					bgs = (price + weight_tax + ks) * parseFloat(tax.surtax);
+				}
+				
+				$("#duty_money").text(comma(ks.toFixed(0)));
+				$("#surtax_money").text(comma(bgs.toFixed(0)));
 			},
 			error: function(request,status,error)
 			{
@@ -230,13 +248,7 @@ function calculate_all()
 			}
 		});
 					
-		// 관세 출력
-		var ks = Number((price + weight_tax) * parseFloat(tax.duty));
-		$("#duty_money").text(comma(ks.toFixed(0)));
 		
-		// 부가세 출력
-		var bgs = (price + weight_tax + ks) * parseFloat(tax.surtax);
-		$("#surtax_money").text(comma(bgs.toFixed(0)));
 	}
 }
 

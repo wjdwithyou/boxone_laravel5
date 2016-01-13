@@ -16,50 +16,39 @@
 		<div id="product_wrap">
 			<div id="top">
 				<div id="top_index">
-					<a href=''>쇼핑박스</a>
+					<a href='<?=$adr_ctr?>Shoppingbox/index'>쇼핑박스</a>
 					&nbsp;>&nbsp;
-					<a href=''>패션잡화</a>
+					<a onclick="getPrdt('l<?=$cate->lidx?>','',1);"><?=$cate->lname?></a>
 					&nbsp;>&nbsp;
-					<a href=''>가방</a>
+					<a onclick="getPrdt('m<?=$cate->midx?>','',1);"><?=$cate->mname?></a>
 					&nbsp;>&nbsp;
-					<a href=''>여성가방</a>
-					&nbsp;>&nbsp;
-					<a href=''>파우치</a>
+					<a onclick="getPrdt('s<?=$cate->sidx?>','',1);"><?=$cate->sname?></a>
 				</div>
 			</div>
 			<div id="product_img_wrap" class="col-xs-12 col-sm-6">
 				<div class="fotorama" data-width="100%" data-height="500px" data-nav="thumbs" data-allowfullscreen="true">
-					<a href="<?=$adr_img ?>product_1.jpg"><img src="<?=$adr_img ?>product_1.jpg"></a>
-					<a href="<?=$adr_img ?>product_2.jpg"><img src="<?=$adr_img ?>product_2.jpg"></a>
-					<a href="<?=$adr_img ?>product_3.jpg"><img src="<?=$adr_img ?>product_3.jpg"></a>
-					<a href="<?=$adr_img ?>product_4.jpg"><img src="<?=$adr_img ?>product_4.jpg"></a>
-					<a href="<?=$adr_img ?>product_1.jpg"><img src="<?=$adr_img ?>product_1.jpg"></a>
-					<a href="<?=$adr_img ?>product_2.jpg"><img src="<?=$adr_img ?>product_2.jpg"></a>
-					<a href="<?=$adr_img ?>product_3.jpg"><img src="<?=$adr_img ?>product_3.jpg"></a>
-					<a href="<?=$adr_img ?>product_4.jpg"><img src="<?=$adr_img ?>product_4.jpg"></a>
-					<a href="<?=$adr_img ?>product_1.jpg"><img src="<?=$adr_img ?>product_1.jpg"></a>
-					<a href="<?=$adr_img ?>product_2.jpg"><img src="<?=$adr_img ?>product_2.jpg"></a>
-					<a href="<?=$adr_img ?>product_3.jpg"><img src="<?=$adr_img ?>product_3.jpg"></a>
-					<a href="<?=$adr_img ?>product_4.jpg"><img src="<?=$adr_img ?>product_4.jpg"></a>
+					<?php foreach ($result['img'] as $imgList) :?>
+						<a href="<?=$imgList?>"><img src="<?=$imgList?>"></a>
+					<?php endforeach;?>
 				</div>
 			</div>
 			<ul id="product_desc_wrap" class="col-xs-12 col-sm-6">
-				<li class="f_b">
-					토리버치
+				<li class="bo_color">
+					<?=$result['brand']?>
 				</li>
-				<li class="pd_li li_underline bo_color">
-					Smathers & Branson for J.Crew card case for j.Crew card case
+				<li class="pd_li li_underline f_b">
+					<?=$result['name']?>
 				</li>
 				<li class="pd_li2">
-					amazon
+					<?=$result['mall']?>
 				</li>
 				<li class="pd_li cl_b">
 					<div class="f_l f_b">
 						가격
 					</div>
 					<div class="f_r">
-						<span class="before_price bo_color">￦134,000</span>
-						<span class="after_price f_b">￦34,000</span>
+						<!-- <span class="before_price bo_color">￦134,000</span> -->
+						<span class="after_price f_b">￦<?=$result['price']?></span>
 					</div>
 				</li>
 				<li class="pd_li li_underline cl_b">
@@ -74,7 +63,9 @@
 					컬러
 				</li>
 				<li class="pd_li3 bo_color">
-					Wht/Bright gold
+					<?php foreach($result['color'] as $colorList) :?>
+						<span class="pd_color"><?=$colorList?></span>&nbsp;/&nbsp; 
+					<?php endforeach;?>
 				</li>
 				<li class="pd_li cl_b">
 					<div class="f_l f_b">
@@ -87,10 +78,12 @@
 					</div>
 				</li>
 				<li class="pd_li3 bo_color">
-					S/M/L/XL/XXL
+					<?php foreach($result['size'] as $sizeList) :?>
+						<span class="pd_size"><?=$sizeList?></span>&nbsp;/&nbsp; 
+					<?php endforeach;?>
 				</li>
 				<li class="pd_li4 li_underline">
-					<button type="button" class="bo_btn f_b">
+					<button type="button" class="bo_btn f_b" onclick="window.open('<?=$result['url']?>');">
 						구매하기
 					</button>
 				</li>
@@ -160,27 +153,7 @@
 					상품정보
 				</div>
 				<div class="info_content">
-					Our Embroidered Poplin Relaxed Tunic is stitched around the collar, placket and sleeve-ends for a graphic, cleanly tailored
-					look. This runway style is made of breathable, bright-white cotton, with a slit crewneck and an easy, tomboyish fit. Finished
-					with a banded hem, it’s crisp and casual — great for laid-back days and getaways.
-					<br>
-					<br>
-					FABRIC & CARE
-					<br>
-					•100% cotton.
-					<br>
-					•Machine-wash cold.
-					<br>
-					<br>
-					DETAILS & FIT
-					<br>
-					•Cotton.
-					<br>
-					•V-neck.
-					<br>
-					•Short sleeves; sleeve length: 19.5" (49 cm)
-					<br>
-					•27.5" (69 cm) in length.
+					<?=$result['story']?>
 				</div>
 			</div>
 

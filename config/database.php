@@ -81,10 +81,10 @@ return [
 
         'sqlsrv' => [
             'driver'   => 'sqlsrv',
-            'host'     => env('DB_HOST', 'localhost'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'host'     => '175.126.145.177:4750',
+            'database' => 'cstourplatform',
+            'username' => 'cstourplatform',
+            'password' => 'q1w2e3r4!@cosmos99',
             'charset'  => 'utf8',
             'prefix'   => '',
         ],

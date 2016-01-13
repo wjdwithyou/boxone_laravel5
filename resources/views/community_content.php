@@ -52,7 +52,7 @@
 				</div>
 				<?php else : ?>
 				<div id="content_btnset" class="f_r">
-					<button type="button" class="bo_btn" onclick='commModify(<?=$result->idx?>);'>
+					<button type="button" class="bo_btn" onclick='location.href = "<?=$adr_ctr?>Community/indexWrite?idx=<?=$result->idx?>";'>
 						수정
 					</button>
 					<button type="button" class="bo_btn" onclick="commDelete(<?=$result -> idx ?>)">
@@ -172,7 +172,11 @@
 								<img src="<?=$adr_img?>profile_image.png">
 							</td>
 							<td class="input_textarea2">
-								<textarea id="reply_write_content" class="form-control" placeholder="최대 300자까지 등록할 수 있습니다." maxlength="300" rows="4"></textarea>
+								<?php if ($logined) :?>
+									<textarea id="reply_write_content" class="form-control" placeholder="최대 300자까지 등록할 수 있습니다." maxlength="300" rows="4"></textarea>
+								<?php else :?>
+									<textarea id="reply_write_content" class="form-control" placeholder="로그인 후에 이용해 주세요." maxlength="300" rows="4"></textarea>
+								<?php endif;?>
 								<button type="button" class="add_reply2" onclick="replyCreate($(this), <?=$result->idx?>, 0);">
 									등록
 								</button>
@@ -193,7 +197,11 @@
 					</tr>
 					<tr class="reply_modify_show">
 						<td class="input_textarea">
-							<textarea class="form-control" placeholder="최대 300자까지 등록할 수 있습니다." maxlength="300" rows="3"></textarea>
+							<?php if ($logined) :?>
+								<textarea class="form-control" placeholder="최대 300자까지 등록할 수 있습니다." maxlength="300" rows="3"></textarea>
+							<?php else :?>
+								<textarea class="form-control" placeholder="로그인 후에 이용해 주세요." maxlength="300" rows="3"></textarea>
+							<?php endif;?>
 							<button type="button" class="add_reply" onclick="">
 								등록
 							</button>
@@ -236,9 +244,15 @@
 		
 		<script>
 			function reply_textarea(e, comm_idx, reply_idx) {
-				$("#reply_textarea").find("button").attr("onclick", "replyCreate($(this), " + comm_idx + ", " + reply_idx + ");");
-				$("#reply_textarea").children().clone().insertAfter(e.closest("table"));
-				e.closest("table").find(".reply_input").hide();
+				var logined = $("#logined").val();
+				if (logined == 0)
+					login_popup();
+				else
+				{
+					$("#reply_textarea").find("button").attr("onclick", "replyCreate($(this), " + comm_idx + ", " + reply_idx + ");");
+					$("#reply_textarea").children().clone().insertAfter(e.closest("table"));
+					e.closest("table").find(".reply_input").hide();
+				}
 			}
 
 			function remove_reply_textarea(e) {
@@ -247,9 +261,15 @@
 			}
 
 			function reply_modify(e) {
-				e.closest("table").find(".input_textarea").children("textarea").text(e.closest("table").find(".reply_content").text());
-				e.closest("table").find(".reply_show").hide();
-				e.closest("table").find(".reply_modify_show").show();
+				var logined = $("#logined").val();
+				if (logined == 0)
+					login_popup();
+				else
+				{
+					e.closest("table").find(".input_textarea").children("textarea").text(e.closest("table").find(".reply_content").text());
+					e.closest("table").find(".reply_show").hide();
+					e.closest("table").find(".reply_modify_show").show();
+				}
 			}
 
 			function reply_modify_cancel(e) {

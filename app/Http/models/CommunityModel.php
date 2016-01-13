@@ -83,6 +83,8 @@ class CommunityModel{
 		 		&& inputErrorCheck($rereply_idx, 'rereply_idx')))
 			return ;
 		
+		// 개행을 <br>로 변경
+		$contents = str_replace("\n", "<br>", $contents);
 
 		$result = DB::table('community_reply')->insertGetId(
 			array(
@@ -110,12 +112,47 @@ class CommunityModel{
 		 		&& inputErrorCheck($contents, 'contents')
 		 		&& inputErrorCheck($commucategory_idx, 'commucategory_idx')))
 			return ;
+		 		
+ 		$imgList = array();
+ 		
+ 		$s3Adr = "https://s3-ap-northeast-1.amazonaws.com/boxone-image/community/";
+ 		$dbImg = "";
+ 		
+ 		$str = $contents;
+ 		$num = 0;
+ 		
+ 		while (strpos($str, "<img"))
+ 		{
+ 			$str = substr($str, strpos($str, "<img"));
+ 			$str = substr($str, strpos($str, "src=\"") + 5);
+ 			$imgStr = substr($str, 0, strpos($str, "\""));
+ 				
+ 			$ext = substr($imgStr, strrpos($imgStr, "."));
+ 				
+ 			if (!$num)
+ 				$dbImg = $community_idx.'_image0'.$ext;
+ 			$imgName = $s3Adr.$community_idx.'_image'.($num++).$ext;
+ 				
+ 			array_push($imgList, $imgStr);
+ 			$contents = str_replace($imgStr, $imgName, $contents);
+ 		}
+ 		
+ 		if (count($imgList) > 0)
+ 		{
+ 			for ($i = 0 ; $i < count($imgList) ; $i++)
+ 			{
+ 				$imgStr = "img/community/".substr($imgList[$i], strrpos($imgList[$i], "/") + 1);
+ 				$ext = substr($imgStr, strrpos($imgStr, ".")+1);
+ 				if (is_file($imgStr))
+ 					insertImg('1', $community_idx, $imgStr, $ext, "$i");
+ 			}
+ 		} 		
 
-		$result = DB::update('update community set title=?, contents=?, commucategory_idx=?, upload=now() where idx = ?',
-			array($title, $contents, $community_idx, $commucategory_idx));
+		$result = DB::update('update community set title=?, contents=?, commucategory_idx=?, image=?, upload=now() where idx = ?',
+			array($title, $contents, $commucategory_idx, $dbImg, $community_idx));
                     
  		if($result == true){
-          	return array('code' => 1, 'msg' => 'update success');
+          	return array('code' => 1, 'msg' => 'update success', 'data' => $community_idx);
          }else{
           	return array('code' => 0, 'msg' => 'update failure');
          } 
@@ -244,7 +281,7 @@ class CommunityModel{
 					$data = DB::select("select cm.* from community as cm where $commucategory_query (cm.title like '%$text%' or cm.contents like '%$text%') order by idx DESC");
 					$result = array();
 					foreach($data as $list)
-						if (strpos($list->title, $text) || strpos(strip_tags($list->contents), $text))
+						if (strpos(' '.$list->title, $text) || strpos(strip_tags(' '.$list->contents), $text))
 							array_push($result, $list);
 					break;
 					
@@ -331,14 +368,14 @@ class CommunityModel{
 		$next = DB::select('SELECT idx FROM community WHERE idx>? LIMIT 1', array($community_idx));
 		
 		if (count($prev) > 0)
-			$result[0]->prev = $prev[0]->idx;
-		else 
-			$result[0]->prev = 0;
-		
-		if (count($next) > 0)
-			$result[0]->next = $next[0]->idx;
+			$result[0]->next = $prev[0]->idx;
 		else 
 			$result[0]->next = 0;
+		
+		if (count($next) > 0)
+			$result[0]->prev = $next[0]->idx;
+		else 
+			$result[0]->prev = 0;
 		
 		if (count($result))
 		{
@@ -347,7 +384,8 @@ class CommunityModel{
 			else
 			{
 				$result[0]->own = 0;
-				if (count(DB::select('SELECT count(*) FROM community_bookmark WHERE member_idx=? AND community_idx=?', array($community_idx, $readmember_idx))))
+				$cnt = DB::select('SELECT count(*) as cnt FROM community_bookmark WHERE member_idx=? AND community_idx=?', array($readmember_idx, $community_idx)); 
+				if ($cnt[0]->cnt)
 					$result[0]->bookmark = 1;
 				else
 					$result[0]->bookmark = 0;
@@ -357,6 +395,33 @@ class CommunityModel{
 		}
 		else
 			return array('code' => 0, 'msg' => 'fucking no data');
+	}
+	
+	
+	/*
+	 *	게시물 한 개 가져오기 (카테고리 이름 포함)
+	 *	게시물 수정 시 사용
+	 */
+	function getInfoSingleWithCateName($community_idx)
+	{
+		if(	!(	inputErrorCheck($community_idx, 'community_idx')))
+			return;
+		
+		$result = DB::select("SELECT member_idx, title, contents, commucategory_idx FROM community WHERE idx=$community_idx");
+		
+		$cate = $result[0]->commucategory_idx;
+		$cateList = array();
+		while ($cate)
+		{
+			$cate_idx = substr($cate, 0, 2);
+			$name = DB::select("SELECT title FROM community_category WHERE idx=$cate_idx");
+			array_push($cateList, array($cate_idx, $name[0]->title));
+			$cate = substr($cate, 3);
+		}
+		
+		$result[0]->cate = $cateList;
+		
+		return $result[0];
 	}
 
 

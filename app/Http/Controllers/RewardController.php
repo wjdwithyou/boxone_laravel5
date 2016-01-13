@@ -55,6 +55,8 @@ class RewardController extends Controller {
 					$i++;
 			}
 		}
+		else 
+			$result = array();
 		
 		$page = 'rewardInfo';
 		return view($page, array('page' => $page, 'reward' => $result, 'adr_img' => $adr_img));

@@ -34,7 +34,7 @@
 		{
 	?>
 			<div class="result_content" style="text-align:center; background-color:#DDDDDD;">
-				겁색된 결과가 없습니다!! 다시!! 입력해주세요!!
+				검색된 결과가 없습니다!! 다시!! 입력해주세요!!
 			</div>
 	<?php 
 		}
