@@ -87,10 +87,10 @@
 				</div>
 				<div id="order_select">
 					<select id="order_list" class="form-control">
-						<option value="1">인기 순</option>
-						<option value="2">할인율: 높은 순</option>
-						<option value="3">할인율: 낮은 순</option>
-						<option value="5">나의 ♥</option>
+						<option value="1"<?php if ($sort == 1) echo (" selected=\"selected\"");?>>인기 순</option>
+						<option value="2"<?php if ($sort == 2) echo (" selected=\"selected\"");?>>가격: 낮은 순</option>
+						<option value="3"<?php if ($sort == 3) echo (" selected=\"selected\"");?>>가격: 낮은 순</option>
+						<option value="5"<?php if ($sort == 5) echo (" selected=\"selected\"");?>>나의 ♥</option>
 					</select>
 				</div>
 			</div>
@@ -113,7 +113,7 @@
 								</div>
 							</div>
 							<div class="hd_price text_overflow">
-								￦<?=$list->price?>
+								￦<?=$list->fPrice?>
 							</div>
 						</div>
 					</div>

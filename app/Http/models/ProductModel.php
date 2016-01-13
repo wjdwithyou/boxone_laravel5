@@ -127,8 +127,8 @@ class ProductModel
 		switch($sort)
 		{
 			case 1: 	$query_orderBy .= 'hit_count DESC, '; 	break;
-			case 2:		$query_orderBy .= 'brand ASC, '; 		break;
-			case 3:		$query_orderBy .= 'price ASC, '; 	break;
+			case 2:		$query_orderBy .= 'price ASC, '; 		break;
+			case 3:		$query_orderBy .= 'price DESC, '; 	break;
 			default : 	$query_orderBy .= ""; 					break;
 		}
 		
@@ -142,7 +142,7 @@ class ProductModel
 			$query_cate = "where name != '' and (".substr($query_cate, 0, strlen($query_cate) - 3).")";
 		
 		// 자료 가져오기
-		$data = DB::select("select * from product $query_cate $query_orderBy idx DESC");
+		$data = DB::select("select *, FORMAT(price, 0) as fPrice from product $query_cate $query_orderBy idx DESC");
 
 		// 갯수 확인 후 페이지 자르기
 		if (count($data) == 0)

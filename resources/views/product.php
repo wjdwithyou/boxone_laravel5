@@ -157,27 +157,6 @@
 				</div>
 				<div class="info_content">
 					<?=$result['story']?>
-					<!-- Our Embroidered Poplin Relaxed Tunic is stitched around the collar, placket and sleeve-ends for a graphic, cleanly tailored
-					look. This runway style is made of breathable, bright-white cotton, with a slit crewneck and an easy, tomboyish fit. Finished
-					with a banded hem, it’s crisp and casual — great for laid-back days and getaways.
-					<br>
-					<br>
-					FABRIC & CARE
-					<br>
-					•100% cotton.
-					<br>
-					•Machine-wash cold.
-					<br>
-					<br>
-					DETAILS & FIT
-					<br>
-					•Cotton.
-					<br>
-					•V-neck.
-					<br>
-					•Short sleeves; sleeve length: 19.5" (49 cm)
-					<br>
-					•27.5" (69 cm) in length. -->
 				</div>
 			</div>
 
