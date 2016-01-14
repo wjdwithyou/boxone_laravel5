@@ -66,16 +66,16 @@
   	<script type="text/javascript" src="//connect.facebook.net/ko_KR/sdk.js"></script>
   	<script type="text/javascript" src="https://apis.google.com/js/client.js?onload=onLoadCallback" async defer></script>
   	
-  	<!-- page 관련 css, js -->
-  	<link rel="stylesheet" href="<?=$adr_css?><?=$page?>.css">
-  	<script type="text/javascript" src="<?=$adr_js?><?=$page?>.js"></script>
-  	
   	<!-- header,footer 관련 css, js -->
   	<link rel="stylesheet" href="<?=$adr_css?>common.css">
   	<link rel="stylesheet" href="<?=$adr_css?>login.css">
   	<link rel="stylesheet" href="<?=$adr_css?>calculator.css">
   	<link rel="stylesheet" href="<?=$adr_css?>deliver.css">
   	<script type="text/javascript" src="<?=$adr_js?>common.js"></script>
-
+  	
+  	<!-- page 관련 css, js -->
+  	<link rel="stylesheet" href="<?=$adr_css?><?=$page?>.css">
+  	<script type="text/javascript" src="<?=$adr_js?><?=$page?>.js"></script>
+ 
     <link rel="icon" href="<?=$adr_img?>brower_logo.png">
     <title>BOXONE</title>
