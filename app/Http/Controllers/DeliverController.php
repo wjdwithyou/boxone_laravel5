@@ -121,6 +121,12 @@ class DeliverController extends Controller {
 		//echo ("화물번호:".$hwaNum.", M B/L:".$mbl.", H B/L:".$hbl);
 	}
 	
+	
+	/*
+	 * 2015.11.23
+	 * 작성자 : 박용호
+	 * 배송조회
+	 */
 	function getInfoDelivery()
 	{
 		$company = Request::input('company');
@@ -1230,6 +1236,12 @@ class DeliverController extends Controller {
 		return view($page, array('page' => $page, 'code' => 1, 'result' => $result, 'adr_ctr' => $adr_ctr));
 	}
 
+	
+	/*
+	 * 2015.11.23
+	 * 작성자 : 박용호
+	 * 배송조회 저장
+	 */
 	public function createDelivery()
 	{
 		$sdModel = new ShipmentDomesticModel(); 
@@ -1248,12 +1260,17 @@ class DeliverController extends Controller {
 	}
 	
 	
+	/*
+	 * 2015.11.23
+	 * 작성자 : 박용호
+	 * 통관조회 저장
+	 */
 	public function createEntry()
 	{
 		$scModel = new ShipmentCustomModel();
 	
 		$num = Request::input('num');
-		$year = Request::input('yaer');
+		$year = Request::input('year');
 	
 		if (session_id() == '') 	session_start();
 		$member_idx = $_SESSION['idx'];

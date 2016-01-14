@@ -20,19 +20,17 @@ class BestrankingController extends Controller {
 	|
 	*/
 
+	/*
+	 *  2016.01.14
+	 *  박용호
+	 * 	베스트랭킹 첫 페이지
+	 */
 	public function index()
 	{
 		$ssModel = new ShoppingsiteModel();
 		
-		if (Request::has('cate'))
-			$cate = Request::input('cate');
-		else 
-			$cate = "0";
-		
-		if (Request::has('char'))
-			$char = Request::input('char');
-		else
-			$char = "1";
+		$cate = Request::input('cate', '0');
+		$char = Request::input('char', '1');
 				
 		// 사이트 카테고리 가져오기
 		$allCate = $ssModel->getCate();
@@ -70,14 +68,23 @@ class BestrankingController extends Controller {
 		return view($page, array('page' => $page, 'nowCate' => $cate, 'cate' => $allCate['data'], 'best1' => $best1, 'upper' => $upper['data'], 'lower' => $lower['data']));
 	}
 	
+	
+	/*
+	 *  2016.01.14
+	 *  박용호
+	 * 	베스트랭킹 내용 부분
+	 *  카테고리, 문자를 받아 해당하는 사이트 목록을 보내줌
+	 */
 	public function sortByChar()
 	{
 		$ssModel = new ShoppingsiteModel();
 		
-		$cate = Request::input('cate');
-		$char = Request::input('char');
+		// 카테고리
+		$cate = Request::input('cate', '0');
+		$char = Request::input('char', '1');
 		$adr_img = Request::input('adr_img');
 		
+		// 카테고리, 문자 별 베스트 랭킹
 		$lower = $ssModel->getInfoListByChar($cate, $char);
 		
 		// 로그인 되어있을 시 북마크 체크
@@ -97,24 +104,43 @@ class BestrankingController extends Controller {
 		return view($page, array('page' => $page, 'nowCate' => $cate, 'lower' => $lower['data'], 'adr_img' => $adr_img));
 	}
 	
+	
+	/*
+	 *  2016.01.14
+	 *  박용호
+	 * 	북마크 클릭 시 사용하는 함수
+	 * 	해당 회원의 해당 사이트 북마크가 없으면 북마크를 만들고, 있으면 북마크를 제거한다.
+	 *  로그인 여부 체크해아 함
+	 */
 	public function checkBookmark()
 	{
 		$ssModel = new ShoppingsiteModel();
 		
 		if (session_id() == '')	session_start();
-		$member_idx = $_SESSION['idx'];
-		$shoppingsite_idx = Request::input('site');
-		
-		$chk = $ssModel->checkBookmark($member_idx, $shoppingsite_idx);
-		if ($chk['code'] == 0)
-			$result = $ssModel->createBookmark($member_idx, $shoppingsite_idx);
-		else
-			$result = $ssModel->deleteBookmark($member_idx, $shoppingsite_idx);
-		
-		header('Content-Type: application/json');
-		echo json_encode($result);
+		if (isset($_SESSION['idx']))
+		{
+			$member_idx = $_SESSION['idx'];
+			$shoppingsite_idx = Request::input('site');
+			
+			$chk = $ssModel->checkBookmark($member_idx, $shoppingsite_idx);
+			if ($chk['code'] == 0)
+				$result = $ssModel->createBookmark($member_idx, $shoppingsite_idx);
+			else
+				$result = $ssModel->deleteBookmark($member_idx, $shoppingsite_idx);
+			
+			header('Content-Type: application/json');
+			echo json_encode($result);
+		}
 	}
 	
+	
+	/*
+	 *  2016.01.14
+	 *  박용호
+	 * 	조회수 +1
+	 *  cookie를 이용해서 반복적인 조회수 증가를 막으려 했으나...
+	 *  일단 한 브라우저에서 10초안에는 조회수가 1이상 오르지 않음
+	 */
 	public function hitCountPlus()
 	{
 		$ssModel = new ShoppingsiteModel();
@@ -122,9 +148,9 @@ class BestrankingController extends Controller {
 		if (isset($_COOKIE['bestrank_click']))
 			return array('code' => 0, 'msg' => 'already clicked!');
 		else
-			setcookie('bestrank_click', 1, time()+5);	
+			setcookie('bestrank_click', 1, time()+10);	
 		
-		$idx = Request::input('idx');
+		$idx = Request::input('idx', '0');
 		$result = $ssModel->increaseHitCount($idx);
 		
 		return $result;

@@ -13,7 +13,6 @@ class ShoppingsiteModel{
      */
 	function create($name, $website_link, $category_idx, $note)
 	{
-
 		if(	!(	inputErrorCheck($name, 'name')
 				&& inputErrorCheck($website_link, 'website_link')
 				&& inputErrorCheck($category_idx, 'category_idx')

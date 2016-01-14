@@ -142,6 +142,7 @@ class LoginController extends Controller {
 		$nickname = Request::input('nickname');		
 		$rec = Request::input('rec');
 		
+		// 이미지는 파일이 될 수도(자체 회원가입), url 주소가 될 수도(소셜 회원가입) 있음.
 		if (Request::hasFile('img'))
 		{
 			$img = Request::file('img');
