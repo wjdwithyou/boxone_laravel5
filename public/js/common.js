@@ -2,14 +2,17 @@ $(document).ready(function(){
 	if ($("#need_login").val() == "1")
 		moveLogin();
 			
-	$(".shoppingbox_hover").mouseover(function() {
-		$("#shoppingbox_menu").children().css("color", "#f15a63");
-		$(".hover_menu").show();
-	  })
-	  .mouseout(function() {
-		$("#shoppingbox_menu").children().css("color", "#000");
-		$(".hover_menu").hide();
-	  });
+	$(".menu_hover").mouseover(function() {
+		$(this).children().css("color", "#f15a63");
+		$("#hover_menu_wrap").show();
+		var temp_menuId = $(this).attr("id");
+		temp_menuId = "#sb_menu" + temp_menuId.substring(9,10);
+		$("#hover_menu_wrap").html($(temp_menuId).html());
+	})
+	.mouseout(function() {
+		$(this).children().css("color", "#000");
+		$("#hover_menu_wrap").hide();
+	});
 });
 
 var adr_ctr = $("#adr_ctr").val();

@@ -69,33 +69,38 @@ if (isset($_COOKIE['need_login'])) {
 <hr class="header_hr2 pc_header">
 <div class="inner">
 	<div id="header_main_wrap" class="f_c">
-		<div id="header_main" class="f_c grid grid_310">
+		<div id="header_main" class="f_c grid grid_311">
 			<a class="mob_header f_l" onclick="location.href='<?= $adr_ctr ?>Sidemenu/index?bef='+location.href"><img src="<?= $adr_img ?>menu.png" class="mob_side_btn img_14"></a>
 			<a class="mob_header f_r" onclick="toggleSearch();"><img src="<?= $adr_img ?>search_img_gray.png" class="mob_side_btn img_14"></a>
 			<a id="bo_logo" onclick="location.href='<?= $adr_ctr ?>'"><img src="<?= $adr_img ?>header_logo.png"></a>
 		</div>
-		<div id="header_search" class="pc_header grid grid_310">
+		<div id="header_search" class="pc_header grid grid_311">
 			<input type="text" id="integrated_search" class="bo_search1 br_25" placeholder="검색어를 입력해주세요.">
 			<a onclick=""><img src="<?= $adr_img ?>search_img.png" class="img_14"></a>
 		</div>
-		<div class="pc_header grid grid_310">
+		<div class="pc_header grid grid_311">
 		</div>
 	</div>
 	<nav id="main_menu_wrap" class="pc_header">
 		<ul id="main_menu" class="li_set f_c">
-			<li id="shoppingbox_menu" class="shoppingbox_hover"><a href="<?=$adr_ctr?>Shoppingbox/index">쇼핑박스</a></li>
 			<li><a href="<?=$adr_ctr?>Bestranking/index">베스트랭킹</a></li>
-			<li><a href="<?=$adr_ctr?>Reward/index">리워드</a></li>
-			<li><a href="<?=$adr_ctr?>Card/index">카드혜택</a></li>
-			<li><a href="<?=$adr_ctr?>Hotdeal/main">핫딜</a></li>
-			<li><a href="<?=$adr_ctr?>Community/index">커뮤니티</a></li>
-			<li><a href="<?=$adr_ctr?>Guide/index?no=1&det=1_1">해외쇼핑가이드</a></li>
+			<span class="li_bar4"></span>
+			<li id="main_menu0"><a href="<?=$adr_ctr?>Shoppingbox/index">클리어런스</a></li>
+			<li id="main_menu1" class="menu_hover"><a href="<?=$adr_ctr?>Shoppingbox/index">여성의류</a></li>
+			<li id="main_menu2" class="menu_hover"><a href="<?=$adr_ctr?>Shoppingbox/index">남성의류</a></li>
+			<li id="main_menu3" class="menu_hover"><a href="<?=$adr_ctr?>Shoppingbox/index">유아동</a></li>
+			<li id="main_menu4" class="menu_hover"><a href="<?=$adr_ctr?>Shoppingbox/index">패션잡화</a></li>
+			<li id="main_menu5" class="menu_hover"><a href="<?=$adr_ctr?>Shoppingbox/index">주방생활취미</a></li>
+			<li id="main_menu6" class="menu_hover"><a href="<?=$adr_ctr?>Shoppingbox/index">디지털가전</a></li>
+			<li id="main_menu7" class="menu_hover"><a href="<?=$adr_ctr?>Shoppingbox/index">뷰티헬스식품</a></li>
 		</ul>
 	</nav>
 </div>
 <hr class="header_hr">
 
 <!-- 쇼핑박스 hover 메뉴 -->
-<div class="hover_menu shoppingbox_hover" hidden>
+<div id="hover_menu_wrap" class="menu_hover" hidden>
 </div>
 <!-- //쇼핑박스 hover 메뉴 -->
+
+<?php include ("menu.php");?>

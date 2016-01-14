@@ -17,7 +17,6 @@
 		<div id="top">
 			<h1 class="top_h1">비밀번호 변경</h1>
 			<h3 class="top_h3 bo_color2">새 비밀번호를 입력해 주세요.</h3>
-			<hr class="top_hr">
 		</div>
 		<div id="content">
 			<div class="input_wrap">

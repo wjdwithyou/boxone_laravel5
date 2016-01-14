@@ -15,13 +15,12 @@
 		<div id="top">
 			<h1 class="top_h1">회원가입</h1>
 			<h3 class="top_h3 bo_color2">회원가입을 하시면 다양한 혜택을 받을 수 있습니다.</h3>
-			<hr class="top_hr">
 		</div>
 		<div id="content">
 			<div class="input_wrap">
 				<div>
 					<div id="profile" class="input_div">
-						<img src="<?=$adr_img?>profile_img2.png" width="100" height="100" id="profile_img" class="br_50">
+						<img src="<?=$adr_img?>profile/default.png" width="100" height="100" id="profile_img" class="br_50">
 						<input type="file" id="profile_file" accept="image/*" onchange="profileUpload($(this));">
 					</div>
 					<div class="input_div">

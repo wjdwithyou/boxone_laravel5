@@ -28,12 +28,5 @@
 	
 </div>
 
-<script>
-$(document).ready(function(){
-	$('.slider1').bxSlider({
-		auto: true
-	});
-});
-</script>
 </body>
 </html>
