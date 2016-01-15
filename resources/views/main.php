@@ -43,29 +43,33 @@
 					<h2 class="top_h2 bo_color2">핫한 상품</h2>
 					<p class="top_p bo_color2">지금 뜨고 있는 상품들을 만나보세요.</p>
 				</div>
-				<div id="hd_content" class="mg_t16">
-					<?php foreach ($prdt as $list) :?>
-					<div class="imglist_div grid grid_432">
-						<div class="imglist_img img_center">
-							<div class="img_center_inner">
-								<a onclick='location.href="<?=$adr_ctr ?>Product/detail?idx=<?=$list->idx?>"'><img src="<?=$list->img?>"></a>
-							</div>
-						</div>
-						<div class="imglist_desc_wrap">
-							<div class="imglist_desc1 t_o bo_color2">
-								<?=$list->brand?>
-							</div>
-							<div class="imglist_desc2 limit_line limit_line_2">
-								<div>
-									<?=$list->name?>
+				<div id="hd_content" class="mg_t16 f_c">
+					<div id="hd_slide">
+						<?php foreach ($prdt as $list) :?>
+						<div class="slide">
+							<div class="imglist_div">
+								<div class="imglist_img img_center">
+									<div class="img_center_inner">
+										<a href="<?=$adr_ctr ?>Shoppingbox/detail?idx=<?=$list->idx?>"><img src="<?=$list->img?>"></a>
+									</div>
+								</div>
+								<div class="imglist_desc_wrap">
+									<div class="imglist_desc1 t_o bo_color2">
+										<?=$list->brand?>
+									</div>
+									<div class="imglist_desc2 limit_line limit_line_2">
+										<div>
+											<?=$list->name?>
+										</div>
+									</div>
+									<div class="imglist_desc3 t_o">
+										￦<?=$list->fPrice?>
+									</div>
 								</div>
 							</div>
-							<div class="imglist_desc3 t_o">
-								￦<?=$list->fPrice?>
-							</div>
 						</div>
+						<?php endforeach;?>
 					</div>
-					<?php endforeach;?>
 				</div>
 			</div>
 			<div id="sb_wrap" class="inner">
@@ -73,12 +77,12 @@
 					<h2 class="top_h2 bo_color2">쇼핑박스</h2>
 					<p class="top_p bo_color2">원하는 상품을 사이트 구별없이 검색하고 가격비교 할 수 있습니다.</p>
 				</div>
-				<div id="sb_content" class="mg_t16">
+				<div id="sb_content" class="mg_t16 f_c">
 					<?php foreach ($prdt as $list) :?>
 					<div class="imglist_div grid grid_432">
 						<div class="imglist_img img_center">
 							<div class="img_center_inner">
-								<a onclick='location.href="<?=$adr_ctr ?>Product/detail?idx=<?=$list->idx?>"'><img src="<?=$list->img?>"></a>
+								<a href="<?=$adr_ctr ?>Shoppingbox/detail?idx=<?=$list->idx?>"><img src="<?=$list->img?>"></a>
 							</div>
 						</div>
 						<div class="imglist_desc_wrap">

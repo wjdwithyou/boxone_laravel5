@@ -45,7 +45,7 @@ label{font-weight:normal}
 .img_center{position:relative;}
 .img_center:before{content:"";display:block;}
 .img_center_inner{position:absolute;top:0;left:0;bottom:0;right:0;text-align:center;white-space:nowrap;}
-.img_center_inner:before{content:'';display:inline-block;height:100%;vertical-align:middle;margin-right:-0.35em;}
+/* .img_center_inner:before{content:'';display:inline-block;height:100%;vertical-align:middle;margin-right:-0.35em;} */
 .img_center_inner a img{max-width:100%;max-height:100%;vertical-align:middle;}
 .imglist_img {padding-top:100%;}/* ratio */
 .imglist_desc_wrap{margin-top:16px;}
