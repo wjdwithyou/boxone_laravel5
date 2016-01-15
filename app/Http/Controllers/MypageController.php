@@ -22,6 +22,11 @@ class MypageController extends Controller {
 	*/
 
 
+	/*
+	 * 2015.11.17
+	 * 작성자 : 박용호
+	 * 마이페이지 처음
+	 */
 	public function index()
 	{
 		$memberModel = new MemberModel();
@@ -34,6 +39,7 @@ class MypageController extends Controller {
 		}
 		return view($page, array('page' => $page, 'result' => $result));
 	}
+	
 	
 	public function info()
 	{

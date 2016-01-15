@@ -59,7 +59,7 @@
 				<div class="imglist_div grid grid_432">
 					<div class="imglist_img img_center">
 						<div class="img_center_inner">
-							<a onclick='location.href="<?=$adr_ctr ?>Product/detail?idx=<?=$list->idx?>"'><img src="<?=$list->img?>"></a>
+							<a onclick='location.href="<?=$adr_ctr ?>Shoppingbox/detail?idx=<?=$list->idx?>"'><img src="<?=$list->img?>"></a>
 						</div>
 					</div>
 					<div class="imglist_desc_wrap">
