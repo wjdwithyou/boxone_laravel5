@@ -203,7 +203,7 @@ function socialLogin(type, id, email, nickname, img)
 			else
 			{
 				alert ("첫 로그인이시네요. 추가정보를 입력해주세요.");
-				window.opener.location.attr('href', adr_ctr + 'Login/login_addinfo?type=' + type + '&id=' + id + '&img=' + img);
+				$(location).attr('href', adr_ctr + 'Login/login_addinfo?type=' + type + '&id=' + id + '&img=' + img);
 			}
 			 
 		},
