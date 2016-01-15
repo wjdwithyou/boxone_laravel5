@@ -191,9 +191,7 @@ function socialLogin(type, id, email, nickname, img)
 		data: {
 			type: type,
 			id: id,
-			email: email,
-			nickname: nickname,
-			img: img
+			pw: id
 		},
 		success: function(result)
 		{
@@ -205,7 +203,16 @@ function socialLogin(type, id, email, nickname, img)
 			else
 			{
 				alert ("첫 로그인이시네요. 추가정보를 입력해주세요.");
-				$(location).attr('href', adr_ctr + 'Login/login_addinfo?type=' + type + '&id=' + id + '&img=' + img);
+				var data = new FormData();
+				data.append("type", type);
+				data.append("id", id);
+				data.append("email", email);
+				data.append("nickname", nickname);
+				data.append("img", img);
+				
+				var xhr = new XMLHttpRequest();
+				xhr.open("POST", adr_ctr + "Login/login_addinfo");
+				xhr.send(data);
 			}
 			 
 		},
