@@ -26,8 +26,8 @@ class LoginController extends Controller {
 		else
 		{
 			$grant_type = "authorization_code";
-			$client_id = "_uNsCw6pC_ItNTWfmVUD";
-			$client_secret = "0Mo8jpE38A";
+			$client_id = "o08PVHiq6vxd5Ub23ZVG";
+			$client_secret = "Z7z534HWCb";
 			$code = Request::input('code');
 			$state = Request::input('state');
 			

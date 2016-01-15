@@ -32,9 +32,9 @@ function cookieEid(){
  * 받기(php) -> 사이트 로그인/가입
  */
 var naver = NaverAuthorize({
-	client_id : "_uNsCw6pC_ItNTWfmVUD",
+	client_id : "o08PVHiq6vxd5Ub23ZVG",
     redirect_uri : adr_ctr+"Login/naverLogin",
-    client_secret : "0Mo8jpE38A"
+    client_secret : "Z7z534HWCb"
 });
 
 function naverLogin()
