@@ -191,7 +191,9 @@ function socialLogin(type, id, email, nickname, img)
 		data: {
 			type: type,
 			id: id,
-			pw: id
+			email: email,
+			nickname: nickname,
+			img: img
 		},
 		success: function(result)
 		{

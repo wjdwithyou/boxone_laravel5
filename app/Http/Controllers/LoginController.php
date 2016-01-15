@@ -374,9 +374,12 @@ class LoginController extends Controller {
 	public function login_addinfo()
 	{
 		$type = Request::input('type');
-		$eid = Request::input('eid');
+		$id = Request::input('id');
+		$email = Request::input('email');
+		$nickname = Request::input('nickname');
 		$img = Request::input('img');
+		
 		$page = 'login_addinfo';
-		return view($page, array('page' => $page, 'type' => $type, 'eid' => $eid, 'img' => $img));
+		return view($page, array('page' => $page, 'type' => $type, 'id' => $id, 'email' => $email, 'nickname' => $nickname, 'img' => $img));
 	}
 }
