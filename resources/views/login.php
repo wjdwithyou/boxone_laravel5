@@ -15,7 +15,7 @@
 	<div id="container">
 		<div id="top">
 			<h1 class="top_h1">로그인</h1>
-			<h3 class="top_h3 bo_color2">해외직구의 모든 것, 박스원에 오신걸 환영합니다.</h3>
+			<p class="top_p bo_color2">해외직구의 모든 것, 박스원에 오신걸 환영합니다.</p>
 		</div>
 		<div id="content">
 			<div class="input_wrap">

@@ -18,7 +18,7 @@
 	<div id="container">
 		<div id="top">
 			<h1 class="top_h1">추가 정보 입력</h1>
-			<h3 class="top_h3 bo_color2">사이트 사용을 위해 간단한 추가 정보를 입력해 주세요.</h3>
+			<p class="top_p bo_color2">사이트 사용을 위해 간단한 추가 정보를 입력해 주세요.</p>
 		</div>
 		<div id="content">
 			<div class="input_wrap">

@@ -13,7 +13,7 @@
 	<div id="container">
 		<div id="top">
 			<h1 class="top_h1">쇼핑박스</h1>
-			<h3 class="top_h3 bo_color2">전세계 모든 상품들을 클릭 한번에 내 입맛대로</h3>
+			<p class="top_p bo_color2">전세계 모든 상품들을 클릭 한번에 내 입맛대로</p>
 			<hr class="top_hr">
 			<h1 class="top_h2">
 				<?php if (count($nowCate)) :?>

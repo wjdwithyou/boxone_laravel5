@@ -14,7 +14,7 @@
 	<div id="container">
 		<div id="top">
 			<h1 class="top_h1">회원가입</h1>
-			<h3 class="top_h3 bo_color2">회원가입을 하시면 다양한 혜택을 받을 수 있습니다.</h3>
+			<p class="top_p bo_color2">회원가입을 하시면 다양한 혜택을 받을 수 있습니다.</p>
 		</div>
 		<div id="content">
 			<div class="input_wrap">

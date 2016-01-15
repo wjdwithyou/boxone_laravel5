@@ -9,9 +9,8 @@ if (isset($_COOKIE['need_login'])) {
 	<div id="header_top_wrap" class="pc_header f_c">
 		<nav class="f_l">
 			<ul class="top_li_set li_set">
-				<!-- <li><a onclick="toggleDialog('l', 22);">배송통관조회</a></li> -->
-				<li><a onclick="delivery_popup();">배송통관조회</a></li>
-				<li><a onclick="toggleDialog('l', 91);">계산기</a></li>
+				<li><a onclick="toggleDialog(1, 'l', 22);">배송통관</a></li>
+				<li><a onclick="toggleDialog(2, 'l', 91);">관세계산</a></li>
 			</ul>
 		</nav>
 		<nav class="f_r">
@@ -41,17 +40,17 @@ if (isset($_COOKIE['need_login'])) {
 					</a>
 				</li> -->
 				<li>
-					<a onclick="toggleDialog('r', 94);">
+					<a onclick="toggleDialog(3, 'r', 94);">
 						<img src="<?= $adr_img?>header_top_love.png" class="header_top_ico img_14">
 					</a>
 				</li>
 				<li>
-					<a onclick="toggleDialog('r', 60);">
+					<a onclick="toggleDialog(4, 'r', 60);">
 						<img src="<?= $adr_img?>header_top_bookmark.png" class="header_top_ico img_14">
 					</a>
 				</li>
 				<li>
-					<a onclick="toggleDialog('r', 25);">
+					<a onclick="toggleDialog(5, 'r', 25);">
 						<img src="<?= $adr_img?>header_top_recently.png" class="header_top_ico img_14">
 					</a>
 				</li>
