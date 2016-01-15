@@ -1,13 +1,13 @@
 <?php
 namespace App\Http\models;
 use DB;
+include_once dirname(__FILE__)."/Utility.php";
+
+
 
 /*
  *  리워드 관련 컨트롤러
  */
-include_once dirname(__FILE__)."/../function/baseFunction.php";
-
-   
 class RewardModel
 {
     /*  	

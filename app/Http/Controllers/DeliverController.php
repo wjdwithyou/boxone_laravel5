@@ -7,6 +7,8 @@ use Request;
 
 class DeliverController extends Controller {
 
+	
+	
 	public function index()
 	{
 		$page = 'deliver';

@@ -1,12 +1,12 @@
 <?php
 namespace App\Http\models;
 use DB;
+include_once dirname(__FILE__)."/Utility.php";
+
+
 /*
  *  카드 관련 컨트롤러
  */
-include_once dirname(__FILE__)."/../function/baseFunction.php";
-
-   
 class CardModel{
     /*  	
      *	카드정보 등록 기능

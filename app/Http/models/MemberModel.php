@@ -3,12 +3,13 @@
 namespace App\Http\models;
 use DB;
 use Hash;
+include_once dirname(__FILE__)."/Utility.php";
+
+
+
 /*
  *  회원 관련 컨트롤러
  */
-include_once dirname(__FILE__)."/../function/baseFunction.php";
-
-
 class MemberModel{
 
     /*    
