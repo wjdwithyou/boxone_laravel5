@@ -6,35 +6,37 @@ use Request;
 
 class RewardController extends Controller {
 
+	
 	/*
-	|--------------------------------------------------------------------------
-	| Default Home Controller
-	|--------------------------------------------------------------------------
-	|
-	| You may wish to use controllers instead of, or in addition to, Closure
-	| based routes. That's great! Here is an example controller method to
-	| get you started. To route to this controller, just add the route:
-	|
-	|	Route::get('/', 'HomeController@showWelcome');
-	|
-	*/
-
+	 * 2015.11.17
+	 * 작성자 : 박용호
+	 * 리워드 초기 페이지
+	 */
 	public function index()
 	{
 		$page = 'reward';
 		return view($page, array('page' => $page));
 	}
 	
+	
+	/*
+	 * 2015.11.17
+	 * 작성자 : 박용호
+	 * 리워드 검색 결과
+	 */
 	public function searchReward()
 	{
 		$rewardModel = new RewardModel();
-		$text = Request::input('text');
+		
+		// 리워드 검색어
+		$text = Request::input('text', '');
 		$adr_img = Request::input('adr_img');
 		
+		// 검색어로 리워드 검색
 		$data = $rewardModel->getInfoListByTarget($text);
 		$data = $data['data'];
 		
-		// 타깃 사이트별로 정렬
+		// 타깃 사이트별로 정렬 (Amazon.com, 등등 끼리 모음)
 		if (count($data) > 1)
 		{
 			$pre_site = $data[0]->target_site;

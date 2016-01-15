@@ -2,99 +2,21 @@
 
 
 	/*
-	 * 인풋 에러 체크 함수
+	 * 	2016.01.15
+	 * 	박용호
+	 * 	인풋 에러 체크 함수
+	 * 	parameter, columnName, type
 	 */
 	function inputErrorCheck($parameter, $columnName)
 	{
-		if( isset($parameter) && ($parameter!='') ){
+		if(isset($parameter) && ($parameter!=''))
 			return TRUE;
-		}
-		else{
+		else
+		{
 			echo json_encode( array('code' => '400', 'msg' => 'invalid input at '.$columnName));
 			return FALSE;
 		}
 	}
-
- 	/*
-     * 카카오톡 액세스토큰을 이용해서 사용자 ID를 반환하는 함수
-     */
-    function getIDKakao($accessToken)
-    {
-    	
-      	$headers    = array('Authorization: Bearer '.$accessToken, 'Content-type: application/x-www-form-urlencoded:charset=utf-8');
-     	$opts       = array(
-         	CURLOPT_URL       		=> 'https://kapi.kakao.com/v1/user/me',
-         	CURLOPT_POST       		=> true,
-         	CURLOPT_HEADER      	=> false,
-         	CURLOPT_HTTPHEADER    	=> $headers,
-         	CURLOPT_RETURNTRANSFER 	=> true
-        );
-      	
-      	$ch      = curl_init();
-      	curl_setopt_array($ch, $opts);
-      	
-      	$result   = curl_exec($ch);
-      	curl_close($ch);
-      	
-      	$result = json_decode($result,true);
- 
-      	return $result['id'];
-    }
-
-
-    /*
-     * 페이스북 액세스토큰을 이용해서 사용자 ID를 반환하는 함수
-     */
-	function getIdFacebook($accessToken)
-	{
-
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, "https://graph.facebook.com/me?access_token=".$accessToken);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		$output = curl_exec($ch);
-
-		//convert  response
-		$output = json_decode($output);
-
-		//handle error; error output
-		if(curl_getinfo($ch, CURLINFO_HTTP_CODE) != 200)
-		{
-			var_dump($output);
-		}
-
-		var_dump($output);
- 
-		curl_close($ch);
-	}
-
-    /*
-     *  구글 액세스토큰을 이용해서 사용자 ID를 반환하는 함수
-     */
-    function getIdGoogle($accessToken)
-    {
-    	
-		if(	!(	inputErrorCheck($accessToken, 'accessToken')))
-			return ;
-
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, "https://www.googleapis.com/oauth2/v1/userinfo?access_token=".$accessToken);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		$output = curl_exec($ch);
-
-		//convert  response
-		$output = json_decode($output);
-
-		//handle error; error output
-		if(curl_getinfo($ch, CURLINFO_HTTP_CODE) != 200)
-		{
-			var_dump($output);
-		}
-
-		var_dump($output);
- 
-		curl_close($ch);		
-    }
-
 
 	/*
 	 *	이미지 사진 등록 함수
@@ -258,6 +180,12 @@
 		}
 	}
 	
+	/*
+	 * 	2016.01.15
+	 * 	박용호
+	 * 	오늘이 아닐 경우 년-월-일 출력
+	 *  오늘일 경우 시:분 출력
+	 */
 	function cutDateAsToday($date)
 	{		
 		if (date('Y-m-d') == substr($date, 0, 10))
@@ -267,6 +195,8 @@
 	}
 	
 	/*
+	 * 	2016.01.15
+	 * 	박용호
 	 *  달러로 받은 가격을 한국돈으로 변환, 콤마 찍기
 	 */
 	function makeMoney($num)
@@ -283,12 +213,17 @@
 		return $str;
 	}
 	
+	
+	/*
+	 *  2016.01.15
+	 *  박용호
+	 *  Cosmos로 가져온 상품을 담고 있는 mssql 연결
+	 */
 	function connectToMssql()
 	{
 		$conn = mssql_connect('cafe24', 'cstourplatform', 'q1w2e3r4!@cosmos99');
 		return $conn;
 	}
-	
 	
 
 	

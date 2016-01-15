@@ -1,13 +1,13 @@
 <?php
 namespace App\Http\models;
 use DB;
+include_once dirname(__FILE__)."/Utility.php";
+
+
 
 /*
  *  상품 관련 컨트롤러
  */
-include_once dirname(__FILE__)."/../function/baseFunction.php";
-
-
 class ProductModel
 {
 
@@ -171,11 +171,11 @@ class ProductModel
 			return array('code' => '0', 'msg' => 'no matched result');
 		else
 		{
-			$page_max = floor((count($data)-1) / 30) + 1;
+			$page_max = floor((count($data)-1) / 20) + 1;
 			if ($page_num > $page_max)
 				$page_num = $page_max;
-			$page_start = ($page_num-1)*30;
-			$result = array_slice($data, $page_start, 30);
+			$page_start = ($page_num-1)*20;
+			$result = array_slice($data, $page_start, 20);
 
 			return array('code' => 1, 'msg' => 'success', 'data' => $result, 'maxPage' => $page_max);
 		}

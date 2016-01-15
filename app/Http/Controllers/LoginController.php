@@ -3,27 +3,12 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\models\MemberModel;
 use Request;
-use AWS;
 use Mail;
 
 
-include_once dirname(__FILE__)."/../function/baseFunction.php";
-
 class LoginController extends Controller {
 
-	/*
-	|--------------------------------------------------------------------------
-	| Default Home Controller
-	|--------------------------------------------------------------------------
-	|
-	| You may wish to use controllers instead of, or in addition to, Closure
-	| based routes. That's great! Here is an example controller method to
-	| get you started. To route to this controller, just add the route:
-	|
-	|	Route::get('/', 'HomeController@showWelcome');
-	|
-	*/
-
+	
 	
 	/*
 	 * 2015.11.17
@@ -41,8 +26,8 @@ class LoginController extends Controller {
 		else
 		{
 			$grant_type = "authorization_code";
-			$client_id = "_uNsCw6pC_ItNTWfmVUD";
-			$client_secret = "0Mo8jpE38A";
+			$client_id = "o08PVHiq6vxd5Ub23ZVG";
+			$client_secret = "Z7z534HWCb";
 			$code = Request::input('code');
 			$state = Request::input('state');
 			
@@ -142,6 +127,7 @@ class LoginController extends Controller {
 		$nickname = Request::input('nickname');		
 		$rec = Request::input('rec');
 		
+		// 이미지는 파일이 될 수도(자체 회원가입), url 주소가 될 수도(소셜 회원가입) 있음.
 		if (Request::hasFile('img'))
 		{
 			$img = Request::file('img');
@@ -388,9 +374,12 @@ class LoginController extends Controller {
 	public function login_addinfo()
 	{
 		$type = Request::input('type');
-		$eid = Request::input('eid');
+		$id = Request::input('id');
+		$email = Request::input('email');
+		$nickname = Request::input('nickname');
 		$img = Request::input('img');
+		
 		$page = 'login_addinfo';
-		return view($page, array('page' => $page, 'type' => $type, 'eid' => $eid, 'img' => $img));
+		return view($page, array('page' => $page, 'type' => $type, 'id' => $id, 'email' => $email, 'nickname' => $nickname, 'img' => $img));
 	}
 }

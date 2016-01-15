@@ -7,19 +7,12 @@ use Request;
 
 class CardController extends Controller {
 
+	
 	/*
-	|--------------------------------------------------------------------------
-	| Default Home Controller
-	|--------------------------------------------------------------------------
-	|
-	| You may wish to use controllers instead of, or in addition to, Closure
-	| based routes. That's great! Here is an example controller method to
-	| get you started. To route to this controller, just add the route:
-	|
-	|	Route::get('/', 'HomeController@showWelcome');
-	|
-	*/
-
+	 *  2016.01.14
+	 *  박용호
+	 * 	카드혜택 첫 페이지
+	 */
 	public function index()
 	{
 		$cardModel = new CardModel();
@@ -44,8 +37,8 @@ class CardController extends Controller {
 	{
 		$cardModel = new CardModel();
 		
-		$type = Request::input('type');
-		$search = Request::input('search');
+		$type = Request::input('type', '1');
+		$search = Request::input('search', ' ');
 		$adr_img = Request::input('adr_img');
 		
 		if ($type == 3)
@@ -88,7 +81,7 @@ class CardController extends Controller {
 	{
 		$cardModel = new CardModel();
 		
-		$type = Request::input('type');
+		$type = Request::input('type', '1');
 		$adr_img = Request::input('adr_img');
 		
 		if ($type == 3)
