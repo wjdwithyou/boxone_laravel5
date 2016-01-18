@@ -75,7 +75,7 @@ class ProductModel
 			array_push($ms_data_size, $list->SizeTxt);
 			
 		$query = DB::connection('sqlsrv')->select("SELECT Story FROM cgStoryMain_$table WHERE ProdInc = ?", array($prodInc));
-		$ms_data_story = $query[0]->story;
+		$ms_data_story = $query[0]->Story;
 		
 		$query = DB::connection('sqlsrv')->select("SELECT Still FROM cgStillMain_$table WHERE ProdInc = ?", array($prodInc));
 		while ($temp = mssql_fetch_array($query))
