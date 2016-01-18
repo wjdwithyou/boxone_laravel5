@@ -78,7 +78,7 @@ class ProductModel
 		$ms_data_story = $query[0]->Story;
 		
 		$query = DB::connection('sqlsrv')->select("SELECT Still FROM cgStillMain_$table WHERE ProdInc = ?", array($prodInc));
-		while ($temp = mssql_fetch_array($query))
+		foreach($query as $list)
 			array_push($ms_data_img, $list->Still);	
 		
 		$imgList = array();
