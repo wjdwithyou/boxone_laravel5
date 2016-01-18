@@ -39,7 +39,7 @@ class HotdealController extends Controller {
 		$hotPrdtModel = new HotdealProductModel();
 	
 		$idx = Request::input('idx');
-		$result = $prdtModel->getInfoSingle($idx);
+		$result = $hotPrdtModel->getInfoSingle($idx);
 	
 		$cateS = $result['data']['cate'];
 		$data = $cateModel->downToUp($cateS);
