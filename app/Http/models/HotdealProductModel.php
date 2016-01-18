@@ -149,8 +149,9 @@ class HotdealProductModel
 		switch($sort)
 		{
 			case 1: 	$query_orderBy .= 'hit_count DESC, '; 	break;
-			case 2:		$query_orderBy .= 'price ASC, '; 		break;
-			case 3:		$query_orderBy .= 'price DESC, '; 	break;
+			case 2:		$query_orderBy .= 'priceS ASC, '; 		break;
+			case 3:		$query_orderBy .= 'priceS DESC, '; 	break;
+			case 4:		$query_orderBy .= 'saleP DESC, '; 	break;
 			default : 	$query_orderBy .= ""; 					break;
 		}
 		

@@ -48,7 +48,10 @@
 						<select id="select_orderby" class="bo_selectbox bo_selectbox_1">
 							<option value="1"<?php if ($sort == 1) echo (" selected=\"selected\"");?>>인기 순</option>
 							<option value="2"<?php if ($sort == 2) echo (" selected=\"selected\"");?>>가격: 낮은 순</option>
-							<option value="3"<?php if ($sort == 3) echo (" selected=\"selected\"");?>>가격: 낮은 순</option>
+							<option value="3"<?php if ($sort == 3) echo (" selected=\"selected\"");?>>가격: 높은 순</option>
+							<?php if ($nowCate[0][0] == "c") : ?>
+								<option value="4"<?php if ($sort == 4) echo (" selected=\"selected\"");?>>할인율 순</option>
+							<?php endif;?>
 							<option value="5"<?php if ($sort == 5) echo (" selected=\"selected\"");?>>나의 ♥</option>
 						</select>
 					</div>
@@ -59,7 +62,11 @@
 				<div class="imglist_div grid grid_432">
 					<div class="imglist_img img_center">
 						<div class="img_center_inner">
-							<a onclick='location.href="<?=$adr_ctr ?>Shoppingbox/detail?idx=<?=$list->idx?>"'><img src="<?=$list->img?>"></a>
+							<?php if ($nowCate[0][0] == "c") :?>
+								<a onclick='location.href="<?=$adr_ctr ?>Hotdeal/productDetail?idx=<?=$list->idx?>"'><img src="<?=$list->img?>"></a>
+							<?php else :?>
+								<a onclick='location.href="<?=$adr_ctr ?>Shoppingbox/detail?idx=<?=$list->idx?>"'><img src="<?=$list->img?>"></a>
+							<?php endif;?>
 						</div>
 					</div>
 					<div class="imglist_desc_wrap">
@@ -72,7 +79,11 @@
 							</div>
 						</div>
 						<div class="imglist_desc3 t_o">
-							￦<?=$list->fPrice?>
+							<?php if (isset($list->fPrice)) : ?>
+								￦<?=$list->fPrice?>
+							<?php else :?>
+								￦<?=$list->fPriceO?> -> ￦<?=$list->fPriceS?> (<?=$list->saleP?>%)
+							<?php endif;?>
 						</div>
 					</div>
 				</div>

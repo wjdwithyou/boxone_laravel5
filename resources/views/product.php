@@ -18,11 +18,15 @@
 				<div id="top_index">
 					<a href='<?=$adr_ctr?>Shoppingbox/index'>쇼핑박스</a>
 					&nbsp;>&nbsp;
-					<a onclick="getPrdt('l<?=$cate->lidx?>','',1);"><?=$cate->lname?></a>
-					&nbsp;>&nbsp;
-					<a onclick="getPrdt('m<?=$cate->midx?>','',1);"><?=$cate->mname?></a>
-					&nbsp;>&nbsp;
-					<a onclick="getPrdt('s<?=$cate->sidx?>','',1);"><?=$cate->sname?></a>
+					<?php if ($cate->lidx == 'c') :?>
+						<a onclick="getPrdt('c','',1);">클리어런스</a>
+					<?php else :?>
+						<a onclick="getPrdt('l<?=$cate->lidx?>','',1);"><?=$cate->lname?></a>
+						&nbsp;>&nbsp;
+						<a onclick="getPrdt('m<?=$cate->midx?>','',1);"><?=$cate->mname?></a>
+						&nbsp;>&nbsp;
+						<a onclick="getPrdt('s<?=$cate->sidx?>','',1);"><?=$cate->sname?></a>
+					<?php endif;?>
 				</div>
 			</div>
 			<div id="product_img_wrap" class="col-xs-12 col-sm-6">
