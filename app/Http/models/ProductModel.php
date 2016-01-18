@@ -48,13 +48,11 @@ class ProductModel
 		$table = $my_data[0]->mall_id.'_'.$my_data[0]->mall_kind;
 		$prodInc = $my_data[0]->prod_id;
 		
-		DB::connection('sqlsrv');
-
-		$query = DB::select("SELECT * FROM cgProdMain_$table WHERE ProdInc = ?", array($prodInc));
+		$query = DB::connection('sqlsrv')->select("SELECT * FROM cgProdMain_$table WHERE ProdInc = ?", array($prodInc));
 		$ms_data_prod = $query[0];
 		$ms_data_img = array($ms_data_prod->PimgD);
 			
-		$query = DB::select("SELECT * FROM cgColorMain_$table WHERE ProdInc = ?", array($prodInc));
+		$query = DB::connection('sqlsrv')->select("SELECT * FROM cgColorMain_$table WHERE ProdInc = ?", array($prodInc));
 		$ms_data_color = array();
 		foreach($query as $list)
 		{
@@ -71,15 +69,15 @@ class ProductModel
 			}
 		}
 			
-		$query = DB::select("SELECT Distinct SizeTxt FROM cgSizeMain_$table WHERE ProdInc = ?", array($prodInc));
+		$query = DB::connection('sqlsrv')->select("SELECT Distinct SizeTxt FROM cgSizeMain_$table WHERE ProdInc = ?", array($prodInc));
 		$ms_data_size = array();
 		foreach($query as $list)
 			array_push($ms_data_size, $list->SizeTxt);
 			
-		$query = DB::select("SELECT Story FROM cgStoryMain_$table WHERE ProdInc = ?", array($prodInc));
+		$query = DB::connection('sqlsrv')->select("SELECT Story FROM cgStoryMain_$table WHERE ProdInc = ?", array($prodInc));
 		$ms_data_story = $query[0]->story;
 		
-		$query = DB::select("SELECT Still FROM cgStillMain_$table WHERE ProdInc = ?", array($prodInc));
+		$query = DB::connection('sqlsrv')->select("SELECT Still FROM cgStillMain_$table WHERE ProdInc = ?", array($prodInc));
 		while ($temp = mssql_fetch_array($query))
 			array_push($ms_data_img, $list->Still);	
 		
