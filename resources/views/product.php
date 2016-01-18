@@ -51,8 +51,13 @@
 						가격
 					</div>
 					<div class="f_r">
-						<!-- <span class="before_price bo_color">￦134,000</span> -->
+						<?php if ($cate->lidx == 'c') :?>
+							<span class="before_price bo_color">￦<?=$result['priceO']?></span>
+						<?php endif;?>
 						<span class="after_price f_b">￦<?=$result['price']?></span>
+						<?php if ($cate->lidx == 'c') :?>
+							<span class="after_price f_b">(<?=$result['saleP']?>% OFF)</span>
+						<?php endif;?>
 					</div>
 				</li>
 				<li class="pd_li li_underline cl_b">
