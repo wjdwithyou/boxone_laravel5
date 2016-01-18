@@ -69,7 +69,7 @@ label{font-weight:normal}
 #wrap{}
 #header{background-color:#fff}
 #container{}
-#top{margin-top:32px;text-align:center;position:relative;}
+#top{padding-top:32px;text-align:center;position:relative;}
 #content{margin-top:32px}
 #footer{margin-bottom:16px}
 .inner{max-width:1024px;margin:0 auto;padding-left:8px;padding-right:8px}

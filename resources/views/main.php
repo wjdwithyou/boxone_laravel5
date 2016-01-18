@@ -21,7 +21,7 @@
 						<h2 class="slide_h2 bo_colorW">해외직구 상품을 한자리에!</h2>
 						<h2 class="slide_h2 bo_colorW">복잡한 회원가입 업이 간편하게 로그인하세요.</h2>
 						<hr class="slide_hr">
-						<button type="button" class="slide_btn bo_btnW" onclick="">로그인</button>
+						<button type="button" class="slide_btn bo_btnW" onclick='location.href="<?=$adr_ctr ?>Login/index"'>로그인</button>
 					</div>
 				</div>
 				<div id="c2" class="slide">
@@ -30,7 +30,7 @@
 						<h2 class="slide_h2 bo_colorW">해외직구 상품을 한자리에!</h2>
 						<h2 class="slide_h2 bo_colorW">복잡한 회원가입 업이 간편하게 로그인하세요.</h2>
 						<hr class="slide_hr">
-						<button type="button" class="slide_btn bo_btnW" onclick="">로그인</button>
+						<button type="button" class="slide_btn bo_btnW" onclick='location.href="<?=$adr_ctr ?>Login/index"'>로그인</button>
 					</div>
 				</div>
 				<div id="c3" class="slide">
@@ -39,7 +39,7 @@
 						<h2 class="slide_h2 bo_colorW">해외직구 상품을 한자리에!</h2>
 						<h2 class="slide_h2 bo_colorW">복잡한 회원가입 업이 간편하게 로그인하세요.</h2>
 						<hr class="slide_hr">
-						<button type="button" class="slide_btn bo_btnW" onclick="">로그인</button>
+						<button type="button" class="slide_btn bo_btnW" onclick='location.href="<?=$adr_ctr ?>Login/index"'>로그인</button>
 					</div>
 				</div>
 			</div>
