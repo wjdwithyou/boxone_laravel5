@@ -43,7 +43,7 @@ class HotdealProductModel
 		if(	!(	inputErrorCheck($prod_idx, 'prod_idx')))
 			return ;
 
-		$my_data = DB::select('SELECT * FROM product WHERE idx =?',array($prod_idx));
+		$my_data = DB::select('SELECT * FROM hotdeal_product WHERE idx =?',array($prod_idx));
 			
 		$table = $my_data[0]->mall_id.'_'.$my_data[0]->mall_kind;
 		$prodInc = $my_data[0]->prod_id;

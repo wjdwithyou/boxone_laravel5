@@ -85,7 +85,7 @@ if (isset($_COOKIE['need_login'])) {
 		<ul id="main_menu" class="li_set f_c">
 			<li><a href="<?=$adr_ctr?>Bestranking/index">베스트랭킹</a></li>
 			<span class="li_bar4"></span>
-			<li id="main_menu0"><a href="<?=$adr_ctr?>Shoppingbox/index">클리어런스</a></li>
+			<li id="main_menu0"><a href="<?=$adr_ctr?>Shoppingbox/index?cate=c">클리어런스</a></li>
 			<li id="main_menu1" class="menu_hover"><a href="<?=$adr_ctr?>Shoppingbox/index?cate=l1">여성의류</a></li>
 			<li id="main_menu2" class="menu_hover"><a href="<?=$adr_ctr?>Shoppingbox/index?cate=l2">남성의류</a></li>
 			<li id="main_menu3" class="menu_hover"><a href="<?=$adr_ctr?>Shoppingbox/index?cate=l3">유아동</a></li>
