@@ -66,12 +66,12 @@ $.ajaxSetup({
 <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=onLoadCallback" async defer></script>
 
 <script type="text/javascript" src="<?=$adr_js?>common.js"></script>
+<link rel="stylesheet" href="<?=$adr_css?>common.css">
 <!-- page 관련 css, js -->
 <link rel="stylesheet" href="<?=$adr_css?><?=$page?>.css">
 <script type="text/javascript" src="<?=$adr_js?><?=$page?>.js"></script>
 
 <!-- header,footer 관련 css, js -->
-<link rel="stylesheet" href="<?=$adr_css?>common.css">
 <link rel="stylesheet" href="<?=$adr_css?>login.css">
 <link rel="stylesheet" href="<?=$adr_css?>calculator.css">
 <link rel="stylesheet" href="<?=$adr_css?>deliver.css">

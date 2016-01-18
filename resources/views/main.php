@@ -54,15 +54,15 @@
 									</div>
 								</div>
 								<div class="imglist_desc_wrap">
-									<div class="imglist_desc1 t_o bo_color2">
+									<div class="imglist_desc1 ta_c t_o bo_color2">
 										<?=$list->brand?>
 									</div>
-									<div class="imglist_desc2 limit_line limit_line_2">
+									<div class="imglist_desc2 ta_c limit_line limit_line_2">
 										<div>
 											<?=$list->name?>
 										</div>
 									</div>
-									<div class="imglist_desc3 t_o">
+									<div class="imglist_desc3 ta_c t_o">
 										￦<?=$list->fPrice?>
 									</div>
 								</div>
@@ -86,15 +86,15 @@
 							</div>
 						</div>
 						<div class="imglist_desc_wrap">
-							<div class="imglist_desc1 t_o bo_color2">
+							<div class="imglist_desc1 ta_c t_o bo_color2">
 								<?=$list->brand?>
 							</div>
-							<div class="imglist_desc2 limit_line limit_line_2">
+							<div class="imglist_desc2 ta_c limit_line limit_line_2">
 								<div>
 									<?=$list->name?>
 								</div>
 							</div>
-							<div class="imglist_desc3 t_o">
+							<div class="imglist_desc3 ta_c t_o">
 								￦<?=$list->fPrice?>
 							</div>
 						</div>
