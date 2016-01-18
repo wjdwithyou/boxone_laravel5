@@ -25,16 +25,9 @@
 				</div>
 				<div id="br_content" class="mg_t16">
 					<div id="br_slide">
-						<div class="slide"><a href=""><img src="<?=$adr_img?>site/1.png" title="1."></a></div>
-						<div class="slide"><a href=""><img src="<?=$adr_img?>site/2.png" title="2."></a></div>
-						<div class="slide"><a href=""><img src="<?=$adr_img?>site/3.png" title="3."></a></div>
-						<div class="slide"><a href=""><img src="<?=$adr_img?>site/4.png" title="4."></a></div>
-						<div class="slide"><a href=""><img src="<?=$adr_img?>site/5.png" title="5"></a></div>
-						<div class="slide"><a href=""><img src="<?=$adr_img?>site/6.png" title="6."></a></div>
-						<div class="slide"><a href=""><img src="<?=$adr_img?>site/7.png" title="7."></a></div>
-						<div class="slide"><a href=""><img src="<?=$adr_img?>site/8.png" title="8."></a></div>
-						<div class="slide"><a href=""><img src="<?=$adr_img?>site/9.png" title="9."></a></div>
-						<div class="slide"><a href=""><img src="<?=$adr_img?>site/10.png" title="10."></a></div>
+						<?php for ($i = 0 ; $i < count($siteList) ; $i++) :?>
+							<div class="slide"><a href="<?=$siteList[$i]->website_link?>"><img src="<?=$adr_img?>site/<?=$siteList[$i]->idx?>.png" title="<?=($i+1)?>."></a></div>
+						<?php endfor;?>
 					</div>
 				</div>
 			</div>
@@ -45,12 +38,12 @@
 				</div>
 				<div id="hd_content" class="mg_t16 f_c">
 					<div id="hd_slide">
-						<?php foreach ($prdt as $list) :?>
+						<?php foreach ($hotList as $list) :?>
 						<div class="slide">
 							<div class="imglist_div">
 								<div class="imglist_img img_center">
 									<div class="img_center_inner">
-										<a href="<?=$adr_ctr ?>Shoppingbox/detail?idx=<?=$list->idx?>"><img src="<?=$list->img?>"></a>
+										<a href="<?=$adr_ctr?>Hotdeal/productDetail?idx=<?=$list->idx?>"><img src="<?=$list->img?>"></a>
 									</div>
 								</div>
 								<div class="imglist_desc_wrap">
@@ -78,7 +71,7 @@
 					<p class="top_p bo_color2">원하는 상품을 사이트 구별없이 검색하고 가격비교 할 수 있습니다.</p>
 				</div>
 				<div id="sb_content" class="mg_t16 f_c">
-					<?php foreach ($prdt as $list) :?>
+					<?php foreach ($prdtList as $list) :?>
 					<div class="imglist_div grid grid_432">
 						<div class="imglist_img img_center">
 							<div class="img_center_inner">

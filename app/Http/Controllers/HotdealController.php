@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\models\HotdealTargetModel;
 use App\Http\models\CategoryModel;
+use App\Http\models\HotdealProductModel;
 use Request;
 
 class HotdealController extends Controller {
@@ -29,6 +30,22 @@ class HotdealController extends Controller {
 	{
 		$page = 'hotdeal';
 		return view($page, array('page' => $page));
+	}
+	
+	
+	public function productDetail()
+	{
+		$cateModel = new CategoryModel();
+		$hotPrdtModel = new HotdealProductModel();
+	
+		$idx = Request::input('idx');
+		$result = $hotPrdtModel->getInfoSingle($idx);
+	
+		$cateS = $result['data']['cate'];
+		$data = $cateModel->downToUp($cateS);
+	
+		$page = 'product';
+		return view($page, array('page' => $page, 'result' => $result['data'], 'cate' => $data['data'][0]));
 	}
 	
 	
