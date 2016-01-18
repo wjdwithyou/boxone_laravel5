@@ -10,5 +10,6 @@
 #c2{background:url(https://s3-ap-northeast-1.amazonaws.com/boxone-image/main_image_2.jpg) center;background-size:cover}
 #c3{background:url(https://s3-ap-northeast-1.amazonaws.com/boxone-image/main_image_3.jpg) center;background-size:cover}
 
+#hd_wrap{padding-top:32px;padding-bottom:32px;background-color:#f8f7f7}
 #br_top{text-align:center}
 #hd_content .bx-wrapper{max-width:1024px !important}

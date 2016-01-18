@@ -70,7 +70,7 @@ label{font-weight:normal}
 #content{margin-top:32px}
 #footer{margin-bottom:16px}
 .inner{max-width:1024px;margin:0 auto;padding-left:8px;padding-right:8px}
-.m_inner{max-width:768px;margin:0 auto;padding-left:8px;padding-right:8px}
+.m_inner{max-width:768px;margin:0 auto}
 .input_div{margin-top:8px}
 .input_div input,.input_div button{width:100%}
 .input_div input:not([type='file']),.input_div button{padding:12px;font-size:16px}
@@ -107,7 +107,9 @@ label{font-weight:normal}
 .bo_color1{color:#f15a63}
 .bo_color2{color:#8c8b8b}
 .bo_color3{color:#8352fa}
-.bo_color4{color:##A886FC}
+.bo_color4{color:#A886FC}
+.bo_colorW{color:#fff}
+.bo_colorB{color:#000}
 .bo_btn1{border:1px solid #f15a63;background-color:#fff;color:#f15a63}
 .bo_btn1:hover{background-color:#f15a63;color:#fff}
 .bo_btn2{border:1px solid #f15a63;background-color:#f15a63;color:#fff}
