@@ -50,7 +50,7 @@ class ProductModel
 		
 		DB::connection('sqlsrv');
 
-		$query = DB::select("SELECT * FROM cgProdMain_$table WHERE ProdInc = ?", array($prdInc));
+		$query = DB::select("SELECT * FROM cgProdMain_$table WHERE ProdInc = ?", array($prodInc));
 		$ms_data_prod = $query[0];
 		$ms_data_img = array($ms_data_prod->PimgD);
 			
