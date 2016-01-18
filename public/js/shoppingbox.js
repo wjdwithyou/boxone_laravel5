@@ -10,7 +10,7 @@ $(document).ready(function() {
 		else
 		{
 			var logined = $("#logined").val();
-			if (logined == 0)
+			if (logined == "0")
 				location.href = adr_ctr + "Login/index";
 			else
 				getPrdt('','5','1');
