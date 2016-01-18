@@ -18,7 +18,8 @@ if (isset($_COOKIE['need_login'])) {
 			<ul class="top_li_set li_set">
 				<?php if (!$logined): ?>
 				<!-- 로그인 이전 헤더 -->
-				<li><a onclick="moveLogin();">로그인</a></li>
+				<?php $sph = "http://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]?>
+				<li><a onclick="moveLogin('<?=$sph?>');">로그인</a></li>
 				<span class="li_bar"></span>
 				<li><a href="<?=$adr_ctr?>Login/join">회원가입</a></li>
 				<!-- //로그인 이전 헤더 -->

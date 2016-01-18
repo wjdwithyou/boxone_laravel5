@@ -99,7 +99,7 @@ class LoginController extends Controller {
 		
 		// 로그인 된 상태로 변환
 		if ($result['code'] == 1)
-		{
+		{	
 			if (session_id() == '')
 				session_start();
 			$_SESSION['idx'] = $result['data'][0]->idx;
@@ -349,30 +349,94 @@ class LoginController extends Controller {
 		echo json_encode($result);
 	}
 	
-	public function index()
-	{
+	public function index(){
+		// 20160115 J.Style
+		// If session exist, redirect to myPage.
+		if (session_id() == '')
+			session_start();
+		
+		if (isset($_SESSION['idx'])){
+			$mbModel = new MemberModel();
+				
+			$nickname = $_SESSION['nickname'];
+			$result = $mbModel->getInfoByNickname($nickname);
+				
+			$page = 'mypage';
+			return view($page, array('page' => $page, 'result' => $result['data'][0]));
+		}
+		// J.Style end
+		
+		$sph = Request::input('sph');
+		
 		$page = 'login';
-		return view($page, array('page' => $page));
+		return view($page, array('page' => $page, 'spb' => $sph));
 	}
-	public function join()
-	{
+	public function join(){
+		// 20160115 J.Style
+		// If session exist, redirect to myPage.
+		if (session_id() == '')
+			session_start();
+		
+		if (isset($_SESSION['idx'])){
+			$mbModel = new MemberModel();
+		
+			$nickname = $_SESSION['nickname'];
+			$result = $mbModel->getInfoByNickname($nickname);
+		
+			$page = 'mypage';
+			return view($page, array('page' => $page, 'result' => $result['data'][0]));
+		}
+		// J.Style end
+		
 		$page = 'join';
 		return view($page, array('page' => $page));
 	}
-	public function login_findpw()
-	{
+	public function login_findpw(){
+		// 20160115 J.Style
+		// If prev page doesn't exist, redirect to main page.
+		
+		// TODO:	 session exist + prev exist?
+		
+		if (!isset($_SERVER['HTTP_REFERER'])){
+			header("Location: http://".$_SERVER['HTTP_HOST']);
+			die();
+		}
+		// J.Style end
+		
 		$page = 'login_findpw';
 		return view($page, array('page' => $page));
 	}
 	
 	public function login_changepw()
 	{
+		// 20160118 J.Style
+		// If prev page doesn't exist, redirect to main page.
+		
+		// TODO:	 session exist + prev exist?
+		
+		if (!isset($_SERVER['HTTP_REFERER'])){
+			header("Location: http://".$_SERVER['HTTP_HOST']);
+			die();
+		}
+		// J.Style end
+		
 		$eid = Request::input('eid');
 		$page = 'login_changepw';
 		return view($page, array('page' => $page, 'eid' => $eid));
 	}
 	public function login_addinfo()
 	{
+		// 20160118 J.Style
+		// If prev page doesn't exist, redirect to main page.
+		
+		// TODO:	 session exist + prev exist?
+		
+		if (!isset($_SERVER['HTTP_REFERER'])){
+			header("Location: http://".$_SERVER['HTTP_HOST']);
+			die();
+		}
+		// J.Style end
+		
 		$type = Request::input('type');
 		$eid = Request::input('eid');
 		$img = Request::input('img');

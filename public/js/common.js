@@ -49,8 +49,8 @@ function toggleSearch(){
 	$("#header_search").toggle();
 }
 
-function moveLogin(){
-	var url = adr_ctr + 'Login/index';
+function moveLogin(sph){
+	var url = adr_ctr + 'Login/index?sph=' + sph;
 	$(location).attr('href',url);
 }
 
@@ -72,6 +72,8 @@ function logout()
 		async: false,
 		success: function(result)
 		{
+			//console.log(result);
+			//alert (result);
 			alert ("안녕히가세요 빠빠");
 			location.reload(false);
 		},	

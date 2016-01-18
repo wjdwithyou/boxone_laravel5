@@ -31,7 +31,7 @@
 						<label for="save_eid"><span></span>아이디 저장</label>
 					</div>
 					<div class="input_div">
-						<button type="button" id="login_btn" class="bo_btn2 br_25" onclick="justLogin();">로그인</button>
+						<button type="button" id="login_btn" class="bo_btn2 br_25" onclick="justLogin('<?=$spb?>');">로그인</button>
 					</div>
 				</div>
 				<div>

@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\models\MemberModel;
 use Request;
-use Utility
+
 
 class MypageController extends Controller {
 
@@ -14,7 +14,7 @@ class MypageController extends Controller {
 	 * 마이페이지 처음
 	 */
 	public function index()
-	{
+	{		
 		$memberModel = new MemberModel();
 		$util = new Utility();
 		
