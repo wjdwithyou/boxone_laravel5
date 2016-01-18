@@ -12,15 +12,15 @@ $(window).load(function(){
 
 function collapseMenu(e){
 	if(e.siblings(".collapse_menu").is(":visible")){
-		e.children("img").attr("src", adr_img + "arrow_down.png");
+		e.children("img").attr("src", adr_img + "collapse_p.png");
 		e.siblings(".collapse_menu").hide();
 	}
 	else{
 		if($(".collapse_menu").is(":visible")){
 			$(".collapse_menu").hide();
-			$(".sm_menu_arrow").attr("src", adr_img + "arrow_down.png");
+			$(".sm_menu_arrow").attr("src", adr_img + "collapse_p.png");
 		}
-		e.children("img").attr("src", adr_img + "arrow_up.png");
+		e.children("img").attr("src", adr_img + "collapse_m.png");
 		e.siblings(".collapse_menu").show();
 	}
 	

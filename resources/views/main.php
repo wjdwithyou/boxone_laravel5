@@ -15,9 +15,33 @@
 	<div id="container">
 		<div id="content">
 			<div id="main_slide">
-				<div id="c1" class="slide"></div>
-				<div id="c2" class="slide"></div>
-				<div id="c3" class="slide"></div>
+				<div id="c1" class="slide">
+					<div class="slide_over">
+						<h1 class="slide_h1 fw_b bo_colorW">박스원</h1>
+						<h2 class="slide_h2 bo_colorW">해외직구 상품을 한자리에!</h2>
+						<h2 class="slide_h2 bo_colorW">복잡한 회원가입 업이 간편하게 로그인하세요.</h2>
+						<hr class="slide_hr">
+						<button type="button" class="slide_btn bo_btnW" onclick="">로그인</button>
+					</div>
+				</div>
+				<div id="c2" class="slide">
+					<div class="slide_over">
+						<h1 class="slide_h1 fw_b bo_colorW">박스원</h1>
+						<h2 class="slide_h2 bo_colorW">해외직구 상품을 한자리에!</h2>
+						<h2 class="slide_h2 bo_colorW">복잡한 회원가입 업이 간편하게 로그인하세요.</h2>
+						<hr class="slide_hr">
+						<button type="button" class="slide_btn bo_btnW" onclick="">로그인</button>
+					</div>
+				</div>
+				<div id="c3" class="slide">
+					<div class="slide_over">
+						<h1 class="slide_h1 fw_b bo_colorW">박스원</h1>
+						<h2 class="slide_h2 bo_colorW">해외직구 상품을 한자리에!</h2>
+						<h2 class="slide_h2 bo_colorW">복잡한 회원가입 업이 간편하게 로그인하세요.</h2>
+						<hr class="slide_hr">
+						<button type="button" class="slide_btn bo_btnW" onclick="">로그인</button>
+					</div>
+				</div>
 			</div>
 			<div id="br_wrap" class="inner">
 				<div class="ta_c mg_t32">
@@ -55,7 +79,7 @@
 									</div>
 								</div>
 								<div class="imglist_desc3 ta_c t_o">
-									<strike>￦<?=$list->fPriceO?></strike> ￦<?=$list->fPriceS?>
+									<strike class="bo_color2">￦<?=$list->fPriceO?></strike> ￦<?=$list->fPriceS?>
 								</div>
 							</div>
 						</div>
