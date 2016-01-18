@@ -16,6 +16,7 @@ $(document).ready(function(){
 });
 
 var adr_ctr = $("#adr_ctr").val();
+var adr_img = $("#adr_img").val();
 
 //chrome, firefox 스크롤바 width 무시하기
 function checkScrollBars() {
@@ -31,7 +32,27 @@ function checkScrollBars() {
 	}
 }
 
-function toggleDialog(d, n){
+function toggleDialog(type, d, n){
+	switch(type){
+		case 1:
+			$("#bo_dialog_content").load(adr_ctr + "deliver");
+			break;
+		case 2:
+			$("#bo_dialog_content").load(adr_ctr + "calculator");
+			break;
+		case 3:
+			$("#bo_dialog_content").load(adr_ctr + "love");
+			break;
+		case 4:
+			$("#bo_dialog_content").load(adr_ctr + "bookmark");
+			break;
+		case 5:
+			$("#bo_dialog_content").load(adr_ctr + "recently");
+			break;
+		default:
+			alert("잘못된 접근입니다.");
+			break;
+	}
 	if(d == "l"){
 		$("#bo_dialog").css({"left": 0, "right": ""});
 		$(".bo_dialog_arrow").css({"left": 0, "right": ""});

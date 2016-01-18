@@ -4,6 +4,16 @@ $(document).ready(function(){
 		$("#eid").val(cookie_eid);
 		$("#save_eid").prop("checked",true);
 	}
+	
+	$("#eid").keyup(function(e){
+		if (e.keyCode == 13)
+			justLogin();
+	});	
+	
+	$("#pw").keyup(function(e){
+		if (e.keyCode == 13)
+			justLogin();
+	});
 });
 
 function cookieEid(){
@@ -22,9 +32,9 @@ function cookieEid(){
  * 받기(php) -> 사이트 로그인/가입
  */
 var naver = NaverAuthorize({
-	client_id : "_uNsCw6pC_ItNTWfmVUD",
+	client_id : "o08PVHiq6vxd5Ub23ZVG",
     redirect_uri : adr_ctr+"Login/naverLogin",
-    client_secret : "0Mo8jpE38A"
+    client_secret : "Z7z534HWCb"
 });
 
 function naverLogin()
@@ -193,7 +203,7 @@ function socialLogin(type, id, email, nickname, img)
 			else
 			{
 				alert ("첫 로그인이시네요. 추가정보를 입력해주세요.");
-				$(opener.location).attr('href', adr_ctr + 'Login/login_addinfo?type=' + type + '&id=' + id + '&img=' + img);
+				$(location).attr('href', adr_ctr + 'Login/login_addinfo?type=' + type + '&id=' + id + '&email=' + email + '&nickname=' + nickname + '&img=' + img);
 			}
 			 
 		},

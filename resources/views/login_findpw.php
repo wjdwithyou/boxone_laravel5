@@ -14,7 +14,7 @@
 	<div id="container">
 		<div id="top">
 			<h1 class="top_h1">비밀번호 찾기</h1>
-			<h3 class="top_h3 bo_color2">인증번호가 입력하신 이메일 계정으로 전송됩니다.</h3>
+			<p class="top_p bo_color2">인증번호가 입력하신 이메일 계정으로 전송됩니다.</p>
 		</div>
 		<div id="content">
 			<div class="input_wrap">

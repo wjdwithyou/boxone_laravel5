@@ -32,6 +32,22 @@ class HotdealController extends Controller {
 	}
 	
 	
+	public function productDetail()
+	{
+		$cateModel = new CategoryModel();
+		$prdtModel = new ProductModel();
+	
+		$idx = Request::input('idx');
+		$result = $prdtModel->getInfoSingle($idx);
+	
+		$cateS = $result['data']['cate'];
+		$data = $cateModel->downToUp($cateS);
+	
+		$page = 'product';
+		return view($page, array('page' => $page, 'result' => $result['data'], 'cate' => $data['data'][0]));
+	}
+	
+	
 	/*
 	 * 2016.01.14
 	 * 작성자 : 박용호

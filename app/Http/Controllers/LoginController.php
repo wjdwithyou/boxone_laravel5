@@ -26,8 +26,8 @@ class LoginController extends Controller {
 		else
 		{
 			$grant_type = "authorization_code";
-			$client_id = "_uNsCw6pC_ItNTWfmVUD";
-			$client_secret = "0Mo8jpE38A";
+			$client_id = "o08PVHiq6vxd5Ub23ZVG";
+			$client_secret = "Z7z534HWCb";
 			$code = Request::input('code');
 			$state = Request::input('state');
 			
@@ -438,9 +438,12 @@ class LoginController extends Controller {
 		// J.Style end
 		
 		$type = Request::input('type');
-		$eid = Request::input('eid');
+		$id = Request::input('id');
+		$email = Request::input('email');
+		$nickname = Request::input('nickname');
 		$img = Request::input('img');
+		
 		$page = 'login_addinfo';
-		return view($page, array('page' => $page, 'type' => $type, 'eid' => $eid, 'img' => $img));
+		return view($page, array('page' => $page, 'type' => $type, 'id' => $id, 'email' => $email, 'nickname' => $nickname, 'img' => $img));
 	}
 }

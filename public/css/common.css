@@ -14,9 +14,11 @@ label{font-weight:normal}
 .c_b{clear:both}
 .f_c{*zoom:1}
 .f_c:after{display:block;visibility:hidden;height:0;font-size:0;clear:both;content:''}
+.ta_c{text-align:center}
 .br_50{border-radius:50%}
 .br_25{border-radius:25px}
 .br_20{border-radius:20px}
+.font_11{font-size:11px}
 .limit_line{display:-webkit-box;overflow:hidden;text-overflow:ellipsis;line-height:1.2em;-webkit-box-orient:vertical;word-wrap:break-word}
 .limit_line_2{height:2.4em;-webkit-line-clamp:2}
 .limit_line_3{height:3.6em;-webkit-line-clamp:3}
@@ -24,6 +26,12 @@ label{font-weight:normal}
 .img_14{width:14px;height:14px}
 .img_24{width:24px;height:24px}
 .img_32{width:32px;height:32px}
+.pd_lr8{padding-left:8px;padding-right:8px}
+.mg_lr8{margin-left:8px;margin-right:8px}
+.mg_t8{margin-top:8px}
+.mg_t16{margin-top:16px}
+.mg_t32{margin-top:32px}
+.mg_t64{margin-top:64px}
 .grid{float:left;position:relative;min-height:1px}
 .grid_h{width:50%}
 .li_set{position:relative}
@@ -37,7 +45,7 @@ label{font-weight:normal}
 .img_center{position:relative;}
 .img_center:before{content:"";display:block;}
 .img_center_inner{position:absolute;top:0;left:0;bottom:0;right:0;text-align:center;white-space:nowrap;}
-.img_center_inner:before{content:'';display:inline-block;height:100%;vertical-align:middle;margin-right:-0.35em;}
+/* .img_center_inner:before{content:'';display:inline-block;height:100%;vertical-align:middle;margin-right:-0.35em;} */
 .img_center_inner a img{max-width:100%;max-height:100%;vertical-align:middle;}
 .imglist_img {padding-top:100%;}/* ratio */
 .imglist_desc_wrap{margin-top:16px;}
@@ -125,7 +133,7 @@ label{font-weight:normal}
 .bo_badge{padding-left:5px;padding-right:5px;border-radius:25px;background-color:#F15A63;color:#fff}
 .top_h1{font-size:23px;font-weight:bold}
 .top_h2{font-size:16px;font-weight:bold}
-.top_h3{margin-top:8px;font-size:11px}
+.top_p{margin-top:8px;font-size:11px}
 .top_hr{width:200px;margin:16px auto;border-top:1px solid #F15A63}
 
 /* Media tag (break point:1024~768~420) */
@@ -152,8 +160,9 @@ label{font-weight:normal}
 }
 
 .sub_menu{width:120px;margin:8px 16px;text-align:left}
-.sub_menu li:first-of-type{font-size:14px;font-weight:bold}
-.sub_menu li:not(:first-of-type){margin-top:4px;font-size:11px;color:#8C8B8B}
+.sub_menu li:first-of-type a{font-size:14px;font-weight:bold}
+.sub_menu li:not(:first-of-type){margin-top:4px}
+.sub_menu li:not(:first-of-type) a{margin-top:4px;font-size:11px;font-weight:normal;color:#8C8B8B}
 .sub_menu_img{margin-top:8px;margin-left:32px;padding-left:32px;border-left:1px solid #ccc}
 .sub_menu_img li a img{height:125px}
 .sub_menu_img li:nth-of-type(2){margin-top:16px}

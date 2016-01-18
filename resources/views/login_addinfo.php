@@ -7,7 +7,7 @@
 
 <body>
 <input type="hidden" id="temp_type" value="<?=$type?>">
-<input type="hidden" id="temp_id" value="<?=$eid?>">
+<input type="hidden" id="temp_id" value="<?=$id?>">
 <input type="hidden" id="temp_img" value="<?=$img?>">
 
 <div id="wrap">
@@ -18,19 +18,19 @@
 	<div id="container">
 		<div id="top">
 			<h1 class="top_h1">추가 정보 입력</h1>
-			<h3 class="top_h3 bo_color2">사이트 사용을 위해 간단한 추가 정보를 입력해 주세요.</h3>
+			<p class="top_p bo_color2">사이트 사용을 위해 간단한 추가 정보를 입력해 주세요.</p>
 		</div>
 		<div id="content">
 			<div class="input_wrap">
 				<div>
 					<div class="input_div">
-						<input type="email" id="eid" class="bo_input1" placeholder="이메일">
+						<input type="email" id="eid" class="bo_input1" placeholder="이메일" value="<?=$email?>">
 					</div>
 					<div>
 						<span id="eid_input_msg" class="input_msg bo_color1"></span>
 					</div>
 					<div class="input_div">
-						<input type="text" id="nick" class="bo_input1" placeholder="닉네임">
+						<input type="text" id="nick" class="bo_input1" placeholder="닉네임" value="<?=$nickname?>">
 					</div>
 					<div>
 						<span id="nick_input_msg" class="input_msg bo_color1"></span>

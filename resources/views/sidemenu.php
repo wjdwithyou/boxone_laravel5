@@ -8,10 +8,10 @@
 <div id="wrap">
 	<div id="container">
 		<div id="sm_content" class="m_inner">
-			<nav class="f_c">
+			<nav class="pd_lr8 f_c">
 				<div class="f_l">
-					<ul class="li_set">
-						<?php if ($logined): ?>
+					<ul class="sm_li_set li_set">
+						<?php if (!$logined): ?>
 						<!-- 로그인 이전 헤더 -->
 						<li><a onclick="moveLogin();">로그인</a></li>
 						<span class="li_bar2"></span>
@@ -21,8 +21,8 @@
 						<!-- 로그인 후 헤더 -->
 						<li>
 							<a href="<?=$adr_ctr?>Mypage/index">
-								<img src="<?= $adr_img?>profile/default.png" id="sm_profile" class="img_32 br_50">
-								<span>김용한 님</span>
+								<img src="<?= $adr_img?>profile/<?=$img?>" id="sm_profile" class="img_32 br_50">
+								<span><?=$nickname?> 님</span>
 							</a>
 						</li>
 						<span class="li_bar2"></span>
@@ -31,26 +31,86 @@
 					</ul>
 				</div>
 				<div class="f_r">
-					<a onclick=""><img src="<?=$adr_img?>x.png" id="sm_quit_btn"></a>
+					<a href="<?=$bef?>"><img src="<?=$adr_img?>x.png" id="sm_quit_btn"></a>
 				</div>
 			</nav>
-			<nav class="sm_div">
-				
-			</nav>
-			<nav>
-				<ul>
-					<li class="sm_div"></li>
-					<li class="sm_div"></li>
-					<li class="sm_div"></li>
-					<li class="sm_div"></li>
-					<li class="sm_div"></li>
-					<li class="sm_div"></li>
-					<li class="sm_div"></li>
-					<li class="sm_div"></li>
-					<li class="sm_div"></li>
+			<nav class="">
+				<ul class="sm_li_set2 li_set f_c">
+					<li><a onclick=""><img src="<?=$adr_img?>header_top_love.png" class="img_14"><p class="mg_t8 font_11">찜한상품</p></a></li>
+					<li><a onclick=""><img src="<?=$adr_img?>header_top_bookmark.png" class="img_14"><p class="mg_t8 font_11">즐겨찾기</p></a></li>
+					<li><a onclick=""><img src="<?=$adr_img?>header_top_recently.png" class="img_14"><p class="mg_t8 font_11">최근본상품</p></a></li>
+					<li><a onclick=""><img src="<?=$adr_img?>header_cal.png" class="img_14"><p class="mg_t8 font_11">관세계산</p></a></li>
+					<li><a onclick=""><img src="<?=$adr_img?>header_top_truck.png" class="img_14"><p class="mg_t8 font_11">배송통관</p></a></li>
 				</ul>
 			</nav>
+			<nav class="mg_t16">
+				<ul>
+					<li class="sm_menu_li1">
+						<a href="<?=$adr_ctr?>Bestranking/index">베스트랭킹</a>
+					</li>
+					<li class="sm_menu_li1">
+						<a href="<?=$adr_ctr?>Shoppingbox/index">쇼핑박스</a>
+					</li>
+					<li class="sm_menu_li2">
+						<a onclick="collapseMenu($(this))">
+							<span class="bo_color2">클리어런스</span>
+						</a>
+					</li>
+					<li class="sm_menu_li2">
+						<a onclick="collapseMenu($(this))">
+							<span class="bo_color2">여성의류</span>
+							<img src="<?=$adr_img?>arrow_down.png" class="sm_menu_arrow">
+						</a>
+						<div id="sm_menu1" class="collapse_menu f_c" hidden></div>
+					</li>
+					<li class="sm_menu_li2">
+						<a onclick="collapseMenu($(this))">
+							<span class="bo_color2">남성의류</span>
+							<img src="<?=$adr_img?>arrow_down.png" class="sm_menu_arrow">
+						</a>
+						<div id="sm_menu2" class="collapse_menu f_c" hidden></div>
+					</li>
+					<li class="sm_menu_li2">
+						<a onclick="collapseMenu($(this))">
+							<span class="bo_color2">유아동</span>
+							<img src="<?=$adr_img?>arrow_down.png" class="sm_menu_arrow">
+						</a>
+						<div id="sm_menu3" class="collapse_menu f_c" hidden></div>
+					</li>
+					<li class="sm_menu_li2">
+						<a onclick="collapseMenu($(this))">
+							<span class="bo_color2">패션잡화</span>
+							<img src="<?=$adr_img?>arrow_down.png" class="sm_menu_arrow">
+						</a>
+						<div id="sm_menu4" class="collapse_menu f_c" hidden></div>
+					</li>
+					<li class="sm_menu_li2">
+						<a onclick="collapseMenu($(this))">
+							<span class="bo_color2">주방생활취미</span>
+							<img src="<?=$adr_img?>arrow_down.png" class="sm_menu_arrow">
+						</a>
+						<div id="sm_menu5" class="collapse_menu f_c" hidden></div>
+					</li>
+					<li class="sm_menu_li2">
+						<a onclick="collapseMenu($(this))">
+							<span class="bo_color2">디지털가전</span>
+							<img src="<?=$adr_img?>arrow_down.png" class="sm_menu_arrow">
+						</a>
+						<div id="sm_menu6" class="collapse_menu f_c" hidden></div>
+					</li>
+					<li class="sm_menu_li2">
+						<a onclick="collapseMenu($(this))">
+							<span class="bo_color2">뷰티헬스식품</span>
+							<img src="<?=$adr_img?>arrow_down.png" class="sm_menu_arrow">
+						</a>
+						<div id="sm_menu7" class="collapse_menu f_c" hidden></div>
+					</li>
+				</ul>
+			</nav>
+		</div>
 	</div>
 </div>
+
+<?php include ("menu.php");?>
 </body>
 </html>
