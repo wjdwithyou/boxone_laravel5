@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\models\HotdealTargetModel;
 use App\Http\models\CategoryModel;
+use App\Http\models\ProductModel;
 use Request;
 
 class HotdealController extends Controller {
