@@ -25,9 +25,9 @@ class MainController extends Controller {
 		$siteList = array_slice($result['data'], 0, 10);
 		
 		// 핫한 상품 (쇼핑박스 중 할인되는 것, 조회수 10개) 가져오기
-		//$result = $hotPrdtModel->getInfoList(1, array(), 1);
-		//$hotList = array_slice($result['data'], 0, 10);
-		$hotList = array();
+		$result = $hotPrdtModel->getInfoList(1, array(), 1);
+		$hotList = array_slice($result['data'], 0, 10);
+		//$hotList = array();
 		
 		// 쇼핑 박스 (쇼핑박스 최신 순 20개) 가져오기
 		$result = $prdtModel->getInfoList(1, array(), 1);

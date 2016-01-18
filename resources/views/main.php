@@ -43,7 +43,7 @@
 							<div class="imglist_div">
 								<div class="imglist_img img_center">
 									<div class="img_center_inner">
-										<a href="<?=$adr_ctr ?>Shoppingbox/detail?idx=<?=$list->idx?>"><img src="<?=$list->img?>"></a>
+										<a href="<?=$adr_ctr ?>Hotdeal/productDetail?idx=<?=$list->idx?>"><img src="<?=$list->img?>"></a>
 									</div>
 								</div>
 								<div class="imglist_desc_wrap">
@@ -55,9 +55,9 @@
 											<?=$list->name?>
 										</div>
 									</div>
-									<div class="imglist_desc3 t_o">
-										￦<?=$list->fPrice?>
-									</div>
+									<!-- <div class="imglist_desc3 t_o">
+										￦19,000
+									</div> -->
 								</div>
 							</div>
 						</div>
