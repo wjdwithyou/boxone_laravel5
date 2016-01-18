@@ -15,13 +15,13 @@
 			<h1 class="top_h1">쇼핑박스</h1>
 			<p class="top_p bo_color2">전세계 모든 상품들을 클릭 한번에 내 입맛대로</p>
 			<hr class="top_hr">
-			<h1 class="top_h2">
+			<h2 class="top_h2">
 				<?php if (count($nowCate)) :?>
 					<?php echo ($nowCate[count($nowCate)-1][1]);?>
 				<?php else :?>
 					전체
 				<?php endif;?>
-			</h1>
+			</h2>
 		</div>
 		<div id="content">
 			<div class="inner">
@@ -70,15 +70,15 @@
 						</div>
 					</div>
 					<div class="imglist_desc_wrap">
-						<div class="imglist_desc1 t_o bo_color2">
+						<div class="imglist_desc1 ta_c t_o bo_color2">
 							<?=$list->brand?>
 						</div>
-						<div class="imglist_desc2 limit_line limit_line_2">
+						<div class="imglist_desc2 ta_c limit_line limit_line_2">
 							<div>
 								<?=$list->name?>
 							</div>
 						</div>
-						<div class="imglist_desc3 t_o">
+						<div class="imglist_desc3 ta_c t_o">
 							<?php if (isset($list->fPrice)) : ?>
 								￦<?=$list->fPrice?>
 							<?php else :?>

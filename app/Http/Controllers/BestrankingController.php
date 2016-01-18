@@ -18,7 +18,7 @@ class BestrankingController extends Controller {
 		$ssModel = new ShoppingsiteModel();
 		
 		$cate = Request::input('cate', '0');
-		$char = Request::input('char', '1');
+		$char = Request::input('char', '2');
 				
 		// 사이트 카테고리 가져오기
 		$allCate = $ssModel->getCate();
@@ -52,7 +52,7 @@ class BestrankingController extends Controller {
 		else
 			$best1 = null;
 					
-		$page = 'bestranking';
+		$page = 'bestranking_temp';
 		return view($page, array('page' => $page, 'nowCate' => $cate, 'cate' => $allCate['data'], 'best1' => $best1, 'upper' => $upper['data'], 'lower' => $lower['data']));
 	}
 	
