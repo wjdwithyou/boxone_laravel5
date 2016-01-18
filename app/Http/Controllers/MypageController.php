@@ -14,7 +14,7 @@ class MypageController extends Controller {
 	 * 마이페이지 처음
 	 */
 	public function index()
-	{
+	{		
 		$memberModel = new MemberModel();
 		$util = new Utility();
 		

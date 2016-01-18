@@ -219,7 +219,7 @@ function socialLogin(type, id, email, nickname, img)
  * 작성자 : 박용호
  * 일반회원 로그인 -> 아이디와 패스워드로 로그인
  */
-function justLogin()
+function justLogin(spb)
 {
 	var type = 5;
 	var id = $("#eid").val();
@@ -241,10 +241,12 @@ function justLogin()
 			if (result.code == 1)
 			{
 				cookieEid();
-				moveMain();
+				//moveMain();
+				location.href = spb;
 			}
 			else
 			{
+				alert(result.data);
 				alert ("잘못된 정보를 입력하셨습니다.");
 				$("#pw").val("").focus();
 			}
