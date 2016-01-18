@@ -113,7 +113,7 @@ class ProductModel
 				'explain' => '',
 				'mall' => $ms_data_prod->MallID,
 				'brand' => $ms_data_prod->BrandID,
-				'price' => makeMoney($ms_data_prod->Lprice),
+				'price' => $my_data[0]->price,
 				'deliverFee' => '',
 				'color' => $ms_data_color,
 				'size' => $ms_data_size,

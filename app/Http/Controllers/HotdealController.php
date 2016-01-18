@@ -43,6 +43,7 @@ class HotdealController extends Controller {
 	
 		$cateS = $result['data']['cate'];
 		$data = $cateModel->downToUp($cateS);
+		$data['data'][0]->lidx = 'c';
 	
 		$page = 'product';
 		return view($page, array('page' => $page, 'result' => $result['data'], 'cate' => $data['data'][0]));
