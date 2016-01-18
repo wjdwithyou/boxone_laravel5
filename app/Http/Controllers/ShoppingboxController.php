@@ -147,10 +147,13 @@ class ShoppingboxController extends Controller {
 			else 
 				$result = $prdtModel->getInfoList($sort, $getCateList, $nowPage);
 		else
+		{
+			$mem_idx = $_SESSION['idx'];
 			if ($cateDepth == -1)
-				$result = $hotPrdtModel->d();
+				$result = $hotPrdtModel->getMyList($mem_idx, $getCateList, $nowPage);
 			else 
-				$result = $prdtModel->d();
+				$result = $prdtModel->getMyList($mem_idx, $getCateList, $nowPage);
+		}
 			
 		if (!($result['code']))
 		{
