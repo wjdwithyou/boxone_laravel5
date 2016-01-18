@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\models\HotdealTargetModel;
 use App\Http\models\CategoryModel;
-use App\Http\models\ProductModel;
+use App\Http\models\HotdealProductModel;
 use Request;
 
 class HotdealController extends Controller {
@@ -36,7 +36,7 @@ class HotdealController extends Controller {
 	public function productDetail()
 	{
 		$cateModel = new CategoryModel();
-		$prdtModel = new ProductModel();
+		$hotPrdtModel = new HotdealProductModel();
 	
 		$idx = Request::input('idx');
 		$result = $prdtModel->getInfoSingle($idx);
