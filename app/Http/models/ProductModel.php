@@ -43,94 +43,87 @@ class ProductModel
 		if(	!(	inputErrorCheck($prod_idx, 'prod_idx')))
 			return ;
 
-		if (connectToMssql())
-		{
-			$my_data = DB::select('select * from product where idx =?',array($prod_idx));
-				
-			$table = $my_data[0]->mall_id.'_'.$my_data[0]->mall_kind;
-			$prodInc = $my_data[0]->prod_id;
-				
-			$query = mssql_query("SELECT * FROM cgProdMain_$table WHERE ProdInc = $prodInc");
-			$ms_data_prod = mssql_fetch_array($query);
-			$ms_data_img = array($ms_data_prod['PimgD']);
-				
-			$query = mssql_query("SELECT * FROM cgColorMain_$table WHERE ProdInc = $prodInc");
-			$ms_data_color = array();
-			while ($temp = mssql_fetch_array($query))
-			{
-				array_push($ms_data_color, $temp['ColorTxt']);
-				array_push($ms_data_img, $temp['Bimg']);
-				for ($i = 1 ; $i <= 12 ; $i++)
-				{
-					$tempImg = $temp['Zimg'.$i];
-					if ($tempImg != "")
-						array_push($ms_data_img, $tempImg);
-					else 
-						break;
-				}
-			}
-				
-			$query = mssql_query("SELECT Distinct SizeTxt FROM cgSizeMain_$table WHERE ProdInc = $prodInc");
-			$ms_data_size = array();
-			while ($temp = mssql_fetch_array($query))
-				array_push($ms_data_size, $temp['SizeTxt']);
-				
-			$query = mssql_query("SELECT Story FROM cgStoryMain_$table WHERE ProdInc = $prodInc");
-			$temp = mssql_fetch_array($query);
-			$ms_data_story = $temp['Story'];
+		$my_data = DB::select('SELECT * FROM product WHERE idx =?',array($prod_idx));
 			
-			$query = mssql_query("SELECT Still FROM cgStillMain_$table WHERE ProdInc = $prodInc");
-			$temp = mssql_fetch_array($query);
-			while ($temp = mssql_fetch_array($query))
-				array_push($ms_data_img, $temp['Still']);	
-			
-			$imgList = array();
-			// 동일한 이미지 정리
-			for ($i = 0 ; $i < count($ms_data_img) ; $i++)
-			{
-				for ($j = $i+1 ; $j < count($ms_data_img) ; $j++)
-				{
-					if (strpos($ms_data_img[$i], "?"))
-						$img1 = substr($ms_data_img[$i], 0, strpos($ms_data_img[$i], "?"));
-					else 
-						$img1 = $ms_data_img[$i];
-					
-					if (strpos($ms_data_img[$j], "?"))
-						$img2 = substr($ms_data_img[$j], 0, strpos($ms_data_img[$j], "?"));
-					else
-						$img2 = $ms_data_img[$j];
-					
-					if ($img1 == $img2)
-						break;
-				}
-				if ($j == count($ms_data_img))
-					array_push($imgList, $ms_data_img[$i]);
-			}
-				
-			$result = array(
-					'idx' => $my_data[0]->idx,
-					'cate' => $my_data[0]->cate_small,
-					'url' => $ms_data_prod['PurlD'],
-					'img' => $imgList,
-					'name' => $ms_data_prod['PnameD'],
-					'explain' => '',
-					'mall' => $ms_data_prod['MallID'],
-					'brand' => $ms_data_prod['BrandID'],
-					'price' => makeMoney($ms_data_prod['Lprice']),
-					'deliverFee' => '',
-					'color' => $ms_data_color,
-					'size' => $ms_data_size,
-					'story' => $ms_data_story
-			);
-				
-			DB::update('update product set hit_count=hit_count+1 where idx=?',array($prod_idx));
-		}
-		else
-		{
-			echo "mssql Connection failed.\n";
-			return;
-		}
+		$table = $my_data[0]->mall_id.'_'.$my_data[0]->mall_kind;
+		$prodInc = $my_data[0]->prod_id;
+		
+		DB::connection('sqlsrv');
 
+		$query = DB::select("SELECT * FROM cgProdMain_$table WHERE ProdInc = ?", array($prdInc));
+		$ms_data_prod = $query[0];
+		$ms_data_img = array($ms_data_prod->PimgD);
+			
+		$query = DB::select("SELECT * FROM cgColorMain_$table WHERE ProdInc = ?", array($prodInc));
+		$ms_data_color = array();
+		foreach($query as $list)
+		{
+			array_push($ms_data_color, $list->ColorTxt);
+			array_push($ms_data_img, $list->Bimg);
+			for ($i = 1 ; $i <= 12 ; $i++)
+			{
+				$col = 'Zimg'.$i;
+				$tempImg = $list->$col;
+				if ($tempImg != "")
+					array_push($ms_data_img, $tempImg);
+				else 
+					break;
+			}
+		}
+			
+		$query = DB::select("SELECT Distinct SizeTxt FROM cgSizeMain_$table WHERE ProdInc = ?", array($prodInc));
+		$ms_data_size = array();
+		foreach($query as $list)
+			array_push($ms_data_size, $list->SizeTxt);
+			
+		$query = DB::select("SELECT Story FROM cgStoryMain_$table WHERE ProdInc = ?", array($prodInc));
+		$ms_data_story = $query[0]->story;
+		
+		$query = DB::select("SELECT Still FROM cgStillMain_$table WHERE ProdInc = ?", array($prodInc));
+		while ($temp = mssql_fetch_array($query))
+			array_push($ms_data_img, $list->Still);	
+		
+		$imgList = array();
+		// 동일한 이미지 정리
+		for ($i = 0 ; $i < count($ms_data_img) ; $i++)
+		{
+			for ($j = $i+1 ; $j < count($ms_data_img) ; $j++)
+			{
+				if (strpos($ms_data_img[$i], "?"))
+					$img1 = substr($ms_data_img[$i], 0, strpos($ms_data_img[$i], "?"));
+				else 
+					$img1 = $ms_data_img[$i];
+				
+				if (strpos($ms_data_img[$j], "?"))
+					$img2 = substr($ms_data_img[$j], 0, strpos($ms_data_img[$j], "?"));
+				else
+					$img2 = $ms_data_img[$j];
+				
+				if ($img1 == $img2)
+					break;
+			}
+			if ($j == count($ms_data_img))
+				array_push($imgList, $ms_data_img[$i]);
+		}
+			
+		$result = array(
+				'idx' => $my_data[0]->idx,
+				'cate' => $my_data[0]->cate_small,
+				'url' => $ms_data_prod->PurlD,
+				'img' => $imgList,
+				'name' => $ms_data_prod->PnameD,
+				'explain' => '',
+				'mall' => $ms_data_prod->MallID,
+				'brand' => $ms_data_prod->BrandID,
+				'price' => makeMoney($ms_data_prod->Lprice),
+				'deliverFee' => '',
+				'color' => $ms_data_color,
+				'size' => $ms_data_size,
+				'story' => $ms_data_story
+		);
+			
+		DB::update('update product set hit_count=hit_count+1 where idx=?',array($prod_idx));
+		
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
 
