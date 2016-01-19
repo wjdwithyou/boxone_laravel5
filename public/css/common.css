@@ -203,7 +203,7 @@ table{width:100%}
 .cal_col{width:75px;font-size:16px}
 .cal_col2{width:65px;padding-left:8px}
 #input_price{padding-right:48px}
-#monetary{position:absolute;margin-top:-35px;right:28px}
+#monetary{display:block;position:absolute;margin-top:-35px;right:28px}
 
 
 
