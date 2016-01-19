@@ -3,7 +3,6 @@
 <head>
 <?php include ("libraries.php");?>
 <script type="text/javascript" src="<?=$adr_btstrp?>js/jquery.cookie.js"></script>
-<script type="text/javascript" src="<?=$adr_js?>login_common.js"></script>
 </head>
 
 <body>
@@ -21,10 +20,10 @@
 			<div class="input_wrap">
 				<div>
 					<div class="input_div">
-						<input type="email" id="eid" class="bo_input1" placeholder="아이디(이메일)">
+						<input type="email" id="eid" class="bo_input1" placeholder="아이디(이메일)" maxlength="50">
 					</div>
 					<div class="input_div">
-						<input type="password" id="pw" class="bo_input1" placeholder="비밀번호">
+						<input type="password" id="pw" class="bo_input1" placeholder="비밀번호" maxlength="15">
 					</div>
 					<div class="input_div">
 						<input type="checkbox" id="save_eid" name="save_eid" class="bo_checkbox bo_checkbox_1">
