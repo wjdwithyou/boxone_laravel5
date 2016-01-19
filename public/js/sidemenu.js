@@ -22,6 +22,27 @@ function collapseMenu(e){
 		}
 		e.children("img").attr("src", adr_img + "collapse_m.png");
 		e.siblings(".collapse_menu").show();
+	}	
+}
+
+function openModal(addr){
+	switch(addr){
+		case "love":
+			$("#modal_title").text("찜한상품");
+			break;
+		case "bookmark":
+			$("#modal_title").text("즐겨찾기");
+			break;
+		case "recently":
+			$("#modal_title").text("최근본상품");
+			break;
+		case "calculator":
+			$("#modal_title").text("관세계산");
+			break;
+		case "deliver":
+			$("#modal_title").text("배송통관");
+			break;
 	}
-	
+	loadDialog(addr);
+	$("#bo_modal").modal("show");
 }

@@ -38,11 +38,11 @@
 					</nav>
 					<nav class="">
 						<ul class="sm_li_set2 li_set f_c">
-							<li><a onclick=""><img src="<?=$adr_img?>header_top_loveW.gif" class="img_24"><p class="mg_t8 bo_colorW font_11">찜한상품</p></a></li>
-							<li><a onclick=""><img src="<?=$adr_img?>header_top_bookmarkW.gif" class="img_24"><p class="mg_t8 bo_colorW font_11">즐겨찾기</p></a></li>
-							<li><a onclick=""><img src="<?=$adr_img?>header_top_recentlyW.gif" class="img_24"><p class="mg_t8 bo_colorW font_11">최근본상품</p></a></li>
-							<li><a onclick=""><img src="<?=$adr_img?>header_calW.gif" class="img_24"><p class="mg_t8 bo_colorW font_11">관세계산</p></a></li>
-							<li><a onclick=""><img src="<?=$adr_img?>header_top_truckW.gif" class="img_24"><p class="mg_t8 bo_colorW font_11">배송통관</p></a></li>
+							<li><a onclick="openModal('love');"><img src="<?=$adr_img?>header_top_loveW.gif" class="img_24"><p class="mg_t8 bo_colorW font_11">찜한상품</p></a></li>
+							<li><a onclick="openModal('bookmark');"><img src="<?=$adr_img?>header_top_bookmarkW.gif" class="img_24"><p class="mg_t8 bo_colorW font_11">즐겨찾기</p></a></li>
+							<li><a onclick="openModal('recently');"><img src="<?=$adr_img?>header_top_recentlyW.gif" class="img_24"><p class="mg_t8 bo_colorW font_11">최근본상품</p></a></li>
+							<li><a onclick="openModal('calculator');"><img src="<?=$adr_img?>header_calW.gif" class="img_24"><p class="mg_t8 bo_colorW font_11">관세계산</p></a></li>
+							<li><a onclick="openModal('deliver');"><img src="<?=$adr_img?>header_top_truckW.gif" class="img_24"><p class="mg_t8 bo_colorW font_11">배송통관</p></a></li>
 						</ul>
 					</nav>
 				</div>
@@ -115,6 +115,21 @@
 	</div>
 </div>
 
+<!-- modal 팝업 -->
+<div id="bo_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal_title">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        		<h4 class="modal-title" id="modal_title">알림</h4>
+			</div>
+			<div id="bo_dialog_content" class="modal-body f_c">
+			</div>
+		</div>
+	</div>
+</div>
+<!-- //팝업 -->
+	
 <?php include ("menu.php");?>
 </body>
 </html>

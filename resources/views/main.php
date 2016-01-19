@@ -19,7 +19,7 @@
 					<div class="slide_over">
 						<h1 class="slide_h1 fw_b bo_colorW">박스원</h1>
 						<h2 class="slide_h2 bo_colorW">해외직구 상품을 한자리에!</h2>
-						<h2 class="slide_h2 bo_colorW">복잡한 회원가입 업이 간편하게 로그인하세요.</h2>
+						<h2 class="slide_h2 bo_colorW">복잡한 회원가입 없이 간편하게 로그인하세요.</h2>
 						<hr class="slide_hr">
 						<button type="button" class="slide_btn bo_btnW" onclick='location.href="<?=$adr_ctr ?>Login/index"'>로그인</button>
 					</div>
@@ -28,7 +28,7 @@
 					<div class="slide_over">
 						<h1 class="slide_h1 fw_b bo_colorW">박스원</h1>
 						<h2 class="slide_h2 bo_colorW">해외직구 상품을 한자리에!</h2>
-						<h2 class="slide_h2 bo_colorW">복잡한 회원가입 업이 간편하게 로그인하세요.</h2>
+						<h2 class="slide_h2 bo_colorW">복잡한 회원가입 없이 간편하게 로그인하세요.</h2>
 						<hr class="slide_hr">
 						<button type="button" class="slide_btn bo_btnW" onclick='location.href="<?=$adr_ctr ?>Login/index"'>로그인</button>
 					</div>
@@ -37,7 +37,7 @@
 					<div class="slide_over">
 						<h1 class="slide_h1 fw_b bo_colorW">박스원</h1>
 						<h2 class="slide_h2 bo_colorW">해외직구 상품을 한자리에!</h2>
-						<h2 class="slide_h2 bo_colorW">복잡한 회원가입 업이 간편하게 로그인하세요.</h2>
+						<h2 class="slide_h2 bo_colorW">복잡한 회원가입 없이 간편하게 로그인하세요.</h2>
 						<hr class="slide_hr">
 						<button type="button" class="slide_btn bo_btnW" onclick='location.href="<?=$adr_ctr ?>Login/index"'>로그인</button>
 					</div>
@@ -79,7 +79,7 @@
 									</div>
 								</div>
 								<div class="imglist_desc3 ta_c t_o">
-									<strike class="bo_color2">￦<?=$list->fPriceO?></strike> ￦<?=$list->fPriceS?>
+									<span><?=round($list->fPriceS / $list->fPriceO * 100)?>%</span><strike class="bo_color2">￦<?=$list->fPriceO?></strike> ￦<?=$list->fPriceS?>
 								</div>
 							</div>
 						</div>

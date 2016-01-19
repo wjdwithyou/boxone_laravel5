@@ -35,23 +35,22 @@ $(document).ready(function(){
 	var i = 0;
 	for (i = 2015 ; i > 1995 ; i--)
 		$("#entry_year").append("<option value='"+i+"-01-01"+"'>"+i+"년</option>");
-	
-	$(".deliver_header_").on('click', function(){
-		$(".deliver_header_").removeClass("deliver_header_selected");
-		$(this).addClass('deliver_header_selected');
-	});
 });
 
-function delivery_popup()
+function parcel()
 {
-	$("#deliver_body").html($("#delivery1").html());
-	$('#deliver_modal').modal('show');
+	$("#parcel").show();
+	$("#customs").hide();
+	$("#parcel_tab").removeClass("notselected_tab").addClass("selected_tab");
+	$("#customs_tab").removeClass("selected_tab").addClass("notselected_tab");
 }
 
-function entry_popup()
+function customs()
 {
-	$("#deliver_body").html($("#entry1").html());
-	$('#deliver_modal').modal('show');
+	$("#parcel").hide();
+	$('#customs').show();
+	$("#parcel_tab").removeClass("selected_tab").addClass("notselected_tab");
+	$("#customs_tab").removeClass("notselected_tab").addClass("selected_tab");
 }
 
 function deliverySearch() 
@@ -69,7 +68,7 @@ function deliverySearch()
 		if (pattern1.test(num) && pattern2.test(num) && pattern3.test(num)) 
 		{
 			alert(company + "의 운송장 번호 패턴에 맞지 않습니다.");
-			$("#delivery_num").focus();
+			$("#delivery_num").val("").focus();
 			return false;
 		}
 	} 
@@ -78,13 +77,13 @@ function deliverySearch()
 		if (!isNumeric(num)) 
 		{
 			alert("운송장 번호는 숫자만 입력해 주세요.");
-			$("#delivery_num").focus();
+			$("#delivery_num").val("").focus();
 			return false;
 		} 
 		else if (company_info[1] > 0 && company_info[1] < num.length) 
 		{
 			alert(company + "의 운송장 번호는 " + company_info[1] + "자리의 숫자로 입력해 주세요.");
-			$("#delivery_num").focus();
+			$("#delivery_num").val("").focus();
 			return false;
 		}
 	}
@@ -94,7 +93,7 @@ function deliverySearch()
 		if (!pattern.test(num)) 
 		{
 			alert(company + "의 운송장 번호 패턴에 맞지 않습니다.");
-			$("#delivery_num").focus();
+			$("#delivery_num").val("").focus();
 			return false;
 		}
 	} 
@@ -105,7 +104,7 @@ function deliverySearch()
 		if (num.search(pattern1) == -1 && num.search(pattern2) == -1) 
 		{
 			alert(company + "의 운송장 번호 패턴에 맞지 않습니다.");
-			$("#delivery_num").focus();
+			$("#delivery_num").val("").focus();
 			return false;
 		}
 	} 
@@ -114,18 +113,17 @@ function deliverySearch()
 		if (!isNumeric(num)) 
 		{
 			alert("운송장 번호는 숫자만 입력해 주세요.");
-			$("#delivery_num").focus();
+			$("#delivery_num").val("").focus();
 			return false;
 		} 
 		else if (company_info[1] > 0 && company_info[1] != num.length) 
 		{
 			alert(company + "의 운송장 번호는 " + company_info[1] + "자리의 숫자로 입력해 주세요.");
-			$("#delivery_num").focus();
+			$("#delivery_num").val("").focus();
 			return false;
 		}
 	}
 	
-	var adr_ctr = $("#adr_ctr").val();
 	$.ajax
 	({
 		url: adr_ctr+"Deliver/getInfoDelivery",
@@ -139,10 +137,7 @@ function deliverySearch()
 		success: function(result)
 		{
 			console.log(result);
-			$("#deliver_body").html(result).trigger("create");
-			$('#deliver_modal').modal('show');
-			//alert (JSON.stringify(result));
-			//result = JSON.parse(result);
+			$("#bo_dialog_content").html(result).trigger("create");
 		},
 		error: function(request,status,error)
 		{
@@ -155,7 +150,6 @@ function deliverySearch()
 
 function entrySearch()
 {
-	var adr_ctr = $("#adr_ctr").val();
 	var num = $("#entry_num").val();
 	var year = $("#entry_year").val();
 	
@@ -171,10 +165,7 @@ function entrySearch()
 		success: function(result)
 		{
 			console.log(result);
-			$("#deliver_body").html(result).trigger("create");
-			$('#deliver_modal').modal('show');
-			//alert (JSON.stringify(result));
-			//result = JSON.parse(result);
+			$("#bo_dialog_content").html(result).trigger("create");
 		},
 		error: function(request,status,error)
 		{
@@ -202,7 +193,6 @@ function createDelivery()
 	var logined = $("#logined").val();
 	if (logined == "0")
 	{
-		$('#deliver_modal').modal('hide');
 		moveLogin();
 	}
 	else
@@ -245,7 +235,6 @@ function createEntry()
 	var logined = $("#logined").val();
 	if (logined == "0")
 	{
-		$('#deliver_modal').modal('hide');
 		moveLogin();
 	}
 	else

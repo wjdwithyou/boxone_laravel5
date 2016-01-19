@@ -26,6 +26,9 @@ Route::any('{ctr}/{fnc}', Request::segment(1)."Controller@".Request::segment(2))
 Route::get('/deliver', function(){
 	return view('deliver');
 });
+Route::get('/deliverInfo', function(){
+	return view('deliverInfo');
+});
 
 
 

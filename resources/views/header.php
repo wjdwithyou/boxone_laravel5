@@ -9,21 +9,18 @@ if (isset($_COOKIE['need_login'])) {
 	<div id="header_top_wrap" class="pc_header f_c">
 		<nav class="f_l">
 			<ul class="top_li_set li_set">
-				<li><a onclick="toggleDialog(1, 'l', 22);">배송통관</a></li>
-				<li><a onclick="toggleDialog(2, 'l', 91);">관세계산</a></li>
+				<li><a onclick="toggleDialog('deliver', 'l', 11);">배송통관</a></li>
+				<li><a onclick="toggleDialog('calculator', 'l', 76);">관세계산</a></li>
 			</ul>
 		</nav>
 		<nav class="f_r">
 			<ul class="top_li_set li_set">
 				<?php if (!$logined): ?>
-				<!-- 로그인 이전 헤더 -->
 				<?php $sph = "http://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]?>
 				<li><a onclick="moveLogin('<?=$sph?>');">로그인</a></li>
 				<span class="li_bar"></span>
 				<li><a href="<?=$adr_ctr?>Login/join">회원가입</a></li>
-				<!-- //로그인 이전 헤더 -->
 				<?php else : ?>
-				<!-- 로그인 후 헤더 -->
 				<li>
 					<a href="<?=$adr_ctr?>Mypage/index">
 						<img src="<?= $adr_img?>profile/<?=$img?>" id="header_profile" class="img_24 br_50">
@@ -33,25 +30,18 @@ if (isset($_COOKIE['need_login'])) {
 				<span class="li_bar"></span>
 				<li><a onclick="logout();">로그아웃</a></li>
 				<?php endif; ?>
-				<!-- //로그인 후 헤더 -->
-				<!-- <li>
-					<a onclick="toggleDialog('r', 136);">
-						<img src="<?= $adr_img?>header_top_alarm.png" class="header_top_ico img_14">
-						<span class="bo_badge" style="margin-left: -8px;">0</span>
-					</a>
-				</li> -->
 				<li>
-					<a onclick="toggleDialog(3, 'r', 94);">
+					<a onclick="toggleDialog('love', 'r', 94);">
 						<img src="<?= $adr_img?>header_top_love.png" class="header_top_ico img_14">
 					</a>
 				</li>
 				<li>
-					<a onclick="toggleDialog(4, 'r', 60);">
+					<a onclick="toggleDialog('bookmark', 'r', 60);">
 						<img src="<?= $adr_img?>header_top_bookmark.png" class="header_top_ico img_14">
 					</a>
 				</li>
 				<li>
-					<a onclick="toggleDialog(5, 'r', 25);">
+					<a onclick="toggleDialog('recently', 'r', 25);">
 						<img src="<?= $adr_img?>header_top_recently.png" class="header_top_ico img_14">
 					</a>
 				</li>
@@ -61,7 +51,7 @@ if (isset($_COOKIE['need_login'])) {
 		<div id="bo_dialog" hidden>
 			<div class="bo_dialog_arrow bo_dialog_arrow_1"></div>
 			<div class="bo_dialog_arrow bo_dialog_arrow_2"></div>
-			<div id="bo_dialog_content"></div>
+			<div id="bo_dialog_content" class="pd_lr8 f_c"></div>
 		</div>
 		<!-- //dialog 팝업-->
 	</div>
