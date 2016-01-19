@@ -1,4 +1,6 @@
 $(document).ready(function(){
+	get_cate_large();
+	select_cate();
 });
 
 /*
@@ -97,6 +99,12 @@ var exchange_rate =
 function select_country(){
 	var cur = $("#select_country").val();
 	var rate = exchange_rate[cur];
+
+	if(cur !== "")
+		$("#exchange_rate").show();
+	else
+		$("#exchange_rate").hide();
+		
 	$("#monetary").text(cur);
 	$("#rate").text(rate);
 	$("#input_price").val("");

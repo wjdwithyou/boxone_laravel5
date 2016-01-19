@@ -55,7 +55,11 @@ function toggleDialog(addr, d, n){
 
 function loadDialog(addr){
 	$("#bo_dialog_content").load(adr_ctr + addr);
-	$.getScript(adr_ctr + "js/" + addr + ".js", function(){});
+	$.ajax({
+		url: adr_ctr + "js/" + addr + ".js",
+		dataType: "script",
+		cache: true
+	});
 }
 
 function toggleSearch(){

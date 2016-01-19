@@ -1,7 +1,7 @@
 <?php if ($code == 0) :?>
 <p class="popup_p mg_t16">조회 결과가 없습니다.</p>
 <div class="input_div">
-	<button type="button" class="bo_btn4 br_25" onclick="">뒤로</button>
+	<button type="button" class="bo_btn4 br_25" onclick="loadDialog('deliver');">뒤로</button>
 </div>
 
 <?php else : if ($code == 1) :?>

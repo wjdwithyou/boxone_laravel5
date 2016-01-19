@@ -19,11 +19,14 @@ table{width:100%}
 .f_c{*zoom:1}
 .f_c:after{display:block;visibility:hidden;height:0;font-size:0;clear:both;content:''}
 .ta_c{text-align:center}
+.ta_r{text-align:right}
 .fw_b{font-weight:bold}
 .br_50{border-radius:50%}
 .br_25{border-radius:25px}
 .br_20{border-radius:20px}
+.font_10{font-size:10px}
 .font_11{font-size:11px}
+.font_16{font-size:16px}
 .limit_line{display:-webkit-box;overflow:hidden;text-overflow:ellipsis;line-height:1.2em;-webkit-box-orient:vertical;word-wrap:break-word}
 .limit_line_2{height:2.4em;-webkit-line-clamp:2}
 .limit_line_3{height:3.6em;-webkit-line-clamp:3}
@@ -115,6 +118,7 @@ table{width:100%}
 .bo_color2{color:#8c8b8b}
 .bo_color3{color:#8352fa}
 .bo_color4{color:#A886FC}
+.bo_color5{color:#13aeb5}
 .bo_colorW{color:#fff}
 .bo_colorB{color:#000}
 .bo_btn1{border:1px solid #f15a63;background-color:#fff;color:#f15a63}
@@ -184,10 +188,28 @@ table{width:100%}
 .sub_menu_img li:nth-of-type(2){margin-top:16px}
 .sub_menu_cb{clear:both}
 
-#delivery_office,#entry_year{width:100%;height:48px;font-size:16px}
+.popup_selectbox{width:100%;height:48px;padding-right:18px;font-size:16px}
+
 .popup_tab{padding:12px 0;border:1px solid #8352fa;font-size:16px;text-align:center;cursor:pointer}
 .popup_tab:first-of-type{border-right:transparent}
 .selected_tab{background-color:#8352fa;color:#fff}
 .notselected_tab{background-color:#fff;color:#8352fa}
 .info_box{padding:8px;border:1px solid #ddd}
 .b_b{border-bottom:1px solid #eee}
+
+#cal_table tr td, #cal_result_table tr td{padding-top:8px}
+#cal_result_table{border-top:1px solid #ddd}
+#select_cate{border-right:transparent}
+.cal_col{width:75px;font-size:16px}
+.cal_col2{width:65px;padding-left:8px}
+#input_price{padding-right:48px}
+#monetary{position:absolute;margin-top:-35px;right:28px}
+
+
+
+
+
+
+
+
+

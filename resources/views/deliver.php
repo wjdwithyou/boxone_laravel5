@@ -10,7 +10,7 @@
 	<div id="parcel">
 		<p class="popup_p mg_t8">BOXONE에서 간편하게 배송조회하세요!</p>
 		<div class="input_div">
-			<select id="delivery_office" class="bo_selectbox bo_selectbox_3">
+			<select id="delivery_office" class="popup_selectbox bo_selectbox bo_selectbox_3">
 			</select>
 		</div>
 		<div class="input_div">
@@ -23,7 +23,7 @@
 	<div id="customs" hidden>
 		<p class="popup_p mg_t8">BOXONE에서 간편하게 통관조회하세요!</p>
 		<div class="input_div">
-			<select id="entry_year" class="bo_selectbox bo_selectbox_3">
+			<select id="entry_year" class="popup_selectbox bo_selectbox bo_selectbox_3">
 			</select>
 		</div>
 		<div class="input_div">

@@ -29,6 +29,9 @@ Route::get('/deliver', function(){
 Route::get('/deliverInfo', function(){
 	return view('deliverInfo');
 });
+Route::get('/calculator', function(){
+	return view('calculator');
+});
 
 
 
