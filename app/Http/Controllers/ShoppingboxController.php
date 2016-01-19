@@ -5,6 +5,7 @@ use App\Http\models\ProductModel;
 use App\Http\models\HotdealProductModel;
 use App\Http\models\CategoryModel;
 use Request;
+use Cookie;
 
 class ShoppingboxController extends Controller {
 
@@ -187,6 +188,10 @@ class ShoppingboxController extends Controller {
 	
 		$cateS = $result['data']['cate'];
 		$data = $cateModel->downToUp($cateS);
+		
+		
+		//$cookie = Cookie::get('prevPrdt', '');
+		//Cookie::queue('prevPrdt', $cookie.$data['data'][0]->lidx.',');
 	
 		$page = 'product';
 		return view($page, array('page' => $page, 'result' => $result['data'], 'cate' => $data['data'][0]));

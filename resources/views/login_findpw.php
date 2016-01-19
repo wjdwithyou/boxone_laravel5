@@ -2,7 +2,6 @@
 <html lang="ko">
 <head>
 <?php include ("libraries.php");?>
-<script type="text/javascript" src="<?=$adr_js?>login_common.js"></script>
 </head>
 
 <body>

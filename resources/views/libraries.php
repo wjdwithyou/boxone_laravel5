@@ -68,8 +68,15 @@ $.ajaxSetup({
 <script type="text/javascript" src="//connect.facebook.net/ko_KR/sdk.js"></script>
 <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=onLoadCallback" async defer></script>
 
+<!-- 전체 공통 js, css -->
 <script type="text/javascript" src="<?=$adr_js?>common.js"></script>
 <link rel="stylesheet" href="<?=$adr_css?>common.css">
+
+<!-- 로그인 관련 css, js ; 로그인 관련 페이지 또는 join일 때 사용-->
+<?php if (strpos(" ".$page, "login") || $page == "join") :?>
+<script type="text/javascript" src="<?=$adr_js?>login_common.js"></script>
+<?php endif;?>
+
 <!-- page 관련 css, js -->
 <link rel="stylesheet" href="<?=$adr_css?><?=$page?>.css">
 <script type="text/javascript" src="<?=$adr_js?><?=$page?>.js"></script>

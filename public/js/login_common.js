@@ -1,3 +1,13 @@
+var patternEmail = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i; 
+var emailMax = 50;
+var patternNick = /[0-9a-zA-Z-_ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+var nickMin = 2;
+var nickMax = 10;
+var patternPw = /[0-9a-zA-Z~!@#$%^&*?-_]/;
+var pwMin = 8;
+var pwMax = 15;
+
+
 /*
  * 2015.11.17
  * 작성자 : 박용호
@@ -6,11 +16,11 @@
 function checkEmail()
 {
 	var email = $("#eid").val();
-	var pattern = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
+	//var pattern = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
 	
 	if (email.length == 0)
 		$("#eid_input_msg").text("미입력");
-	else if (!pattern.test(email))
+	else if (!patternEmail.test(email))
 		$("#eid_input_msg").text("이메일 양식 불일치");
 	else
 		$.ajax
@@ -31,7 +41,7 @@ function checkEmail()
 				}
 				else
 				{
-					$("#eid_input_msg").text("사용불가");
+					$("#eid_input_msg").text("중복으로 인한 사용불가");
 				}
 			},	
 			error:function(request,status,error)
@@ -49,12 +59,14 @@ function checkEmail()
 function checkNickname()
 {
 	var nickname = $("#nick").val();
-	var pattern = /[^0-9a-zA-Z-_ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+	//var pattern = /[^0-9a-zA-Z-_ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
 	
 	if (nickname.length == 0)
 		$("#nick_input_msg").text("미입력");
-	else if (pattern.test(nickname))
+	else if (!patternNick.test(nickname))
 		$("#nick_input_msg").text("숫자, 영문, 한글, -_외 사용불가");
+	else if (nickname.length > nickMax)
+		$("#nick_input_msg").text("최대 "+nickMax+"자 까지 입력 가능");
 	else
 		$.ajax
 		({
@@ -74,7 +86,7 @@ function checkNickname()
 				}
 				else
 				{
-					$("#nick_input_msg").text("사용불가");
+					$("#nick_input_msg").text("중복으로 인한 사용불가");
 				}
 			},	
 			error:function(request,status,error)
@@ -101,10 +113,10 @@ function checkPw()
 	
 	if (pw.length == 0)
 		$("#pw_input_msg").text("미입력");
-	else if (!patternNum.test(pw) || !patternEng.test(pw))
-		$("#pw_input_msg").text("영문, 숫자 반드시 포함");
-	else if (patternX.test(pw))
-		$("#pw_input_msg").text("()=+\|<>/{}등 사용 불가");
+	else if (!patternPw.test(pw))
+		$("#pw_input_msg").text("영문 숫자 ~!@#$%^&*?-_");
+	else if (pw.length < pwMin || pw.length > pwMax)
+		$("#pw_input_msg").text("최소 2자, 최대 10자");
 	else
 		$("#pw_input_msg").text("사용가능");
 	
