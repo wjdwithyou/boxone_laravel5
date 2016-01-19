@@ -51,7 +51,7 @@ if (isset($_COOKIE['need_login'])) {
 		<div id="bo_dialog" hidden>
 			<div class="bo_dialog_arrow bo_dialog_arrow_1"></div>
 			<div class="bo_dialog_arrow bo_dialog_arrow_2"></div>
-			<div id="bo_dialog_content" class="pd_lr8 f_c"></div>
+			<div id="bo_dialog_content" class="f_c"></div>
 		</div>
 		<!-- //dialog 팝업-->
 	</div>

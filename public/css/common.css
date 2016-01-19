@@ -8,6 +8,8 @@ ul,ol{list-style:none}
 a,a:hover,a:active,a:focus{color:#000;text-decoration:none;cursor:pointer}
 input:focus, textarea:focus{outline:none}
 input{-webkit-appearance:none;-moz-appearance:none;appearance:none}
+input[type='number']{-moz-appearance:textfield}
+input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none}
 label{font-weight:normal}
 select::-ms-expand{display:none}
 table{width:100%}
@@ -96,7 +98,7 @@ table{width:100%}
 .top_li_set{font-size:11px}
 .top_li_set li{margin-right:16px}
 .header_top_ico{margin-top:-2px}
-#bo_dialog{position:absolute;z-index:10001;width:300px;padding-bottom:16px;border:1px solid #e1e1e1;background-color:#fff;box-shadow:0px 5px 8px 0px rgba(225, 225, 225, 0.25);top:23px}
+#bo_dialog{position:absolute;z-index:10001;width:300px;padding:32px 16px;border:1px solid #e1e1e1;background-color:#fff;box-shadow:0px 5px 8px 0px rgba(225, 225, 225, 0.25);top:23px}
 .bo_dialog_arrow{position:absolute;width:0;height:0;border-style:solid;border-width:0 10px 10px 10px}
 .bo_dialog_arrow_1{z-index:102;border-color:transparent transparent #fff transparent;top:-9px}
 .bo_dialog_arrow_2{z-index:101;border-color:transparent transparent #ccc transparent;top:-10px}

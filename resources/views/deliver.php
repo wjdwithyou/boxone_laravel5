@@ -1,4 +1,4 @@
-<nav class="mg_t16 f_c">
+<nav class="f_c">
 	<div id="parcel_tab" class="popup_tab selected_tab grid grid_h" onclick="parcel();">
 		배송
 	</div>
