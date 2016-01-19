@@ -10,7 +10,7 @@
 		<div>
 			<div id="sm_content">
 				<div class="m_inner">
-					<nav class="pd_lr8 f_c">
+					<nav class="pd_lr16 f_c">
 						<div class="f_l">
 							<ul class="sm_li_set li_set">
 								<?php if (!$logined): ?>
@@ -33,7 +33,7 @@
 							</ul>
 						</div>
 						<div class="f_r">
-							<a href="<?=$bef?>"><img src="<?=$adr_img?>xW2.png" id="sm_quit_btn" class="img_14"></a>
+							<a href="<?=$bef?>"><img src="<?=$adr_img?>xW2.png" id="sm_quit_btn" class="img_13"></a>
 						</div>
 					</nav>
 					<nav class="">
@@ -63,49 +63,49 @@
 					<li class="sm_menu_li2">
 						<a onclick="collapseMenu($(this))">
 							<span class="bo_color2">여성의류</span>
-							<img src="<?=$adr_img?>arrow_down.png" class="sm_menu_arrow">
+							<img src="<?=$adr_img?>collapse_p.png" class="sm_menu_arrow img_13">
 						</a>
 						<div id="sm_menu1" class="collapse_menu f_c" hidden></div>
 					</li>
 					<li class="sm_menu_li2">
 						<a onclick="collapseMenu($(this))">
 							<span class="bo_color2">남성의류</span>
-							<img src="<?=$adr_img?>arrow_down.png" class="sm_menu_arrow">
+							<img src="<?=$adr_img?>collapse_p.png" class="sm_menu_arrow img_13">
 						</a>
 						<div id="sm_menu2" class="collapse_menu f_c" hidden></div>
 					</li>
 					<li class="sm_menu_li2">
 						<a onclick="collapseMenu($(this))">
 							<span class="bo_color2">유아동</span>
-							<img src="<?=$adr_img?>arrow_down.png" class="sm_menu_arrow">
+							<img src="<?=$adr_img?>collapse_p.png" class="sm_menu_arrow img_13">
 						</a>
 						<div id="sm_menu3" class="collapse_menu f_c" hidden></div>
 					</li>
 					<li class="sm_menu_li2">
 						<a onclick="collapseMenu($(this))">
 							<span class="bo_color2">패션잡화</span>
-							<img src="<?=$adr_img?>arrow_down.png" class="sm_menu_arrow">
+							<img src="<?=$adr_img?>collapse_p.png" class="sm_menu_arrow img_13">
 						</a>
 						<div id="sm_menu4" class="collapse_menu f_c" hidden></div>
 					</li>
 					<li class="sm_menu_li2">
 						<a onclick="collapseMenu($(this))">
 							<span class="bo_color2">주방생활취미</span>
-							<img src="<?=$adr_img?>arrow_down.png" class="sm_menu_arrow">
+							<img src="<?=$adr_img?>collapse_p.png" class="sm_menu_arrow img_13">
 						</a>
 						<div id="sm_menu5" class="collapse_menu f_c" hidden></div>
 					</li>
 					<li class="sm_menu_li2">
 						<a onclick="collapseMenu($(this))">
 							<span class="bo_color2">디지털가전</span>
-							<img src="<?=$adr_img?>arrow_down.png" class="sm_menu_arrow">
+							<img src="<?=$adr_img?>collapse_p.png" class="sm_menu_arrow img_13">
 						</a>
 						<div id="sm_menu6" class="collapse_menu f_c" hidden></div>
 					</li>
 					<li class="sm_menu_li2">
 						<a onclick="collapseMenu($(this))">
 							<span class="bo_color2">뷰티헬스식품</span>
-							<img src="<?=$adr_img?>arrow_down.png" class="sm_menu_arrow">
+							<img src="<?=$adr_img?>collapse_p.png" class="sm_menu_arrow img_13">
 						</a>
 						<div id="sm_menu7" class="collapse_menu f_c" hidden></div>
 					</li>
