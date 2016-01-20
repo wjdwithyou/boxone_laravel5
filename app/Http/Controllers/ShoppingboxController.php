@@ -25,8 +25,6 @@ class ShoppingboxController extends Controller {
 		if ($sort == '5' && empty($_SESSION['idx']))
 			$sort = 1;
 		
-		
-		
 		// 카테고리 가져오기, 검사 (0은 전체)
 		$cate = 'l0';
 		if (Request::has('cate'))
@@ -189,12 +187,28 @@ class ShoppingboxController extends Controller {
 		$cateS = $result['data']['cate'];
 		$data = $cateModel->downToUp($cateS);
 		
+		// 최근 본 상품의 카테고리를 cookie로 가지고 다닌다.
+		$cookie = Request::cookie('recentCate');
+		if ($cookie == '')
+			$cookieArray = array();
+		else
+		{
+			$cookieArray = json_decode($cookie);
+			// cookie 임의 변경 시 자동 초기화
+			if (json_last_error() != JSON_ERROR_NONE)
+				$cookieArray = array();
+		}
+		array_push($cookieArray, $data['data'][0]->lidx);
+		if (count($cookieArray) > 10)
+			$cookieArray = array_slice($cookieArray, 0, 10);
 		
-		//$cookie = Cookie::get('prevPrdt', '');
-		//Cookie::queue('prevPrdt', $cookie.$data['data'][0]->lidx.',');
-	
+		$json_cookie = json_encode($cookieArray);
+		Cookie::queue('recentCate', $json_cookie);
+		
+		// 출력
 		$page = 'product';
 		return view($page, array('page' => $page, 'result' => $result['data'], 'cate' => $data['data'][0]));
 	}
-	
+
 }
+

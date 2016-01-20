@@ -1,7 +1,3 @@
-$(document).ready(function(){
-	selectHighcate();
-});
-
 /*
  * 2015.11.24 
  * 작성자 : 박용호
