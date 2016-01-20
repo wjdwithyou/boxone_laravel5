@@ -1,6 +1,5 @@
 $(document).ready(function(){
 	get_cate_large();
-	selectHighcate();
 });
 
 /*
@@ -14,13 +13,13 @@ function get_cate_large()
 	({
 		url: adr_ctr+"Sidemenu/getCateLarge",
 		type: 'post',
-		async: false,
 		success: function(result)
 		{
 			result = JSON.parse(result);
 			var i;
 			for (i = 0 ; i < result.length ; i++)
 				$("#high_cate").append('<option value="'+result[i].idx+'">'+result[i].name+'</option>');
+			selectHighcate();
 		},
 		error: function(request,status,error)
 		{
@@ -48,7 +47,6 @@ function selectHighcate(){
 		},		
 		success: function(result)
 		{
-			alert (JSON.stringify(result));
 			result = JSON.parse(result);
 			var i;
 			$("#low_cate").html('');
