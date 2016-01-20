@@ -48,6 +48,7 @@ function selectHighcate(){
 		},		
 		success: function(result)
 		{
+			alert (JSON.stringify(result));
 			result = JSON.parse(result);
 			var i;
 			$("#low_cate").html('');
