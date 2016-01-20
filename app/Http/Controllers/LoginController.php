@@ -350,8 +350,13 @@ class LoginController extends Controller {
 	}
 	
 	public function index(){
-		// 20160115 J.Style
-		// If session exist, redirect to myPage.
+		// 20160120 J.Style
+		/*	If session exist, redirect to myPage.
+		 *  Else,
+		 * 			If prev page(REFERER) exist, 	and has 'prev', redirect to 'prev' page.
+		 * 											and no 'prev', redirect to prev page(HTTP_REFERER).
+		 * 			Else, redirect to mainPage.
+		 */
 		if (session_id() == '')
 			session_start();
 		
@@ -360,17 +365,25 @@ class LoginController extends Controller {
 				
 			$nickname = $_SESSION['nickname'];
 			$result = $mbModel->getInfoByNickname($nickname);
-				
+			
 			$page = 'mypage';
 			return view($page, array('page' => $page, 'result' => $result['data'][0]));
 		}
-		// J.Style end
-		
-		$sph = Request::input('sph');
-		
-		$page = 'login';
-		return view($page, array('page' => $page, 'spb' => $sph));
+		else{
+			if (isset($_SERVER['HTTP_REFERER'])){
+				if (Request::has('prev'))
+					$prev_url = Request::input('prev');
+				else
+					$prev_url = $_SERVER['HTTP_REFERER'];
+			}
+			else
+				$prev_url = 'http://'.$_SERVER['HTTP_HOST'];
+			
+			$page = 'login';
+			return view($page, array('page' => $page, 'prev_url' => $prev_url));
+		}
 	}
+	
 	public function join(){
 		// 20160115 J.Style
 		// If session exist, redirect to myPage.

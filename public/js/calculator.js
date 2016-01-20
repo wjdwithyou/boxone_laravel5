@@ -1,34 +1,6 @@
 $(document).ready(function(){
-	get_cate_large();
 	selectHighcate();
 });
-
-/*
- * 2015.11.24 
- * 작성자 : 박용호 
- * 계산기 큰 카테고리 가져오기
- */
-function get_cate_large()
-{
-	$.ajax
-	({
-		url: adr_ctr+"Sidemenu/getCateLarge",
-		type: 'post',
-		async: false,
-		success: function(result)
-		{
-			result = JSON.parse(result);
-			var i;
-			for (i = 0 ; i < result.length ; i++)
-				$("#high_cate").append('<option value="'+result[i].idx+'">'+result[i].name+'</option>');
-		},
-		error: function(request,status,error)
-		{
-			console.log(request.responseText);
-		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		}
-	});
-}
 
 /*
  * 2015.11.24 

@@ -61,8 +61,13 @@ function toggleSearch(){
 	$("#header_search").toggle();
 }
 
-function moveLogin(sph){
-	var url = adr_ctr + 'Login/index?sph=' + sph;
+function moveLogin(page){
+	var query = '';
+	
+	if (page == 'login')
+		query += '?prev=' + $('#prev_url').val();
+	
+	var url = adr_ctr + 'Login/index' + query;
 	$(location).attr('href',url);
 }
 

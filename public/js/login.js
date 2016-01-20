@@ -210,7 +210,7 @@ function socialLogin(type, id, email, nickname, img)
  * 일반회원 로그인 -> 아이디와 패스워드로 로그인
  * spb : callback 페이지
  */
-function justLogin(spb)
+function justLogin(prev_url)
 {
 	var type = 5;
 	var id = $("#eid").val();
@@ -242,7 +242,7 @@ function justLogin(spb)
 				{
 					cookieEid();
 					//moveMain();
-					location.href = spb;
+					location.href = prev_url;
 				}
 				else
 				{

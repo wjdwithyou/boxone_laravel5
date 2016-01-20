@@ -23,14 +23,15 @@
 						<input type="email" id="eid" class="bo_input1" placeholder="아이디(이메일)" maxlength="50">
 					</div>
 					<div class="input_div">
-						<input type="password" id="pw" class="bo_input1" placeholder="비밀번호" maxlength="15" onkeypress="if(event.keyCode==13){justLogin('<?=$spb?>');return false;}">
+						<input type="password" id="pw" class="bo_input1" placeholder="비밀번호" maxlength="15" onkeypress="if(event.keyCode==13){justLogin('<?=$prev_url?>');return false;}">
 					</div>
 					<div class="input_div">
 						<input type="checkbox" id="save_eid" name="save_eid" class="bo_checkbox bo_checkbox_1">
 						<label for="save_eid"><span></span>아이디 저장</label>
 					</div>
 					<div class="input_div">
-						<button type="button" id="login_btn" class="bo_btn2 br_25" onclick="justLogin('<?=$spb?>');">로그인</button>
+						<input type="hidden" id="prev_url" value="<?=$prev_url?>"/>
+						<button type="button" id="login_btn" class="bo_btn2 br_25" onclick="justLogin('<?=$prev_url?>');">로그인</button>
 					</div>
 				</div>
 				<div>

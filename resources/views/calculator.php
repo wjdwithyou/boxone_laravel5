@@ -1,6 +1,27 @@
 <div class="f_c">
 	<div class="grid grid_h">
-		<select id="high_cate" class="popup_selectbox bo_selectbox bo_selectbox_3" onchange="selectHighcate();"></select>
+		<select id="high_cate" class="popup_selectbox bo_selectbox bo_selectbox_3" onchange="selectHighcate();">
+			<option value="1">유아</option>
+			<option value="2">레저/스포츠</option>
+			<option value="3">의류/패션잡화</option>
+			<option value="4">가전</option>
+			<option value="5">컴퓨터관련용품</option>
+			<option value="6">영상/음향</option>
+			<option value="7">도서/CD</option>
+			<option value="8">화장품/미용</option>
+			<option value="9">의약품/건강보조</option>
+			<option value="10">침구/커튼</option>
+			<option value="11">가구/인테리어</option>
+			<option value="12">주방용품</option>
+			<option value="13">애완용품</option>
+			<option value="14">완구</option>
+			<option value="15">바디/헤어케어용품</option>
+			<option value="16">악기</option>
+			<option value="17">예술품/수집품</option>
+			<option value="18">식품</option>
+			<option value="19">자동차용품</option>
+			<option value="20">생활</option>
+		</select>
 	</div>
 	<div class="grid grid_h">
 		<select id="low_cate" class="popup_selectbox bo_selectbox bo_selectbox_3" onchange="selectLowcate();"></select>
