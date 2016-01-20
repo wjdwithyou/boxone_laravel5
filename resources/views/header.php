@@ -9,8 +9,8 @@ if (isset($_COOKIE['need_login'])) {
 	<div id="header_top_wrap" class="pc_header f_c">
 		<nav class="f_l">
 			<ul class="top_li_set li_set">
-				<li><a onclick="toggleDialog('deliver', 'l', 11);">배송통관</a></li>
-				<li><a onclick="toggleDialog('calculator', 'l', 76);">관세계산</a></li>
+				<li><a onclick="toggleDialog('deliver', 11);">배송통관</a></li>
+				<li><a onclick="toggleDialog('calculator', 76);">관세계산</a></li>
 			</ul>
 		</nav>
 		<nav class="f_r">
@@ -30,21 +30,6 @@ if (isset($_COOKIE['need_login'])) {
 				<span class="li_bar"></span>
 				<li><a onclick="logout();">로그아웃</a></li>
 				<?php endif; ?>
-				<li>
-					<a onclick="toggleDialog('love', 'r', 94);">
-						<img src="<?= $adr_img?>header_top_love.png" class="header_top_ico img_14">
-					</a>
-				</li>
-				<li>
-					<a onclick="toggleDialog('bookmark', 'r', 60);">
-						<img src="<?= $adr_img?>header_top_bookmark.png" class="header_top_ico img_14">
-					</a>
-				</li>
-				<li>
-					<a onclick="toggleDialog('recently', 'r', 25);">
-						<img src="<?= $adr_img?>header_top_recently.png" class="header_top_ico img_14">
-					</a>
-				</li>
 			</ul>
 		</nav>
 		<!-- dialog 팝업 -->

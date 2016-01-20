@@ -35,5 +35,24 @@ class MainController extends Controller {
 		
 		$page = 'main';
 		return view($page, array('page' => $page, 'siteList' => $siteList, 'hotList' => $hotList, 'prdtList' => $prdtList));
-	}	
+	}
+		
+	public function deliver(){
+		return view('deliver');
+	}
+	public function deliverInfo(){
+		return view('deliverInfo');
+	}
+	public function calculator(){
+		return view('calculator');
+	}
+	public function love(){
+		return view('love');
+	}
+	public function bookmark(){
+		return view('bookmark');
+	}
+	public function recently(){
+		return view('recently');
+	}
 }

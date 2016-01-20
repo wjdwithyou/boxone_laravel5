@@ -32,17 +32,11 @@ function checkScrollBars() {
 	}
 }
 
-function toggleDialog(addr, d, n){
-	if(d == "l"){
-		$("#bo_dialog").css({"left": 0, "right": ""});
-		$(".bo_dialog_arrow").css({"left": 0, "right": ""});
-		$(".bo_dialog_arrow").css({"left": n});
-	}
-	else{
-		$("#bo_dialog").css({"left": "", "right": 0});
-		$(".bo_dialog_arrow").css({"left": "", "right": 0});
-		$(".bo_dialog_arrow").css({"right": n});
-	}
+function toggleDialog(addr, n){
+	$("#bo_dialog").css({"left": 0, "right": ""});
+	$(".bo_dialog_arrow").css({"left": 0, "right": ""});
+	$(".bo_dialog_arrow").css({"left": n});
+	
 	if($("#bo_dialog").is(":visible")){
 		$("#bo_dialog_content").children().remove();
 		$("#bo_dialog").hide();
@@ -54,11 +48,12 @@ function toggleDialog(addr, d, n){
 }
 
 function loadDialog(addr){
-	$("#bo_dialog_content").load(adr_ctr + addr);
-	$.ajax({
-		url: adr_ctr + "js/" + addr + ".js",
-		dataType: "script",
-		cache: true
+	$("#bo_dialog_content").load(adr_ctr + "Main/" + addr, function(){
+		$.ajax({
+			url: adr_ctr + "js/" + addr + ".js",
+			dataType: "script",
+			cache: true
+		});
 	});
 }
 

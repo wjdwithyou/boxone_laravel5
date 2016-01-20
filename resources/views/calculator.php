@@ -10,7 +10,7 @@
 	<tr>
 		<td class="cal_col">국가선택</td>
 		<td colspan="2">
-			<select id="select_country" class="popup_selectbox bo_selectbox bo_selectbox_2" onchange="select_country();">
+			<select id="select_country" class="popup_selectbox bo_selectbox bo_selectbox_3" onchange="select_country();">
 				<option value="">국가선택</option>
 				<option value="NLG">네덜란드</option>
 				<option value="DEM">독일</option>
@@ -28,15 +28,15 @@
 	</tr>
 	<tr id="exchange_rate" hidden>
 		<td colspan="3">
-			<p class="popup_p bo_color5">고시환율&nbsp;<strong id="rate"></strong>&nbsp;원</p>
-			<p class="popup_p bo_color5">안심구매금액&nbsp<strong id="ansim"></strong></p>
+			<p class="popup_p bo_color7">고시환율&nbsp;<strong id="rate"></strong>&nbsp;원</p>
+			<p class="popup_p bo_color7">안심구매금액&nbsp<strong id="ansim"></strong></p>
 		</td>
 	</tr>
 	<tr>
 		<td class="cal_col">상품가격</td>
 		<td class="input_div" colspan="2">
 			<input type="number" id="input_price" class="bo_input1">
-			<span id="monetary" class="font_16"></span>
+			<span id="monetary" class="font_16 bo_color2"></span>
 		</td>
 	</tr>
 	<tr>
@@ -52,7 +52,7 @@
 			<input type="number" id="input_weight" class="bo_input1">
 		</td>
 		<td class="cal_col2">
-			<select id="select_weight" class="popup_selectbox bo_selectbox bo_selectbox_2">
+			<select id="select_weight" class="popup_selectbox bo_selectbox bo_selectbox_3">
 				<option value="kg">kg</option>
 				<option value="lbs">lbs</option>
 			</select>
@@ -60,11 +60,11 @@
 	</tr>
 	<tr>
 		<td class="input_div" colspan="3">
-			<button type="button" class="bo_btn4 br_25" onclick="calculate_all();">계산하기</button>
+			<button type="button" class="bo_btn7 br_25 mg_t24" onclick="calculate_all();">계산하기</button>
 		</td>
 	</tr>
 </table>
-<table id="cal_result_table" class="mg_t16">
+<table id="cal_result_table" class="mg_t16" hidden>
 	<tr>
 		<td colspan="2">
 			<p class="popup_p">물품가격 200달러 이하로 목록통관 대상입니다.</p>
@@ -73,7 +73,7 @@
 	</tr>
 	<tr>
 		<td class="cal_col">상품가격</td>
-		<td class="ta_r"><strong id="price_money" class="font_16 bo_color3"></strong>&nbsp;원</td>
+		<td class="ta_r"><strong id="price_money" class="font_16 bo_color7"></strong>&nbsp;원</td>
 	</tr>
 	<tr>
 		<td class="cal_col">선편요금</td>

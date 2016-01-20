@@ -248,6 +248,9 @@ function calculate_all()
 				
 				$("#duty_money").text(comma(ks.toFixed(0)));
 				$("#surtax_money").text(comma(bgs.toFixed(0)));
+				$("#cal_result_table").show();
+				$(".modal-dialog").css("height", "auto");
+				
 			},
 			error: function(request,status,error)
 			{
