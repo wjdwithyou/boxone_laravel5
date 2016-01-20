@@ -32,27 +32,7 @@ function checkScrollBars() {
 	}
 }
 
-function toggleDialog(type, d, n){
-	switch(type){
-		case 1:
-			$("#bo_dialog_content").load(adr_ctr + "deliver");
-			break;
-		case 2:
-			$("#bo_dialog_content").load(adr_ctr + "calculator");
-			break;
-		case 3:
-			$("#bo_dialog_content").load(adr_ctr + "love");
-			break;
-		case 4:
-			$("#bo_dialog_content").load(adr_ctr + "bookmark");
-			break;
-		case 5:
-			$("#bo_dialog_content").load(adr_ctr + "recently");
-			break;
-		default:
-			alert("잘못된 접근입니다.");
-			break;
-	}
+function toggleDialog(addr, d, n){
 	if(d == "l"){
 		$("#bo_dialog").css({"left": 0, "right": ""});
 		$(".bo_dialog_arrow").css({"left": 0, "right": ""});
@@ -63,7 +43,23 @@ function toggleDialog(type, d, n){
 		$(".bo_dialog_arrow").css({"left": "", "right": 0});
 		$(".bo_dialog_arrow").css({"right": n});
 	}
-	$("#bo_dialog").toggle();
+	if($("#bo_dialog").is(":visible")){
+		$("#bo_dialog_content").children().remove();
+		$("#bo_dialog").hide();
+	}
+	else{
+		loadDialog(addr);
+		$("#bo_dialog").show();
+	}
+}
+
+function loadDialog(addr){
+	$("#bo_dialog_content").load(adr_ctr + addr);
+	$.ajax({
+		url: adr_ctr + "js/" + addr + ".js",
+		dataType: "script",
+		cache: true
+	});
 }
 
 function toggleSearch(){

@@ -1,4 +1,6 @@
 $(document).ready(function(){
+	get_cate_large();
+	selectHighcate();
 });
 
 /*
@@ -8,7 +10,6 @@ $(document).ready(function(){
  */
 function get_cate_large()
 {
-	var adr_ctr = $("#adr_ctr").val();
 	$.ajax
 	({
 		url: adr_ctr+"Sidemenu/getCateLarge",
@@ -19,7 +20,7 @@ function get_cate_large()
 			result = JSON.parse(result);
 			var i;
 			for (i = 0 ; i < result.length ; i++)
-				$("#select_cate").append('<option value="'+result[i].idx+'">'+result[i].name+'</option>');
+				$("#high_cate").append('<option value="'+result[i].idx+'">'+result[i].name+'</option>');
 		},
 		error: function(request,status,error)
 		{
@@ -35,8 +36,8 @@ function get_cate_large()
  * 계산기  큰 카테고리 선택 시 작은 카테고리 가져오기
  */
 var tax;
-function select_cate(){
-	var cate = $("#select_cate").val();
+function selectHighcate(){
+	var cate = $("#high_cate").val();
 	
 	$.ajax
 	({
@@ -66,7 +67,7 @@ function select_cate(){
  * 작성자 : 박용호
  * 계싼기 작은 카테고리 선택 시, 국가선택이 이미 되어 있으면 안심구매금액 변경
  */
-function select_lowcate(){
+function selectLowcate(){
 	var cur = $("#select_country").val();
 	if (cur != "")
 		change_ansim();
@@ -97,6 +98,12 @@ var exchange_rate =
 function select_country(){
 	var cur = $("#select_country").val();
 	var rate = exchange_rate[cur];
+
+	if(cur !== "")
+		$("#exchange_rate").show();
+	else
+		$("#exchange_rate").hide();
+		
 	$("#monetary").text(cur);
 	$("#rate").text(rate);
 	$("#input_price").val("");

@@ -2,8 +2,10 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\models\ProductModel;
+use App\Http\models\HotdealProductModel;
 use App\Http\models\CategoryModel;
 use Request;
+use Cookie;
 
 class ShoppingboxController extends Controller {
 
@@ -13,6 +15,7 @@ class ShoppingboxController extends Controller {
 	{
 		$cateModel = new CategoryModel();
 		$prdtModel = new ProductModel();
+		$hotPrdtModel = new HotdealProductModel();
 		
 		// 정렬 방식 가져오기, 검사	(1, 2, 3, 5)
 		$sort = '1';
@@ -31,6 +34,8 @@ class ShoppingboxController extends Controller {
 		
 		if ($cate == 'l0')
 			$cateDepth = 0;
+		else if ($cate == 'c')
+			$cateDepth = -1;
 		else if (strpos(" ".$cate, 'l'))
 		{
 			$cateL = substr($cate, 1);
@@ -112,10 +117,19 @@ class ShoppingboxController extends Controller {
 			else
 				$cateDepth = 0;
 		}
+		else if ($cateDepth == -1)	// 클리어런스
+		{
+			$tempList = $cateModel->getInfoListLarge();
+			$cateList = array(array("l0", "전체", 0), array("c", "클리어런스", 1));
+			foreach($tempList['data'] as $list)
+				array_push($cateList, array("l".$list->idx, $list->name, 0));
+			
+			$cate = array(array("c", "클리어런스"));
+		}
 		if ($cateDepth == 0)
 		{
 			$tempList = $cateModel->getInfoListLarge();
-			$cateList = array(array("l0", "전체", 0));
+			$cateList = array(array("l0", "전체", 0), array("c", "클리어런스", 0));
 			foreach($tempList['data'] as $list)
 				array_push($cateList, array("l".$list->idx, $list->name, 0));
 			
@@ -127,11 +141,21 @@ class ShoppingboxController extends Controller {
 		if (Request::has('page'))
 			$nowPage = Request::input('page');
 		
+		// 상품 가져오기
 		if ($sort != '5')
-			$result = $prdtModel->getInfoList($sort, $getCateList, $nowPage);
+			if ($cateDepth == -1)
+				$result = $hotPrdtModel->getInfoList($sort, $getCateList, $nowPage);
+			else 
+				$result = $prdtModel->getInfoList($sort, $getCateList, $nowPage);
 		else
-			$result = $prdtModel->d();
-		
+		{
+			$mem_idx = $_SESSION['idx'];
+			if ($cateDepth == -1)
+				$result = $hotPrdtModel->getMyList($mem_idx, $getCateList, $nowPage);
+			else 
+				$result = $prdtModel->getMyList($mem_idx, $getCateList, $nowPage);
+		}
+			
 		if (!($result['code']))
 		{
 			$result['maxPage'] = $nowPage = 1;
@@ -164,6 +188,10 @@ class ShoppingboxController extends Controller {
 	
 		$cateS = $result['data']['cate'];
 		$data = $cateModel->downToUp($cateS);
+		
+		
+		//$cookie = Cookie::get('prevPrdt', '');
+		//Cookie::queue('prevPrdt', $cookie.$data['data'][0]->lidx.',');
 	
 		$page = 'product';
 		return view($page, array('page' => $page, 'result' => $result['data'], 'cate' => $data['data'][0]));

@@ -8,7 +8,13 @@ $(document).ready(function() {
 		if (sort != "5")
 			getPrdt('','',"1");
 		else
-			getPrdt('','5','1');
+		{
+			var logined = $("#logined").val();
+			if (logined == "0")
+				location.href = adr_ctr + "Login/index";
+			else
+				getPrdt('','5','1');
+		}
 	});
 });
 

@@ -113,7 +113,7 @@ class ProductModel
 				'explain' => '',
 				'mall' => $ms_data_prod->MallID,
 				'brand' => $ms_data_prod->BrandID,
-				'price' => makeMoney($ms_data_prod->Lprice),
+				'price' => $my_data[0]->price,
 				'deliverFee' => '',
 				'color' => $ms_data_color,
 				'size' => $ms_data_size,
@@ -159,7 +159,47 @@ class ProductModel
 
 		// 갯수 확인 후 페이지 자르기
 		if (count($data) == 0)
-			return array('code' => '0', 'msg' => 'no matched result');
+			return array('code' => 0, 'msg' => 'no matched result');
+		else
+		{
+			$page_max = floor((count($data)-1) / 20) + 1;
+			if ($page_num > $page_max)
+				$page_num = $page_max;
+			$page_start = ($page_num-1)*20;
+			$result = array_slice($data, $page_start, 20);
+
+			return array('code' => 1, 'msg' => 'success', 'data' => $result, 'maxPage' => $page_max);
+		}
+	}
+	
+	/*
+	 *	내 찜한 상품 목록 가져오기 기능
+	 */
+	function getMyList($mem_idx, $getCateList, $page_num)
+	{
+		if( !( 	inputErrorCheck($mem_idx, 'mem_idx') &&
+				inputErrorCheck($getCateList, 'getCateList') &&
+				inputErrorCheck($page_num, 'page_num')))
+					return ;
+
+		// 카테고리 정리
+		$query_cate = "";
+		foreach($getCateList as $list)
+			$query_cate .= "cate_small=$list or ";
+		if ($query_cate == "")
+			$query_cate = "name != ''";
+		else
+			$query_cate = "name != '' and (".substr($query_cate, 0, strlen($query_cate) - 3).")";
+
+		// 자료 가져오기
+		$data = DB::select("select *, FORMAT(price, 0) as fPrice 
+							from product_bookmark as pb, product as p  
+							where pb.member_idx = ? and pb.product_idx = p.idx and $query_cate ", 
+							array($mem_idx));
+
+		// 갯수 확인 후 페이지 자르기
+		if (count($data) == 0)
+			return array('code' => 0, 'msg' => 'no matched result');
 		else
 		{
 			$page_max = floor((count($data)-1) / 20) + 1;

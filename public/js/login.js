@@ -4,16 +4,6 @@ $(document).ready(function(){
 		$("#eid").val(cookie_eid);
 		$("#save_eid").prop("checked",true);
 	}
-	
-	$("#eid").keyup(function(e){
-		if (e.keyCode == 13)
-			justLogin();
-	});	
-	
-	$("#pw").keyup(function(e){
-		if (e.keyCode == 13)
-			justLogin();
-	});
 });
 
 function cookieEid(){
@@ -218,6 +208,7 @@ function socialLogin(type, id, email, nickname, img)
  * 2015.11.17
  * 작성자 : 박용호
  * 일반회원 로그인 -> 아이디와 패스워드로 로그인
+ * spb : callback 페이지
  */
 function justLogin(prev_url)
 {
@@ -225,37 +216,46 @@ function justLogin(prev_url)
 	var id = $("#eid").val();
 	var pw = $("#pw").val();
 	
-	$.ajax
-	({
-		url: adr_ctr+'Login/login',
-		type: 'post',
-		async: false,
-		data: {
-			type: type,
-			id: id,
-			pw: pw
-		},
-		success: function(result)
-		{
-			result = JSON.parse(result);
-			if (result.code == 1)
+	var patternId = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
+	
+	if (id.length == 0)
+		alert ("아이디(이메일)을 입력해주세요.");
+	else if (pw.length == 0)
+		alert ("비밀번호를 입력해주세요.");
+	else if (!patternId.test(id))
+		alert ("아이디(이메일) 양식이 올바르지 않습니다.");
+	else
+		$.ajax
+		({
+			url: adr_ctr+'Login/login',
+			type: 'post',
+			async: false,
+			data: {
+				type: type,
+				id: id,
+				pw: pw
+			},
+			success: function(result)
 			{
-				cookieEid();
-				//moveMain();
-				location.href = prev_url;
-			}
-			else
+				result = JSON.parse(result);
+				if (result.code == 1)
+				{
+					cookieEid();
+					//moveMain();
+					location.href = prev_url;
+				}
+				else
+				{
+					//alert(result.data);
+					alert ("잘못된 정보를 입력하셨습니다.");
+					$("#pw").val("").focus();
+				}
+				 
+			},
+			error: function(request,status,error)
 			{
-				alert(result.data);
-				alert ("잘못된 정보를 입력하셨습니다.");
-				$("#pw").val("").focus();
+				console.log(request.responseText);
+			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
-			 
-		},
-		error: function(request,status,error)
-		{
-			console.log(request.responseText);
-		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		}
-	});
+		});
 }
