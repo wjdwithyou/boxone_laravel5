@@ -23,7 +23,7 @@
 						<input type="email" id="eid" class="bo_input1" placeholder="아이디(이메일)" maxlength="50">
 					</div>
 					<div class="input_div">
-						<input type="password" id="pw" class="bo_input1" placeholder="비밀번호" maxlength="15">
+						<input type="password" id="pw" class="bo_input1" placeholder="비밀번호" maxlength="15" onkeypress="if(event.keyCode==13){justLogin('<?=$spb?>');return false;}">
 					</div>
 					<div class="input_div">
 						<input type="checkbox" id="save_eid" name="save_eid" class="bo_checkbox bo_checkbox_1">

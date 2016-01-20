@@ -4,16 +4,6 @@ $(document).ready(function(){
 		$("#eid").val(cookie_eid);
 		$("#save_eid").prop("checked",true);
 	}
-	
-	$("#eid").keyup(function(e){
-		if (e.keyCode == 13)
-			justLogin();
-	});	
-	
-	$("#pw").keyup(function(e){
-		if (e.keyCode == 13)
-			justLogin();
-	});
 });
 
 function cookieEid(){

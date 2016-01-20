@@ -199,7 +199,7 @@ table{width:100%}
 
 #cal_table tr td, #cal_result_table tr td{padding-top:8px}
 #cal_result_table{border-top:1px solid #ddd}
-#select_cate{border-right:transparent}
+#high_cate{border-right:transparent}
 .cal_col{width:75px;font-size:16px}
 .cal_col2{width:65px;padding-left:8px}
 #input_price{padding-right:48px}

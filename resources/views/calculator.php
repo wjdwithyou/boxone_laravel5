@@ -1,9 +1,9 @@
 <div class="f_c">
 	<div class="grid grid_h">
-		<select id="select_cate" class="popup_selectbox bo_selectbox bo_selectbox_3" onchange="select_cate();"></select>
+		<select id="high_cate" class="popup_selectbox bo_selectbox bo_selectbox_3" onchange="selectHighcate();"></select>
 	</div>
 	<div class="grid grid_h">
-		<select id="low_cate" class="popup_selectbox bo_selectbox bo_selectbox_3" onchange="select_lowcate();"></select>
+		<select id="low_cate" class="popup_selectbox bo_selectbox bo_selectbox_3" onchange="selectLowcate();"></select>
 	</div>
 </div>
 <table id="cal_table">
