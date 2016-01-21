@@ -15,20 +15,20 @@
 							<ul class="sm_li_set li_set">
 								<?php if (!$logined): ?>
 								<!-- 로그인 이전 헤더 -->
-								<li><a onclick="moveLogin();" class="bo_colorW">로그인</a></li>
+								<li><a onclick="moveLogin();"><span class="bo_colorw">로그인</span></a></li>
 								<span class="li_bar2"></span>
-								<li><a href="<?=$adr_ctr?>Login/join" class="bo_colorW">회원가입</a></li>
+								<li><a href="<?=$adr_ctr?>Login/join"><span class="bo_colorw">회원가입</span></a></li>
 								<!-- //로그인 이전 헤더 -->
 								<?php else : ?>
 								<!-- 로그인 후 헤더 -->
 								<li>
 									<a href="<?=$adr_ctr?>Mypage/index">
 										<img src="<?= $adr_img?>profile/<?=$img?>" id="sm_profile" class="img_32 br_50">
-										<span class="bo_colorW"><?=$nickname?> 님</span>
+										<span class="bo_colorw"><?=$nickname?> 님</span>
 									</a>
 								</li>
 								<span class="li_bar2"></span>
-								<li><a onclick="logout();" class="bo_colorW">로그아웃</a></li>
+								<li><a onclick="logout();" class="bo_colorw">로그아웃</a></li>
 								<?php endif; ?>
 							</ul>
 						</div>
@@ -38,11 +38,11 @@
 					</nav>
 					<nav class="">
 						<ul class="sm_li_set2 li_set f_c">
-							<li><a onclick="openModal('love');"><img src="<?=$adr_img?>header_top_loveW.gif" class="img_24"><p class="mg_t8 bo_colorW font_11">찜한상품</p></a></li>
-							<li><a onclick="openModal('bookmark');"><img src="<?=$adr_img?>header_top_bookmarkW.gif" class="img_24"><p class="mg_t8 bo_colorW font_11">즐겨찾기</p></a></li>
-							<li><a onclick="openModal('recently');"><img src="<?=$adr_img?>header_top_recentlyW.gif" class="img_24"><p class="mg_t8 bo_colorW font_11">최근본상품</p></a></li>
-							<li><a onclick="openModal('calculator');"><img src="<?=$adr_img?>header_calW.gif" class="img_24"><p class="mg_t8 bo_colorW font_11">관세계산</p></a></li>
-							<li><a onclick="openModal('deliver');"><img src="<?=$adr_img?>header_top_truckW.gif" class="img_24"><p class="mg_t8 bo_colorW font_11">배송통관</p></a></li>
+							<li><a onclick="openModal('love');" class="dp_b"><img src="<?=$adr_img?>header_top_loveW.gif" class="img_24"><p class="mg_t8 bo_colorw font_11">찜한상품</p></a></li>
+							<li><a onclick="openModal('bookmark');" class="dp_b"><img src="<?=$adr_img?>header_top_bookmarkW.gif" class="img_24"><p class="mg_t8 bo_colorw font_11">즐겨찾기</p></a></li>
+							<li><a onclick="openModal('recently');" class="dp_b"><img src="<?=$adr_img?>header_top_recentlyW.gif" class="img_24"><p class="mg_t8 bo_colorw font_11">최근본상품</p></a></li>
+							<li><a onclick="openModal('calculator');" class="dp_b"><img src="<?=$adr_img?>header_calW.gif" class="img_24"><p class="mg_t8 bo_colorw font_11">관세계산</p></a></li>
+							<li><a onclick="openModal('deliver');" class="dp_b"><img src="<?=$adr_img?>header_top_truckW.gif" class="img_24"><p class="mg_t8 bo_colorw font_11">배송통관</p></a></li>
 						</ul>
 					</nav>
 				</div>

@@ -6,10 +6,6 @@
 				<li><a href="">개인정보 취급방침</a></li>
 				<span class="li_bar2"></span>
 				<li><a href="">약관</a></li>
-				<span class="li_bar2"></span>
-				<li><a href="">판매 및 환불</a></li>
-				<span class="li_bar2"></span>
-				<li><a href="">사이트 맵</a></li>
 			</ul>
 		</nav>
 		<div class="footer_div bo_color2">

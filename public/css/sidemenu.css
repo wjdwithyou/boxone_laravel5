@@ -11,8 +11,10 @@
 .sm_menu_arrow{position:absolute;margin-top:4px;right:16px}
 .collapse_menu nav{width:100%;padding-top:8px}
 .modal-dialog{width:300px !important;margin:32px auto !important}
-.modal-body{padding:32px 16px !important}
-
+.modal-content{border-radius:0 !important}
+.modal-body{padding:16px !important}
+#modal_title{margin-left:15px;text-align:center}
+.modal{-webkit-overflow-scrolling:auto}
 .sub_menu{min-height:135px;margin:0;padding:8px 8px;text-align:left}
 .sub_menu li:first-of-type a{font-size:14px;font-weight:bold}
 .sub_menu li:not(:first-of-type){margin-top:4px}

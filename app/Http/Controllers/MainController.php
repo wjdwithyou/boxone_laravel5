@@ -35,5 +35,15 @@ class MainController extends Controller {
 		
 		$page = 'main';
 		return view($page, array('page' => $page, 'siteList' => $siteList, 'hotList' => $hotList, 'prdtList' => $prdtList));
-	}	
+	}
+		
+	public function deliver(){
+		return view('deliver');
+	}
+	public function deliverInfo(){
+		return view('deliverInfo');
+	}
+	public function calculator(){
+		return view('calculator');
+	}
 }

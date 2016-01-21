@@ -17,29 +17,29 @@
 			<div id="main_slide">
 				<div id="c1" class="slide">
 					<div class="slide_over">
-						<h1 class="slide_h1 fw_b bo_colorW">박스원</h1>
-						<h2 class="slide_h2 bo_colorW">해외직구 상품을 한자리에!</h2>
-						<h2 class="slide_h2 bo_colorW">복잡한 회원가입 없이 간편하게 로그인하세요.</h2>
+						<h1 class="slide_h1 fw_b bo_colorw">박스원</h1>
+						<h2 class="slide_h2 bo_colorw">해외직구 상품을 한자리에!</h2>
+						<h2 class="slide_h2 bo_colorw">복잡한 회원가입 없이 간편하게 로그인하세요.</h2>
 						<hr class="slide_hr">
-						<button type="button" class="slide_btn bo_btnW" onclick='location.href="<?=$adr_ctr ?>Login/index"'>로그인</button>
+						<button type="button" class="slide_btn bo_btnw" onclick='location.href="<?=$adr_ctr ?>Login/index"'>로그인</button>
 					</div>
 				</div>
 				<div id="c2" class="slide">
 					<div class="slide_over">
-						<h1 class="slide_h1 fw_b bo_colorW">박스원</h1>
-						<h2 class="slide_h2 bo_colorW">해외직구 상품을 한자리에!</h2>
-						<h2 class="slide_h2 bo_colorW">복잡한 회원가입 없이 간편하게 로그인하세요.</h2>
+						<h1 class="slide_h1 fw_b bo_colorw">박스원</h1>
+						<h2 class="slide_h2 bo_colorw">해외직구 상품을 한자리에!</h2>
+						<h2 class="slide_h2 bo_colorw">복잡한 회원가입 없이 간편하게 로그인하세요.</h2>
 						<hr class="slide_hr">
-						<button type="button" class="slide_btn bo_btnW" onclick='location.href="<?=$adr_ctr ?>Login/index"'>로그인</button>
+						<button type="button" class="slide_btn bo_btnw" onclick='location.href="<?=$adr_ctr ?>Login/index"'>로그인</button>
 					</div>
 				</div>
 				<div id="c3" class="slide">
 					<div class="slide_over">
-						<h1 class="slide_h1 fw_b bo_colorW">박스원</h1>
-						<h2 class="slide_h2 bo_colorW">해외직구 상품을 한자리에!</h2>
-						<h2 class="slide_h2 bo_colorW">복잡한 회원가입 없이 간편하게 로그인하세요.</h2>
+						<h1 class="slide_h1 fw_b bo_colorw">박스원</h1>
+						<h2 class="slide_h2 bo_colorw">해외직구 상품을 한자리에!</h2>
+						<h2 class="slide_h2 bo_colorw">복잡한 회원가입 없이 간편하게 로그인하세요.</h2>
 						<hr class="slide_hr">
-						<button type="button" class="slide_btn bo_btnW" onclick='location.href="<?=$adr_ctr ?>Login/index"'>로그인</button>
+						<button type="button" class="slide_btn bo_btnw" onclick='location.href="<?=$adr_ctr ?>Login/index"'>로그인</button>
 					</div>
 				</div>
 			</div>
@@ -73,13 +73,14 @@
 								<div class="imglist_desc1 ta_c t_o bo_color2">
 									<?=$list->brand?>
 								</div>
-								<div class="imglist_desc2 ta_c limit_line limit_line_2">
-									<div>
-										<?=$list->name?>
-									</div>
+								<div class="imglist_desc2 ta_c t_o">
+									<?=$list->name?>
+								</div>
+								<div class="bo_color1 ta_c fw_b mg_t8">
+									<?=round($list->fPriceS / $list->fPriceO * 100)?>%
 								</div>
 								<div class="imglist_desc3 ta_c t_o">
-									<span><?=round($list->fPriceS / $list->fPriceO * 100)?>%</span><strike class="bo_color2">￦<?=$list->fPriceO?></strike> ￦<?=$list->fPriceS?>
+									<strike class="bo_color2">￦<?=$list->fPriceO?></strike>&nbsp;￦<?=$list->fPriceS?>
 								</div>
 							</div>
 						</div>
@@ -104,12 +105,10 @@
 							<div class="imglist_desc1 ta_c t_o bo_color2">
 								<?=$list->brand?>
 							</div>
-							<div class="imglist_desc2 ta_c limit_line limit_line_2">
-								<div>
-									<?=$list->name?>
-								</div>
+							<div class="imglist_desc2 ta_c t_o">
+								<?=$list->name?>
 							</div>
-							<div class="imglist_desc3 ta_c t_o">
+							<div class="imglist_desc3 ta_c t_o mg_t8">
 								￦<?=$list->fPrice?>
 							</div>
 						</div>

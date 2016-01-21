@@ -16,8 +16,8 @@
 		<div class="input_div">
 			<input type="number" id="delivery_num" class="bo_input1" placeholder="운송장번호">
 		</div>
-		<div class="input_div">
-			<button type="button" class="bo_btn4 br_25" onclick="deliverySearch();">조회</button>
+		<div class="input_div pd_t24">
+			<button type="button" class="bo_btn7 br_25" onclick="deliverySearch();">조회</button>
 		</div>
 	</div>
 	<div id="customs" hidden>
@@ -29,8 +29,8 @@
 		<div class="input_div">
 			<input type="number" id="entry_num" class="bo_input1" placeholder="화물통관번호">
 		</div>
-		<div class="input_div">
-			<button type="button" class="bo_btn4 br_25" onclick="entrySearch();">조회</button>
+		<div class="input_div pd_t24">
+			<button type="button" class="bo_btn7 br_25" onclick="entrySearch();">조회</button>
 		</div>
 	</div>
 </div>

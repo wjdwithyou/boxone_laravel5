@@ -15,23 +15,10 @@
     return view('welcome');
 });*/
 
-Route::get('/cateList', function(){
-	return view('cateList');
+Route::get('/cosmos/{name}', function(){
+	return view('/cosmos/'.Request::segment(2));
 });
 
 Route::get('/', 'MainController@index');
 
 Route::any('{ctr}/{fnc}', Request::segment(1)."Controller@".Request::segment(2));
-
-Route::get('/deliver', function(){
-	return view('deliver');
-});
-Route::get('/deliverInfo', function(){
-	return view('deliverInfo');
-});
-Route::get('/calculator', function(){
-	return view('calculator');
-});
-
-
-

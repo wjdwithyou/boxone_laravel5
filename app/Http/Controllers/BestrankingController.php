@@ -52,7 +52,7 @@ class BestrankingController extends Controller {
 		else
 			$best1 = null;
 					
-		$page = 'bestranking_temp';
+		$page = 'bestranking';
 		return view($page, array('page' => $page, 'nowCate' => $cate, 'cate' => $allCate['data'], 'best1' => $best1, 'upper' => $upper['data'], 'lower' => $lower['data']));
 	}
 	
