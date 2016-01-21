@@ -88,7 +88,7 @@
 	<tr>
 		<td class="cal_col">상품가격</td>
 		<td class="input_div" colspan="2">
-			<input type="number" id="input_price" class="bo_input1">
+			<input type="number" id="input_price" class="bo_input1" onkeypress="if(event.keyCode==13){calculate_all();return false;}">
 			<span id="monetary" class="font_16 bo_color2"></span>
 		</td>
 	</tr>
@@ -102,7 +102,7 @@
 			상품무게
 		</td>
 		<td class="input_div">
-			<input type="number" id="input_weight" class="bo_input1">
+			<input type="number" id="input_weight" class="bo_input1" onkeypress="if(event.keyCode==13){calculate_all();return false;}">
 		</td>
 		<td class="cal_col2">
 			<select id="select_weight" class="popup_selectbox bo_selectbox bo_selectbox_3">
