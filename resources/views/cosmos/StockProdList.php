@@ -1,5 +1,4 @@
 <?php
-	header("Content-Type: text/xml; charset=utf-8");
 	$mallList = DB::connection('sqlsrv')->select("SELECT MallKind, MallID FROM cgMallMain");
 	$data = array();
 	foreach($mallList as $list)
