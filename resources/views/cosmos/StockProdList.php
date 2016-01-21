@@ -1,8 +1,8 @@
 <?php
-	$mallList = DB::connection('sqlsrv')->select("SELECT MallKind, MallID FROM cgMallMain");
+	$mallList = DB::connection('sqlsrv')->select("SELECT Distinct TABLE_NAME FROM information_schema.TABLES WHERE TABLE_NAME like 'cgProdMain_%'");
 	$data = array();
 	foreach($mallList as $list)
-		array_push($data, DB::connection('sqlsrv')->select("SELECT MallKind, MallID, ProdInc, PnameP, Lprice, Sprice, Stock, PurlP, PimgP, Ccode1, Ccode2, Ccode3, Ccode4 FROM cgProdMain_".$list->MallID."_".$list->MallKind));
+		array_push($data, DB::connection('sqlsrv')->select("SELECT MallKind, MallID, ProdInc, PnameP, Lprice, Sprice, Stock, PurlP, PimgP, Ccode1, Ccode2, Ccode3, Ccode4 FROM ".$list->TABLE_NAME));
 ?>
 
 <table border=1>
