@@ -10,6 +10,7 @@ if (isset($_COOKIE['need_login'])) {
 		<nav class="f_l">
 			<ul class="top_li_set li_set">
 				<li><a onclick="toggleDialog('deliver', 11);">배송통관</a></li>
+				<span class="li_bar2"></span>
 				<li><a onclick="toggleDialog('calculator', 76);">관세계산</a></li>
 			</ul>
 		</nav>
@@ -18,7 +19,7 @@ if (isset($_COOKIE['need_login'])) {
 				<?php if (!$logined): ?>
 				<!-- 로그인 이전 헤더 -->
 				<li><a onclick="moveLogin('<?=$page?>');">로그인</a></li>
-				<span class="li_bar"></span>
+				<span class="li_bar2"></span>
 				<li><a href="<?=$adr_ctr?>Login/join">회원가입</a></li>
 				<?php else : ?>
 				<li>
@@ -27,7 +28,7 @@ if (isset($_COOKIE['need_login'])) {
 						<span><?=$nickname?>님</span>
 					</a>
 				</li>
-				<span class="li_bar"></span>
+				<span class="li_bar2"></span>
 				<li><a onclick="logout();">로그아웃</a></li>
 				<?php endif; ?>
 			</ul>

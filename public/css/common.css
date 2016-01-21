@@ -152,7 +152,6 @@ button:focus{outline:0}
 #main_menu li{margin-right:56px;padding-bottom:8px}
 #main_menu li:last-of-type{margin-right:0}
 .top_li_set{font-size:11px}
-.top_li_set li{margin-right:16px}
 .header_top_ico{margin-top:-2px}
 #bo_dialog{position:absolute;z-index:10001;width:300px;padding:16px;border:1px solid #e1e1e1;background-color:#fff;box-shadow:0px 5px 8px 0px rgba(0, 0, 0, 0.25);top:23px}
 .bo_dialog_arrow{position:absolute;width:0;height:0;border-style:solid;border-width:0 10px 10px 10px}
