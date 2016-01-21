@@ -46,13 +46,4 @@ class MainController extends Controller {
 	public function calculator(){
 		return view('calculator');
 	}
-	public function love(){
-		return view('love');
-	}
-	public function bookmark(){
-		return view('bookmark');
-	}
-	public function recently(){
-		return view('recently');
-	}
 }
