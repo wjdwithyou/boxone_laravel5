@@ -15,8 +15,8 @@
     return view('welcome');
 });*/
 
-Route::get('/cateList', function(){
-	return view('cateList');
+Route::get('/cosmos/{name}', function(){
+	return view('/cosmos/'.Request::segment(2));
 });
 
 Route::get('/', 'MainController@index');
