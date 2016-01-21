@@ -81,7 +81,7 @@
 	</tr>
 	<tr id="exchange_rate" hidden>
 		<td colspan="3">
-			<p class="popup_p bo_color7">고시환율&nbsp;<strong id="rate"></strong>&nbsp;원 (2016.01.21 기준)</p>
+			<p class="popup_p bo_color7">고시환율&nbsp;<strong id="rate"></strong>&nbsp;원 (<span id="rate_date">2016.01.21</span> 기준)</p>
 			<p class="popup_p bo_color7">안심구매금액&nbsp<strong id="ansim"></strong></p>
 		</td>
 	</tr>
