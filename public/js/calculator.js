@@ -1,7 +1,3 @@
-$(document).ready(function(){
-	selectHighcate();
-});
-
 /*
  * 2015.11.24 
  * 작성자 : 박용호
@@ -122,7 +118,7 @@ function change_ansim()
 			}
 			else
 			{
-				ansim = parseFloat("200") * parseFloat(exchange_rate["USD"]) / parseFloat(exchange_rate[cur]);
+				ansim = parseFloat("150") * parseFloat(exchange_rate["USD"]) / parseFloat(exchange_rate[cur]);
 				$("#ansim").html(ansim.toFixed(2)+"&nbsp;"+cur);
 			}			
 		},
@@ -177,6 +173,53 @@ function calculate_all()
 		var price = parseFloat(prdt_price) * rate;
 		$("#price_money").text(comma(price.toFixed(0)));
 		
+		// 목록통관 / 일반통관 대상 명시
+		var tax_free;
+		if (cur == "USD")
+		{
+			if (tax.status == 1)
+			{
+				if (parseFloat(prdt_price) <= 200)
+				{
+					$("#cal_detail").html("물품가격 200달러 이하로 목록통관 대상입니다.");
+					tax_free = true;
+				}
+				else
+				{
+					$("#cal_detail").html("물품가격 200달러 초과로 목록통관 대상이 아닙니다.");
+					tax_free = false;
+				}
+			}
+			else
+			{
+				if (parseFloat(prdt_price) <= 150)
+				{
+					$("#cal_detail").html("물품가격 150달러 이하로 일반통관 대상입니다.");
+					tax_free = true;
+				}
+				else
+				{
+					$("#cal_detail").html("물품가격 150달러 초과로 일반통관 대상이 아닙니다.");
+					tax_free = false;
+				}
+			}
+			
+		}
+		else
+		{
+			var price_dollor = parseFloat(prdt_price) * rate / parseFloat(exchange_rate['USD']);
+			if (price_dollor < 150)
+			{
+				$("#cal_detail").html("물품가격 150달러 이하로 면세 대상입니다.");
+				tax_free = true;
+			}
+			else
+			{
+				$("#cal_detail").html("물품가격 150달러 초과로 초과과세 대상입니다.");
+				tax_free = false;
+			}
+		}
+		
 		// 선편요금 출력
 		var weight_tax;
 		var status;
@@ -212,7 +255,7 @@ function calculate_all()
 				// 관세, 부가세 출력
 				var ks = 0;
 				var bgs = 0;
-				if ((Number(price)+weight_tax) > ansim * parseFloat(exchange_rate[cur]))
+				if (!tax_free)
 				{
 					ks = Number((price + weight_tax) * parseFloat(tax.duty));
 					bgs = (price + weight_tax + ks) * parseFloat(tax.surtax);
