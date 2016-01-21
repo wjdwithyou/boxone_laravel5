@@ -15,9 +15,9 @@
 							<ul class="sm_li_set li_set">
 								<?php if (!$logined): ?>
 								<!-- 로그인 이전 헤더 -->
-								<li><a onclick="moveLogin();" class="bo_colorw">로그인</a></li>
+								<li><a onclick="moveLogin();"><span class="bo_colorw">로그인</span></a></li>
 								<span class="li_bar2"></span>
-								<li><a href="<?=$adr_ctr?>Login/join" class="bo_colorw">회원가입</a></li>
+								<li><a href="<?=$adr_ctr?>Login/join"><span class="bo_colorw">회원가입</span></a></li>
 								<!-- //로그인 이전 헤더 -->
 								<?php else : ?>
 								<!-- 로그인 후 헤더 -->
@@ -38,11 +38,11 @@
 					</nav>
 					<nav class="">
 						<ul class="sm_li_set2 li_set f_c">
-							<li><a onclick="openModal('love');"><img src="<?=$adr_img?>header_top_loveW.gif" class="img_24"><p class="mg_t8 bo_colorw font_11">찜한상품</p></a></li>
-							<li><a onclick="openModal('bookmark');"><img src="<?=$adr_img?>header_top_bookmarkW.gif" class="img_24"><p class="mg_t8 bo_colorw font_11">즐겨찾기</p></a></li>
-							<li><a onclick="openModal('recently');"><img src="<?=$adr_img?>header_top_recentlyW.gif" class="img_24"><p class="mg_t8 bo_colorw font_11">최근본상품</p></a></li>
-							<li><a onclick="openModal('calculator');"><img src="<?=$adr_img?>header_calW.gif" class="img_24"><p class="mg_t8 bo_colorw font_11">관세계산</p></a></li>
-							<li><a onclick="openModal('deliver');"><img src="<?=$adr_img?>header_top_truckW.gif" class="img_24"><p class="mg_t8 bo_colorw font_11">배송통관</p></a></li>
+							<li><a onclick="openModal('love');" class="dp_b"><img src="<?=$adr_img?>header_top_loveW.gif" class="img_24"><p class="mg_t8 bo_colorw font_11">찜한상품</p></a></li>
+							<li><a onclick="openModal('bookmark');" class="dp_b"><img src="<?=$adr_img?>header_top_bookmarkW.gif" class="img_24"><p class="mg_t8 bo_colorw font_11">즐겨찾기</p></a></li>
+							<li><a onclick="openModal('recently');" class="dp_b"><img src="<?=$adr_img?>header_top_recentlyW.gif" class="img_24"><p class="mg_t8 bo_colorw font_11">최근본상품</p></a></li>
+							<li><a onclick="openModal('calculator');" class="dp_b"><img src="<?=$adr_img?>header_calW.gif" class="img_24"><p class="mg_t8 bo_colorw font_11">관세계산</p></a></li>
+							<li><a onclick="openModal('deliver');" class="dp_b"><img src="<?=$adr_img?>header_top_truckW.gif" class="img_24"><p class="mg_t8 bo_colorw font_11">배송통관</p></a></li>
 						</ul>
 					</nav>
 				</div>

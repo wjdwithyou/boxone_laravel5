@@ -49,7 +49,7 @@
 	</tr>
 	<tr id="exchange_rate" hidden>
 		<td colspan="3">
-			<p class="popup_p bo_color7">고시환율&nbsp;<strong id="rate"></strong>&nbsp;원</p>
+			<p class="popup_p bo_color7">고시환율&nbsp;<strong id="rate"></strong>&nbsp;원 (2016.01.21 기준)</p>
 			<p class="popup_p bo_color7">안심구매금액&nbsp<strong id="ansim"></strong></p>
 		</td>
 	</tr>
@@ -107,5 +107,10 @@
 	<tr>
 		<td class="cal_col">부가세</td>
 		<td class="ta_r"><strong id="surtax_money" class="font_16 bo_color1"></strong>&nbsp;원</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<p class="popup_p font_10">※ 이 결과는 참고용이니, 실제 금액과 다를 수 있습니다.</p>
+		</td>
 	</tr>
 </table>
