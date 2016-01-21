@@ -2,7 +2,7 @@
 	$mallList = DB::connection('sqlsrv')->select("SELECT MallKind, MallID FROM cgMallMain");
 	$data = array();
 	foreach($mallList as $list)
-		array_push($data, DB::connection('sqlsrv')->select("SELECT MallKind, MallID, ProdInc, PnameP, Lprice, Sprice, Stock, PurlP, PimgP, Ccode1, Ccode2, Ccode3, Ccode4 FROM cgProdMain_$list"));
+		array_push($data, DB::connection('sqlsrv')->select("SELECT MallKind, MallID, ProdInc, PnameP, Lprice, Sprice, Stock, PurlP, PimgP, Ccode1, Ccode2, Ccode3, Ccode4 FROM cgProdMain_".$list->MallID."_".$list->MallKind));
 ?>
 
 <table border=1>
