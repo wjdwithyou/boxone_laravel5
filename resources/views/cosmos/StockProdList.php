@@ -2,7 +2,7 @@
 	$mallList = DB::connection('sqlsrv')->select("SELECT Distinct TABLE_NAME FROM information_schema.TABLES WHERE TABLE_NAME like 'cgProdMain_%'");
 	$data = array();
 	foreach($mallList as $list)
-		array_merge($data, DB::connection('sqlsrv')->select("SELECT MallKind, MallID, ProdInc, PnameP, Lprice, Sprice, Stock, PurlP, PimgP, Ccode1, Ccode2, Ccode3, Ccode4 FROM ".$list->TABLE_NAME));
+		$data = array_merge($data, DB::connection('sqlsrv')->select("SELECT MallKind, MallID, ProdInc, PnameP, Lprice, Sprice, Stock, PurlP, PimgP, Ccode1, Ccode2, Ccode3, Ccode4 FROM ".$list->TABLE_NAME));
 ?>
 
 <table border=1>
