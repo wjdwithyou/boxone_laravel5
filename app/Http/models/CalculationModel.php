@@ -40,7 +40,7 @@ class CalculationModel{
         if( !(  inputErrorCheck($idx, 'idx')))
         	return ; 
 
-		$result = DB::select('select status, duty, surtax, note from calculation_category_medium where idx=?', array($idx));
+		$result = DB::select('select status, duty, surtax, note, tax1, tax2, tax3, tax4, tax5 from calculation_category_medium where idx=?', array($idx));
 
 		return $result;
 	}
