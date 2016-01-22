@@ -1,42 +1,11 @@
-$(document).ready(function(){
-});
-
-/*
- * 2015.11.24 
- * 작성자 : 박용호 
- * 계산기 큰 카테고리 가져오기
- */
-function get_cate_large()
-{
-	var adr_ctr = $("#adr_ctr").val();
-	$.ajax
-	({
-		url: adr_ctr+"Sidemenu/getCateLarge",
-		type: 'post',
-		async: false,
-		success: function(result)
-		{
-			result = JSON.parse(result);
-			var i;
-			for (i = 0 ; i < result.length ; i++)
-				$("#select_cate").append('<option value="'+result[i].idx+'">'+result[i].name+'</option>');
-		},
-		error: function(request,status,error)
-		{
-			console.log(request.responseText);
-		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		}
-	});
-}
-
 /*
  * 2015.11.24 
  * 작성자 : 박용호
  * 계산기  큰 카테고리 선택 시 작은 카테고리 가져오기
  */
 var tax;
-function select_cate(){
-	var cate = $("#select_cate").val();
+function selectHighcate(){
+	var cate = $("#high_cate").val();
 	
 	$.ajax
 	({
@@ -66,29 +35,17 @@ function select_cate(){
  * 작성자 : 박용호
  * 계싼기 작은 카테고리 선택 시, 국가선택이 이미 되어 있으면 안심구매금액 변경
  */
-function select_lowcate(){
+function selectLowcate(){
 	var cur = $("#select_country").val();
 	if (cur != "")
 		change_ansim();
 }
 
 // 내가바로 환율이다!!!!!!!
-var exchange_rate = 
-{
-	미선택:"",
-	NLG:"561.0",
-	DEM:"632.09",
-	USD:"1156.89",
-	ESP:"7.4301",
-	GBP:"1761.85",
-	EUR:"1236.34",
-	JPY:"9.3965",
-	CNY:"180.74",
-	FRF:"188.47",
-	AUD:"823.81",
-	HKD:"149.23"
-};
 
+
+var rateKr;
+var rateUs;
 /*
  * 2015.11.24 
  * 작성자 : 박용HoHo
@@ -96,13 +53,39 @@ var exchange_rate =
  */
 function select_country(){
 	var cur = $("#select_country").val();
-	var rate = exchange_rate[cur];
-	$("#monetary").text(cur);
-	$("#rate").text(rate);
-	$("#input_price").val("");
+	
+	if (cur !== "")
+		$.ajax
+		({
+			url: adr_ctr+"Sidemenu/getRate",
+			type: 'post',
+			async: false,
+			data: {
+				country: cur
+			},		
+			success: function(result)
+			{
+				//alert (JSON.stringify(result));
+				result = JSON.parse(result);
+				rateKr = result[1];
+				rateUs = result[2];			
+				
+				$("#monetary").text(cur);
+				$("#rate_date").text(result[0]);
+				$("#rate").text(rateKr);
+				$("#exchange_rate").show();
+				$("#input_price").val("");
+			},
+			error: function(request,status,error)
+			{
+				console.log(request.responseText);
+			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	else
+		$("#exchange_rate").hide();
 
-	change_ansim();
-	get_weight_cost();
+	change_ansim();	
 }
 
 /*
@@ -111,6 +94,7 @@ function select_country(){
  * 안심구매금액 처리
  */
 var tax;
+var ansim;
 function change_ansim()
 {
 	var cur = $("#select_country").val();
@@ -126,6 +110,25 @@ function change_ansim()
 		success: function(result)
 		{
 			tax = JSON.parse(result);
+			if (cur == "USD")
+			{
+				//alert (tax.status);
+				if (Number(tax.status) == 1)
+				{
+					ansim = 200;
+					$("#ansim").html("200&nbsp;USD");
+				}
+				else
+				{
+					ansim = 150;
+					$("#ansim").html("150&nbsp;USD");
+				}
+			}
+			else
+			{
+				ansim = parseFloat("150") / parseFloat(rateUs);
+				$("#ansim").html(ansim.toFixed(2)+"&nbsp;"+cur);
+			}			
 		},
 		error: function(request,status,error)
 		{
@@ -133,21 +136,7 @@ function change_ansim()
 		}
 	});
 
-	if (cur == "USD")
-	{
-		if (Number(tax.status) == 1)
-			$("#ansim").html("200&nbsp;USD");
-		else
-		{
-			var ansim = parseFloat("150000") / parseFloat(exchange_rate["USD"]);
-			$("#ansim").html(ansim.toFixed(2)+"&nbsp;USD");
-		}
-	}
-	else
-	{
-		var ansim = parseFloat("150000") / parseFloat(exchange_rate[cur]);
-		$("#ansim").html(ansim.toFixed(2)+"&nbsp;"+cur);
-	}
+	
 }
 
 
@@ -162,7 +151,7 @@ function calculate_all()
 	var cur = $("#select_country").val();
 	var prdt_price = $("#input_price").val();
 	var weight = $("#input_weight").val();
-	var rate = parseFloat(exchange_rate[cur]);
+	var rate = parseFloat(rateKr);
 	
 	var patternNum = /[0-9]/;
 
@@ -191,6 +180,53 @@ function calculate_all()
 		// 상품가격 출력
 		var price = parseFloat(prdt_price) * rate;
 		$("#price_money").text(comma(price.toFixed(0)));
+		
+		// 목록통관 / 일반통관 대상 명시
+		var tax_free;
+		if (cur == "USD")
+		{
+			if (tax.status == 1)
+			{
+				if (parseFloat(prdt_price) <= 200)
+				{
+					$("#cal_detail").html("상품가격 200달러 이하로 목록통관 대상입니다.");
+					tax_free = true;
+				}
+				else
+				{
+					$("#cal_detail").html("상품가격 200달러 초과로 일반통관 과세 대상입니다.");
+					tax_free = false;
+				}
+			}
+			else
+			{
+				if (parseFloat(prdt_price) <= 150)
+				{
+					$("#cal_detail").html("상품가격 150달러 이하로 일반통관 면세 대상입니다.");
+					tax_free = true;
+				}
+				else
+				{
+					$("#cal_detail").html("상품가격 150달러 초과로 일반통관 과세 대상입니다.");
+					tax_free = false;
+				}
+			}
+			
+		}
+		else
+		{
+			var price_dollor = parseFloat(prdt_price) * rate / parseFloat(rateUs);
+			if (price_dollor < 150)
+			{
+				$("#cal_detail").html("상품가격 150달러 이하로 일반통관 면세 대상입니다.");
+				tax_free = true;
+			}
+			else
+			{
+				$("#cal_detail").html("상품가격 150달러 초과로 일반통관 과세 대상입니다.");
+				tax_free = false;
+			}
+		}
 		
 		// 선편요금 출력
 		var weight_tax;
@@ -222,7 +258,22 @@ function calculate_all()
 			success: function(result)
 			{
 				weight_tax = Number(result);
-				$("#weight_money").text(comma(result));				 
+				$("#weight_money").text(comma(result));		
+				
+				// 관세, 부가세 출력
+				var ks = 0;
+				var bgs = 0;
+				if (!tax_free)
+				{
+					ks = Number((price + weight_tax) * parseFloat(tax.duty));
+					bgs = (price + weight_tax + ks) * parseFloat(tax.surtax);
+				}
+				
+				$("#duty_money").text(comma(ks.toFixed(0)));
+				$("#surtax_money").text(comma(bgs.toFixed(0)));
+				$("#cal_result_table").show();
+				$(".modal-dialog").css("height", "auto");
+				
 			},
 			error: function(request,status,error)
 			{
@@ -230,13 +281,7 @@ function calculate_all()
 			}
 		});
 					
-		// 관세 출력
-		var ks = Number((price + weight_tax) * parseFloat(tax.duty));
-		$("#duty_money").text(comma(ks.toFixed(0)));
 		
-		// 부가세 출력
-		var bgs = (price + weight_tax + ks) * parseFloat(tax.surtax);
-		$("#surtax_money").text(comma(bgs.toFixed(0)));
 	}
 }
 

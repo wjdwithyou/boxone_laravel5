@@ -1,168 +1,114 @@
 <!DOCTYPE html>
 <html lang="ko">
-	<head>
-		<?php
-		include ("libraries.php");
-		?>
-	</head>
+<head>
+<?php include ("libraries.php");?>
+</head>
 
-	<body>
-		<?php
-		include ("header.php");
-		?>
-
-		<div id="br_wrap">
-			<div id="static_menu_wrap">
-				<div class="br_menu" onclick='location.href="<?= $adr_ctr?>Bestranking/index?cate=0&char=1"'>
-					탑브랜드
-				</div>
-				<?php foreach($cate as $cateList):?>
-					<div class="br_menu" onclick='location.href = "<?= $adr_ctr?>Bestranking/index?cate=<?= $cateList->idx?>"'>
-						<?= $cateList->name?>
+<body>
+<div id="wrap">
+	<div id="header">
+	<?php include ("header.php");?>
+	</div>
+	
+	<div id="container">
+		<div id="top">
+			<h1 class="top_h1">베스트랭킹</h1>
+			<p class="top_p bo_color2">박스원이 알선한 이번주 해외직구 사이트 베스트 랭킹!</p>
+			<hr class="top_hr">
+			<h2 class="top_h2">
+				
+			</h2>
+		</div>
+		<div id="content">
+			<div class="inner">
+				<div id="select_wrap" class="f_c">
+					<div>
+						<select id="select_cate" class="bo_selectbox bo_selectbox_2" onchange="">
+							<option value="0&char=1">탑 브랜드</option>
+							<?php foreach ($cate as $cateList) :?>
+							<option value="<?=$cateList->idx?>"><?= $cateList->name?></option>
+							<?php endforeach;?>
+						</select>
 					</div>
-				<?php endforeach;?>
+				</div>
 			</div>
-
-			<div id="br_content" class="tab-content">
-				<div id="br_top">
-					<div id="br_top_title">
-						베스트랭킹
-					</div>
-					<div id="br_top_content">
-						박스원이 알선한 이번 주 해외직구 사이트 배스트 랭킹 순위!
-					</div>
-				</div>
-
-				<div id="br_nav_wrap">
-					<div class="nav_menu col-xs-6 col-sm-4" onclick='location.href = "<?= $adr_ctr?>Bestranking/index?cate=0&char=1"'>
-						탑브랜드
-					</div>
-					<?php foreach($cate as $cateList):?>
-						<div class="nav_menu col-xs-6 col-sm-4" onclick='location.href = "<?= $adr_ctr?>Bestranking/index?cate=<?= $cateList->idx?>"'>
-							<?= $cateList->name?>
+			<ul id="imglist_wrap" class="li_set f_c">
+				<?php for($i = 0 ; $i < count($upper) ; $i++) :?>
+				<?php if ($i == 0) :?>
+				<li class="brlist_div grid grid_512">
+				<?php else :?>
+				<li class="brlist_div grid grid_532">
+				<?php endif;?>
+					<div class="inner_box">
+						<div class="brlist_top mg_t8">
+							<p class="brlist_top_txt bo_color1"><strong>BEST <?= ($i+1)?></strong></p>
+							<a onclick="clickBookmark($(this).children(), <?= $best1->idx?>);">
+								<?php if ($best1->bookmark == 1) :?>
+								<img src="<?= $adr_img ?>bookmark_on.png" class="br_bookmark img_14">
+								<?php else :?>
+								<img src="<?= $adr_img ?>bookmark.png" class="br_bookmark img_14">
+								<?php endif;?>
+							</a>
 						</div>
-					<?php endforeach;?>
-					<div class="clear_both"></div>
-				</div>
-
-				<div id="br_rank_wrap">
-					<!-- 랭킹 1위 -->
-					<?php if ($best1 != null) :?>
-						<div class="rank_div_top">
-							<div class="rank_border">
-								<div class="rank">
-									<div class="rank_bookmark">
-										<a onclick="clickBookmark($(this).children(), <?= $best1->idx?>);">
-											<?php if ($best1->bookmark == 1) :?>
-												<img src="<?= $adr_img ?>bookmark_on.png">
-											<?php else :?>
-												<img src="<?= $adr_img ?>bookmark.png">
-											<?php endif;?>
-										</a>
-									</div>
-									<div class="clear_both"></div>
-									<div class="rank_no">
-										BEST 1
-									</div>
-									<div class="rank_img">
-										<a onclick="clickLink(<?= $best1->idx?>, '<?= $best1->website_link?>');"><img src="<?= $adr_img ?>site/<?= $best1->idx?>.png"></a>
-									</div>
-								</div>
-								<div class="rank_desc">
-									<div class="rank_desc_title">
-										<?= $best1->name_eng?>
-									</div>
-									<div class="rank_desc_content">
-										<?= $best1->name?>
-									</div>
+						<div class="brlist_img img_center">
+							<div class="img_center_inner">
+								<a onclick="clickLink(<?= $upper[$i]->idx?>, '<?= $upper[$i]->website_link?>');"><img src="<?= $adr_img ?>site/<?= $upper[$i]->idx?>.png"></a>
+							</div>
+						</div>
+						<div class="imglist_desc_wrap">
+							<div class="imglist_desc1 ta_c pd_lr8 t_o bo_color2">
+								<?= $upper[$i]->name_eng?>
+							</div>
+							<div class="imglist_desc2 ta_c pd_b8 pd_lr8 t_o">
+								<div>
+									<?= $upper[$i]->name?>
 								</div>
 							</div>
 						</div>
-					<?php endif;?>
-					
-					<!-- 랭킹 2~10위 -->
-					<?php for($i = 1 ; $i < count($upper) ; $i++) :?>
-						<div class="rank_div">
-							<div class="rank_border">
-								<div class="rank">
-									<div class="rank_bookmark">
-										<a onclick="clickBookmark($(this).children(), <?= $upper[$i]->idx?>);">
-											<?php if ($upper[$i]->bookmark == 1) :?>
-												<img src="<?= $adr_img ?>bookmark_on.png">
-											<?php else :?>
-												<img src="<?= $adr_img ?>bookmark.png">
-											<?php endif;?>
-										</a>
-									</div>
-									<div class="clear_both"></div>
-									<div class="rank_no">
-										BEST <?= ($i+1)?>
-										<span><!-- 랭크 no --></span>
-									</div>
-									<div class="rank_img">
-										<a onclick="clickLink(<?= $upper[$i]->idx?>, '<?= $upper[$i]->website_link?>');"><img src="<?= $adr_img ?>site/<?= $upper[$i]->idx?>.png"></a>
-									</div>
-								</div>
-								<div class="rank_desc">
-									<div class="rank_desc_title">
-										<?= $upper[$i]->name_eng?>
-									</div>
-									<div class="rank_desc_content">
-										<?= $upper[$i]->name?>
-									</div>
-								</div>
-							</div>
-						</div>
-					<?php endfor;?>
-					
-					<div class="clear_both"></div>
+					</div>
+				</li>
+				<?php endfor;?>
+			</ul>
+			<div class="inner">
+				<div class="ta_c mg_t64">
+					<h2 class="top_h2 bo_color2">더 많은 사이트를 알고 싶어요!</h2>
 				</div>
-
-				<div id="br_site_title">
-					더 많은 사이트를 알고 싶어요!
-				</div>
-				<div id="br_site_atoz">
-					<a onclick="sortByChar(<?= $nowCate?>, 1);">0 - 9</a>
+				<nav id="br_site_atoz">
 					<a onclick="sortByChar(<?= $nowCate?>, 2);">A - E</a>
 					<a onclick="sortByChar(<?= $nowCate?>, 3);">F - L</a>
 					<a onclick="sortByChar(<?= $nowCate?>, 4);">M - S</a>
 					<a onclick="sortByChar(<?= $nowCate?>, 5);">T - Z</a>
-				</div>
-				
-				<div id="site_list">
+					<a onclick="sortByChar(<?= $nowCate?>, 1);">0 - 9</a>
+				</nav>
+				<hr class="sub_hr">
+				<ul id="br_site_wrap" class="li_set mg_t16 f_c">
 					<?php foreach ($lower as $charList) :?>
-						<div class="site_set col-xs-6 col-sm-4">
-							<div class="site_img">
-								<a onclick="clickLink(<?= $charList->idx?>, '<?= $charList->website_link?>');"><img src="<?= $adr_img ?>site/<?= $charList->idx?>.png"></a>
+					<li class="br_site_li grid grid_532">
+						<div class="br_site_img pd">
+							<a onclick="clickLink(<?= $charList->idx?>, '<?= $charList->website_link?>');">
+								<img src="<?= $adr_img ?>site/<?= $charList->idx?>.png">
+							</a>
+						</div>
+						<div>
+							<div class="imglist_desc1 ta_c pd_lr8 t_o bo_color2">
+								<?= $charList->name_eng?>
 							</div>
-							<div class="site_name_set">
-								<div class="site_bookmark">
-									<a onclick="clickBookmark($(this).children(), <?= $charList->idx?>);">
-										<?php if ($charList->bookmark == 1) :?>
-											<img src="<?= $adr_img ?>bookmark_on.png">
-										<?php else :?>
-											<img src="<?= $adr_img ?>bookmark.png">
-										<?php endif;?>
-									</a>
-								</div>
-								<div class="site_name_en">
-									<?= $charList->name_eng?>
-								</div>
-								<div class="site_name_kr">
-									<?= $charList->name?>
-								</div>
-								<div class="clear_both"></div>
+							<div class="imglist_desc2 ta_c pd_lr8 t_o">
+								<?= $charList->name?>
 							</div>
 						</div>
+					</li>
 					<?php endforeach;?>
-					<div class="clear_both"></div>
-				</div>
+				</ul>
 			</div>
 		</div>
-		
-		<?php
-		include ("footer.php");
-		?>
-	</body>
-</html>
+	</div>
+	
+	<div id="footer">
+	<?php include ("footer.php");?>
+	</div>
+	
+</div>
 
+</body>
+</html>

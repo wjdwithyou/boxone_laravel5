@@ -12,7 +12,7 @@ function sortByChar(cate, char)
 		},		 
 		success: function(result)
 		{
-			$("#site_list").html(result);
+			$("#br_site_wrap").html(result);
 		},	
 		error:function(request,status,error)
 		{
@@ -28,7 +28,7 @@ function clickBookmark(img, site)
 	var logined = $("#logined").val();
 	
 	if (logined == "0")
-		login_popup();
+		moveLogin();
 	else
 	{
 		$.ajax

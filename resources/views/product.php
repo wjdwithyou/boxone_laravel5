@@ -16,15 +16,17 @@
 		<div id="product_wrap">
 			<div id="top">
 				<div id="top_index">
-					<a href=''>쇼핑박스</a>
+					<a href='<?=$adr_ctr?>Shoppingbox/index'>쇼핑박스</a>
 					&nbsp;>&nbsp;
-					<a href=''>패션잡화</a>
-					&nbsp;>&nbsp;
-					<a href=''>가방</a>
-					&nbsp;>&nbsp;
-					<a href=''>여성가방</a>
-					&nbsp;>&nbsp;
-					<a href=''>파우치</a>
+					<?php if ($cate->lidx == 'c') :?>
+						<a onclick="getPrdt('c','',1);">클리어런스</a>
+					<?php else :?>
+						<a onclick="getPrdt('l<?=$cate->lidx?>','',1);"><?=$cate->lname?></a>
+						&nbsp;>&nbsp;
+						<a onclick="getPrdt('m<?=$cate->midx?>','',1);"><?=$cate->mname?></a>
+						&nbsp;>&nbsp;
+						<a onclick="getPrdt('s<?=$cate->sidx?>','',1);"><?=$cate->sname?></a>
+					<?php endif;?>
 				</div>
 			</div>
 			<div id="product_img_wrap" class="col-xs-12 col-sm-6">
@@ -35,22 +37,27 @@
 				</div>
 			</div>
 			<ul id="product_desc_wrap" class="col-xs-12 col-sm-6">
-				<li class="f_b">
+				<li class="bo_color">
+					<?=$result['brand']?>
+				</li>
+				<li class="pd_li li_underline f_b">
 					<?=$result['name']?>
 				</li>
-				<li class="pd_li li_underline bo_color">
-					<?=$result['mall']?>
-				</li>
 				<li class="pd_li2">
-					<?=$result['brand']?>
+					<?=$result['mall']?>
 				</li>
 				<li class="pd_li cl_b">
 					<div class="f_l f_b">
 						가격
 					</div>
 					<div class="f_r">
-						<!-- <span class="before_price bo_color">￦134,000</span> -->
+						<?php if ($cate->lidx == 'c') :?>
+							<span class="before_price bo_color">￦<?=$result['priceO']?></span>
+						<?php endif;?>
 						<span class="after_price f_b">￦<?=$result['price']?></span>
+						<?php if ($cate->lidx == 'c') :?>
+							<span class="after_price f_b">(<?=$result['saleP']?>% OFF)</span>
+						<?php endif;?>
 					</div>
 				</li>
 				<li class="pd_li li_underline cl_b">
@@ -79,11 +86,13 @@
 						</button>
 					</div>
 				</li>
-				<li id="pd_size" class="pd_li3 bo_color">
-					 <?=$result['size']?>
+				<li class="pd_li3 bo_color">
+					<?php foreach($result['size'] as $sizeList) :?>
+						<span class="pd_size"><?=$sizeList?></span>&nbsp;/&nbsp; 
+					<?php endforeach;?>
 				</li>
 				<li class="pd_li4 li_underline">
-					<button type="button" class="bo_btn f_b">
+					<button type="button" class="bo_btn f_b" onclick="window.open('<?=$result['url']?>');">
 						구매하기
 					</button>
 				</li>
@@ -154,27 +163,6 @@
 				</div>
 				<div class="info_content">
 					<?=$result['story']?>
-					<!-- Our Embroidered Poplin Relaxed Tunic is stitched around the collar, placket and sleeve-ends for a graphic, cleanly tailored
-					look. This runway style is made of breathable, bright-white cotton, with a slit crewneck and an easy, tomboyish fit. Finished
-					with a banded hem, it’s crisp and casual — great for laid-back days and getaways.
-					<br>
-					<br>
-					FABRIC & CARE
-					<br>
-					•100% cotton.
-					<br>
-					•Machine-wash cold.
-					<br>
-					<br>
-					DETAILS & FIT
-					<br>
-					•Cotton.
-					<br>
-					•V-neck.
-					<br>
-					•Short sleeves; sleeve length: 19.5" (49 cm)
-					<br>
-					•27.5" (69 cm) in length. -->
 				</div>
 			</div>
 

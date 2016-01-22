@@ -3,27 +3,12 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\models\MemberModel;
 use Request;
-use AWS;
 use Mail;
 
 
-include_once dirname(__FILE__)."/../function/baseFunction.php";
-
 class LoginController extends Controller {
 
-	/*
-	|--------------------------------------------------------------------------
-	| Default Home Controller
-	|--------------------------------------------------------------------------
-	|
-	| You may wish to use controllers instead of, or in addition to, Closure
-	| based routes. That's great! Here is an example controller method to
-	| get you started. To route to this controller, just add the route:
-	|
-	|	Route::get('/', 'HomeController@showWelcome');
-	|
-	*/
-
+	
 	
 	/*
 	 * 2015.11.17
@@ -41,8 +26,8 @@ class LoginController extends Controller {
 		else
 		{
 			$grant_type = "authorization_code";
-			$client_id = "_uNsCw6pC_ItNTWfmVUD";
-			$client_secret = "0Mo8jpE38A";
+			$client_id = "o08PVHiq6vxd5Ub23ZVG";
+			$client_secret = "Z7z534HWCb";
 			$code = Request::input('code');
 			$state = Request::input('state');
 			
@@ -114,7 +99,7 @@ class LoginController extends Controller {
 		
 		// 로그인 된 상태로 변환
 		if ($result['code'] == 1)
-		{
+		{	
 			if (session_id() == '')
 				session_start();
 			$_SESSION['idx'] = $result['data'][0]->idx;
@@ -142,6 +127,7 @@ class LoginController extends Controller {
 		$nickname = Request::input('nickname');		
 		$rec = Request::input('rec');
 		
+		// 이미지는 파일이 될 수도(자체 회원가입), url 주소가 될 수도(소셜 회원가입) 있음.
 		if (Request::hasFile('img'))
 		{
 			$img = Request::file('img');
@@ -363,33 +349,114 @@ class LoginController extends Controller {
 		echo json_encode($result);
 	}
 	
-	public function tester()
+	public function index(){
+		// 20160120 J.Style
+		/*	If session exist, redirect to myPage.
+		 *  Else,
+		 * 			If prev page(REFERER) exist, 	and has 'prev', redirect to 'prev' page.
+		 * 											and no 'prev', redirect to prev page(HTTP_REFERER).
+		 * 			Else, redirect to mainPage.
+		 */
+		if (session_id() == '')
+			session_start();
+		
+		if (isset($_SESSION['idx'])){
+			$mbModel = new MemberModel();
+				
+			$nickname = $_SESSION['nickname'];
+			$result = $mbModel->getInfoByNickname($nickname);
+			
+			$page = 'mypage';
+			return view($page, array('page' => $page, 'result' => $result['data'][0]));
+		}
+		else{
+			if (isset($_SERVER['HTTP_REFERER'])){
+				if (Request::has('prev'))
+					$prev_url = Request::input('prev');
+				else
+					$prev_url = $_SERVER['HTTP_REFERER'];
+			}
+			else
+				$prev_url = 'http://'.$_SERVER['HTTP_HOST'];
+			
+			$page = 'login';
+			return view($page, array('page' => $page, 'prev_url' => $prev_url));
+		}
+	}
+	
+	public function join(){
+		// 20160115 J.Style
+		// If session exist, redirect to myPage.
+		if (session_id() == '')
+			session_start();
+		
+		if (isset($_SESSION['idx'])){
+			$mbModel = new MemberModel();
+		
+			$nickname = $_SESSION['nickname'];
+			$result = $mbModel->getInfoByNickname($nickname);
+		
+			$page = 'mypage';
+			return view($page, array('page' => $page, 'result' => $result['data'][0]));
+		}
+		// J.Style end
+		
+		$page = 'join';
+		return view($page, array('page' => $page));
+	}
+	public function login_findpw(){
+		// 20160115 J.Style
+		// If prev page doesn't exist, redirect to main page.
+		
+		// TODO:	 session exist + prev exist?
+		
+		if (!isset($_SERVER['HTTP_REFERER'])){
+			header("Location: http://".$_SERVER['HTTP_HOST']);
+			die();
+		}
+		// J.Style end
+		
+		$page = 'login_findpw';
+		return view($page, array('page' => $page));
+	}
+	
+	public function login_changepw()
 	{
-		$url = "http://mud-kage.kakao.co.kr/14/dn/btqcnDsoqDk/EF2PbvmH9i1ldtXgjWv0TK/o.jpg";
-		//file_put_contents("img/community/test.gif", file_get_contents($url));
+		// 20160118 J.Style
+		// If prev page doesn't exist, redirect to main page.
 		
+		// TODO:	 session exist + prev exist?
 		
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $url);
-		//curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-		//curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-		//curl_setopt($ch, CURLOPT_SSLVERSION, 3);
-		curl_setopt($ch, CURLOPT_SSL_CIPHER_LIST, 'SSLv3');
-		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-		ob_start();
-		$res = curl_exec($ch);
-		$buffer = ob_get_contents();
-		ob_end_clean();
+		if (!isset($_SERVER['HTTP_REFERER'])){
+			header("Location: http://".$_SERVER['HTTP_HOST']);
+			die();
+		}
+		// J.Style end
 		
-		file_put_contents("img/community/test.jpg", $buffer);
+		$eid = Request::input('eid');
+		$page = 'login_changepw';
+		return view($page, array('page' => $page, 'eid' => $eid));
+	}
+	public function login_addinfo()
+	{
+		// 20160118 J.Style
+		// If prev page doesn't exist, redirect to main page.
 		
-		$s3 = AWS::createClient('s3');
-		$s3->putObject(array(
-			'Bucket'	=> 'boxone-image',
-			'Key'		=> 'community/tester.jpg',
-			'SourceFile'	=> 'img/community/test.jpg'
-		));
+		// TODO:	 session exist + prev exist?
 		
+		if (!isset($_SERVER['HTTP_REFERER'])){
+			header("Location: http://".$_SERVER['HTTP_HOST']);
+			die();
+		}
+		// J.Style end
+		
+		$type = Request::input('type');
+		$id = Request::input('id');
+		$email = Request::input('email');
+		$nickname = Request::input('nickname');
+		$img = Request::input('img');
+		
+		$page = 'login_addinfo';
+		return view($page, array('page' => $page, 'type' => $type, 'id' => $id, 'email' => $email, 'nickname' => $nickname, 'img' => $img));
 	}
 }
-

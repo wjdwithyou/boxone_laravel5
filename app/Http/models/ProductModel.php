@@ -1,13 +1,13 @@
 <?php
 namespace App\Http\models;
 use DB;
+include_once dirname(__FILE__)."/Utility.php";
+
+
 
 /*
  *  상품 관련 컨트롤러
  */
-include_once dirname(__FILE__)."/../function/baseFunction.php";
-
-
 class ProductModel
 {
 
@@ -20,18 +20,17 @@ class ProductModel
 				&& inputErrorCheck($member_idx, 'member_idx')))
 					return ;
 
+		$result = DB::table('product_bookmark')->insertGetId(
+				array(
+						'prod_idx'=> $prod_idx,
+						'member_idx'=> $member_idx,
+						'upload'=>DB::raw('now()')
+				)
+		);
 
-				$result = DB::table('product_bookmark')->insertGetId(
-						array(
-								'prod_idx'=> $prod_idx,
-								'member_idx'=> $member_idx,
-								'upload'=>DB::raw('now()')
-						)
-				);
+		DB::update('update product set bookmark_count=bookmark_count+1 where idx=?',array($prod_idx));
 
-				DB::update('update product set bookmark_count=bookmark_count+1 where idx=?',array($prod_idx));
-
-				return array('code' => 1,'msg' =>'success' ,'data' => $result);
+		return array('code' => 1,'msg' =>'success' ,'data' => $result);
 	}
 
 
@@ -44,108 +43,170 @@ class ProductModel
 		if(	!(	inputErrorCheck($prod_idx, 'prod_idx')))
 			return ;
 
-		if (connectToMssql())
-		{
-			$my_data = DB::select('select * from product where idx =?',array($prod_idx));
-				
-			$table = $my_data[0]->mall_id.'_'.$my_data[0]->mall_kind;
-			$prodInc = $my_data[0]->prod_id;
-				
-			$query = mssql_query("SELECT * FROM cgProdMain_$table WHERE ProdInc = $prodInc");
-			$ms_data_prod = mssql_fetch_array($query);
-			$ms_data_img = array($ms_data_prod['PimgD']);
-				
-			$query = mssql_query("SELECT * FROM cgColorMain_$table WHERE ProdInc = $prodInc");
-			$ms_data_color = array();
-			while ($temp = mssql_fetch_array($query))
-			{
-				array_push($temp['ColorTxt']);
-				array_push($ms_data_img, $temp['Bimg']);
-				for ($i = 1 ; $i <= 12 ; $i++)
-				{
-					$tempImg = $temp['Zimg'.$i];
-					if ($tempImg != "")
-						array_push($ms_data_img, $tempImg);
-					else 
-						break;
-				}
-			}
-			$ms_data_color = substr($ms_data_color, 0, strlen($ms_data_color)-3);
-				
-			$query = mssql_query("SELECT Distinct SizeTxt, * FROM cgSizeMain_$table WHERE ProdInc = $prodInc");
-			$ms_data_size = array();
-			while ($temp = mssql_fetch_array($query))
-				array_push($temp['SizeTxt']);
-			$ms_data_size = substr($ms_data_size, 0, strlen($ms_data_size)-3);
-				
-			$query = mssql_query("SELECT Story FROM cgStoryMain_$table WHERE ProdInc = $prodInc");
-			$temp = mssql_fetch_array($query);
-			$ms_data_story = $temp['Story'];
+		$my_data = DB::select('SELECT * FROM product WHERE idx =?',array($prod_idx));
 			
-			$query = mssql_query("SELECT Still FROM cgStillMain_$table WHERE ProdInc = $prodInc");
-			$temp = mssql_fetch_array($query);
-			while ($temp = mssql_fetch_array($query))
-				array_push($ms_data_img, $temp['Still']);						
-				
-			$result = array(
-					'idx' => $my_data[0]->idx,
-					'cate' => $my_data[0]->cate_small,
-					'url' => $ms_data_prod['PurlD'],
-					'img' => $ms_data_img,
-					'name' => $ms_data_prod['PnameD'],
-					'explain' => '',
-					'mall' => $ms_data_prod['MallID'],
-					'brand' => $ms_data_prod['BrandID'],
-					'price' => makeMoney($ms_data_prod['Lprice']),
-					'deliverFee' => '',
-					'color' => $ms_data_color,
-					'size' => $ms_data_size,
-					'story' => $ms_data_story
-			);
-				
-			DB::update('update product set hit_count=hit_count+1 where idx=?',array($prod_idx));
-		}
-		else
+		$table = $my_data[0]->mall_id.'_'.$my_data[0]->mall_kind;
+		$prodInc = $my_data[0]->prod_id;
+		
+		$query = DB::connection('sqlsrv')->select("SELECT * FROM cgProdMain_$table WHERE ProdInc = ?", array($prodInc));
+		$ms_data_prod = $query[0];
+		$ms_data_img = array($ms_data_prod->PimgD);
+			
+		$query = DB::connection('sqlsrv')->select("SELECT * FROM cgColorMain_$table WHERE ProdInc = ?", array($prodInc));
+		$ms_data_color = array();
+		foreach($query as $list)
 		{
-			echo "mssql Connection failed.\n";
-			return;
+			array_push($ms_data_color, $list->ColorTxt);
+			array_push($ms_data_img, $list->Bimg);
+			for ($i = 1 ; $i <= 12 ; $i++)
+			{
+				$col = 'Zimg'.$i;
+				$tempImg = $list->$col;
+				if ($tempImg != "")
+					array_push($ms_data_img, $tempImg);
+				else 
+					break;
+			}
 		}
-
+			
+		$query = DB::connection('sqlsrv')->select("SELECT Distinct SizeTxt FROM cgSizeMain_$table WHERE ProdInc = ?", array($prodInc));
+		$ms_data_size = array();
+		foreach($query as $list)
+			array_push($ms_data_size, $list->SizeTxt);
+			
+		$query = DB::connection('sqlsrv')->select("SELECT Story FROM cgStoryMain_$table WHERE ProdInc = ?", array($prodInc));
+		$ms_data_story = $query[0]->Story;
+		
+		$query = DB::connection('sqlsrv')->select("SELECT Still FROM cgStillMain_$table WHERE ProdInc = ?", array($prodInc));
+		foreach($query as $list)
+			array_push($ms_data_img, $list->Still);	
+		
+		$imgList = array();
+		// 동일한 이미지 정리
+		for ($i = 0 ; $i < count($ms_data_img) ; $i++)
+		{
+			for ($j = $i+1 ; $j < count($ms_data_img) ; $j++)
+			{
+				if (strpos($ms_data_img[$i], "?"))
+					$img1 = substr($ms_data_img[$i], 0, strpos($ms_data_img[$i], "?"));
+				else 
+					$img1 = $ms_data_img[$i];
+				
+				if (strpos($ms_data_img[$j], "?"))
+					$img2 = substr($ms_data_img[$j], 0, strpos($ms_data_img[$j], "?"));
+				else
+					$img2 = $ms_data_img[$j];
+				
+				if ($img1 == $img2)
+					break;
+			}
+			if ($j == count($ms_data_img))
+				array_push($imgList, $ms_data_img[$i]);
+		}
+			
+		$result = array(
+				'idx' => $my_data[0]->idx,
+				'cate' => $my_data[0]->cate_small,
+				'url' => $ms_data_prod->PurlD,
+				'img' => $imgList,
+				'name' => $ms_data_prod->PnameD,
+				'explain' => '',
+				'mall' => $ms_data_prod->MallID,
+				'brand' => $ms_data_prod->BrandID,
+				'price' => $my_data[0]->price,
+				'deliverFee' => '',
+				'color' => $ms_data_color,
+				'size' => $ms_data_size,
+				'story' => $ms_data_story
+		);
+			
+		DB::update('update product set hit_count=hit_count+1 where idx=?',array($prod_idx));
+		
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
 
 	/*
 	 *	정보 리스트 가져오는 기능
 	 */
-	function getInfoList($cate_small)
+	function getInfoList($sort, $getCateList, $page_num)
 	{
-		if( !( inputErrorCheck($cate_small, 'cate_small')))
+		if( !( inputErrorCheck($sort, 'sort') && 
+				inputErrorCheck($getCateList, 'getCateList') &&
+				inputErrorCheck($page_num, 'page_num')))
 			return ;
 
 		// 정렬 구분
-		$query_orderBy = "order by";
-		switch($sort_option)
+		$query_orderBy = "order by ";
+		switch($sort)
 		{
-			case 1: 	$query_orderBy .= ' hit_count DESC'; 	break ;
-			case 2:		$query_orderBy .= ' deadline ASC'; 		break ;
-			case 3:		$query_orderBy .= ' site_name ASC'; 	break ;
+			case 1: 	$query_orderBy .= 'hit_count DESC, '; 	break;
+			case 2:		$query_orderBy .= 'price ASC, '; 		break;
+			case 3:		$query_orderBy .= 'price DESC, '; 	break;
 			default : 	$query_orderBy .= ""; 					break;
 		}
-
-
+		
+		// 카테고리 정리
+		$query_cate = "";
+		foreach($getCateList as $list)
+			$query_cate .= "cate_small=$list or ";
+		if ($query_cate == "")
+			$query_cate = "where name != ''";
+		else 
+			$query_cate = "where name != '' and (".substr($query_cate, 0, strlen($query_cate) - 3).")";
+		
 		// 자료 가져오기
-		$data = DB::select("select * from product where cate_small=$cate_small $query_orderBy, idx DESC");
+		$data = DB::select("select *, FORMAT(price, 0) as fPrice from product $query_cate $query_orderBy idx DESC");
 
 		// 갯수 확인 후 페이지 자르기
 		if (count($data) == 0)
-			return array('code' => '0', 'msg' => 'no matched result');
+			return array('code' => 0, 'msg' => 'no matched result');
 		else
 		{
-			$page_max = floor((count($data)-1) / 30) + 1;
+			$page_max = floor((count($data)-1) / 20) + 1;
 			if ($page_num > $page_max)
 				$page_num = $page_max;
-			$page_start = ($page_num-1)*30;
-			$result = array_slice($data, $page_start, 30);
+			$page_start = ($page_num-1)*20;
+			$result = array_slice($data, $page_start, 20);
+
+			return array('code' => 1, 'msg' => 'success', 'data' => $result, 'maxPage' => $page_max);
+		}
+	}
+	
+	/*
+	 *	내 찜한 상품 목록 가져오기 기능
+	 */
+	function getMyList($mem_idx, $getCateList, $page_num)
+	{
+		if( !( 	inputErrorCheck($mem_idx, 'mem_idx') &&
+				inputErrorCheck($getCateList, 'getCateList') &&
+				inputErrorCheck($page_num, 'page_num')))
+					return ;
+
+		// 카테고리 정리
+		$query_cate = "";
+		foreach($getCateList as $list)
+			$query_cate .= "cate_small=$list or ";
+		if ($query_cate == "")
+			$query_cate = "name != ''";
+		else
+			$query_cate = "name != '' and (".substr($query_cate, 0, strlen($query_cate) - 3).")";
+
+		// 자료 가져오기
+		$data = DB::select("select *, FORMAT(price, 0) as fPrice 
+							from product_bookmark as pb, product as p  
+							where pb.member_idx = ? and pb.product_idx = p.idx and $query_cate ", 
+							array($mem_idx));
+
+		// 갯수 확인 후 페이지 자르기
+		if (count($data) == 0)
+			return array('code' => 0, 'msg' => 'no matched result');
+		else
+		{
+			$page_max = floor((count($data)-1) / 20) + 1;
+			if ($page_num > $page_max)
+				$page_num = $page_max;
+			$page_start = ($page_num-1)*20;
+			$result = array_slice($data, $page_start, 20);
 
 			return array('code' => 1, 'msg' => 'success', 'data' => $result, 'maxPage' => $page_max);
 		}

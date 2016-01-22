@@ -1,11 +1,12 @@
 <?php
 namespace App\Http\models;
 use DB;
+include_once dirname(__FILE__)."/Utility.php";
+
+
 /*
  *  카테고리 관련 컨트롤러
  */
-include_once dirname(__FILE__)."/../function/baseFunction.php";
-
 class CategoryModel{
 
 
@@ -16,7 +17,7 @@ class CategoryModel{
 	{
 
 
-		$result = DB::select("SELECT 
+		/*$result = DB::select("SELECT 
 									cs.idx as sidx, 
 									cs.name as sname, 
 									cm.idx as midx, 
@@ -28,7 +29,15 @@ class CategoryModel{
 									ON cs.medium_idx = cm.idx
 								INNER JOIN category_large AS cl
 								 	ON cm.large_idx = cl.idx
-								WHERE cs.idx='$small_idx'");
+								WHERE cs.idx='$small_idx'");*/
+		
+		$result = DB::select("select	idx as sidx,
+										name as sname,
+										m_idx as midx,
+										m_name as mname,
+										l_idx as lidx,
+										l_name as lname
+								from category where idx='$small_idx'");
 
       	return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
@@ -41,7 +50,8 @@ class CategoryModel{
 		if( !( inputErrorCheck($large_idx, 'large_idx')))
 			return ;
 
-		$result = DB::select("SELECT 
+		
+		/*$result = DB::select("SELECT 
 									cs.idx as sidx, 
 									cs.name as sname, 
 									cm.idx as midx, 
@@ -53,8 +63,15 @@ class CategoryModel{
 									ON cm.large_idx = cl.idx
 								INNER JOIN category_small AS cs
 								 	ON cs.medium_idx = cm.idx
-								WHERE cl.idx='$large_idx'");
-
+								WHERE cl.idx='$large_idx'");*/
+		
+		$result = DB::select("select	idx as sidx,
+										name as sname,
+										m_idx as midx,
+										m_name as mname,
+										l_idx as lidx,
+										l_name as lname
+								from category where l_idx='$large_idx'");
 
       	return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
@@ -64,7 +81,10 @@ class CategoryModel{
 	 */
 	function getInfoListLarge()
 	{
-		$result = DB::select('select * from category_large');
+		//$result = DB::select('select * from category_large');
+		$result = DB::select('select distinct	l_idx as idx,
+												l_name as name
+								from category order by idx asc');
 
       	return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
@@ -77,7 +97,11 @@ class CategoryModel{
 		if( !( inputErrorCheck($large_idx, 'large_idx')))
 			return ;
 
-		$result = DB::select('select * from category_medium where large_idx=?', array($large_idx));
+		//$result = DB::select('select * from category_medium where large_idx=?', array($large_idx));
+		$result = DB::select('select distinct	m_idx as idx,
+												m_name as name,
+												l_idx as large_idx
+								from category where l_idx=? order by idx asc', array($large_idx));
 
 	    return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
@@ -90,9 +114,41 @@ class CategoryModel{
 		if( !( inputErrorCheck($medium_idx, 'medium_idx')))
 			return ;
 
-		$result = DB::select('select * from category_small where medium_idx=?', array($medium_idx));
+		//$result = DB::select('select * from category_small where medium_idx=?', array($medium_idx));
+		$result = DB::select('select	idx,
+										name,
+										m_idx as medium_idx,
+										0 as large_idx
+								from category where m_idx=? order by idx asc', array($medium_idx));
 
 	    return array('code' => 1, 'msg' => 'success', 'data' => $result);
+	}
+	
+	function getCateName($depth, $idx)
+	{
+		if ($depth == 1){
+			//$result = DB::select("SELECT * FROM category_large WHERE idx=$idx");
+			$result = DB::select("select	l_idx as idx,
+											l_name as name
+									from category where l_idx='$idx'");
+		}
+		else if ($depth == 2){
+			//$result = DB::select("SELECT * FROM category_medium WHERE idx=$idx");
+			$result = DB::select("select	m_idx as idx,
+											m_name as name,
+											l_idx as large_idx
+									from category where m_idx='$idx'");
+		}
+		else{
+			//$result = DB::select("SELECT * FROM category_small WHERE idx=$idx");
+			$result = DB::select("select	idx,
+											name,
+											m_idx as medium_idx,
+											0 as large_idx
+									from category where idx='$idx'");
+		}
+		
+		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
 
 }

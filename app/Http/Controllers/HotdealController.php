@@ -3,65 +3,80 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\models\HotdealTargetModel;
 use App\Http\models\CategoryModel;
+use App\Http\models\HotdealProductModel;
 use Request;
 
 class HotdealController extends Controller {
 
+	
 	/*
-	|--------------------------------------------------------------------------
-	| Default Home Controller
-	|--------------------------------------------------------------------------
-	|
-	| You may wish to use controllers instead of, or in addition to, Closure
-	| based routes. That's great! Here is an example controller method to
-	| get you started. To route to this controller, just add the route:
-	|
-	|	Route::get('/', 'HomeController@showWelcome');
-	|
-	*/
-
+	 * 2016.01.14
+	 * 작성자 : 박용호
+	 * 핫딜 메인 페이지
+	 */
 	public function main()
 	{
 		$page = 'hotdeal_main';
 		return view($page, array('page' => $page));
 	}
 	
+	
+	/*
+	 * 2016.01.14
+	 * 작성자 : 박용호
+	 * 핫딜 상품 페이지
+	 */
 	public function indexProduct()
 	{
 		$page = 'hotdeal';
 		return view($page, array('page' => $page));
 	}
 	
+	
+	public function productDetail()
+	{
+		$cateModel = new CategoryModel();
+		$hotPrdtModel = new HotdealProductModel();
+	
+		$idx = Request::input('idx');
+		$result = $hotPrdtModel->getInfoSingle($idx);
+	
+		$cateS = $result['data']['cate'];
+		$data = $cateModel->downToUp($cateS);
+		$data['data'][0]->lidx = 'c';
+	
+		$page = 'product';
+		return view($page, array('page' => $page, 'result' => $result['data'], 'cate' => $data['data'][0]));
+	}
+	
+	
+	/*
+	 * 2016.01.14
+	 * 작성자 : 박용호
+	 * 핫딜 코드 페이지
+	 */
 	public function indexCode()
 	{
 		$hotdealModel = new HotdealTargetModel();
 		$categoryModel = new CategoryModel();
 		
 		// 정렬 방식 가져오기, 검사	(1, 2, 3, 5)
-		$sort = '1';
-		if (Request::has('sort'))
-			$sort = Request::input('sort');
+		$sort = Request::input('sort', '1');
 		if (session_id() == '')	session_start();
 		if ($sort == '5' && empty($_SESSION['idx']))
-			$sort = 1;
+			$sort = '1';
 		
 		// 카테고리 가져오기, 검사	(0은 전체)		
-		$cate = '0';
-		if (Request::has('cate'))
-			$cate = Request::input('cate');
+		$cate = Request::input('cate', '0');
 		$cateList = $categoryModel->getInfoListLarge();
 		if ($cate > count($cateList['data']))
 			$cate = '0';
 		
 		// 사이트 가져오기, 검사 (전체는 0)
-		$site = "0";
-		if (Request::has('site'))
-			$site = Request::input('site');
+		$site = Request::input('site', '0');
 		
 		// 페이지 검사
-		$nowPage = '1';
-		if (Request::has('page'))
-			$nowPage = Request::input('page');
+		$nowPage = Request::input('page', '1');
 		
 		// 현재 카테고리 이름 가져오기
 		$name = "전체";
@@ -94,6 +109,7 @@ class HotdealController extends Controller {
 			
 		}
 		
+		// 해당 정보 없을 시 빈 배열 넣어줌
 		if ($result['code'] == '0')
 		{
 			$result['maxPage'] = 1;
@@ -101,7 +117,10 @@ class HotdealController extends Controller {
 			$result['data'] = array();
 		}
 		
+		// 현재 카테고리
 		$nowCate = array('idx' => $cate, 'name' => $name);
+		
+		// 현재, 최대 페이지 번호
 		$paging = array('now' => $nowPage, 'max' => $result['maxPage']);
 		
 		$page = 'hotdeal';
@@ -119,6 +138,13 @@ class HotdealController extends Controller {
 		return view($page, $data);
 	}
 	
+	
+	/*
+	 * 2016.01.14
+	 * 작성자 : 박용호
+	 * 조회수 1 증가
+	 * 역시 1 증가한 후 10초 후에 증가할 수 있음
+	 */
 	public function hitCountPlus()
 	{
 		$hotdealModel = new HotdealTargetModel();
@@ -126,7 +152,7 @@ class HotdealController extends Controller {
 		if (isset($_COOKIE['hotdeal_click']))
 			return array('code' => 0, 'msg' => 'already clicked!');
 		else
-			setcookie('hotdeal_click', 1, time()+5);	
+			setcookie('hotdeal_click', 1, time()+10);	
 		
 		$idx = Request::input('idx');
 		$result = $hotdealModel->updateHitCount($idx);
@@ -134,6 +160,12 @@ class HotdealController extends Controller {
 		return $result;
 	}
 	
+	
+	/*
+	 * 2016.01.14
+	 * 작성자 : 박용호
+	 * 핫딜 북마크
+	 */
 	public function hotdealBookmark()
 	{
 		$hotdealModel = new HotdealTargetModel();
