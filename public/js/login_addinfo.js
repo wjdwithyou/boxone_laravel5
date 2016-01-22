@@ -14,8 +14,8 @@ $(document).ready(function(){
  */
 function socialSignIn()
 {
-	var email_msg = $("#social_add_email_msg").text();
-	var nickname_msg = $("#social_add_nickname_msg").text();
+	var email_msg = $("#eid_input_msg").text();
+	var nickname_msg = $("#nick_input_msg").text();
 	
 	if (email_msg != "사용가능" || nickname_msg != "사용가능")
 		alert ("이메일과 닉네임을 다시 확인해주세요.");

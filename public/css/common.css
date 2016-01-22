@@ -7,7 +7,9 @@ img,fieldset{border:0}
 ul,ol{list-style:none}
 a,a:hover,a:active,a:focus{color:#000;text-decoration:none;cursor:pointer}
 input:focus, textarea:focus{outline:none}
+input,select,option{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
 input{-webkit-appearance:none;-moz-appearance:none;appearance:none}
+input::-ms-clear{display:none}
 input[type='number']{-moz-appearance:textfield}
 input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none}
 label{font-weight:normal}
@@ -90,7 +92,7 @@ button:focus{outline:0}
 .m_inner{max-width:768px;margin:0 auto}
 .input_div{margin-top:8px}
 .input_div input,.input_div button{width:100%}
-.input_div input:not([type='file']),.input_div button{padding:12px;font-size:16px}
+.input_div input:not([type='file']),.input_div button{height:48px;padding-left:12px;padding-right:12px;font-size:16px}
 .input_wrap{width:300px;margin:0 auto;padding:0 8px}
 #imglist_wrap{max-width:1024px;margin:16px auto;}
 .imglist_div{padding:16px 8px}
@@ -178,7 +180,7 @@ button:focus{outline:0}
 	.grid_432,.grid_532{width:33.33333333%}
 	.grid_512{width:100%}
 	.pc_header{display:none}
-	#header{position:fixed;z-index:10001;width:100%;top:0}
+	#header{position:fixed;z-index:10002;width:100%;top:0}
 	#container{margin-top:51px}
 	#bo_logo img{width:120px}
 	#header_search{margin-top:8px}
@@ -186,8 +188,12 @@ button:focus{outline:0}
 	.mob_side_btn{margin-top:8px}
 	.header_hr{margin-top:8px}
 }
+@media(min-width:768px){
+	.grid_221{width:50%}
+}
 @media(max-width:420px){
 	.grid_432,.grid_532,.grid_512{width:50%}
+	.grid_221{width:100%}
 	.input_wrap{width:100%}
 }
 

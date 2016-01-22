@@ -1,6 +1,7 @@
 <div class="f_c">
 	<div class="grid grid_h">
 		<select id="high_cate" class="popup_selectbox bo_selectbox bo_selectbox_3" onchange="selectHighcate();">
+			<option value="">대분류</option>
 			<option value="1">유아</option>
 			<option value="2">레저/스포츠</option>
 			<option value="3">의류/패션잡화</option>
@@ -25,37 +26,7 @@
 	</div>
 	<div class="grid grid_h">
 		<select id="low_cate" class="popup_selectbox bo_selectbox bo_selectbox_3" onchange="selectLowcate();">
-			<option value="1">수유관련 용품</option>
-			<option value="2">수유관련 용품(플라스틱)</option>
-			<option value="3">목욕통</option>
-			<option value="4">목욕통(플라스틱)</option>
-			<option value="5">체온계</option>
-			<option value="6">보행기</option>
-			<option value="7">기타관련용품</option>
-			<option value="8">유모차</option>
-			<option value="9">유모차 부품</option>
-			<option value="10">이유식</option>
-			<option value="11">젖병류</option>
-			<option value="12">젖병류(플라스틱)</option>
-			<option value="13">기저귀(종이/면)</option>
-			<option value="14">안전용품</option>
-			<option value="15">키시트</option>
-			<option value="16">임산부/영아의류</option>
-			<option value="17">수영복</option>
-			<option value="18">완구(바퀴)</option>
-			<option value="19">완구(조립식)</option>
-			<option value="20">아동용 동화책</option>
-			<option value="21">보행기</option>
-			<option value="22">어린이용 화장품</option>
-			<option value="23">완구(장난감)</option>
-			<option value="24">유모차</option>
-			<option value="25">유모차부품</option>
-			<option value="26">유아용냅킨</option>
-			<option value="27">유아용의류</option>
-			<option value="28">일회용 기저귀</option>
-			<option value="29">카시트</option>
-			<option value="30">이유식(채소)</option>
-			<option value="31">조제분유</option>
+			<option value="">소분류</option>
 		</select>
 	</div>
 </div>
@@ -94,7 +65,7 @@
 	</tr>
 	<tr>
 		<td colspan="3">
-			<p class="popup_p font_10">물품가격은 외국내 배송료, 세금을 포함한 가격입니다.</p>
+			<p class="popup_p font_10">상품가격은 외국내 배송료, 세금을 포함한 가격입니다.</p>
 		</td>
 	</tr>
 	<tr>
@@ -106,8 +77,8 @@
 		</td>
 		<td class="cal_col2">
 			<select id="select_weight" class="popup_selectbox bo_selectbox bo_selectbox_3">
-				<option value="kg">kg</option>
 				<option value="lbs">lbs</option>
+				<option value="kg">kg</option>
 			</select>
 		</td>
 	</tr>
@@ -129,7 +100,7 @@
 		<td class="ta_r"><strong id="price_money" class="font_16 bo_color7"></strong>&nbsp;원</td>
 	</tr>
 	<tr>
-		<td class="cal_col">선편요금</td>
+		<td class="cal_col">국제운임</td>
 		<td class="ta_r"><strong id="weight_money" class="font_16 bo_color1"></strong>&nbsp;원</td>
 	</tr>
 	<tr>
