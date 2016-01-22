@@ -65,15 +65,11 @@
 		<td colspan="2">
 			<select id="select_country" class="popup_selectbox bo_selectbox bo_selectbox_3" onchange="select_country();">
 				<option value="">국가선택</option>
-				<option value="NLG">네덜란드</option>
-				<option value="DEM">독일</option>
 				<option value="USD">미국</option>
-				<option value="ESP">스페인</option>
+				<option value="EUR">유럽연합</option>
 				<option value="GBP">영국</option>
-				<option value="EUR">유럽</option>
 				<option value="JPY">일본</option>
 				<option value="CNY">중국</option>
-				<option value="FRF">프랑스</option>
 				<option value="AUD">호주</option>
 				<option value="HKD">홍콩</option>					
 			</select>

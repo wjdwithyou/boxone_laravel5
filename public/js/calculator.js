@@ -59,6 +59,7 @@ function select_country(){
 		({
 			url: adr_ctr+"Sidemenu/getRate",
 			type: 'post',
+			async: false,
 			data: {
 				country: cur
 			},		
