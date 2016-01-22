@@ -66,8 +66,8 @@
 			<select id="select_country" class="popup_selectbox bo_selectbox bo_selectbox_3" onchange="select_country();">
 				<option value="">국가선택</option>
 				<option value="USD">미국</option>
+				<option value="EUR">유럽연합</option>
 				<option value="GBP">영국</option>
-				<option value="EUR">유로</option>
 				<option value="JPY">일본</option>
 				<option value="CNY">중국</option>
 				<option value="AUD">호주</option>
