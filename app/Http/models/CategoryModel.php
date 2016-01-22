@@ -30,6 +30,8 @@ class CategoryModel{
 								INNER JOIN category_large AS cl
 								 	ON cm.large_idx = cl.idx
 								WHERE cs.idx='$small_idx'");
+		
+		// $result = DB::select("SELECT * FROM category WHERE idx=?", array($small_idx));
 
       	return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
@@ -55,7 +57,7 @@ class CategoryModel{
 								INNER JOIN category_small AS cs
 								 	ON cs.medium_idx = cm.idx
 								WHERE cl.idx='$large_idx'");
-
+		// $result = DB::select("SELECT * FROM category WHERE l_idx=?", array($large_idx));
 
       	return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
@@ -66,7 +68,8 @@ class CategoryModel{
 	function getInfoListLarge()
 	{
 		$result = DB::select('select * from category_large');
-
+		// $result = DB::select('SELECT DISTINCT l_idx, l_name FROM category');
+		
       	return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
 
@@ -79,6 +82,7 @@ class CategoryModel{
 			return ;
 
 		$result = DB::select('select * from category_medium where large_idx=?', array($large_idx));
+		// $result = DB::select('SELECT DISTINCT m_idx, m_name FROM category WHERE l_idx = ?', array($large_idx));
 
 	    return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
@@ -92,6 +96,7 @@ class CategoryModel{
 			return ;
 
 		$result = DB::select('select * from category_small where medium_idx=?', array($medium_idx));
+		// $result = DB::select('SELECT DISTINCT idx, name FROM category WHERE m_idx = ?', array($medium_idx));
 
 	    return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
