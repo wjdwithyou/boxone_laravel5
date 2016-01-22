@@ -227,6 +227,29 @@ function calculate_all()
 			}
 		}
 		
+		// 160122 J.Style
+		// If additional tax exist, display it.
+		// not complete code.
+		var temp = '';
+		var tax_arr = [tax.tax1, tax.tax2, tax.tax3, tax.tax4, tax.tax5];
+		
+		for (var i = 0; i < 5; ++i){
+			if (tax_arr[i] != 0){
+				temp += ' tax';
+				temp += i;
+				// 실제로는 세금 이름을 붙이자..
+				temp += ','; 
+			}
+		}
+		
+		if (temp != ''){
+			var additional = temp.substring(0, temp.length - 1);
+			$("#cal_additional").html("얘는" + additional + " 같은게 붙어요..");
+		}
+		else
+			$("#cal_additional").html("");
+		// J.Style end
+		
 		// 선편요금 출력
 		var weight_tax;
 		var status;

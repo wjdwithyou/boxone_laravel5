@@ -121,6 +121,7 @@
 	<tr>
 		<td colspan="2">
 			<p id="cal_detail" class="popup_p">물품가격 200달러 이하로 목록통관 대상입니다.</p>
+			<p id="cal_additional" class="popup_p"></p>
 			<!-- 별도의 개별소비세 부과 대상입니다. -->
 		</td>
 	</tr>
