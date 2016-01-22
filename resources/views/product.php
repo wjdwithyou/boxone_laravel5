@@ -79,8 +79,8 @@
 						</button>
 					</div>
 				</li>
-				<li class="pd_li3 bo_color">
-					<?=$result['size']?>
+				<li id="pd_size" class="pd_li3 bo_color">
+					 <?=$result['size']?>
 				</li>
 				<li class="pd_li4 li_underline">
 					<button type="button" class="bo_btn f_b">

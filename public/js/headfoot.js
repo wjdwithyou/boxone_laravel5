@@ -19,4 +19,5 @@ function cal_toggle(){
 	}
 	
 	$("#cal_popup").toggle();
+
 }

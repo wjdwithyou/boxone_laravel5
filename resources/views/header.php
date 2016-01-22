@@ -45,6 +45,7 @@
 				</div>
 				<?php endif; ?>
 			</div>
+
 			<div id="alarm_set">
 				<div class="col-xs-3">
 					<a onclick=""><img src="<?= $adr_img?>header_alarm.png"></a>
@@ -59,16 +60,20 @@
 					<a onclick="cal_toggle();"><img src="<?= $adr_img?>header_cal.png" id="header_cal"></a>
 				</div>
 				<!-- 계산기 팝업 -->
-				<div id="cal_popup" hidden>
+		
+				<div id="cal_popup" class="test" hidden>
+						
 					<div id="cal_title">
 						관세 계산기
 					</div>
-					<?php include ("calculator.php"); ?>					
+					<?php include ("calculator.php"); ?>
+			
 				</div>
 				<div class="clear_both"></div>
 			</div>
 		</div>		
-		
+					<div id="tri" class="test" hidden></div>
+					<div id="tri_border" class="test" hidden></div>	
 		<div id="searchbar_wrap">
 			<a onclick=""><img src="<?= $adr_img?>search_img.png"></a>
 			<input type="text" class="form-control" placeholder="Search for...">
@@ -83,7 +88,7 @@
 		</div>
 	</div>
 </div>
-
+					
 <div id="main_menu_wrap">
 	<div id="main_menu">
 		<div id="shoppingbox_menu_wrap" class="menu_split">
@@ -188,6 +193,29 @@
 </div>
 
 <style>
+#tri_border {
+		position: absolute;
+		width: 0;
+		height: 0;
+		border-style: solid;
+		border-width: 0 10px 18px 10px;
+		top: 65px;
+		left: 1396px;
+		z-index: 101;
+		border-color: transparent transparent #ccc transparent;
+		
+	}
+#tri {
+		z-index: 102;
+		position: absolute;
+		top: 71px;
+		left: 1396px;
+		width: 0;
+		height: 0;
+		border-style: solid;
+		border-width: 0 10px 18px 10px;
+		border-color: transparent transparent #ffffff transparent;
+	}
 	.sb_top, #sp_txt {
 		font-weight: bold;
 		margin-top: 15px;
@@ -234,6 +262,7 @@
     font-weight: normal;
     text-align: left;
 }
+
 </style>
 
 <?php include ("login.php"); ?>
