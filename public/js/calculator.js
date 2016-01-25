@@ -212,12 +212,12 @@ function calculate_all()
 			{
 				if (parseFloat(prdt_price) <= 150)
 				{
-					$("#cal_detail").html("상품가격 150달러 이하로 일반통관 면세 대상입니다.");
+					$("#cal_detail").html("상품가격 $150 이하로 일반통관 면세 대상입니다.");
 					tax_free = true;
 				}
 				else
 				{
-					$("#cal_detail").html("상품가격 150달러 초과로 일반통관 과세 대상입니다.");
+					$("#cal_detail").html("상품가격 $150 초과로 일반통관 과세 대상입니다.");
 					tax_free = false;
 				}
 			}
@@ -228,12 +228,12 @@ function calculate_all()
 			var price_dollor = parseFloat(prdt_price) * rate / parseFloat(rateUs);
 			if (price_dollor < 150)
 			{
-				$("#cal_detail").html("상품가격 150달러 이하로 일반통관 면세 대상입니다.");
+				$("#cal_detail").html("상품가격 $150 이하로 일반통관 면세 대상입니다.");
 				tax_free = true;
 			}
 			else
 			{
-				$("#cal_detail").html("상품가격 150달러 초과로 일반통관 과세 대상입니다.");
+				$("#cal_detail").html("상품가격 $150 초과로 일반통관 과세 대상입니다.");
 				tax_free = false;
 			}
 		}
