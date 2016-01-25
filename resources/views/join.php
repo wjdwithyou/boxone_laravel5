@@ -48,7 +48,7 @@
 					</div>
 					<div class="btn_set2 f_c">
 						<div class="input_div grid grid_h">
-							<button type="button" id="login_btn" class="bo_btn1 br_25" onclick="">취소</button>
+							<button type="button" id="login_btn" class="bo_btn1 br_25" onclick="goBack();">취소</button>
 						</div>
 						<div class="input_div grid grid_h">
 							<button type="button" id="login_btn" class="bo_btn2 br_25" onclick="justSignIn();">확인</button>

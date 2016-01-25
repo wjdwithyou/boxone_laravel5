@@ -1,5 +1,5 @@
-<div class="f_c">
-	<div class="grid grid_h">
+<div>
+	<div class="input_div">
 		<select id="high_cate" class="popup_selectbox bo_selectbox bo_selectbox_3" onchange="selectHighcate();">
 			<option value="">대분류</option>
 			<option value="1">유아</option>
@@ -24,16 +24,13 @@
 			<option value="20">생활</option>
 		</select>
 	</div>
-	<div class="grid grid_h">
+	<div class="input_div">
 		<select id="low_cate" class="popup_selectbox bo_selectbox bo_selectbox_3" onchange="selectLowcate();">
 			<option value="">소분류</option>
 		</select>
 	</div>
-</div>
-<table id="cal_table">
-	<tr>
-		<td class="cal_col">국가선택</td>
-		<td colspan="2">
+	<div class="input_div f_c">
+		<div class="grid grid_h">
 			<select id="select_country" class="popup_selectbox bo_selectbox bo_selectbox_3" onchange="select_country();">
 				<option value="">국가선택</option>
 				<option value="USD">미국</option>
@@ -44,14 +41,15 @@
 				<option value="AUD">호주</option>
 				<option value="HKD">홍콩</option>					
 			</select>
-		</td>
-	</tr>
-	<tr id="exchange_rate" hidden>
-		<td colspan="3">
-			<p class="popup_p bo_color7">고시환율&nbsp;<strong id="rate"></strong>&nbsp;원 (<span id="rate_date">2016.01.21</span> 기준)</p>
-			<p class="popup_p bo_color7">안심구매금액&nbsp<strong id="ansim"></strong></p>
-		</td>
-	</tr>
+		</div>
+		<div id="exchange_rate" class="grid grid_h pd_l8" hidden>
+			<p class="popup_p bo_color7 font_11">고시환율&nbsp;<strong id="rate" class="font_12"></strong>&nbsp;원</p>
+			<p class="popup_p bo_color7 font_11">(<span id="rate_date"></span>&nbsp;기준)</p>
+			<p class="popup_p bo_color7 font_11">면세금액&nbsp<strong id="ansim" class="font_12"></strong></p>
+		</div>
+	</div>
+</div>
+<table id="cal_table">
 	<tr>
 		<td class="cal_col">상품가격</td>
 		<td class="input_div" colspan="2">

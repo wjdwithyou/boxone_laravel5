@@ -1,16 +1,14 @@
 $(document).ready(function(){
 	if ($("#need_login").val() == "1")
 		moveLogin();
-			
+	
 	$(".menu_hover").mouseover(function() {
-		$(this).children().css("color", "#f15a63");
 		$("#hover_menu_wrap").show();
 		var temp_menuId = $(this).attr("id");
 		temp_menuId = "#sb_menu" + temp_menuId.substring(9,10);
 		$("#hover_menu_wrap").html($(temp_menuId).html());
 	})
 	.mouseout(function() {
-		$(this).children().css("color", "#000");
 		$("#hover_menu_wrap").hide();
 	});
 });
@@ -99,4 +97,20 @@ function logout()
 		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		}
 	});
+}
+
+function toggleAsidemenu(){
+	if($("#aside_menu_wrap").css("right") == "0px"){
+		$("#aside_menu_wrap").css("right", -80);
+		$("#aside_arrow img").attr("src", adr_img + "left_arrow.png");
+		
+	}
+	else{
+		$("#aside_menu_wrap").css("right", 0);
+		$("#aside_arrow img").attr("src", adr_img + "right_arrow.png");
+	}
+}
+
+function goBack(){
+	window.history.back();
 }

@@ -53,7 +53,7 @@
 					</nav>
 				</div>
 				<nav id="sign_find">
-					<a href="<?=$adr_ctr?>Login/join">가입하기</a>
+					<a href="<?=$adr_ctr?>Login/join">회원가입</a>
 					<span class="li_bar2"></span>
 					<a href="<?=$adr_ctr?>Login/login_findpw">비밀번호 찾기</a>
 				</nav>

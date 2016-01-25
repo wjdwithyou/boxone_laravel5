@@ -19,6 +19,7 @@ function selectHighcate(){
 			result = JSON.parse(result);
 			var i;
 			$("#low_cate").html('');
+			$("#low_cate").append('<option value="">소분류</option>');
 			for (i = 0 ; i < result.length ; i++)
 				$("#low_cate").append('<option value="'+result[i].idx+'">'+result[i].name+'</option>');
 		},
@@ -67,7 +68,7 @@ function select_country(){
 			{
 				//alert (JSON.stringify(result));
 				result = JSON.parse(result);
-				rateKr = result[1];
+				rateKr = Number(result[1]).toFixed(2);
 				rateUs = result[2];			
 				
 				$("#monetary").text(cur);
@@ -147,6 +148,7 @@ function change_ansim()
  */
 function calculate_all()
 {
+	var high_cate = $("#high_cate").val();
 	var cate = $("#low_cate").val();
 	var cur = $("#select_country").val();
 	var prdt_price = $("#input_price").val();
@@ -155,7 +157,15 @@ function calculate_all()
 	
 	var patternNum = /[0-9]/;
 
-	if (cur == "")
+	if (high_cate == "")
+	{
+		alert ("대분류를 선택해주세요.");
+	}
+	else if(cate == "")
+	{
+		alert ("소분류를 선택해주세요.");
+	}
+	else if (cur == "")
 	{
 		alert ("국가를 선택해주세요.");
 	}
