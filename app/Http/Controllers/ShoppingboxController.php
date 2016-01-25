@@ -201,6 +201,7 @@ class ShoppingboxController extends Controller {
 		array_push($cookieArray, $data['data'][0]->lidx);
 		if (count($cookieArray) > 10)
 			$cookieArray = array_slice($cookieArray, 0, 10);
+		print_r($cookieArray);
 		
 		$json_cookie = json_encode($cookieArray);
 		Cookie::queue('recentCate', $json_cookie);
