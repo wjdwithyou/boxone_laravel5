@@ -66,7 +66,8 @@ class MainController extends Controller {
 				array_push($cateList, $sList->sidx);
 			$temp = $prdtModel->getInfoList(1, $cateList, 1);
 			
-			$temp = array_slice($temp['data'], 0, 4);
+			if (count($temp['data']) >= 4)
+				$temp = array_slice($temp['data'], 0, 4);
 			$temp['cateName'] = $smallCate['data'][0]->lname;
 			array_push($prdtList, $temp);
 		}
