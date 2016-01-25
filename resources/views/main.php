@@ -95,7 +95,7 @@
 				</div>
 				<div id="sb_content" class="mg_t16 f_c">
 					<?php foreach ($prdtList as $list) :?>
-						<?=$list['cateName']?>
+						<div><?=$list['cateName']?></div>
 						<?php for($i = 0 ; $i < count($list)-1 ; $i++) :?>
 						<div class="imglist_div grid grid_432">
 							<div class="imglist_img img_center">
