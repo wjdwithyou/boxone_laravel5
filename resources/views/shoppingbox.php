@@ -25,26 +25,108 @@
 		</div>
 		<div id="content">
 			<div class="inner">
-				<nav id="index">
-					<a href='<?=$adr_ctr?>Shoppingbox/index'>쇼핑박스</a>
-					<?php foreach ($nowCate as $list) :?>
-						&nbsp;>&nbsp;
-						<a onclick="getPrdt('<?=$list[0]?>','',1);"><?=$list[1]?></a>
-					<?php endforeach;?>
-				</nav>
-				<div id="select_wrap" class="f_c">
-					<div>
-						<select id="select_cate" class="bo_selectbox bo_selectbox_2">
+				<div class="f_c">
+					<nav class="classify grid grid_211">
+						<div class="classify_top">
+							<a href='<?=$adr_ctr?>Shoppingbox/index'>쇼핑박스</a>
+							<?php foreach ($nowCate as $list) :?>
+								>
+								<a onclick="getPrdt('<?=$list[0]?>','',1);"><?=$list[1]?></a>
+							<?php endforeach;?>
+						</div>
+						<div id="cate_wrap" class="classify_div f_C">
 							<?php foreach ($cateList as $list) :?>
 								<?php if ($list[2]) :?>
-									<option value="<?=$list[0]?>" selected="selected"><?=$list[1]?></option>
+								<input type="hidden" id="select_cate" value="<?=$list[0]?>">
 								<?php else :?>
-									<option value="<?=$list[0]?>"><?=$list[1]?></option>
+								<input type="hidden" id="select_cate" value="l0">
 								<?php endif;?>
+								<div class="grid grid_h">
+									<a onclick="getPrdt('<?=$list[0]?>','',1);"><?=$list[1]?>&nbsp;<span class="bo_color2">123</span></a>
+								</div>
 							<?php endforeach;?>
-						</select>
+						</div>
+					</nav>
+					<nav class="classify grid grid_211">
+						<div class="classify_top f_c">
+							<span>브랜드</span>
+							<div id="collapse_brand" class="f_r">
+								<a id="collapse_brand_btn" onclick="collapseBrand();"><img src="<?=$adr_img?>collapse_p.png" class="img_14"></a>
+							</div>
+						</div>
+						<div id="brand_wrap" class="classify_div f_C">
+							<div class="grid grid_h">
+								<input type="checkbox" id="sc1" name="sc1" class="bo_checkbox bo_checkbox_1">
+								<label for="sc1"><span></span>아베크롬비</label>
+							</div>
+							<div class="grid grid_h">
+								<input type="checkbox" id="sc2" name="sc2" class="bo_checkbox bo_checkbox_1">
+								<label for="sc2"><span></span>아베크롬비</label>
+							</div>
+							<div class="grid grid_h">
+								<input type="checkbox" id="sc3" name="sc3" class="bo_checkbox bo_checkbox_1">
+								<label for="sc3"><span></span>아베크롬비</label>
+							</div>
+							<div class="grid grid_h">
+								<input type="checkbox" id="sc4" name="sc4" class="bo_checkbox bo_checkbox_1">
+								<label for="sc4"><span></span>아베크롬비</label>
+							</div>
+							<div class="grid grid_h">
+								<input type="checkbox" id="sc5" name="sc5" class="bo_checkbox bo_checkbox_1">
+								<label for="sc5"><span></span>아베크롬비</label>
+							</div>
+							<div class="grid grid_h">
+								<input type="checkbox" id="sc6" name="sc6" class="bo_checkbox bo_checkbox_1">
+								<label for="sc6"><span></span>아베크롬비</label>
+							</div>
+							<div class="grid grid_h">
+								<input type="checkbox" id="sc7" name="sc7" class="bo_checkbox bo_checkbox_1">
+								<label for="sc7"><span></span>아베크롬비</label>
+							</div>
+							<div class="grid grid_h">
+								<input type="checkbox" id="sc8" name="sc8" class="bo_checkbox bo_checkbox_1">
+								<label for="sc8"><span></span>아베크롬비</label>
+							</div>
+							<div class="grid grid_h">
+								<input type="checkbox" id="sc9" name="sc9" class="bo_checkbox bo_checkbox_1">
+								<label for="sc9"><span></span>아베크롬비</label>
+							</div>
+							<div class="grid grid_h">
+								<input type="checkbox" id="sc10" name="sc10" class="bo_checkbox bo_checkbox_1">
+								<label for="sc10"><span></span>아베크롬비</label>
+							</div>
+							<div class="grid grid_h">
+								<input type="checkbox" id="sc11" name="sc11" class="bo_checkbox bo_checkbox_1">
+								<label for="sc11"><span></span>아베크롬비</label>
+							</div>
+							<div class="grid grid_h">
+								<input type="checkbox" id="sc12" name="sc12" class="bo_checkbox bo_checkbox_1">
+								<label for="sc12"><span></span>아베크롬비</label>
+							</div>
+							<div class="grid grid_h">
+								<input type="checkbox" id="sc13" name="sc13" class="bo_checkbox bo_checkbox_1">
+								<label for="sc13"><span></span>아베크롬비</label>
+							</div>
+							<div class="grid grid_h">
+								<input type="checkbox" id="sc14" name="sc14" class="bo_checkbox bo_checkbox_1">
+								<label for="sc14"><span></span>아베크롬비</label>
+							</div>
+							<div class="grid grid_h">
+								<input type="checkbox" id="sc15" name="sc15" class="bo_checkbox bo_checkbox_1">
+								<label for="sc15"><span></span>아베크롬비</label>
+							</div>
+							<div class="grid grid_h">
+								<input type="checkbox" id="sc16" name="sc16" class="bo_checkbox bo_checkbox_1">
+								<label for="sc16"><span></span>아베크롬비</label>
+							</div>
+						</div>
+					</nav>
+				</div>
+				<div class="f_c mg_t32">
+					<div class="font_14 mg_t12 fw_b f_l">
+						전체 검색결과&nbsp;<span class="bo_color1">344</span>
 					</div>
-					<div>
+					<div class="f_r">
 						<select id="select_orderby" class="bo_selectbox bo_selectbox_1">
 							<option value="1"<?php if ($sort == 1) echo (" selected=\"selected\"");?>>인기 순</option>
 							<option value="2"<?php if ($sort == 2) echo (" selected=\"selected\"");?>>가격: 낮은 순</option>
@@ -56,6 +138,7 @@
 						</select>
 					</div>
 				</div>
+				<hr class="sb_hr mg_t8">
 			</div>
 			<div id="imglist_wrap" class="f_c">
 				<?php foreach ($prdt as $list) :?>
