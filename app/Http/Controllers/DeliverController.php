@@ -144,7 +144,12 @@ class DeliverController extends Controller {
 		
 		if ($company == "CJ대한통운")
 		{
-			$postdata = "fsp_action=PARC_ACT_002&fsp_cmd=retrieveInvNoACT&invc_no=$num&nextpage=parcel%2Fpa_004_r.jsp";
+			//$result = json_decode(file_get_contents('http://platformstory.iptime.org:8093?company='.$company.'&num='.$num));
+			$result = json_decode(file_get_contents('http://platformstory.iptime.org:8093/?company=CJ&num='.$num), true);
+			//return $result;
+			
+			
+			/*$postdata = "fsp_action=PARC_ACT_002&fsp_cmd=retrieveInvNoACT&invc_no=$num&nextpage=parcel%2Fpa_004_r.jsp";
 				
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_URL, "https://www.doortodoor.co.kr/main/doortodoor.do");
@@ -212,7 +217,7 @@ class DeliverController extends Controller {
 				array_push($info, $temp);
 			}
 				
-			array_push($result, $info);
+			array_push($result, $info);*/
 				
 				
 		}
@@ -1234,6 +1239,8 @@ class DeliverController extends Controller {
 				$result['prdt'] = $result['receiver']."님의 상품";
 			else 
 				$result['prdt'] = "상품명 알 수 없음";
+			
+		//print_r ($result);
 		
 		return view($page, array('page' => $page, 'code' => 1, 'result' => $result, 'adr_ctr' => $adr_ctr));
 	}
