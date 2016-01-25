@@ -11,7 +11,7 @@ if (isset($_COOKIE['need_login'])) {
 			<ul class="top_li_set li_set">
 				<li><a onclick="toggleDialog('deliver', 11);">배송통관</a></li>
 				<span class="li_bar2"></span>
-				<li><a onclick="toggleDialog('calculator', 76);">관세계산</a></li>
+				<li><a onclick="toggleDialog('calculator', 80);">관세계산</a></li>
 			</ul>
 		</nav>
 		<nav class="f_r">
@@ -48,7 +48,7 @@ if (isset($_COOKIE['need_login'])) {
 		<div id="header_main" class="f_c grid grid_311">
 			<a class="mob_header f_l" onclick="location.href='<?= $adr_ctr ?>Sidemenu/index?bef='+location.href"><img src="<?= $adr_img ?>menu.png" class="mob_side_btn img_14"></a>
 			<a class="mob_header f_r" onclick="toggleSearch();"><img src="<?= $adr_img ?>search_img_gray.png" class="mob_side_btn img_14"></a>
-			<a id="bo_logo" onclick="location.href='<?= $adr_ctr ?>'"><img src="<?= $adr_img ?>header_logo.png"></a>
+			<a id="bo_logo" onclick="location.href='<?= $adr_ctr ?>'"><img src="<?= $adr_img ?>header_logo.png" alt="boxone" title="boxone"></a>
 		</div>
 		<div id="header_search" class="pc_header grid grid_311">
 			<input type="text" id="integrated_search" class="bo_search1 br_25" placeholder="검색어를 입력해주세요.">

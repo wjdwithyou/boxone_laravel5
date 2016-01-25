@@ -39,7 +39,7 @@
 							<button type="button" id="login_btn" class="bo_btn1 br_25" onclick="">취소</button>
 						</div>
 						<div class="input_div grid grid_h">
-							<button type="button" id="login_btn" class="bo_btn2 br_25" onclick="">확인</button>
+							<button type="button" id="login_btn" class="bo_btn2 br_25" onclick="socialSignIn();">확인</button>
 						</div>
 					</div>
 				</div>
