@@ -43,6 +43,25 @@ class HotdealController extends Controller {
 	
 		$cateS = $result['data']['cate'];
 		$data = $cateModel->downToUp($cateS);
+		
+		// 최근 본 상품의 카테고리를 cookie로 가지고 다닌다.
+		$cookie = Request::cookie('recentCate');
+		if ($cookie == '')
+			$cookieArray = array();
+		else
+		{
+			$cookieArray = json_decode($cookie, true);
+			// cookie 임의 변경 시 자동 초기화
+			if (json_last_error() != JSON_ERROR_NONE)
+				$cookieArray = array();
+		}
+		array_push($cookieArray, $data['data'][0]->lidx);
+		if (count($cookieArray) > 10)
+			$cookieArray = array_slice($cookieArray, 0, 10);
+		
+		$json_cookie = json_encode($cookieArray);
+		Cookie::queue('recentCate', $json_cookie);
+		
 		$data['data'][0]->lidx = 'c';
 	
 		$page = 'product';
