@@ -63,9 +63,9 @@ class MainController extends Controller {
 			$smallCate = $cateModel->upToDown($list);
 			$cateList = array();
 			foreach($smallCate['data'] as $sList)
-				array_push($cateList, $sList->idx);
+				array_push($cateList, $sList->sidx);
 			$temp = $prdtModel->getInfoList(1, $cateList, 1);
-			$temp['data']['cateName'] = $smallCate['data'][0]->name;
+			$temp['data']['cateName'] = $smallCate['data'][0]->sname;
 			array_push($prdtList, $temp['data']);
 		}
 		
