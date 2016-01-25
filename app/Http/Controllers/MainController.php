@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Http\models\ShoppingsiteModel;
 use App\Http\models\HotdealProductModel;
 use App\Http\models\ProductModel;
+use Request;
 
 class MainController extends Controller {
 
@@ -29,7 +30,21 @@ class MainController extends Controller {
 		$hotList = array_slice($result['data'], 0, 8);
 		//$hotList = array();
 		
-		// 쇼핑 박스 (쇼핑박스 최신 순 20개) 가져오기
+		// 쇼핑 박스 저장한 카테고리 수(쿠키) 확인 후, 우선순위 확인하여 가져오기
+		$cookie = Request::cookie('recentCate');
+		if ($cookie == '')
+			$cookieArray = array();
+		else
+		{
+			$cookieArray = json_decode($cookie, true);
+			// cookie 임의 변경 시 자동 초기화
+			if (json_last_error() != JSON_ERROR_NONE)
+				$cookieArray = array();
+		}
+		$cateValues = array_count_values($cookieArray);
+		sort($cateValues);
+		print_r($cateValues);
+		
 		$result = $prdtModel->getInfoList(1, array(), 1);
 		$prdtList = $result['data'];
 		

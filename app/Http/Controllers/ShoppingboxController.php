@@ -193,7 +193,7 @@ class ShoppingboxController extends Controller {
 			$cookieArray = array();
 		else
 		{
-			$cookieArray = json_decode($cookie);
+			$cookieArray = json_decode($cookie, true);
 			// cookie 임의 변경 시 자동 초기화
 			if (json_last_error() != JSON_ERROR_NONE)
 				$cookieArray = array();

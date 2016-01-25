@@ -59,92 +59,98 @@ function deliverySearch()
 	var company = company_info[0];
 	var num = $("#delivery_num").val();
 
-	/* 운송장 번호 값 확인 */
-	if (company == "UPS") 
+	if (company == "경동택배" || company == "대신택배" || company == "일양로지스" || company == "한의사랑택배" || company == "FedEx" || company == "DHL" || company == "UPS")
+		if (confirm("위 사이트는 새창으로 연결됩니다. 연결하시겠습니까?"))
+			window.open(company_info[2]);
+	else
 	{
-		var pattern1 = /^[0-9a-zA-Z]{9,12}$/i;
-		var pattern2 = /^[0-9a-zA-Z]{18}$/i;
-		var pattern3 = /^[0-9a-zA-Z]{25}$/i;
-		if (pattern1.test(num) && pattern2.test(num) && pattern3.test(num)) 
+		/* 운송장 번호 값 확인 */
+		if (company == "UPS") 
 		{
-			alert(company + "의 운송장 번호 패턴에 맞지 않습니다.");
-			$("#delivery_num").val("").focus();
-			return false;
-		}
-	} 
-	else if (company == "FedEx") 
-	{
-		if (!isNumeric(num)) 
-		{
-			alert("운송장 번호는 숫자만 입력해 주세요.");
-			$("#delivery_num").val("").focus();
-			return false;
+			var pattern1 = /^[0-9a-zA-Z]{9,12}$/i;
+			var pattern2 = /^[0-9a-zA-Z]{18}$/i;
+			var pattern3 = /^[0-9a-zA-Z]{25}$/i;
+			if (pattern1.test(num) && pattern2.test(num) && pattern3.test(num)) 
+			{
+				alert(company + "의 운송장 번호 패턴에 맞지 않습니다.");
+				$("#delivery_num").val("").focus();
+				return false;
+			}
 		} 
-		else if (company_info[1] > 0 && company_info[1] < num.length) 
+		else if (company == "FedEx") 
 		{
-			alert(company + "의 운송장 번호는 " + company_info[1] + "자리의 숫자로 입력해 주세요.");
-			$("#delivery_num").val("").focus();
-			return false;
+			if (!isNumeric(num)) 
+			{
+				alert("운송장 번호는 숫자만 입력해 주세요.");
+				$("#delivery_num").val("").focus();
+				return false;
+			} 
+			else if (company_info[1] > 0 && company_info[1] < num.length) 
+			{
+				alert(company + "의 운송장 번호는 " + company_info[1] + "자리의 숫자로 입력해 주세요.");
+				$("#delivery_num").val("").focus();
+				return false;
+			}
 		}
-	}
-	else if (company == "EMS") 
-	{
-		var pattern = /^[a-zA-Z]{2}[0-9]{9}[a-zA-Z]{2}$/;
-		if (!pattern.test(num)) 
+		else if (company == "EMS") 
 		{
-			alert(company + "의 운송장 번호 패턴에 맞지 않습니다.");
-			$("#delivery_num").val("").focus();
-			return false;
-		}
-	} 
-	else if (company == "TNT Express") 
-	{
-		var pattern1 = /^[a-zA-Z]{2}[0-9]{9}[a-zA-Z]{2}$/;
-		var pattern2 = /^[0-9]{9}$/;
-		if (num.search(pattern1) == -1 && num.search(pattern2) == -1) 
-		{
-			alert(company + "의 운송장 번호 패턴에 맞지 않습니다.");
-			$("#delivery_num").val("").focus();
-			return false;
-		}
-	} 
-	else 
-	{
-		if (!isNumeric(num)) 
-		{
-			alert("운송장 번호는 숫자만 입력해 주세요.");
-			$("#delivery_num").val("").focus();
-			return false;
+			var pattern = /^[a-zA-Z]{2}[0-9]{9}[a-zA-Z]{2}$/;
+			if (!pattern.test(num)) 
+			{
+				alert(company + "의 운송장 번호 패턴에 맞지 않습니다.");
+				$("#delivery_num").val("").focus();
+				return false;
+			}
 		} 
-		else if (company_info[1] > 0 && company_info[1] != num.length) 
+		else if (company == "TNT Express") 
 		{
-			alert(company + "의 운송장 번호는 " + company_info[1] + "자리의 숫자로 입력해 주세요.");
-			$("#delivery_num").val("").focus();
-			return false;
+			var pattern1 = /^[a-zA-Z]{2}[0-9]{9}[a-zA-Z]{2}$/;
+			var pattern2 = /^[0-9]{9}$/;
+			if (num.search(pattern1) == -1 && num.search(pattern2) == -1) 
+			{
+				alert(company + "의 운송장 번호 패턴에 맞지 않습니다.");
+				$("#delivery_num").val("").focus();
+				return false;
+			}
+		} 
+		else 
+		{
+			if (!isNumeric(num)) 
+			{
+				alert("운송장 번호는 숫자만 입력해 주세요.");
+				$("#delivery_num").val("").focus();
+				return false;
+			} 
+			else if (company_info[1] > 0 && company_info[1] != num.length) 
+			{
+				alert(company + "의 운송장 번호는 " + company_info[1] + "자리의 숫자로 입력해 주세요.");
+				$("#delivery_num").val("").focus();
+				return false;
+			}
 		}
+		
+		$.ajax
+		({
+			url: adr_ctr+"Deliver/getInfoDelivery",
+			type: 'post',
+			async: false,
+			data:{
+				adr_ctr: adr_ctr,
+				company: company,
+				num: num
+			},
+			success: function(result)
+			{
+				console.log(result);
+				$("#bo_dialog_content").html(result).trigger("create");
+			},
+			error: function(request,status,error)
+			{
+				console.log(request.responseText);
+			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
 	}
-	
-	$.ajax
-	({
-		url: adr_ctr+"Deliver/getInfoDelivery",
-		type: 'post',
-		async: false,
-		data:{
-			adr_ctr: adr_ctr,
-			company: company,
-			num: num
-		},
-		success: function(result)
-		{
-			console.log(result);
-			$("#bo_dialog_content").html(result).trigger("create");
-		},
-		error: function(request,status,error)
-		{
-			console.log(request.responseText);
-		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		}
-	});
 	//window.open(url, "_blank");
 }
 
