@@ -159,7 +159,7 @@ class ProductModel
 
 		// 갯수 확인 후 페이지 자르기
 		if (count($data) == 0)
-			return array('code' => 0, 'msg' => 'no matched result');
+			return array('code' => 0, 'msg' => 'no matched result', 'data' => array());
 		else
 		{
 			$page_max = floor((count($data)-1) / 20) + 1;
