@@ -189,12 +189,12 @@ function calculate_all()
 			{
 				if (parseFloat(prdt_price) <= 200)
 				{
-					$("#cal_detail").html("상품가격 200달러 이하로 목록통관 대상입니다.");
+					$("#cal_detail").html("목록통관 물품입니다.");
 					tax_free = true;
 				}
 				else
 				{
-					$("#cal_detail").html("상품가격 200달러 초과로 일반통관 과세 대상입니다.");
+					$("#cal_detail").html("목록통관 물품입니다.");
 					tax_free = false;
 				}
 			}
