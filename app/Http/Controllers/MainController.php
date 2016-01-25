@@ -44,6 +44,7 @@ class MainController extends Controller {
 		$cateValues = array_count_values($cookieArray);
 		sort($cateValues);
 		print_r($cateValues);
+		print_r($cookieArray);
 		
 		$result = $prdtModel->getInfoList(1, array(), 1);
 		$prdtList = $result['data'];
