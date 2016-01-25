@@ -55,7 +55,7 @@ class MainController extends Controller {
 		foreach ($cookieArray as $list)
 			$cookieValue[$list]++;
 		arsort($cookieValue);
-		$cateArray = array_keys($cateValue);
+		$cateArray = array_keys($cookieValue);
 		
 		$prdtList = array();
 		foreach($cateArray as $list)
