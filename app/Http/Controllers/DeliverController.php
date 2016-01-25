@@ -144,10 +144,7 @@ class DeliverController extends Controller {
 		
 		if ($company == "CJ대한통운")
 		{
-			//$result = json_decode(file_get_contents('http://platformstory.iptime.org:8093?company='.$company.'&num='.$num));
 			$result = json_decode(file_get_contents('http://platformstory.iptime.org:8093/?company=CJ&num='.$num), true);
-			//return $result;
-			
 			
 			/*$postdata = "fsp_action=PARC_ACT_002&fsp_cmd=retrieveInvNoACT&invc_no=$num&nextpage=parcel%2Fpa_004_r.jsp";
 				
@@ -220,6 +217,75 @@ class DeliverController extends Controller {
 			array_push($result, $info);*/
 				
 				
+		}
+		else if ($company == "CVSnet 편의점택배")
+		{
+			$result = json_decode(file_get_contents("http://platformstory.iptime.org:8093/?company=CVS&num=$num"), true);
+			
+			/*$html = file_get_contents('http://www.doortodoor.co.kr/jsp/cmn/TrackingCVS.jsp?pTdNo='.$num);
+				
+			if (strpos($html, "검색된 결과가 없습니다"))
+				return view($page, array('page' => $page, 'code' => 0));
+		
+			$html = substr($html, strpos($html, "<tbody"));
+		
+			// 보낸 분
+			$html = substr($html, strpos($html, "<td") + 3);
+			$html = substr($html, strpos($html, "<td"));
+			$html = substr($html, strpos($html, ">") + 1);
+			$result['sender'] = substr($html, 0, strpos($html, "<"));
+		
+			// 받는 분
+			$html = substr($html, strpos($html, "<td"));
+			$html = substr($html, strpos($html, ">") + 1);
+			$result['receiver'] = substr($html, 0, strpos($html, "<"));
+		
+			// 상품 이름
+			$html = substr($html, strpos($html, "<td"));
+			$html = substr($html, strpos($html, ">") + 1);
+			$result['prdt'] = substr($html, 0, strpos($html, "<"));
+		
+			// 배송 상황 (현재위치, 처리현황)
+			$html = substr($html, strpos($html, "<tbody"));
+			$info = array();
+			while (strpos($html, "<tr"))
+			{
+				$temp = array();
+					
+				$html = substr($html, strpos($html, "</tr>") + 1);
+					
+				// 날짜
+				$html = substr($html, strpos($html, "<td>") + 4);
+				$temp['date'] = substr($html, 0, strpos($html, " "));
+					
+				// 시간
+				$html = substr($html, strpos($html, " ") + 1);
+				$temp['time'] = substr($html, 0, strpos($html, "<"));
+		
+				// 상태
+				$html = substr($html, strpos($html, "<td"));
+				$html = substr($html, strpos($html, ">") + 1);
+				$temp['state'] = trim(substr($html, 0, strpos($html, "<")));
+		
+				if (strpos($temp['state'], "배송지에 도착"))
+					$temp['state'] = "배송지에 도착";
+				if (strpos($temp['state'], "상품이 이동중"))
+					$temp['state'] = "배송지역 이동중";
+				if (strpos($temp['state'], "배송할 예정"))
+					$temp['state'] = "배송 예정";
+				if (strpos($temp['state'], "배송완료"))
+					$temp['state'] = "배송완료";
+					
+					
+				// 위치
+				$html = substr($html, strpos($html, "href"));
+				$html = substr($html, strpos($html, ">") + 1);
+				$temp['location'] = substr($html, 0, strpos($html, "<"));
+					
+				array_push($info, $temp);
+			}
+		
+			array_push($result, $info);*/
 		}
 		else if ($company == "우체국택배")
 		{
@@ -590,73 +656,7 @@ class DeliverController extends Controller {
 			}
 			array_push($result, $info);
 		}
-		else if ($company == "CVSnet 편의점택배")
-		{
-			$html = file_get_contents('http://www.doortodoor.co.kr/jsp/cmn/TrackingCVS.jsp?pTdNo='.$num);
-			
-			if (strpos($html, "검색된 결과가 없습니다"))
-				return view($page, array('page' => $page, 'code' => 0));
-				
-			$html = substr($html, strpos($html, "<tbody"));
-				
-			// 보낸 분
-			$html = substr($html, strpos($html, "<td") + 3);
-			$html = substr($html, strpos($html, "<td"));
-			$html = substr($html, strpos($html, ">") + 1);
-			$result['sender'] = substr($html, 0, strpos($html, "<"));
-				
-			// 받는 분
-			$html = substr($html, strpos($html, "<td"));
-			$html = substr($html, strpos($html, ">") + 1);
-			$result['receiver'] = substr($html, 0, strpos($html, "<"));
-				
-			// 상품 이름
-			$html = substr($html, strpos($html, "<td"));
-			$html = substr($html, strpos($html, ">") + 1);
-			$result['prdt'] = substr($html, 0, strpos($html, "<"));
-				
-			// 배송 상황 (현재위치, 처리현황)
-			$html = substr($html, strpos($html, "<tbody"));
-			$info = array();
-			while (strpos($html, "<tr"))
-			{
-				$temp = array();
-					
-				$html = substr($html, strpos($html, "</tr>") + 1);
-					
-				// 날짜
-				$html = substr($html, strpos($html, "<td>") + 4);
-				$temp['date'] = substr($html, 0, strpos($html, " "));
-					
-				// 시간
-				$html = substr($html, strpos($html, " ") + 1);
-				$temp['time'] = substr($html, 0, strpos($html, "<"));
 		
-				// 상태
-				$html = substr($html, strpos($html, "<td"));
-				$html = substr($html, strpos($html, ">") + 1);
-				$temp['state'] = trim(substr($html, 0, strpos($html, "<")));
-				
-				if (strpos($temp['state'], "배송지에 도착"))
-					$temp['state'] = "배송지에 도착";
-				if (strpos($temp['state'], "상품이 이동중"))
-					$temp['state'] = "배송지역 이동중";
-				if (strpos($temp['state'], "배송할 예정"))
-					$temp['state'] = "배송 예정";
-				if (strpos($temp['state'], "배송완료"))
-					$temp['state'] = "배송완료";
-					
-					
-				// 위치
-				$html = substr($html, strpos($html, "href"));
-				$html = substr($html, strpos($html, ">") + 1);
-				$temp['location'] = substr($html, 0, strpos($html, "<"));
-					
-				array_push($info, $temp);
-			}
-		
-			array_push($result, $info);
-		}
 		else if ($company == "KGB택배")
 		{
 			$opts = array(
