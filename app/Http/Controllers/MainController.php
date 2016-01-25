@@ -68,6 +68,8 @@ class MainController extends Controller {
 			
 			if (count($temp['data']) >= 4)
 				$temp = array_slice($temp['data'], 0, 4);
+			else
+				$temp = array();
 			$temp['cateName'] = $smallCate['data'][0]->lname;
 			array_push($prdtList, $temp);
 		}
