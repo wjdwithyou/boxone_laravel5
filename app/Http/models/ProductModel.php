@@ -211,18 +211,6 @@ class ProductModel
 			return array('code' => 1, 'msg' => 'success', 'data' => $result, 'maxPage' => $page_max);
 		}
 	}
-	
-	/*
-	 * 	메인페이지 하단 카테고리별 상품노출
-	 */
-	function getMainList()
-	{
-		$data = array();
-		for ($i = 1 ; $i < 8 ; $i++)
-		{
-			
-		}
-	}
 }
 
 

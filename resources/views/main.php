@@ -95,24 +95,27 @@
 				</div>
 				<div id="sb_content" class="mg_t16 f_c">
 					<?php foreach ($prdtList as $list) :?>
-					<div class="imglist_div grid grid_432">
-						<div class="imglist_img img_center">
-							<div class="img_center_inner">
-								<a href="<?=$adr_ctr ?>Shoppingbox/detail?idx=<?=$list->idx?>"><img src="<?=$list->img?>"></a>
+						<div><?=$list['cateName']?></div>
+						<?php for($i = 0 ; $i < count($list)-1 ; $i++) :?>
+						<div class="imglist_div grid grid_432">
+							<div class="imglist_img img_center">
+								<div class="img_center_inner">
+									<a href="<?=$adr_ctr ?>Shoppingbox/detail?idx=<?=$list[$i]->idx?>"><img src="<?=$list[$i]->img?>"></a>
+								</div>
+							</div>
+							<div class="imglist_desc_wrap">
+								<div class="imglist_desc1 ta_c t_o bo_color2">
+									<?=$list[$i]->brand?>
+								</div>
+								<div class="imglist_desc2 ta_c t_o">
+									<?=$list[$i]->name?>
+								</div>
+								<div class="imglist_desc3 ta_c t_o mg_t8">
+									￦<?=$list[$i]->fPrice?>
+								</div>
 							</div>
 						</div>
-						<div class="imglist_desc_wrap">
-							<div class="imglist_desc1 ta_c t_o bo_color2">
-								<?=$list->brand?>
-							</div>
-							<div class="imglist_desc2 ta_c t_o">
-								<?=$list->name?>
-							</div>
-							<div class="imglist_desc3 ta_c t_o mg_t8">
-								￦<?=$list->fPrice?>
-							</div>
-						</div>
-					</div>
+						<?php endfor;?>
 					<?php endforeach;?>
 				</div>
 			</div>
