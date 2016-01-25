@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Http\models\ShoppingsiteModel;
 use App\Http\models\HotdealProductModel;
 use App\Http\models\ProductModel;
+use App\Http\models\CategoryModel;
 use Request;
 
 class MainController extends Controller {
@@ -20,6 +21,7 @@ class MainController extends Controller {
 		$siteModel = new ShoppingsiteModel();
 		$hotPrdtModel = new HotdealProductModel();
 		$prdtModel = new ProductModel();
+		$cateModel = new CategoryModel();
 		
 		// 인기 쇼핑몰 랭킹 (쇼핑사이트 조회수로 10개) 가져오기
 		$result = $siteModel->getInfoList(0);
@@ -41,12 +43,31 @@ class MainController extends Controller {
 			if (json_last_error() != JSON_ERROR_NONE)
 				$cookieArray = array();
 		}
-		$cateValues = array_count_values($cookieArray);
-		arsort($cateValues);
-		print_r($cateValues);
+		$cookieValue = array(
+				1 => 0,
+				2 => 0,
+				3 => 0,
+				4 => 0,
+				5 => 0,
+				6 => 0,
+				7 => 0,
+		);
+		foreach ($cookieArray as $list)
+			$cookieValue[$list]++;
+		arsort($cookieValue);
+		$cateArray = array_keys($cateValue);
 		
-		$result = $prdtModel->getInfoList(1, array(), 1);
-		$prdtList = $result['data'];
+		$prdtList = array();
+		foreach($cateArray as $list)
+		{
+			$smallCate = $cateModel->upToDown($list);
+			$cateList = array();
+			foreach($smallCate['data'] as $sList)
+				array_push($cateList, $sList->idx);
+			$temp = $prdtModel->getInfoList(1, $cateList, 1);
+			$temp['data']['cateName'] = $smallCate['data'][0]->name;
+			array_push($prdtList, $temp['data']);
+		}
 		
 		$page = 'main';
 		return view($page, array('page' => $page, 'siteList' => $siteList, 'hotList' => $hotList, 'prdtList' => $prdtList));
