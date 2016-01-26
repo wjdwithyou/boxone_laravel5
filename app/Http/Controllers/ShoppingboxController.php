@@ -216,7 +216,13 @@ class ShoppingboxController extends Controller {
 			if (json_last_error() != JSON_ERROR_NONE)
 				$cookieArray = array();
 		}
-		array_push($cookieArray, $result['data'][0]);
+		array_push($cookieArray, array(
+				$result['data']['idx'],
+				$result['data']['name'],
+				$result['data']['brand'],
+				$result['data']['img'][0],
+				$result['data']['price']
+		));
 		if (count($cookieArray) > 10)
 			$cookieArray = array_slice($cookieArray, 1, 10);
 		
