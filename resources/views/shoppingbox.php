@@ -56,67 +56,67 @@
 						</div>
 						<div id="brand_wrap" class="classify_div f_C">
 							<div class="grid grid_h">
-								<input type="checkbox" id="sc1" name="sc1" class="bo_checkbox bo_checkbox_1">
+								<input type="checkbox" id="sc1" name="sc1" class="bo_checkbox2 bo_checkbox_1">
 								<label for="sc1"><span></span>아베크롬비</label>
 							</div>
 							<div class="grid grid_h">
-								<input type="checkbox" id="sc2" name="sc2" class="bo_checkbox bo_checkbox_1">
+								<input type="checkbox" id="sc2" name="sc2" class="bo_checkbox2 bo_checkbox_1">
 								<label for="sc2"><span></span>아베크롬비</label>
 							</div>
 							<div class="grid grid_h">
-								<input type="checkbox" id="sc3" name="sc3" class="bo_checkbox bo_checkbox_1">
+								<input type="checkbox" id="sc3" name="sc3" class="bo_checkbox2 bo_checkbox_1">
 								<label for="sc3"><span></span>아베크롬비</label>
 							</div>
 							<div class="grid grid_h">
-								<input type="checkbox" id="sc4" name="sc4" class="bo_checkbox bo_checkbox_1">
+								<input type="checkbox" id="sc4" name="sc4" class="bo_checkbox2 bo_checkbox_1">
 								<label for="sc4"><span></span>아베크롬비</label>
 							</div>
 							<div class="grid grid_h">
-								<input type="checkbox" id="sc5" name="sc5" class="bo_checkbox bo_checkbox_1">
+								<input type="checkbox" id="sc5" name="sc5" class="bo_checkbox2 bo_checkbox_1">
 								<label for="sc5"><span></span>아베크롬비</label>
 							</div>
 							<div class="grid grid_h">
-								<input type="checkbox" id="sc6" name="sc6" class="bo_checkbox bo_checkbox_1">
+								<input type="checkbox" id="sc6" name="sc6" class="bo_checkbox2 bo_checkbox_1">
 								<label for="sc6"><span></span>아베크롬비</label>
 							</div>
 							<div class="grid grid_h">
-								<input type="checkbox" id="sc7" name="sc7" class="bo_checkbox bo_checkbox_1">
+								<input type="checkbox" id="sc7" name="sc7" class="bo_checkbox2 bo_checkbox_1">
 								<label for="sc7"><span></span>아베크롬비</label>
 							</div>
 							<div class="grid grid_h">
-								<input type="checkbox" id="sc8" name="sc8" class="bo_checkbox bo_checkbox_1">
+								<input type="checkbox" id="sc8" name="sc8" class="bo_checkbox2 bo_checkbox_1">
 								<label for="sc8"><span></span>아베크롬비</label>
 							</div>
 							<div class="grid grid_h">
-								<input type="checkbox" id="sc9" name="sc9" class="bo_checkbox bo_checkbox_1">
+								<input type="checkbox" id="sc9" name="sc9" class="bo_checkbox2 bo_checkbox_1">
 								<label for="sc9"><span></span>아베크롬비</label>
 							</div>
 							<div class="grid grid_h">
-								<input type="checkbox" id="sc10" name="sc10" class="bo_checkbox bo_checkbox_1">
+								<input type="checkbox" id="sc10" name="sc10" class="bo_checkbox2 bo_checkbox_1">
 								<label for="sc10"><span></span>아베크롬비</label>
 							</div>
 							<div class="grid grid_h">
-								<input type="checkbox" id="sc11" name="sc11" class="bo_checkbox bo_checkbox_1">
+								<input type="checkbox" id="sc11" name="sc11" class="bo_checkbox2 bo_checkbox_1">
 								<label for="sc11"><span></span>아베크롬비</label>
 							</div>
 							<div class="grid grid_h">
-								<input type="checkbox" id="sc12" name="sc12" class="bo_checkbox bo_checkbox_1">
+								<input type="checkbox" id="sc12" name="sc12" class="bo_checkbox2 bo_checkbox_1">
 								<label for="sc12"><span></span>아베크롬비</label>
 							</div>
 							<div class="grid grid_h">
-								<input type="checkbox" id="sc13" name="sc13" class="bo_checkbox bo_checkbox_1">
+								<input type="checkbox" id="sc13" name="sc13" class="bo_checkbox2 bo_checkbox_1">
 								<label for="sc13"><span></span>아베크롬비</label>
 							</div>
 							<div class="grid grid_h">
-								<input type="checkbox" id="sc14" name="sc14" class="bo_checkbox bo_checkbox_1">
+								<input type="checkbox" id="sc14" name="sc14" class="bo_checkbox2 bo_checkbox_1">
 								<label for="sc14"><span></span>아베크롬비</label>
 							</div>
 							<div class="grid grid_h">
-								<input type="checkbox" id="sc15" name="sc15" class="bo_checkbox bo_checkbox_1">
+								<input type="checkbox" id="sc15" name="sc15" class="bo_checkbox2 bo_checkbox_1">
 								<label for="sc15"><span></span>아베크롬비</label>
 							</div>
 							<div class="grid grid_h">
-								<input type="checkbox" id="sc16" name="sc16" class="bo_checkbox bo_checkbox_1">
+								<input type="checkbox" id="sc16" name="sc16" class="bo_checkbox2 bo_checkbox_1">
 								<label for="sc16"><span></span>아베크롬비</label>
 							</div>
 						</div>

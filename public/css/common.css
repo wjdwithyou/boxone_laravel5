@@ -44,6 +44,8 @@ button:focus{outline:0}
 .img_14{width:14px;height:14px}
 .img_24{width:24px;height:24px}
 .img_32{width:32px;height:32px}
+.img_64{width:64px;height:64px}
+.pd_a8{padding:8px}
 .pd_t24{padding-top:24px}
 .pd_b8{padding-bottom:8px}
 .pd_l8{padding-left:8px}
@@ -132,8 +134,9 @@ button:focus{outline:0}
 .bo_search1{border:1px solid #f15a63;padding-left:30px}
 .bo_search2{border:1px solid #ccc;padding-left:30px}
 .bo_search1 + a img, .bo_search2 + a img{position:absolute;z-index:10;}
-.bo_checkbox{display:none}
+.bo_checkbox,.bo_checkbox2{display:none}
 .bo_checkbox + label span{display:inline-block;vertical-align:middle;width:19px;height:19px;margin:-4px 4px 0 0;background:url(https://s3-ap-northeast-1.amazonaws.com/boxone-image/bo_checkbox.png);background-size:contain;cursor:pointer}
+.bo_checkbox2 + label span{display:inline-block;vertical-align:middle;width:14px;height:14px;margin:-4px 4px 0 0;background:url(https://s3-ap-northeast-1.amazonaws.com/boxone-image/bo_checkbox.png);background-size:contain;cursor:pointer}
 .bo_checkbox_1:checked + label span{background:url(https://s3-ap-northeast-1.amazonaws.com/boxone-image/bo_checkbox_on.png);background-size:contain;}
 .bo_checkbox_2:checked + label span{background:url(https://s3-ap-northeast-1.amazonaws.com/boxone-image/bo_checkbox_on2.png);background-size:contain;}
 .bo_selectbox{width:188px;height:40px;padding-left:6px;background-position:right 10px center !important;background-size:11px !important;text-indent:0.01px;text-overflow:"";-webkit-appearance:none;-moz-appearance:none;appearance:none;}

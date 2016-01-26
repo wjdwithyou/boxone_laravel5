@@ -237,3 +237,18 @@ function updateNickname()
 		});
 	}
 }
+
+function profileUpload(file)
+{
+	var img = $("#profile_img");
+	
+	if (window.FileReader && file[0].files && file[0].files[0])
+	{
+		var reader = new FileReader();
+		reader.onload = function(e){
+			img.attr("src", e.target.result);
+		};
+		reader.readAsDataURL(file[0].files[0]);
+	}
+	//img.attr("src", file.val());
+}

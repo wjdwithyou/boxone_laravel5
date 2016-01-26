@@ -5,7 +5,7 @@
 .sm_menu_li1 a, .sm_menu_li2 a{display:block}
 .sm_li_set li{font-size:14px}
 .sm_li_set2{margin-top:16px}
-.sm_li_set2 li{float:left;width:20%;text-align:center}
+.sm_li_set2 li{float:left;width:50%;text-align:center}
 #sm_profile{margin-top:-2px;margin-right:4px}
 #sm_quit_btn{margin-top:6px}
 .sm_menu_arrow{position:absolute;margin-top:4px;right:16px}
