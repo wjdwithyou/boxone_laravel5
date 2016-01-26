@@ -58,10 +58,12 @@ function deliverySearch()
 	var company_info = dtd_companys[$("#delivery_office").val()];
 	var company = company_info[0];
 	var num = $("#delivery_num").val();
-
+	
 	if (company == "경동택배" || company == "대신택배" || company == "일양로지스" || company == "한의사랑택배" || company == "FedEx" || company == "DHL" || company == "UPS")
+	{
 		if (confirm("위 사이트는 새창으로 연결됩니다. 연결하시겠습니까?"))
 			window.open(company_info[2]);
+	}
 	else
 	{
 		/* 운송장 번호 값 확인 */

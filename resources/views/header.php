@@ -67,7 +67,7 @@ if (isset($_COOKIE['need_login'])) {
 		<div class="inner">
 			<nav id="main_menu_wrap" class="pc_header">
 				<ul id="main_menu" class="li_set f_c">
-					<li><a class="header_t2" href="<?=$adr_ctr?>Bestranking/index?cate=c">베스트랭킹</a></li>
+					<li><a class="header_t2" href="<?=$adr_ctr?>Bestranking/index">베스트랭킹</a></li>
 					<li id="main_menu0"><a class="header_t2" href="<?=$adr_ctr?>Shoppingbox/index?cate=c">클리어런스</a></li>
 					<li id="main_menu1" class="menu_hover"><a class="header_t2" href="<?=$adr_ctr?>Shoppingbox/index?cate=l1">여성의류</a></li>
 					<li id="main_menu2" class="menu_hover"><a class="header_t2" href="<?=$adr_ctr?>Shoppingbox/index?cate=l2">남성의류</a></li>

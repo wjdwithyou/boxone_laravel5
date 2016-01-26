@@ -128,7 +128,7 @@ class ProductModel
 	/*
 	 *	정보 리스트 가져오는 기능
 	 */
-	function getInfoList($sort, $getCateList, $page_num)
+	function getInfoList($sort, $getCateList, $brand, $page_num)
 	{
 		if( !( inputErrorCheck($sort, 'sort') && 
 				inputErrorCheck($getCateList, 'getCateList') &&
@@ -154,8 +154,18 @@ class ProductModel
 		else 
 			$query_cate = "where name != '' and (".substr($query_cate, 0, strlen($query_cate) - 3).")";
 		
+		// 브랜드 정리
+		$query_brand = "";
+		foreach($brand as $list)
+			$query_brand .= "brand=$list or ";
+		if ($query_brand != "")
+			$query_brand = " and (".substr($query_brand, 0, strlen($query_brand) - 3).")";
+		
 		// 자료 가져오기
-		$data = DB::select("select *, FORMAT(price, 0) as fPrice from product $query_cate $query_orderBy idx DESC");
+		$data = DB::select("select *, FORMAT(price, 0) as fPrice from product $query_cate $query_brand $query_orderBy idx DESC");
+		
+		// 브랜드 리스트 가져오기
+		$brandList = DB::select("SELECT DISTINCT brand FROM product $query_cate ORDER BY brand ASC");
 
 		// 갯수 확인 후 페이지 자르기
 		if (count($data) == 0)
@@ -168,14 +178,14 @@ class ProductModel
 			$page_start = ($page_num-1)*20;
 			$result = array_slice($data, $page_start, 20);
 
-			return array('code' => 1, 'msg' => 'success', 'data' => $result, 'maxPage' => $page_max);
+			return array('code' => 1, 'msg' => 'success', 'data' => $result, 'maxPage' => $page_max, 'brandList' => $brandList, 'prdtCnt' => count($data));
 		}
 	}
 	
 	/*
 	 *	내 찜한 상품 목록 가져오기 기능
 	 */
-	function getMyList($mem_idx, $getCateList, $page_num)
+	function getMyList($mem_idx, $getCateList, $brand, $page_num)
 	{
 		if( !( 	inputErrorCheck($mem_idx, 'mem_idx') &&
 				inputErrorCheck($getCateList, 'getCateList') &&
@@ -191,10 +201,24 @@ class ProductModel
 		else
 			$query_cate = "name != '' and (".substr($query_cate, 0, strlen($query_cate) - 3).")";
 
+		// 브랜드 정리
+		$query_brand = "";
+		foreach($brand as $list)
+			$query_brand .= "brand=$list or ";
+		if ($query_brand != "")
+			$query_brand = " and (".substr($query_brand, 0, strlen($query_brand) - 3).")";
+		
+		
 		// 자료 가져오기
 		$data = DB::select("select *, FORMAT(price, 0) as fPrice 
 							from product_bookmark as pb, product as p  
-							where pb.member_idx = ? and pb.product_idx = p.idx and $query_cate ", 
+							where pb.member_idx = ? and pb.product_idx = p.idx and $query_cate $query_brand", 
+							array($mem_idx));
+		
+		// 브랜드 리스트 가져오기
+		$brandList = DB::select("SELECT DISTINCT brand 
+							FROM product_bookmark AS pb, product AS p 
+							WHERE pb.member_idx = ? AND pb.product_idx = p.idx and $query_cate ORDER BY brand ASC",
 							array($mem_idx));
 
 		// 갯수 확인 후 페이지 자르기
@@ -208,7 +232,7 @@ class ProductModel
 			$page_start = ($page_num-1)*20;
 			$result = array_slice($data, $page_start, 20);
 
-			return array('code' => 1, 'msg' => 'success', 'data' => $result, 'maxPage' => $page_max);
+			return array('code' => 1, 'msg' => 'success', 'data' => $result, 'maxPage' => $page_max, 'brandList' => $brandList, 'prdtCnt' => count($data));
 		}
 	}
 }

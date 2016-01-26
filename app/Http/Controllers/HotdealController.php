@@ -5,6 +5,7 @@ use App\Http\models\HotdealTargetModel;
 use App\Http\models\CategoryModel;
 use App\Http\models\HotdealProductModel;
 use Request;
+use Cookie;
 
 class HotdealController extends Controller {
 
@@ -61,6 +62,30 @@ class HotdealController extends Controller {
 		
 		$json_cookie = json_encode($cookieArray);
 		Cookie::queue('recentCate', $json_cookie);
+		
+		// 최근 본 상품의 정보 (idx, name, brand, img, price)를 가지고 다닌다.
+		$cookie = Request::cookie('recentPrdt');
+		if ($cookie == '')
+			$cookieArray = array();
+		else
+		{
+			$cookieArray = json_decode($cookie, true);
+			// cookie 임의 변경 시 자동 초기화
+			if (json_last_error() != JSON_ERROR_NONE)
+				$cookieArray = array();
+		}
+		array_push($cookieArray, array(
+				$result['data']['idx'],
+				$result['data']['name'],
+				$result['data']['brand'],
+				$result['data']['img'][0],
+				$result['data']['price']
+		));
+		if (count($cookieArray) > 10)
+			$cookieArray = array_slice($cookieArray, 1, 10);
+		
+		$json_cookie = json_encode($cookieArray);
+		Cookie::queue('recentPrdt', $json_cookie);
 		
 		$data['data'][0]->lidx = 'c';
 	

@@ -130,7 +130,7 @@ class HotdealProductModel
 	/*
 	 *	정보 리스트 가져오는 기능
 	 */
-	function getInfoList($sort, $getCateList, $page_num)
+	function getInfoList($sort, $getCateList, $brand, $page_num)
 	{
 		if( !( inputErrorCheck($sort, 'sort') && 
 				inputErrorCheck($getCateList, 'getCateList') &&
@@ -157,8 +157,18 @@ class HotdealProductModel
 		else 
 			$query_cate = "where name != '' and (".substr($query_cate, 0, strlen($query_cate) - 3).")";
 		
+		// 브랜드 정리
+		$query_brand = "";
+		foreach($brand as $list)
+			$query_brand .= "brand=$list or ";
+		if ($query_brand != "")
+			$query_brand = " and (".substr($query_brand, 0, strlen($query_brand) - 3).")";
+		
 		// 자료 가져오기
-		$data = DB::select("select *, FORMAT(priceO, 0) as fPriceO, FORMAT(priceS, 0) as fPriceS from hotdeal_product $query_cate $query_orderBy idx DESC");
+		$data = DB::select("select *, FORMAT(priceO, 0) as fPriceO, FORMAT(priceS, 0) as fPriceS from hotdeal_product $query_cate $query_brand $query_orderBy idx DESC");
+		
+		// 브랜드 리스트 가져오기
+		$brandList = DB::select("SELECT DISTINCT brand FROM hotdeal_product $query_cate ORDER BY brand ASC");
 
 		// 갯수 확인 후 페이지 자르기
 		if (count($data) == 0)
@@ -171,7 +181,7 @@ class HotdealProductModel
 			$page_start = ($page_num-1)*20;
 			$result = array_slice($data, $page_start, 20);
 
-			return array('code' => 1, 'msg' => 'success', 'data' => $result, 'maxPage' => $page_max);
+			return array('code' => 1, 'msg' => 'success', 'data' => $result, 'maxPage' => $page_max, 'brandList' => $brandList, 'prdtCnt' => count($data));
 		}
 	}
 	
@@ -179,17 +189,31 @@ class HotdealProductModel
 	/*
 	 *	내 찜한 상품 목록 가져오기 기능
 	 */
-	function getMyList($mem_idx, $getCateList, $page_num)
+	function getMyList($mem_idx, $getCateList, $brand, $page_num)
 	{
 		if( !( 	inputErrorCheck($mem_idx, 'mem_idx') &&
 				inputErrorCheck($getCateList, 'getCateList') &&
 				inputErrorCheck($page_num, 'page_num')))
 					return ;
+				
+		// 브랜드 정리
+		$query_brand = "";
+		foreach($brand as $list)
+			$query_brand .= "brand=$list or ";
+		if ($query_brand != "")
+			$query_brand = " and (".substr($query_brand, 0, strlen($query_brand) - 3).")";
+				
 
 		// 자료 가져오기
 		$data = DB::select("select *, FORMAT(priceO, 0) as fPriceO, FORMAT(priceS, 0) as fPriceS
 							from hotdeal_bookmark as hb, hotdeal_product as hp  
-							where hb.member_idx = ? and hb.target = 1 and hb.hotdeal_idx = hp.idx", 
+							where hb.member_idx = ? and hb.target = 1 and hb.hotdeal_idx = hp.idx $query_brand", 
+							array($mem_idx));
+		
+		// 브랜드 리스트 가져오기
+		$brandList = DB::select("SELECT DISTINCT brand
+							FROM hotdeal_bookmark AS hb, hotdeal_product AS hp  
+							WHERE hb.member_idx = ? AND hb.target = 1 and hb.hotdeal_idx = hp.idx ORDER BY brand ASC",
 							array($mem_idx));
 
 		// 갯수 확인 후 페이지 자르기
@@ -203,7 +227,7 @@ class HotdealProductModel
 			$page_start = ($page_num-1)*20;
 			$result = array_slice($data, $page_start, 20);
 
-			return array('code' => 1, 'msg' => 'success', 'data' => $result, 'maxPage' => $page_max);
+			return array('code' => 1, 'msg' => 'success', 'data' => $result, 'maxPage' => $page_max, 'brandList' => $brandList, 'prdtCnt' => count($data));
 		}
 	}
 

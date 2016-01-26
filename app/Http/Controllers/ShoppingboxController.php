@@ -25,6 +25,11 @@ class ShoppingboxController extends Controller {
 		if ($sort == '5' && empty($_SESSION['idx']))
 			$sort = 1;
 		
+		// 브랜드 가져오기
+		$brand = array();
+		if (Request::has('brand'))
+			$brand = json_decode(Request::input('brand'), true);
+		
 		// 카테고리 가져오기, 검사 (0은 전체)
 		$cate = 'l0';
 		if (Request::has('cate'))
@@ -142,22 +147,24 @@ class ShoppingboxController extends Controller {
 		// 상품 가져오기
 		if ($sort != '5')
 			if ($cateDepth == -1)
-				$result = $hotPrdtModel->getInfoList($sort, $getCateList, $nowPage);
+				$result = $hotPrdtModel->getInfoList($sort, $getCateList, $brand, $nowPage);
 			else 
-				$result = $prdtModel->getInfoList($sort, $getCateList, $nowPage);
+				$result = $prdtModel->getInfoList($sort, $getCateList, $brand, $nowPage);
 		else
 		{
 			$mem_idx = $_SESSION['idx'];
 			if ($cateDepth == -1)
-				$result = $hotPrdtModel->getMyList($mem_idx, $getCateList, $nowPage);
+				$result = $hotPrdtModel->getMyList($mem_idx, $getCateList, $brand, $nowPage);
 			else 
-				$result = $prdtModel->getMyList($mem_idx, $getCateList, $nowPage);
+				$result = $prdtModel->getMyList($mem_idx, $getCateList, $brand, $nowPage);
 		}
 			
 		if (!($result['code']))
 		{
 			$result['maxPage'] = $nowPage = 1;
 			$result['data'] = array();
+			$result['brandList'] = array();
+			$result['prdtCnt'] = 0;
 		}
 			
 		$paging = array('now' => $nowPage, 'max' => $result['maxPage']);
@@ -168,7 +175,10 @@ class ShoppingboxController extends Controller {
 				'cateList' => $cateList,
 				'nowCate' => $cate,
 				'sort' => $sort,
+				'nowBrand' => $brand,
+				'brandList' => $result['brandList'],
 				'paging' => $paging,
+				'prdtCnt' => $result['prdtCnt'],
 				'prdt' => $result['data']
 		);
 		return view($page, $data);
@@ -200,10 +210,34 @@ class ShoppingboxController extends Controller {
 		}
 		array_push($cookieArray, $data['data'][0]->lidx);
 		if (count($cookieArray) > 10)
-			$cookieArray = array_slice($cookieArray, 0, 10);
+			$cookieArray = array_slice($cookieArray, 1, 10);
 		
 		$json_cookie = json_encode($cookieArray);
 		Cookie::queue('recentCate', $json_cookie);
+		
+		// 최근 본 상품의 정보 (idx, name, brand, img, price)를 가지고 다닌다.
+		$cookie = Request::cookie('recentPrdt');
+		if ($cookie == '')
+			$cookieArray = array();
+		else 
+		{
+			$cookieArray = json_decode($cookie, true);
+			// cookie 임의 변경 시 자동 초기화
+			if (json_last_error() != JSON_ERROR_NONE)
+				$cookieArray = array();
+		}
+		array_push($cookieArray, array(
+				$result['data']['idx'],
+				$result['data']['name'],
+				$result['data']['brand'],
+				$result['data']['img'][0],
+				$result['data']['price']
+		));
+		if (count($cookieArray) > 10)
+			$cookieArray = array_slice($cookieArray, 1, 10);
+		
+		$json_cookie = json_encode($cookieArray);
+		Cookie::queue('recentPrdt', $json_cookie);
 		
 		// 출력
 		$page = 'product';
