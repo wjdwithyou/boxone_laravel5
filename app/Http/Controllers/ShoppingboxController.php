@@ -200,10 +200,28 @@ class ShoppingboxController extends Controller {
 		}
 		array_push($cookieArray, $data['data'][0]->lidx);
 		if (count($cookieArray) > 10)
-			$cookieArray = array_slice($cookieArray, 0, 10);
+			$cookieArray = array_slice($cookieArray, 1, 10);
 		
 		$json_cookie = json_encode($cookieArray);
 		Cookie::queue('recentCate', $json_cookie);
+		
+		// 최근 본 상품의 정보 (idx, name, brand, img, price)를 가지고 다닌다.
+		$cookie = Request::cookie('recentPrdt');
+		if ($cookie == '')
+			$cookieArray = array();
+		else 
+		{
+			$cookieArray = json_decode($cookie, true);
+			// cookie 임의 변경 시 자동 초기화
+			if (json_last_error() != JSON_ERROR_NONE)
+				$cookieArray = array();
+		}
+		array_push($cookieArray, $result['data'][0]);
+		if (count($cookieArray) > 10)
+			$cookieArray = array_slice($cookieArray, 1, 10);
+		
+		$json_cookie = json_encode($cookieArray);
+		Cookie::queue('recentPrdt', $json_cookie);
 		
 		// 출력
 		$page = 'product';
