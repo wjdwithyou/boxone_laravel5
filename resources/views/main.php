@@ -13,36 +13,36 @@
 	</div>
 	
 	<div id="container">
-		<div id="content">
-			<div id="main_slide">
-				<div id="c1" class="slide">
-					<div class="slide_over">
-						<h1 class="slide_h1 fw_b bo_colorw">박스원</h1>
-						<h2 class="slide_h2 bo_colorw">해외직구 상품을 한자리에!</h2>
-						<h2 class="slide_h2 bo_colorw">복잡한 회원가입 없이 간편하게 로그인하세요.</h2>
-						<hr class="slide_hr">
-						<button type="button" class="slide_btn bo_btnw" onclick='location.href="<?=$adr_ctr ?>Login/index"'>로그인</button>
-					</div>
-				</div>
-				<div id="c2" class="slide">
-					<div class="slide_over">
-						<h1 class="slide_h1 fw_b bo_colorw">박스원</h1>
-						<h2 class="slide_h2 bo_colorw">해외직구 상품을 한자리에!</h2>
-						<h2 class="slide_h2 bo_colorw">복잡한 회원가입 없이 간편하게 로그인하세요.</h2>
-						<hr class="slide_hr">
-						<button type="button" class="slide_btn bo_btnw" onclick='location.href="<?=$adr_ctr ?>Login/index"'>로그인</button>
-					</div>
-				</div>
-				<div id="c3" class="slide">
-					<div class="slide_over">
-						<h1 class="slide_h1 fw_b bo_colorw">박스원</h1>
-						<h2 class="slide_h2 bo_colorw">해외직구 상품을 한자리에!</h2>
-						<h2 class="slide_h2 bo_colorw">복잡한 회원가입 없이 간편하게 로그인하세요.</h2>
-						<hr class="slide_hr">
-						<button type="button" class="slide_btn bo_btnw" onclick='location.href="<?=$adr_ctr ?>Login/index"'>로그인</button>
-					</div>
+		<div id="main_slide">
+			<div id="c1" class="slide">
+				<div class="slide_over">
+					<h1 class="slide_h1 fw_b bo_colorw">박스원</h1>
+					<h2 class="slide_h2 bo_colorw">해외직구 상품을 한자리에!</h2>
+					<h2 class="slide_h2 bo_colorw">복잡한 회원가입 없이 간편하게 로그인하세요.</h2>
+					<hr class="slide_hr">
+					<button type="button" class="slide_btn bo_btnw" onclick='location.href="<?=$adr_ctr ?>Login/index"'>로그인</button>
 				</div>
 			</div>
+			<div id="c2" class="slide">
+				<div class="slide_over">
+					<h1 class="slide_h1 fw_b bo_colorw">박스원</h1>
+					<h2 class="slide_h2 bo_colorw">해외직구 상품을 한자리에!</h2>
+					<h2 class="slide_h2 bo_colorw">복잡한 회원가입 없이 간편하게 로그인하세요.</h2>
+					<hr class="slide_hr">
+					<button type="button" class="slide_btn bo_btnw" onclick='location.href="<?=$adr_ctr ?>Login/index"'>로그인</button>
+				</div>
+			</div>
+			<div id="c3" class="slide">
+				<div class="slide_over">
+					<h1 class="slide_h1 fw_b bo_colorw">박스원</h1>
+					<h2 class="slide_h2 bo_colorw">해외직구 상품을 한자리에!</h2>
+					<h2 class="slide_h2 bo_colorw">복잡한 회원가입 없이 간편하게 로그인하세요.</h2>
+					<hr class="slide_hr">
+					<button type="button" class="slide_btn bo_btnw" onclick='location.href="<?=$adr_ctr ?>Login/index"'>로그인</button>
+				</div>
+			</div>
+		</div>
+		<div id="content">
 			<div id="br_wrap" class="inner">
 				<div class="ta_c mg_t32">
 					<h2 class="top_h2 bo_color2">인기 쇼핑몰 랭킹</h2>

@@ -1,183 +1,72 @@
 <!DOCTYPE html>
 <html lang="ko">
-	<head>
-		<?php
-		include ("libraries.php");
-		?>
-	</head>
+<head>
+<?php include ("libraries.php");?>
 
-	<body>
-		<?php
-		include ("header.php");
-		?>
+<link rel="stylesheet" href="<?=$adr_css?>mypage_common.css">
+</head>
 
-		<div id="container" class="cl_b">
-			<div id="mytop_wrap" class="cl_b">
-				<div id="mytop" class="cl_b">
-					<div id="mytop_mypage" class="col-xs-12 col-sm-3">
-						<div id="mytop_title">
-							MY 커뮤니티
+<body>
+<input type="hidden" id="member_idx" value="<?=$result->idx?>"/>
+
+<div id="wrap">
+	<div id="header">
+	<?php include ("header.php");?>
+	</div>
+	
+	<div id="container">
+		<div id="mypage_top">
+			<div id="mypage_top_wrap">
+				<div class="inner">
+					<h1 class="top_h1 ta_c bo_colorw">마이페이지</h1>
+					<nav class="bo_colorw f_c mg_t32 font_14">
+						<div class="top_div1 f_l ta_c">
+							<div>
+								<img src="<?=$adr_img?>member/default.png" class="br_50" width="80" height="80">
+							</div>
+							<p><?=$nickname?>님</p>
 						</div>
-						<div id="mytop_profile">
-							<img src="<?= $adr_img ?>img.png">
+						<div class="top_div2 f_l ta_c" onclick="">
+							<div>
+								<img src="<?=$adr_img?>mp_heart.png" class="mp_ico">
+							</div>
+							<p>찜한상품</p>
+							<div class="mp_alarm">
+								<span>12</span>
+							</div>
 						</div>
-						<div id="mytop_nickname">
-							우주토깽 님
+						<div class="top_div2 f_l ta_c" onclick="">
+							<div>
+								<img src="<?=$adr_img?>mp_delivery.png" class="mp_ico">
+							</div>
+							<p>배송통관</p>
+							<div class="mp_alarm">
+								<span>2</span>
+							</div>
 						</div>
-						<div id="mytop_info">
-							<a href="">회원정보 수정 ></a>
+						<div class="top_div2 f_l ta_c" onclick="location.href = '<?=$adr_ctr?>Mypage/info'">
+							<div>
+								<img src="<?=$adr_img?>mp_info.png" class="mp_ico">
+							</div>
+							<p>내정보</p>
+							<div class="mp_alarm">
+								<span>5</span>
+							</div>
 						</div>
-					</div>
-
+					</nav>
 				</div>
-			</div>
-
-			<div id="mycm_nav">
-				<a class="current_mycm" onclick="">내가 쓴 글</a>
-				<a onclick="">내가 쓴 댓글</a>
-				<a onclick="">북마크</a>
-			</div>
-
-			<div id="cm_content">
-				<div id="cm_board_wrap" class="cl_b">
-					<table class="cm_board">
-						<!-- 커뮤니티 글 -->
-						<tr>
-							<td class="mycm_checkbox" rowspan="2">
-							<input type="checkbox" id="cm_cate_" name="cc" onclick="">
-							<label for="cm_cate_"><span></span></label></td>
-							<td class="cm_board_title"><a onclick="">[EXO] 수니 심장 뿌셔뿌셔한 목폴라와 무스탕입은 오늘자 공항 찬열이.jpg<span class="pc_reply">&nbsp;[12]</span></a></td>
-							<td class="cm_pc">파지래기</td>
-							<td class="cm_pc">2015-12-24 01:35:07</td>
-							<td class="cm_pc">112</td>
-							<td class="cm_board_reply cm_mobile" rowspan="2">
-							<div class="numberCircle">
-								12
-							</div></td>
-						</tr>
-						<tr class="cm_mobile">
-							<td class="cm_board_writer bo_color">파지래기&nbsp;|&nbsp;2015-12-24 01:35:07&nbsp;|&nbsp;조회수&nbsp;112</td>
-						</tr>
-						<!-- /커뮤니티 글 -->
-					</table>
-					<table class="cm_board">
-						<!-- 커뮤니티 글 -->
-						<tr>
-							<td class="mycm_checkbox" rowspan="2">
-							<input type="checkbox" id="cm_cate_" name="cc" onclick="">
-							<label for="cm_cate_"><span></span></label></td>
-							<td class="cm_board_title"><a onclick="">[EXO] 수니 심장 뿌셔뿌셔한 목폴라와 무스탕입은 오늘자 공항 찬열이.jpg<span class="pc_reply">&nbsp;[12]</span></a></td>
-							<td class="cm_pc">파지래기</td>
-							<td class="cm_pc">2015-12-24 01:35:07</td>
-							<td class="cm_pc">112</td>
-							<td class="cm_board_reply cm_mobile" rowspan="2">
-							<div class="numberCircle">
-								12
-							</div></td>
-						</tr>
-						<tr class="cm_mobile">
-							<td class="cm_board_writer bo_color">파지래기&nbsp;|&nbsp;2015-12-24 01:35:07&nbsp;|&nbsp;조회수&nbsp;112</td>
-						</tr>
-						<!-- /커뮤니티 글 -->
-					</table>
-					<table class="cm_board">
-						<!-- 커뮤니티 글 -->
-						<tr>
-							<td class="mycm_checkbox" rowspan="2">
-							<input type="checkbox" id="cm_cate_" name="cm_cate_" onclick="">
-							<label for="cm_cate_"><span></span></label></td>
-							<td class="cm_board_title"><a onclick="">[EXO] 수니 심장 뿌셔뿌셔한 목폴라와 무스탕입은 오늘자 공항 찬열이.jpg<span class="pc_reply">&nbsp;[12]</span></a></td>
-							<td class="cm_pc">파지래기</td>
-							<td class="cm_pc">2015-12-24 01:35:07</td>
-							<td class="cm_pc">112</td>
-							<td class="cm_board_reply cm_mobile" rowspan="2">
-							<div class="numberCircle">
-								12
-							</div></td>
-						</tr>
-						<tr class="cm_mobile">
-							<td class="cm_board_writer bo_color">파지래기&nbsp;|&nbsp;2015-12-24 01:35:07&nbsp;|&nbsp;조회수&nbsp;112</td>
-						</tr>
-						<!-- /커뮤니티 글 -->
-					</table>
-					<table class="cm_board">
-						<!-- 커뮤니티 글 -->
-						<tr>
-							<td class="mycm_checkbox" rowspan="2">
-							<input type="checkbox" id="cm_cate_" name="cc" onclick="">
-							<label for="cm_cate_"><span></span></label></td>
-							<td class="cm_board_title"><a onclick="">[EXO] 수니 심장 뿌셔뿌셔한 목폴라와 무스탕입은 오늘자 공항 찬열이.jpg<span class="pc_reply">&nbsp;[12]</span></a></td>
-							<td class="cm_pc">파지래기</td>
-							<td class="cm_pc">2015-12-24 01:35:07</td>
-							<td class="cm_pc">112</td>
-							<td class="cm_board_reply cm_mobile" rowspan="2">
-							<div class="numberCircle">
-								12
-							</div></td>
-						</tr>
-						<tr class="cm_mobile">
-							<td class="cm_board_writer bo_color">파지래기&nbsp;|&nbsp;2015-12-24 01:35:07&nbsp;|&nbsp;조회수&nbsp;112</td>
-						</tr>
-						<!-- /커뮤니티 글 -->
-					</table>
-				</div>
-			</div>
-
-			<div id="cm_contents_btnset" class="cl_b">
-				<div class="f_l">
-					<input type="checkbox" id="check_all" name="select_all" onclick="check_all();">
-					<label for="check_all"><span></span>전체선택</label>
-				</div>
-				<div class="f_r">
-					<button type="button" id="selected_remove" onclick="">
-						삭제
-					</button>
-				</div>
-			</div>
-
-			<div id="pagination_wrap">
-				<a onclick=""><img src="<?= $adr_img ?>left_arrow.png"></a>
-				<div id="pagination">
-					<a class="current_page" onclick="">1</a>
-					<a onclick="">2</a>
-					<a onclick="">3</a>
-					<span>···</span>
-					<a onclick="">7</a>
-				</div>
-				<a onclick=""><img src="<?= $adr_img ?>right_arrow.png"></a>
 			</div>
 		</div>
-
-		<?php
-		include ("footer.php");
-		?>
-
-		<script>
-			function check_all() {
-				if ($("#check_all").prop("checked")) {
-					$("input[type=checkbox]").prop("checked", true);
-				} else {
-					$("input[type=checkbox]").prop("checked", false);
-				}
-			}
-		</script>
-		<style>
-			input[type="checkbox"] + label span {
-				display: inline-block;
-				width: 19px;
-				height: 19px;
-				margin: -4px 4px 0 0;
-				vertical-align: middle;
-				background: url(<?=$adr_img ?>bo_checkbox.png);
-				background-size: contain;
-				cursor: pointer;
-			}
-			input[type="checkbox"]:checked + label span {
-				background: url(<?=$adr_img ?>bo_checkbox_on2.png);
-				background-size: contain;
-			}
-
-		</style>
-	</body>
+		<div id="content">
+			
+		</div>
+	</div>
+	
+	<div id="footer">
+	<?php include ("footer.php");?>
+	</div>
+	
+</div>
+	
+</body>
 </html>
-
