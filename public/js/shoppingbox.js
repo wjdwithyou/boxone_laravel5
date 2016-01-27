@@ -23,7 +23,16 @@ function getPrdt(cate, sort, page)
 	if (page == '')
 		page = d;
 	
-	location.href = adr_ctr + "Shoppingbox/index?cate=" + cate + "&sort=" + sort + "&page=" + page;
+	var search = $("#integrated_search").val();
+	var brand = [];
+	$("input:checkbox[name='sc']").each(function(){
+		//alert ($("#span"+$("this").attr("id")).css("background"));
+		if (this.checked)
+			brand.push(this.value);
+	});
+	brand = JSON.stringify(brand);
+	
+	location.href = adr_ctr + "Shoppingbox/index?cate=" + cate + "&search=" + search + "&brand=" + brand + "&sort=" + sort + "&page=" + page;
 }
 
 function collapseBrand(){

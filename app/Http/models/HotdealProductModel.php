@@ -130,10 +130,9 @@ class HotdealProductModel
 	/*
 	 *	정보 리스트 가져오는 기능
 	 */
-	function getInfoList($sort, $getCateList, $brand, $page_num)
+	function getInfoList($sort, $cateDepth, $cateIdx, $brand, $searchList, $page_num)
 	{
 		if( !( inputErrorCheck($sort, 'sort') && 
-				inputErrorCheck($getCateList, 'getCateList') &&
 				inputErrorCheck($page_num, 'page_num')))
 			return ;
 
@@ -149,26 +148,34 @@ class HotdealProductModel
 		}
 		
 		// 카테고리 정리
-		$query_cate = "";
-		foreach($getCateList as $list)
-			$query_cate .= "cate_small=$list or ";
-		if ($query_cate == "")
-			$query_cate = "where name != ''";
-		else 
-			$query_cate = "where name != '' and (".substr($query_cate, 0, strlen($query_cate) - 3).")";
+		$query_cate = "where name != '' ";
+		if ($cateDepth == 1)
+			$query_cate .= "and cate_large = $cateIdx";
+		else if ($cateDepth == 2)
+			$query_cate .= "and cate_medium = $cateIdx";
+		else if ($cateDepth == 3)
+			$query_cate .= "and cate_small = $cateIdx";
 		
 		// 브랜드 정리
 		$query_brand = "";
 		foreach($brand as $list)
-			$query_brand .= "brand=$list or ";
+			$query_brand .= "brand='$list' or ";
 		if ($query_brand != "")
 			$query_brand = " and (".substr($query_brand, 0, strlen($query_brand) - 3).")";
 		
+		// 검색어 정리
+		$query_search = "";
+		foreach($searchList as $list)
+			$query_search = "name like '%$list%' or brand like '%$list%' or ";
+		if ($query_search != "")
+			$query_search = " and (".substr($query_search, 0, strlen($query_search) - 3).")";
+		
+		
 		// 자료 가져오기
-		$data = DB::select("select *, FORMAT(priceO, 0) as fPriceO, FORMAT(priceS, 0) as fPriceS from hotdeal_product $query_cate $query_brand $query_orderBy idx DESC");
+		$data = DB::select("select *, FORMAT(priceO, 0) as fPriceO, FORMAT(priceS, 0) as fPriceS from hotdeal_product $query_cate $query_brand $query_search $query_orderBy idx DESC");
 		
 		// 브랜드 리스트 가져오기
-		$brandList = DB::select("SELECT DISTINCT brand FROM hotdeal_product $query_cate ORDER BY brand ASC");
+		$brandList = DB::select("SELECT DISTINCT brand FROM hotdeal_product $query_cate $query_search ORDER BY brand ASC");
 
 		// 갯수 확인 후 페이지 자르기
 		if (count($data) == 0)
@@ -189,31 +196,37 @@ class HotdealProductModel
 	/*
 	 *	내 찜한 상품 목록 가져오기 기능
 	 */
-	function getMyList($mem_idx, $getCateList, $brand, $page_num)
+	function getMyList($mem_idx, $cateDepth, $cateIdx, $brand, $searchList, $page_num)
 	{
 		if( !( 	inputErrorCheck($mem_idx, 'mem_idx') &&
-				inputErrorCheck($getCateList, 'getCateList') &&
 				inputErrorCheck($page_num, 'page_num')))
 					return ;
 				
 		// 브랜드 정리
 		$query_brand = "";
 		foreach($brand as $list)
-			$query_brand .= "brand=$list or ";
+			$query_brand .= "hp.brand='$list' or ";
 		if ($query_brand != "")
 			$query_brand = " and (".substr($query_brand, 0, strlen($query_brand) - 3).")";
-				
+		
+		// 검색어 정리
+		$query_search = "";
+		foreach($searchList as $list)
+			$query_search = "hp.name like '%$list%' or hp.brand like '%$list%' or ";
+		if ($query_search != "")
+			$query_search = " and (".substr($query_search, 0, strlen($query_search) - 3).")";
+		
 
 		// 자료 가져오기
 		$data = DB::select("select *, FORMAT(priceO, 0) as fPriceO, FORMAT(priceS, 0) as fPriceS
 							from hotdeal_bookmark as hb, hotdeal_product as hp  
-							where hb.member_idx = ? and hb.target = 1 and hb.hotdeal_idx = hp.idx $query_brand", 
+							where hb.member_idx = ? and hb.target = 1 and hb.hotdeal_idx = hp.idx $query_brand $query_search", 
 							array($mem_idx));
 		
 		// 브랜드 리스트 가져오기
 		$brandList = DB::select("SELECT DISTINCT brand
 							FROM hotdeal_bookmark AS hb, hotdeal_product AS hp  
-							WHERE hb.member_idx = ? AND hb.target = 1 and hb.hotdeal_idx = hp.idx ORDER BY brand ASC",
+							WHERE hb.member_idx = ? AND hb.target = 1 and hb.hotdeal_idx = hp.idx $query_search ORDER BY brand ASC",
 							array($mem_idx));
 
 		// 갯수 확인 후 페이지 자르기
@@ -230,5 +243,5 @@ class HotdealProductModel
 			return array('code' => 1, 'msg' => 'success', 'data' => $result, 'maxPage' => $page_max, 'brandList' => $brandList, 'prdtCnt' => count($data));
 		}
 	}
-
+	
 }
