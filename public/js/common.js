@@ -11,6 +11,11 @@ $(document).ready(function(){
 	.mouseout(function() {
 		$("#hover_menu_wrap").hide();
 	});
+	
+	$("#integrated_search").keyup(function(e){
+		if (e.keyCode == 13)
+			integrateSearch();
+	});
 });
 
 var adr_ctr = $("#adr_ctr").val();
@@ -113,4 +118,15 @@ function toggleAsidemenu(){
 
 function goBack(){
 	window.history.back();
+}
+
+function integrateSearch()
+{
+	if (typeof getPrdt !== 'undefined' && $.isFunction(getPrdt))
+		getPrdt('','',"1");
+	else
+	{
+		var searchText = $("#integrated_search").val();
+		location.href = adr_ctr + "Shoppingbox/index?search=" + searchText;
+	}
 }

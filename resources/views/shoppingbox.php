@@ -30,21 +30,17 @@
 						<div class="classify_top">
 							<a href='<?=$adr_ctr?>Shoppingbox/index'>쇼핑박스</a>
 							<?php foreach ($nowCate as $list) :?>
-								>
-								<a onclick="getPrdt('<?=$list[0]?>','',1);"><?=$list[1]?></a>
+								> <a onclick="getPrdt('<?=$list[0]?>','',1);"><?=$list[1]?></a>
 							<?php endforeach;?>
 						</div>
 						<div id="cate_wrap" class="classify_div f_C">
-							<?php foreach ($cateList as $list) :?>
-								<?php if ($list[2]) :?>
-								<input type="hidden" id="select_cate" value="<?=$list[0]?>">
-								<?php else :?>
-								<input type="hidden" id="select_cate" value="l0">
-								<?php endif;?>
+							
+							<input type="hidden" id="select_cate" value="<?=$nowCate[count($nowCate)-1][0]?>">
+							<?php for ($i = 0 ; $i < count($cateList) ; $i++) :?>
 								<div class="grid grid_h">
-									<a onclick="getPrdt('<?=$list[0]?>','',1);"><?=$list[1]?>&nbsp;<span class="bo_color2">123</span></a>
+									<a onclick="getPrdt('<?=$cateList[$i][0]?>','',1);"><?=$cateList[$i][1]?>&nbsp;<span class="bo_color2"><?php if (isset($cntList[$i])) echo $cntList[$i]; else echo 0;?></span></a>
 								</div>
-							<?php endforeach;?>
+							<?php endfor;?>
 						</div>
 					</nav>
 					<nav class="grid grid_211">
@@ -56,12 +52,12 @@
 								</div>
 							</div>
 							<div id="brand_wrap" class="classify_div f_C">
-								<?php foreach ($brandList as $list) :?>
-								<div>
-									<input type="checkbox" id="sc1" name="sc1" class="bo_checkbox bo_checkbox_1">
-									<label for="sc1"><span></span><?=$list->brand?></label>
+								<?php for ($i = 0 ; $i < count($brandList) ; $i++) :?>
+								<div class="grid grid_h">
+									<input type="checkbox" id="sc<?=$i?>" name="sc" value="<?=$brandList[$i]->brand?>" class="bo_checkbox bo_checkbox_1">
+									<label for="sc<?=$i?>"><span id="spansc<?=$i?>"></span><?=$brandList[$i]->brand?></label>
 								</div>
-								<?php endforeach;?>
+								<?php endfor;?>
 							</div>
 						</div>
 						<div class="classify2 grid grid_211">
@@ -72,12 +68,12 @@
 								</div>
 							</div>
 							<div id="site_wrap" class="classify_div f_C">
-								<?php foreach ($brandList as $list) :?>
-								<div>
-									<input type="checkbox" id="sc1" name="sc1" class="bo_checkbox bo_checkbox_1">
-									<label for="sc1"><span></span><?=$list->brand?></label>
+								<?php for ($i = 0 ; $i < count($brandList) ; $i++) :?>
+								<div class="grid grid_h">
+									<input type="checkbox" id="sc<?=$i?>" name="sc" value="<?=$brandList[$i]->brand?>" class="bo_checkbox bo_checkbox_1">
+									<label for="sc<?=$i?>"><span id="spansc<?=$i?>"></span><?=$brandList[$i]->brand?></label>
 								</div>
-								<?php endforeach;?>
+								<?php endfor;?>
 							</div>
 						</div>
 					</nav>

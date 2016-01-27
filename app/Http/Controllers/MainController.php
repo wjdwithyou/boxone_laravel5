@@ -28,7 +28,7 @@ class MainController extends Controller {
 		$siteList = array_slice($result['data'], 0, 10);
 		
 		// 핫한 상품 (쇼핑박스 중 할인되는 것, 조회수 10개) 가져오기
-		$result = $hotPrdtModel->getInfoList(1, array(), array(), 1);
+		$result = $hotPrdtModel->getInfoList(1, 0, 0, array(), array(), 1);
 		$hotList = array_slice($result['data'], 0, 8);
 		//$hotList = array();
 		
@@ -67,7 +67,7 @@ class MainController extends Controller {
 				array_push($cateList, $sList->sidx);
 			
 			// 상품 가져오기
-			$temp = $prdtModel->getInfoList(1, $cateList, array(), 1);
+			$temp = $prdtModel->getInfoList(1, 0, 0, array(), array(), 1);
 			
 			if ($temp['code'] == 1)
 			{

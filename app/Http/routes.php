@@ -19,6 +19,10 @@ Route::get('/cosmos/{name}', function(){
 	return view('/cosmos/'.Request::segment(2));
 });
 
+Route::get('cateList', function(){
+	return view('/cosmos/cateMain');
+});
+
 Route::get('/', 'MainController@index');
 
 Route::any('{ctr}/{fnc}', Request::segment(1)."Controller@".Request::segment(2));

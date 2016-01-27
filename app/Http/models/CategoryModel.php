@@ -128,24 +128,30 @@ class CategoryModel{
 	{
 		if ($depth == 1){
 			//$result = DB::select("SELECT * FROM category_large WHERE idx=$idx");
-			$result = DB::select("select	l_idx as idx,
+			$result = DB::select("select 	l_idx as idx, 
 											l_name as name
-									from category where l_idx='$idx'");
+									from category where l_idx='$idx'
+									group by l_idx, l_name");
 		}
 		else if ($depth == 2){
 			//$result = DB::select("SELECT * FROM category_medium WHERE idx=$idx");
-			$result = DB::select("select	m_idx as idx,
+			$result = DB::select("select 	m_idx as idx,
 											m_name as name,
-											l_idx as large_idx
-									from category where m_idx='$idx'");
+											l_idx as large_idx,
+											l_name as large_name
+									from category where m_idx='$idx'
+									group by l_idx, l_name, m_idx, m_name");
 		}
 		else{
 			//$result = DB::select("SELECT * FROM category_small WHERE idx=$idx");
 			$result = DB::select("select	idx,
 											name,
 											m_idx as medium_idx,
-											0 as large_idx
-									from category where idx='$idx'");
+											m_name as medium_name,
+											l_idx as large_idx,
+											l_name as large_name
+									from category where idx='$idx'
+									group by l_idx, l_name, m_idx, m_name, idx, name");
 		}
 		
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);

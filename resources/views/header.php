@@ -55,7 +55,7 @@ if (isset($_COOKIE['need_login'])) {
 					<a id="bo_logo" onclick="location.href='<?= $adr_ctr ?>'"><img src="<?= $adr_img ?>header_logo.gif" alt="boxone" title="boxone"></a>
 				</div>
 				<div id="header_search" class="pc_header grid grid_311">
-					<input type="text" id="integrated_search" class="bo_search1 br_25" placeholder="검색어를 입력해주세요.">
+					<input type="text" id="integrated_search" class="bo_search1 br_25" placeholder="검색어를 입력해주세요." <?php if (isset($search)) echo "value='$search'";?>>
 					<a onclick=""><img src="<?= $adr_img ?>search_img.png" class="img_14"></a>
 				</div>
 				<div class="pc_header grid grid_311">
