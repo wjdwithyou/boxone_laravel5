@@ -43,20 +43,38 @@
 							<?php endfor;?>
 						</div>
 					</nav>
-					<nav class="classify grid grid_211">
-						<div class="classify_top f_c">
-							<span>브랜드</span>
-							<div id="collapse_brand" class="f_r">
-								<a id="collapse_brand_btn" onclick="collapseBrand();"><img src="<?=$adr_img?>collapse_p.png" class="img_14"></a>
+					<nav class="grid grid_211">
+						<div class="classify2 grid grid_211">
+							<div class="classify_top f_c">
+								<span>브랜드</span>
+								<div id="collapse_brand" class="f_r">
+									<a id="brand_collapse_btn" onclick="collapseOption('brand');"><img src="<?=$adr_img?>collapse_p.png" class="img_14"></a>
+								</div>
+							</div>
+							<div id="brand_wrap" class="classify_div f_C">
+								<?php for ($i = 0 ; $i < count($brandList) ; $i++) :?>
+								<div class="grid grid_h">
+									<input type="checkbox" id="sc<?=$i?>" name="sc" value="<?=$brandList[$i]->brand?>" class="bo_checkbox bo_checkbox_1">
+									<label for="sc<?=$i?>"><span id="spansc<?=$i?>"></span><?=$brandList[$i]->brand?></label>
+								</div>
+								<?php endfor;?>
 							</div>
 						</div>
-						<div id="brand_wrap" class="classify_div f_C">
-							<?php for ($i = 0 ; $i < count($brandList) ; $i++) :?>
-							<div class="grid grid_h">
-								<input type="checkbox" id="sc<?=$i?>" name="sc" value="<?=$brandList[$i]->brand?>" class="bo_checkbox bo_checkbox_1">
-								<label for="sc<?=$i?>"><span id="spansc<?=$i?>"></span><?=$brandList[$i]->brand?></label>
+						<div class="classify2 grid grid_211">
+							<div class="classify_top f_c">
+								<span>사이트</span>
+								<div id="collapse_site" class="f_r">
+									<a id="site_collapse_btn" onclick="collapseOption('site');"><img src="<?=$adr_img?>collapse_p.png" class="img_14"></a>
+								</div>
 							</div>
-							<?php endfor;?>
+							<div id="site_wrap" class="classify_div f_C">
+								<?php for ($i = 0 ; $i < count($brandList) ; $i++) :?>
+								<div class="grid grid_h">
+									<input type="checkbox" id="sc<?=$i?>" name="sc" value="<?=$brandList[$i]->brand?>" class="bo_checkbox bo_checkbox_1">
+									<label for="sc<?=$i?>"><span id="spansc<?=$i?>"></span><?=$brandList[$i]->brand?></label>
+								</div>
+								<?php endfor;?>
+							</div>
 						</div>
 					</nav>
 				</div>

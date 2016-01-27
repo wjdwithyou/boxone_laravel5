@@ -15,6 +15,10 @@
 	</div>
 	
 	<div id="container">
+		<div id="top">
+			<h1 class="top_h1">쇼핑박스</h1>
+			<p class="top_p bo_color2">전세계 모든 상품들을 클릭 한번에 내 입맛대로</p>
+		</div>
 		<div id="mypage_top">
 			<div id="mypage_top_wrap">
 				<div class="inner">
@@ -22,7 +26,7 @@
 					<nav class="bo_colorw f_c mg_t32 font_14">
 						<div class="top_div1 f_l ta_c">
 							<div>
-								<img src="<?=$adr_img?>member/default.png" class="br_50" width="80" height="80">
+								<img src="<?=$adr_img?>info.png" class="br_50" width="80" height="80">
 							</div>
 							<p><?=$nickname?>님</p>
 						</div>
@@ -49,9 +53,6 @@
 								<img src="<?=$adr_img?>mp_info.png" class="mp_ico">
 							</div>
 							<p>내정보</p>
-							<div class="mp_alarm">
-								<span>5</span>
-							</div>
 						</div>
 					</nav>
 				</div>
