@@ -26,13 +26,15 @@ function getPrdt(cate, sort, page)
 	location.href = adr_ctr + "Shoppingbox/index?cate=" + cate + "&sort=" + sort + "&page=" + page;
 }
 
-function collapseBrand(){
-	if($("#brand_wrap").is(":visible")){
-		$("#collapse_brand_btn img").attr("src", adr_img + "collapse_p.png");
-		$("#brand_wrap").hide();
+function collapseOption(type){
+	var t = "#" + type;
+	
+	if($(t + "_wrap").is(":visible")){
+		$(t + "_collapse_btn img").attr("src", adr_img + "collapse_p.png");
+		$(t + "_wrap").hide();
 	}
 	else{
-		$("#collapse_brand_btn img").attr("src", adr_img + "collapse_m.png");
-		$("#brand_wrap").show();
+		$(t + "_collapse_btn img").attr("src", adr_img + "collapse_m.png");
+		$(t + "_wrap").show();
 	}
 }

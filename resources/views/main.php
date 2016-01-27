@@ -14,7 +14,7 @@
 	
 	<div id="container">
 		<div id="main_slide">
-			<div id="c1" class="slide">
+			<div id="slide1" class="slide">
 				<div class="slide_over">
 					<h1 class="slide_h1 fw_b bo_colorw">박스원</h1>
 					<h2 class="slide_h2 bo_colorw">해외직구 상품을 한자리에!</h2>
@@ -23,7 +23,7 @@
 					<button type="button" class="slide_btn bo_btnw" onclick='location.href="<?=$adr_ctr ?>Login/index"'>로그인</button>
 				</div>
 			</div>
-			<div id="c2" class="slide">
+			<div id="slide2" class="slide">
 				<div class="slide_over">
 					<h1 class="slide_h1 fw_b bo_colorw">박스원</h1>
 					<h2 class="slide_h2 bo_colorw">해외직구 상품을 한자리에!</h2>
@@ -32,7 +32,7 @@
 					<button type="button" class="slide_btn bo_btnw" onclick='location.href="<?=$adr_ctr ?>Login/index"'>로그인</button>
 				</div>
 			</div>
-			<div id="c3" class="slide">
+			<div id="slide3" class="slide">
 				<div class="slide_over">
 					<h1 class="slide_h1 fw_b bo_colorw">박스원</h1>
 					<h2 class="slide_h2 bo_colorw">해외직구 상품을 한자리에!</h2>
@@ -45,7 +45,7 @@
 		<div id="content">
 			<div id="br_wrap" class="inner">
 				<div class="ta_c mg_t32">
-					<h2 class="top_h2 bo_color2">인기 쇼핑몰 랭킹</h2>
+					<h3 class="bo_color2">인기 쇼핑몰 랭킹</h3>
 				</div>
 				<div id="br_content" class="mg_t16">
 					<div id="br_slide">
@@ -58,64 +58,123 @@
 			<div id="hd_wrap" class="mg_t32">
 				<div class="inner">
 					<div class="ta_c">
-						<h2 class="top_h2 bo_color2">핫한 상품</h2>
+						<h3 class="bo_color2">핫한 상품</h3>
 						<p class="top_p bo_color2">지금 뜨고 있는 상품들을 만나보세요.</p>
 					</div>
 					<div id="hd_content" class="mg_t16 f_c">
-						<?php foreach ($hotList as $list) :?>
-						<div class="imglist_div grid grid_432">
-							<div class="imglist_img img_center">
-								<div class="img_center_inner">
-									<a href="<?=$adr_ctr?>Hotdeal/productDetail?idx=<?=$list->idx?>"><img src="<?=$list->img?>"></a>
+						<div id="hd_slide_wrap" class="grid grid_211">
+							<div id="hd_slide_wrap_inner">
+								<div id="hd_slide">
+									<?php foreach ($hotList as $list) :?>
+									<div class="slide">
+										<div class="imglist_div2">
+											<div class="imglist_img img_center">
+												<div class="img_center_inner">
+													<a href="<?=$adr_ctr?>Hotdeal/productDetail?idx=<?=$list->idx?>"><img src="<?=$list->img?>"></a>
+												</div>
+											</div>
+											<div class="imglist_desc_wrap">
+												<div class="imglist_desc1 ta_c t_o bo_color2">
+													<?=$list->brand?>
+												</div>
+												<div class="imglist_desc2 ta_c t_o">
+													<?=$list->name?>
+												</div>
+												<div class="bo_color1 ta_c fw_b mg_t8">
+													<?=round($list->fPriceS / $list->fPriceO * 100)?>%
+												</div>
+												<div class="imglist_desc3 ta_c t_o">
+													<strike class="bo_color2">￦<?=$list->fPriceO?></strike>&nbsp;￦<?=$list->fPriceS?>
+												</div>
+											</div>
+										</div>
+									</div>
+									<?php endforeach;?>
 								</div>
 							</div>
-							<div class="imglist_desc_wrap">
-								<div class="imglist_desc1 ta_c t_o bo_color2">
-									<?=$list->brand?>
+						</div>
+						<?php foreach ($hotList as $list) :?>
+						<div class="imglist_div2 imglist_div3 grid grid_442">
+							<div class="imglist_div_inner">
+								<div class="imglist_img img_center">
+									<div class="img_center_inner">
+										<a href="<?=$adr_ctr?>Hotdeal/productDetail?idx=<?=$list->idx?>"><img src="<?=$list->img?>"></a>
+									</div>
 								</div>
-								<div class="imglist_desc2 ta_c t_o">
-									<?=$list->name?>
-								</div>
-								<div class="bo_color1 ta_c fw_b mg_t8">
-									<?=round($list->fPriceS / $list->fPriceO * 100)?>%
-								</div>
-								<div class="imglist_desc3 ta_c t_o">
-									<strike class="bo_color2">￦<?=$list->fPriceO?></strike>&nbsp;￦<?=$list->fPriceS?>
+								<div class="imglist_desc_wrap">
+									<div class="imglist_desc1 ta_c t_o bo_color2">
+										<?=$list->brand?>
+									</div>
+									<div class="imglist_desc2 ta_c t_o">
+										<?=$list->name?>
+									</div>
+									<div class="bo_color1 ta_c fw_b mg_t8">
+										<?=round($list->fPriceS / $list->fPriceO * 100)?>%
+									</div>
+									<div class="imglist_desc3 ta_c t_o">
+										<strike class="bo_color2">￦<?=$list->fPriceO?></strike>&nbsp;￦<?=$list->fPriceS?>
+									</div>
 								</div>
 							</div>
 						</div>
 						<?php endforeach;?>
+						<div class="imglist_div2 imglist_div3 grid grid_442">
+							<div class="imglist_div_inner">
+								<div class="imglist_img img_center">
+									<div class="img_center_inner">
+										<a href=""><img src="<?=$adr_img?>site/429.png"></a>
+									</div>
+								</div>
+								<div class="imglist_desc_wrap">
+									<div class="imglist_desc1 ta_c t_o bo_color2">
+										Victoria^s Secret
+									</div>
+									<div class="imglist_desc2 ta_c t_o">
+										Drapey Hooded Poncho
+									</div>
+									<div class="bo_color1 ta_c fw_b mg_t8">
+										61%
+									</div>
+									<div class="imglist_desc3 ta_c t_o">
+										<strike class="bo_color2">￦72,066</strike>&nbsp;￦44,802
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 			<div class="inner">
 				<div class="ta_c mg_t32">
-					<h2 class="top_h2 bo_color2">쇼핑박스</h2>
-					<p class="top_p bo_color2">원하는 상품을 사이트 구별없이 검색하고 가격비교 할 수 있습니다.</p>
+					<h3 class="bo_color2">내게 딱 맞는 상품</h3>
 				</div>
-				<div id="sb_content" class="mg_t16 f_c">
+				<div id="sb_content" class="f_c">
 					<?php foreach ($prdtList as $list) :?>
-						<div><?=$list['cateName']?></div>
-						<?php for($i = 0 ; $i < count($list)-1 ; $i++) :?>
-						<div class="imglist_div grid grid_432">
-							<div class="imglist_img img_center">
-								<div class="img_center_inner">
-									<a href="<?=$adr_ctr ?>Shoppingbox/detail?idx=<?=$list[$i]->idx?>"><img src="<?=$list[$i]->img?>"></a>
+						<div class="mg_t32 ta_c font_16 f_b bo_color2"><?=$list['cateName']?></div>
+						<div class="cate_slide">
+							<?php for($i = 0 ; $i < count($list)-1 ; $i++) :?>
+							<div class="slide">
+								<div class="imglist_div">
+									<div class="imglist_img img_center">
+										<div class="img_center_inner">
+											<a href="<?=$adr_ctr ?>Shoppingbox/detail?idx=<?=$list[$i]->idx?>"><img src="<?=$list[$i]->img?>"></a>
+										</div>
+									</div>
+									<div class="imglist_desc_wrap">
+										<div class="imglist_desc1 ta_c t_o bo_color2">
+											<?=$list[$i]->brand?>
+										</div>
+										<div class="imglist_desc2 ta_c t_o">
+											<?=$list[$i]->name?>
+										</div>
+										<div class="imglist_desc3 ta_c t_o mg_t8">
+											￦<?=$list[$i]->fPrice?>
+										</div>
+									</div>
 								</div>
 							</div>
-							<div class="imglist_desc_wrap">
-								<div class="imglist_desc1 ta_c t_o bo_color2">
-									<?=$list[$i]->brand?>
-								</div>
-								<div class="imglist_desc2 ta_c t_o">
-									<?=$list[$i]->name?>
-								</div>
-								<div class="imglist_desc3 ta_c t_o mg_t8">
-									￦<?=$list[$i]->fPrice?>
-								</div>
-							</div>
+							<?php endfor;?>
 						</div>
-						<?php endfor;?>
 					<?php endforeach;?>
 				</div>
 			</div>
