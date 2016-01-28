@@ -355,12 +355,12 @@ class ProductModel
 	{
 		$result = DB::select("SELECT * FROM product_review WHERE product_idx = ?", array($idx));
 		
-		$rateArray = array(0,0,0,0,0);		
+		$rateArray = array(0,0,0,0,0,0);		
 		$rateAll = 0;
 		foreach ($result as $list)
 		{
 			$rateAll += $list->rating;
-			++$rateArray[ceil($list->rating+0.1)];
+			++$rateArray[floor($list->rating+0.5)];
 		}
 		$rate = $rateAll / count($result);
 		
