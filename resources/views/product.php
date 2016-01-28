@@ -474,11 +474,11 @@
 							사용자 총평점
 						</div>
 						<div class="score">
-							<span class="f_b bo_color2"><?php for ($i = 1 ; $i <= 5 ; $i++) if ($i < $rate[0]) echo '★'; else echo '☆';?></span>
+							<span class="f_b bo_color2"><?php for ($i = 1 ; $i <= 5 ; $i++) if ($i <= $rate[0]) echo '★'; else echo '☆';?></span>
 							&nbsp;
 							<span class="rating f_b"><?=$rate[0]?></span>
 							&nbsp;/&nbsp;
-							<span class="total_rating bo_color"><?=$rate[2]?></span>
+							<span class="total_rating bo_color"><?=$rate[2]?>건</span>
 						</div>
 					</div>
 					<div class="score_div col-xs-4">
@@ -486,7 +486,7 @@
 							가장 많은 평점
 						</div>
 						<div class="score">
-							<span class="f_b bo_color2"><?php for ($i = 1 ; $i <= 5 ; $i++) if ($i < $rate[1][0]) echo '★'; else echo '☆';?></span>
+							<span class="f_b bo_color2"><?php for ($i = 1 ; $i <= 5 ; $i++) if ($i <= $rate[1][0]) echo '★'; else echo '☆';?></span>
 							&nbsp;
 							<span class="rating f_b"><?=$rate[1][0]?></span>
 							&nbsp;|&nbsp;
@@ -508,7 +508,7 @@
 					<ul class="review">
 						<li class="cl_b">
 							<div class="f_l">
-								<span class="f_b bo_color2"><?php for ($i = 1 ; $i <= 5 ; $i++) if ($i < $list->rating) echo '★'; else echo '☆';?></span>
+								<span class="f_b bo_color2"><?php for ($i = 1 ; $i <= 5 ; $i++) if ($i <= $list->rating) echo '★'; else echo '☆';?></span>
 								&nbsp;
 								<span class="f_b"><?=$list->title?></span>
 								&nbsp;|&nbsp;
