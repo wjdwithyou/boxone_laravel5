@@ -383,7 +383,7 @@ class ProductModel
 				$prdt[0]->type = 'p';	
 			else
 			{
-				$prdt = DB::select("SELECT *, FORMAT(priceS, 0) as fPrice FROM hodeal_product WHERE idx = ?", array($list->prod_id));
+				$prdt = DB::select("SELECT *, FORMAT(priceS, 0) as fPrice FROM hotdeal_product WHERE idx = ?", array($list->prod_id));
 				$prdt[0]->type = 'h';
 			}
 			array_push($result, $prdt[0]);
