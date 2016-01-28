@@ -28,6 +28,11 @@ class ShoppingboxController extends Controller {
 		if (Request::has('brand'))
 			$brand = json_decode(Request::input('brand'), true);
 		
+		// 사이트 가져오기
+		$mall = array();
+		if (Request::has('mall'))
+			$mall = json_decode(Request::input('mall'), true);
+		
 		// 검색어 가져오기
 		$search = Request::input('search', '');
 		$searchText = array();
@@ -123,19 +128,19 @@ class ShoppingboxController extends Controller {
 		if ($sort != '5')
 		{
 			if ($cateDepth == -1)
-				$result = $hotPrdtModel->getInfoList($sort, 0, 0, $brand, $searchText, $nowPage);
+				$result = $hotPrdtModel->getInfoList($sort, 0, 0, $brand, $mall, $searchText, $nowPage);
 			else
-				$result = $prdtModel->getInfoList($sort, $cateDepth, $cateIdx, $brand, $searchText, $nowPage);
-			$cntList = $prdtModel->getPrdtCnt($cateDepth, $cateListIdx, $brand, $searchText, 0);
+				$result = $prdtModel->getInfoList($sort, $cateDepth, $cateIdx, $brand, $mall, $searchText, $nowPage);
+			$cntList = $prdtModel->getPrdtCnt($cateDepth, $cateListIdx, $brand, $mall, $searchText, 0);
 		}
 		else
 		{
 			$mem_idx = $_SESSION['idx'];
 			if ($cateDepth == -1)
-				$result = $hotPrdtModel->getMyList($mem_idx, 0, 0, $brand, $searchText, $nowPage);
+				$result = $hotPrdtModel->getMyList($mem_idx, 0, 0, $brand, $mall, $searchText, $nowPage);
 			else
-				$result = $prdtModel->getMyList($mem_idx, $cateDepth, $cateIdx, $brand, $searchText, $nowPage);
-			$cntList = $prdtModel->getPrdtCnt($cateDepth, $cateListIdx, $brand, $searchText, $mem_idx);
+				$result = $prdtModel->getMyList($mem_idx, $cateDepth, $cateIdx, $brand, $mall, $searchText, $nowPage);
+			$cntList = $prdtModel->getPrdtCnt($cateDepth, $cateListIdx, $brand, $mall, $searchText, $mem_idx);
 		}
 				
 		if (!($result['code']))
@@ -143,16 +148,33 @@ class ShoppingboxController extends Controller {
 			$result['maxPage'] = $nowPage = 1;
 			$result['data'] = array();
 			$result['brandList'] = array();
+			$result['mallList'] = array();
 			$result['prdtCnt'] = 0;
 		}
 
 		// 현재 체크된 브랜드 선택
 		foreach($result['brandList'] as $brandList)
+		{
+			$brandList->checked = 0;
 			foreach($brand as $list)
 				if ($brandList->brand == $list)
+				{
 					$brandList->checked = 1;
-				else
-					$brandList->checked = 0;
+					break;
+				}
+		}
+		
+		// 현재 체크된 브랜드 선택
+		foreach($result['mallList'] as $mallList)
+		{
+			$mallList->checked = 0;
+			foreach($mall as $list)
+				if ($mallList->mall_id == $list)
+				{
+					$mallList->checked = 1;
+					break;
+				}
+		}
 			
 		$paging = array('now' => $nowPage, 'max' => $result['maxPage']);
 		
@@ -163,8 +185,8 @@ class ShoppingboxController extends Controller {
 				'cateList' => $cateList,
 				'nowCate' => $cate,
 				'sort' => $sort,
-				'nowBrand' => $brand,
 				'brandList' => $result['brandList'],
+				'mallList' => $result['mallList'],
 				'paging' => $paging,
 				'prdtCnt' => $result['prdtCnt'],
 				'cntList' => $cntList,
@@ -185,6 +207,12 @@ class ShoppingboxController extends Controller {
 	
 		$cateS = $result['data']['cate'];
 		$data = $cateModel->downToUp($cateS);
+		
+		// 리뷰 가져오기
+		$reviewList = $prdtModel->getReview($idx);
+		
+		// 동일 상품 가져오기
+		$sameList = $prdtModel->getMappingPrdt($result['data']['binding']);
 		
 		// 최근 본 상품의 카테고리를 cookie로 가지고 다닌다.
 		$cookie = Request::cookie('recentCate');
@@ -230,7 +258,14 @@ class ShoppingboxController extends Controller {
 		
 		// 출력
 		$page = 'product';
-		return view($page, array('page' => $page, 'result' => $result['data'], 'cate' => $data['data'][0]));
+		return view($page, array(
+				'page' => $page, 
+				'result' => $result['data'], 
+				'reviewList' => $reviewList['data'],
+				'sameList' => $sameList['data'],
+				'rate' => array($reviewList['rateAve'], $reviewList['rateBest'], $reviewList['rateCnt']),
+				'cate' => $data['data'][0]
+		));
 	}
 
 }

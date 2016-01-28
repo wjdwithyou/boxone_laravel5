@@ -43,7 +43,7 @@ class HotdealProductModel
 		if(	!(	inputErrorCheck($prod_idx, 'prod_idx')))
 			return ;
 
-		$my_data = DB::select('SELECT * FROM hotdeal_product WHERE idx =?',array($prod_idx));
+		$my_data = DB::select('SELECT *, FORMAT(priceO, 0) as fPriceO, FORMAT(priceS, 0) as fPriceS FROM hotdeal_product WHERE idx =?',array($prod_idx));
 			
 		$table = $my_data[0]->mall_id.'_'.$my_data[0]->mall_kind;
 		$prodInc = $my_data[0]->prod_id;
@@ -113,13 +113,14 @@ class HotdealProductModel
 				'explain' => '',
 				'mall' => $ms_data_prod->MallID,
 				'brand' => $ms_data_prod->BrandID,
-				'priceO' => $my_data[0]->priceO,
-				'price' => $my_data[0]->priceS,
+				'priceO' => $my_data[0]->fPriceO,
+				'price' => $my_data[0]->fPriceS,
 				'saleP' => $my_data[0]->saleP,
 				'deliverFee' => '',
 				'color' => $ms_data_color,
 				'size' => $ms_data_size,
-				'story' => $ms_data_story
+				'story' => $ms_data_story,
+				'binding' => $my_data[0]->binding
 		);
 			
 		DB::update('update product set hit_count=hit_count+1 where idx=?',array($prod_idx));
@@ -130,7 +131,7 @@ class HotdealProductModel
 	/*
 	 *	정보 리스트 가져오는 기능
 	 */
-	function getInfoList($sort, $cateDepth, $cateIdx, $brand, $searchList, $page_num)
+	function getInfoList($sort, $cateDepth, $cateIdx, $brand, $mall, $searchList, $page_num)
 	{
 		if( !( inputErrorCheck($sort, 'sort') && 
 				inputErrorCheck($page_num, 'page_num')))
@@ -163,6 +164,13 @@ class HotdealProductModel
 		if ($query_brand != "")
 			$query_brand = " and (".substr($query_brand, 0, strlen($query_brand) - 3).")";
 		
+		// 사이트 정리
+		$query_mall = "";
+		foreach($brand as $list)
+			$query_mall .= "mall_id='$list' or ";
+		if ($query_mall != "")
+			$query_mall = " and (".substr($query_mall, 0, strlen($query_mall) - 3).")";
+		
 		// 검색어 정리
 		$query_search = "";
 		foreach($searchList as $list)
@@ -172,31 +180,29 @@ class HotdealProductModel
 		
 		
 		// 자료 가져오기
-		$data = DB::select("select *, FORMAT(priceO, 0) as fPriceO, FORMAT(priceS, 0) as fPriceS from hotdeal_product $query_cate $query_brand $query_search $query_orderBy idx DESC");
+		$data = DB::select("select *, FORMAT(priceO, 0) as fPriceO, FORMAT(priceS, 0) as fPriceS from hotdeal_product $query_cate $query_brand $query_mall $query_search $query_orderBy idx DESC");
 		
 		// 브랜드 리스트 가져오기
 		$brandList = DB::select("SELECT DISTINCT brand FROM hotdeal_product $query_cate $query_search ORDER BY brand ASC");
+		
+		// 사이트 리스트 가져오기
+		$mallList = DB::select("SELECT DISTINCT mall_id FROM hotdeal_product $query_cate $query_search ORDER BY mall_id ASC");
 
 		// 갯수 확인 후 페이지 자르기
-		if (count($data) == 0)
-			return array('code' => '0', 'msg' => 'no matched result');
-		else
-		{
-			$page_max = floor((count($data)-1) / 20) + 1;
-			if ($page_num > $page_max)
-				$page_num = $page_max;
-			$page_start = ($page_num-1)*20;
-			$result = array_slice($data, $page_start, 20);
-
-			return array('code' => 1, 'msg' => 'success', 'data' => $result, 'maxPage' => $page_max, 'brandList' => $brandList, 'prdtCnt' => count($data));
-		}
+		$page_max = floor((count($data)-1) / 20) + 1;
+		if ($page_num > $page_max)
+			$page_num = $page_max;
+		$page_start = ($page_num-1)*20;
+		$result = array_slice($data, $page_start, 20);
+		
+		return array('code' => 1, 'msg' => 'success', 'data' => $result, 'maxPage' => $page_max, 'brandList' => $brandList, 'mallList' => $mallList, 'prdtCnt' => count($data));
 	}
 	
 
 	/*
 	 *	내 찜한 상품 목록 가져오기 기능
 	 */
-	function getMyList($mem_idx, $cateDepth, $cateIdx, $brand, $searchList, $page_num)
+	function getMyList($mem_idx, $cateDepth, $cateIdx, $brand, $mall, $searchList, $page_num)
 	{
 		if( !( 	inputErrorCheck($mem_idx, 'mem_idx') &&
 				inputErrorCheck($page_num, 'page_num')))
@@ -209,6 +215,13 @@ class HotdealProductModel
 		if ($query_brand != "")
 			$query_brand = " and (".substr($query_brand, 0, strlen($query_brand) - 3).")";
 		
+		// 사이트 정리
+		$query_mall = "";
+		foreach($brand as $list)
+			$query_mall .= "hp.mall_id='$list' or ";
+		if ($query_mall != "")
+			$query_mall = " and (".substr($query_mall, 0, strlen($query_mall) - 3).")";
+		
 		// 검색어 정리
 		$query_search = "";
 		foreach($searchList as $list)
@@ -220,7 +233,7 @@ class HotdealProductModel
 		// 자료 가져오기
 		$data = DB::select("select *, FORMAT(priceO, 0) as fPriceO, FORMAT(priceS, 0) as fPriceS
 							from hotdeal_bookmark as hb, hotdeal_product as hp  
-							where hb.member_idx = ? and hb.target = 1 and hb.hotdeal_idx = hp.idx $query_brand $query_search", 
+							where hb.member_idx = ? and hb.target = 1 and hb.hotdeal_idx = hp.idx $query_brand $query_mall $query_search", 
 							array($mem_idx));
 		
 		// 브랜드 리스트 가져오기
@@ -228,6 +241,12 @@ class HotdealProductModel
 							FROM hotdeal_bookmark AS hb, hotdeal_product AS hp  
 							WHERE hb.member_idx = ? AND hb.target = 1 and hb.hotdeal_idx = hp.idx $query_search ORDER BY brand ASC",
 							array($mem_idx));
+		
+		// 사이트 리스트 가져오기
+		$brandList = DB::select("SELECT DISTINCT mall_id
+				FROM hotdeal_bookmark AS hb, hotdeal_product AS hp
+				WHERE hb.member_idx = ? AND hb.target = 1 and hb.hotdeal_idx = hp.idx $query_search ORDER BY mall_id ASC",
+				array($mem_idx));
 
 		// 갯수 확인 후 페이지 자르기
 		if (count($data) == 0)
@@ -240,8 +259,27 @@ class HotdealProductModel
 			$page_start = ($page_num-1)*20;
 			$result = array_slice($data, $page_start, 20);
 
-			return array('code' => 1, 'msg' => 'success', 'data' => $result, 'maxPage' => $page_max, 'brandList' => $brandList, 'prdtCnt' => count($data));
+			return array('code' => 1, 'msg' => 'success', 'data' => $result, 'maxPage' => $page_max, 'brandList' => $brandList, 'mallList' => $mallList, 'prdtCnt' => count($data));
 		}
+	}
+	
+	function getReview($idx)
+	{
+		$result = DB::select("SELECT * FROM hotdeal_review WHERE hotdeal_idx = ?", array($idx));
+		
+		$rateArray = array(0,0,0,0,0,0);
+		$rateAll = 0;
+		foreach ($result as $list)
+		{
+			$rateAll += $list->rating;
+			++$rateArray[floor($list->rating+0.5)];
+		}
+		$rateAve = $rateAll / count($result);
+		
+		arsort($rateArray);
+		$rateBest = array(array_keys($rateArray)[0], array_shift($rateArray));
+		
+		return array('code' => 1, 'msg' => 'success', 'data' => $result, 'rateCnt' => count($result), 'rateBest' => $rateBest, 'rateAve' => $rateAve);
 	}
 	
 }

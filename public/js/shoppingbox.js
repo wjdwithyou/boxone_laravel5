@@ -25,14 +25,19 @@ function getPrdt(cate, sort, page)
 	
 	var search = $("#integrated_search").val();
 	var brand = [];
-	$("input:checkbox[name='sc']").each(function(){
-		//alert ($("#span"+$("this").attr("id")).css("background"));
+	$("input:checkbox[name='brandList']").each(function(){
 		if (this.checked)
 			brand.push(this.value);
 	});
 	brand = JSON.stringify(brand);
+	var mall = [];
+	$("input:checkbox[name='mallList']").each(function(){
+		if (this.checked)
+			mall.push(this.value);
+	});
+	mall = JSON.stringify(mall);
 	
-	location.href = adr_ctr + "Shoppingbox/index?cate=" + cate + "&search=" + search + "&brand=" + brand + "&sort=" + sort + "&page=" + page;
+	location.href = adr_ctr + "Shoppingbox/index?cate=" + cate + "&search=" + search + "&brand=" + brand + "&mall=" + mall + "&sort=" + sort + "&page=" + page;
 }
 
 function collapseOption(type){

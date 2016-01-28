@@ -171,23 +171,28 @@
 					가격비교
 				</div>
 				<div id="compare_div_wrap" class="cl_b">
+					<?php foreach ($sameList as $list) :?>
 					<!-- 가격 비교 -->
 					<div class="compare_div col-xs-12 col-sm-6">
 						<div class="compare_inner">
 							<table class="compare_table">
 								<tr>
-									<td class="compare_site">amazon</td>
-									<td class="compare_price" colspan="2">￦34,000</td>
+									<td class="compare_site"><?=$list->brand?></td>
+									<td class="compare_price" colspan="2">￦<?=$list->fPrice?></td>
 								</tr>
 								<tr>
 									<td></td>
-									<td colspan="2"> Smathers & Branson®forJ.Crew card case forJ.Crew card case </td>
+									<td colspan="2"> <?=$list->name?> </td>
 								</tr>
 								<tr>
 									<td></td>
 									<td class="bo_color">무료배송</td>
 									<td class="review_btn">
-									<button type="button" class="bo_btn3">
+									<?php if ($list->ptype == 'p') :?>
+									<button type="button" class="bo_btn3" onclick="location.href = '<?=$adr_ctr?>Shoppingbox/detail?idx=<?=$list->idx?>';">
+									<?php else :?>
+									<button type="button" class="bo_btn3" onclick="location.href = '<?=$adr_ctr?>Hotdeal/productDetail?idx=<?=$list->idx?>';">
+									<?php endif;?>
 										구매하기
 									</button></td>
 								</tr>
@@ -195,138 +200,7 @@
 						</div>
 					</div>
 					<!-- /가격 비교 -->
-					<div class="compare_div col-xs-12 col-sm-6">
-						<div class="compare_inner">
-							<table class="compare_table">
-								<tr>
-									<td class="compare_site">amazon</td>
-									<td class="compare_price" colspan="2">￦34,000</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td colspan="2"> Smathers & Branson®forJ.Crew card case forJ.Crew card case </td>
-								</tr>
-								<tr>
-									<td></td>
-									<td class="bo_color">무료배송</td>
-									<td class="review_btn">
-									<button type="button" class="bo_btn3">
-										구매하기
-									</button></td>
-								</tr>
-							</table>
-						</div>
-					</div>
-					<div class="compare_div col-xs-12 col-sm-6">
-						<div class="compare_inner">
-							<table class="compare_table">
-								<tr>
-									<td class="compare_site">amazon</td>
-									<td class="compare_price" colspan="2">￦34,000</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td colspan="2"> Smathers & Branson®forJ.Crew card case forJ.Crew card case </td>
-								</tr>
-								<tr>
-									<td></td>
-									<td class="bo_color">무료배송</td>
-									<td class="review_btn">
-									<button type="button" class="bo_btn3">
-										구매하기
-									</button></td>
-								</tr>
-							</table>
-						</div>
-					</div>
-					<div class="compare_div col-xs-12 col-sm-6">
-						<div class="compare_inner">
-							<table class="compare_table">
-								<tr>
-									<td class="compare_site">amazon</td>
-									<td class="compare_price" colspan="2">￦34,000</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td colspan="2"> Smathers & Branson®forJ.Crew card case forJ.Crew card case </td>
-								</tr>
-								<tr>
-									<td></td>
-									<td class="bo_color">무료배송</td>
-									<td class="review_btn">
-									<button type="button" class="bo_btn3">
-										구매하기
-									</button></td>
-								</tr>
-							</table>
-						</div>
-					</div>
-					<div class="compare_div col-xs-12 col-sm-6">
-						<div class="compare_inner">
-							<table class="compare_table">
-								<tr>
-									<td class="compare_site">amazon</td>
-									<td class="compare_price" colspan="2">￦34,000</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td colspan="2"> Smathers & Branson®forJ.Crew card case forJ.Crew card case </td>
-								</tr>
-								<tr>
-									<td></td>
-									<td class="bo_color">무료배송</td>
-									<td class="review_btn">
-									<button type="button" class="bo_btn3">
-										구매하기
-									</button></td>
-								</tr>
-							</table>
-						</div>
-					</div>
-					<div class="compare_div col-xs-12 col-sm-6">
-						<div class="compare_inner">
-							<table class="compare_table">
-								<tr>
-									<td class="compare_site">amazon</td>
-									<td class="compare_price" colspan="2">￦34,000</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td colspan="2"> Smathers & Branson®forJ.Crew card case forJ.Crew card case </td>
-								</tr>
-								<tr>
-									<td></td>
-									<td class="bo_color">무료배송</td>
-									<td class="review_btn">
-									<button type="button" class="bo_btn3">
-										구매하기
-									</button></td>
-								</tr>
-							</table>
-						</div>
-					</div>
-					<div class="compare_div col-xs-12 col-sm-6">
-						<div class="compare_inner">
-							<table class="compare_table">
-								<tr>
-									<td class="compare_site">amazon</td>
-									<td class="compare_price" colspan="2">￦34,000</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td colspan="2"> Smathers & Branson®forJ.Crew card case forJ.Crew card case </td>
-								</tr>
-								<tr>
-									<td></td>
-									<td class="bo_color">무료배송</td>
-									<td class="review_btn">
-									<button type="button" class="bo_btn3">
-										구매하기
-									</button></td>
-								</tr>
-							</table>
-						</div>
-					</div>
+					<?php endforeach;?>
 				</div>
 			</div>
 
@@ -474,11 +348,11 @@
 							사용자 총평점
 						</div>
 						<div class="score">
-							<span class="f_b bo_color2">★★★★☆</span>
+							<span class="f_b bo_color2"><?php for ($i = 1 ; $i <= 5 ; $i++) if ($i <= $rate[0]) echo '★'; else echo '☆';?></span>
 							&nbsp;
-							<span class="rating f_b">4.6</span>
+							<span class="rating f_b"><?=$rate[0]?></span>
 							&nbsp;/&nbsp;
-							<span class="total_rating bo_color">5</span>
+							<span class="total_rating bo_color"><?=$rate[2]?>건</span>
 						</div>
 					</div>
 					<div class="score_div col-xs-4">
@@ -486,11 +360,11 @@
 							가장 많은 평점
 						</div>
 						<div class="score">
-							<span class="f_b bo_color2">★★★★☆</span>
+							<span class="f_b bo_color2"><?php for ($i = 1 ; $i <= 5 ; $i++) if ($i <= $rate[1][0]) echo '★'; else echo '☆';?></span>
 							&nbsp;
-							<span class="rating f_b">4.0</span>
+							<span class="rating f_b"><?=$rate[1][0]?></span>
 							&nbsp;|&nbsp;
-							<span class="total_rating bo_color">325건</span>
+							<span class="total_rating bo_color"><?=$rate[1][1]?>건</span>
 						</div>
 					</div>
 					<div class="score_div col-xs-4">
@@ -498,222 +372,36 @@
 							전체 리뷰수
 						</div>
 						<div class="score">
-							<span class="review_count bo_color2 f_b">398건</span>
+							<span class="review_count bo_color2 f_b"><?=$rate[2]?>건</span>
 						</div>
 					</div>
 				</div>
 				<div id="review_google_wrap" class="info_content">
 					<!-- 구글 후기 -->
+					<?php foreach($reviewList as $list) :?>
 					<ul class="review">
 						<li class="cl_b">
 							<div class="f_l">
-								<span class="f_b bo_color2">★★★★☆</span>
+								<span class="f_b bo_color2"><?php for ($i = 1 ; $i <= 5 ; $i++) if ($i <= $list->rating) echo '★'; else echo '☆';?></span>
 								&nbsp;
-								<span class="f_b">RUNS BIG</span>
+								<span class="f_b"><?=$list->title?></span>
 								&nbsp;|&nbsp;
-								<span class="bo_color f_s12">saemi park</span>
+								<span class="bo_color f_s12"><?=$list->writer_name?></span>
 							</div>
 							<div class="f_r f_s12 bo_color">
-								APR 22, 2015
+								<?=$list->upload?>
 							</div>
 						</li>
 						<li class="review_content f_s12">
-							I wanted to love this top but ended up returning it. I'm usually a large or 12 in Tory Burch but this size 12 top ran quite
-							big. The fabric was stiff so it had a boxy shape to it.
+							<?=$list->contents?>
 						</li>
 						<li class="review_translate">
 							<a onclick="">번역</a>
 						</li>
 					</ul>
+					<?php endforeach;?>
 					<!-- /구글 후기 -->
-					<ul class="review">
-						<li class="cl_b">
-							<div class="f_l">
-								<span class="f_b bo_color2">★★★★☆</span>
-								&nbsp;
-								<span class="f_b">RUNS BIG</span>
-								&nbsp;|&nbsp;
-								<span class="bo_color f_s12">saemi park</span>
-							</div>
-							<div class="f_r f_s12 bo_color">
-								APR 22, 2015
-							</div>
-						</li>
-						<li class="review_content f_s12">
-							I wanted to love this top but ended up returning it. I'm usually a large or 12 in Tory Burch but this size 12 top ran quite
-							big. The fabric was stiff so it had a boxy shape to it.
-						</li>
-						<li class="review_translate">
-							<a onclick="">번역</a>
-						</li>
-					</ul>
-					<ul class="review">
-						<li class="cl_b">
-							<div class="f_l">
-								<span class="f_b bo_color2">★★★★☆</span>
-								&nbsp;
-								<span class="f_b">RUNS BIG</span>
-								&nbsp;|&nbsp;
-								<span class="bo_color f_s12">saemi park</span>
-							</div>
-							<div class="f_r f_s12 bo_color">
-								APR 22, 2015
-							</div>
-						</li>
-						<li class="review_content f_s12">
-							I wanted to love this top but ended up returning it. I'm usually a large or 12 in Tory Burch but this size 12 top ran quite
-							big. The fabric was stiff so it had a boxy shape to it.
-						</li>
-						<li class="review_translate">
-							<a onclick="">번역</a>
-						</li>
-					</ul>
-					<ul class="review">
-						<li class="cl_b">
-							<div class="f_l">
-								<span class="f_b bo_color2">★★★★☆</span>
-								&nbsp;
-								<span class="f_b">RUNS BIG</span>
-								&nbsp;|&nbsp;
-								<span class="bo_color f_s12">saemi park</span>
-							</div>
-							<div class="f_r f_s12 bo_color">
-								APR 22, 2015
-							</div>
-						</li>
-						<li class="review_content f_s12">
-							I wanted to love this top but ended up returning it. I'm usually a large or 12 in Tory Burch but this size 12 top ran quite
-							big. The fabric was stiff so it had a boxy shape to it.
-						</li>
-						<li class="review_translate">
-							<a onclick="">번역</a>
-						</li>
-					</ul>
 				</div>
-				
-				<!-- 구글 후기 페이징 -->
-				<div class="pagination_wrap cl_b">
-					<a onclick=""><img src="<?= $adr_img ?>left_arrow.png"></a>
-					<div class="pagination">
-						<a class="current_page" onclick="">1</a>
-						<a onclick="">2</a>
-						<a onclick="">3</a>
-						<span>···</span>
-						<a onclick="">7</a>
-					</div>
-					<a onclick=""><img src="<?= $adr_img ?>right_arrow.png"></a>
-				</div>
-				<!-- /구글 후기 페이징 -->
-				
-				<div class="info_title remove_b_t">
-					커뮤니티 후기
-				</div>
-				<div id="review_bo_wrap" class="info_content">
-					<!-- 커뮤니티 후기 -->
-					<ul class="review">
-						<li class="cl_b">
-							<div class="f_l">
-								<span class="f_b bo_color2">★★★★☆</span>
-								&nbsp;
-								<span class="f_b">아이패드 에어2 역시 좋습니다</span>
-								&nbsp;|&nbsp;
-								<span class="bo_color f_s12">saemi park</span>
-								&nbsp;|&nbsp;
-								<span class="bo_color f_s12">G마켓에서 작성</span>
-							</div>
-							<div class="f_r f_s12 bo_color">
-								APR 22, 2015
-							</div>
-						</li>
-						<li class="review_content">
-							우선 온라인을 통해서 처음으로 고가의 가전을 구입하게 되었습니다.
-							하이마트나 이마트 등에 비해 5만원 가량 저렴합니다.
-
-							걱정과는 다르게 뽁뽁이까지 싸져있어서 큰 이상은 없는 양품을 받은거 같아 기분이 좋네요
-						</li>
-					</ul>
-					<!-- /커뮤니티 후기 -->
-					<ul class="review">
-						<li class="cl_b">
-							<div class="f_l">
-								<span class="f_b bo_color2">★★★★☆</span>
-								&nbsp;
-								<span class="f_b">아이패드 에어2 역시 좋습니다</span>
-								&nbsp;|&nbsp;
-								<span class="bo_color f_s12">saemi park</span>
-								&nbsp;|&nbsp;
-								<span class="bo_color f_s12">G마켓에서 작성</span>
-							</div>
-							<div class="f_r f_s12 bo_color">
-								APR 22, 2015
-							</div>
-						</li>
-						<li class="review_content">
-							우선 온라인을 통해서 처음으로 고가의 가전을 구입하게 되었습니다.
-							하이마트나 이마트 등에 비해 5만원 가량 저렴합니다.
-
-							걱정과는 다르게 뽁뽁이까지 싸져있어서 큰 이상은 없는 양품을 받은거 같아 기분이 좋네요
-						</li>
-					</ul>
-					<ul class="review">
-						<li class="cl_b">
-							<div class="f_l">
-								<span class="f_b bo_color2">★★★★☆</span>
-								&nbsp;
-								<span class="f_b">아이패드 에어2 역시 좋습니다</span>
-								&nbsp;|&nbsp;
-								<span class="bo_color f_s12">saemi park</span>
-								&nbsp;|&nbsp;
-								<span class="bo_color f_s12">G마켓에서 작성</span>
-							</div>
-							<div class="f_r f_s12 bo_color">
-								APR 22, 2015
-							</div>
-						</li>
-						<li class="review_content">
-							우선 온라인을 통해서 처음으로 고가의 가전을 구입하게 되었습니다.
-							하이마트나 이마트 등에 비해 5만원 가량 저렴합니다.
-
-							걱정과는 다르게 뽁뽁이까지 싸져있어서 큰 이상은 없는 양품을 받은거 같아 기분이 좋네요
-						</li>
-					</ul>
-					<ul class="review">
-						<li class="cl_b">
-							<div class="f_l">
-								<span class="f_b bo_color2">★★★★☆</span>
-								&nbsp;
-								<span class="f_b">아이패드 에어2 역시 좋습니다</span>
-								&nbsp;|&nbsp;
-								<span class="bo_color f_s12">saemi park</span>
-								&nbsp;|&nbsp;
-								<span class="bo_color f_s12">G마켓에서 작성</span>
-							</div>
-							<div class="f_r f_s12 bo_color">
-								APR 22, 2015
-							</div>
-						</li>
-						<li class="review_content">
-							우선 온라인을 통해서 처음으로 고가의 가전을 구입하게 되었습니다.
-							하이마트나 이마트 등에 비해 5만원 가량 저렴합니다.
-
-							걱정과는 다르게 뽁뽁이까지 싸져있어서 큰 이상은 없는 양품을 받은거 같아 기분이 좋네요
-						</li>
-					</ul>
-				</div>
-				
-				<!-- 커뮤니티 후기 페이징 -->
-				<div class="pagination_wrap cl_b">
-					<a onclick=""><img src="<?= $adr_img ?>left_arrow.png"></a>
-					<div class="pagination">
-						<a class="current_page" onclick="">1</a>
-						<a onclick="">2</a>
-						<a onclick="">3</a>
-						<span>···</span>
-						<a onclick="">7</a>
-					</div>
-					<a onclick=""><img src="<?= $adr_img ?>right_arrow.png"></a>
-				</div>
-				<!-- /커뮤니티 후기 페이징 -->
 			</div>
 		</div>
 

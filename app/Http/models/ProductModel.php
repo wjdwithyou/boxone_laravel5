@@ -43,7 +43,7 @@ class ProductModel
 		if(	!(	inputErrorCheck($prod_idx, 'prod_idx')))
 			return ;
 
-		$my_data = DB::select('SELECT * FROM product WHERE idx =?',array($prod_idx));
+		$my_data = DB::select('SELECT *, FORMAT(price, 0) as fPrice FROM product WHERE idx =?',array($prod_idx));
 			
 		$table = $my_data[0]->mall_id.'_'.$my_data[0]->mall_kind;
 		$prodInc = $my_data[0]->prod_id;
@@ -113,11 +113,12 @@ class ProductModel
 				'explain' => '',
 				'mall' => $ms_data_prod->MallID,
 				'brand' => $ms_data_prod->BrandID,
-				'price' => $my_data[0]->price,
+				'price' => $my_data[0]->fPrice,
 				'deliverFee' => '',
 				'color' => $ms_data_color,
 				'size' => $ms_data_size,
-				'story' => $ms_data_story
+				'story' => $ms_data_story,
+				'binding' => $my_data[0]->binding
 		);
 			
 		DB::update('update product set hit_count=hit_count+1 where idx=?',array($prod_idx));
@@ -128,7 +129,7 @@ class ProductModel
 	/*
 	 *	정보 리스트 가져오는 기능
 	 */
-	function getInfoList($sort, $cateDepth, $cateIdx, $brand, $searchList, $page_num)
+	function getInfoList($sort, $cateDepth, $cateIdx, $brand, $mall, $searchList, $page_num)
 	{
 		if( !( inputErrorCheck($sort, 'sort') && 
 				inputErrorCheck($page_num, 'page_num')))
@@ -161,6 +162,13 @@ class ProductModel
 		if ($query_brand != "")
 			$query_brand = " and (".substr($query_brand, 0, strlen($query_brand) - 3).")";
 		
+		// 브랜드 정리
+		$query_mall = "";
+		foreach($brand as $list)
+			$query_mall .= "mall_id='$list' or ";
+		if ($query_mall != "")
+			$query_mall = " and (".substr($query_mall, 0, strlen($query_mall) - 3).")";
+		
 		// 검색어 정리
 		$query_search = "";
 		foreach($searchList as $list)
@@ -169,30 +177,28 @@ class ProductModel
 			$query_search = " and (".substr($query_search, 0, strlen($query_search) - 3).")";
 		
 		// 자료 가져오기
-		$data = DB::select("select *, FORMAT(price, 0) as fPrice from product $query_cate $query_brand $query_search $query_orderBy idx DESC");
+		$data = DB::select("select *, FORMAT(price, 0) as fPrice from product $query_cate $query_brand $query_mall $query_search $query_orderBy idx DESC");
 		
 		// 브랜드 리스트 가져오기
 		$brandList = DB::select("SELECT DISTINCT brand FROM product $query_cate $query_search ORDER BY brand ASC");
+		
+		// 사이트 리스트 가져오기
+		$mallList = DB::select("SELECT DISTINCT mall_id FROM product $query_cate $query_search ORDER BY mall_id ASC");
 
 		// 갯수 확인 후 페이지 자르기
-		if (count($data) == 0)
-			return array('code' => 0, 'msg' => 'no matched result', 'data' => array());
-		else
-		{
-			$page_max = floor((count($data)-1) / 20) + 1;
-			if ($page_num > $page_max)
-				$page_num = $page_max;
-			$page_start = ($page_num-1)*20;
-			$result = array_slice($data, $page_start, 20);
+		$page_max = floor((count($data)-1) / 20) + 1;
+		if ($page_num > $page_max)
+			$page_num = $page_max;
+		$page_start = ($page_num-1)*20;
+		$result = array_slice($data, $page_start, 20);
 
-			return array('code' => 1, 'msg' => 'success', 'data' => $result, 'maxPage' => $page_max, 'brandList' => $brandList, 'prdtCnt' => count($data));
-		}
+		return array('code' => 1, 'msg' => 'success', 'data' => $result, 'maxPage' => $page_max, 'brandList' => $brandList, 'mallList' => $mallList, 'prdtCnt' => count($data));
 	}
 	
 	/*
 	 *	내 찜한 상품 목록 가져오기 기능
 	 */
-	function getMyList($mem_idx, $cateDepth, $cateIdx, $brand, $searchList, $page_num)
+	function getMyList($mem_idx, $cateDepth, $cateIdx, $brand, $mall, $searchList, $page_num)
 	{
 		if( !( 	inputErrorCheck($mem_idx, 'mem_idx') &&
 				inputErrorCheck($page_num, 'page_num')))
@@ -215,6 +221,13 @@ class ProductModel
 		if ($query_brand != "")
 			$query_brand = " and (".substr($query_brand, 0, strlen($query_brand) - 3).")";
 
+		// 사이트 정리
+		$query_mall = "";
+		foreach($mall as $list)
+			$query_mall .= "p.mall_id='$list' or ";
+		if ($query_mall != "")
+			$query_mall = " and (".substr($query_mall, 0, strlen($query_mall) - 3).")";
+			
 		// 검색어 정리
 		$query_search = "";
 		foreach($searchList as $list)
@@ -226,7 +239,7 @@ class ProductModel
 		// 자료 가져오기
 		$data = DB::select("select *, FORMAT(price, 0) as fPrice 
 							from product_bookmark as pb, product as p  
-							where pb.member_idx = ? and pb.product_idx = p.idx and $query_cate $query_brand $query_search", 
+							where pb.member_idx = ? and pb.product_idx = p.idx and $query_cate $query_brand $query_mall $query_search", 
 							array($mem_idx));
 		
 		// 브랜드 리스트 가져오기
@@ -234,6 +247,12 @@ class ProductModel
 							FROM product_bookmark AS pb, product AS p 
 							WHERE pb.member_idx = ? AND pb.product_idx = p.idx and $query_cate $query_search ORDER BY brand ASC",
 							array($mem_idx));
+		
+		// 사이트 리스트 가져오기
+		$mallList = DB::select("SELECT DISTINCT mall_id
+				FROM product_bookmark AS pb, product AS p
+				WHERE pb.member_idx = ? AND pb.product_idx = p.idx and $query_cate $query_search ORDER BY mall_id ASC",
+				array($mem_idx));
 
 		// 갯수 확인 후 페이지 자르기
 		if (count($data) == 0)
@@ -246,14 +265,14 @@ class ProductModel
 			$page_start = ($page_num-1)*20;
 			$result = array_slice($data, $page_start, 20);
 
-			return array('code' => 1, 'msg' => 'success', 'data' => $result, 'maxPage' => $page_max, 'brandList' => $brandList, 'prdtCnt' => count($data));
+			return array('code' => 1, 'msg' => 'success', 'data' => $result, 'maxPage' => $page_max, 'brandList' => $brandList, 'mallList' => $mallList, 'prdtCnt' => count($data));
 		}
 	}
 	
 	/*
 	 *  카테고리별 상품 갯수 확인
 	 */
-	function getPrdtCnt($cateDepth, $cate, $brand, $searchList, $member_idx)
+	function getPrdtCnt($cateDepth, $cate, $brand, $mall, $searchList, $member_idx)
 	{
 		// 회원 확인
 		$query_member = "true";
@@ -288,6 +307,14 @@ class ProductModel
 		if ($query_brand != "")
 			$query_brand = " and (".substr($query_brand, 0, strlen($query_brand) - 3).")";
 		
+		// 사이트 정리
+		$query_mall = "";
+		foreach($brand as $list)
+			$query_mall .= "mall_id='$list' or ";
+		if ($query_mall != "")
+			$query_mall = " and (".substr($query_mall, 0, strlen($query_mall) - 3).")";
+		
+		
 		// 검색어 정리
 		$query_search = "";
 		foreach($searchList as $list)
@@ -298,7 +325,7 @@ class ProductModel
 		
 		$cntList = DB::select("SELECT c.$cate_column, p.cnt 
 								FROM category c LEFT OUTER JOIN 
-								(SELECT cate_large, cate_medium, cate_small, brand, name, count(*) cnt FROM product WHERE true $query_brand $query_search GROUP BY $prdt_column) p 
+								(SELECT cate_large, cate_medium, cate_small, brand, mall_id, name, count(*) cnt FROM product WHERE true $query_brand $query_mall $query_search GROUP BY $prdt_column) p 
 								ON c.$cate_column = p.$prdt_column 
 								WHERE $query_member $query_cate
 								GROUP BY c.$cate_column ");
@@ -316,13 +343,56 @@ class ProductModel
 		
 		if ($cateDepth == 0 || $cateDepth == -1)
 		{
-			$hotdealCnt = DB::select("SELECT count(*) cnt FROM hotdeal_product WHERE $query_member $query_brand $query_search");
+			$hotdealCnt = DB::select("SELECT count(*) cnt FROM hotdeal_product WHERE $query_member $query_brand $query_mall $query_search");
 			array_unshift($result, $hotdealCnt[0]->cnt);
 		}
 		
 		array_unshift($result, $allCnt);
 		
 		return $result;
+	}
+	
+	function getReview($idx)
+	{
+		$result = DB::select("SELECT * FROM product_review WHERE product_idx = ?", array($idx));
+		
+		$rateArray = array(0,0,0,0,0,0);		
+		$rateAll = 0;
+		foreach ($result as $list)
+		{
+			$rateAll += $list->rating;
+			++$rateArray[floor($list->rating+0.5)];
+		}
+		
+		if (count($result))
+			$rateAve = $rateAll / count($result);
+		else
+			$rateAve = 0;
+		
+		arsort($rateArray);
+		$rateBest = array(array_keys($rateArray)[0], array_shift($rateArray));
+	
+		return array('code' => 1, 'msg' => 'success', 'data' => $result, 'rateCnt' => count($result), 'rateBest' => $rateBest, 'rateAve' => $rateAve);
+	}
+	
+	function getMappingPrdt($mapping_idx)
+	{
+		if ($mapping_idx != 0)
+		{
+			$result = DB::select("(SELECT idx, 'p' AS ptype, mall_id, brand, name, FORMAT(price, 0) as fPrice 
+									FROM product 
+									WHERE prod_id IN 
+									(SELECT prod_id FROM mapping_product WHERE idx = 1)) 
+										UNION 
+									(SELECT idx, 'h' AS ptype, mall_id, brand, name, FORMAT(priceS, 0) as fPrice 
+									FROM hotdeal_product 
+									WHERE prod_id IN 
+									(SELECT prod_id FROM mapping_product WHERE idx = 1)) ORDER BY fPrice asc");
+		}
+		else
+			$result = array();
+		
+		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
 	
 }
