@@ -373,21 +373,26 @@ class ProductModel
 	
 	function getMappingPrdt($prod_idx, $mapping_idx)
 	{
-		$prdtList = DB::select("SELECT * FROM mapping_product WHERE idx = ?", array($mapping_idx));
-		
-		$result = array();
-		foreach($prdtList as $list)
+		if ($mapping_idx != 0)
 		{
-			$prdt = DB::select("SELECT *, FORMAT(price, 0) as fPrice FROM product WHERE prod_id = ?", array($list->prod_id));
-			if (count($prdt))
-				$prdt[0]->type = 'p';	
-			else
+			$prdtList = DB::select("SELECT * FROM mapping_product WHERE idx = ?", array($mapping_idx));
+			
+			$result = array();
+			foreach($prdtList as $list)
 			{
-				$prdt = DB::select("SELECT *, FORMAT(priceS, 0) as fPrice FROM hotdeal_product WHERE prod_id = ?", array($list->prod_id));
-				$prdt[0]->type = 'h';
+				$prdt = DB::select("SELECT *, FORMAT(price, 0) as fPrice FROM product WHERE prod_id = ?", array($list->prod_id));
+				if (count($prdt))
+					$prdt[0]->type = 'p';	
+				else
+				{
+					$prdt = DB::select("SELECT *, FORMAT(priceS, 0) as fPrice FROM hotdeal_product WHERE prod_id = ?", array($list->prod_id));
+					$prdt[0]->type = 'h';
+				}
+				array_push($result, $prdt[0]);
 			}
-			array_push($result, $prdt[0]);
 		}
+		else
+			$result = array();
 		
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
