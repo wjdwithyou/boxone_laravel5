@@ -378,12 +378,12 @@ class ProductModel
 		$result = array();
 		foreach($prdtList as $list)
 		{
-			$prdt = DB::select("SELECT *, FORMAT(price, 0) as fPrice FROM product WHERE idx = ?", array($list->prod_id));
+			$prdt = DB::select("SELECT *, FORMAT(price, 0) as fPrice FROM product WHERE prod_id = ?", array($list->prod_id));
 			if (count($prdt))
 				$prdt[0]->type = 'p';	
 			else
 			{
-				$prdt = DB::select("SELECT *, FORMAT(priceS, 0) as fPrice FROM hotdeal_product WHERE idx = ?", array($list->prod_id));
+				$prdt = DB::select("SELECT *, FORMAT(priceS, 0) as fPrice FROM hotdeal_product WHERE prod_id = ?", array($list->prod_id));
 				$prdt[0]->type = 'h';
 			}
 			array_push($result, $prdt[0]);
