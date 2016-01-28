@@ -188,7 +188,7 @@
 									<td></td>
 									<td class="bo_color">무료배송</td>
 									<td class="review_btn">
-									<?php if ($list->type == 'p') :?>
+									<?php if ($list->ptype == 'p') :?>
 									<button type="button" class="bo_btn3" onclick="location.href = '<?=$adr_ctr?>Shoppingbox/detail?idx=<?=$list->idx?>';">
 									<?php else :?>
 									<button type="button" class="bo_btn3" onclick="location.href = '<?=$adr_ctr?>Hotdeal/productDetail?idx=<?=$list->idx?>';">
