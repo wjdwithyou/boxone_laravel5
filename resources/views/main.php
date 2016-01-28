@@ -118,29 +118,6 @@
 							</div>
 						</div>
 						<?php endforeach;?>
-						<div class="imglist_div2 imglist_div3 grid grid_442">
-							<div class="imglist_div_inner">
-								<div class="imglist_img img_center">
-									<div class="img_center_inner">
-										<a href=""><img src="<?=$adr_img?>site/429.png"></a>
-									</div>
-								</div>
-								<div class="imglist_desc_wrap">
-									<div class="imglist_desc1 ta_c t_o bo_color2">
-										Victoria^s Secret
-									</div>
-									<div class="imglist_desc2 ta_c t_o">
-										Drapey Hooded Poncho
-									</div>
-									<div class="bo_color1 ta_c fw_b mg_t8">
-										61%
-									</div>
-									<div class="imglist_desc3 ta_c t_o">
-										<strike class="bo_color2">￦72,066</strike>&nbsp;￦44,802
-									</div>
-								</div>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
