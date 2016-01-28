@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Http\models\HotdealTargetModel;
 use App\Http\models\CategoryModel;
 use App\Http\models\HotdealProductModel;
+use App\Http\models\ProductModel;
 use Request;
 use Cookie;
 
