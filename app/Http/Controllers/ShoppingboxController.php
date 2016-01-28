@@ -212,7 +212,7 @@ class ShoppingboxController extends Controller {
 		$reviewList = $prdtModel->getReview($idx);
 		
 		// 동일 상품 가져오기
-		$sameList = $prdtModel->getMappingPrdt($idx, $data['data']['binding']);
+		$sameList = $prdtModel->getMappingPrdt($idx, $result['data']['binding']);
 		
 		// 최근 본 상품의 카테고리를 cookie로 가지고 다닌다.
 		$cookie = Request::cookie('recentCate');
