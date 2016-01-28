@@ -370,6 +370,27 @@ class ProductModel
 		return array('code' => 1, 'msg' => 'success', 'data' => $result, 'count' => count($result), 'rateBest' => $rateBest);
 	}
 	
+	function getMappingPrdt($prod_idx, $mapping_idx)
+	{
+		$prdtList = DB::select("SELECT * FROM mapping_product WHERE idx = ?", array($mapping_idx));
+		
+		$result = array();
+		foreach($prdtList as $list)
+		{
+			$prdt = DB::select("SELECT *, FORMAT(price, 0) as fPrice FROM product WHERE idx = ?", array($list->prod_id));
+			if (count($prdt))
+				$prdt[0]->type = 'p';	
+			else
+			{
+				$prdt = DB::select("SELECT *, FORMAT(priceS, 0) as fPrice FROM hodeal_product WHERE idx = ?", array($list->prod_id));
+				$prdt[0]->type = 'h';
+			}
+			array_push($result, $prdt[0]);
+		}
+		
+		return array('code' => 1, 'msg' => 'success', 'data' => $result);
+	}
+	
 }
 
 
