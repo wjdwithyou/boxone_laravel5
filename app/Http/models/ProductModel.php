@@ -365,14 +365,14 @@ class ProductModel
 		}
 		
 		if (count($result))
-			$rate = $rateAll / count($result);
+			$rateAve = $rateAll / count($result);
 		else
-			$rate = 0;
+			$rateAve = 0;
 		
 		arsort($rateArray);
 		$rateBest = array(array_keys($rateArray)[0], array_shift($rateArray));
 	
-		return array('code' => 1, 'msg' => 'success', 'data' => $result, 'count' => count($result), 'rateBest' => $rateBest);
+		return array('code' => 1, 'msg' => 'success', 'data' => $result, 'rateCnt' => count($result), 'rateBest' => $rateBest, 'rateAve' => $rateAve);
 	}
 	
 	function getMappingPrdt($prod_idx, $mapping_idx)
