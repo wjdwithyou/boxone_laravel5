@@ -379,7 +379,7 @@ class ProductModel
 	{
 		if ($mapping_idx != 0)
 		{
-			$prdtList = DB::select("(SELECT idx, 'p' AS ptype, mall_id, brand, name, FORMAT(price, 0) as fPrice 
+			$result = DB::select("(SELECT idx, 'p' AS ptype, mall_id, brand, name, FORMAT(price, 0) as fPrice 
 									FROM product 
 									WHERE prod_id IN 
 									(SELECT prod_id FROM mapping_product WHERE idx = 1)) 
