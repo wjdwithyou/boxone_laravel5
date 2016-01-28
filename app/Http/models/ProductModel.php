@@ -43,7 +43,7 @@ class ProductModel
 		if(	!(	inputErrorCheck($prod_idx, 'prod_idx')))
 			return ;
 
-		$my_data = DB::select('SELECT * FROM product WHERE idx =?',array($prod_idx));
+		$my_data = DB::select('SELECT *, FORMAT(price, 0) as fPrice FROM product WHERE idx =?',array($prod_idx));
 			
 		$table = $my_data[0]->mall_id.'_'.$my_data[0]->mall_kind;
 		$prodInc = $my_data[0]->prod_id;
@@ -113,7 +113,7 @@ class ProductModel
 				'explain' => '',
 				'mall' => $ms_data_prod->MallID,
 				'brand' => $ms_data_prod->BrandID,
-				'price' => $my_data[0]->price,
+				'price' => $my_data[0]->fPrice,
 				'deliverFee' => '',
 				'color' => $ms_data_color,
 				'size' => $ms_data_size,
@@ -349,6 +349,13 @@ class ProductModel
 		array_unshift($result, $allCnt);
 		
 		return $result;
+	}
+	
+	function getReview($idx)
+	{
+		$result = DB::select("SELECT * FROM product_review WHERE product_idx = ?", array($idx));
+	
+		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
 	
 }

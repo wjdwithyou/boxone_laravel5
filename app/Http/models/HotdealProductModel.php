@@ -43,7 +43,7 @@ class HotdealProductModel
 		if(	!(	inputErrorCheck($prod_idx, 'prod_idx')))
 			return ;
 
-		$my_data = DB::select('SELECT * FROM hotdeal_product WHERE idx =?',array($prod_idx));
+		$my_data = DB::select('SELECT *, FORMAT(priceO, 0) as fPriceO, FORMAT(priceS, 0) as fPriceS FROM hotdeal_product WHERE idx =?',array($prod_idx));
 			
 		$table = $my_data[0]->mall_id.'_'.$my_data[0]->mall_kind;
 		$prodInc = $my_data[0]->prod_id;
@@ -113,8 +113,8 @@ class HotdealProductModel
 				'explain' => '',
 				'mall' => $ms_data_prod->MallID,
 				'brand' => $ms_data_prod->BrandID,
-				'priceO' => $my_data[0]->priceO,
-				'price' => $my_data[0]->priceS,
+				'priceO' => $my_data[0]->fPriceO,
+				'price' => $my_data[0]->fPriceS,
 				'saleP' => $my_data[0]->saleP,
 				'deliverFee' => '',
 				'color' => $ms_data_color,
@@ -260,6 +260,13 @@ class HotdealProductModel
 
 			return array('code' => 1, 'msg' => 'success', 'data' => $result, 'maxPage' => $page_max, 'brandList' => $brandList, 'mallList' => $mallList, 'prdtCnt' => count($data));
 		}
+	}
+	
+	function getReview($idx)
+	{
+		$result = DB::select("SELECT * FROM hotdeal_review WHERE hotdeal_idx = ?", array($idx));
+		
+		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
 	
 }

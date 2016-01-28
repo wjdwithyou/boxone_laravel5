@@ -504,91 +504,42 @@
 				</div>
 				<div id="review_google_wrap" class="info_content">
 					<!-- 구글 후기 -->
+					<?php foreach($reviewList as $list) :?>
 					<ul class="review">
 						<li class="cl_b">
 							<div class="f_l">
+								<?php if ($list->rating <= 1) :?>
+								<span class="f_b bo_color2">★☆☆☆☆</span>
+								<?php else : if ($list->rating <= 2) :?>
+								<span class="f_b bo_color2">★★☆☆☆</span>
+								<?php else : if ($list->rating <= 3) :?>
+								<span class="f_b bo_color2">★★★☆☆</span>
+								<?php else : if ($list->rating <= 4) :?>
 								<span class="f_b bo_color2">★★★★☆</span>
+								<?php else :?>
+								<span class="f_b bo_color2">★★★★★</span>
+								<?php endif;?>
+								<?php endif;?>
+								<?php endif;?>
+								<?php endif;?>
 								&nbsp;
-								<span class="f_b">RUNS BIG</span>
+								<span class="f_b"><?=$list->title?></span>
 								&nbsp;|&nbsp;
-								<span class="bo_color f_s12">saemi park</span>
+								<span class="bo_color f_s12"><?=$list->writer_name?></span>
 							</div>
 							<div class="f_r f_s12 bo_color">
-								APR 22, 2015
+								<?=$list->upload?>
 							</div>
 						</li>
 						<li class="review_content f_s12">
-							I wanted to love this top but ended up returning it. I'm usually a large or 12 in Tory Burch but this size 12 top ran quite
-							big. The fabric was stiff so it had a boxy shape to it.
+							<?=$list->contents?>
 						</li>
 						<li class="review_translate">
 							<a onclick="">번역</a>
 						</li>
 					</ul>
+					<?php endforeach;?>
 					<!-- /구글 후기 -->
-					<ul class="review">
-						<li class="cl_b">
-							<div class="f_l">
-								<span class="f_b bo_color2">★★★★☆</span>
-								&nbsp;
-								<span class="f_b">RUNS BIG</span>
-								&nbsp;|&nbsp;
-								<span class="bo_color f_s12">saemi park</span>
-							</div>
-							<div class="f_r f_s12 bo_color">
-								APR 22, 2015
-							</div>
-						</li>
-						<li class="review_content f_s12">
-							I wanted to love this top but ended up returning it. I'm usually a large or 12 in Tory Burch but this size 12 top ran quite
-							big. The fabric was stiff so it had a boxy shape to it.
-						</li>
-						<li class="review_translate">
-							<a onclick="">번역</a>
-						</li>
-					</ul>
-					<ul class="review">
-						<li class="cl_b">
-							<div class="f_l">
-								<span class="f_b bo_color2">★★★★☆</span>
-								&nbsp;
-								<span class="f_b">RUNS BIG</span>
-								&nbsp;|&nbsp;
-								<span class="bo_color f_s12">saemi park</span>
-							</div>
-							<div class="f_r f_s12 bo_color">
-								APR 22, 2015
-							</div>
-						</li>
-						<li class="review_content f_s12">
-							I wanted to love this top but ended up returning it. I'm usually a large or 12 in Tory Burch but this size 12 top ran quite
-							big. The fabric was stiff so it had a boxy shape to it.
-						</li>
-						<li class="review_translate">
-							<a onclick="">번역</a>
-						</li>
-					</ul>
-					<ul class="review">
-						<li class="cl_b">
-							<div class="f_l">
-								<span class="f_b bo_color2">★★★★☆</span>
-								&nbsp;
-								<span class="f_b">RUNS BIG</span>
-								&nbsp;|&nbsp;
-								<span class="bo_color f_s12">saemi park</span>
-							</div>
-							<div class="f_r f_s12 bo_color">
-								APR 22, 2015
-							</div>
-						</li>
-						<li class="review_content f_s12">
-							I wanted to love this top but ended up returning it. I'm usually a large or 12 in Tory Burch but this size 12 top ran quite
-							big. The fabric was stiff so it had a boxy shape to it.
-						</li>
-						<li class="review_translate">
-							<a onclick="">번역</a>
-						</li>
-					</ul>
 				</div>
 				
 				<!-- 구글 후기 페이징 -->

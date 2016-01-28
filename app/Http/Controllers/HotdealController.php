@@ -45,6 +45,9 @@ class HotdealController extends Controller {
 		$cateS = $result['data']['cate'];
 		$data = $cateModel->downToUp($cateS);
 		
+		// 리뷰 가져오기
+		$reviewList = $hotPrdtModel->getReview($idx);
+		
 		// 최근 본 상품의 카테고리를 cookie로 가지고 다닌다.
 		$cookie = Request::cookie('recentCate');
 		if ($cookie == '')
@@ -90,7 +93,7 @@ class HotdealController extends Controller {
 		$data['data'][0]->lidx = 'c';
 	
 		$page = 'product';
-		return view($page, array('page' => $page, 'result' => $result['data'], 'cate' => $data['data'][0]));
+		return view($page, array('page' => $page, 'result' => $result['data'], 'reviewList' => $reviewList['data'], 'cate' => $data['data'][0]));
 	}
 	
 	
