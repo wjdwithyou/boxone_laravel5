@@ -54,8 +54,8 @@
 							<div id="brand_wrap" class="classify_div f_C">
 								<?php for ($i = 0 ; $i < count($brandList) ; $i++) :?>
 								<div class="grid grid_h">
-									<input type="checkbox" id="sc<?=$i?>" name="sc" value="<?=$brandList[$i]->brand?>" class="bo_checkbox bo_checkbox_1">
-									<label for="sc<?=$i?>"><span id="spansc<?=$i?>"></span><?=$brandList[$i]->brand?></label>
+									<input type="checkbox" id="brandList<?=$i?>" name="brandList" value="<?=$brandList[$i]->brand?>" <?php if ($brandList[$i]->checked) echo "checked='checked'";?> class="bo_checkbox bo_checkbox_1">
+									<label for="brandList<?=$i?>"><span></span><?=$brandList[$i]->brand?></label>
 								</div>
 								<?php endfor;?>
 							</div>
@@ -70,8 +70,8 @@
 							<div id="site_wrap" class="classify_div f_C">
 								<?php for ($i = 0 ; $i < count($brandList) ; $i++) :?>
 								<div class="grid grid_h">
-									<input type="checkbox" id="sc<?=$i?>" name="sc" value="<?=$brandList[$i]->brand?>" class="bo_checkbox bo_checkbox_1">
-									<label for="sc<?=$i?>"><span id="spansc<?=$i?>"></span><?=$brandList[$i]->brand?></label>
+									<input type="checkbox" id="mallList<?=$i?>" name="mallList" value="<?=$brandList[$i]->brand?>" class="bo_checkbox bo_checkbox_1">
+									<label for="mallList<?=$i?>"><span></span><?=$brandList[$i]->mall_id?></label>
 								</div>
 								<?php endfor;?>
 							</div>
