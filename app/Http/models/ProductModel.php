@@ -360,7 +360,7 @@ class ProductModel
 		foreach ($result as $list)
 		{
 			$rateAll += $list->rating;
-			++$rateArray[ceil($list+0.1)];
+			++$rateArray[ceil($list->rating+0.1)];
 		}
 		$rate = $rateAll / count($result);
 		
