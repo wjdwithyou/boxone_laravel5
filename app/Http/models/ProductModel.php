@@ -375,25 +375,19 @@ class ProductModel
 		return array('code' => 1, 'msg' => 'success', 'data' => $result, 'rateCnt' => count($result), 'rateBest' => $rateBest, 'rateAve' => $rateAve);
 	}
 	
-	function getMappingPrdt($prod_idx, $mapping_idx)
+	function getMappingPrdt($mapping_idx)
 	{
 		if ($mapping_idx != 0)
 		{
-			$prdtList = DB::select("SELECT * FROM mapping_product WHERE idx = ?", array($mapping_idx));
-			
-			$result = array();
-			foreach($prdtList as $list)
-			{
-				$prdt = DB::select("SELECT *, FORMAT(price, 0) as fPrice FROM product WHERE prod_id = ?", array($list->prod_id));
-				if (count($prdt))
-					$prdt[0]->type = 'p';	
-				else
-				{
-					$prdt = DB::select("SELECT *, FORMAT(priceS, 0) as fPrice FROM hotdeal_product WHERE prod_id = ?", array($list->prod_id));
-					$prdt[0]->type = 'h';
-				}
-				array_push($result, $prdt[0]);
-			}
+			$prdtList = DB::select("(SELECT idx, 'p' AS ptype, mall_id, brand, name, FORMAT(price, 0) as fPrice 
+									FROM product 
+									WHERE prod_id IN 
+									(SELECT prod_id FROM mapping_product WHERE idx = 1)) 
+										UNION 
+									(SELECT idx, 'h' AS ptype, mall_id, brand, name, FORMAT(priceS, 0) as fPrice 
+									FROM hotdeal_product 
+									WHERE prod_id IN 
+									(SELECT prod_id FROM mapping_product WHERE idx = 1)) ORDER BY fPrice asc");
 		}
 		else
 			$result = array();
