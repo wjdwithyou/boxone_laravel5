@@ -363,7 +363,11 @@ class ProductModel
 			$rateAll += $list->rating;
 			++$rateArray[floor($list->rating+0.5)];
 		}
-		$rate = $rateAll / count($result);
+		
+		if (count($result))
+			$rate = $rateAll / count($result);
+		else
+			$rate = 0;
 		
 		arsort($rateArray);
 		$rateBest = array(array_keys($rateArray)[0], array_shift($rateArray));
