@@ -60,19 +60,14 @@ class MainController extends Controller {
 		$prdtList = array();
 		foreach($cateArray as $list)
 		{
-			// 카테고리 가져오기
-			$smallCate = $cateModel->upToDown($list);
-			$cateList = array();
-			foreach($smallCate['data'] as $sList)
-				array_push($cateList, $sList->sidx);
-			
 			// 상품 가져오기
-			$temp = $prdtModel->getInfoList(1, 0, 0, array(), array(), array(), 1);
+			$temp = $prdtModel->getInfoList(1, 1, $list, array(), array(), array(), 1);
 			
 			if ($temp['code'] == 1)
 			{
+				$cateName = $cateModel->getCateName(1, $list);
 				$temp = array_slice($temp['data'], 0, 4);
-				$temp['cateName'] = $smallCate['data'][0]->lname;
+				$temp['cateName'] = $cateName['data'][0]->name;
 				array_push($prdtList, $temp);
 			}			
 		}
