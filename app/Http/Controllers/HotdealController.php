@@ -51,7 +51,7 @@ class HotdealController extends Controller {
 		$reviewList = $hotPrdtModel->getReview($idx);
 		
 		// 동일 상품 가져오기
-		$sameList = $prdtModel->getMappingPrdt($idx, $data['data'][0]->binding);
+		$sameList = $prdtModel->getMappingPrdt($idx, $result['data']['binding']);
 		
 		// 최근 본 상품의 카테고리를 cookie로 가지고 다닌다.
 		$cookie = Request::cookie('recentCate');

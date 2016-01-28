@@ -119,7 +119,8 @@ class HotdealProductModel
 				'deliverFee' => '',
 				'color' => $ms_data_color,
 				'size' => $ms_data_size,
-				'story' => $ms_data_story
+				'story' => $ms_data_story,
+				'binding' => $my_data[0]->binding
 		);
 			
 		DB::update('update product set hit_count=hit_count+1 where idx=?',array($prod_idx));
