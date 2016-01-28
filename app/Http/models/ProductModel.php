@@ -185,18 +185,13 @@ class ProductModel
 		$mallList = DB::select("SELECT DISTINCT mall_id FROM product $query_cate $query_search ORDER BY mall_id ASC");
 
 		// 갯수 확인 후 페이지 자르기
-		if (count($data) == 0)
-			return array('code' => 0, 'msg' => 'no matched result', 'data' => array());
-		else
-		{
-			$page_max = floor((count($data)-1) / 20) + 1;
-			if ($page_num > $page_max)
-				$page_num = $page_max;
-			$page_start = ($page_num-1)*20;
-			$result = array_slice($data, $page_start, 20);
+		$page_max = floor((count($data)-1) / 20) + 1;
+		if ($page_num > $page_max)
+			$page_num = $page_max;
+		$page_start = ($page_num-1)*20;
+		$result = array_slice($data, $page_start, 20);
 
-			return array('code' => 1, 'msg' => 'success', 'data' => $result, 'maxPage' => $page_max, 'brandList' => $brandList, 'mallList' => $mallList, 'prdtCnt' => count($data));
-		}
+		return array('code' => 1, 'msg' => 'success', 'data' => $result, 'maxPage' => $page_max, 'brandList' => $brandList, 'mallList' => $mallList, 'prdtCnt' => count($data));
 	}
 	
 	/*

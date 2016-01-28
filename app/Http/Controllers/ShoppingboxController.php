@@ -148,6 +148,7 @@ class ShoppingboxController extends Controller {
 			$result['maxPage'] = $nowPage = 1;
 			$result['data'] = array();
 			$result['brandList'] = array();
+			$result['mallList'] = array();
 			$result['prdtCnt'] = 0;
 		}
 
@@ -162,6 +163,18 @@ class ShoppingboxController extends Controller {
 					break;
 				}
 		}
+		
+		// 현재 체크된 브랜드 선택
+		foreach($result['mallList'] as $mallList)
+		{
+			$mallList->checked = 0;
+			foreach($mall as $list)
+				if ($mallList->mall_id == $list)
+				{
+					$mallList->checked = 1;
+					break;
+				}
+		}
 			
 		$paging = array('now' => $nowPage, 'max' => $result['maxPage']);
 		
@@ -173,6 +186,7 @@ class ShoppingboxController extends Controller {
 				'nowCate' => $cate,
 				'sort' => $sort,
 				'brandList' => $result['brandList'],
+				'mallList' => $result['mallList'],
 				'paging' => $paging,
 				'prdtCnt' => $result['prdtCnt'],
 				'cntList' => $cntList,

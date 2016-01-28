@@ -68,10 +68,10 @@
 								</div>
 							</div>
 							<div id="site_wrap" class="classify_div f_C">
-								<?php for ($i = 0 ; $i < count($brandList) ; $i++) :?>
+								<?php for ($i = 0 ; $i < count($mallList) ; $i++) :?>
 								<div class="grid grid_h">
-									<input type="checkbox" id="mallList<?=$i?>" name="mallList" value="<?=$brandList[$i]->brand?>" class="bo_checkbox bo_checkbox_1">
-									<label for="mallList<?=$i?>"><span></span><?=$brandList[$i]->mall_id?></label>
+									<input type="checkbox" id="mallList<?=$i?>" name="mallList" value="<?=$mallList[$i]->mall_id?>" <?php if ($mallList[$i]->checked) echo "checked='checked'";?> class="bo_checkbox bo_checkbox_1">
+									<label for="mallList<?=$i?>"><span></span><?=$mallList[$i]->mall_id?></label>
 								</div>
 								<?php endfor;?>
 							</div>
