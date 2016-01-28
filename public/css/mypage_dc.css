@@ -1,0 +1,6 @@
+.cate_title_wrap{position:relative}
+.cate_title{position:absolute;z-index:10;padding:8px 32px;border:1px solid #ccc;background-color:#fff;top:-18px;left:32px}
+.cate_title_hr{z-index:5;margin-top:32px;margin-bottom:32px;border-top:1px solid #ccc}
+.dc_ul li{border-bottom:1px solid #ddd}
+.dc_ico{margin-top:25px}
+.dc_state_wrap{background-color:#f8f7f7}

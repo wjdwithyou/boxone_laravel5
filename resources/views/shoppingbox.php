@@ -53,8 +53,8 @@
 							</div>
 							<div id="brand_wrap" class="classify_div f_C">
 								<?php for ($i = 0 ; $i < count($brandList) ; $i++) :?>
-								<div class="grid grid_h">
-									<input type="checkbox" id="sc<?=$i?>" name="sc" value="<?=$brandList[$i]->brand?>" class="bo_checkbox bo_checkbox_1">
+								<div>
+									<input type="checkbox" id="sc<?=$i?>" name="sc<?=$i?>" value="<?=$brandList[$i]->brand?>" class="bo_checkbox bo_checkbox_1">
 									<label for="sc<?=$i?>"><span id="spansc<?=$i?>"></span><?=$brandList[$i]->brand?></label>
 								</div>
 								<?php endfor;?>
@@ -69,8 +69,8 @@
 							</div>
 							<div id="site_wrap" class="classify_div f_C">
 								<?php for ($i = 0 ; $i < count($brandList) ; $i++) :?>
-								<div class="grid grid_h">
-									<input type="checkbox" id="sc<?=$i?>" name="sc" value="<?=$brandList[$i]->brand?>" class="bo_checkbox bo_checkbox_1">
+								<div>
+									<input type="checkbox" id="sc<?=$i?>" name="sc<?=$i?>" value="<?=$brandList[$i]->brand?>" class="bo_checkbox bo_checkbox_1">
 									<label for="sc<?=$i?>"><span id="spansc<?=$i?>"></span><?=$brandList[$i]->brand?></label>
 								</div>
 								<?php endfor;?>
@@ -101,7 +101,7 @@
 				</div>
 				<hr class="sb_hr mg_t8">
 			</div>
-			<div id="imglist_wrap" class="f_c">
+			<div class="imglist_wrap f_c">
 				<?php foreach ($prdt as $list) :?>
 				<div class="imglist_div grid grid_432">
 					<div class="imglist_img img_center">

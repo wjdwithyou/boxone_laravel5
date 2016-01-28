@@ -41,6 +41,20 @@ class MypageController extends Controller {
 		}
 		return view($page, array('page' => $page, 'result' => $result));
 	}
+	
+	public function dc()
+	{
+		$memberModel = new MemberModel();
+		$util = new Utility();
+		
+		if ($util->loginStateChk(true))
+		{
+			$nickname = $_SESSION['nickname'];
+			$result = $memberModel->getInfoByNickname($nickname)['data'][0];
+			$page = 'mypage_dc';
+		}
+		return view($page, array('page' => $page, 'result' => $result));
+	}
 
 	/*
 	 * 2015.11.19

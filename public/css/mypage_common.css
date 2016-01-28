@@ -1,18 +1,27 @@
-#mypage_top_wrap{width:100%;height:100%;padding-top:16px;padding-bottom:16px;background-color:#a4d0d1}
-.mp_alarm{margin-top:16px}
+#mypage_top .np_inner nav{background-color:#92A9DD}
 .top_div2{cursor:pointer}
+.selected_mpdiv{background-color:#526FB3}
+.mp_badge{display:inline-block;padding:4px 8px;background-color:#F77769}
+.mp_btn{padding:6px 16px}
 
 @media(min-width:768px){
-	.top_div1{width:34%;border-right:1px solid #f9957f}
-	.top_div2{width:22%}
+	.top_div1,.top_div2{width:25%}
+	.top_div1{margin-top:45px}
+	.top_div2{padding-top:32px;padding-bottom:32px}
 	.top_div1>p,.top_div2>p{margin-top:16px}
-	.mp_ico{width:80px;height:80px}
-	.mp_alarm span{padding:4px 8px;background-color:#F2B2A1;border-radius:10px}
+	.top_div1_bl{border-right:1px solid #a2b6e2}
+	.mp_ico{width:60px;height:60px}
+	.mpt_ico{margin-top:16px}
+	.mpt_ico2{margin-top:40px}
+	#top{display:block}
+	#mpt_tit{display:none}
 }
 @media(max-width:767px){
-	.top_div1{width:100%}
-	.top_div2{position:relative;width:33.333333%;margin-top:32px}
+	.top_div1{width:100%;margin-top:32px;padding-bottom:8px;border-bottom:1px solid #a2b6e2}
+	.top_div2{position:relative;width:33.333333%;padding-top:8px;padding-bottom:8px}
 	.top_div1>p,.top_div2>p{margin-top:8px}
-	.mp_ico{width:24px;height:24px}
-	.mp_alarm{position:absolute;top:-34px;left:60%}
+	.mp_ico{width:24px;height:24px;margin-top:8px}
+	.mpt_ico2{margin-top:25px}
+	#top{display:none}
+	#mpt_tit{display:block}
 }

@@ -32,7 +32,7 @@
 					</div>
 				</div>
 			</div>
-			<ul id="imglist_wrap" class="li_set f_c">
+			<ul class="imglist_wrap li_set f_c">
 				<?php for($i = 0 ; $i < count($upper) ; $i++) :?>
 				<?php if ($i == 0) :?>
 				<li class="brlist_div grid grid_512">
