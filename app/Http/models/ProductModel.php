@@ -354,8 +354,20 @@ class ProductModel
 	function getReview($idx)
 	{
 		$result = DB::select("SELECT * FROM product_review WHERE product_idx = ?", array($idx));
+		
+		$rateArray = array(0,0,0,0,0);		
+		$rateAll = 0;
+		foreach ($result as $list)
+		{
+			$rateAll += $list->rating;
+			++$rateArray[ceil($list+0.1)];
+		}
+		$rate = $rateAll / count($result);
+		
+		arsort($rateArray);
+		$rateBest = array(array_keys($rateArray)[0], array_shift($rateArray));
 	
-		return array('code' => 1, 'msg' => 'success', 'data' => $result);
+		return array('code' => 1, 'msg' => 'success', 'data' => $result, 'count' => count($result), 'rateBest' => $rateBest);
 	}
 	
 }

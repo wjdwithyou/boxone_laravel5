@@ -474,11 +474,11 @@
 							사용자 총평점
 						</div>
 						<div class="score">
-							<span class="f_b bo_color2">★★★★☆</span>
+							<span class="f_b bo_color2"><?php for ($i = 1 ; $i <= 5 ; $i++) if ($i < $rate[0]) echo '★'; else echo '☆';?></span>
 							&nbsp;
-							<span class="rating f_b">4.6</span>
+							<span class="rating f_b"><?=$rate[0]?></span>
 							&nbsp;/&nbsp;
-							<span class="total_rating bo_color">5</span>
+							<span class="total_rating bo_color"><?=$rate[2]?></span>
 						</div>
 					</div>
 					<div class="score_div col-xs-4">
@@ -486,11 +486,11 @@
 							가장 많은 평점
 						</div>
 						<div class="score">
-							<span class="f_b bo_color2">★★★★☆</span>
+							<span class="f_b bo_color2"><?php for ($i = 1 ; $i <= 5 ; $i++) if ($i < $rate[1][0]) echo '★'; else echo '☆';?></span>
 							&nbsp;
-							<span class="rating f_b">4.0</span>
+							<span class="rating f_b"><?=$rate[1][0]?></span>
 							&nbsp;|&nbsp;
-							<span class="total_rating bo_color">325건</span>
+							<span class="total_rating bo_color"><?=$rate[1][1]?>건</span>
 						</div>
 					</div>
 					<div class="score_div col-xs-4">
@@ -498,7 +498,7 @@
 							전체 리뷰수
 						</div>
 						<div class="score">
-							<span class="review_count bo_color2 f_b">398건</span>
+							<span class="review_count bo_color2 f_b"><?=$rate[2]?>건</span>
 						</div>
 					</div>
 				</div>
@@ -508,20 +508,7 @@
 					<ul class="review">
 						<li class="cl_b">
 							<div class="f_l">
-								<?php if ($list->rating <= 1) :?>
-								<span class="f_b bo_color2">★☆☆☆☆</span>
-								<?php else : if ($list->rating <= 2) :?>
-								<span class="f_b bo_color2">★★☆☆☆</span>
-								<?php else : if ($list->rating <= 3) :?>
-								<span class="f_b bo_color2">★★★☆☆</span>
-								<?php else : if ($list->rating <= 4) :?>
-								<span class="f_b bo_color2">★★★★☆</span>
-								<?php else :?>
-								<span class="f_b bo_color2">★★★★★</span>
-								<?php endif;?>
-								<?php endif;?>
-								<?php endif;?>
-								<?php endif;?>
+								<span class="f_b bo_color2"><?php for ($i = 1 ; $i <= 5 ; $i++) if ($i < $list->rating) echo '★'; else echo '☆';?></span>
 								&nbsp;
 								<span class="f_b"><?=$list->title?></span>
 								&nbsp;|&nbsp;

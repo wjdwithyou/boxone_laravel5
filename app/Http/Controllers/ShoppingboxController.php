@@ -255,7 +255,13 @@ class ShoppingboxController extends Controller {
 		
 		// 출력
 		$page = 'product';
-		return view($page, array('page' => $page, 'result' => $result['data'], 'reviewList' => $reviewList['data'], 'cate' => $data['data'][0]));
+		return view($page, array(
+				'page' => $page, 
+				'result' => $result['data'], 
+				'reviewList' => $reviewList['data'],
+				'rate' => array($reviewList['rateAve'], $reviewList['rateBest'], $reviewList['rateCnt']),
+				'cate' => $data['data'][0]
+		));
 	}
 
 }
