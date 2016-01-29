@@ -249,6 +249,8 @@ class MemberModel{
 	    	$result_f = DB::update('update member set nickname=?, pw=? where nickname=?',	/*type=?, email=?,*/	/* +image */
 	    			array($nickname, $encrypt, $nicknameo));
 	    	
+	    	$time = DB::select('select now() as upload');
+	    	
 	    	$temp_idx = DB::select('select idx from member where nickname=?', array($nickname));
 	    	$idx = $temp_idx[0]->idx;
 	    	
@@ -263,7 +265,7 @@ class MemberModel{
     		foreach ($before as $i){
     			$s3->deleteObject(array(
     					'Bucket'	=> 'boxone-image',
-    					'Key'	=> $i['Key']	
+    					'Key'		=> $i['Key']	
     			));
     		}
     		
@@ -271,7 +273,7 @@ class MemberModel{
     		$s3PrfAdr = 'https://s3-ap-northeast-1.amazonaws.com/boxone-image/profile/';
     		$ext = $image->getClientOriginalExtension();
     		
-    		$img_name = $idx."_image.".$ext;
+    		$img_name = $idx."_".$time[0]->upload.".".$ext;
     		
     		$result_s = DB::update('update member set image=? where idx=?', array($img_name, $idx));
     		
