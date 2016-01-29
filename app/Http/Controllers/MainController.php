@@ -28,7 +28,8 @@ class MainController extends Controller {
 		
 		// 핫한 상품 (쇼핑박스 중 할인되는 것, 조회수 10개) 가져오기
 		$result = $hotPrdtModel->getInfoList(1, 0, 0, array(), array(), array(), 1);
-		$hotList = array_slice($result['data'], 0, 8);
+		$hotBigList = array_slice($result['data'], 0, 8);
+		$hotList = array_slice($result['data'], 8, 8);
 		//$hotList = array();
 		
 		// 쇼핑 박스 저장한 카테고리 수(쿠키) 확인 후, 우선순위 확인하여 가져오기
