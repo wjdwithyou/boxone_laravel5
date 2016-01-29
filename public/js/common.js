@@ -106,7 +106,7 @@ function logout()
 
 function toggleAsidemenu(){
 	if($("#aside_menu_wrap").css("right") == "0px"){
-		$("#aside_menu_wrap").css("right", -80);
+		$("#aside_menu_wrap").css("right", -60);
 		$("#aside_arrow img").attr("src", adr_img + "left_arrow.png");
 		
 	}
@@ -129,4 +129,27 @@ function integrateSearch()
 		var searchText = $("#integrated_search").val();
 		location.href = adr_ctr + "Shoppingbox/index?search=" + searchText;
 	}
+}
+
+function moveTop(){
+	$("html, body").animate({scrollTop: 0}, 100);
+}
+
+function toggleExpand(e, t){
+	if($("#aside_expand").is(":visible")){
+		$("#aside_expand").hide();
+		$(".aside_div").children("i").css("color", "#8c8b8b");
+		$(".aside_div").not(".aside_div_2").css("background-color", "#eee");
+		e.children("i").css("color", "#8c8b8b");
+	}
+	else{
+		$("#aside_expand").show();
+		$(".aside_div").children("i").css("color", "#8c8b8b");
+		e.css("background-color", "#fff");
+		e.children("i").css("color", "#f15a63");
+	}
+}
+
+function deleteImg(){
+	
 }

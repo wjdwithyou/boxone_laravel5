@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Http\models\HotdealTargetModel;
 use App\Http\models\CategoryModel;
 use App\Http\models\HotdealProductModel;
+use App\Http\models\ProductModel;
 use Request;
 use Cookie;
 
@@ -38,6 +39,7 @@ class HotdealController extends Controller {
 	{
 		$cateModel = new CategoryModel();
 		$hotPrdtModel = new HotdealProductModel();
+		$prdtModel = new ProductModel();
 	
 		$idx = Request::input('idx');
 		$result = $hotPrdtModel->getInfoSingle($idx);
@@ -47,6 +49,12 @@ class HotdealController extends Controller {
 		
 		// 리뷰 가져오기
 		$reviewList = $hotPrdtModel->getReview($idx);
+		
+		// 동일 상품 가져오기
+		$sameList = $prdtModel->getMappingPrdt($idx, $result['data']['binding']);
+		
+		// 최하단 '이런 상품 어떠세요?' 가져오기
+		$suggestList = $prdtModel->getSuggestPrdt($cateS, $idx);
 		
 		// 최근 본 상품의 카테고리를 cookie로 가지고 다닌다.
 		$cookie = Request::cookie('recentCate');
@@ -77,13 +85,7 @@ class HotdealController extends Controller {
 			if (json_last_error() != JSON_ERROR_NONE)
 				$cookieArray = array();
 		}
-		array_push($cookieArray, array(
-				$result['data']['idx'],
-				$result['data']['name'],
-				$result['data']['brand'],
-				$result['data']['img'][0],
-				$result['data']['price']
-		));
+		array_push($cookieArray, array('h', $result['data']['idx']));
 		if (count($cookieArray) > 10)
 			$cookieArray = array_slice($cookieArray, 1, 10);
 		
@@ -97,6 +99,8 @@ class HotdealController extends Controller {
 				'page' => $page, 
 				'result' => $result['data'], 
 				'reviewList' => $reviewList['data'], 
+				'sameList' => $sameList['data'],
+				'suggestList' => $suggestList['data'],
 				'rate' => array($reviewList['rateAve'], $reviewList['rateBest'], $reviewList['rateCnt']),
 				'cate' => $data['data'][0]
 		));

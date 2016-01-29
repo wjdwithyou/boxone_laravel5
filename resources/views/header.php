@@ -83,14 +83,167 @@ if (isset($_COOKIE['need_login'])) {
 	<hr class="header_hr2">
 </div>
 
-<!-- <aside id="aside_menu_wrap" class="f_c">
+<aside id="aside_menu_wrap" class="f_c">
 	<div id="aside_arrow" class="f_l">
 		<a onclick="toggleAsidemenu();"><img src="<?=$adr_img?>left_arrow.png"></a>
 	</div>
-	<div id="aside_menu" class="f_l">
-		
+	<div id="aside_menu" class="f_l f_c">
+		<div class="aside_div aside_div_3" onclick="moveMain();">
+			<i class="fa fa-home bo_color2"></i>
+		</div>
+		<div class="aside_div" onclick="toggleExpand($(this), 1);">
+			<i class="fa fa-heart bo_color2 sm_ico"></i>
+		</div>
+		<div class="aside_div" onclick="toggleExpand($(this), 2);">
+			<i class="fa fa-star bo_color2"></i>
+		</div>
+		<div class="aside_div" onclick="toggleExpand($(this), 3);">
+			<div class="aside_badge"><span class="ico_badge fw_b br_20 bo_colorw font_10">1</span></div>
+			<i class="fa fa-shopping-cart bo_color2"></i>
+		</div>
+		<div class="aside_div aside_div_2" onclick="moveTop();">
+			<img src="<?=$adr_img?>arr_top.png" width="26" height="28" alt=""></i>
+		</div>
+		<div class="aside_div aside_div_4" onclick="moveTop();">
+			<img src="<?=$adr_img?>arr_top_red.png" width="22" height="24" alt=""></i>
+		</div>
 	</div>
-</aside> -->
+</aside>
+<aside id="aside_expand" hidden>
+	<div class="pd_a8">
+		<div id="aside_expand_top" class="pd_b8 ta_c">
+			<span class="fw_b font_16">최근 본 상품</span>
+		</div>
+		<div id="aside_expand_content" class="f_c">
+			<div class="imglist_div aside_img_wrap grid_as">
+				<div class="imglist_img img_center">
+					<div class="delete_img font_16">
+						<a onclick="deleteImg();"><i class="fa fa-times-circle bo_color2"></i></a>
+					</div>
+					<div class="img_center_inner">
+						<a href=""><img src="http://s7d9.scene7.com/is/image/AmericanApparel/rsadm320_white?defaultImage=/notavail&$ProductZoom$"></a>
+					</div>
+				</div>
+				<div class="imglist_desc_wrap">
+					<div class="imglist_desc1 ta_c t_o bo_color2">
+						Abercrombie
+					</div>
+					<div class="imglist_desc2 ta_c t_o">
+						Faux Suede Patchwork Shift Dress
+					</div>
+					<div class="imglist_desc3 ta_c t_o mg_t8">
+						￦82,361
+					</div>
+				</div>
+			</div>
+			<div class="imglist_div aside_img_wrap grid_as">
+				<div class="imglist_img img_center">
+					<div class="delete_img font_16">
+						<a onclick="deleteImg();"><i class="fa fa-times-circle bo_color2"></i></a>
+					</div>
+					<div class="img_center_inner">
+						<a href=""><img src="http://s7d9.scene7.com/is/image/AmericanApparel/rsadm320_white?defaultImage=/notavail&$ProductZoom$"></a>
+					</div>
+				</div>
+				<div class="imglist_desc_wrap">
+					<div class="imglist_desc1 ta_c t_o bo_color2">
+						Abercrombie
+					</div>
+					<div class="imglist_desc2 ta_c t_o">
+						Faux Suede Patchwork Shift Dress
+					</div>
+					<div class="imglist_desc3 ta_c t_o mg_t8">
+						￦82,361
+					</div>
+				</div>
+			</div>
+			<div class="imglist_div aside_img_wrap grid_as">
+				<div class="imglist_img img_center">
+					<div class="delete_img font_16">
+						<a onclick="deleteImg();"><i class="fa fa-times-circle bo_color2"></i></a>
+					</div>
+					<div class="img_center_inner">
+						<a href=""><img src="http://s7d9.scene7.com/is/image/AmericanApparel/rsadm320_white?defaultImage=/notavail&$ProductZoom$"></a>
+					</div>
+				</div>
+				<div class="imglist_desc_wrap">
+					<div class="imglist_desc1 ta_c t_o bo_color2">
+						Abercrombie
+					</div>
+					<div class="imglist_desc2 ta_c t_o">
+						Faux Suede Patchwork Shift Dress
+					</div>
+					<div class="imglist_desc3 ta_c t_o mg_t8">
+						￦82,361
+					</div>
+				</div>
+			</div>
+			<div class="imglist_div aside_img_wrap grid_as">
+				<div class="imglist_img img_center">
+					<div class="delete_img font_16">
+						<a onclick="deleteImg();"><i class="fa fa-times-circle bo_color2"></i></a>
+					</div>
+					<div class="img_center_inner">
+						<a href=""><img src="http://s7d9.scene7.com/is/image/AmericanApparel/rsadm320_white?defaultImage=/notavail&$ProductZoom$"></a>
+					</div>
+				</div>
+				<div class="imglist_desc_wrap">
+					<div class="imglist_desc1 ta_c t_o bo_color2">
+						Abercrombie
+					</div>
+					<div class="imglist_desc2 ta_c t_o">
+						Faux Suede Patchwork Shift Dress
+					</div>
+					<div class="imglist_desc3 ta_c t_o mg_t8">
+						￦82,361
+					</div>
+				</div>
+			</div>
+			<div class="imglist_div aside_img_wrap grid_as">
+				<div class="imglist_img img_center">
+					<div class="delete_img font_16">
+						<a onclick="deleteImg();"><i class="fa fa-times-circle bo_color2"></i></a>
+					</div>
+					<div class="img_center_inner">
+						<a href=""><img src="http://s7d9.scene7.com/is/image/AmericanApparel/rsadm320_white?defaultImage=/notavail&$ProductZoom$"></a>
+					</div>
+				</div>
+				<div class="imglist_desc_wrap">
+					<div class="imglist_desc1 ta_c t_o bo_color2">
+						Abercrombie
+					</div>
+					<div class="imglist_desc2 ta_c t_o">
+						Faux Suede Patchwork Shift Dress
+					</div>
+					<div class="imglist_desc3 ta_c t_o mg_t8">
+						￦82,361
+					</div>
+				</div>
+			</div>
+			<div class="imglist_div aside_img_wrap grid_as">
+				<div class="imglist_img img_center">
+					<div class="delete_img font_16">
+						<a onclick="deleteImg();"><i class="fa fa-times-circle bo_color2"></i></a>
+					</div>
+					<div class="img_center_inner">
+						<a href=""><img src="http://s7d9.scene7.com/is/image/AmericanApparel/rsadm320_white?defaultImage=/notavail&$ProductZoom$"></a>
+					</div>
+				</div>
+				<div class="imglist_desc_wrap">
+					<div class="imglist_desc1 ta_c t_o bo_color2">
+						Abercrombie
+					</div>
+					<div class="imglist_desc2 ta_c t_o">
+						Faux Suede Patchwork Shift Dress
+					</div>
+					<div class="imglist_desc3 ta_c t_o mg_t8">
+						￦82,361
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</aside>
 
 <!-- 쇼핑박스 hover 메뉴 -->
 <div id="hover_menu_wrap" class="menu_hover" hidden>

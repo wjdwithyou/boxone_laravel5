@@ -224,4 +224,27 @@ class ShoppingsiteModel{
          	return array('code' => 0, 'msg' => 'update failure: no matched data');
         } 
 	}
+	
+	/*
+	 *  각 카테고리별 최고 쇼핑사이트 가져오기 (메인페이지용)
+	 */
+	function getBestSiteByCate()
+	{
+		$result = DB::select("SELECT ss.*, sc.name as cate_name 
+							FROM (
+								SELECT * 
+								FROM (
+									SELECT * 
+									FROM shoppingsite 
+									ORDER BY hit_count DESC) s 
+								GROUP BY s.category_idx) ss 
+							INNER JOIN shoppingsite_category sc ON ss.category_idx = sc.idx ");
+		return $result;
+	}
 }
+
+
+
+
+
+

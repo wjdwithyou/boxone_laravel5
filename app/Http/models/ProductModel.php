@@ -117,7 +117,8 @@ class ProductModel
 				'deliverFee' => '',
 				'color' => $ms_data_color,
 				'size' => $ms_data_size,
-				'story' => $ms_data_story
+				'story' => $ms_data_story,
+				'binding' => $my_data[0]->binding
 		);
 			
 		DB::update('update product set hit_count=hit_count+1 where idx=?',array($prod_idx));
@@ -362,12 +363,57 @@ class ProductModel
 			$rateAll += $list->rating;
 			++$rateArray[floor($list->rating+0.5)];
 		}
-		$rate = $rateAll / count($result);
 		
 		arsort($rateArray);
-		$rateBest = array(array_keys($rateArray)[0], array_shift($rateArray));
+		
+		if (count($result))
+		{
+			$rateAve = $rateAll / count($result);
+			$rateBest = array(array_keys($rateArray)[0], array_shift($rateArray));
+		}
+		else
+		{
+			$rateAve = 0;
+			$rateBest = array(0, 0);
+		}
+		return array('code' => 1, 'msg' => 'success', 'data' => $result, 'rateCnt' => count($result), 'rateBest' => $rateBest, 'rateAve' => $rateAve);
+	}
 	
-		return array('code' => 1, 'msg' => 'success', 'data' => $result, 'count' => count($result), 'rateBest' => $rateBest);
+	function getMappingPrdt($mapping_idx)
+	{
+		if ($mapping_idx != 0)
+		{
+			$result = DB::select("(SELECT idx, 'p' AS ptype, mall_id, brand, name, FORMAT(price, 0) as fPrice 
+									FROM product 
+									WHERE idx IN 
+									(SELECT prod_idx FROM mapping_product WHERE idx = ? && item_type = 'p')) 
+										UNION 
+									(SELECT idx, 'h' AS ptype, mall_id, brand, name, FORMAT(priceS, 0) as fPrice 
+									FROM hotdeal_product 
+									WHERE prod_id IN 
+									(SELECT prod_id FROM mapping_product WHERE idx = ? && item_type = 'h')) 
+									ORDER BY fPrice asc", 
+									array($mapping_idx, $mapping_idx));
+		}
+		else
+			$result = array();
+		
+		return array('code' => 1, 'msg' => 'success', 'data' => $result);
+	}
+	
+	function getSuggestPrdt($cate, $idx)
+	{
+		$result = DB::select("(SELECT 'p' as ptype, idx, name, img, brand, hit_count, FORMAT(price, 0) as fPrice 
+							FROM product 
+							WHERE cate_small=? AND idx != ?)
+							UNION
+							(SELECT 'h' as ptype, idx, name, img, brand, hit_count, FORMAT(priceS, 0) as fPrice
+							FROM hotdeal_product
+							WHERE cate_small=? AND idx != ?)
+							ORDER BY hit_count DESC LIMIT 6", 
+				array($cate, $idx, $cate, $idx));
+		
+		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
 	
 }

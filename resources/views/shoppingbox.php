@@ -53,7 +53,7 @@
 							</div>
 							<div id="brand_wrap" class="classify_div f_C">
 								<?php for ($i = 0 ; $i < count($brandList) ; $i++) :?>
-								<div class="grid grid_h">
+								<div>
 									<input type="checkbox" id="brandList<?=$i?>" name="brandList" value="<?=$brandList[$i]->brand?>" <?php if ($brandList[$i]->checked) echo "checked='checked'";?> class="bo_checkbox bo_checkbox_1">
 									<label for="brandList<?=$i?>"><span></span><?=$brandList[$i]->brand?></label>
 								</div>
@@ -69,7 +69,7 @@
 							</div>
 							<div id="site_wrap" class="classify_div f_C">
 								<?php for ($i = 0 ; $i < count($mallList) ; $i++) :?>
-								<div class="grid grid_h">
+								<div>
 									<input type="checkbox" id="mallList<?=$i?>" name="mallList" value="<?=$mallList[$i]->mall_id?>" <?php if ($mallList[$i]->checked) echo "checked='checked'";?> class="bo_checkbox bo_checkbox_1">
 									<label for="mallList<?=$i?>"><span></span><?=$mallList[$i]->mall_id?></label>
 								</div>
@@ -101,7 +101,7 @@
 				</div>
 				<hr class="sb_hr mg_t8">
 			</div>
-			<div id="imglist_wrap" class="f_c">
+			<div class="imglist_wrap f_c">
 				<?php foreach ($prdt as $list) :?>
 				<div class="imglist_div grid grid_432">
 					<div class="imglist_img img_center">

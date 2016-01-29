@@ -119,7 +119,8 @@ class HotdealProductModel
 				'deliverFee' => '',
 				'color' => $ms_data_color,
 				'size' => $ms_data_size,
-				'story' => $ms_data_story
+				'story' => $ms_data_story,
+				'binding' => $my_data[0]->binding
 		);
 			
 		DB::update('update product set hit_count=hit_count+1 where idx=?',array($prod_idx));
@@ -273,10 +274,19 @@ class HotdealProductModel
 			$rateAll += $list->rating;
 			++$rateArray[floor($list->rating+0.5)];
 		}
-		$rateAve = $rateAll / count($result);
 		
 		arsort($rateArray);
-		$rateBest = array(array_keys($rateArray)[0], array_shift($rateArray));
+		
+		if (count($result))
+		{
+			$rateAve = $rateAll / count($result);
+			$rateBest = array(array_keys($rateArray)[0], array_shift($rateArray));
+		}
+		else
+		{
+			$rateAve = 0;
+			$rateBest = array(0, 0);
+		}
 		
 		return array('code' => 1, 'msg' => 'success', 'data' => $result, 'rateCnt' => count($result), 'rateBest' => $rateBest, 'rateAve' => $rateAve);
 	}

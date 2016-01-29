@@ -3,7 +3,9 @@
 .bx-wrapper{margin-bottom:0 !important}
 #main_slide .bx-wrapper img{width:100% !important}
 #main_slide .slide{width:100%;height:300px}
-#br_slide .slide{height:100px}
+#br_slide .slide{height:130px}
+#br_slide .imglist_img{padding-top:50% !important}
+.br_border{display:inline-block;border:1px solid #F15A63;padding:2px 8px}
 #hd_slide_wrap{padding:8px}
 #hd_slide_wrap_inner{height:100%;background-color:#fff}
 .img_center img{display:inline !important}
@@ -11,7 +13,7 @@
 .imglist_div2{padding:8px}
 .imglist_div3:nth-of-type(6){clear:both}
 .bx-wrapper .bx-caption{background-color:#fff !important;text-align:center}
-.bx-wrapper .bx-caption span{padding:0 !important;font-size:12px !important;color:#8C8B8B !important}
+.bx-wrapper .bx-caption span{padding:0 !important;font-size:18px !important;color:#8C8B8B !important}
 #slide1{background:url(https://s3-ap-northeast-1.amazonaws.com/boxone-image/main_image_1.jpg) center;background-size:cover}
 #slide2{background:url(https://s3-ap-northeast-1.amazonaws.com/boxone-image/main_image_2.jpg) center;background-size:cover}
 #slide3{background:url(https://s3-ap-northeast-1.amazonaws.com/boxone-image/main_image_3.jpg) center;background-size:cover}
@@ -25,6 +27,9 @@
 .slide_h2{font-size:14px;margin-top:8px}
 .bx-pager{position:relative !important;bottom:0 !important}
 
+.cate_title_wrap{position:relative}
+.cate_title{position:absolute;z-index:10;padding:8px 16px;border:1px solid #8C8B8B;background-color:#fff;top:-16px;left:32px}
+.cate_title_hr{z-index:5;margin-top:32px;margin-bottom:32px;border-top:1px solid #8C8B8B}
 
 @media(min-width:768px){
 	#hd_slide_wrap_inner{padding-top:15%}

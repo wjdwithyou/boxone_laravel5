@@ -101,52 +101,28 @@
 				</li>
 				<li class="equal_price_wrap">
 					<!-- 같은 가격 사이트 비교 -->
+					<?php for ($i = 0 ; $i < count($sameList) && $i < 3 ; $i++) :?>
 					<ul class="cl_b">
 						<li>
-							REVOLVE clothing
+							<?=$sameList[$i]->name?> 
 						</li>
 						<li>
 							<div class="f_l f_b">
-								무료배송 면세
+								<?=$sameList[$i]->mall_id?> / ￦<?=$sameList[$i]->fPrice?>
 							</div>
 							<div class="f_r">
-								<button type="button" class="bo_btn3">
+								<?php if ($sameList[$i]->ptype == 'p') :?>
+								<button type="button" class="bo_btn3" onclick="location.href = '<?=$adr_ctr?>Shoppingbox/detail?idx=<?=$sameList[$i]->idx?>';">
+								<?php else :?>
+								<button type="button" class="bo_btn3" onclick="location.href = '<?=$adr_ctr?>Hotdeal/productDetail?idx=<?=$sameList[$i]->idx?>';">
+								<?php endif;?>
 									구매하기
 								</button>
 							</div>
 						</li>
 					</ul>
+					<?php endfor;?>
 					<!-- /같은 가격 사이트 비교 -->
-					<ul class="cl_b">
-						<li>
-							REVOLVE clothing
-						</li>
-						<li>
-							<div class="f_l f_b">
-								무료배송 면세
-							</div>
-							<div class="f_r">
-								<button type="button" class="bo_btn3">
-									구매하기
-								</button>
-							</div>
-						</li>
-					</ul>
-					<ul class="cl_b">
-						<li>
-							REVOLVE clothing
-						</li>
-						<li>
-							<div class="f_l f_b">
-								무료배송 면세
-							</div>
-							<div class="f_r">
-								<button type="button" class="bo_btn3">
-									구매하기
-								</button>
-							</div>
-						</li>
-					</ul>
 				</li>
 			</ul>
 			<div class="cl_b"></div>
@@ -172,22 +148,27 @@
 				</div>
 				<div id="compare_div_wrap" class="cl_b">
 					<!-- 가격 비교 -->
+					<?php foreach ($sameList as $list) :?>
 					<div class="compare_div col-xs-12 col-sm-6">
 						<div class="compare_inner">
 							<table class="compare_table">
 								<tr>
-									<td class="compare_site">amazon</td>
-									<td class="compare_price" colspan="2">￦34,000</td>
+									<td class="compare_site"><?=$list->brand?></td>
+									<td class="compare_price" colspan="2">￦<?=$list->fPrice?></td>
 								</tr>
 								<tr>
 									<td></td>
-									<td colspan="2"> Smathers & Branson®forJ.Crew card case forJ.Crew card case </td>
+									<td colspan="2"> <?=$list->name?> </td>
 								</tr>
 								<tr>
 									<td></td>
 									<td class="bo_color">무료배송</td>
 									<td class="review_btn">
-									<button type="button" class="bo_btn3">
+									<?php if ($list->ptype == 'p') :?>
+									<button type="button" class="bo_btn3" onclick="location.href = '<?=$adr_ctr?>Shoppingbox/detail?idx=<?=$list->idx?>';">
+									<?php else :?>
+									<button type="button" class="bo_btn3" onclick="location.href = '<?=$adr_ctr?>Hotdeal/productDetail?idx=<?=$list->idx?>';">
+									<?php endif;?>
 										구매하기
 									</button></td>
 								</tr>
@@ -195,138 +176,7 @@
 						</div>
 					</div>
 					<!-- /가격 비교 -->
-					<div class="compare_div col-xs-12 col-sm-6">
-						<div class="compare_inner">
-							<table class="compare_table">
-								<tr>
-									<td class="compare_site">amazon</td>
-									<td class="compare_price" colspan="2">￦34,000</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td colspan="2"> Smathers & Branson®forJ.Crew card case forJ.Crew card case </td>
-								</tr>
-								<tr>
-									<td></td>
-									<td class="bo_color">무료배송</td>
-									<td class="review_btn">
-									<button type="button" class="bo_btn3">
-										구매하기
-									</button></td>
-								</tr>
-							</table>
-						</div>
-					</div>
-					<div class="compare_div col-xs-12 col-sm-6">
-						<div class="compare_inner">
-							<table class="compare_table">
-								<tr>
-									<td class="compare_site">amazon</td>
-									<td class="compare_price" colspan="2">￦34,000</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td colspan="2"> Smathers & Branson®forJ.Crew card case forJ.Crew card case </td>
-								</tr>
-								<tr>
-									<td></td>
-									<td class="bo_color">무료배송</td>
-									<td class="review_btn">
-									<button type="button" class="bo_btn3">
-										구매하기
-									</button></td>
-								</tr>
-							</table>
-						</div>
-					</div>
-					<div class="compare_div col-xs-12 col-sm-6">
-						<div class="compare_inner">
-							<table class="compare_table">
-								<tr>
-									<td class="compare_site">amazon</td>
-									<td class="compare_price" colspan="2">￦34,000</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td colspan="2"> Smathers & Branson®forJ.Crew card case forJ.Crew card case </td>
-								</tr>
-								<tr>
-									<td></td>
-									<td class="bo_color">무료배송</td>
-									<td class="review_btn">
-									<button type="button" class="bo_btn3">
-										구매하기
-									</button></td>
-								</tr>
-							</table>
-						</div>
-					</div>
-					<div class="compare_div col-xs-12 col-sm-6">
-						<div class="compare_inner">
-							<table class="compare_table">
-								<tr>
-									<td class="compare_site">amazon</td>
-									<td class="compare_price" colspan="2">￦34,000</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td colspan="2"> Smathers & Branson®forJ.Crew card case forJ.Crew card case </td>
-								</tr>
-								<tr>
-									<td></td>
-									<td class="bo_color">무료배송</td>
-									<td class="review_btn">
-									<button type="button" class="bo_btn3">
-										구매하기
-									</button></td>
-								</tr>
-							</table>
-						</div>
-					</div>
-					<div class="compare_div col-xs-12 col-sm-6">
-						<div class="compare_inner">
-							<table class="compare_table">
-								<tr>
-									<td class="compare_site">amazon</td>
-									<td class="compare_price" colspan="2">￦34,000</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td colspan="2"> Smathers & Branson®forJ.Crew card case forJ.Crew card case </td>
-								</tr>
-								<tr>
-									<td></td>
-									<td class="bo_color">무료배송</td>
-									<td class="review_btn">
-									<button type="button" class="bo_btn3">
-										구매하기
-									</button></td>
-								</tr>
-							</table>
-						</div>
-					</div>
-					<div class="compare_div col-xs-12 col-sm-6">
-						<div class="compare_inner">
-							<table class="compare_table">
-								<tr>
-									<td class="compare_site">amazon</td>
-									<td class="compare_price" colspan="2">￦34,000</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td colspan="2"> Smathers & Branson®forJ.Crew card case forJ.Crew card case </td>
-								</tr>
-								<tr>
-									<td></td>
-									<td class="bo_color">무료배송</td>
-									<td class="review_btn">
-									<button type="button" class="bo_btn3">
-										구매하기
-									</button></td>
-								</tr>
-							</table>
-						</div>
-					</div>
+					<?php endforeach;?>
 				</div>
 			</div>
 
@@ -335,133 +185,35 @@
 					이런 상품 어떠세요?
 				</div>
 				<!-- 추천 상품 -->
+				<?php foreach ($suggestList as $list) :?>
 				<div class="product_div col-xs-6 col-sm-4 col-md-2">
 					<div class="hd_product_img center_box">
 						<div class="center_content">
-							<a onclick='location.href="<?=$adr_ctr ?>Product/index"'><img src="<?= $adr_img ?>product_ex.jpg"></a>
+							<?php if ($list->ptype == 'p') :?>							
+							<a onclick='location.href="<?=$adr_ctr ?>Shoppingbox/detail?idx=<?=$list->idx?>"'>
+							<?php else :?>
+							<a onclick='location.href="<?=$adr_ctr ?>Hotdeal/productDetail?idx=<?=$list->idx?>"'>
+							<?php endif;?>
+								<img src="<?=$list->img?>">
+							</a>
 						</div>
 					</div>
 					<div class="hd_site_desc">
 						<div class="hd_brand text_overflow">
-							토리버치
+							<?=$list->name?>
 						</div>
 						<div class="hd_product_name">
 							<div>
-								상품명
-								토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일
+								<?=$list->brand?>
 							</div>
 						</div>
 						<div class="hd_price text_overflow">
-							￦34,900
+							￦<?=$list->fPrice?>
 						</div>
 					</div>
 				</div>
+				<?php endforeach;?>
 				<!-- /추천 상품 -->
-				<div class="product_div col-xs-6 col-sm-4 col-md-2">
-					<div class="hd_product_img center_box">
-						<div class="center_content">
-							<a onclick='location.href="<?=$adr_ctr ?>Product/index"'><img src="<?= $adr_img ?>product_ex.jpg"></a>
-						</div>
-					</div>
-					<div class="hd_site_desc">
-						<div class="hd_brand text_overflow">
-							토리버치
-						</div>
-						<div class="hd_product_name">
-							<div>
-								상품명
-								토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일
-							</div>
-						</div>
-						<div class="hd_price text_overflow">
-							￦34,900
-						</div>
-					</div>
-				</div>
-				<div class="product_div col-xs-6 col-sm-4 col-md-2">
-					<div class="hd_product_img center_box">
-						<div class="center_content">
-							<a onclick='location.href="<?=$adr_ctr ?>Product/index"'><img src="<?= $adr_img ?>product_ex.jpg"></a>
-						</div>
-					</div>
-					<div class="hd_site_desc">
-						<div class="hd_brand text_overflow">
-							토리버치
-						</div>
-						<div class="hd_product_name">
-							<div>
-								상품명
-								토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일
-							</div>
-						</div>
-						<div class="hd_price text_overflow">
-							￦34,900
-						</div>
-					</div>
-				</div>
-				<div class="product_div col-xs-6 col-sm-4 col-md-2">
-					<div class="hd_product_img center_box">
-						<div class="center_content">
-							<a onclick='location.href="<?=$adr_ctr ?>Product/index"'><img src="<?= $adr_img ?>product_ex.jpg"></a>
-						</div>
-					</div>
-					<div class="hd_site_desc">
-						<div class="hd_brand text_overflow">
-							토리버치
-						</div>
-						<div class="hd_product_name">
-							<div>
-								상품명
-								토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일
-							</div>
-						</div>
-						<div class="hd_price text_overflow">
-							￦34,900
-						</div>
-					</div>
-				</div>
-				<div class="product_div col-xs-6 col-sm-4 col-md-2">
-					<div class="hd_product_img center_box">
-						<div class="center_content">
-							<a onclick='location.href="<?=$adr_ctr ?>Product/index"'><img src="<?= $adr_img ?>product_ex.jpg"></a>
-						</div>
-					</div>
-					<div class="hd_site_desc">
-						<div class="hd_brand text_overflow">
-							토리버치
-						</div>
-						<div class="hd_product_name">
-							<div>
-								상품명
-								토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일
-							</div>
-						</div>
-						<div class="hd_price text_overflow">
-							￦34,900
-						</div>
-					</div>
-				</div>
-				<div class="product_div col-xs-6 col-sm-4 col-md-2">
-					<div class="hd_product_img center_box">
-						<div class="center_content">
-							<a onclick='location.href="<?=$adr_ctr ?>Product/index"'><img src="<?= $adr_img ?>product_ex.jpg"></a>
-						</div>
-					</div>
-					<div class="hd_site_desc">
-						<div class="hd_brand text_overflow">
-							토리버치
-						</div>
-						<div class="hd_product_name">
-							<div>
-								상품명
-								토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일
-							</div>
-						</div>
-						<div class="hd_price text_overflow">
-							￦34,900
-						</div>
-					</div>
-				</div>
 			</div>
 
 			<div id="review_wrap" class="cl_b">
@@ -528,130 +280,6 @@
 					<?php endforeach;?>
 					<!-- /구글 후기 -->
 				</div>
-				
-				<!-- 구글 후기 페이징 -->
-				<div class="pagination_wrap cl_b">
-					<a onclick=""><img src="<?= $adr_img ?>left_arrow.png"></a>
-					<div class="pagination">
-						<a class="current_page" onclick="">1</a>
-						<a onclick="">2</a>
-						<a onclick="">3</a>
-						<span>···</span>
-						<a onclick="">7</a>
-					</div>
-					<a onclick=""><img src="<?= $adr_img ?>right_arrow.png"></a>
-				</div>
-				<!-- /구글 후기 페이징 -->
-				
-				<div class="info_title remove_b_t">
-					커뮤니티 후기
-				</div>
-				<div id="review_bo_wrap" class="info_content">
-					<!-- 커뮤니티 후기 -->
-					<ul class="review">
-						<li class="cl_b">
-							<div class="f_l">
-								<span class="f_b bo_color2">★★★★☆</span>
-								&nbsp;
-								<span class="f_b">아이패드 에어2 역시 좋습니다</span>
-								&nbsp;|&nbsp;
-								<span class="bo_color f_s12">saemi park</span>
-								&nbsp;|&nbsp;
-								<span class="bo_color f_s12">G마켓에서 작성</span>
-							</div>
-							<div class="f_r f_s12 bo_color">
-								APR 22, 2015
-							</div>
-						</li>
-						<li class="review_content">
-							우선 온라인을 통해서 처음으로 고가의 가전을 구입하게 되었습니다.
-							하이마트나 이마트 등에 비해 5만원 가량 저렴합니다.
-
-							걱정과는 다르게 뽁뽁이까지 싸져있어서 큰 이상은 없는 양품을 받은거 같아 기분이 좋네요
-						</li>
-					</ul>
-					<!-- /커뮤니티 후기 -->
-					<ul class="review">
-						<li class="cl_b">
-							<div class="f_l">
-								<span class="f_b bo_color2">★★★★☆</span>
-								&nbsp;
-								<span class="f_b">아이패드 에어2 역시 좋습니다</span>
-								&nbsp;|&nbsp;
-								<span class="bo_color f_s12">saemi park</span>
-								&nbsp;|&nbsp;
-								<span class="bo_color f_s12">G마켓에서 작성</span>
-							</div>
-							<div class="f_r f_s12 bo_color">
-								APR 22, 2015
-							</div>
-						</li>
-						<li class="review_content">
-							우선 온라인을 통해서 처음으로 고가의 가전을 구입하게 되었습니다.
-							하이마트나 이마트 등에 비해 5만원 가량 저렴합니다.
-
-							걱정과는 다르게 뽁뽁이까지 싸져있어서 큰 이상은 없는 양품을 받은거 같아 기분이 좋네요
-						</li>
-					</ul>
-					<ul class="review">
-						<li class="cl_b">
-							<div class="f_l">
-								<span class="f_b bo_color2">★★★★☆</span>
-								&nbsp;
-								<span class="f_b">아이패드 에어2 역시 좋습니다</span>
-								&nbsp;|&nbsp;
-								<span class="bo_color f_s12">saemi park</span>
-								&nbsp;|&nbsp;
-								<span class="bo_color f_s12">G마켓에서 작성</span>
-							</div>
-							<div class="f_r f_s12 bo_color">
-								APR 22, 2015
-							</div>
-						</li>
-						<li class="review_content">
-							우선 온라인을 통해서 처음으로 고가의 가전을 구입하게 되었습니다.
-							하이마트나 이마트 등에 비해 5만원 가량 저렴합니다.
-
-							걱정과는 다르게 뽁뽁이까지 싸져있어서 큰 이상은 없는 양품을 받은거 같아 기분이 좋네요
-						</li>
-					</ul>
-					<ul class="review">
-						<li class="cl_b">
-							<div class="f_l">
-								<span class="f_b bo_color2">★★★★☆</span>
-								&nbsp;
-								<span class="f_b">아이패드 에어2 역시 좋습니다</span>
-								&nbsp;|&nbsp;
-								<span class="bo_color f_s12">saemi park</span>
-								&nbsp;|&nbsp;
-								<span class="bo_color f_s12">G마켓에서 작성</span>
-							</div>
-							<div class="f_r f_s12 bo_color">
-								APR 22, 2015
-							</div>
-						</li>
-						<li class="review_content">
-							우선 온라인을 통해서 처음으로 고가의 가전을 구입하게 되었습니다.
-							하이마트나 이마트 등에 비해 5만원 가량 저렴합니다.
-
-							걱정과는 다르게 뽁뽁이까지 싸져있어서 큰 이상은 없는 양품을 받은거 같아 기분이 좋네요
-						</li>
-					</ul>
-				</div>
-				
-				<!-- 커뮤니티 후기 페이징 -->
-				<div class="pagination_wrap cl_b">
-					<a onclick=""><img src="<?= $adr_img ?>left_arrow.png"></a>
-					<div class="pagination">
-						<a class="current_page" onclick="">1</a>
-						<a onclick="">2</a>
-						<a onclick="">3</a>
-						<span>···</span>
-						<a onclick="">7</a>
-					</div>
-					<a onclick=""><img src="<?= $adr_img ?>right_arrow.png"></a>
-				</div>
-				<!-- /커뮤니티 후기 페이징 -->
 			</div>
 		</div>
 

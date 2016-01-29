@@ -12,14 +12,12 @@ class ShipmentCustomModel{
     /*  	
      *	해외통관 정보 등록 기능
      */
-	function create($entry_num, $year, $icon, $memo, $member_idx, $status)
+	function create($entry_num, $year, $member_idx, $status)
 	{
 
 		if(	!(	inputErrorCheck($entry_num, 'entry_num')
 				&& inputErrorCheck($year, 'year')
-				&& inputErrorCheck($icon, 'icon')
 				&& inputErrorCheck($member_idx, 'member_idx')
-				&& inputErrorCheck($memo, 'memo')
 				&& inputErrorCheck($status, 'status')
 				))
 			return ;		
@@ -29,9 +27,7 @@ class ShipmentCustomModel{
 			array(
 				'entry_num'=> $entry_num, 
 				'year'=> $year, 
-				'icon'=> $icon, 
 				'member_idx'=> $member_idx, 
-				'memo'=> $memo, 
 				'status'=> $status, 
 				'upload'=>DB::raw('now()')
 				)
@@ -48,7 +44,7 @@ class ShipmentCustomModel{
 		if(	!(	inputErrorCheck($member_idx, 'member_idx')))
 			return ;	
 		
-		$result = DB::select('select * from shipment_custom where member_idx=? order by idx DESC', array($membeR_idx));
+		$result = DB::select('select * from shipment_custom where member_idx=? order by idx DESC', array($member_idx));
 
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
@@ -71,30 +67,34 @@ class ShipmentCustomModel{
 	}
 
 
-    /*  	
-     *	해외통관 수정 기능
+  /*  	
+     *	해외배송 수정 기능
      */
-	function update($idx, product_name, $year, $icon, $memo, $status)
+	function update($idx, $status)
 	{
 
-
 		if(	!(	inputErrorCheck($idx, 'idx')
-				&& inputErrorCheck($product_name, 'product_name')
-				&& inputErrorCheck($year, 'year')
-				&& inputErrorCheck($icon, 'icon')
-				&& inputErrorCheck($memo, 'memo')
 				&& inputErrorCheck($status, 'status')
 				))
 			return ;		
 				
-				
-		$result = DB::update('update shipment_custom set product_name=?, year=?, icon=?, memo=?, status=?,	upload=now() where idx=?',
-			array($product_name, $year, $icon, $memo, $status, $idx));
+		$result = DB::update('update shipment_custom set status=?, upload=now() where idx=?',
+			array($status, $idx));
                     
  		if($result == true){
           	return array('code' => 1, 'msg' => 'success');
          }else{
           	return array('code' => 0, 'msg' => 'update false');
          } 
+	}
+	
+	/*
+	 *  배송중인 항목 갯수
+	 */
+	function getCntDeliver($member_idx)
+	{
+		$result = DB::select("SELECT count(*) as cnt FROM shipment_custom WHERE member_idx = ? AND status = 0", array($member_idx));
+	
+		return $result[0]->cnt;
 	}
 }

@@ -18,6 +18,10 @@
 	$adr_btstrp = "http://localhost:8000/bootstrap/";
 	$adr_ctr = "http://localhost:8000/";
 	*/
+	
+	function isMobile() {
+		return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
+	}
 ?>
 
 <input type="hidden" id="adr_js" value="<?=$adr_js?>"/>
@@ -30,6 +34,7 @@
 	if (session_id() == '')	session_start();
 		$logined = !empty($_SESSION['nickname']);
 	if ($logined) {
+		// 헤더에서 사용
 		$nickname = $_SESSION['nickname'];
 		$img = $_SESSION['img'];
 	}

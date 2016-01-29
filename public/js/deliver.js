@@ -2,28 +2,28 @@
 // naver 감사합니다.
 
 var dtd_companys = new Array();
-dtd_companys.push(new Array("CJ대한통운", 12, "http://www.doortodoor.co.kr"));
-dtd_companys.push(new Array("우체국택배", 13, "http://parcel.epost.go.kr"));
-dtd_companys.push(new Array("한진택배", 12, "http://hanex.hanjin.co.kr"));
-dtd_companys.push(new Array("현대택배", 12, "http://www.hlc.co.kr"));
-dtd_companys.push(new Array("로젠택배", 11, "http://www.ilogen.com"));
-dtd_companys.push(new Array("KG로지스", 12, "http://www.kgbls.co.kr"));
-dtd_companys.push(new Array("CVSnet 편의점택배", 10, "http://www.cvsnet.co.kr/"));
-dtd_companys.push(new Array("KGB택배", 10, "http://www.kgbls.co.kr/"));
-dtd_companys.push(new Array("경동택배", 12, "http://www.kdexp.com/"));
-dtd_companys.push(new Array("대신택배", 13, "http://apps.ds3211.co.kr"));
-dtd_companys.push(new Array("일양로지스", 9, "http://www.ilyanglogis.com/"));
-dtd_companys.push(new Array("합동택배", 13, "http://www.hdexp.co.kr/"));
-dtd_companys.push(new Array("GTX로지스", 11, "http://home.gtxlogis.co.kr/"));
-dtd_companys.push(new Array("건영택배", 10, "http://www.kunyoung.com/"));
-dtd_companys.push(new Array("천일택배", 11, "http://www.chunil.co.kr/"));
-dtd_companys.push(new Array("한의사랑택배", 13, "http://www.hanips.com/"));
-dtd_companys.push(new Array("굿투럭", 10, "http://www.goodstoluck.co.kr/"));
-dtd_companys.push(new Array("FedEx", 30, "http://www.fedex.com/kr/"));
-dtd_companys.push(new Array("EMS", 13, "http://service.epost.go.kr"));
-dtd_companys.push(new Array("DHL", 13, "http://www.dhl.co.kr"));
-dtd_companys.push(new Array("UPS", 13, "http://www.ups.com/content/kr/ko/index.jsx"));
-dtd_companys.push(new Array("TNTExpress", 9, "http://www.tnt.com/express/ko_kr/site/home.html"));
+dtd_companys.push(new Array("CJ대한통운", 12, "http://www.doortodoor.co.kr", "CJ"));
+dtd_companys.push(new Array("우체국택배", 13, "http://parcel.epost.go.kr", "postbox"));
+dtd_companys.push(new Array("한진택배", 12, "http://hanex.hanjin.co.kr", "hanjin"));
+dtd_companys.push(new Array("현대택배", 12, "http://www.hlc.co.kr", "hyundai"));
+dtd_companys.push(new Array("로젠택배", 11, "http://www.ilogen.com", "logen"));
+dtd_companys.push(new Array("KG로지스", 12, "http://www.kgbls.co.kr", "KG"));
+dtd_companys.push(new Array("CVSnet 편의점택배", 10, "http://www.cvsnet.co.kr/", "CVS"));
+dtd_companys.push(new Array("KGB택배", 10, "http://www.kgbls.co.kr/", "KGB"));
+dtd_companys.push(new Array("경동택배", 12, "http://www.kdexp.com/", "kd"));
+dtd_companys.push(new Array("대신택배", 13, "http://apps.ds3211.co.kr", "ds"));
+dtd_companys.push(new Array("일양로지스", 9, "http://www.ilyanglogis.com/", "ilyang"));
+dtd_companys.push(new Array("합동택배", 13, "http://www.hdexp.co.kr/", "hapdong"));
+dtd_companys.push(new Array("GTX로지스", 11, "http://home.gtxlogis.co.kr/", "GTX"));
+dtd_companys.push(new Array("건영택배", 10, "http://www.kunyoung.com/", "kunyoung"));
+dtd_companys.push(new Array("천일택배", 11, "http://www.chunil.co.kr/", "chunil"));
+dtd_companys.push(new Array("한의사랑택배", 13, "http://www.hanips.com/", "han"));
+dtd_companys.push(new Array("굿투럭", 10, "http://www.goodstoluck.co.kr/", "gtl"));
+dtd_companys.push(new Array("FedEx", 30, "http://www.fedex.com/kr/", "FedEx"));
+dtd_companys.push(new Array("EMS", 13, "http://service.epost.go.kr", "EMS"));
+dtd_companys.push(new Array("DHL", 13, "http://www.dhl.co.kr", "DHL"));
+dtd_companys.push(new Array("UPS", 13, "http://www.ups.com/content/kr/ko/index.jsx", "UPS"));
+dtd_companys.push(new Array("TNTExpress", 9, "http://www.tnt.com/express/ko_kr/site/home.html", "TNT"));
 
 $(document).ready(function(){
 	$("#delivery_office").html("");
@@ -58,6 +58,7 @@ function deliverySearch()
 	var company_info = dtd_companys[$("#delivery_office").val()];
 	var company = company_info[0];
 	var num = $("#delivery_num").val();
+	var company_code = company_info[3];
 	
 	if (company == "경동택배" || company == "대신택배" || company == "일양로지스" || company == "한의사랑택배" || company == "FedEx" || company == "DHL" || company == "UPS")
 	{
@@ -138,7 +139,7 @@ function deliverySearch()
 			async: false,
 			data:{
 				adr_ctr: adr_ctr,
-				company: company,
+				company: company_code,
 				num: num
 			},
 			success: function(result)

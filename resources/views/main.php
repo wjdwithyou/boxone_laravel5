@@ -50,7 +50,23 @@
 				<div id="br_content" class="mg_t16">
 					<div id="br_slide">
 						<?php for ($i = 0 ; $i < count($siteList) ; $i++) :?>
-							<div class="slide"><a href="<?=$siteList[$i]->website_link?>"><img src="<?=$adr_img?>site/<?=$siteList[$i]->idx?>.png" title="<?=($i+1)?>."></a></div>
+							<div class="slide">
+								<div class="imglist_div2">
+									<div class="imglist_img img_center">
+										<div class="img_center_inner">
+											<a href="<?=$siteList[$i]->website_link?>"><img src="<?=$adr_img?>site/<?=$siteList[$i]->idx?>.png"></a>
+										</div>
+									</div>
+									<div class="imglist_desc_wrap ta_c">
+										<div class="imglist_desc1 ta_c t_o bo_color1 font_10 br_20 br_border">
+											<?=$siteList[$i]->name?>
+										</div>
+										<div class="imglist_desc2 ta_c t_o">
+											<?=$siteList[$i]->cate_name?>
+										</div>
+									</div>
+								</div>
+							</div>
 						<?php endfor;?>
 					</div>
 				</div>
@@ -65,7 +81,7 @@
 						<div id="hd_slide_wrap" class="grid grid_211">
 							<div id="hd_slide_wrap_inner">
 								<div id="hd_slide">
-									<?php foreach ($hotList as $list) :?>
+									<?php foreach ($hotBigList as $list) :?>
 									<div class="slide">
 										<div class="imglist_div2">
 											<div class="imglist_img img_center">
@@ -81,7 +97,7 @@
 													<?=$list->name?>
 												</div>
 												<div class="bo_color1 ta_c fw_b mg_t8">
-													<?=round($list->fPriceS / $list->fPriceO * 100)?>%
+													<?=$list->saleP?>%
 												</div>
 												<div class="imglist_desc3 ta_c t_o">
 													<strike class="bo_color2">￦<?=$list->fPriceO?></strike>&nbsp;￦<?=$list->fPriceS?>
@@ -109,7 +125,7 @@
 										<?=$list->name?>
 									</div>
 									<div class="bo_color1 ta_c fw_b mg_t8">
-										<?=round($list->fPriceS / $list->fPriceO * 100)?>%
+										<?=$list->saleP?>%
 									</div>
 									<div class="imglist_desc3 ta_c t_o">
 										<strike class="bo_color2">￦<?=$list->fPriceO?></strike>&nbsp;￦<?=$list->fPriceS?>
@@ -127,7 +143,11 @@
 				</div>
 				<div id="sb_content" class="f_c">
 					<?php foreach ($prdtList as $list) :?>
-						<div class="mg_t32 ta_c font_16 f_b bo_color2"><?=$list['cateName']?></div>
+						<div class="cate_title_wrap">
+							<hr class="cate_title_hr">
+							<div class="cate_title br_25 f_b bo_color2"><span><?=$list['cateName']?></span></div>
+						</div>
+						<?php if(!isMobile()) :?>
 						<div class="cate_slide">
 							<?php for($i = 0 ; $i < count($list)-1 ; $i++) :?>
 							<div class="slide">
@@ -152,6 +172,70 @@
 							</div>
 							<?php endfor;?>
 						</div>
+						<?php else :?>
+						<div class="imglist_wrap ws_n ofx_a f_c">
+							<?php for($i = 0 ; $i < count($list)-1 ; $i++) :?>
+							<div class="imglist_div dp_ib grid_442">
+								<div class="imglist_img img_center">
+									<div class="img_center_inner">
+										<a href="<?=$adr_ctr ?>Shoppingbox/detail?idx=<?=$list[$i]->idx?>"><img src="<?=$list[$i]->img?>"></a>
+									</div>
+								</div>
+								<div class="imglist_desc_wrap">
+									<div class="imglist_desc1 ta_c t_o bo_color2">
+										<?=$list[$i]->brand?>
+									</div>
+									<div class="imglist_desc2 ta_c t_o">
+										<?=$list[$i]->name?>
+									</div>
+									<div class="imglist_desc3 ta_c t_o mg_t8">
+										￦<?=$list[$i]->fPrice?>
+									</div>
+								</div>
+							</div>
+							<?php endfor;?>
+							<?php for($i = 0 ; $i < count($list)-1 ; $i++) :?>
+							<div class="imglist_div dp_ib grid_442">
+								<div class="imglist_img img_center">
+									<div class="img_center_inner">
+										<a href="<?=$adr_ctr ?>Shoppingbox/detail?idx=<?=$list[$i]->idx?>"><img src="<?=$list[$i]->img?>"></a>
+									</div>
+								</div>
+								<div class="imglist_desc_wrap">
+									<div class="imglist_desc1 ta_c t_o bo_color2">
+										<?=$list[$i]->brand?>
+									</div>
+									<div class="imglist_desc2 ta_c t_o">
+										<?=$list[$i]->name?>
+									</div>
+									<div class="imglist_desc3 ta_c t_o mg_t8">
+										￦<?=$list[$i]->fPrice?>
+									</div>
+								</div>
+							</div>
+							<?php endfor;?>
+							<?php for($i = 0 ; $i < count($list)-1 ; $i++) :?>
+							<div class="imglist_div dp_ib grid_442">
+								<div class="imglist_img img_center">
+									<div class="img_center_inner">
+										<a href="<?=$adr_ctr ?>Shoppingbox/detail?idx=<?=$list[$i]->idx?>"><img src="<?=$list[$i]->img?>"></a>
+									</div>
+								</div>
+								<div class="imglist_desc_wrap">
+									<div class="imglist_desc1 ta_c t_o bo_color2">
+										<?=$list[$i]->brand?>
+									</div>
+									<div class="imglist_desc2 ta_c t_o">
+										<?=$list[$i]->name?>
+									</div>
+									<div class="imglist_desc3 ta_c t_o mg_t8">
+										￦<?=$list[$i]->fPrice?>
+									</div>
+								</div>
+							</div>
+							<?php endfor;?>
+						</div>
+						<?php endif;?>
 					<?php endforeach;?>
 				</div>
 			</div>
