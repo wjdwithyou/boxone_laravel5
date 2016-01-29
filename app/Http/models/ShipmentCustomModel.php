@@ -97,4 +97,14 @@ class ShipmentCustomModel{
 	
 		return $result[0]->cnt;
 	}
+	
+	/*
+	 *  단일 정보 가져오기
+	 */
+	function getInfoSingle($idx)
+	{
+		$result = DB::select("SELECT * FROM shipment_custom WHERE idx = ?", array($idx));
+	
+		return $result;
+	}
 }

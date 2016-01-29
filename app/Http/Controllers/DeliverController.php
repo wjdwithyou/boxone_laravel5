@@ -27,6 +27,11 @@ class DeliverController extends Controller {
 		
 		$result = json_decode(file_get_contents("http://platformstory.iptime.org:8093/custom.php?year=$year"."&num=$num"), true);
 		
+		if (strpos(' '.$result['state'], "반출"))
+			$result['stateNum'] = 1;
+		else
+			$result['stateNum'] = 0;
+		
 		$page = 'deliverInfo';
 		return view($page, array('page' => $page, 'code' => 2, 'result' => $result));
 		
@@ -49,6 +54,13 @@ class DeliverController extends Controller {
 		$result['office'] = $company;
 		$result['num'] = $num;
 		
+		if (strpos(' '.$result['state'], "완료"))
+			$result['stateNum'] = 1;
+		else
+			$result['stateNum'] = 0;			
+		
+		array_push($result, array());
+		
 		$page = 'deliverInfo';
 		return view($page, array('page' => $page, 'code' => 1, 'result' => $result, 'adr_ctr' => $adr_ctr));
 	}
@@ -66,11 +78,12 @@ class DeliverController extends Controller {
 		$office = Request::input('office');
 		$num = Request::input('num');
 		$prdt = Request::input('prdt');
+		$state = Request::input('state');
 		
 		if (session_id() == '') 	session_start();
 		$member_idx = $_SESSION['idx'];
 		
-		$result = $sdModel->create(trim($prdt), $num, $office, " ", $member_idx, " ", " ", "배송중");
+		$result = $sdModel->create(trim($prdt), $num, $office, $member_idx, $state);
 		
 		header('Content-Type: application/json');
 		echo json_encode($result);
@@ -88,11 +101,56 @@ class DeliverController extends Controller {
 	
 		$num = Request::input('num');
 		$year = Request::input('year');
+		$state = Request::input('state');
 	
 		if (session_id() == '') 	session_start();
 		$member_idx = $_SESSION['idx'];
 	
-		$result = $scModel->create($num, $year, " ", " ", $member_idx, "배송중");
+		$result = $scModel->create($num, $year, $member_idx, $state);
+	
+		header('Content-Type: application/json');
+		echo json_encode($result);
+	}
+	
+	/*
+	 *  배송 삭제
+	 */
+	public function deleteDelivery()
+	{
+		$sdModel = new ShipmentDomesticModel(); 
+		
+		$idx = Request::input('idx');
+		
+		if (session_id() == '') 	session_start();
+		$member_idx = $_SESSION['idx'];
+		
+		$info = $sdModel->getInfoSingle($idx);
+		if (count($info) && $info[0]->member_idx == $member_idx)
+			$result = $sdModel->delete($idx);
+		else 
+			$result = array('code' => 0);		
+		
+		header('Content-Type: application/json');
+		echo json_encode($result);
+	}
+	
+	/*
+	 *  통관 삭제
+	 */
+	public function deleteEntry()
+	{
+		$scModel = new ShipmentCustomModel();
+	
+		$idx = Request::input('idx');
+	
+		if (session_id() == '') 	session_start();
+		$member_idx = $_SESSION['idx'];
+		
+		$info = $scModel->getInfoSingle($idx);
+		if (count($info) && $info[0]->member_idx == $member_idx)
+			$result = $scModel->delete($idx);
+		else
+			$result = array('code' => 0);
 	
 		header('Content-Type: application/json');
 		echo json_encode($result);

@@ -8,6 +8,7 @@
 <input type="hidden" id="delivery_office_value" value="<?=$result['office']?>"/>
 <input type="hidden" id="delivery_num_value" value="<?=$result['num']?>"/>
 <input type="hidden" id="delivery_prdt_value" value="<?=$result['prdt']?>"/>
+<input type="hidden" id="delivery_state_value" value="<?=$result['stateNum']?>"/>
 <p class="popup_p">
 	<?=$result['office']?> / <?=$result['num']?>로 조회한 결과입니다.
 </p>
@@ -48,6 +49,7 @@
 <?php else : ?>
 <input type="hidden" id="entry_num_value" value="<?=$result['hbl']?>"/>
 <input type="hidden" id="entry_year_value" value="<?=$result['year']?>"/>
+<input type="hidden" id="entry_state_value" value="<?=$result['stateNum']?>"/>
 <p class="popup_p">
 	<?=$result['hbl']?>로 조회한 결과입니다.
 </p>
