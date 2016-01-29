@@ -81,7 +81,7 @@
 						<div id="hd_slide_wrap" class="grid grid_211">
 							<div id="hd_slide_wrap_inner">
 								<div id="hd_slide">
-									<?php foreach ($hotList as $list) :?>
+									<?php foreach ($hotBigList as $list) :?>
 									<div class="slide">
 										<div class="imglist_div2">
 											<div class="imglist_img img_center">
