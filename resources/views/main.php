@@ -50,7 +50,7 @@
 				<div id="br_content" class="mg_t16">
 					<div id="br_slide">
 						<?php for ($i = 0 ; $i < count($siteList) ; $i++) :?>
-							<div class="slide"><a href="<?=$siteList[$i]->website_link?>"><img src="<?=$adr_img?>site/<?=$siteList[$i]->idx?>.png" title="<?=($i+1)?>."></a></div>
+							<div class="slide"><a href="<?=$siteList[$i]->website_link?>"><img src="<?=$adr_img?>site/<?=$siteList[$i]->idx?>.png" title="<?=($i+1)?>. <?=$siteList[$i]->cate_name?>"></a></div>
 						<?php endfor;?>
 					</div>
 				</div>
@@ -81,7 +81,7 @@
 													<?=$list->name?>
 												</div>
 												<div class="bo_color1 ta_c fw_b mg_t8">
-													<?=round($list->fPriceS / $list->fPriceO * 100)?>%
+													<?=$list->saleP?>%
 												</div>
 												<div class="imglist_desc3 ta_c t_o">
 													<strike class="bo_color2">￦<?=$list->fPriceO?></strike>&nbsp;￦<?=$list->fPriceS?>
@@ -109,7 +109,7 @@
 										<?=$list->name?>
 									</div>
 									<div class="bo_color1 ta_c fw_b mg_t8">
-										<?=round($list->fPriceS / $list->fPriceO * 100)?>%
+										<?=$list->saleP?>%
 									</div>
 									<div class="imglist_desc3 ta_c t_o">
 										<strike class="bo_color2">￦<?=$list->fPriceO?></strike>&nbsp;￦<?=$list->fPriceS?>

@@ -230,8 +230,9 @@ class ShoppingsiteModel{
 	 */
 	function getBestSiteByCate()
 	{
-		$result = DB::select("SELECT * 
-							FROM (SELECT * FROM shoppingsite  ORDER BY hit_count DESC) s 
+		$result = DB::select("SELECT s.*, sc.name as cate_name 
+							FROM (SELECT * FROM shoppingsite ORDER BY hit_count DESC) s 
+							INNER JOIN shoppingsite_category sc ON s.category_idx = sc.idx 
 							GROUP BY s.category_idx");
 		return $result;
 	}
