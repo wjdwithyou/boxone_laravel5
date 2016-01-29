@@ -111,10 +111,10 @@
 								<?=$sameList[$i]->fPrice?>
 							</div>
 							<div class="f_r">
-								<?php if ($list->ptype == 'p') :?>
-								<button type="button" class="bo_btn3" onclick="location.href = '<?=$adr_ctr?>Shoppingbox/detail?idx=<?=$list->idx?>';">
+								<?php if ($sameList[$i]->ptype == 'p') :?>
+								<button type="button" class="bo_btn3" onclick="location.href = '<?=$adr_ctr?>Shoppingbox/detail?idx=<?=$sameList[$i]->idx?>';">
 								<?php else :?>
-								<button type="button" class="bo_btn3" onclick="location.href = '<?=$adr_ctr?>Hotdeal/productDetail?idx=<?=$list->idx?>';">
+								<button type="button" class="bo_btn3" onclick="location.href = '<?=$adr_ctr?>Hotdeal/productDetail?idx=<?=$sameList[$i]->idx?>';">
 								<?php endif;?>
 									구매하기
 								</button>
