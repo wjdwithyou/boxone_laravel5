@@ -24,8 +24,7 @@ class MainController extends Controller {
 		$cateModel = new CategoryModel();
 		
 		// 인기 쇼핑몰 랭킹 (쇼핑사이트 조회수로 10개) 가져오기
-		$result = $siteModel->getInfoList(0);
-		$siteList = array_slice($result['data'], 0, 10);
+		$siteList = $siteModel->getBestSiteByCate();
 		
 		// 핫한 상품 (쇼핑박스 중 할인되는 것, 조회수 10개) 가져오기
 		$result = $hotPrdtModel->getInfoList(1, 0, 0, array(), array(), array(), 1);

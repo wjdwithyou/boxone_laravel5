@@ -12,15 +12,13 @@ class ShipmentDomesticModel{
     /*  	
      *	국내배송정보 등록 기능
      */
-	function create($product_name, $postal_num, $postal_agency, $memo, $member_idx, $icon, $status)
+	function create($product_name, $postal_num, $postal_agency, $member_idx, $status)
 	{
 
 		if(	!(	inputErrorCheck($product_name, 'product_name')
 				&& inputErrorCheck($postal_agency, 'postal_agency')
 				&& inputErrorCheck($postal_num, 'postal_num')
 				&& inputErrorCheck($member_idx, 'member_idx')
-				&& inputErrorCheck($memo, 'memo')
-				&& inputErrorCheck($icon, 'icon')
 				&& inputErrorCheck($status, 'status')
 				))
 			return ;		
@@ -32,9 +30,7 @@ class ShipmentDomesticModel{
 				'postal_num'=> $postal_num,
 				'postal_agency'=> $postal_agency, 
 				'member_idx'=> $member_idx, 
-				'memo'=> $memo, 
 				'status'=> $status, 
-				'icon'=> $icon,
 				'upload'=>DB::raw('now()')
 				)
 			);	
@@ -77,26 +73,31 @@ class ShipmentDomesticModel{
     /*  	
      *	국내배송 수정 기능
      */
-	function update($idx, $product_name, $postal_num, $postal_agency, $memo, $icon, $status)
+	function update($idx, $status)
 	{
 
 		if(	!(	inputErrorCheck($idx, 'idx')
-				&& inputErrorCheck($product_name, 'product_name')
-				&& inputErrorCheck($postal_num, 'postal_num')
-				&& inputErrorCheck($postal_agency, 'postal_agency')
-				&& inputErrorCheck($memo, 'memo')
-				&& inputErrorCheck($icon, 'icon')
 				&& inputErrorCheck($status, 'status')
 				))
 			return ;		
 				
-		$result = DB::update('update shipment_domestic set product_name=?, postal_num=?, postal_agency=?, memo=?, icon=?, status=?,	upload=now() where idx=?',
-			array($product_name, $postal_num, $postal_agency, $memo, $icon, $status, $idx));
+		$result = DB::update('update shipment_domestic set status=?, upload=now() where idx=?',
+			array($status, $idx));
                     
  		if($result == true){
           	return array('code' => 1, 'msg' => 'success');
          }else{
           	return array('code' => 0, 'msg' => 'update false');
          } 
+	}
+	
+	/*
+	 *  배송중인 항목 갯수 확인 기능
+	 */
+	function getCntDeliver($member_idx)
+	{
+		$result = DB::select("SELECT count(*) as cnt FROM shipment_domestic WHERE member_idx = ? AND status = 0", array($member_idx));
+		
+		return $result[0]->cnt;
 	}
 }

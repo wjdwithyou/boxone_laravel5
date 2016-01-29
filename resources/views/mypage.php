@@ -7,7 +7,6 @@
 </head>
 
 <body>
-<input type="hidden" id="member_idx" value="<?=$result->idx?>"/>
 
 <div id="wrap">
 	<div id="header">
@@ -42,14 +41,14 @@
 						</div>
 						<p>찜한상품</p>
 					</div>
-					<div class="top_div2 f_l ta_c" onclick="location.href = '<?=$adr_ctr?>Mypage/dc'">
-						<div><span class="mp_badge fw_b br_20">1</span></div>
+					<div class="top_div2 f_l ta_c" onclick="location.href = '<?=$adr_ctr?>Mypage/deliveryIndex'">
+						<div><span class="mp_badge fw_b br_20"><?=$alarmDc?></span></div>
 						<div class="mpt_ico">
 							<img src="<?=$adr_img?>mp_delivery.png" class="mp_ico">
 						</div>
 						<p>배송통관</p>
 					</div>
-					<div class="top_div2 f_l ta_c" onclick="location.href = '<?=$adr_ctr?>Mypage/info'">
+					<div class="top_div2 f_l ta_c" onclick="location.href = '<?=$adr_ctr?>Mypage/infoIndex'">
 						<div class="mpt_ico2">
 							<img src="<?=$adr_img?>mp_info.png" class="mp_ico">
 						</div>
