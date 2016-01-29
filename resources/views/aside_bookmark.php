@@ -1,5 +1,5 @@
 <div id="aside_expand_top" class="pd_b8 ta_c">
-	<span class="fw_b font_16">최근 본 상품</span>
+	<span class="fw_b font_16">즐겨찾기</span>
 </div>
 <div id="aside_expand_content" class="f_c">
 	<div class="imglist_div aside_img_wrap grid_as">
