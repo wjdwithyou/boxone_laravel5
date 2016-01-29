@@ -124,7 +124,7 @@ class LoginController extends Controller {
 		$id = Request::input('id');
 		$pw = Request::input('pw');
 		$email = Request::input('email');
-		$nickname = Request::input('nickname');		
+		$nickname = Request::input('nickname');	
 		$rec = Request::input('rec');
 		
 		// 이미지는 파일이 될 수도(자체 회원가입), url 주소가 될 수도(소셜 회원가입) 있음.
@@ -172,6 +172,61 @@ class LoginController extends Controller {
 		echo json_encode($result);
 	}
 	
+	public function modifyInfo(){
+		$mbModel = new MemberModel();
+		
+		//$type = Request::input('type');	// social+
+		$nicknameo = Request::input('nicknameo');
+		//$email = Request::input('email');	// social+
+		$nickname = Request::input('nickname');
+		$pw = Request::input('pw');
+		
+		$img = Request::file('img');
+		/*
+		if (Request::hasFile('img'))
+			$img = Request::file('img');
+		*/
+		
+		/*
+		// 이미지는 파일이 될 수도(자체 회원가입), url 주소가 될 수도(소셜 회원가입) 있음.
+		if (Request::hasFile('img'))
+		{
+			$img = Request::file('img');
+			$imgType = 1;
+		}
+		else if (Request::has('img'))
+		{
+			$img = Request::input('img');
+			if (strpos(" ".$img, "default") || strpos(" ".$img, "nodata"))
+			{
+				$img = "default.png";
+				$imgType = 3;
+			}
+			else
+				$imgType = 2;
+		}
+		else
+		{
+			$img = "default.png";
+			$imgType = 3;
+		}
+		*/
+		$result = $mbModel->updateInfo($nicknameo, /*$type, $email*/$nickname, $pw, $img);
+		
+		$image = $mbModel->getImage($nickname);
+		
+		if ($result['code'] == 1){
+			if (session_id() == '')
+				session_start();
+			
+			$_SESSION['nickname'] = $nickname;
+			$_SESSION['img'] = $image['data'][0]->image;
+		}
+		
+		header('Content-Type: application/json');
+		echo json_encode($result);
+	}
+	
 	/*
 	 * 2015.11.17
 	 * 작성자 : 박용호
@@ -199,6 +254,20 @@ class LoginController extends Controller {
 		
 		$nickname = Request::input('nickname');
 		$result = $memberModel->checknickname($nickname);
+		
+		header('Content-Type: application/json');
+		echo json_encode($result);
+	}
+	
+	// 160129 J.Style
+	// Check old password is correct.
+	public function checkPwo(){
+		$memberModel = new MemberModel();
+		
+		$nicknameo = Request::input('nicknameo');
+		$pwo = Request::input('pwo');
+		
+		$result = $memberModel->checkPwo($nicknameo, $pwo);
 		
 		header('Content-Type: application/json');
 		echo json_encode($result);
@@ -420,8 +489,7 @@ class LoginController extends Controller {
 		return view($page, array('page' => $page));
 	}
 	
-	public function login_changepw()
-	{
+	public function login_changepw(){
 		// 20160118 J.Style
 		// If prev page doesn't exist, redirect to main page.
 		
@@ -437,8 +505,7 @@ class LoginController extends Controller {
 		$page = 'login_changepw';
 		return view($page, array('page' => $page, 'eid' => $eid));
 	}
-	public function login_addinfo()
-	{
+	public function login_addinfo(){
 		// 20160118 J.Style
 		// If prev page doesn't exist, redirect to main page.
 		

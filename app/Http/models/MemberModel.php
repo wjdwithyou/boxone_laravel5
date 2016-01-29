@@ -1,11 +1,10 @@
 <?php
-
 namespace App\Http\models;
 use DB;
+use AWS;
 use Hash;
+
 include_once dirname(__FILE__)."/Utility.php";
-
-
 
 /*
  *  회원 관련 컨트롤러
@@ -101,6 +100,15 @@ class MemberModel{
           return array('code' => 0, 'data'=> "login failure" );
       }
     }
+    
+    // Test
+    // Temp function
+    // get image by nickname
+    function getImage($nickname){
+    	$image = DB::select('select image from member where nickname=?', array($nickname));
+    	
+    	return array('code' => 1, 'data' => $image);
+    }
 
     /*    
      *  이메일 중복 체크
@@ -118,9 +126,7 @@ class MemberModel{
     /*    
      *  닉네임 중복 체크
      */
-    function checkNickname($nickname)
-    {
-
+    function checkNickname($nickname){
       $check = DB::select('select * from member where nickname=?', array($nickname));
 
       if( $check == NULL)
@@ -128,7 +134,17 @@ class MemberModel{
       else
         return array('code' => 0, 'msg' => 'exist user');
     }
-
+    
+    // 160129 J.Style
+    // When modify info, check old password is correct or not.
+    function checkPwo($nicknameo, $pwo){
+    	$check = DB::select('select pw from member where nickname=?', array($nicknameo));		// nickname is unique..
+    	
+    	if (count($check) > 0 && Hash::check($pwo, $check[0]->pw))
+    		return array('code' => 1, 'msg' => 'success');
+    	else
+    		return array('code' => 0, 'msg' => 'incorrect password');
+    }
 
     /*    
      *  닉네임으로 회원 검색 기능
@@ -211,6 +227,78 @@ class MemberModel{
       		return array('code' => 0, 'msg' => 'update failure');
       }
 
+    // 160129 J.Style
+    // Update info in MyPage.
+    function updateInfo($nicknameo, $nickname, $pw, $image){
+    	if( !( /*inputErrorCheck($type, 'type')
+    		&&*/ inputErrorCheck($nicknameo, 'nicknameo')
+    		&& /*inputErrorCheck($email, 'email')
+			&&*/ inputErrorCheck($nickname, 'nickname')
+    		&& inputErrorCheck($pw, 'pw')
+    		/*&& inputErrorCheck($image, 'image')*/))
+    		return;
+    	
+    	$encrypt = Hash::make($pw);
+    	
+    	if (!(Hash::check($pw, $encrypt))){
+    		if (Hash::needsRehash($encrypt))
+    			$encrypt = Hash::make($pw);
+    	}
+    	
+    	if ($image){
+	    	$result_f = DB::update('update member set nickname=?, pw=? where nickname=?',	/*type=?, email=?,*/	/* +image */
+	    			array($nickname, $encrypt, $nicknameo));
+	    	
+	    	$temp_idx = DB::select('select idx from member where nickname=?', array($nickname));
+	    	$idx = $temp_idx[0]->idx;
+	    	
+    		$s3 = AWS::createClient('s3');
+    		
+    		// Remove previous image from S3
+    		$before = $s3->getIterator('ListObjects', array(
+    				'Bucket'	=> 'boxone-image',
+    				'Prefix'	=> 'profile/'.$idx.'_'
+    		));
+    		
+    		foreach ($before as $i){
+    			$s3->deleteObject(array(
+    					'Bucket'	=> 'boxone-image',
+    					'Key'	=> $i['Key']	
+    			));
+    		}
+    		
+    		// Add new image to S3
+    		$s3PrfAdr = 'https://s3-ap-northeast-1.amazonaws.com/boxone-image/profile/';
+    		$ext = $image->getClientOriginalExtension();
+    		
+    		$img_name = $idx."_image".$ext;
+    		
+    		$result_s = DB::update('update member set image=? where idx=?', array($img_name, $idx));
+    		
+    		
+    		
+    		$result = ($result_f && $result_s)? true: false;
+    		
+    		
+    		
+    		$s3 = AWS::createClient('s3');
+    		
+    		$s3->putObject(array(
+    				'Bucket'		=> 'boxone-image',
+    				'Key'			=> 'profile/'.$img_name,
+    				'SourceFile'	=> $image
+    		));
+    	}
+    	else{
+    		$result = DB::update('update member set nickname=?, pw=? where nickname=?',	/*type=?, email=?,*/
+	    			array($nickname, $encrypt, $nicknameo));
+    	}
+    	
+    	if ($result == true)
+    		return array('code' => 1, 'msg' => 'update success');
+    	else
+    		return array('code' => 0, 'msg' => 'update failure');
+    }
 
     /*
      *  추천인 닉네임을 파라미터로 받아 포인트 증가시킴

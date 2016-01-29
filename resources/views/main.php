@@ -59,10 +59,10 @@
 									</div>
 									<div class="imglist_desc_wrap ta_c">
 										<div class="imglist_desc1 ta_c t_o bo_color1 font_10 br_20 br_border">
-											구매대행
+											<?=$siteList[$i]->name?>
 										</div>
 										<div class="imglist_desc2 ta_c t_o">
-											위메프박스
+											<?=$siteList[$i]->cate_name?>
 										</div>
 									</div>
 								</div>
@@ -81,7 +81,7 @@
 						<div id="hd_slide_wrap" class="grid grid_211">
 							<div id="hd_slide_wrap_inner">
 								<div id="hd_slide">
-									<?php foreach ($hotList as $list) :?>
+									<?php foreach ($hotBigList as $list) :?>
 									<div class="slide">
 										<div class="imglist_div2">
 											<div class="imglist_img img_center">
@@ -97,7 +97,7 @@
 													<?=$list->name?>
 												</div>
 												<div class="bo_color1 ta_c fw_b mg_t8">
-													<?=round($list->fPriceS / $list->fPriceO * 100)?>%
+													<?=$list->saleP?>%
 												</div>
 												<div class="imglist_desc3 ta_c t_o">
 													<strike class="bo_color2">￦<?=$list->fPriceO?></strike>&nbsp;￦<?=$list->fPriceS?>
@@ -125,7 +125,7 @@
 										<?=$list->name?>
 									</div>
 									<div class="bo_color1 ta_c fw_b mg_t8">
-										<?=round($list->fPriceS / $list->fPriceO * 100)?>%
+										<?=$list->saleP?>%
 									</div>
 									<div class="imglist_desc3 ta_c t_o">
 										<strike class="bo_color2">￦<?=$list->fPriceO?></strike>&nbsp;￦<?=$list->fPriceS?>
