@@ -274,7 +274,10 @@ class HotdealProductModel
 			$rateAll += $list->rating;
 			++$rateArray[floor($list->rating+0.5)];
 		}
-		$rateAve = $rateAll / count($result);
+		if (count($result))
+			$rateAve = $rateAll / count($result);
+		else
+			$rateAve = 0;
 		
 		arsort($rateArray);
 		$rateBest = array(array_keys($rateArray)[0], array_shift($rateArray));
