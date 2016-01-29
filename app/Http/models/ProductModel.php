@@ -395,6 +395,21 @@ class ProductModel
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
 	
+	function getSuggestPrdt($cate, $idx)
+	{
+		$result = DB::select("(SELECT 'p' as ptype, idx, name, img, brand, FORMAT(price, 0) as fPrice 
+							FROM product 
+							WHERE cate_small=? AND idx != ?)
+							UNION
+							(SELECT 'h' as ptype, idx, name, img, brand, FORMAT(priceS, 0) as fPrice
+							FROM hotdeal_product
+							WHERE cate_small=? AND idx != ?)
+							ORDER BY hit_count DESC LIMIT 6", 
+				array($cate, $idx, $cate, $idx));
+		
+		return array('code' => 1, 'msg' => 'success', 'data' => $result);
+	}
+	
 }
 
 
