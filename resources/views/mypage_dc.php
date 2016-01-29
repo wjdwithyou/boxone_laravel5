@@ -86,7 +86,7 @@
 								<div class="dc_state_wrap mg_t8 pd_tb8" hidden>
 									<div class="dc_state_top f_c">
 										<div class="mg_lr8 f_r">
-											<button type="button" class="mp_btn bo_btn5 br_25" onclick="">삭제</button>
+											<button type="button" class="mp_btn bo_btn5 br_25" onclick="deleteDelivery(<?=$list['idx']?>);">삭제</button>
 										</div>
 									</div>
 									<div class="dc_state_content">
@@ -132,7 +132,7 @@
 								<div class="dc_state_wrap mg_t8 pd_tb8" hidden>
 									<div class="dc_state_top f_c">
 										<div class="mg_lr8 f_r">
-											<button type="button" class="mp_btn bo_btn5 br_25" onclick="">삭제</button>
+											<button type="button" class="mp_btn bo_btn5 br_25" onclick="deleteEntry(<?=$list['idx']?>);">삭제</button>
 										</div>
 									</div>
 									<div class="dc_state_content">

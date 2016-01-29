@@ -215,13 +215,11 @@ class LoginController extends Controller {
 		
 		$image = $mbModel->getImage($nickname);
 		
-		if ($result['code'] == 1){
-			if (session_id() == '')
-				session_start();
-			
-			$_SESSION['nickname'] = $nickname;
-			$_SESSION['img'] = $image['data'][0]->image;
-		}
+		if (session_id() == '')
+			session_start();
+		
+		$_SESSION['nickname'] = $nickname;
+		$_SESSION['img'] = $image['data'][0]->image;
 		
 		header('Content-Type: application/json');
 		echo json_encode($result);

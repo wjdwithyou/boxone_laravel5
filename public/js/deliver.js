@@ -8,7 +8,7 @@ dtd_companys.push(new Array("한진택배", 12, "http://hanex.hanjin.co.kr", "ha
 dtd_companys.push(new Array("현대택배", 12, "http://www.hlc.co.kr", "hyundai"));
 dtd_companys.push(new Array("로젠택배", 11, "http://www.ilogen.com", "logen"));
 dtd_companys.push(new Array("KG로지스", 12, "http://www.kgbls.co.kr", "KG"));
-dtd_companys.push(new Array("CVSnet 편의점택배", 10, "http://www.cvsnet.co.kr/", "CVS"));
+dtd_companys.push(new Array("CVSnet편의점택배", 10, "http://www.cvsnet.co.kr/", "CVS"));
 dtd_companys.push(new Array("KGB택배", 10, "http://www.kgbls.co.kr/", "KGB"));
 dtd_companys.push(new Array("경동택배", 12, "http://www.kdexp.com/", "kd"));
 dtd_companys.push(new Array("대신택배", 13, "http://apps.ds3211.co.kr", "ds"));
@@ -58,7 +58,6 @@ function deliverySearch()
 	var company_info = dtd_companys[$("#delivery_office").val()];
 	var company = company_info[0];
 	var num = $("#delivery_num").val();
-	var company_code = company_info[3];
 	
 	if (company == "경동택배" || company == "대신택배" || company == "일양로지스" || company == "한의사랑택배" || company == "FedEx" || company == "DHL" || company == "UPS")
 	{
@@ -139,7 +138,7 @@ function deliverySearch()
 			async: false,
 			data:{
 				adr_ctr: adr_ctr,
-				company: company_code,
+				company: company,
 				num: num
 			},
 			success: function(result)
@@ -206,19 +205,23 @@ function createDelivery()
 	}
 	else
 	{	
-		var num = $("#entry_num_value").val();
-		var year = $("#entry_num_value").val();
+		var office = $("#delivery_office_value").val();		
+		var num = $("#delivery_num_value").val();
+		var prdt = $("#delivery_prdt_value").val();
+		var state = $("#delivery_state_value").val();
 		
 		//alert (office+" "+num+" "+prdt);
 		
 		$.ajax
 		({
-			url: adr_ctr+"Deliver/createEntry",
+			url: adr_ctr+"Deliver/createDelivery",
 			type: 'post',
 			async: false,
 			data:{
+				office: office,
 				num: num,
-				year: year
+				prdt: prdt,
+				state: state
 			},
 			success: function(result)
 			{
@@ -248,21 +251,21 @@ function createEntry()
 	}
 	else
 	{	
-		var num = $("#delivery_office_value").val();
-		var num = $("#delivery_num_value").val();
-		var prdt = $("#delivery_prdt_value").html();
+		var num = $("#entry_num_value").val();
+		var year = $("#entry_year_value").val();
+		var state = $("#entry_state_value").val();
 		
 		//alert (office+" "+num+" "+prdt);
 		
 		$.ajax
 		({
-			url: adr_ctr+"Deliver/createDelivery",
+			url: adr_ctr+"Deliver/createEntry",
 			type: 'post',
 			async: false,
 			data:{
-				office: office,
 				num: num,
-				prdt: prdt
+				year: year,
+				state: state
 			},
 			success: function(result)
 			{
@@ -281,6 +284,7 @@ function createEntry()
 		});
 	}
 }
+
 
 
 

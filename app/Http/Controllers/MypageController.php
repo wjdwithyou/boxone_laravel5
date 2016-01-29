@@ -39,9 +39,12 @@ class MypageController extends Controller {
 	public function infoIndex()
 	{
 		$memberModel = new MemberModel();
+		$domModel = new ShipmentDomesticModel();
+		$cusModel = new ShipmentCustomModel();
 		
 		if (Utility::loginStateChk(true))
 		{
+			$idx = $_SESSION['idx'];
 			$nickname = $_SESSION['nickname'];
 			$result = $memberModel->getInfoByNickname($nickname)['data'][0];
 			
@@ -70,7 +73,8 @@ class MypageController extends Controller {
 			{
 				$temp = array(
 						'hwaNum' => $list->entry_num,
-						'year' => $list->year
+						'year' => $list->year,
+						'idx' => $list->idx
 				);
 				
 				// 배송완료 상태일 때 (추후 수정 필요?)
@@ -80,6 +84,8 @@ class MypageController extends Controller {
 					$temp['data'] = $result;
 					$temp['state'] = '배송완료';
 					$temp['upload'] = $list->upload;
+					
+					array_push($temp, array());
 				}
 				// 배송완료가 아닐 때
 				else
@@ -89,6 +95,9 @@ class MypageController extends Controller {
 					$temp['state'] = $result['state'];
 					$temp['upload'] = date("Y-m-d H:i:s", time());
 						
+					$state = 0;
+					if (substr(' '.$result['state'], "완료"))
+						$state = 1;
 					$cusModel->update($list->idx, $temp['state']);
 				}
 				array_push($customList, $temp);
@@ -102,6 +111,7 @@ class MypageController extends Controller {
 						'company' => $list->postal_agency,
 						'num' => $list->postal_num,
 						'prdt_name' => $list->product_name,
+						'idx' => $list->idx
 				);
 				
 				// 배송완료 상태일 때 (추후 수정 필요?)
