@@ -50,7 +50,23 @@
 				<div id="br_content" class="mg_t16">
 					<div id="br_slide">
 						<?php for ($i = 0 ; $i < count($siteList) ; $i++) :?>
-							<div class="slide"><a href="<?=$siteList[$i]->website_link?>"><img src="<?=$adr_img?>site/<?=$siteList[$i]->idx?>.png" title="<?=($i+1)?>. <?=$siteList[$i]->cate_name?>"></a></div>
+							<div class="slide">
+								<div class="imglist_div2">
+									<div class="imglist_img img_center">
+										<div class="img_center_inner">
+											<a href="<?=$siteList[$i]->website_link?>"><img src="<?=$adr_img?>site/<?=$siteList[$i]->idx?>.png"></a>
+										</div>
+									</div>
+									<div class="imglist_desc_wrap ta_c">
+										<div class="imglist_desc1 ta_c t_o bo_color1 font_10 br_20 br_border">
+											<?=$siteList[$i]->name?>
+										</div>
+										<div class="imglist_desc2 ta_c t_o">
+											<?=$siteList[$i]->cate_name?>
+										</div>
+									</div>
+								</div>
+							</div>
 						<?php endfor;?>
 					</div>
 				</div>

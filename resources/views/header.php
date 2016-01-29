@@ -117,6 +117,9 @@ if (isset($_COOKIE['need_login'])) {
 		<div id="aside_expand_content" class="f_c">
 			<div class="imglist_div aside_img_wrap grid_as">
 				<div class="imglist_img img_center">
+					<div class="delete_img font_16">
+						<a onclick="deleteImg();"><i class="fa fa-times-circle bo_color2"></i></a>
+					</div>
 					<div class="img_center_inner">
 						<a href=""><img src="http://s7d9.scene7.com/is/image/AmericanApparel/rsadm320_white?defaultImage=/notavail&$ProductZoom$"></a>
 					</div>
@@ -135,6 +138,9 @@ if (isset($_COOKIE['need_login'])) {
 			</div>
 			<div class="imglist_div aside_img_wrap grid_as">
 				<div class="imglist_img img_center">
+					<div class="delete_img font_16">
+						<a onclick="deleteImg();"><i class="fa fa-times-circle bo_color2"></i></a>
+					</div>
 					<div class="img_center_inner">
 						<a href=""><img src="http://s7d9.scene7.com/is/image/AmericanApparel/rsadm320_white?defaultImage=/notavail&$ProductZoom$"></a>
 					</div>
@@ -153,6 +159,9 @@ if (isset($_COOKIE['need_login'])) {
 			</div>
 			<div class="imglist_div aside_img_wrap grid_as">
 				<div class="imglist_img img_center">
+					<div class="delete_img font_16">
+						<a onclick="deleteImg();"><i class="fa fa-times-circle bo_color2"></i></a>
+					</div>
 					<div class="img_center_inner">
 						<a href=""><img src="http://s7d9.scene7.com/is/image/AmericanApparel/rsadm320_white?defaultImage=/notavail&$ProductZoom$"></a>
 					</div>
@@ -171,6 +180,9 @@ if (isset($_COOKIE['need_login'])) {
 			</div>
 			<div class="imglist_div aside_img_wrap grid_as">
 				<div class="imglist_img img_center">
+					<div class="delete_img font_16">
+						<a onclick="deleteImg();"><i class="fa fa-times-circle bo_color2"></i></a>
+					</div>
 					<div class="img_center_inner">
 						<a href=""><img src="http://s7d9.scene7.com/is/image/AmericanApparel/rsadm320_white?defaultImage=/notavail&$ProductZoom$"></a>
 					</div>
@@ -189,6 +201,9 @@ if (isset($_COOKIE['need_login'])) {
 			</div>
 			<div class="imglist_div aside_img_wrap grid_as">
 				<div class="imglist_img img_center">
+					<div class="delete_img font_16">
+						<a onclick="deleteImg();"><i class="fa fa-times-circle bo_color2"></i></a>
+					</div>
 					<div class="img_center_inner">
 						<a href=""><img src="http://s7d9.scene7.com/is/image/AmericanApparel/rsadm320_white?defaultImage=/notavail&$ProductZoom$"></a>
 					</div>
@@ -207,6 +222,9 @@ if (isset($_COOKIE['need_login'])) {
 			</div>
 			<div class="imglist_div aside_img_wrap grid_as">
 				<div class="imglist_img img_center">
+					<div class="delete_img font_16">
+						<a onclick="deleteImg();"><i class="fa fa-times-circle bo_color2"></i></a>
+					</div>
 					<div class="img_center_inner">
 						<a href=""><img src="http://s7d9.scene7.com/is/image/AmericanApparel/rsadm320_white?defaultImage=/notavail&$ProductZoom$"></a>
 					</div>
