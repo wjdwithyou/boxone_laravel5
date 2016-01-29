@@ -7,7 +7,6 @@
 </head>
 
 <body>
-<input type="hidden" id="member_idx" value="<?=$result->idx?>"/>
 
 <div id="wrap">
 	<div id="header">
@@ -43,7 +42,7 @@
 						<p>찜한상품</p>
 					</div>
 					<div class="selected_mpdiv top_div2 f_l ta_c" onclick="location.href = '<?=$adr_ctr?>Mypage/dc'">
-						<div><span class="mp_badge fw_b br_20">1</span></div>
+						<div><span class="mp_badge fw_b br_20"><?=$alarmDc?></span></div>
 						<div class="mpt_ico">
 							<img src="<?=$adr_img?>mp_delivery.png" class="mp_ico">
 						</div>
@@ -72,12 +71,13 @@
 							<div class="cate_title br_25 f_b bo_color2"><span class="font_16">배송</span></div>
 						</div>
 						<ul class="dc_ul pd_a8">
+							<?php foreach ($deliverList as $list) :?>
 							<li class="pd_tb16 f_c">
 								<a class="f_c" onclick="toggleState($(this));">
 									<div class="f_l">
-										<div>상품명</div>
-										<div class="bo_color7 td_ul mg_t8">배송중</div>
-										<div>반입</div>
+										<div><?=$list['prdt_name']?></div>
+										<div class="bo_color7 td_ul mg_t8"><?=$list['state']?></div>
+										<div><?=$list['company']?> / <?=$list['num']?></div>
 									</div>
 									<div class="dc_ico f_r">
 										<i class="fa fa-chevron-circle-down font_14 bo_color2"></i>
@@ -92,202 +92,23 @@
 									<div class="dc_state_content">
 										<table class="deliver_table mg_t8 ta_c">
 											<caption class="ta_c">배송추적</caption>
-												<tbody><tr class="b_b">
-												<td>2015-08-05</td>
-												<td>서용산</td>
-												<td>이천센터(으)로 출발</td>
+												<tbody>
+											<?php foreach($list['data'][0] as $tracking) :?>
+											<tr class="b_b">
+												<td>
+													<?php if ($tracking['date'] != "") :?>
+														<?=$tracking['date']?> <?=$tracking['time']?>
+													<?php endif;?>
+												</td>
+												<td><?=$tracking['location']?></td>
+												<td><?=$tracking['state']?></td>
 											</tr>
-												<tr class="b_b">
-												<td></td>
-												<td>이천센터</td>
-												<td>서용산에서 도착</td>
-											</tr>
-												<tr class="b_b">
-												<td></td>
-												<td>이천센터</td>
-												<td>서수원(으)로 출발</td>
-											</tr>
-												<tr class="b_b">
-												<td></td>
-												<td>서수원</td>
-												<td>서수원지점에 도착</td>
-											</tr>
-												<tr class="b_b">
-												<td></td>
-												<td>북수원</td>
-												<td>고객님께 물품을 배달 준비 중</td>
-											</tr>
-												<tr class="b_b">
-												<td>2015-08-06 20:47</td>
-												<td>북수원</td>
-												<td>배달완료</td>
-											</tr>
+											<?php endforeach;?>
 											</tbody></table>
 									</div>
 								</div>
 							</li>
-							<li class="pd_tb16 f_c">
-								<a class="f_c" onclick="toggleState($(this));">
-									<div class="f_l">
-										<div>상품명</div>
-										<div class="bo_color7 td_ul mg_t8">배송중</div>
-										<div>반입</div>
-									</div>
-									<div class="dc_ico f_r">
-										<i class="fa fa-chevron-circle-down font_14 bo_color2"></i>
-									</div>
-								</a>
-								<div class="dc_state_wrap mg_t8 pd_tb8" hidden>
-									<div class="dc_state_top f_c">
-										<div class="mg_lr8 f_r">
-											<button type="button" class="mp_btn bo_btn5 br_25" onclick="">삭제</button>
-										</div>
-									</div>
-									<div class="dc_state_content">
-										<table class="deliver_table mg_t8 ta_c">
-											<caption class="ta_c">배송추적</caption>
-												<tbody><tr class="b_b">
-												<td>2015-08-05</td>
-												<td>서용산</td>
-												<td>이천센터(으)로 출발</td>
-											</tr>
-												<tr class="b_b">
-												<td></td>
-												<td>이천센터</td>
-												<td>서용산에서 도착</td>
-											</tr>
-												<tr class="b_b">
-												<td></td>
-												<td>이천센터</td>
-												<td>서수원(으)로 출발</td>
-											</tr>
-												<tr class="b_b">
-												<td></td>
-												<td>서수원</td>
-												<td>서수원지점에 도착</td>
-											</tr>
-												<tr class="b_b">
-												<td></td>
-												<td>북수원</td>
-												<td>고객님께 물품을 배달 준비 중</td>
-											</tr>
-												<tr class="b_b">
-												<td>2015-08-06 20:47</td>
-												<td>북수원</td>
-												<td>배달완료</td>
-											</tr>
-											</tbody></table>
-									</div>
-								</div>
-							</li>
-							<li class="pd_tb16 f_c">
-								<a class="f_c" onclick="toggleState($(this));">
-									<div class="f_l">
-										<div>상품명</div>
-										<div class="bo_color7 td_ul mg_t8">배송중</div>
-										<div>반입</div>
-									</div>
-									<div class="dc_ico f_r">
-										<i class="fa fa-chevron-circle-down font_14 bo_color2"></i>
-									</div>
-								</a>
-								<div class="dc_state_wrap mg_t8 pd_tb8" hidden>
-									<div class="dc_state_top f_c">
-										<div class="mg_lr8 f_r">
-											<button type="button" class="mp_btn bo_btn5 br_25" onclick="">삭제</button>
-										</div>
-									</div>
-									<div class="dc_state_content">
-										<table class="deliver_table mg_t8 ta_c">
-											<caption class="ta_c">배송추적</caption>
-												<tbody><tr class="b_b">
-												<td>2015-08-05</td>
-												<td>서용산</td>
-												<td>이천센터(으)로 출발</td>
-											</tr>
-												<tr class="b_b">
-												<td></td>
-												<td>이천센터</td>
-												<td>서용산에서 도착</td>
-											</tr>
-												<tr class="b_b">
-												<td></td>
-												<td>이천센터</td>
-												<td>서수원(으)로 출발</td>
-											</tr>
-												<tr class="b_b">
-												<td></td>
-												<td>서수원</td>
-												<td>서수원지점에 도착</td>
-											</tr>
-												<tr class="b_b">
-												<td></td>
-												<td>북수원</td>
-												<td>고객님께 물품을 배달 준비 중</td>
-											</tr>
-												<tr class="b_b">
-												<td>2015-08-06 20:47</td>
-												<td>북수원</td>
-												<td>배달완료</td>
-											</tr>
-											</tbody></table>
-									</div>
-								</div>
-							</li>
-							<li class="pd_tb16 f_c">
-								<a class="f_c" onclick="toggleState($(this));">
-									<div class="f_l">
-										<div>상품명</div>
-										<div class="bo_color7 td_ul mg_t8">배송중</div>
-										<div>반입</div>
-									</div>
-									<div class="dc_ico f_r">
-										<i class="fa fa-chevron-circle-down font_14 bo_color2"></i>
-									</div>
-								</a>
-								<div class="dc_state_wrap mg_t8 pd_tb8" hidden>
-									<div class="dc_state_top f_c">
-										<div class="mg_lr8 f_r">
-											<button type="button" class="mp_btn bo_btn5 br_25" onclick="">삭제</button>
-										</div>
-									</div>
-									<div class="dc_state_content">
-										<table class="deliver_table mg_t8 ta_c">
-											<caption class="ta_c">배송추적</caption>
-												<tbody><tr class="b_b">
-												<td>2015-08-05</td>
-												<td>서용산</td>
-												<td>이천센터(으)로 출발</td>
-											</tr>
-												<tr class="b_b">
-												<td></td>
-												<td>이천센터</td>
-												<td>서용산에서 도착</td>
-											</tr>
-												<tr class="b_b">
-												<td></td>
-												<td>이천센터</td>
-												<td>서수원(으)로 출발</td>
-											</tr>
-												<tr class="b_b">
-												<td></td>
-												<td>서수원</td>
-												<td>서수원지점에 도착</td>
-											</tr>
-												<tr class="b_b">
-												<td></td>
-												<td>북수원</td>
-												<td>고객님께 물품을 배달 준비 중</td>
-											</tr>
-												<tr class="b_b">
-												<td>2015-08-06 20:47</td>
-												<td>북수원</td>
-												<td>배달완료</td>
-											</tr>
-											</tbody></table>
-									</div>
-								</div>
-							</li>
+							<?php endforeach;?>
 						</ul>
 					</div>
 					<div class="grid grid_211 pd_a8">
@@ -296,6 +117,7 @@
 							<div class="cate_title br_25 f_b bo_color2"><span class="font_16">통관</span></div>
 						</div>
 						<ul class="dc_ul pd_a8">
+							<?php foreach($customList as $list) : ?>
 							<li class="pd_tb16 f_c">
 								<a class="f_c" onclick="">
 									<div class="f_l">
@@ -307,31 +129,32 @@
 										<i class="fa fa-chevron-circle-down bo_color7 font_14"></i>
 									</div>
 								</a>
+								<div class="dc_state_wrap mg_t8 pd_tb8" hidden>
+									<div class="dc_state_top f_c">
+										<div class="mg_lr8 f_r">
+											<button type="button" class="mp_btn bo_btn5 br_25" onclick="">삭제</button>
+										</div>
+									</div>
+									<div class="dc_state_content">
+										<table class="deliver_table mg_t8 ta_c">
+											<caption class="ta_c">배송추적</caption>
+												<tbody>
+											<?php foreach($list['data'][0] as $tracking) :?>
+											<tr class="b_b">
+												<td>
+													<?php if ($tracking['date'] != "") :?>
+														<?=$tracking['date']?> <?=$tracking['time']?>
+													<?php endif;?>
+												</td>
+												<td><?=$tracking['state']?></td>
+												<td><?=$tracking['name']?></td>
+											</tr>
+											<?php endforeach;?>
+											</tbody></table>
+									</div>
+								</div>
 							</li>
-							<li class="pd_tb16 f_c">
-								<a class="f_c" onclick="">
-									<div class="f_l">
-										<div>상품명</div>
-										<div class="bo_color7 td_ul mg_t8">배송중</div>
-										<div>반입</div>
-									</div>
-									<div class="dc_ico f_r">
-										<i class="fa fa-chevron-circle-down bo_color7 font_14"></i>
-									</div>
-								</a>
-							</li>
-							<li class="pd_tb16 f_c">
-								<a class="f_c" onclick="">
-									<div class="f_l">
-										<div>상품명</div>
-										<div class="bo_color7 td_ul mg_t8">배송중</div>
-										<div>반입</div>
-									</div>
-									<div class="dc_ico f_r">
-										<i class="fa fa-chevron-circle-down bo_color7 font_14"></i>
-									</div>
-								</a>
-							</li>
+							<?php endforeach;?>
 						</ul>
 					</div>
 				</div>

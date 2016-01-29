@@ -364,14 +364,18 @@ class ProductModel
 			++$rateArray[floor($list->rating+0.5)];
 		}
 		
-		if (count($result))
-			$rateAve = $rateAll / count($result);
-		else
-			$rateAve = 0;
-		
 		arsort($rateArray);
-		$rateBest = array(array_keys($rateArray)[0], array_shift($rateArray));
-	
+		
+		if (count($result))
+		{
+			$rateAve = $rateAll / count($result);
+			$rateBest = array(array_keys($rateArray)[0], array_shift($rateArray));
+		}
+		else
+		{
+			$rateAve = 0;
+			$rateBest = array(0, 0);
+		}
 		return array('code' => 1, 'msg' => 'success', 'data' => $result, 'rateCnt' => count($result), 'rateBest' => $rateBest, 'rateAve' => $rateAve);
 	}
 	
@@ -381,16 +385,33 @@ class ProductModel
 		{
 			$result = DB::select("(SELECT idx, 'p' AS ptype, mall_id, brand, name, FORMAT(price, 0) as fPrice 
 									FROM product 
-									WHERE prod_id IN 
-									(SELECT prod_id FROM mapping_product WHERE idx = 1)) 
+									WHERE idx IN 
+									(SELECT prod_idx FROM mapping_product WHERE idx = ? && item_type = 'p')) 
 										UNION 
 									(SELECT idx, 'h' AS ptype, mall_id, brand, name, FORMAT(priceS, 0) as fPrice 
 									FROM hotdeal_product 
 									WHERE prod_id IN 
-									(SELECT prod_id FROM mapping_product WHERE idx = 1)) ORDER BY fPrice asc");
+									(SELECT prod_id FROM mapping_product WHERE idx = ? && item_type = 'h')) 
+									ORDER BY fPrice asc", 
+									array($mapping_idx, $mapping_idx));
 		}
 		else
 			$result = array();
+		
+		return array('code' => 1, 'msg' => 'success', 'data' => $result);
+	}
+	
+	function getSuggestPrdt($cate, $idx)
+	{
+		$result = DB::select("(SELECT 'p' as ptype, idx, name, img, brand, hit_count, FORMAT(price, 0) as fPrice 
+							FROM product 
+							WHERE cate_small=? AND idx != ?)
+							UNION
+							(SELECT 'h' as ptype, idx, name, img, brand, hit_count, FORMAT(priceS, 0) as fPrice
+							FROM hotdeal_product
+							WHERE cate_small=? AND idx != ?)
+							ORDER BY hit_count DESC LIMIT 6", 
+				array($cate, $idx, $cate, $idx));
 		
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}

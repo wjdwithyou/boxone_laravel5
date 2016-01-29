@@ -101,52 +101,28 @@
 				</li>
 				<li class="equal_price_wrap">
 					<!-- 같은 가격 사이트 비교 -->
+					<?php for ($i = 0 ; $i < count($sameList) && $i < 3 ; $i++) :?>
 					<ul class="cl_b">
 						<li>
-							REVOLVE clothing
+							<?=$sameList[$i]->name?> 
 						</li>
 						<li>
 							<div class="f_l f_b">
-								무료배송 면세
+								<?=$sameList[$i]->mall_id?> / ￦<?=$sameList[$i]->fPrice?>
 							</div>
 							<div class="f_r">
-								<button type="button" class="bo_btn3">
+								<?php if ($sameList[$i]->ptype == 'p') :?>
+								<button type="button" class="bo_btn3" onclick="location.href = '<?=$adr_ctr?>Shoppingbox/detail?idx=<?=$sameList[$i]->idx?>';">
+								<?php else :?>
+								<button type="button" class="bo_btn3" onclick="location.href = '<?=$adr_ctr?>Hotdeal/productDetail?idx=<?=$sameList[$i]->idx?>';">
+								<?php endif;?>
 									구매하기
 								</button>
 							</div>
 						</li>
 					</ul>
+					<?php endfor;?>
 					<!-- /같은 가격 사이트 비교 -->
-					<ul class="cl_b">
-						<li>
-							REVOLVE clothing
-						</li>
-						<li>
-							<div class="f_l f_b">
-								무료배송 면세
-							</div>
-							<div class="f_r">
-								<button type="button" class="bo_btn3">
-									구매하기
-								</button>
-							</div>
-						</li>
-					</ul>
-					<ul class="cl_b">
-						<li>
-							REVOLVE clothing
-						</li>
-						<li>
-							<div class="f_l f_b">
-								무료배송 면세
-							</div>
-							<div class="f_r">
-								<button type="button" class="bo_btn3">
-									구매하기
-								</button>
-							</div>
-						</li>
-					</ul>
 				</li>
 			</ul>
 			<div class="cl_b"></div>
@@ -171,8 +147,8 @@
 					가격비교
 				</div>
 				<div id="compare_div_wrap" class="cl_b">
-					<?php foreach ($sameList as $list) :?>
 					<!-- 가격 비교 -->
+					<?php foreach ($sameList as $list) :?>
 					<div class="compare_div col-xs-12 col-sm-6">
 						<div class="compare_inner">
 							<table class="compare_table">
@@ -209,133 +185,35 @@
 					이런 상품 어떠세요?
 				</div>
 				<!-- 추천 상품 -->
+				<?php foreach ($suggestList as $list) :?>
 				<div class="product_div col-xs-6 col-sm-4 col-md-2">
 					<div class="hd_product_img center_box">
 						<div class="center_content">
-							<a onclick='location.href="<?=$adr_ctr ?>Product/index"'><img src="<?= $adr_img ?>product_ex.jpg"></a>
+							<?php if ($list->ptype == 'p') :?>							
+							<a onclick='location.href="<?=$adr_ctr ?>Shoppingbox/detail?idx=<?=$list->idx?>"'>
+							<?php else :?>
+							<a onclick='location.href="<?=$adr_ctr ?>Hotdeal/productDetail?idx=<?=$list->idx?>"'>
+							<?php endif;?>
+								<img src="<?=$list->img?>">
+							</a>
 						</div>
 					</div>
 					<div class="hd_site_desc">
 						<div class="hd_brand text_overflow">
-							토리버치
+							<?=$list->name?>
 						</div>
 						<div class="hd_product_name">
 							<div>
-								상품명
-								토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일
+								<?=$list->brand?>
 							</div>
 						</div>
 						<div class="hd_price text_overflow">
-							￦34,900
+							￦<?=$list->fPrice?>
 						</div>
 					</div>
 				</div>
+				<?php endforeach;?>
 				<!-- /추천 상품 -->
-				<div class="product_div col-xs-6 col-sm-4 col-md-2">
-					<div class="hd_product_img center_box">
-						<div class="center_content">
-							<a onclick='location.href="<?=$adr_ctr ?>Product/index"'><img src="<?= $adr_img ?>product_ex.jpg"></a>
-						</div>
-					</div>
-					<div class="hd_site_desc">
-						<div class="hd_brand text_overflow">
-							토리버치
-						</div>
-						<div class="hd_product_name">
-							<div>
-								상품명
-								토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일
-							</div>
-						</div>
-						<div class="hd_price text_overflow">
-							￦34,900
-						</div>
-					</div>
-				</div>
-				<div class="product_div col-xs-6 col-sm-4 col-md-2">
-					<div class="hd_product_img center_box">
-						<div class="center_content">
-							<a onclick='location.href="<?=$adr_ctr ?>Product/index"'><img src="<?= $adr_img ?>product_ex.jpg"></a>
-						</div>
-					</div>
-					<div class="hd_site_desc">
-						<div class="hd_brand text_overflow">
-							토리버치
-						</div>
-						<div class="hd_product_name">
-							<div>
-								상품명
-								토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일
-							</div>
-						</div>
-						<div class="hd_price text_overflow">
-							￦34,900
-						</div>
-					</div>
-				</div>
-				<div class="product_div col-xs-6 col-sm-4 col-md-2">
-					<div class="hd_product_img center_box">
-						<div class="center_content">
-							<a onclick='location.href="<?=$adr_ctr ?>Product/index"'><img src="<?= $adr_img ?>product_ex.jpg"></a>
-						</div>
-					</div>
-					<div class="hd_site_desc">
-						<div class="hd_brand text_overflow">
-							토리버치
-						</div>
-						<div class="hd_product_name">
-							<div>
-								상품명
-								토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일
-							</div>
-						</div>
-						<div class="hd_price text_overflow">
-							￦34,900
-						</div>
-					</div>
-				</div>
-				<div class="product_div col-xs-6 col-sm-4 col-md-2">
-					<div class="hd_product_img center_box">
-						<div class="center_content">
-							<a onclick='location.href="<?=$adr_ctr ?>Product/index"'><img src="<?= $adr_img ?>product_ex.jpg"></a>
-						</div>
-					</div>
-					<div class="hd_site_desc">
-						<div class="hd_brand text_overflow">
-							토리버치
-						</div>
-						<div class="hd_product_name">
-							<div>
-								상품명
-								토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일
-							</div>
-						</div>
-						<div class="hd_price text_overflow">
-							￦34,900
-						</div>
-					</div>
-				</div>
-				<div class="product_div col-xs-6 col-sm-4 col-md-2">
-					<div class="hd_product_img center_box">
-						<div class="center_content">
-							<a onclick='location.href="<?=$adr_ctr ?>Product/index"'><img src="<?= $adr_img ?>product_ex.jpg"></a>
-						</div>
-					</div>
-					<div class="hd_site_desc">
-						<div class="hd_brand text_overflow">
-							토리버치
-						</div>
-						<div class="hd_product_name">
-							<div>
-								상품명
-								토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일 토리버치 잡화 제화 최고 25%까지 세일
-							</div>
-						</div>
-						<div class="hd_price text_overflow">
-							￦34,900
-						</div>
-					</div>
-				</div>
 			</div>
 
 			<div id="review_wrap" class="cl_b">
