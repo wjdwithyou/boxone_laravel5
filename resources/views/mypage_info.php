@@ -61,7 +61,7 @@
 			<div class="input_wrap">
 				<div>
 					<div id="profile" class="input_div">
-						<img src="<?=$adr_img?>profile/default.png" width="100" height="100" id="profile_img" class="br_50">
+						<img src="<?=$adr_img?>profile/<?=$img?>" width="100" height="100" id="profile_img" class="br_50">
 						<input type="file" id="profile_file" accept="image/*" onchange="profileUpload($(this));">
 					</div>
 					<?php if ($result->type != 5) :	?>
@@ -104,35 +104,36 @@
 						<span id="eid_input_msg" class="input_msg bo_color1"></span>
 					</div>
 					<div class="input_div">
+						<input type="hidden", id="nicko" value="<?=$result->nickname?>"/>
 						<input type="text" id="nick" class="bo_input1" value="<?=$result->nickname?>" placeholder="닉네임">
 					</div>
 					<div>
 						<span id="nick_input_msg" class="input_msg bo_color1"></span>
 					</div>
 					<div class="input_div">
-						<input type="password" id="pw" class="bo_input1" placeholder="비밀번호">
+						<input type="password" id="pwo" class="bo_input1" placeholder="비밀번호">
+					</div>
+					<div>
+						<span id="pwo_input_msg" class="input_msg bo_color1"></span>
+					</div>
+					<div class="input_div">
+						<input type="password" id="pw" class="bo_input1" placeholder="새 비밀번호">
 					</div>
 					<div>
 						<span id="pw_input_msg" class="input_msg bo_color1"></span>
 					</div>
 					<div class="input_div">
-						<input type="password" id="npw" class="bo_input1" placeholder="새 비밀번호">
+						<input type="password" id="pwc" class="bo_input1" placeholder="새 비밀번호 확인">
 					</div>
 					<div>
-						<span id="npw_input_msg" class="input_msg bo_color1"></span>
-					</div>
-					<div class="input_div">
-						<input type="password" id="npwc" class="bo_input1" placeholder="새 비밀번호 확인">
-					</div>
-					<div>
-						<span id="npwc_input_msg" class="input_msg bo_color1"></span>
+						<span id="pwc_input_msg" class="input_msg bo_color1"></span>
 					</div>
 					<div class="btn_set2 f_c">
 						<div class="input_div grid grid_h">
 							<button type="button" id="login_btn" class="bo_btn1 br_25" onclick="goBack();">취소</button>
 						</div>
 						<div class="input_div grid grid_h">
-							<button type="button" id="login_btn" class="bo_btn2 br_25" onclick="justSignIn();">확인</button>
+							<button type="button" id="login_btn" class="bo_btn2 br_25" onclick="justModify();">확인</button>
 						</div>
 					</div>
 				</div>

@@ -6,20 +6,18 @@
 <meta name="csrf-token" content="<?php echo csrf_token();?>"/>
 
 <?php
-	
 	$adr_js = "http://52.69.26.243/js/";
 	$adr_css = "http://52.69.26.243/css/";
 	$adr_img = "https://s3-ap-northeast-1.amazonaws.com/boxone-image/";
 	$adr_btstrp = "http://52.69.26.243/bootstrap/";
 	$adr_ctr = "http://52.69.26.243/";
-	
-
-	/*$adr_js = "http://localhost:8000/js/";
+	/*
+	$adr_js = "http://localhost:8000/js/";
 	$adr_css = "http://localhost:8000/css/";
 	$adr_img = "https://s3-ap-northeast-1.amazonaws.com/boxone-image/";
 	$adr_btstrp = "http://localhost:8000/bootstrap/";
-	$adr_ctr = "http://localhost:8000/";*/
-
+	$adr_ctr = "http://localhost:8000/";
+	*/
 ?>
 
 <input type="hidden" id="adr_js" value="<?=$adr_js?>"/>
@@ -73,7 +71,7 @@ $.ajaxSetup({
 <link rel="stylesheet" href="<?=$adr_css?>common.css">
 
 <!-- 로그인 관련 css, js ; 로그인 관련 페이지 또는 join일 때 사용-->
-<?php if (strpos(" ".$page, "login") || $page == "join") :?>
+<?php if (strpos(" ".$page, "login") || $page == "join" || $page == "mypage_info") :?>
 <script type="text/javascript" src="<?=$adr_js?>login_common.js"></script>
 <?php endif;?>
 
