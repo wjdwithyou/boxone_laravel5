@@ -9,7 +9,7 @@
 #hd_slide_wrap{padding:8px}
 #hd_slide_wrap_inner{height:100%;background-color:#fff}
 .img_center img{display:inline !important}
-.imglist_div_inner{padding-top:16px;padding-bottom:16px;background-color:#fff}
+.imglist_div_inner{padding:16px;background-color:#fff}
 .imglist_div2{padding:8px}
 .imglist_div3:nth-of-type(6){clear:both}
 .bx-wrapper .bx-caption{background-color:#fff !important;text-align:center}
@@ -32,7 +32,6 @@
 .cate_title_hr{z-index:5;margin-top:32px;margin-bottom:32px;border-top:1px solid #8C8B8B}
 
 @media(min-width:768px){
-	#hd_slide_wrap_inner{padding-top:15%}
 }
 @media(max-width:767px){
 	#hd_slide_wrap{height:auto !important}

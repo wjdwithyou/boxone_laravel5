@@ -138,12 +138,15 @@ function moveTop(){
 function toggleExpand(e, t){
 	if($("#aside_expand").is(":visible")){
 		$("#aside_expand").hide();
+		$("#mob_aside_bg").hide();
 		$(".aside_div").children("i").css("color", "#8c8b8b");
 		$(".aside_div").not(".aside_div_2").css("background-color", "#eee");
 		e.children("i").css("color", "#8c8b8b");
 	}
 	else{
 		$("#aside_expand").show();
+		$("#mob_aside_bg").height($("body").height());
+		$("#mob_aside_bg").show();
 		$(".aside_div").children("i").css("color", "#8c8b8b");
 		e.css("background-color", "#fff");
 		e.children("i").css("color", "#f15a63");
