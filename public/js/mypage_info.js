@@ -1,3 +1,99 @@
+$(document).ready(function(){
+	//$("#pwo_input_msg").val('미입력');
+	//$("#pw_input_msg").val('미입력');
+	//$("#pwc_input_msg").val('미입력');
+	
+	/*
+	$("#eid").focusout(function(){
+		checkEmail();
+	});
+	*/
+	
+	$("#nick").focusout(function(){
+		checkNickname();
+	});
+	$("#pwo").focusout(function(){
+		checkPwo();
+	});
+	$("#pw").focusout(function(){
+		checkPw();
+	})
+	$("#pwc").focusout(function() {
+		checkPwc();
+	});
+});
+
+// 160129 J.Style
+// Modify profile in MyPage.
+function justModify(){
+	var adr_ctr = $("#adr_ctr").val();
+	
+	//var email_msg = $("#eid_input_msg").text();
+	var nickname_msg = $("#nick_input_msg").text();
+	var pwo_msg = $("#pwo_input_msg").text();
+	var pw_msg = $("#pw_input_msg").text();
+	var pwc_msg = $("#pwc_input_msg").text();
+	
+	if (/*email_msg*/nickname_msg != '사용가능' || pwo_msg != '일치' || pw_msg != '사용가능' || pwc_msg != '일치')
+		alert('입력한 정보들을 다시 확인해주세요.');
+	else{
+		//var type = 5;
+		
+		var nicknameo = $("#nicko").val();
+		
+		//var eid = $("#eid").val();	// social+
+		var nickname = $("#nick").val();
+		var pw = $("#pw").val();
+		
+		var imgFile = $("#profile_file");
+		var img = (imgFile[0].files && imgFile[0].files[0])? imgFile[0].files[0]: '';
+		/*
+		var img = '';
+		
+		if (imgFile[0].files && imgFile[0].files[0])
+			var img = imgFile[0].files[0]; // 임시
+		else
+			var img = '';
+		*/
+		
+		// second move
+		
+		var data = new FormData();
+		
+		//data.append("type", type);	// social+
+		data.append("nicknameo", nicknameo);
+		//data.append("email", eid);
+		data.append("nickname", nickname);
+		data.append("pw", pw);
+		data.append("img", img);
+		
+		$.ajax({
+			async: false,
+			cache: false,
+			contentType: false,
+			data: data,
+			processData: false,
+			type: 'post',
+			url: adr_ctr + 'Login/modifyInfo',
+			success: function(result){
+				// alert(JSON.stringify(result));
+				result = JSON.parse(result);
+				
+				if (result.code == 1){
+					alert('정보 수정이 완료되었습니다.');
+					/*top.document.*/location.href = adr_ctr + "Mypage/index";
+				}
+				else
+					alert('정보 수정 실패');
+			},
+			error: function(request, status, error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			    console.log(request.responseText);
+			}
+		});
+	}
+}
+
 /*
  * 2015.11.18
  * 작성자 : 박용호

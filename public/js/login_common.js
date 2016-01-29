@@ -58,43 +58,82 @@ function checkEmail()
  */
 function checkNickname()
 {
+	var logined = $("#logined").val();
+	
+	var nicknameo = $("#nicko").val();
 	var nickname = $("#nick").val();
 	//var pattern = /[^0-9a-zA-Z-_ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
 	
-	if (nickname.length == 0)
-		$("#nick_input_msg").text("미입력");
-	else if (!patternNick.test(nickname))
-		$("#nick_input_msg").text("숫자, 영문, 한글, -_외 사용불가");
-	else if (nickname.length > nickMax)
-		$("#nick_input_msg").text("최대 "+nickMax+"자 까지 입력 가능");
-	else
-		$.ajax
-		({
-			url: adr_ctr+'Login/checkNickname',
+	if (logined && nickname == nicknameo){
+		$("#nick_input_msg").text("사용가능");
+	}
+	else{
+		if (nickname.length == 0)
+			$("#nick_input_msg").text("미입력");
+		else if (!patternNick.test(nickname))
+			$("#nick_input_msg").text("숫자, 영문, 한글, -_외 사용불가");
+		else if (nickname.length > nickMax)
+			$("#nick_input_msg").text("최대 "+nickMax+"자 까지 입력 가능");
+		else{
+			$.ajax({
+				url: adr_ctr + 'Login/checkNickname',
+				type: 'post',
+				async: false,
+				data: {
+					nickname: nickname
+				},		 
+				success: function(result)
+				{
+					result = JSON.parse(result);
+					if (result.code == 1)
+					{
+						// 닉네임 사용 가능
+						$("#nick_input_msg").text("사용가능");
+					}
+					else
+					{
+						$("#nick_input_msg").text("중복으로 인한 사용불가");
+					}
+				},	
+				error:function(request,status,error)
+				{
+					console.log(request.responseText);
+				    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				}
+			});
+		}
+	}
+}
+
+function checkPwo(){
+	var nicknameo = $("#nicko").val();
+	var pwo = $("#pwo").val();
+	
+	if (pwo.length == 0)
+		$("#pwo_input_msg").text("미입력");
+	else{
+		$.ajax({
+			url: adr_ctr + 'Login/checkPwo',
 			type: 'post',
 			async: false,
 			data: {
-				nickname: nickname
-			},		 
-			success: function(result)
-			{
+				nicknameo: nicknameo,
+				pwo: pwo
+			},
+			success: function(result){
 				result = JSON.parse(result);
+				
 				if (result.code == 1)
-				{
-					// 닉네임 사용 가능
-					$("#nick_input_msg").text("사용가능");
-				}
+					$("#pwo_input_msg").text("일치");
 				else
-				{
-					$("#nick_input_msg").text("중복으로 인한 사용불가");
-				}
-			},	
-			error:function(request,status,error)
-			{
+					$("#pwo_input_msg").text("불일치");
+			},
+			error: function(request, status, error){
 				console.log(request.responseText);
 			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}
 		});
+	}
 }
 
 /*
@@ -116,7 +155,7 @@ function checkPw()
 	else if (!patternPw.test(pw))
 		$("#pw_input_msg").text("영문 숫자 ~!@#$%^&*?-_");
 	else if (pw.length < pwMin || pw.length > pwMax)
-		$("#pw_input_msg").text("최소 2자, 최대 10자");
+		$("#pw_input_msg").text("최소 8자, 최대 15자");
 	else
 		$("#pw_input_msg").text("사용가능");
 	

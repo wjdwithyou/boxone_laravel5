@@ -39,9 +39,12 @@ class MypageController extends Controller {
 	public function infoIndex()
 	{
 		$memberModel = new MemberModel();
+		$domModel = new ShipmentDomesticModel();
+		$cusModel = new ShipmentCustomModel();
 		
 		if (Utility::loginStateChk(true))
 		{
+			$idx = $_SESSION['idx'];
 			$nickname = $_SESSION['nickname'];
 			$result = $memberModel->getInfoByNickname($nickname)['data'][0];
 			
