@@ -291,3 +291,5 @@ button:focus{outline:0}
 	.grid_221{width:100%}
 	.input_wrap{width:100%}
 }
+
+.delete_img{position:absolute;z-index:5;top:0;right:0}

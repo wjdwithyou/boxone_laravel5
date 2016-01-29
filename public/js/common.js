@@ -149,3 +149,7 @@ function toggleExpand(e, t){
 		e.children("i").css("color", "#f15a63");
 	}
 }
+
+function deleteImg(){
+	
+}

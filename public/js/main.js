@@ -19,12 +19,21 @@ $(document).ready(function(){
 	    pager: true,
 	    controls: false
 	});
-	$('.cate_slide').bxSlider({
-	    slideWidth: 252,
-	    minSlides: 2,
-	    maxSlides: 4,
-	    moveSlides: 1,
-	    pager: false
+	$('.cate_slide').each(function() {
+	    var _this = $(this).bxSlider({
+	        slideWidth: 252,
+		    minSlides: 2,
+		    maxSlides: 4,
+		    moveSlides: 1,
+		    pager: false,
+		    speed: 200,
+        	pause: 500
+	    });
+	    _this.mouseenter(function() {   
+	         _this.startAuto();      
+	     }).mouseleave(function() {   
+	         _this.stopAuto();
+	    });
 	});
 	
 	if($(window).width() >767)
