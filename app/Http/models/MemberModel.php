@@ -271,7 +271,7 @@ class MemberModel{
     		$s3PrfAdr = 'https://s3-ap-northeast-1.amazonaws.com/boxone-image/profile/';
     		$ext = $image->getClientOriginalExtension();
     		
-    		$img_name = $idx."_image".$ext;
+    		$img_name = $idx."_image.".$ext;
     		
     		$result_s = DB::update('update member set image=? where idx=?', array($img_name, $idx));
     		
@@ -294,10 +294,7 @@ class MemberModel{
 	    			array($nickname, $encrypt, $nicknameo));
     	}
     	
-    	if ($result == true)
-    		return array('code' => 1, 'msg' => 'update success');
-    	else
-    		return array('code' => 0, 'msg' => 'update failure');
+    	return array('code' => 1, 'msg' => 'update success');
     }
 
     /*
