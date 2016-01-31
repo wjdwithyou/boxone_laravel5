@@ -15,7 +15,7 @@
 
 		<div id="product_wrap">
 			<div id="top">
-				<div id="top_index">
+				<div id="top_index" class="pd_lr8">
 					<a href='<?=$adr_ctr?>Shoppingbox/index'>쇼핑박스</a>
 					&nbsp;>&nbsp;
 					<?php if ($cate->lidx == 'c') :?>
@@ -29,14 +29,14 @@
 					<?php endif;?>
 				</div>
 			</div>
-			<div id="product_img_wrap" class="col-xs-12 col-sm-6">
+			<div id="product_img_wrap" class="col-xs-12 col-sm-6 pd_lr8">
 				<div class="fotorama" data-width="100%" data-height="500px" data-nav="thumbs" data-allowfullscreen="true">
 					<?php foreach ($result['img'] as $imgList) :?>
 						<a href="<?=$imgList?>"><img src="<?=$imgList?>"></a>
 					<?php endforeach;?>
 				</div>
 			</div>
-			<ul id="product_desc_wrap" class="col-xs-12 col-sm-6">
+			<ul id="product_desc_wrap" class="col-xs-12 col-sm-6 pd_a8 mg_t32">
 				<li class="bo_color">
 					<?=$result['brand']?>
 				</li>
@@ -94,10 +94,10 @@
 				<li class="pd_li4 li_underline">
 					<div class="btn_set2 input_div pd_t24 f_c">
 						<div class="grid grid_h">
-							<button type="button" class="bo_btn8 br_25" onclick="">찜하기</button>
+							<button type="button" class="bo_btn1 br_25" onclick="">찜하기</button>
 						</div>
 						<div class="grid grid_h">
-							<button type="button" class="bo_btn7 br_25" onclick="window.open('<?=$result['url']?>');">구매가기</button>
+							<button type="button" class="bo_btn2 br_25" onclick="window.open('<?=$result['url']?>');">구매하기</button>
 						</div>
 					</div>
 				</li>

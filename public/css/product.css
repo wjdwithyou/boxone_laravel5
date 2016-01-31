@@ -6,24 +6,16 @@
 	margin: 0 auto;
 }
 #top {
-	margin: 32px 8px 16px 8px;
 	text-align: center;
 }
 #top_index {
 	font-size: 11px;
 	text-align: left;
-	margin-top: 32px;
 	margin-bottom: 32px;
 }
 #top_index a {
 	color: #454545;
 	font-weight: bold;
-}
-#product_img_wrap {
-	height: 700px;
-}
-.fotorama {
-	margin-top: 80px;
 }
 @media (max-width: 768px) {
 	.fotorama {
@@ -52,7 +44,6 @@
 	padding-bottom: 16px;
 }
 .pd_li4 {
-	padding-top: 32px;
 	padding-bottom: 32px;
 }
 .li_underline {
@@ -114,9 +105,6 @@
 }
 .bo_color {
 	color: #8c8b8b;
-}
-.bo_color2 {
-	color: #f15a63;
 }
 .before_price {
 	text-decoration: line-through;
