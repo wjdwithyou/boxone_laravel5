@@ -163,9 +163,9 @@
 				</div>
 				<!-- 추천 상품 -->
 				<?php foreach ($suggestList as $list) :?>
-				<div class="product_div col-xs-6 col-sm-4 col-md-2">
-					<div class="hd_product_img center_box">
-						<div class="center_content">
+				<div class="imglist_div grid grid_432">
+					<div class="imglist_img img_center">
+						<div class="img_center_inner">
 							<?php if ($list->ptype == 'p') :?>							
 							<a onclick='location.href="<?=$adr_ctr ?>Shoppingbox/detail?idx=<?=$list->idx?>"'>
 							<?php else :?>
@@ -175,16 +175,16 @@
 							</a>
 						</div>
 					</div>
-					<div class="hd_site_desc">
-						<div class="hd_brand text_overflow">
-							<?=$list->name?>
+					<div class="imglist_desc_wrap">
+						<div class="imglist_desc1 ta_c t_o bo_color2">
+							<?=$list->brand?>
 						</div>
-						<div class="hd_product_name">
+						<div class="imglist_desc2 ta_c limit_line limit_line_2">
 							<div>
-								<?=$list->brand?>
+								<?=$list->name?>
 							</div>
 						</div>
-						<div class="hd_price text_overflow">
+						<div class="imglist_desc3 ta_c t_o">
 							￦<?=$list->fPrice?>
 						</div>
 					</div>
