@@ -14,6 +14,7 @@ class HotdealProductModel
 	/*
 	 * dd
 	 */
+	/*
 	function createBookmark($prod_idx, $member_idx)
 	{
 		if( !( inputErrorCheck($prod_idx, 'prod_idx')
@@ -32,7 +33,28 @@ class HotdealProductModel
 
 		return array('code' => 1,'msg' =>'success' ,'data' => $result);
 	}
-
+	*/
+	
+	// 160131 J.Style
+	// Create hotdeal bookmark, and increase bookmark count.
+	function createBookmark($hotdeal_idx, $member_idx){
+		if ( !(inputErrorCheck($prod_idx, 'prod_idx')
+			&& inputErrorCheck($member_idx, 'member_idx')))
+			return;
+		
+		$result = DB::table ('hotdeal_bookmark')->insertGetId(
+				array(
+						'hotdeal_idx' => $hotdeal_idx,
+						'member_idx' => $member_idx,
+						'upload' => DB::raw('now()'),
+						'target' => 1
+				)
+		);
+		
+		DB::update('update hotdeal_product set bookmark_count=bookmark_count+1 where idx=?', array($hotdeal_idx));
+		
+		return array('code' => 1, 'msg' => 'success', 'data' => $result);
+	}
 
 	/*
 	 *	단일 정보 가져오는 기능

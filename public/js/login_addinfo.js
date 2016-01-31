@@ -32,3 +32,49 @@ function socialSignIn()
 		signIn(type, id, pw, email, nickname, img, rec);
 	}
 }
+
+/*
+// 20160131 J.Style
+// ctrl C+V from join.js
+function signIn(type, id, pw, email, nickname, img, rec)
+{
+	alert(type+'/'+id+'/'+pw+'/'+email+'/'+nickname+'/'+img+'/'+rec);
+	var data = new FormData();
+	data.append("type", type);
+	data.append("id", id);
+	data.append("pw", pw);
+	data.append("email", email);
+	data.append("nickname", nickname);
+	data.append("img", img);
+	data.append("rec", rec);
+
+	$.ajax
+	({
+		url: adr_ctr+'Login/signIn',
+		type: 'post',
+		cache: false,
+		processData: false,
+		contentType: false,
+		data: data,
+		success: function(result)
+		{
+			//alert (JSON.stringify(result));
+			result = JSON.parse(result);
+			if (result.code == 1)
+			{
+				alert ("회원가입 및 로그인 되었습니다.");
+				moveMain();
+			}
+			else
+			{
+				alert ("회원 가입 실패.");
+			}
+		},	
+		error:function(request,status,error)
+		{
+		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		    console.log(request.responseText);
+		}
+	});
+}
+*/

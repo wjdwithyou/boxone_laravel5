@@ -4,37 +4,37 @@ use App\Http\Controllers\Controller;
 use App\Http\models\MemberModel;
 use App\Http\models\ShipmentCustomModel;
 use App\Http\models\ShipmentDomesticModel;
+use App\Http\models\ProductModel;	// temp
 use Request;
 
-
 class MypageController extends Controller {
-
-
 	/*
 	 * 2015.11.17
 	 * 작성자 : 박용호
 	 * 마이페이지 처음
 	 */
-	public function index()
-	{		
+	public function index(){		
 		$memberModel = new MemberModel();
 		$cusModel = new ShipmentCustomModel();
 		$domModel = new ShipmentDomesticModel();
 		
-		if (Utility::loginStateChk(true))
-		{
+		//$hdModel = new HotdealProductModel();
+		$pdModel = new ProductModel();
+		
+		if (Utility::loginStateChk(true)){
 			$idx = $_SESSION['idx'];
 			$nickname = $_SESSION['nickname'];
-			$result = $memberModel->getInfoByNickname($nickname)['data'][0];
 			
+			$result = $memberModel->getInfoByNickname($nickname)['data'][0];
 			$alarmDc = $cusModel->getCntDeliver($idx) + $domModel->getCntDeliver($idx);
 			
+			$productList = $pdModel->getBookmarkProduct($idx);
+			
 			$page = 'mypage';
-			return view($page, array('page' => $page, 'result' => $result, 'alarmDc' => $alarmDc));
+			return view($page, array('page' => $page, 'result' => $result, 'alarmDc' => $alarmDc, 'prdtList' => $productList['data']));
 		}
 		
 	}
-	
 	
 	public function infoIndex()
 	{

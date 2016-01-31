@@ -58,7 +58,17 @@
 			</div>
 		</div>
 		<div id="content">
-			
+			<?php for($i = 0 ;$i < count($prdtList); ++$i) :?>
+				<?php foreach($prdtList[$i] as $j) :?>
+				 	<?=$j->idx?><br>
+				 	<?=$j->img?><br>
+					<?=$j->brand?><br>
+					<?=$j->name?><br>
+					<?=$j->saleP?><br>
+					<?=$j->price?><br>
+				<?php endforeach;?>
+				<br>
+			<?php endfor;?>
 		</div>
 	</div>
 	
