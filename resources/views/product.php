@@ -92,37 +92,14 @@
 					<?php endforeach;?>
 				</li>
 				<li class="pd_li4 li_underline">
-					<button type="button" class="bo_btn f_b" onclick="window.open('<?=$result['url']?>');">
-						구매하기
-					</button>
-				</li>
-				<li class="pd_li">
-					같은 가격의 쇼핑몰이 궁금하다면?
-				</li>
-				<li class="equal_price_wrap">
-					<!-- 같은 가격 사이트 비교 -->
-					<?php for ($i = 0 ; $i < count($sameList) && $i < 3 ; $i++) :?>
-					<ul class="cl_b">
-						<li>
-							<?=$sameList[$i]->name?> 
-						</li>
-						<li>
-							<div class="f_l f_b">
-								<?=$sameList[$i]->mall_id?> / ￦<?=$sameList[$i]->fPrice?>
-							</div>
-							<div class="f_r">
-								<?php if ($sameList[$i]->ptype == 'p') :?>
-								<button type="button" class="bo_btn3" onclick="location.href = '<?=$adr_ctr?>Shoppingbox/detail?idx=<?=$sameList[$i]->idx?>';">
-								<?php else :?>
-								<button type="button" class="bo_btn3" onclick="location.href = '<?=$adr_ctr?>Hotdeal/productDetail?idx=<?=$sameList[$i]->idx?>';">
-								<?php endif;?>
-									구매하기
-								</button>
-							</div>
-						</li>
-					</ul>
-					<?php endfor;?>
-					<!-- /같은 가격 사이트 비교 -->
+					<div class="btn_set2 input_div pd_t24 f_c">
+						<div class="grid grid_h">
+							<button type="button" class="bo_btn8 br_25" onclick="">찜하기</button>
+						</div>
+						<div class="grid grid_h">
+							<button type="button" class="bo_btn7 br_25" onclick="window.open('<?=$result['url']?>');">구매가기</button>
+						</div>
+					</div>
 				</li>
 			</ul>
 			<div class="cl_b"></div>

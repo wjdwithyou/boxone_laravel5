@@ -58,19 +58,36 @@
 			</div>
 		</div>
 		<div id="content">
+			<div class="inner f_c">
 			<?php for($i = 0 ;$i < count($prdtList); ++$i) :?>
 				<?php foreach($prdtList[$i] as $j) :?>
-				 	<?=$j->idx?><br>
-				 	<?=$j->img?><br>
-					<?=$j->brand?><br>
-					<?=$j->name?><br>
-					<?=$j->saleP?><br>
-					<?=$j->price?><br>
+				<div class="imglist_div grid grid_432">
+					<div class="delete_img font_16">
+						<a onclick="deleteImg();"><i class="fa fa-times-circle bo_color2"></i></a>
+					</div>
+					<div class="imglist_img img_center">
+						<div class="img_center_inner">
+							<a onclick='location.href="<?=$adr_ctr ?>Hotdeal/productDetail?idx=<?=$j->idx?>"'><img src="<?=$j->img?>"></a>
+						</div>
+					</div>
+					<div class="imglist_desc_wrap">
+						<div class="imglist_desc1 ta_c t_o bo_color2">
+							<?=$j->brand?>
+						</div>
+						<div class="imglist_desc2 ta_c limit_line limit_line_2">
+							<div>
+								<?=$j->name?>
+							</div>
+						</div>
+						<div class="imglist_desc3 ta_c t_o">
+							<?=$j->price?><br>
+						</div>
+					</div>
+				</div>
 				<?php endforeach;?>
-				<br>
 			<?php endfor;?>
+			</div>
 		</div>
-	</div>
 	
 	<div id="footer">
 	<?php include ("footer.php");?>
