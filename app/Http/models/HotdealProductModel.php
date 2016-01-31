@@ -8,33 +8,7 @@ include_once dirname(__FILE__)."/Utility.php";
 /*
  *  상품 관련 컨트롤러
  */
-class HotdealProductModel
-{
-
-	/*
-	 * dd
-	 */
-	/*
-	function createBookmark($prod_idx, $member_idx)
-	{
-		if( !( inputErrorCheck($prod_idx, 'prod_idx')
-				&& inputErrorCheck($member_idx, 'member_idx')))
-					return ;
-
-		$result = DB::table('product_bookmark')->insertGetId(
-				array(
-						'prod_idx'=> $prod_idx,
-						'member_idx'=> $member_idx,
-						'upload'=>DB::raw('now()')
-				)
-		);
-
-		DB::update('update product set bookmark_count=bookmark_count+1 where idx=?',array($prod_idx));
-
-		return array('code' => 1,'msg' =>'success' ,'data' => $result);
-	}
-	*/
-	
+class HotdealProductModel{
 	// 160131 J.Style
 	// Create hotdeal bookmark, and increase bookmark count.
 	function createBookmark($hotdeal_idx, $member_idx){

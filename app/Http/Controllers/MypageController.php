@@ -4,7 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Http\models\MemberModel;
 use App\Http\models\ShipmentCustomModel;
 use App\Http\models\ShipmentDomesticModel;
-use App\Http\models\ProductModel;	// temp
+use App\Http\models\ProductModel;
 use Request;
 
 class MypageController extends Controller {
@@ -13,12 +13,14 @@ class MypageController extends Controller {
 	 * 작성자 : 박용호
 	 * 마이페이지 처음
 	 */
+	
+	// 20160131 Modified by J.Style 
+	// Add bookmark list.
 	public function index(){		
 		$memberModel = new MemberModel();
 		$cusModel = new ShipmentCustomModel();
 		$domModel = new ShipmentDomesticModel();
 		
-		//$hdModel = new HotdealProductModel();
 		$pdModel = new ProductModel();
 		
 		if (Utility::loginStateChk(true)){

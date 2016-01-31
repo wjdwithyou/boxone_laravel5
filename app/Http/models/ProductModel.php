@@ -382,24 +382,6 @@ class ProductModel
 	// 160129 J.Style
 	// Get $member_idx's hotdeal product bookmark list and product bookmark list.
 	function getBookmarkProduct($member_idx){
-		/*
-		$result = DB::select(	'(select hotdeal_idx as idx from hotdeal_bookmark where member_idx=? and target=1)
-									union
-								(select product_idx as idx from product_bookmark where member_idx=?)',
-								array($member_idx, $member_idx));
-		
-		$productList = array();
-		
-		for ($i = 0; $i < count($result); ++$i){
-			$temp = DB::select(	'(select idx, img, brand, name, saleP, priceS as price from hotdeal_product where idx=?)
-									union
-								(select idx, img, brand, name, 0 as saleP, price from product where idx=?)',
-								array($result[$i]->idx, $result[$i]->idx));
-			
-			array_push($productList, $temp);
-		}
-		*/
-		
 		$bookmark_h = DB::select('select hotdeal_idx from hotdeal_bookmark where member_idx=? and target=1', array($member_idx));
 		$bookmark_p = DB::select('select product_idx from product_bookmark where member_idx=?', array($member_idx));
 		
