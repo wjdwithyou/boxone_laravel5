@@ -37,13 +37,13 @@
 				</div>
 			</div>
 			<ul id="product_desc_wrap" class="col-xs-12 col-sm-6 pd_a8 mg_t32">
-				<li class="bo_color">
+				<li class="bo_color font_14">
 					<?=$result['brand']?>
 				</li>
-				<li class="pd_li li_underline f_b">
+				<li class="pd_li li_underline f_b font_16">
 					<?=$result['name']?>
 				</li>
-				<li class="pd_li2">
+				<li class="pd_li2 font_14">
 					<?=$result['mall']?>
 				</li>
 				<li class="pd_li cl_b">
@@ -81,7 +81,7 @@
 						사이즈
 					</div>
 					<div class="f_r">
-						<button type="button" class="bo_btn6">
+						<button type="button" class="bo_btn6 pd_lr8 br_25">
 							사이즈표
 						</button>
 					</div>
