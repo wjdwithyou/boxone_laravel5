@@ -18,13 +18,13 @@
 		</div>
 		<div class="imglist_desc_wrap">
 			<div class="imglist_desc1 ta_c t_o bo_color2">
-				<?=$list[$i]->brand?>
+				<?=$list->brand?>
 			</div>
 			<div class="imglist_desc2 ta_c t_o">
-				<?=$list[$i]->name?>
+				<?=$list->name?>
 			</div>
 			<div class="imglist_desc3 ta_c t_o mg_t8">
-				<?=$list[$i]->fPrice?>
+				<?=$list->price?>
 			</div>
 		</div>
 	</div>
