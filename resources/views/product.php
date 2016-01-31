@@ -81,7 +81,7 @@
 						사이즈
 					</div>
 					<div class="f_r">
-						<button type="button" class="bo_btn2">
+						<button type="button" class="bo_btn6">
 							사이즈표
 						</button>
 					</div>
