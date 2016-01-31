@@ -191,7 +191,7 @@ function expandRecently()
 		success: function(result)
 		{
 			console.log(result);
-			$("#aside_expand").children().html(result).trigger("create");
+			$("#aside_expand").children().html(result);
 		},
 		error: function(request,status,error)
 		{

@@ -1,7 +1,3 @@
-<?php
-	$adr_ctr2 = "http://52.69.26.243/";
-?>
-
 <div id="aside_expand_top" class="pd_b8 ta_c">
 	<span class="fw_b font_16">최근 본 상품</span>
 </div>
@@ -13,7 +9,7 @@
 				<a onclick="deleteImg();"><i class="fa fa-times-circle bo_color2"></i></a>
 			</div>
 			<div class="img_center_inner">
-				<a href="<?=$adr_ctr2 ?>Shoppingbox/detail?idx=<?=$list->idx?>"><img src="<?=$list->img?>"></a>
+				<a href="<?=$adr_ctr ?>Shoppingbox/detail?idx=<?=$list->idx?>"><img src="<?=$list->img?>"></a>
 			</div>
 		</div>
 		<div class="imglist_desc_wrap">
