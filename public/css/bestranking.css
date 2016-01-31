@@ -11,6 +11,7 @@
 .br_site_img{padding:8px;text-align:center}
 .br_site_img img{max-width:100%;max-height:100%}
 .br_site_li{padding:16px 8px}
+.site_bookamrk{position:absolute}
 
 @media(min-width:421px){
 	#select_wrap div{float:left}

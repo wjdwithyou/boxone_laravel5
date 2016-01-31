@@ -42,8 +42,8 @@
 					<div class="inner_box">
 						<div class="brlist_top mg_t8">
 							<p class="brlist_top_txt bo_color1"><strong>BEST <?= ($i+1)?></strong></p>
-							<a onclick="clickBookmark($(this).children(), <?= $best1->idx?>);">
-								<?php if ($best1->bookmark == 1) :?>
+							<a onclick="clickBookmark($(this).children(), <?= $upper[$i]->idx?>);">
+								<?php if ($upper[$i]->bookmark == 1) :?>
 								<img src="<?= $adr_img ?>bookmark_on.png" class="br_bookmark img_14">
 								<?php else :?>
 								<img src="<?= $adr_img ?>bookmark.png" class="br_bookmark img_14">
@@ -87,6 +87,15 @@
 						<div class="br_site_img pd">
 							<a onclick="clickLink(<?= $charList->idx?>, '<?= $charList->website_link?>');">
 								<img src="<?= $adr_img ?>site/<?= $charList->idx?>.png">
+							</a>
+						</div>
+						<div>
+							<a onclick="clickBookmark($(this).children(), <?= $charList->idx?>);">
+								<?php if ($charList->bookmark == 1) :?>
+								<img src="<?= $adr_img ?>bookmark_on.png" class="br_bookmark img_14">
+								<?php else :?>
+								<img src="<?= $adr_img ?>bookmark.png" class="br_bookmark img_14">
+								<?php endif;?>
 							</a>
 						</div>
 						<div>

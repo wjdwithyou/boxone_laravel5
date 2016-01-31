@@ -59,10 +59,10 @@
 									</div>
 									<div class="imglist_desc_wrap ta_c">
 										<div class="imglist_desc1 ta_c t_o bo_color1 font_10 br_20 br_border">
-											<?=$siteList[$i]->name?>
+											<?=$siteList[$i]->cate_name?>
 										</div>
 										<div class="imglist_desc2 ta_c t_o">
-											<?=$siteList[$i]->cate_name?>
+											<?=$siteList[$i]->name?>
 										</div>
 									</div>
 								</div>

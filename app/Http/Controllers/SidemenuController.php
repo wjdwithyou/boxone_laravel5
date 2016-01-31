@@ -75,7 +75,7 @@ class SidemenuController extends Controller {
 		$dateArray = explode('/',$result->Date);
 		$date = $dateArray[2].".".$dateArray[0].".".$dateArray[1];
 		
-		$data = array($date.' '.$result->Time, $result->Rate);
+		$data = array($date, $result->Rate);
 		
 		$url = "http://query.yahooapis.com/v1/public/yql";
 		$url .= "?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22".$country."USD%22)&format=json&env=store://datatables.org/alltableswithkeys&callback=";

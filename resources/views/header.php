@@ -84,20 +84,20 @@ if (isset($_COOKIE['need_login'])) {
 </div>
 
 <aside id="aside_menu_wrap" class="f_c">
-	<div id="aside_arrow" class="f_l">
+	<!-- <div id="aside_arrow" class="f_l">
 		<a onclick="toggleAsidemenu();"><img src="<?=$adr_img?>left_arrow.png"></a>
-	</div>
+	</div> -->
 	<div id="aside_menu" class="f_l f_c">
 		<div class="aside_div aside_div_3" onclick="moveMain();">
 			<i class="fa fa-home bo_color2"></i>
+		</div>
+		<div class="aside_div" onclick="toggleExpand($(this), 1);">
+			<i class="fa fa-star bo_color2"></i>
 		</div>
 		<div class="aside_div" onclick="location.href = '<?=$adr_ctr?>Mypage/index'">
 			<i class="fa fa-heart bo_color2 sm_ico"></i>
 		</div>
 		<div class="aside_div" onclick="toggleExpand($(this), 2);">
-			<i class="fa fa-star bo_color2"></i>
-		</div>
-		<div class="aside_div" onclick="toggleExpand($(this), 3);">
 			<div class="aside_badge"><span class="ico_badge fw_b br_20 bo_colorw font_10">1</span></div>
 			<i class="fa fa-shopping-cart bo_color2"></i>
 		</div>
