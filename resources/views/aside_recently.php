@@ -9,7 +9,7 @@
 	<?php for ($i = 0; $i < count($recentList); ++$i) :?>
 		<?php foreach ($recentList[$i] as $j) :?>
 			<?=$j->idx?><br/>
-			<?=$j->image?><br/>
+			<?=$j->img?><br/>
 			<?=$j->brand?><br/>
 			<?=$j->name?><br/>
 			<?=$j->price?><br/>
