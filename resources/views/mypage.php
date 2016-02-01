@@ -80,7 +80,7 @@
 							</div>
 						</div>
 						<div class="imglist_desc3 ta_c t_o">
-							<?=$j->price?><br>
+							￦<?=$j->price?><br>
 						</div>
 					</div>
 				</div>
@@ -94,6 +94,6 @@
 	</div>
 	
 </div>
-	
+
 </body>
 </html>
