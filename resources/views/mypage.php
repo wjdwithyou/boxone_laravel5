@@ -63,11 +63,15 @@
 				<?php foreach($prdtList[$i] as $j) :?>
 				<div class="imglist_div grid grid_432">
 					<div class="delete_img font_16">
-						<a onclick="deleteImg();"><i class="fa fa-times-circle bo_color2"></i></a>
+						<a onclick="deleteBookmark(<?=$j->idx?>, <?=($j->saleP!=0)?1:0?>);"><i class="fa fa-times-circle bo_color2"></i></a>
 					</div>
 					<div class="imglist_img img_center">
 						<div class="img_center_inner">
+							<?php if ($j->saleP != 0) :?>
 							<a onclick='location.href="<?=$adr_ctr ?>Hotdeal/productDetail?idx=<?=$j->idx?>"'><img src="<?=$j->img?>"></a>
+							<?php else :?>
+							<a onclick='location.href="<?=$adr_ctr ?>Shoppingbox/detail?idx=<?=$j->idx?>"'><img src="<?=$j->img?>"></a>
+							<?php endif;?>
 						</div>
 					</div>
 					<div class="imglist_desc_wrap">

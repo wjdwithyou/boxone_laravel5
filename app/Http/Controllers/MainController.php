@@ -79,17 +79,37 @@ class MainController extends Controller {
 	public function deliver(){
 		return view('deliver');
 	}
+	
 	public function deliverInfo(){
 		return view('deliverInfo');
 	}
+	
 	public function calculator(){
 		return view('calculator');
 	}
 	
-	
+	// 160201 J.Style
+	// No comment.
 	public function recently(){
-		return view('aside_recently');
+		$pdModel = new ProductModel();
+		
+		$cookie = Request::cookie('recentPrdt');
+		
+		if ($cookie == '')
+			$cookieArray = array();
+		else{
+			$cookieArray = json_decode($cookie, true);
+			
+			if (json_last_error() != JSON_ERROR_NONE)
+				$cookieArray = array();
+		}
+		
+		$recentList = $pdModel->getProductByCookie($cookieArray);
+		
+		$page = 'aside_recently';
+		return view($page, array(/*'page' => $page, */'recentList' => $recentList['data']));
 	}
+	
 	public function bookmark(){
 		return view('aside_bookmark');
 	}

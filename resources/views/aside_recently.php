@@ -2,7 +2,22 @@
 	<span class="fw_b font_16">최근 본 상품</span>
 </div>
 <div id="aside_expand_content" class="f_c">
-	<div class="imglist_div aside_img_wrap grid_as">
+
+	<br/>
+	<p align="center"><b>test</b></p>
+	<br/>
+	<?php for ($i = 0; $i < count($recentList); ++$i) :?>
+		<?php foreach ($recentList[$i] as $j) :?>
+			<?=$j->idx?><br/>
+			<?=$j->img?><br/>
+			<?=$j->brand?><br/>
+			<?=$j->name?><br/>
+			<?=$j->price?><br/>
+			<?=$j->is_hotdeal?><br/>
+		<?php endforeach;?>
+	<?php endfor;?>
+	
+	<!--div class="imglist_div aside_img_wrap grid_as">
 		<div class="imglist_img img_center">
 			<div class="delete_img font_16">
 				<a onclick="deleteImg();"><i class="fa fa-times-circle bo_color2"></i></a>
@@ -148,5 +163,5 @@
 				￦26,646
 			</div>
 		</div>
-	</div>
+	</div-->
 </div>

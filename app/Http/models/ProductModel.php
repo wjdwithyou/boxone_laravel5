@@ -8,31 +8,26 @@ include_once dirname(__FILE__)."/Utility.php";
 /*
  *  상품 관련 컨트롤러
  */
-class ProductModel
-{
-
-	/*
-	 * dd
-	 */
-	function createBookmark($prod_idx, $member_idx)
-	{
-		if( !( inputErrorCheck($prod_idx, 'prod_idx')
-				&& inputErrorCheck($member_idx, 'member_idx')))
-					return ;
+class ProductModel{
+	// 160201 Modified by J.Style.
+	// Create product bookmark, and increate bookmark count.
+	function createBookmarkProduct($member_idx, $product_idx){
+		if ( !(inputErrorCheck($member_idx, 'member_idx')
+			&& inputErrorCheck($product_idx, 'product_idx')))
+			return ;
 
 		$result = DB::table('product_bookmark')->insertGetId(
 				array(
-						'prod_idx'=> $prod_idx,
 						'member_idx'=> $member_idx,
+						'product_idx'=> $product_idx,
 						'upload'=>DB::raw('now()')
 				)
 		);
 
-		DB::update('update product set bookmark_count=bookmark_count+1 where idx=?',array($prod_idx));
+		DB::update('update product set bookmark_count=bookmark_count+1 where idx=?', array($product_idx));
 
-		return array('code' => 1,'msg' =>'success' ,'data' => $result);
+		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
-
 
 	/*
 	 *	단일 정보 가져오는 기능
@@ -400,6 +395,22 @@ class ProductModel
 		return array('code' => 1, 'msg' => 'success', 'data' => $productList);
 	}
 	
+	// 160201 J.Style
+	// Delete bookmark product
+	function deleteBookmarkProduct($member_idx, $product_idx){
+		if ( !(inputErrorCheck($member_idx, 'member_idx')
+			&& inputErrorCheck($product_idx, 'product_idx')))
+			return;
+		
+		$result = DB::delete('delete from product_bookmark where member_idx=? and product_idx=?',
+				array($member_idx, $product_idx));
+		
+		if ($result == true)
+			return array('code' => 1, 'msg' => 'success');
+		else
+			return array('code' => 0, 'msg' => 'delete failure');
+	}
+	
 	function getMappingPrdt($mapping_idx)
 	{
 		if ($mapping_idx != 0)
@@ -435,6 +446,23 @@ class ProductModel
 				array($cate, $idx, $cate, $idx));
 		
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
+	}
+	
+	// 160201 J.Style
+	// Get hotdeal product and product by user cookie.
+	function getProductByCookie($cookieArray){
+		$recentList = array();
+		
+		for ($i = 0; $i < count($cookieArray); ++$i){
+			if ($cookieArray[$i][0] == 'h')
+				$temp = DB::select('select idx, img, brand, name, priceS as price, 1 as is_hotdeal from hotdeal_product where idx=?', array($cookieArray[$i][1]));
+			else
+				$temp = DB::select('select idx, img, brand, name, price, 0 as is_hotdeal from product where idx=?', array($cookieArray[$i][1]));
+			
+			array_push($recentList, $temp);
+		}
+		
+		return array('code' => 1, 'msg' => 'success', 'data' => $recentList);
 	}
 }
 
