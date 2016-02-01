@@ -12,7 +12,6 @@
 	$adr_img = "https://s3-ap-northeast-1.amazonaws.com/boxone-image/";
 	$adr_btstrp = "http://52.69.26.243/bootstrap/";
 	$adr_ctr = "http://52.69.26.243/";
-	
 	/*
 	$adr_js = "http://localhost:8000/js/";
 	$adr_css = "http://localhost:8000/css/";
@@ -20,9 +19,8 @@
 	$adr_btstrp = "http://localhost:8000/bootstrap/";
 	$adr_ctr = "http://localhost:8000/";
 	*/
-	
 	function isMobile() {
-		return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
+		return preg_match("/(android|avantgo|iphone|ipad|ipod|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
 	}
 ?>
 

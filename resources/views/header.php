@@ -98,7 +98,7 @@ if (isset($_COOKIE['need_login'])) {
 			<i class="fa fa-heart bo_color2 sm_ico"></i>
 		</div>
 		<div class="aside_div" onclick="toggleExpand($(this), 2);">
-			<div class="aside_badge"><span class="ico_badge fw_b br_20 bo_colorw font_10">1</span></div>
+			<div class="aside_badge"><span class="ico_badge fw_b br_20 bo_colorw font_10">7</span></div>
 			<i class="fa fa-shopping-cart bo_color2"></i>
 		</div>
 		<div class="aside_div aside_div_2" onclick="moveTop();">

@@ -86,37 +86,11 @@ class MainController extends Controller {
 		return view('calculator');
 	}
 	
-	// 160201 J.Style
-	// Aside menu bookmark.
-	public function bookmark(){
-		if (session_id() == '')
-			session_start();
-		
-		if (empty($_SESSION['idx']))
-			return;
-		
-		$idx = $_SESSION['idx'];
-			
-		$pdModel = new ProductModel();
-		
-		$pdList = $pdModel->getBookmarkProduct($idx);
-			
-		$page = 'aside_bookmark';
-		return view($page, array('page' => $page, 'pdList' => $pdList['data']));
-	}
 	
 	public function recently(){
-		$cookie = Request::cookie('recentPrdt');
-		if ($cookie == '')
-			$cookieArray = array();
-		else
-		{
-			$cookieArray = json_decode($cookie, true);
-			// cookie 임의 변경 시 자동 초기화
-			if (json_last_error() != JSON_ERROR_NONE)
-				$cookieArray = array();
-		}
-		$page = 'aside_recently';
-		return view($page, array('page' => $page, 'recentlyList' => $cookieArray));
+		return view('aside_recently');
+	}
+	public function bookmark(){
+		return view('aside_bookmark');
 	}
 }

@@ -125,6 +125,90 @@
 				</div>
 				<div id="compare_div_wrap" class="cl_b">
 					<!-- 가격 비교 -->
+					<div class="compare_div col-xs-12 col-sm-6">
+						<div class="compare_inner">
+							<table class="compare_table">
+								<tr>
+									<td class="compare_site">ASOS</td>
+									<td class="compare_price" colspan="2">￦49,800</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td colspan="2">MJC Women's Rudolph Plush Pajama Pants</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td class="bo_color">무료배송</td>
+									<td class="review_btn">
+										<button type="button" class="aaa br_25 bo_btn2" onclick="">구매하기</button>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div class="compare_div col-xs-12 col-sm-6">
+						<div class="compare_inner">
+							<table class="compare_table">
+								<tr>
+									<td class="compare_site">ASOS</td>
+									<td class="compare_price" colspan="2">￦49,800</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td colspan="2">MJC Women's Rudolph Plush Pajama Pants</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td class="bo_color">무료배송</td>
+									<td class="review_btn">
+										<button type="button" class="aaa br_25 bo_btn2" onclick="">구매하기</button>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div class="compare_div col-xs-12 col-sm-6">
+						<div class="compare_inner">
+							<table class="compare_table">
+								<tr>
+									<td class="compare_site">ASOS</td>
+									<td class="compare_price" colspan="2">￦49,800</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td colspan="2">MJC Women's Rudolph Plush Pajama Pants</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td class="bo_color">무료배송</td>
+									<td class="review_btn">
+										<button type="button" class="aaa br_25 bo_btn2" onclick="">구매하기</button>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div class="compare_div col-xs-12 col-sm-6">
+						<div class="compare_inner">
+							<table class="compare_table">
+								<tr>
+									<td class="compare_site">ASOS</td>
+									<td class="compare_price" colspan="2">￦49,800</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td colspan="2">MJC Women's Rudolph Plush Pajama Pants</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td class="bo_color">무료배송</td>
+									<td class="review_btn">
+										<button type="button" class="aaa br_25 bo_btn2" onclick="">구매하기</button>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>s
 					<?php foreach ($sameList as $list) :?>
 					<div class="compare_div col-xs-12 col-sm-6">
 						<div class="compare_inner">
