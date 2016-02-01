@@ -96,7 +96,9 @@ class HotdealController extends Controller {
 	
 		$page = 'product';
 		return view($page, array(
-				'page' => $page, 
+				'page' => $page,
+				'idx' => $idx,
+				'is_hotdeal' => 1,
 				'result' => $result['data'], 
 				'reviewList' => $reviewList['data'], 
 				'sameList' => $sameList['data'],

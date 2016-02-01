@@ -8,14 +8,10 @@ include_once dirname(__FILE__)."/Utility.php";
 /*
  *  상품 관련 컨트롤러
  */
-class ProductModel
-{
-
-	/*
-	 * dd
-	 */
-	function createBookmark($prod_idx, $member_idx)
-	{
+class ProductModel{
+	// 160201 Modified by J.Style.
+	// Create product bookmark, and increate bookmark count.
+	function createBookmarkProduct($prod_idx, $member_idx){
 		if( !( inputErrorCheck($prod_idx, 'prod_idx')
 				&& inputErrorCheck($member_idx, 'member_idx')))
 					return ;

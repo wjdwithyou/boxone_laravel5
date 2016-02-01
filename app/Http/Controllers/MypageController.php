@@ -148,6 +148,30 @@ class MypageController extends Controller {
 		
 	}
 	
+	public function addZzim(){
+		if (session_id() == '')
+			session_start();
+		
+		if (empty($_SESSION['idx']))
+			return;
+		
+		$member_idx = $_SESSION['idx'];
+		
+		$hdModel = new HotdealProductModel();
+		$pdModel = new ProductModel();
+		
+		$temp_idx = Request::input('idx');
+		$is_hotdeal = Request::input('is_hotdeal');
+		
+		if ($is_hotdeal)
+			$result = $hdModel->createBookmarkHotdeal($member_idx, $temp_idx);
+		else
+			$result = $pdModel->createBookmarkProduct($member_idx, $temp_idx);
+
+		header('Content-Type: application/json');
+		echo json_encode($result);
+	}
+	
 	// 160201 J.Style
 	// If hotdeal, delete bookmark from hotdeal table.
 	// If not, delete bookmark from product table.
@@ -163,13 +187,13 @@ class MypageController extends Controller {
 		$hdModel = new HotdealProductModel();
 		$pdModel = new ProductModel();
 		
-		$product_idx = Request::input('idx');
+		$temp_idx = Request::input('idx');
 		$is_hotdeal = Request::input('is_hotdeal');
 		
 		if ($is_hotdeal)
-			$result = $hdModel->deleteBookmarkHotdeal($member_idx, $product_idx);
+			$result = $hdModel->deleteBookmarkHotdeal($member_idx, $temp_idx);
 		else
-			$result = $pdModel->deleteBookmarkProduct($member_idx, $product_idx);
+			$result = $pdModel->deleteBookmarkProduct($member_idx, $temp_idx);
 		
 		header('Content-Type: application/json');
 		echo json_encode($result);

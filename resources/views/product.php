@@ -94,7 +94,7 @@
 				<li class="pd_li4 li_underline">
 					<div class="btn_set2 input_div pd_t24 f_c">
 						<div class="grid grid_h">
-							<button type="button" class="bo_btn1 br_25" onclick="">찜하기</button>
+							<button type="button" class="bo_btn1 br_25" onclick="prdtZzim(<?=$idx?>, <?=$is_hotdeal?>)">찜하기</button>
 						</div>
 						<div class="grid grid_h">
 							<button type="button" class="bo_btn2 br_25" onclick="window.open('<?=$result['url']?>');">구매하기</button>
