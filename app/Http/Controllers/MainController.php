@@ -100,9 +100,7 @@ class MainController extends Controller {
 				$cookieArray = array();
 		}
 		
-		return $cookieArray;
-		
-		
+		return $cookieArray[9];
 		/*
 		// tt start
 		// 쇼핑 박스 저장한 카테고리 수(쿠키) 확인 후, 우선순위 확인하여 가져오기
