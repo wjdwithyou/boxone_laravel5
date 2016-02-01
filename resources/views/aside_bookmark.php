@@ -1,19 +1,8 @@
 <div id="aside_expand_top" class="pd_b8 ta_c">
 	<span class="fw_b font_16">즐겨찾기</span>
 </div>
-<div>
-	<?php for ($i = 0; $i < count($pdList); ++$i) :?>
-		<?php foreach ($pdList[$i] as $j) :?>
-			<?=$j->idx?><br>
-			<?=$j->img?><br>
-			<?=$j->brand?><br>
-			<?=$j->name?><br>
-			<?=$j->price?><br>
-		<?php endforeach;?>
-		<br>
-	<?php endfor;?>
-</div>
-<!--div id="aside_expand_content" class="f_c">
+
+<div id="aside_expand_content" class="f_c">
 	<div class="imglist_div aside_img_wrap grid_as">
 		<div class="imglist_img img_center">
 			<div class="delete_img font_16">
@@ -122,4 +111,4 @@
 			</div>
 		</div>
 	</div>
-</div-->
+</div>
