@@ -88,7 +88,11 @@ class MainController extends Controller {
 		return view('calculator');
 	}
 	
+	// 160201 J.Style
+	// No comment.
 	public function recently(){
+		$pdModel = new ProductModel();
+		
 		$cookie = Request::cookie('recentPrdt');
 		
 		if ($cookie == '')
@@ -100,32 +104,10 @@ class MainController extends Controller {
 				$cookieArray = array();
 		}
 		
-		return $cookieArray[9][1];
-		/*
-		// tt start
-		// 쇼핑 박스 저장한 카테고리 수(쿠키) 확인 후, 우선순위 확인하여 가져오기
-	
-		$cookieValue = array(
-				1 => 0,
-				2 => 0,
-				3 => 0,
-				4 => 0,
-				5 => 0,
-				6 => 0,
-				7 => 0,
-		);
-		foreach ($cookieArray as $list)
-			$cookieValue[$list]++;
-		arsort($cookieValue);
-		$cateArray = array_keys($cookieValue);
-		// tt end
-		*/
-		
+		$recentList = $pdModel->getProductByCookie($cookieArray);
 		
 		$page = 'aside_recently';
-		return view($page, array('data' => $data));
-		
-		//return view('aside_recently');
+		return view($page, array(/*'page' => $page, */'recentList' => $recentList['data']));
 	}
 	
 	public function bookmark(){

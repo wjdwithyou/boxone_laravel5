@@ -3,10 +3,19 @@
 </div>
 <div id="aside_expand_content" class="f_c">
 
-	<br/><p align="center"><b>test</b></p>
-	
-	
-	
+	<br/>
+	<p align="center"><b>test</b></p>
+	<br/>
+	<?php for ($i = 0; $i < count($recentList); ++$i) :?>
+		<?php foreach ($recentList[$i] as $j) :?>
+			<?=$j->idx?><br/>
+			<?=$j->image?><br/>
+			<?=$j->brand?><br/>
+			<?=$j->name?><br/>
+			<?=$j->price?><br/>
+			<?=$j->is_hotdeal?><br/>
+		<?php endforeach;?>
+	<?php endfor;?>
 	
 	<!--div class="imglist_div aside_img_wrap grid_as">
 		<div class="imglist_img img_center">
