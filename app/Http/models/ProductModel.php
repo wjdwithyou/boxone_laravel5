@@ -11,15 +11,15 @@ include_once dirname(__FILE__)."/Utility.php";
 class ProductModel{
 	// 160201 Modified by J.Style.
 	// Create product bookmark, and increate bookmark count.
-	function createBookmarkProduct($product_idx, $member_idx){
-		if ( !(inputErrorCheck($product_idx, 'prod_idx')
-			&& inputErrorCheck($member_idx, 'member_idx')))
+	function createBookmarkProduct($member_idx, $product_idx){
+		if ( !(inputErrorCheck($member_idx, 'member_idx')
+			&& inputErrorCheck($product_idx, 'product_idx')))
 			return ;
 
 		$result = DB::table('product_bookmark')->insertGetId(
 				array(
-						'product_idx'=> $product_idx,
 						'member_idx'=> $member_idx,
+						'product_idx'=> $product_idx,
 						'upload'=>DB::raw('now()')
 				)
 		);

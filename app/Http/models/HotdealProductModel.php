@@ -12,14 +12,14 @@ class HotdealProductModel{
 	// 160131 J.Style
 	// Create hotdeal bookmark, and increase bookmark count.
 	function createBookmarkHotdeal($hotdeal_idx, $member_idx){
-		if ( !(inputErrorCheck($prod_idx, 'prod_idx')
-			&& inputErrorCheck($member_idx, 'member_idx')))
+		if ( !(inputErrorCheck($member_idx, 'member_idx')
+			&& inputErrorCheck($hotdeal_idx, 'hotdeal_idx')))
 			return;
 		
 		$result = DB::table ('hotdeal_bookmark')->insertGetId(
 				array(
-						'hotdeal_idx' => $hotdeal_idx,
 						'member_idx' => $member_idx,
+						'hotdeal_idx' => $hotdeal_idx,
 						'upload' => DB::raw('now()'),
 						'target' => 1
 				)
