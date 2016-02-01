@@ -11,24 +11,23 @@ include_once dirname(__FILE__)."/Utility.php";
 class ProductModel{
 	// 160201 Modified by J.Style.
 	// Create product bookmark, and increate bookmark count.
-	function createBookmarkProduct($prod_idx, $member_idx){
-		if( !( inputErrorCheck($prod_idx, 'prod_idx')
-				&& inputErrorCheck($member_idx, 'member_idx')))
-					return ;
+	function createBookmarkProduct($product_idx, $member_idx){
+		if ( !(inputErrorCheck($product_idx, 'prod_idx')
+			&& inputErrorCheck($member_idx, 'member_idx')))
+			return ;
 
 		$result = DB::table('product_bookmark')->insertGetId(
 				array(
-						'prod_idx'=> $prod_idx,
+						'product_idx'=> $product_idx,
 						'member_idx'=> $member_idx,
 						'upload'=>DB::raw('now()')
 				)
 		);
 
-		DB::update('update product set bookmark_count=bookmark_count+1 where idx=?',array($prod_idx));
+		DB::update('update product set bookmark_count=bookmark_count+1 where idx=?', array($product_idx));
 
-		return array('code' => 1,'msg' =>'success' ,'data' => $result);
+		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
-
 
 	/*
 	 *	단일 정보 가져오는 기능
