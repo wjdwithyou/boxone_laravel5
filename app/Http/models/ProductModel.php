@@ -400,6 +400,22 @@ class ProductModel
 		return array('code' => 1, 'msg' => 'success', 'data' => $productList);
 	}
 	
+	// 160201 J.Style
+	// Delete bookmark product
+	function deleteBookmarkProduct($member_idx, $product_idx){
+		if ( !(inputErrorCheck($member_idx, 'member_idx')
+			&& inputErrorCheck($product_idx, 'product_idx')))
+			return;
+		
+		$result = DB::delete('delete from product_bookmark where member_idx=? and product_idx=?',
+				array($member_idx, $product_idx));
+		
+		if ($result == true)
+			return array('code' => 1, 'msg' => 'success');
+		else
+			return array('code' => 0, 'msg' => 'delete failure');
+	}
+	
 	function getMappingPrdt($mapping_idx)
 	{
 		if ($mapping_idx != 0)

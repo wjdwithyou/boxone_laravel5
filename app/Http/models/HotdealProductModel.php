@@ -29,6 +29,22 @@ class HotdealProductModel{
 		
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
+	
+	// 160201 J.Style
+	// Delete bookmark hotdeal
+	function deleteBookmarkHotdeal($member_idx, $hotdeal_idx){
+		if ( !(inputErrorCheck($member_idx, 'member_idx')
+			&& inputErrorCheck($hotdeal_idx, 'hotdeal_idx')))
+			return;
+		
+		$result = DB::delete('delete from hotdeal_bookmark where member_idx=? and hotdeal_idx=? and target=1',
+				array($member_idx, $hotdeal_idx));
+		
+		if ($result == true)
+			return array('code' => 1, 'msg' => 'success');
+		else
+			return array('code' => 0, 'msg' => 'delete failure');
+	}
 
 	/*
 	 *	단일 정보 가져오는 기능
