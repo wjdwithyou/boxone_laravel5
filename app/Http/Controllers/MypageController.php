@@ -148,7 +148,7 @@ class MypageController extends Controller {
 		
 	}
 	
-	public function addZzim(){
+	public function addZZim(){
 		if (session_id() == '')
 			session_start();
 		
