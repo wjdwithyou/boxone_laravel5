@@ -66,7 +66,7 @@ class MainController extends Controller {
 			if ($temp['code'] == 1)
 			{
 				$cateName = $cateModel->getCateName(1, $list);
-				$temp = array_slice($temp['data'], 0, 4);
+				$temp = array_slice($temp['data'], 0, 10);
 				$temp['cateName'] = $cateName['data'][0]->name;
 				array_push($prdtList, $temp);
 			}			

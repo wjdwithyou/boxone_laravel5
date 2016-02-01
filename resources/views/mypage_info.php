@@ -29,13 +29,13 @@
 								<span></span>
 							</div>
 							<div>
-								<img src="<?=$adr_img?>info.png" class="br_50" width="80" height="80">
+								<img src="<?=$adr_img?>profile/<?=$img?>" class="br_50" width="80" height="80">
 							</div>
 							<p class="font_14 mg_t8"><?=$nickname?>님</p>
 						</div>
 					</div>
 					<div class="top_div2 f_l ta_c" onclick="location.href = '<?=$adr_ctr?>Mypage/index'">
-						<div><span class="mp_badge fw_b br_20">123</span></div>
+						<div><span class="mp_badge fw_b br_20">2</span></div>
 						<div class="mpt_ico">
 							<img src="<?=$adr_img?>mp_heart.png" class="mp_ico">
 						</div>

@@ -163,7 +163,7 @@
 				</div>
 				<!-- 추천 상품 -->
 				<?php foreach ($suggestList as $list) :?>
-				<div class="imglist_div grid grid_432">
+				<div class="imglist_div grid grid_532">
 					<div class="imglist_img img_center">
 						<div class="img_center_inner">
 							<?php if ($list->ptype == 'p') :?>							

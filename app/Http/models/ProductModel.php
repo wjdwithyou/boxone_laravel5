@@ -431,7 +431,7 @@ class ProductModel
 							(SELECT 'h' as ptype, idx, name, img, brand, hit_count, FORMAT(priceS, 0) as fPrice
 							FROM hotdeal_product
 							WHERE cate_small=? AND idx != ?)
-							ORDER BY hit_count DESC LIMIT 6", 
+							ORDER BY hit_count DESC LIMIT 5", 
 				array($cate, $idx, $cate, $idx));
 		
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
