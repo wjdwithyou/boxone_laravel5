@@ -85,6 +85,26 @@ class MainController extends Controller {
 	public function calculator(){
 		return view('calculator');
 	}
+	
+	// 160201 J.Style
+	// Aside menu bookmark.
+	public function bookmark(){
+		if (session_id() == '')
+			session_start();
+		
+		if (empty($_SESSION['idx']))
+			return;
+		
+		$idx = $_SESSION['idx'];
+			
+		$pdModel = new ProductModel();
+		
+		$pdList = $pdModel->getBookmarkProduct($idx);
+			
+		$page = 'aside_bookmark';
+		return view($page, array('page' => $page, 'pdList' => $pdList['data']));
+	}
+	
 	public function recently(){
 		return view('aside_recently');
 	}
