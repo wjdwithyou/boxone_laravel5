@@ -178,30 +178,25 @@ function expandBookmark()
 	});
 }
 
-function expandRecently()
-{
-	$.ajax
-	({
-		url: adr_ctr+"Main/recently",
-		type: 'post',
+function expandRecently(){
+	$.ajax({
 		async: false,
-		success: function(result)
-		{
+		type: 'post',
+		url: adr_ctr + "Main/recently",
+		success: function(result){
 			$("#aside_expand").children().html(result);
 		},
-		error: function(request,status,error)
-		{
+		error: function(request, status, error){
 			console.log(request.responseText);
 		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		}
 	});
 }
-
+/*
 function deleteImg(){
 	alert("삭제하시겠습니까?");
 }
-
-
+*/
 function clickLink(idx, url)
 {
 	$.ajax

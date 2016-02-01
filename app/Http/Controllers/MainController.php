@@ -79,17 +79,57 @@ class MainController extends Controller {
 	public function deliver(){
 		return view('deliver');
 	}
+	
 	public function deliverInfo(){
 		return view('deliverInfo');
 	}
+	
 	public function calculator(){
 		return view('calculator');
 	}
 	
-	
 	public function recently(){
-		return view('aside_recently');
+		$cookie = Request::cookie('recentPrdt');
+		
+		if ($cookie == '')
+			$cookieArray = array();
+		else{
+			$cookieArray = json_decode($cookie, true);
+			
+			if (json_last_error() != JSON_ERROR_NONE)
+				$cookieArray = array();
+		}
+		
+		return $cookieArray;
+		
+		
+		/*
+		// tt start
+		// 쇼핑 박스 저장한 카테고리 수(쿠키) 확인 후, 우선순위 확인하여 가져오기
+	
+		$cookieValue = array(
+				1 => 0,
+				2 => 0,
+				3 => 0,
+				4 => 0,
+				5 => 0,
+				6 => 0,
+				7 => 0,
+		);
+		foreach ($cookieArray as $list)
+			$cookieValue[$list]++;
+		arsort($cookieValue);
+		$cateArray = array_keys($cookieValue);
+		// tt end
+		*/
+		
+		
+		$page = 'aside_recently';
+		return view($page, array('data' => $data));
+		
+		//return view('aside_recently');
 	}
+	
 	public function bookmark(){
 		return view('aside_bookmark');
 	}
