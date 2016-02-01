@@ -161,7 +161,7 @@
 									<td></td>
 									<td class="bo_color">무료배송</td>
 									<td class="review_btn">
-										<button type="button" class="bo_btn3" onclick="">구매하기</button>
+										<button type="button" class="aaa br_25 bo_btn2" onclick="">구매하기</button>
 									</td>
 								</tr>
 							</table>
@@ -182,7 +182,7 @@
 									<td></td>
 									<td class="bo_color">무료배송</td>
 									<td class="review_btn">
-										<button type="button" class="bo_btn3" onclick="">구매하기</button>
+										<button type="button" class="aaa br_25 bo_btn2" onclick="">구매하기</button>
 									</td>
 								</tr>
 							</table>
@@ -203,7 +203,7 @@
 									<td></td>
 									<td class="bo_color">무료배송</td>
 									<td class="review_btn">
-										<button type="button" class="bo_btn3" onclick="">구매하기</button>
+										<button type="button" class="aaa br_25 bo_btn2" onclick="">구매하기</button>
 									</td>
 								</tr>
 							</table>
