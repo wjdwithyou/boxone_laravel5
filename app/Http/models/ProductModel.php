@@ -464,27 +464,6 @@ class ProductModel{
 		
 		return array('code' => 1, 'msg' => 'success', 'data' => $recentList);
 	}
-	
-	// 160201 J.Style
-	// No comment.
-	function getBookmarkProduct($member_idx){
-		$bookmark_h = DB::select('select hotdeal_idx from hotdeal_bookmark where member_idx=? and target=1', array($member_idx));
-		$bookmark_p = DB::select('select product_idx from product_bookmark where member_idx=?', array($member_idx));
-	
-		$productList = array();
-	
-		for ($i = 0; $i < count($bookmark_h); ++$i){
-			$temp = DB::select('select idx, img, brand, name, saleP, priceS as price from hotdeal_product where idx=?', array($bookmark_h[$i]->hotdeal_idx));
-			array_push($productList, $temp);
-		}
-	
-		for ($i = 0; $i < count($bookmark_p); ++$i){
-			$temp = DB::select('select idx, img, brand, name, 0 as saleP, price from product where idx=?', array($bookmark_p[$i]->product_idx));
-			array_push($productList, $temp);
-		}
-	
-		return array('code' => 1, 'msg' => 'success', 'data' => $productList);
-	}
 }
 
 
