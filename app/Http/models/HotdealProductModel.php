@@ -11,7 +11,7 @@ include_once dirname(__FILE__)."/Utility.php";
 class HotdealProductModel{
 	// 160131 J.Style
 	// Create hotdeal bookmark, and increase bookmark count.
-	function createBookmarkHotdeal($hotdeal_idx, $member_idx){
+	function createBookmarkHotdeal($member_idx, $hotdeal_idx){
 		if ( !(inputErrorCheck($member_idx, 'member_idx')
 			&& inputErrorCheck($hotdeal_idx, 'hotdeal_idx')))
 			return;
