@@ -164,10 +164,6 @@ function expandBookmark()
 		url: adr_ctr+"Main/bookmark",
 		type: 'post',
 		async: false,
-		data:{
-			year: year,
-			num: num
-		},
 		success: function(result)
 		{
 			console.log(result);
@@ -190,7 +186,7 @@ function expandRecently()
 		async: false,
 		success: function(result)
 		{
-			console.log(result);
+			//console.log(result);
 			$("#aside_expand").children().html(result);
 		},
 		error: function(request,status,error)
