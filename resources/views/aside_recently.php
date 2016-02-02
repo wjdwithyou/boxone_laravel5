@@ -11,9 +11,9 @@
 				</div>
 				<div class="img_center_inner">
 					<?php if ($j->is_hotdeal == 1) :?>
-					<a href="Hotdeal/productDetail?idx=<?=$list->idx?>"><img src="<?=$list->img?>"></a>
+					<a href="Hotdeal/productDetail?idx=<?=$list->idx?>"><img src="<?=$j->img?>"></a>
 					<?php else :?>
-					<a href="Shoppingbox/detail?idx=<?=$list->idx?>"><img src="<?=$list->img?>"></a>
+					<a href="Shoppingbox/detail?idx=<?=$list->idx?>"><img src="<?=$j->img?>"></a>
 					<?php endif;?>
 				</div>
 			</div>
