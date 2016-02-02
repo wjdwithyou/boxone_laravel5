@@ -11,15 +11,15 @@ include_once dirname(__FILE__)."/Utility.php";
 class HotdealProductModel{
 	// 160131 J.Style
 	// Create hotdeal bookmark, and increase bookmark count.
-	function createBookmark($hotdeal_idx, $member_idx){
-		if ( !(inputErrorCheck($prod_idx, 'prod_idx')
-			&& inputErrorCheck($member_idx, 'member_idx')))
+	function createBookmarkHotdeal($member_idx, $hotdeal_idx){
+		if ( !(inputErrorCheck($member_idx, 'member_idx')
+			&& inputErrorCheck($hotdeal_idx, 'hotdeal_idx')))
 			return;
 		
 		$result = DB::table ('hotdeal_bookmark')->insertGetId(
 				array(
-						'hotdeal_idx' => $hotdeal_idx,
 						'member_idx' => $member_idx,
+						'hotdeal_idx' => $hotdeal_idx,
 						'upload' => DB::raw('now()'),
 						'target' => 1
 				)
@@ -28,6 +28,22 @@ class HotdealProductModel{
 		DB::update('update hotdeal_product set bookmark_count=bookmark_count+1 where idx=?', array($hotdeal_idx));
 		
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
+	}
+	
+	// 160201 J.Style
+	// Delete bookmark hotdeal
+	function deleteBookmarkHotdeal($member_idx, $hotdeal_idx){
+		if ( !(inputErrorCheck($member_idx, 'member_idx')
+			&& inputErrorCheck($hotdeal_idx, 'hotdeal_idx')))
+			return;
+		
+		$result = DB::delete('delete from hotdeal_bookmark where member_idx=? and hotdeal_idx=? and target=1',
+				array($member_idx, $hotdeal_idx));
+		
+		if ($result == true)
+			return array('code' => 1, 'msg' => 'success');
+		else
+			return array('code' => 0, 'msg' => 'delete failure');
 	}
 
 	/*

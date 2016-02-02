@@ -29,13 +29,13 @@
 								<span></span>
 							</div>
 							<div>
-								<img src="<?=$adr_img?>info.png" class="br_50" width="80" height="80">
+								<img src="<?=$adr_img?>profile/<?=$img?>" class="br_50" width="80" height="80">
 							</div>
 							<p class="font_14 mg_t8"><?=$nickname?>님</p>
 						</div>
 					</div>
 					<div class="selected_mpdiv top_div2 f_l ta_c" onclick="location.href = '<?=$adr_ctr?>Mypage/index'">
-						<div><span class="mp_badge fw_b br_20">123</span></div>
+						<div><span class="mp_badge fw_b br_20">2</span></div>
 						<div class="mpt_ico">
 							<img src="<?=$adr_img?>mp_heart.png" class="mp_ico">
 						</div>
@@ -63,11 +63,15 @@
 				<?php foreach($prdtList[$i] as $j) :?>
 				<div class="imglist_div grid grid_432">
 					<div class="delete_img font_16">
-						<a onclick="deleteImg();"><i class="fa fa-times-circle bo_color2"></i></a>
+						<a onclick="deleteBookmark(<?=$j->idx?>, <?=($j->saleP!=0)?1:0?>);"><i class="fa fa-times-circle bo_color2"></i></a>
 					</div>
 					<div class="imglist_img img_center">
 						<div class="img_center_inner">
+							<?php if ($j->saleP != 0) :?>
 							<a onclick='location.href="<?=$adr_ctr ?>Hotdeal/productDetail?idx=<?=$j->idx?>"'><img src="<?=$j->img?>"></a>
+							<?php else :?>
+							<a onclick='location.href="<?=$adr_ctr ?>Shoppingbox/detail?idx=<?=$j->idx?>"'><img src="<?=$j->img?>"></a>
+							<?php endif;?>
 						</div>
 					</div>
 					<div class="imglist_desc_wrap">
@@ -80,7 +84,7 @@
 							</div>
 						</div>
 						<div class="imglist_desc3 ta_c t_o">
-							<?=$j->price?><br>
+							￦<?=$j->price?><br>
 						</div>
 					</div>
 				</div>
@@ -94,6 +98,6 @@
 	</div>
 	
 </div>
-	
+
 </body>
 </html>

@@ -147,10 +147,12 @@ function toggleExpand(e, t){
 		if(t == 1){
 			expandBookmark();
 		}
-		else if(t == 2){
+		else{
 			expandRecently();
 		}
 		$("#aside_expand").show();
+		$("#mob_aside_bg").height($("body").height());
+		$("#mob_aside_bg").show();
 		$(".aside_div").children("i").css("color", "#8c8b8b");
 		e.css("background-color", "#fff");
 		e.children("i").css("color", "#f15a63");
@@ -164,33 +166,8 @@ function expandBookmark()
 		url: adr_ctr+"Main/bookmark",
 		type: 'post',
 		async: false,
-		data:{
-			year: year,
-			num: num
-		},
 		success: function(result)
 		{
-			console.log(result);
-			$("#aside_expand").children().html(result).trigger("create");
-		},
-		error: function(request,status,error)
-		{
-			console.log(request.responseText);
-		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		}
-	});
-}
-
-function expandRecently()
-{
-	$.ajax
-	({
-		url: adr_ctr+"Main/recently",
-		type: 'post',
-		async: false,
-		success: function(result)
-		{
-			console.log(result);
 			$("#aside_expand").children().html(result);
 		},
 		error: function(request,status,error)
@@ -201,6 +178,45 @@ function expandRecently()
 	});
 }
 
+function expandRecently(){
+	$.ajax({
+		async: false,
+		type: 'post',
+		url: adr_ctr + "Main/recently",
+		success: function(result){
+			$("#aside_expand").children().html(result);
+		},
+		error: function(request, status, error){
+			console.log(request.responseText);
+		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+	});
+}
+/*
 function deleteImg(){
 	alert("삭제하시겠습니까?");
+}
+*/
+function clickLink(idx, url)
+{
+	$.ajax
+	({
+		url: adr_ctr+"Bestranking/hitCountPlus",
+		type: 'post',
+		async: false,
+		data:{
+			idx: idx
+		},
+		success: function(result)
+		{
+			window.open(url);
+			//alert (JSON.stringify(result));
+			//result = JSON.parse(result);
+		},
+		error: function(request,status,error)
+		{
+			console.log(request.responseText);
+		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+	});
 }

@@ -94,7 +94,7 @@
 				<li class="pd_li4 li_underline">
 					<div class="btn_set2 input_div pd_t24 f_c">
 						<div class="grid grid_h">
-							<button type="button" class="bo_btn1 br_25" onclick="">찜하기</button>
+							<button type="button" class="bo_btn1 br_25" onclick="prdtZZim(<?=$idx?>, <?=$is_hotdeal?>)">찜하기</button>
 						</div>
 						<div class="grid grid_h">
 							<button type="button" class="bo_btn2 br_25" onclick="window.open('<?=$result['url']?>');">구매하기</button>
@@ -142,9 +142,9 @@
 									<td class="bo_color">무료배송</td>
 									<td class="review_btn">
 									<?php if ($list->ptype == 'p') :?>
-									<button type="button" class="bo_btn3" onclick="location.href = '<?=$adr_ctr?>Shoppingbox/detail?idx=<?=$list->idx?>';">
+									<button type="button" class="aaa br_25 bo_btn2" onclick="location.href = '<?=$adr_ctr?>Shoppingbox/detail?idx=<?=$list->idx?>';">
 									<?php else :?>
-									<button type="button" class="bo_btn3" onclick="location.href = '<?=$adr_ctr?>Hotdeal/productDetail?idx=<?=$list->idx?>';">
+									<button type="button" class="aaa br_25 bo_btn2" onclick="location.href = '<?=$adr_ctr?>Hotdeal/productDetail?idx=<?=$list->idx?>';">
 									<?php endif;?>
 										구매하기
 									</button></td>
@@ -163,7 +163,7 @@
 				</div>
 				<!-- 추천 상품 -->
 				<?php foreach ($suggestList as $list) :?>
-				<div class="imglist_div grid grid_432">
+				<div class="imglist_div grid grid_532">
 					<div class="imglist_img img_center">
 						<div class="img_center_inner">
 							<?php if ($list->ptype == 'p') :?>							

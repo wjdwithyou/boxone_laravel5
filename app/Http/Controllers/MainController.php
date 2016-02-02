@@ -66,7 +66,7 @@ class MainController extends Controller {
 			if ($temp['code'] == 1)
 			{
 				$cateName = $cateModel->getCateName(1, $list);
-				$temp = array_slice($temp['data'], 0, 4);
+				$temp = array_slice($temp['data'], 0, 10);
 				$temp['cateName'] = $cateName['data'][0]->name;
 				array_push($prdtList, $temp);
 			}			
@@ -79,24 +79,38 @@ class MainController extends Controller {
 	public function deliver(){
 		return view('deliver');
 	}
+	
 	public function deliverInfo(){
 		return view('deliverInfo');
 	}
+	
 	public function calculator(){
 		return view('calculator');
 	}
+	
+	// 160201 J.Style
+	// No comment.
 	public function recently(){
+		$pdModel = new ProductModel();
+		
 		$cookie = Request::cookie('recentPrdt');
+		
 		if ($cookie == '')
 			$cookieArray = array();
-		else
-		{
+		else{
 			$cookieArray = json_decode($cookie, true);
-			// cookie 임의 변경 시 자동 초기화
+			
 			if (json_last_error() != JSON_ERROR_NONE)
 				$cookieArray = array();
 		}
+		
+		$recentList = $pdModel->getProductByCookie($cookieArray);
+		
 		$page = 'aside_recently';
-		return view($page, array('page' => $page, 'recentlyList' => $cookieArray));
+		return view($page, array(/*'page' => $page, */'recentList' => $recentList['data']));
+	}
+	
+	public function bookmark(){
+		return view('aside_bookmark');
 	}
 }

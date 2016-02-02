@@ -257,6 +257,8 @@ class ShoppingboxController extends Controller {
 		$page = 'product';
 		return view($page, array(
 				'page' => $page, 
+				'idx' => $idx,
+				'is_hotdeal' => 0,
 				'result' => $result['data'], 
 				'reviewList' => $reviewList['data'],
 				'sameList' => $sameList['data'],

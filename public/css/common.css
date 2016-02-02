@@ -143,8 +143,8 @@ button:focus{outline:0}
 .bo_btn8:hover{background-color:#97B0E9;color:#fff}
 .bo_btnw{border:1px solid #fff;background-color:#fff;color:#000}
 .bo_input1{border:1px solid #ccc;border-radius:0}
-.bo_search1{border:1px solid #f15a63;padding-left:30px}
-.bo_search2{border:1px solid #ccc;padding-left:30px}
+.bo_search1{border:1px solid #f15a63;padding-left:16px;padding-right:30px}
+.bo_search2{border:1px solid #ccc;padding-left:16px;padding-right:30px}
 .bo_search1 + a img, .bo_search2 + a img{position:absolute;z-index:10;}
 .bo_checkbox,.bo_checkbox2{display:none}
 .bo_checkbox + label span{display:inline-block;vertical-align:middle;width:19px;height:19px;margin:-4px 4px 0 0;background:url(https://s3-ap-northeast-1.amazonaws.com/boxone-image/bo_checkbox.png);background-size:contain;cursor:pointer}
@@ -167,7 +167,7 @@ button:focus{outline:0}
 #header_main_wrap{padding-top:12px;padding-bottom:12px}
 #header_profile{position:absolute;top:-4px;left:-28px}
 #integrated_search{width:100%;margin-top:2px;padding-top:8px;padding-bottom:8px;font-size:13px}
-#integrated_search + a img{top:12px;left:12px}
+#integrated_search + a img{top:12px;right:12px}
 #main_menu{margin-left:-18px;margin-right:-18px;font-size:12px;font-weight:bold;text-align:center}
 #main_menu li{padding:8px 26px}
 #main_menu li:first-of-type{background-color:#F47B82}
@@ -235,7 +235,7 @@ button:focus{outline:0}
 	.mob_header{display:none}
 	#bo_logo img{width:132px;height:40px;background-size:contain}
 	#aside_menu_wrap{position:fixed;z-index:10000;width:60px;top:40%;right:0}
-	#aside_menu{width:60px;height:100%;background-color:#fff;border:1px solid #ddd}
+	#aside_menu{width:60px;height:100%;background-color:#fff;border:1px solid #fff}
 	.aside_div{width:60px;height:60px;text-align:center;padding-top:16px}
 	.aside_div i{font-size:28px}
 	.aside_div_2{background-color:#F15A63}

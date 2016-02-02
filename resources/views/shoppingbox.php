@@ -122,13 +122,18 @@
 								<?=$list->name?>
 							</div>
 						</div>
+						<?php if (isset($list->fPrice)) : ?>
 						<div class="imglist_desc3 ta_c t_o">
-							<?php if (isset($list->fPrice)) : ?>
-								￦<?=$list->fPrice?>
-							<?php else :?>
-								￦<?=$list->fPriceO?> -> ￦<?=$list->fPriceS?> (<?=$list->saleP?>%)
-							<?php endif;?>
+							￦<?=$list->fPrice?>
 						</div>
+						<?php else :?>
+						<div class="bo_color1 ta_c fw_b mg_t8">
+							<?=$list->saleP?>%
+						</div>
+						<div class="imglist_desc3 ta_c t_o">
+							<strike class="bo_color2">￦<?=$list->fPriceO?></strike>&nbsp;￦<?=$list->fPriceS?>
+						</div>
+						<?php endif;?>
 					</div>
 				</div>
 				<?php endforeach;?>
