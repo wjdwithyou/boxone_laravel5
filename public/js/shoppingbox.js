@@ -20,8 +20,10 @@ function getPrdt(cate, sort, page)
 		cate = $("#select_cate").val();
 	if (sort == '')
 		sort = $("#select_orderby").val();
+	/*
 	if (page == '')
 		page = d;
+	*/
 	
 	var search = $("#integrated_search").val();
 	var brand = [];
