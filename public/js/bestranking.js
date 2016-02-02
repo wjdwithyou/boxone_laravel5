@@ -69,3 +69,11 @@ function clickBookmark(img, site)
 	}
 }
 
+function changeCate(){
+	
+	var adr_ctr = $("#adr_ctr").val();
+	var category = $("#select_cate option:selected").val();
+	
+	location.href = adr_ctr + "Bestranking/index?cate="+category;
+
+}

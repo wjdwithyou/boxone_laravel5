@@ -23,7 +23,7 @@
 			<div class="inner">
 				<div id="select_wrap" class="f_c">
 					<div>
-						<select id="select_cate" class="bo_selectbox bo_selectbox_2" onchange="">
+						<select id="select_cate" class="bo_selectbox bo_selectbox_2" onchange="changeCate()">
 							<option value="0&char=1">탑 브랜드</option>
 							<?php foreach ($cate as $cateList) :?>
 							<option value="<?=$cateList->idx?>"><?= $cateList->name?></option>
