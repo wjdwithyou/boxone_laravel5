@@ -26,7 +26,7 @@ $(document).ready(function(){
 		    maxSlides: 4,
 		    moveSlides: 1,
 		    pager: false,
-		    speed: 200,
+		    speed: 1000,
         	pause: 500
 	    });
 	    _this.mouseenter(function() {   

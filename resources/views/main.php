@@ -165,7 +165,7 @@
 											<?=$list[$i]->name?>
 										</div>
 										<div class="imglist_desc3 ta_c t_o mg_t8">
-											￦<?=$list[$i]->fPrice?>
+											<?=$list[$i]->fPrice?>
 										</div>
 									</div>
 								</div>

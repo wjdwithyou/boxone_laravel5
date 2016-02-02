@@ -195,7 +195,8 @@
 							<img src="<?=$adr_img?>reply_inner.png">
 						</td>
 					</tr>
-					<tr class="reply_modify_show">
+					<tr class="reply_modif
+					y_show">
 						<td class="input_textarea">
 							<?php if ($logined) :?>
 								<textarea class="form-control" placeholder="최대 300자까지 등록할 수 있습니다." maxlength="300" rows="3"></textarea>
@@ -219,7 +220,7 @@
 			<!-- /댓댓글 달기 클론 -->
 
 			<div id="pagination_wrap">
-				<div id="pagination">
+				<div id="pagination"> 
 					<?php if($result->next) :?>
 						<a onclick="commContent(<?=$result -> next ?>);">이전</a>
 					<?php else : ?>
