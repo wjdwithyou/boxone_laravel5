@@ -12,7 +12,7 @@
 			<img src="<?=$j->img?>"/><br/>
 			<?=$j->brand?><br/>
 			<?=$j->name?><br/>
-			<?=$j->price?><br/>
+			<?=$j->fprice?><br/>
 			<?=$j->is_hotdeal?><br/>
 		<?php endforeach;?>
 		<br/>

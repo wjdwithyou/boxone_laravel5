@@ -383,12 +383,12 @@ class ProductModel{
 		$productList = array();
 		
 		for ($i = 0; $i < count($bookmark_h); ++$i){
-			$temp = DB::select('select idx, img, brand, name, saleP, priceS as price from hotdeal_product where idx=?', array($bookmark_h[$i]->hotdeal_idx));
+			$temp = DB::select('select idx, img, brand, name, saleP, FORMAT(priceS, 0) as fprice from hotdeal_product where idx=?', array($bookmark_h[$i]->hotdeal_idx));
 			array_push($productList, $temp);
 		}
 		
 		for ($i = 0; $i < count($bookmark_p); ++$i){
-			$temp = DB::select('select idx, img, brand, name, 0 as saleP, price from product where idx=?', array($bookmark_p[$i]->product_idx));
+			$temp = DB::select('select idx, img, brand, name, 0 as saleP, FORMAT(price, 0) as fprice from product where idx=?', array($bookmark_p[$i]->product_idx));
 			array_push($productList, $temp);
 		}
 		
@@ -455,9 +455,9 @@ class ProductModel{
 		
 		for ($i = 0; $i < count($cookieArray); ++$i){
 			if ($cookieArray[$i][0] == 'h')
-				$temp = DB::select('select idx, img, brand, name, priceS as price, 1 as is_hotdeal from hotdeal_product where idx=?', array($cookieArray[$i][1]));
+				$temp = DB::select('select idx, img, brand, name, FORMAT(priceS, 0) as fprice, 1 as is_hotdeal from hotdeal_product where idx=?', array($cookieArray[$i][1]));
 			else
-				$temp = DB::select('select idx, img, brand, name, price, 0 as is_hotdeal from product where idx=?', array($cookieArray[$i][1]));
+				$temp = DB::select('select idx, img, brand, name, FORMAT(price, 0) as fprice, 0 as is_hotdeal from product where idx=?', array($cookieArray[$i][1]));
 			
 			array_push($recentList, $temp);
 		}
