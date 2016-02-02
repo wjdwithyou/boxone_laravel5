@@ -35,7 +35,7 @@
 						</div>
 					</div>
 					<div class="selected_mpdiv top_div2 f_l ta_c" onclick="location.href = '<?=$adr_ctr?>Mypage/index'">
-						<div><span class="mp_badge fw_b br_20">2</span></div>
+						<div><span class="mp_badge fw_b br_20"><?=$alarmWish?></span></div>
 						<div class="mpt_ico">
 							<img src="<?=$adr_img?>mp_heart.png" class="mp_ico">
 						</div>

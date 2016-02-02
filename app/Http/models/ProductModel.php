@@ -411,6 +411,17 @@ class ProductModel{
 			return array('code' => 0, 'msg' => 'delete failure');
 	}
 	
+	// 160202 J.Style
+	// get product wishlist count.
+	function getCntWishlist($member_idx){
+		if ( !(inputErrorCheck($member_idx, 'member_idx')))
+			return;
+		
+		$result = DB::select('select count(*) as cnt from product_bookmark where member_idx=?', array($member_idx));
+		
+		return array('code' => 1, 'msg' => 'success', 'data' => $result);
+	}
+	
 	function getMappingPrdt($mapping_idx)
 	{
 		if ($mapping_idx != 0)
