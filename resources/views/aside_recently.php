@@ -1,3 +1,6 @@
+<?php
+	$adr_ctr = "http://52.69.26.243/";
+?>
 <div id="aside_expand_top" class="pd_b8 ta_c">
 	<span class="fw_b font_16">최근 본 상품</span>
 </div>
@@ -11,9 +14,9 @@
 				</div>
 				<div class="img_center_inner">
 					<?php if ($j->is_hotdeal == 1) :?>
-					<a href="Hotdeal/productDetail?idx=<?=$j->idx?>"><img src="<?=$j->img?>"></a>
+					<a href="<?=$adr_ctr?>Hotdeal/productDetail?idx=<?=$j->idx?>"><img src="<?=$j->img?>"></a>
 					<?php else :?>
-					<a href="Shoppingbox/detail?idx=<?=$j->idx?>"><img src="<?=$j->img?>"></a>
+					<a href="<?=$adr_ctr?>Shoppingbox/detail?idx=<?=$j->idx?>"><img src="<?=$j->img?>"></a>
 					<?php endif;?>
 				</div>
 			</div>
