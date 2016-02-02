@@ -26,7 +26,7 @@ $(document).ready(function(){
 		    maxSlides: 5,
 		    moveSlides: 1,
 		    pager: false,
-		    speed: 200,
+		    speed: 1000,
         	pause: 500
 	    });
 	    _this.parent(".bx-viewport").next().find(".bx-next").mouseenter(function() {

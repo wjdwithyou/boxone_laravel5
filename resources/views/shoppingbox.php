@@ -148,7 +148,7 @@
 						<a onclick="getPrdt('','',<?php echo ($paging['now'] - 1);?>);"><?php echo ($paging['now'] - 1);?></a>
 					<?php else :?>
 						<?php for($i = 1 ; $i < $paging['now'] ; $i++) :?>
-							<a onclick="getPrdt('','','',<?=$i?>);"><?=$i?></a>
+							<a onclick="getPrdt('','',<?=$i?>);"><?=$i?></a>
 						<?php endfor;?>
 					<?php endif;?>
 					<a class="current_page"><?=$paging['now']?></a>
