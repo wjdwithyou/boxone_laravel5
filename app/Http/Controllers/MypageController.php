@@ -34,28 +34,9 @@ class MypageController extends Controller {
 			$productList = $pdModel->getBookmarkProduct($idx);
 			
 			$page = 'mypage';
-			return view($page, array('page' => $page, 'result' => $result, 'alarmDc' => $alarmDc, 'prdtList' => $productList['data']));
+			return view($page, array('page' => $page, 'result' => $result, 'alarmWish' => count($productList['data']), 'alarmDc' => $alarmDc, 'prdtList' => $productList['data']));
 		}
 		
-	}
-	
-	public function infoIndex()
-	{
-		$memberModel = new MemberModel();
-		$domModel = new ShipmentDomesticModel();
-		$cusModel = new ShipmentCustomModel();
-		
-		if (Utility::loginStateChk(true))
-		{
-			$idx = $_SESSION['idx'];
-			$nickname = $_SESSION['nickname'];
-			$result = $memberModel->getInfoByNickname($nickname)['data'][0];
-			
-			$alarmDc = $cusModel->getCntDeliver($idx) + $domModel->getCntDeliver($idx);
-			
-			$page = 'mypage_info';
-			return view($page, array('page' => $page, 'result' => $result, 'alarmDc' => $alarmDc));
-		}
 	}
 	
 	public function deliveryIndex()
@@ -63,6 +44,9 @@ class MypageController extends Controller {
 		$memberModel = new MemberModel();
 		$domModel = new ShipmentDomesticModel();
 		$cusModel = new ShipmentCustomModel();
+		
+		$hdModel = new HotdealProductModel();
+		$pdModel = new ProductModel();
 		
 		if (Utility::loginStateChk(true))
 		{
@@ -138,14 +122,38 @@ class MypageController extends Controller {
 				array_push($deliverList, $temp);
 			}
 			
+			$alarmWish = $hdModel->getCntWishlist($idx)['data'][0]->cnt + $pdModel->getCntWishlist($idx)['data'][0]->cnt;
 			$alarmDc = $cusModel->getCntDeliver($idx) + $domModel->getCntDeliver($idx);
 				
 			$page = 'mypage_dc';
-			return view($page, array('page' => $page, 'result' => $result, 'customList' => $customList, 'deliverList' => $deliverList, 'alarmDc' => $alarmDc));
+			return view($page, array('page' => $page, 'result' => $result, 'customList' => $customList, 'deliverList' => $deliverList, 'alarmWish' => $alarmWish, 'alarmDc' => $alarmDc));
 		}
 		else
 			return;
 		
+	}
+	
+	public function infoIndex()
+	{
+		$memberModel = new MemberModel();
+		$domModel = new ShipmentDomesticModel();
+		$cusModel = new ShipmentCustomModel();
+	
+		$hdModel = new HotdealProductModel();
+		$pdModel = new ProductModel();
+	
+		if (Utility::loginStateChk(true))
+		{
+			$idx = $_SESSION['idx'];
+			$nickname = $_SESSION['nickname'];
+			$result = $memberModel->getInfoByNickname($nickname)['data'][0];
+				
+			$alarmWish = $hdModel->getCntWishlist($idx)['data'][0]->cnt + $pdModel->getCntWishlist($idx)['data'][0]->cnt;
+			$alarmDc = $cusModel->getCntDeliver($idx) + $domModel->getCntDeliver($idx);
+				
+			$page = 'mypage_info';
+			return view($page, array('page' => $page, 'result' => $result, 'alarmWish' => $alarmWish, 'alarmDc' => $alarmDc));
+		}
 	}
 	
 	public function addZZim(){

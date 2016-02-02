@@ -3,7 +3,22 @@
 </div>
 
 <div id="aside_expand_content" class="f_c">
-	<div class="imglist_div aside_img_wrap grid_as">
+
+	<br/>
+	<p align="center"><b>bookmark test</b></p>
+	<br/>
+	<?php for ($i = 0; $i < count($bookmarkList); ++$i) :?>
+		<?php foreach ($bookmarkList[$i] as $j) :?>
+			<?=$j->idx?><br/>
+			<img src="https://s3-ap-northeast-1.amazonaws.com/boxone-image/site/<?= $j->idx?>.png"/><br/>
+			<?=$j->name?><br/>
+			<?=$j->website_link?><br/>
+			<?=$j->name_eng?><br/>
+		<?php endforeach;?>
+		<br/>
+	<?php endfor;?>
+	
+	<!--div class="imglist_div aside_img_wrap grid_as">
 		<div class="imglist_img img_center">
 			<div class="delete_img font_16">
 				<a onclick="deleteImg();"><i class="fa fa-times-circle bo_color2"></i></a>
@@ -110,5 +125,5 @@
 				다이슨
 			</div>
 		</div>
-	</div>
+	</div-->
 </div>
