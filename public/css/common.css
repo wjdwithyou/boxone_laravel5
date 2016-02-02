@@ -26,6 +26,7 @@ button:focus{outline:0}
 .f_c:after{display:block;visibility:hidden;height:0;font-size:0;clear:both;content:''}
 .ta_c{text-align:center}
 .ta_r{text-align:right}
+.ta_l{text-align:left}
 .fw_b{font-weight:bold}
 .dp_b{display:block}
 .dp_ib{display:inline-block}
@@ -37,6 +38,7 @@ button:focus{outline:0}
 .font_12{font-size:12px}
 .font_14{font-size:14px}
 .font_16{font-size:16px}
+.font_24{font-size:24px}
 .td_ul{text-decoration:underline}
 .limit_line{display:-webkit-box;overflow:hidden;text-overflow:ellipsis;line-height:1.2em;-webkit-box-orient:vertical;word-wrap:break-word}
 .limit_line_2{height:2.4em;-webkit-line-clamp:2}
@@ -51,6 +53,7 @@ button:focus{outline:0}
 .img_32{width:32px;height:32px}
 .img_64{width:64px;height:64px}
 .pd_a8{padding:8px}
+.pd_t8{padding-top:8px}
 .pd_t16{padding-top:16px}
 .pd_t24{padding-top:24px}
 .pd_b8{padding-bottom:8px}
@@ -69,6 +72,7 @@ button:focus{outline:0}
 .mg_t64{margin-top:64px}
 .grid{float:left;position:relative;min-height:1px}
 .grid_h{width:50%}
+.grid_t{width:33.333333%}
 .grid_q{width:25%}
 .grid_f{width:20%}
 .li_set{position:relative}
@@ -155,6 +159,7 @@ button:focus{outline:0}
 .bo_selectbox_1{border:1px solid #F15A63;background:#F15A63 url(https://s3-ap-northeast-1.amazonaws.com/boxone-image/select_arr1.png) no-repeat;color:#fff}
 .bo_selectbox_2{border:1px solid #F15A63;background:#fff url(https://s3-ap-northeast-1.amazonaws.com/boxone-image/select_arr2.png) no-repeat;color:#F15A63}
 .bo_selectbox_3{border:1px solid #97B0E9;background:#fff url(https://s3-ap-northeast-1.amazonaws.com/boxone-image/select_arr3.png) no-repeat;color:#8C8B8B}
+.bo_selectbox_4{border:1px solid #8c8b8b;background:#fff url(https://s3-ap-northeast-1.amazonaws.com/boxone-image/select_arr4.png) no-repeat;color:#8c8b8b}
 .bo_badge{padding-left:5px;padding-right:5px;border-radius:25px;background-color:#F15A63;color:#fff}
 .bo_badge{padding-left:5px;padding-right:5px;border-radius:25px;background-color:#F15A63;color:#fff}
 .top_h1{font-size:23px;font-weight:bold}
@@ -217,6 +222,7 @@ button:focus{outline:0}
 .notselected_tab{background-color:#fff;color:#97B0E9}
 .info_box{padding:8px;border:1px solid #97B0E9;background-color:#97B0E9}
 .b_b{border-bottom:1px solid #eee}
+.b_b2{border-bottom:1px solid #ddd}
 #cal_table tr td, #cal_result_table tr td{padding-top:8px}
 #cal_result_table{border-top:1px solid #ddd}
 .cal_col{width:75px;font-size:16px}
@@ -235,7 +241,7 @@ button:focus{outline:0}
 	.mob_header{display:none}
 	#bo_logo img{width:132px;height:40px;background-size:contain}
 	#aside_menu_wrap{position:fixed;z-index:10000;width:60px;top:40%;right:0}
-	#aside_menu{width:60px;height:100%;background-color:#fff;border:1px solid #fff}
+	#aside_menu{width:60px;height:100%;background-color:#fff;border:1px solid #ccc}
 	.aside_div{width:60px;height:60px;text-align:center;padding-top:16px}
 	.aside_div i{font-size:28px}
 	.aside_div_2{background-color:#F15A63}

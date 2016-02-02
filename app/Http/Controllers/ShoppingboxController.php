@@ -254,7 +254,7 @@ class ShoppingboxController extends Controller {
 		Cookie::queue('recentPrdt', $json_cookie);
 		
 		// 출력
-		$page = 'product';
+		$page = 'product_';
 		return view($page, array(
 				'page' => $page, 
 				'idx' => $idx,
@@ -266,6 +266,11 @@ class ShoppingboxController extends Controller {
 				'rate' => array($reviewList['rateAve'], $reviewList['rateBest'], $reviewList['rateCnt']),
 				'cate' => $data['data'][0]
 		));
+	}
+
+	public function product(){
+		$page = 'product';
+		return view($page, array('page' => $page));
 	}
 
 }
