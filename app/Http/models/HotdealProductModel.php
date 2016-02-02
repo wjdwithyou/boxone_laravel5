@@ -30,6 +30,22 @@ class HotdealProductModel{
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
 	
+	// 160202 J.Style
+	// Check whether $hotdeal_idx exist or not.
+	function checkWishlist($member_idx, $hotdeal_idx){
+		if ( !(inputErrorCheck($member_idx, 'member_idx')
+			&& inputErrorCheck($hotdeal_idx, 'hotdeal_idx')))
+			return;
+		
+		$result = DB::select('select * from hotdeal_bookmark where member_idx=? and hotdeal_idx=? and target=1',
+				array($member_idx, $hotdeal_idx));
+		
+		if (count($result) > 0)
+			return array('code' => 0, 'msg' => 'already exist');
+		else
+			return array('code' => 1, 'msg' => 'success');
+	}
+	
 	// 160201 J.Style
 	// Delete bookmark hotdeal
 	function deleteBookmarkHotdeal($member_idx, $hotdeal_idx){

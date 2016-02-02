@@ -156,6 +156,8 @@ class MypageController extends Controller {
 		}
 	}
 	
+	// 160202 Modified by J.Style
+	// Add product to wishlist.
 	public function addZZim(){
 		if (session_id() == '')
 			session_start();
@@ -168,16 +170,34 @@ class MypageController extends Controller {
 		$hdModel = new HotdealProductModel();
 		$pdModel = new ProductModel();
 		
-		$temp_idx = Request::input('idx');
+		$temp_idx = Request::input('idx');		// 	hotdeal / product idx
 		$is_hotdeal = Request::input('is_hotdeal');
 		
-		if ($is_hotdeal)
-			$result = $hdModel->createBookmarkHotdeal($member_idx, $temp_idx);
-		else
-			$result = $pdModel->createBookmarkProduct($member_idx, $temp_idx);
-
-		header('Content-Type: application/json');
-		echo json_encode($result);
+		$alarmWish = $hdModel->getCntWishlist($idx)['data'][0]->cnt + $pdModel->getCntWishlist($idx)['data'][0]->cnt;
+		
+		if ($alarmWish >= 20){		// code 2: Wishlist max exceed.
+			header('Content-Type: application/json');
+			echo json_encode(array('code' => 2, 'msg' => 'max_exceed'));
+		}
+		else{
+			$tpModel = ($is_hotdeal)? $hdModel: $pdModel;
+			
+			$check = $tpModel->checkWishlist($member_idx, $temp_idx);
+			
+			if ($check['code'] == 0){
+				header('Content-Type: application/json');
+				echo json_encode(array('code' => 3, 'msg' => 'already_exist'));	// code 3: Already exist product.
+			}
+			else{
+				if ($is_hotdeal)
+					$result = $hdModel->createBookmarkHotdeal($member_idx, $temp_idx);
+				else
+					$result = $pdModel->createBookmarkProduct($member_idx, $temp_idx);
+				
+				header('Content-Type: application/json');
+				echo json_encode($result);	// code 0, 1
+			}
+		}
 	}
 	
 	// 160201 J.Style

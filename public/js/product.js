@@ -24,10 +24,15 @@ function prdtZZim(idx, is_hotdeal){
 		type: 'post',
 		url: adr_ctr + 'Mypage/addZZim',
 		success: function(result){
+			//alert(result.code);
 			result = JSON.parse(result);
 			
 			if (result.code == 1)
 				alert('찜한 상품에 추가되었습니다.');
+			else if (result.code == 2)
+				alert('찜한 상품은 20개를 초과할 수 없습니다.');
+			else if (result.code == 3)
+				alert('이미 찜한 상품입니다.');
 			else
 				alert('잘못된 접근입니다.');
 		},

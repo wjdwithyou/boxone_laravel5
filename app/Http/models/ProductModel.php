@@ -28,7 +28,23 @@ class ProductModel{
 
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
-
+	
+	// 160202 J.Style
+	// Check whether $product_idx exist or not.
+	function checkWishlist($member_idx, $product_idx){
+		if ( !(inputErrorCheck($member_idx, 'member_idx')
+				&& inputErrorCheck($product_idx, 'product_idx')))
+			return;
+	
+		$result = DB::select('select * from product_bookmark where member_idx=? and product_idx=?',
+				array($member_idx, $product_idx));
+	
+		if (count($result) > 0)
+			return array('code' => 0, 'msg' => 'already exist');
+		else
+			return array('code' => 1, 'msg' => 'success');
+	}
+	
 	/*
 	 *	단일 정보 가져오는 기능
 	 */
