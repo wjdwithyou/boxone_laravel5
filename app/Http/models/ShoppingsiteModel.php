@@ -188,6 +188,24 @@ class ShoppingsiteModel{
 
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
+	
+	// 160202 J.Style
+	// Get $member_idx's bookmark site info.
+	function getBookmarkSite($member_idx){
+		if ( !(inputErrorCheck($member_idx, 'member_idx')))
+			return;
+		
+		$idxList = DB::select('select shoppingsite_idx from link_bookmark where member_idx=?', array($member_idx));
+		
+		$result = array();
+		
+		for ($i = 0; $i < count($idxList); ++$i){
+			$temp = DB::select('select idx, name, website_link, name_eng from shoppingsite where idx=?', array($idxList[$i]->shoppingsite_idx));
+			array_push($result, $temp);
+		}
+		
+		return array('code' => 1, 'msg' => 'success', 'data' => $result);
+	}
 
  	/*  	
      *	북마크 삭제 기능
