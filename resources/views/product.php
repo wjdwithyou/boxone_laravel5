@@ -51,11 +51,11 @@
 							</tr>
 							<tr>
 								<td class="fw_b">가격</td>
-								<td class="fw_b font_16">
+								<td>
 									<?php if ($cate->lidx == 'c') :?>
 										<strike class="bo_color2">￦<?=$result['priceO']?></strike>
 									<?php endif;?>
-									<span class="fw_b">￦<?=$result['price']?></span>
+									<span class="fw_b font_16">￦<?=$result['price']?></span>
 									<?php if ($cate->lidx == 'c') :?>
 										<span class="bo_color1 fw_b">(<?=$result['saleP']?>% OFF)</span>
 									<?php endif;?>
@@ -127,16 +127,16 @@
 					</div>
 					<div class="mg_t16 pd_lr8 f_c">
 						<?php foreach ($sameList as $list) :?>
-						<div class="pd_lr8 grid grid_221">
+						<div class="pd_a8 grid grid_221">
 							<div class="compare_inner">
 								<table class="compare_table">
 									<tr>
-										<td class="fw_b font_14"><?=$list->brand?></td>
+										<td class="compare_site fw_b font_14 t_o"><?=$list->brand?></td>
 										<td class="fw_b bo_color1 font_16" colspan="2">￦<?=$list->fPrice?></td>
 									</tr>
 									<tr>
 										<td></td>
-										<td class="pd_t8" colspan="2"><?=$list->name?></td>
+										<td class="pd_t8 t_o" colspan="2"><?=$list->name?></td>
 									</tr>
 									<tr>
 										<td></td>
@@ -153,7 +153,7 @@
 				</div>
 				
 				<div id="suggest_wrap" class="mg_t32">
-					<div class="bo_color1 ta_c fw_b">
+					<div class="bo_color1 ta_c fw_b font_16">
 						<i>이런 상품 어떠세요?</i>
 					</div>
 					<div class="f_c">
@@ -192,13 +192,13 @@
 					<div class="info_title ta_c fw_b pd_tb16">
 						상품후기
 					</div>
-					<div id="score_wrap" class="f_c">
+					<div id="score_wrap" class="ta_c f_c pd_tb16">
 						<div class="score_div grid grid_t">
 							<div class="fw_b">
 								사용자 총평점
 							</div>
 							<div class="mg_t8">
-								<span class="fw_b bo_color2"><?php for ($i = 1 ; $i <= 5 ; $i++) if ($i <= $rate[0]) echo '★'; else echo '☆';?></span>
+								<span class="fw_b bo_color1"><?php for ($i = 1 ; $i <= 5 ; $i++) if ($i <= $rate[0]) echo '★'; else echo '☆';?></span>
 								&nbsp;
 								<span class="fw_b"><?=$rate[0]?></span>
 								&nbsp;/&nbsp;
@@ -210,7 +210,7 @@
 								가장 많은 평점
 							</div>
 							<div class="mg_t8">
-								<span class="f_b bo_color2"><?php for ($i = 1 ; $i <= 5 ; $i++) if ($i <= $rate[1][0]) echo '★'; else echo '☆';?></span>
+								<span class="f_b bo_color1"><?php for ($i = 1 ; $i <= 5 ; $i++) if ($i <= $rate[1][0]) echo '★'; else echo '☆';?></span>
 								&nbsp;
 								<span class="fw_b"><?=$rate[1][0]?></span>
 								&nbsp;|&nbsp;
@@ -228,28 +228,30 @@
 					</div>
 					
 					<div id="review_google_wrap" class="info_content">
-						<?php foreach($reviewList as $list) :?>
 						<ul>
-							<li class="f_c">
-								<div class="f_l">
-									<span class="fw_b bo_color2"><?php for ($i = 1 ; $i <= 5 ; $i++) if ($i <= $list->rating) echo '★'; else echo '☆';?></span>
-									&nbsp;
-									<span class="fw_b"><?=$list->title?></span>
-									&nbsp;|&nbsp;
-									<span class="bo_color2"><?=$list->writer_name?></span>
+							<?php foreach($reviewList as $list) :?>
+							<li class="mg_t16">
+								<div class="f_c">
+									<div class="f_l">
+										<span class="fw_b bo_color1"><?php for ($i = 1 ; $i <= 5 ; $i++) if ($i <= $list->rating) echo '★'; else echo '☆';?></span>
+										&nbsp;
+										<span class="fw_b"><?=$list->title?></span>
+										&nbsp;|&nbsp;
+										<span class="bo_color2"><?=$list->writer_name?></span>
+									</div>
+									<div class="f_r bo_color2">
+										<?=$list->upload?>
+									</div>
 								</div>
-								<div class="f_r bo_color2">
-									<?=$list->upload?>
+								<div class="mg_t8">
+									<?=$list->contents?>
+								</div>
+								<div class="ta_r">
+									<a class="td_ul" onclick="">번역</a>
 								</div>
 							</li>
-							<li>
-								<?=$list->contents?>
-							</li>
-							<li>
-								<a onclick="">번역</a>
-							</li>
+							<?php endforeach;?>
 						</ul>
-						<?php endforeach;?>
 					</div>
 				</div>
 			</div>
