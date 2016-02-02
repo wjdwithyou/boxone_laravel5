@@ -28,8 +28,9 @@
 .bx-pager{position:relative !important;bottom:0 !important}
 
 .cate_title_wrap{position:relative}
-.cate_title{position:absolute;z-index:10;padding:8px 16px;border:1px solid #8C8B8B;background-color:#fff;top:-16px;left:32px}
+.cate_title{position:absolute;z-index:10;padding:8px 16px;border:1px solid #8C8B8B;background-color:#fff;top:-16px; left: 50%;transform: translateX(-50%);}
 .cate_title_hr{z-index:5;margin-top:32px;margin-bottom:32px;border-top:1px solid #8C8B8B}
+
 
 @media(min-width:768px){
 }

@@ -1,6 +1,9 @@
 #social_txt{margin-top:32px;font-size:18px;text-align:center}
 #social_hr{width:200px;margin:16px auto;border-top:1px solid #8c8b8b}
-.social_div{float:left;width:25%;text-align:center}
+.social_div{float:left;width:25%;text-align:center;-ms-interpolation-mode: bicubic;
+}
 .social_btn{width:50px;	height:50px}
 #sign_find{margin-top:16px;text-align:center}
 #login_txt{margin-top:8px;font-size:10px;color:#8C8B8B}
+
+img { -ms-interpolation-mode: bicubic; background:rgba(255,255,255,.001); image-rendering: auto; }

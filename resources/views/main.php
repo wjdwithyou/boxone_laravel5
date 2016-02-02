@@ -145,7 +145,7 @@
 					<?php foreach ($prdtList as $list) :?>
 						<div class="cate_title_wrap">
 							<hr class="cate_title_hr">
-							<div class="cate_title br_25 f_b bo_color2"><span><?=$list['cateName']?></span></div>
+							<div class="cate_title br_25 f_b bo_color2"><?=$list['cateName']?>1</div>
 						</div>
 						<?php if(!isMobile()) :?>
 						<div class="cate_slide">
