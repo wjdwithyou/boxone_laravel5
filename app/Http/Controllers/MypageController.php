@@ -173,7 +173,7 @@ class MypageController extends Controller {
 		$temp_idx = Request::input('idx');		// 	hotdeal / product idx
 		$is_hotdeal = Request::input('is_hotdeal');
 		
-		$alarmWish = $hdModel->getCntWishlist($idx)['data'][0]->cnt + $pdModel->getCntWishlist($idx)['data'][0]->cnt;
+		$alarmWish = $hdModel->getCntWishlist($member_idx)['data'][0]->cnt + $pdModel->getCntWishlist($member_idx)['data'][0]->cnt;
 		
 		if ($alarmWish >= 20){		// code 2: Wishlist max exceed.
 			header('Content-Type: application/json');
