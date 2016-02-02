@@ -8,3 +8,12 @@
 .info_title{color:#f15a63;border-top:1px solid #f15a63;border-bottom:1px solid #f15a63}
 .compare_inner{padding:16px;background-color:#f8f7f7}
 .compare_buy_btn{padding:4px 16px}
+#score_wrap{border-bottom:1px solid #f15a63}
+.compare_site{width:100px}
+
+@media(min-width:768px){
+	.fotorama{padding-right:32px !important}
+}
+@media(max-width:767px){
+	.fotorama{padding-right:0 !important}
+}
