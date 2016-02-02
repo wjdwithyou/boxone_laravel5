@@ -88,6 +88,25 @@ class MainController extends Controller {
 		return view('calculator');
 	}
 	
+	// 160202 J.Style
+	// No comment.
+	public function bookmark(){
+		if (session_id() == '')
+			session_start();
+	
+		if (!isset($_SESSION['idx']))
+			return;
+	
+		$member_idx = $_SESSION['idx'];
+	
+		$ssModel = new ShoppingsiteModel();
+	
+		$bookmarkList = $ssModel->getBookmarkSite($member_idx);
+	
+		$page = 'aside_bookmark';
+		return view($page, array(/*'page' => $page, */'bookmarkList' => $bookmarkList['data']));
+	}
+	
 	// 160201 J.Style
 	// No comment.
 	public function recently(){
@@ -108,9 +127,5 @@ class MainController extends Controller {
 		
 		$page = 'aside_recently';
 		return view($page, array(/*'page' => $page, */'recentList' => $recentList['data']));
-	}
-	
-	public function bookmark(){
-		return view('aside_bookmark');
 	}
 }

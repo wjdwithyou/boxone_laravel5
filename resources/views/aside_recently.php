@@ -9,12 +9,13 @@
 	<?php for ($i = 0; $i < count($recentList); ++$i) :?>
 		<?php foreach ($recentList[$i] as $j) :?>
 			<?=$j->idx?><br/>
-			<?=$j->img?><br/>
+			<img src="<?=$j->img?>"/><br/>
 			<?=$j->brand?><br/>
 			<?=$j->name?><br/>
 			<?=$j->price?><br/>
 			<?=$j->is_hotdeal?><br/>
 		<?php endforeach;?>
+		<br/>
 	<?php endfor;?>
 	
 	<!--div class="imglist_div aside_img_wrap grid_as">
