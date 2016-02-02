@@ -51,11 +51,11 @@
 							</tr>
 							<tr>
 								<td class="fw_b">가격</td>
-								<td class="fw_b font_16">
+								<td>
 									<?php if ($cate->lidx == 'c') :?>
 										<strike class="bo_color2">￦<?=$result['priceO']?></strike>
 									<?php endif;?>
-									<span class="fw_b">￦<?=$result['price']?></span>
+									<span class="fw_b font_16">￦<?=$result['price']?></span>
 									<?php if ($cate->lidx == 'c') :?>
 										<span class="bo_color1 fw_b">(<?=$result['saleP']?>% OFF)</span>
 									<?php endif;?>
