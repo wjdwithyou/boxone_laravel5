@@ -7,13 +7,13 @@
 		<div class="imglist_div aside_img_wrap grid_as">
 			<div class="imglist_img img_center">
 				<div class="delete_img font_16">
-					<a onclick="deleteImg();"><i class="fa fa-times-circle bo_color2"></i></a>
+					<a onclick="deleteRecently();"><i class="fa fa-times-circle bo_color2"></i></a>
 				</div>
 				<div class="img_center_inner">
 					<?php if ($j->is_hotdeal == 1) :?>
-					<a onclick='location.href="<?=$adr_ctr ?>Hotdeal/productDetail?idx=<?=$list->idx?>"'><img src="<?=$list->img?>"></a>
+					<a href="Hotdeal/productDetail?idx=<?=$list->idx?>"><img src="<?=$list->img?>"></a>
 					<?php else :?>
-					<a onclick='location.href="<?=$adr_ctr ?>Shoppingbox/detail?idx=<?=$list->idx?>"'><img src="<?=$list->img?>"></a>
+					<a href="Shoppingbox/detail?idx=<?=$list->idx?>"><img src="<?=$list->img?>"></a>
 					<?php endif;?>
 				</div>
 			</div>

@@ -192,11 +192,7 @@ function expandRecently(){
 		}
 	});
 }
-/*
-function deleteImg(){
-	alert("삭제하시겠습니까?");
-}
-*/
+
 function clickLink(idx, url)
 {
 	$.ajax
@@ -219,4 +215,12 @@ function clickLink(idx, url)
 		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		}
 	});
+}
+
+function deleteBookmark(){
+	confirm("삭제하시겠습니까?");
+}
+
+function deleteRecently(){
+	confirm("삭제하시겠습니까?");
 }
