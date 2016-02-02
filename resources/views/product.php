@@ -157,6 +157,7 @@
 						<i>이런 상품 어떠세요?</i>
 					</div>
 					<div class="f_c">
+						<?php foreach ($suggestList as $list) :?>
 						<div class="imglist_div grid grid_532">
 							<div class="imglist_img img_center">
 								<div class="img_center_inner">
@@ -183,6 +184,7 @@
 								</div>
 							</div>
 						</div>
+						<?php endforeach;?>
 					</div>
 				</div>
 				
