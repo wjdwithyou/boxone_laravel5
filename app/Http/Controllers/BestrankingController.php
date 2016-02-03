@@ -100,19 +100,29 @@ class BestrankingController extends Controller {
 	 * 	해당 회원의 해당 사이트 북마크가 없으면 북마크를 만들고, 있으면 북마크를 제거한다.
 	 *  로그인 여부 체크해아 함
 	 */
-	public function checkBookmark()
-	{
+	
+	// 160203 J.Style
+	// Add check cnt.
+	public function checkBookmark(){
 		$ssModel = new ShoppingsiteModel();
 		
-		if (session_id() == '')	session_start();
-		if (isset($_SESSION['idx']))
-		{
+		if (session_id() == '')
+			session_start();
+		
+		if (isset($_SESSION['idx'])){
 			$member_idx = $_SESSION['idx'];
 			$shoppingsite_idx = Request::input('site');
 			
 			$chk = $ssModel->checkBookmark($member_idx, $shoppingsite_idx);
-			if ($chk['code'] == 0)
-				$result = $ssModel->createBookmark($member_idx, $shoppingsite_idx);
+			
+			if ($chk['code'] == 0){
+				$cnt = $ssModel->getBookmarkCnt($member_idx)['data'][0]->cnt;
+				
+				if ($cnt >= 10)
+					$result = array('code' => 1, 'msg' => 'max_exceed', 'data' => 'max_exceed');
+				else
+					$result = $ssModel->createBookmark($member_idx, $shoppingsite_idx);
+			}
 			else
 				$result = $ssModel->deleteBookmark($member_idx, $shoppingsite_idx);
 			

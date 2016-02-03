@@ -63,7 +63,7 @@
 				<?php foreach($prdtList[$i] as $j) :?>
 				<div class="imglist_div grid grid_432">
 					<div class="delete_img font_16">
-						<a onclick="deleteBookmark(<?=$j->idx?>, <?=($j->saleP!=0)?1:0?>);"><i class="fa fa-times-circle bo_color2"></i></a>
+						<a onclick="deleteWishlist(<?=$j->idx?>, <?=($j->saleP!=0)?1:0?>);"><i class="fa fa-times-circle bo_color2"></i></a>
 					</div>
 					<div class="imglist_img img_center">
 						<div class="img_center_inner">

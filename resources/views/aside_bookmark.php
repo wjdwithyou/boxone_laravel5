@@ -8,10 +8,10 @@
 		<div class="imglist_div aside_img_wrap grid_as">
 			<div class="imglist_img img_center">
 				<div class="delete_img font_16">
-					<a onclick="deleteBookmark();"><i class="fa fa-times-circle bo_color2"></i></a>
+					<a onclick="deleteBookmark(<?=$j->idx?>);"><i class="fa fa-times-circle bo_color2"></i></a>
 				</div>
 				<div class="img_center_inner">
-					<a onclick="clickLink(139, '<?=$j->website_link?>');"><img src="https://s3-ap-northeast-1.amazonaws.com/boxone-image/site/<?= $j->idx?>.png"></a>
+					<a onclick="clickLink(<?=$j->idx?>, '<?=$j->website_link?>');"><img src="https://s3-ap-northeast-1.amazonaws.com/boxone-image/site/<?= $j->idx?>.png"></a>
 				</div>
 			</div>
 			<div class="imglist_desc_wrap">

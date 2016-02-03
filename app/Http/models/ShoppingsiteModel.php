@@ -174,6 +174,17 @@ class ShoppingsiteModel{
 		else
 			return array('code' => 0,'msg' =>'failure' ,'data' => $result);
 	}
+	
+	// 160203 J.Style
+	// Get $member_idx's bookmark count.
+	function getBookmarkCnt($member_idx){
+		if ( !(inputErrorCheck($member_idx, 'member_idx')))
+			return;
+		
+		$result = DB::select('select count(*) as cnt from link_bookmark where member_idx=?', array($member_idx));
+		
+		return array('code' => 1, 'msg' => 'success', 'data' => $result);
+	}
 
     /*  	
      *	북마크 리스트 가져오는 기능
@@ -210,19 +221,17 @@ class ShoppingsiteModel{
  	/*  	
      *	북마크 삭제 기능
      */
-	function deleteBookmark($member_idx, $shoppingsite_idx)
-	{
-		if(	!(	inputErrorCheck($member_idx, 'member_idx')
-				&& inputErrorCheck($shoppingsite_idx, 'shoppingsite_idx')))
-				return ;	
+	function deleteBookmark($member_idx, $shoppingsite_idx){
+		if (!(inputErrorCheck($member_idx, 'member_idx')
+			&&inputErrorCheck($shoppingsite_idx, 'shoppingsite_idx')))
+			return;	
 
  		$result = DB::delete('delete from link_bookmark where member_idx=? and shoppingsite_idx=?', array($member_idx, $shoppingsite_idx));
 
-		if($result == true){
+		if($result == true)
          	return array('code' => 1, 'msg' => 'data delete success', 'data' => 'delete');
-        }else{
+        else
          	return array('code' => 0, 'msg' => 'delete false: no matched data');
-        }
 	}
 
 	/*
