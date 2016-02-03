@@ -54,15 +54,15 @@
 								<div class="imglist_div2">
 									<div class="imglist_img img_center">
 										<div class="img_center_inner">
-											<a href="<?=$siteList[$i]->website_link?>"><img src="<?=$adr_img?>site/<?=$siteList[$i]->idx?>.png"></a>
+											<a href="<?=$adr_ctr?>Bestranking/index?cate=<?=$i+1?>"><img src="<?=$adr_img?>site/<?=$siteList[$i]->idx?>.png"></a>
 										</div>
 									</div>
 									<div class="imglist_desc_wrap ta_c">
-										<div class="imglist_desc1 ta_c t_o bo_color1 font_10 br_20 br_border">
+										<div class="imglist_desc1 ta_c t_o bo_color1 font_10 br_20 br_border" onclick='location.href="<?=$adr_ctr?>Bestranking/index?cate=<?=$i+1?>"' style="cursor:pointer">
 											<?=$siteList[$i]->cate_name?>
 										</div>
 										<div class="imglist_desc2 ta_c t_o">
-											<?=$siteList[$i]->name?>
+											<a href="<?=$adr_ctr?>Bestranking/index?cate=<?=$i+1?>"><?=$siteList[$i]->name?></a>
 										</div>
 									</div>
 								</div>
