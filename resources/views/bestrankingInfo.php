@@ -6,7 +6,7 @@
 		</a>
 	</div>
 	<div class="site_bookmark">
-		<a onclick="clickBookmark($(this).children(), <?= $charList-->idx?>);">
+		<a onclick="clickBookmark($(this).children(), <?= $charList->idx?>);">
 			<?php if ($charList->bookmark == 1) :?>
 			<img src="<?= $adr_img ?>bookmark_on.png" class="br_bookmark img_14">
 			<?php else :?>
