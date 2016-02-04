@@ -9,14 +9,14 @@
 	<div id="header">
 	<?php include ("header.php");?>
 	</div>
-	
+
 	<div id="container">
 		<div id="top">
 			<h1 class="top_h1">베스트랭킹</h1>
 			<p class="top_p bo_color2">박스원이 알선한 이번주 해외직구 사이트 베스트 랭킹!</p>
 			<hr class="top_hr">
 			<h2 class="top_h2">
-				
+
 			</h2>
 		</div>
 		<div id="content">
@@ -26,7 +26,11 @@
 						<select id="select_cate" class="bo_selectbox bo_selectbox_2" onchange="changeCate()">
 							<option value="0&char=1">탑 브랜드</option>
 							<?php foreach ($cate as $cateList) :?>
-							<option value="<?=$cateList->idx?>"><?= $cateList->name?></option>
+								<?php if($nowCate == $cateList->idx) :?>
+									<option value="<?=$cateList->idx?>" selected><?= $cateList->name?></option>
+								<?php else :?>
+									<option value="<?=$cateList->idx?>"><?= $cateList->name?></option>
+								<?php endif; ?>
 							<?php endforeach;?>
 						</select>
 					</div>
@@ -112,11 +116,11 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<div id="footer">
 	<?php include ("footer.php");?>
 	</div>
-	
+
 </div>
 
 </body>
