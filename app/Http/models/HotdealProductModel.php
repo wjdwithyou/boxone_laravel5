@@ -220,10 +220,7 @@ class HotdealProductModel{
 
 		// 자료 가져오기
 		$data = DB::select("select *, FORMAT(priceO, 0) as fPriceO, FORMAT(priceS, 0) as fPriceS from hotdeal_product $query_cate $query_brand $query_mall $query_search $query_orderBy idx DESC");
-		foreach($data as $list){
-			$list->brand = str_replace("^", "'", "$list->brand");
-			$list->name = str_replace("^", "'", "$list->name");
-		}
+
 		// 브랜드 리스트 가져오기
 		$brandList = DB::select("SELECT DISTINCT brand FROM hotdeal_product $query_cate $query_search ORDER BY brand ASC");
 

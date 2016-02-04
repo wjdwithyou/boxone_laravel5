@@ -115,13 +115,6 @@ class ProductModel{
 				array_push($imgList, $ms_data_img[$i]);
 		}
 
-		$ms_data_prod->PnameD = str_replace("^", "'", "$ms_data_prod->PnameD");
-		$ms_data_prod->BrandID = str_replace("^", "'", "$ms_data_prod->BrandID");
-		$ms_data_prod->MallID = str_replace("^", "'", "$ms_data_prod->MallID");
-		$ms_data_color = str_replace("^", "'", "$ms_data_color");
-		$ms_data_size = str_replace("^", "'", "$ms_data_size");
-		$ms_data_story = str_replace("^", "'", "$ms_data_story");
-
 		$result = array(
 				'idx' => $my_data[0]->idx,
 				'cate' => $my_data[0]->cate_small,
@@ -196,10 +189,7 @@ class ProductModel{
 
 		// 자료 가져오기
 		$data = DB::select("select *, FORMAT(price, 0) as fPrice from product $query_cate $query_brand $query_mall $query_search $query_orderBy idx DESC");
-		foreach($data as $list){
-			$list->brand = str_replace("^", "'", "$list->brand");
-			$list->name = str_replace("^", "'", "$list->name");
-		}
+
 		// 브랜드 리스트 가져오기
 		$brandList = DB::select("SELECT DISTINCT brand FROM product $query_cate $query_search ORDER BY brand ASC");
 
@@ -496,10 +486,6 @@ class ProductModel{
 			else
 				$temp = DB::select('select idx, img, brand, name, FORMAT(price, 0) as fprice, 0 as is_hotdeal from product where idx=?', array($cookieArray[$i][1]));
 
-			foreach($temp as $list){
-				$list->brand = str_replace("^", "'", "$list->brand");
-				$list->name = str_replace("^", "'", "$list->name");
-			}
 			array_push($recentList, $temp);
 		}
 
