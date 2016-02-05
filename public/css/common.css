@@ -301,3 +301,10 @@ button:focus{outline:0}
 }
 
 .delete_img{position:absolute;z-index:5;top:0;right:0}
+
+.bx-wrapper .bx-prev {
+	left: -45px !important;
+}
+.bx-wrapper .bx-next {
+	right: -45px !important;
+}

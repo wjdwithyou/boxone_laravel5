@@ -21,7 +21,7 @@ $(document).ready(function(){
 	});
 	$('.cate_slide').each(function() {
 	    var _this = $(this).bxSlider({
-	        slideWidth: 201,
+	        slideWidth: 181,
 		    minSlides: 2,
 		    maxSlides: 5,
 		    moveSlides: 1,
