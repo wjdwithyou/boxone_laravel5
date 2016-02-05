@@ -1,4 +1,4 @@
-function deleteBookmark(idx, is_hotdeal){
+function deleteWishlist(idx, is_hotdeal){
 	$.ajax({
 		async: false,
 		data: {
@@ -6,7 +6,7 @@ function deleteBookmark(idx, is_hotdeal){
 			is_hotdeal: is_hotdeal
 		},
 		type: 'post',
-		url: adr_ctr + 'Mypage/deleteBookmark',
+		url: adr_ctr + 'Mypage/deleteWishlist',
 		success: function(result){
 			result = JSON.parse(result);
 			

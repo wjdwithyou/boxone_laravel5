@@ -145,11 +145,16 @@ function toggleExpand(e, t){
 	}
 	else{
 		if(t == 1){
-			expandBookmark();
+			if ($("#logined").val() == 0){
+				alert('로그인 후 이용해주세요.');
+				return;
+			}
+			else
+				expandBookmark();
 		}
-		else{
+		else
 			expandRecently();
-		}
+		
 		$("#aside_expand").show();
 		$("#mob_aside_bg").height($("body").height());
 		$("#mob_aside_bg").show();
@@ -159,25 +164,25 @@ function toggleExpand(e, t){
 	}
 }
 
-function expandBookmark()
-{
-	$.ajax
-	({
-		url: adr_ctr+"Main/bookmark",
-		type: 'post',
+// 160203 Modified by J.Style
+// No comment.
+function expandBookmark(){
+	$.ajax({
 		async: false,
-		success: function(result)
-		{
+		type: 'post',
+		url: adr_ctr + 'Main/bookmark',
+		success: function(result){
 			$("#aside_expand").children().html(result);
 		},
-		error: function(request,status,error)
-		{
+		error: function(request, status, error){
 			console.log(request.responseText);
 		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		}
 	});
 }
 
+// 160202 Modified by J.Style
+// No comment.
 function expandRecently(){
 	$.ajax({
 		async: false,
@@ -217,10 +222,35 @@ function clickLink(idx, url)
 	});
 }
 
-function deleteBookmark(){
-	confirm("삭제하시겠습니까?");
+// 160203 J.Style
+// No comment.
+function deleteBookmark(idx){
+	//confirm("삭제하시겠습니까?");
+	
+	$.ajax({
+		async: false,
+		data: {
+			idx: idx
+		},
+		type: 'post',
+		url: adr_ctr + 'Main/deleteBookmark',
+		success: function(result){
+			result = JSON.parse(result);
+			
+			if (result.code == 1){
+				alert('삭제되었습니다.');
+				expandBookmark();
+			}
+			else
+				alert('잘못된 접근입니다.');
+		},
+		error: function(request, status, error){
+			console.log(request.responseText);
+		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+	});
 }
 
 function deleteRecently(){
-	confirm("삭제하시겠습니까?");
+	//confirm("삭제하시겠습니까?");
 }

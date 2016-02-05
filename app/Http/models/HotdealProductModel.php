@@ -15,7 +15,7 @@ class HotdealProductModel{
 		if ( !(inputErrorCheck($member_idx, 'member_idx')
 			&& inputErrorCheck($hotdeal_idx, 'hotdeal_idx')))
 			return;
-		
+
 		$result = DB::table ('hotdeal_bookmark')->insertGetId(
 				array(
 						'member_idx' => $member_idx,
@@ -24,52 +24,52 @@ class HotdealProductModel{
 						'target' => 1
 				)
 		);
-		
+
 		DB::update('update hotdeal_product set bookmark_count=bookmark_count+1 where idx=?', array($hotdeal_idx));
-		
+
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
-	
+
 	// 160202 J.Style
 	// Check whether $hotdeal_idx exist or not.
 	function checkWishlist($member_idx, $hotdeal_idx){
 		if ( !(inputErrorCheck($member_idx, 'member_idx')
 			&& inputErrorCheck($hotdeal_idx, 'hotdeal_idx')))
 			return;
-		
+
 		$result = DB::select('select * from hotdeal_bookmark where member_idx=? and hotdeal_idx=? and target=1',
 				array($member_idx, $hotdeal_idx));
-		
+
 		if (count($result) > 0)
 			return array('code' => 0, 'msg' => 'already exist');
 		else
 			return array('code' => 1, 'msg' => 'success');
 	}
-	
+
 	// 160201 J.Style
 	// Delete bookmark hotdeal
 	function deleteBookmarkHotdeal($member_idx, $hotdeal_idx){
 		if ( !(inputErrorCheck($member_idx, 'member_idx')
 			&& inputErrorCheck($hotdeal_idx, 'hotdeal_idx')))
 			return;
-		
+
 		$result = DB::delete('delete from hotdeal_bookmark where member_idx=? and hotdeal_idx=? and target=1',
 				array($member_idx, $hotdeal_idx));
-		
+
 		if ($result == true)
 			return array('code' => 1, 'msg' => 'success');
 		else
 			return array('code' => 0, 'msg' => 'delete failure');
 	}
-	
+
 	// 160202 J.Style
 	// get hotdeal wishlist count.
 	function getCntWishlist($member_idx){
 		if ( !(inputErrorCheck($member_idx, 'member_idx')))
 			return;
-		
+
 		$result = DB::select('select count(*) as cnt from hotdeal_bookmark where member_idx=?', array($member_idx));
-		
+
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
 
@@ -83,14 +83,14 @@ class HotdealProductModel{
 			return ;
 
 		$my_data = DB::select('SELECT *, FORMAT(priceO, 0) as fPriceO, FORMAT(priceS, 0) as fPriceS FROM hotdeal_product WHERE idx =?',array($prod_idx));
-			
+
 		$table = $my_data[0]->mall_id.'_'.$my_data[0]->mall_kind;
 		$prodInc = $my_data[0]->prod_id;
-		
+
 		$query = DB::connection('sqlsrv')->select("SELECT * FROM cgProdMain_$table WHERE ProdInc = ?", array($prodInc));
 		$ms_data_prod = $query[0];
 		$ms_data_img = array($ms_data_prod->PimgD);
-			
+
 		$query = DB::connection('sqlsrv')->select("SELECT * FROM cgColorMain_$table WHERE ProdInc = ?", array($prodInc));
 		$ms_data_color = array();
 		foreach($query as $list)
@@ -103,23 +103,23 @@ class HotdealProductModel{
 				$tempImg = $list->$col;
 				if ($tempImg != "")
 					array_push($ms_data_img, $tempImg);
-				else 
+				else
 					break;
 			}
 		}
-			
+
 		$query = DB::connection('sqlsrv')->select("SELECT Distinct SizeTxt FROM cgSizeMain_$table WHERE ProdInc = ?", array($prodInc));
 		$ms_data_size = array();
 		foreach($query as $list)
 			array_push($ms_data_size, $list->SizeTxt);
-			
+
 		$query = DB::connection('sqlsrv')->select("SELECT Story FROM cgStoryMain_$table WHERE ProdInc = ?", array($prodInc));
 		$ms_data_story = $query[0]->Story;
-		
+
 		$query = DB::connection('sqlsrv')->select("SELECT Still FROM cgStillMain_$table WHERE ProdInc = ?", array($prodInc));
 		foreach($query as $list)
-			array_push($ms_data_img, $list->Still);	
-		
+			array_push($ms_data_img, $list->Still);
+
 		$imgList = array();
 		// 동일한 이미지 정리
 		for ($i = 0 ; $i < count($ms_data_img) ; $i++)
@@ -128,21 +128,21 @@ class HotdealProductModel{
 			{
 				if (strpos($ms_data_img[$i], "?"))
 					$img1 = substr($ms_data_img[$i], 0, strpos($ms_data_img[$i], "?"));
-				else 
+				else
 					$img1 = $ms_data_img[$i];
-				
+
 				if (strpos($ms_data_img[$j], "?"))
 					$img2 = substr($ms_data_img[$j], 0, strpos($ms_data_img[$j], "?"));
 				else
 					$img2 = $ms_data_img[$j];
-				
+
 				if ($img1 == $img2)
 					break;
 			}
 			if ($j == count($ms_data_img))
 				array_push($imgList, $ms_data_img[$i]);
 		}
-			
+
 		$result = array(
 				'idx' => $my_data[0]->idx,
 				'cate' => $my_data[0]->cate_small,
@@ -161,9 +161,9 @@ class HotdealProductModel{
 				'story' => $ms_data_story,
 				'binding' => $my_data[0]->binding
 		);
-			
+
 		DB::update('update product set hit_count=hit_count+1 where idx=?',array($prod_idx));
-		
+
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
 	}
 
@@ -172,7 +172,7 @@ class HotdealProductModel{
 	 */
 	function getInfoList($sort, $cateDepth, $cateIdx, $brand, $mall, $searchList, $page_num)
 	{
-		if( !( inputErrorCheck($sort, 'sort') && 
+		if( !( inputErrorCheck($sort, 'sort') &&
 				inputErrorCheck($page_num, 'page_num')))
 			return ;
 
@@ -186,7 +186,7 @@ class HotdealProductModel{
 			case 4:		$query_orderBy .= 'saleP DESC, '; 	break;
 			default : 	$query_orderBy .= ""; 					break;
 		}
-		
+
 		// 카테고리 정리
 		$query_cate = "where name != '' ";
 		if ($cateDepth == 1)
@@ -195,35 +195,35 @@ class HotdealProductModel{
 			$query_cate .= "and cate_medium = $cateIdx";
 		else if ($cateDepth == 3)
 			$query_cate .= "and cate_small = $cateIdx";
-		
+
 		// 브랜드 정리
 		$query_brand = "";
 		foreach($brand as $list)
 			$query_brand .= "brand='$list' or ";
 		if ($query_brand != "")
 			$query_brand = " and (".substr($query_brand, 0, strlen($query_brand) - 3).")";
-		
+
 		// 사이트 정리
 		$query_mall = "";
 		foreach($brand as $list)
 			$query_mall .= "mall_id='$list' or ";
 		if ($query_mall != "")
 			$query_mall = " and (".substr($query_mall, 0, strlen($query_mall) - 3).")";
-		
+
 		// 검색어 정리
 		$query_search = "";
 		foreach($searchList as $list)
 			$query_search = "name like '%$list%' or brand like '%$list%' or ";
 		if ($query_search != "")
 			$query_search = " and (".substr($query_search, 0, strlen($query_search) - 3).")";
-		
-		
+
+
 		// 자료 가져오기
 		$data = DB::select("select *, FORMAT(priceO, 0) as fPriceO, FORMAT(priceS, 0) as fPriceS from hotdeal_product $query_cate $query_brand $query_mall $query_search $query_orderBy idx DESC");
-		
+
 		// 브랜드 리스트 가져오기
 		$brandList = DB::select("SELECT DISTINCT brand FROM hotdeal_product $query_cate $query_search ORDER BY brand ASC");
-		
+
 		// 사이트 리스트 가져오기
 		$mallList = DB::select("SELECT DISTINCT mall_id FROM hotdeal_product $query_cate $query_search ORDER BY mall_id ASC");
 
@@ -233,10 +233,10 @@ class HotdealProductModel{
 			$page_num = $page_max;
 		$page_start = ($page_num-1)*20;
 		$result = array_slice($data, $page_start, 20);
-		
+
 		return array('code' => 1, 'msg' => 'success', 'data' => $result, 'maxPage' => $page_max, 'brandList' => $brandList, 'mallList' => $mallList, 'prdtCnt' => count($data));
 	}
-	
+
 
 	/*
 	 *	내 찜한 상품 목록 가져오기 기능
@@ -246,41 +246,41 @@ class HotdealProductModel{
 		if( !( 	inputErrorCheck($mem_idx, 'mem_idx') &&
 				inputErrorCheck($page_num, 'page_num')))
 					return ;
-				
+
 		// 브랜드 정리
 		$query_brand = "";
 		foreach($brand as $list)
 			$query_brand .= "hp.brand='$list' or ";
 		if ($query_brand != "")
 			$query_brand = " and (".substr($query_brand, 0, strlen($query_brand) - 3).")";
-		
+
 		// 사이트 정리
 		$query_mall = "";
 		foreach($brand as $list)
 			$query_mall .= "hp.mall_id='$list' or ";
 		if ($query_mall != "")
 			$query_mall = " and (".substr($query_mall, 0, strlen($query_mall) - 3).")";
-		
+
 		// 검색어 정리
 		$query_search = "";
 		foreach($searchList as $list)
 			$query_search = "hp.name like '%$list%' or hp.brand like '%$list%' or ";
 		if ($query_search != "")
 			$query_search = " and (".substr($query_search, 0, strlen($query_search) - 3).")";
-		
+
 
 		// 자료 가져오기
 		$data = DB::select("select *, FORMAT(priceO, 0) as fPriceO, FORMAT(priceS, 0) as fPriceS
-							from hotdeal_bookmark as hb, hotdeal_product as hp  
-							where hb.member_idx = ? and hb.target = 1 and hb.hotdeal_idx = hp.idx $query_brand $query_mall $query_search", 
+							from hotdeal_bookmark as hb, hotdeal_product as hp
+							where hb.member_idx = ? and hb.target = 1 and hb.hotdeal_idx = hp.idx $query_brand $query_mall $query_search",
 							array($mem_idx));
-		
+
 		// 브랜드 리스트 가져오기
 		$brandList = DB::select("SELECT DISTINCT brand
-							FROM hotdeal_bookmark AS hb, hotdeal_product AS hp  
+							FROM hotdeal_bookmark AS hb, hotdeal_product AS hp
 							WHERE hb.member_idx = ? AND hb.target = 1 and hb.hotdeal_idx = hp.idx $query_search ORDER BY brand ASC",
 							array($mem_idx));
-		
+
 		// 사이트 리스트 가져오기
 		$brandList = DB::select("SELECT DISTINCT mall_id
 				FROM hotdeal_bookmark AS hb, hotdeal_product AS hp
@@ -301,11 +301,11 @@ class HotdealProductModel{
 			return array('code' => 1, 'msg' => 'success', 'data' => $result, 'maxPage' => $page_max, 'brandList' => $brandList, 'mallList' => $mallList, 'prdtCnt' => count($data));
 		}
 	}
-	
+
 	function getReview($idx)
 	{
 		$result = DB::select("SELECT * FROM hotdeal_review WHERE hotdeal_idx = ?", array($idx));
-		
+
 		$rateArray = array(0,0,0,0,0,0);
 		$rateAll = 0;
 		foreach ($result as $list)
@@ -313,9 +313,9 @@ class HotdealProductModel{
 			$rateAll += $list->rating;
 			++$rateArray[floor($list->rating+0.5)];
 		}
-		
+
 		arsort($rateArray);
-		
+
 		if (count($result))
 		{
 			$rateAve = $rateAll / count($result);
@@ -326,8 +326,8 @@ class HotdealProductModel{
 			$rateAve = 0;
 			$rateBest = array(0, 0);
 		}
-		
+
 		return array('code' => 1, 'msg' => 'success', 'data' => $result, 'rateCnt' => count($result), 'rateBest' => $rateBest, 'rateAve' => $rateAve);
 	}
-	
+
 }

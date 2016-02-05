@@ -90,7 +90,7 @@ class MainController extends Controller {
 	}
 	
 	// 160202 J.Style
-	// No comment.
+	// Get bookmark list.
 	public function bookmark(){
 		if (session_id() == '')
 			session_start();
@@ -108,8 +108,31 @@ class MainController extends Controller {
 		return view($page, array(/*'page' => $page, */'bookmarkList' => $bookmarkList['data']));
 	}
 	
-	// 160201 J.Style
+	// 160203 J.Style
 	// No comment.
+	public function deleteBookmark(){
+		if (session_id() == '')
+			session_start();
+		
+		if (!isset($_SESSION['idx']))
+			return;
+		
+		$member_idx = $_SESSION['idx'];
+		
+		
+		
+		$ssModel = new ShoppingsiteModel();
+		
+		$shoppingsite_idx = Request::input('idx');
+		
+		$result = $ssModel->deleteBookmark($member_idx, $shoppingsite_idx);
+		
+		header('Content-Type: application/json');
+		echo json_encode($result);
+	}
+	
+	// 160201 J.Style
+	// Get recent list.
 	public function recently(){
 		$pdModel = new ProductModel();
 		

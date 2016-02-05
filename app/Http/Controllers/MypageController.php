@@ -201,9 +201,9 @@ class MypageController extends Controller {
 	}
 	
 	// 160201 J.Style
-	// If hotdeal, delete bookmark from hotdeal table.
-	// If not, delete bookmark from product table.
-	public function deleteBookmark(){
+	// If hotdeal, delete wishlist from hotdeal table.
+	// If not, delete wishlist from product table.
+	public function deleteWishlist(){
 		if (session_id() == '')
 			session_start();
 		
