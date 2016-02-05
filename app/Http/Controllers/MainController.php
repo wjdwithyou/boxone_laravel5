@@ -68,10 +68,11 @@ class MainController extends Controller {
 				$cateName = $cateModel->getCateName(1, $list);
 				$temp = array_slice($temp['data'], 0, 10);
 				$temp['cateName'] = $cateName['data'][0]->name;
+				$temp['cateIdx'] = $cateName['data'][0]->idx;
 				array_push($prdtList, $temp);
 			}			
 		}
-		
+
 		$page = 'main';
 		return view($page, array('page' => $page, 'siteList' => $siteList, 'hotList' => $hotList, 'hotBigList' => $hotBigList, 'prdtList' => $prdtList));
 	}

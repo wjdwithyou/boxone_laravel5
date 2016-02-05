@@ -155,6 +155,7 @@ class CategoryModel{
 		}
 		
 		return array('code' => 1, 'msg' => 'success', 'data' => $result);
+		
 	}
 
 }

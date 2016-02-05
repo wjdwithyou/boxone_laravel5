@@ -141,15 +141,15 @@
 				<div class="ta_c mg_t32">
 					<h3 class="bo_color2">내게 딱 맞는 상품</h3>
 				</div>
-				<div id="sb_content" class="f_c">
+				<div id="sb_content" class="f_c"><?php $i=1 ?>
 					<?php foreach ($prdtList as $list) :?>
 						<div class="cate_title_wrap">
 							<hr class="cate_title_hr">
-							<div class="cate_title br_25 f_b bo_color2"><?=$list['cateName']?></div>
+							<div class="cate_title br_25 f_b bo_color2" onclick='location.href="<?=$adr_ctr?>/Shoppingbox/index?cate=l<?=$list['cateIdx']?>"' style="cursor:pointer"><?=$list['cateName']?></div>
 						</div>
 						<?php if(!isMobile()) :?>
 						<div class="cate_slide">
-							<?php for($i = 0 ; $i < count($list)-1 ; $i++) :?>
+							<?php for($i = 0 ; $i < count($list)-2 ; $i++) :?>
 							<div class="slide">
 								<div class="imglist_div">
 									<div class="imglist_img img_center">
