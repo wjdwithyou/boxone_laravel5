@@ -11,7 +11,7 @@
 	<div id="header">
 	<?php include ("header.php");?>
 	</div>
-	
+
 	<div id="container">
 		<div id="main_slide">
 			<div id="slide1" class="slide">
@@ -145,7 +145,7 @@
 					<?php foreach ($prdtList as $list) :?>
 						<div class="cate_title_wrap">
 							<hr class="cate_title_hr">
-							<div class="cate_title br_25 f_b bo_color2"><?=$list['cateName']?>1</div>
+							<div class="cate_title br_25 f_b bo_color2"><?=$list['cateName']?></div>
 						</div>
 						<?php if(!isMobile()) :?>
 						<div class="cate_slide">
@@ -165,7 +165,7 @@
 											<?=$list[$i]->name?>
 										</div>
 										<div class="imglist_desc3 ta_c t_o mg_t8">
-											<?=$list[$i]->fPrice?>
+											￦<?=$list[$i]->fPrice?>
 										</div>
 									</div>
 								</div>
@@ -241,11 +241,11 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<div id="footer">
 	<?php include ("footer.php");?>
 	</div>
-	
+
 </div>
 
 </body>

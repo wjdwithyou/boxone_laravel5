@@ -3,6 +3,7 @@
 /* Reset */
 body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select,hr,label{margin:0;padding:0}
 body,input,textarea,select,button,table{font-family:'맑은 고딕',Malgun Gothic,Helvetica,sans-serif;font-size:12px}
+body{-ms-overflow-style:scrollbar}
 img,fieldset{border:0}
 ul,ol{list-style:none}
 a,a:hover,a:active,a:focus{color:#000;text-decoration:none;cursor:pointer}
